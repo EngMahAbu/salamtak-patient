@@ -1,6 +1,391 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/nav_graph">
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/nav_graph"
+            app:startDestination="@id/splashFragment">
+
+
+    <fragment
+            android:id="@+id/chooseLanguageFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.splash.ChooseLanguageFragment"
+            android:label="choose Language"
+            tools:layout="@layout/choose_languagefragment">
+        <action
+                android:id="@+id/action_chooseLanguageFragment_to_onboardingFragment"
+                app:destination="@id/onboardingFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/splashFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.splash.SplashFragment"
+            android:label="SplashFragment"
+            tools:layout="@layout/splashfragment"
+
+    >
+        <action
+                android:id="@+id/action_splashFragment_to_chooseLanguageFragment"
+                app:destination="@id/chooseLanguageFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/onboardingFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.splash.OnboardingFragment"
+            android:label="onboarding"
+            tools:layout="@layout/onboardingfragment"
+
+    >
+
+        <action
+                android:id="@+id/action_onboardingFragment_to_loginFragment"
+                app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/loginFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.loginandforgetpassword.LoginFragment"
+            android:label="LoginFragment"
+            tools:layout="@layout/loginfragment">
+        <action
+                android:id="@+id/action_loginFragment_to_dialogBottomSheetFragment"
+                app:destination="@id/dialogBottomSheetFragment" />
+        <action
+                android:id="@+id/action_loginFragment_to_forgetPasswordFragment"
+                app:destination="@id/forgetPasswordFragment" />
+        <action
+                android:id="@+id/action_loginFragment_to_signupFragment"
+                app:destination="@id/signupFragment" />
+        <action
+                android:id="@+id/action_loginFragment_to_docotorProfileFragment"
+                app:destination="@id/docotorProfileFragment" />
+        <action
+                android:id="@+id/action_loginFragment_to_homeFragment"
+                app:destination="@id/homeFragment" />
+    </fragment>
+    <dialog
+            android:id="@+id/dialogBottomSheetFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.dialog.DialogBottomSheetFragment"
+            android:label="dialog_bottom_sheetfragment"
+            tools:layout="@layout/dialog_bottom_sheetfragment">
+        <argument
+                android:name="changeview"
+                app:argType="string"
+                app:nullable="true" />
+        <action
+                android:id="@+id/action_dialogBottomSheetFragment_to_loginFragment"
+                app:destination="@id/loginFragment"
+        />
+    </dialog>
+    <fragment
+            android:id="@+id/forgetPasswordFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.loginandforgetpassword.ForgetPasswordFragment"
+            android:label="forget_passwordfragment"
+            tools:layout="@layout/forget_passwordfragment">
+        <action
+                android:id="@+id/action_forgetPasswordFragment_to_loginFragment"
+                app:destination="@id/loginFragment" />
+        <action
+                android:id="@+id/action_forgetPasswordFragment_to_dialogBottomSheetFragment"
+                app:destination="@id/dialogBottomSheetFragment" />
+        <action
+                android:id="@+id/action_forgetPasswordFragment_to_otpFragment"
+                app:destination="@id/otpFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/otpFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.loginandforgetpassword.OtpFragment"
+            android:label="otpfragment"
+            tools:layout="@layout/otpfragment">
+        <action
+                android:id="@+id/action_otpFragment_to_dialogBottomSheetFragment"
+                app:destination="@id/dialogBottomSheetFragment" />
+        <action
+                android:id="@+id/action_otpFragment_to_changepasswordFragment"
+                app:destination="@id/changepasswordFragment" />
+        <argument
+                android:name="responsemodel"
+                app:argType="com.korashiGroup.salamtakPatient.model.register.Data"
+                app:nullable="true" />
+        <argument
+                android:name="user"
+                app:argType="com.korashiGroup.salamtakPatient.model.register.CreateUser"
+                app:nullable="true" />
+        <argument
+                android:name="userforgetpassword"
+                app:argType="com.korashiGroup.salamtakPatient.model.register.UserForgetInfo"
+                app:nullable="true" />
+        <action
+                android:id="@+id/action_otpFragment_to_homeFragment"
+                app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/changepasswordFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.loginandforgetpassword.ChangepasswordFragment"
+            android:label="changepasswordfragment"
+            tools:layout="@layout/changepasswordfragment">
+        <argument
+                android:name="userId"
+                app:argType="integer" />
+        <action
+                android:id="@+id/action_changepasswordFragment_to_dialogBottomSheetFragment"
+                app:destination="@id/dialogBottomSheetFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/signupFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.signupanddocotorprofile.SignupFragment"
+            android:label="SignupFragment"
+            tools:layout="@layout/signupfragment">
+        <action
+                android:id="@+id/action_signupFragment_to_otpFragment"
+                app:destination="@id/otpFragment" />
+        <action
+                android:id="@+id/action_signupFragment_to_dialogBottomSheetFragment"
+                app:destination="@id/dialogBottomSheetFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/docotorProfileFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.signupanddocotorprofile.DocotorProfileFragment"
+            android:label="docotor_profilefragment"
+            tools:layout="@layout/docotor_profilefragment">
+        <action
+                android:id="@+id/action_docotorProfileFragment_to_dialogBottomSheetFragment"
+                app:destination="@id/dialogBottomSheetFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/homeFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.home.HomeFragment"
+            android:label="homefragment"
+            tools:layout="@layout/homefragment">
+        <action
+                android:id="@+id/action_homeFragment_to_searchFragment"
+                app:destination="@id/searchFragment" />
+        <action
+                android:id="@+id/action_homeFragment_to_dialogBottomSheetFragment"
+                app:destination="@id/dialogBottomSheetFragment" />
+        <action
+                android:id="@+id/action_homeFragment_to_healthEntityFragment"
+                app:destination="@id/healthEntityFragment" />
+        <action
+                android:id="@+id/action_homeFragment_to_bookingAppointmentFragment"
+                app:destination="@id/bookingAppointmentFragment" />
+        <action
+                android:id="@+id/action_homeFragment_to_healthyTopicsFragment"
+                app:destination="@id/healthyTopicsFragment" />
+        <action
+                android:id="@+id/action_homeFragment_to_videoCallFragment"
+                app:destination="@id/videoCallFragment" />
+
+
+    </fragment>
+    <fragment
+            android:id="@+id/searchFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.home.SearchFragment"
+            android:label="searchfragment"
+            tools:layout="@layout/searchfragment">
+        <action
+                android:id="@+id/action_searchFragment_to_homeFragment"
+                app:destination="@id/homeFragment" />
+        <action
+                android:id="@+id/action_searchFragment_to_filterFragment"
+                app:destination="@id/filterFragment" />
+        <action
+                android:id="@+id/action_searchFragment_to_dialogBottomSheetFragment"
+                app:destination="@id/dialogBottomSheetFragment" />
+        <action
+                android:id="@+id/action_searchFragment_to_dialogClinkBookingFragment"
+                app:destination="@id/dialogClinkBookingFragment" />
+        <action
+                android:id="@+id/action_searchFragment_to_bookingAppointmentFragment"
+                app:destination="@id/bookingAppointmentFragment"
+        />
+    </fragment>
+    <fragment
+            android:id="@+id/myScheduleFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.navbottom.MyScheduleFragment"
+            android:label="my_schedulefragment"
+            tools:layout="@layout/my_schedulefragment">
+        <action
+                android:id="@+id/action_myScheduleFragment_to_dialogSchduleFragment"
+                app:destination="@id/dialogSchduleFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/moreFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.navbottom.MoreFragment"
+            android:label="morefragment"
+            tools:layout="@layout/morefragment">
+        <action
+                android:id="@+id/action_moreFragment_to_dialogBottomSheetFragment"
+                app:destination="@id/dialogBottomSheetFragment"
+        />
+        <action
+                android:id="@+id/action_moreFragment_to_changepasswordFragment"
+                app:destination="@id/changepasswordFragment" />
+        <action
+                android:id="@+id/action_moreFragment_to_webViewFragment"
+                app:destination="@id/webViewFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/filterFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.home.FilterFragment"
+            android:label="filterfragment"
+            tools:layout="@layout/filterfragment" />
+    <fragment
+            android:id="@+id/webViewFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.webView.WebViewFragment"
+            android:label="fragment_web_view"
+            tools:layout="@layout/fragment_web_view" />
+
+    <fragment
+            android:id="@+id/editProfileFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.editprofile.EditProfileFragment"
+            android:label="edit_profilefragment"
+            tools:layout="@layout/edit_profilefragment" />
+    <dialog
+            android:id="@+id/dialogClinkBookingFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.dialog.DialogClinkBookingFragment"
+            android:label="dialog_clink_bookingfragment"
+            tools:layout="@layout/dialog_clink_bookingfragment">
+        <argument
+                android:name="appointmentrequest"
+                app:argType="com.korashiGroup.salamtakPatient.model.booking.PatientAppointmentRequest" />
+        <action
+                android:id="@+id/action_dialogClinkBookingFragment_to_appointmentDetailsFragment"
+                app:destination="@id/appointmentDetailsFragment" />
+        <argument
+                android:name="appointments"
+                app:argType="com.korashiGroup.salamtakPatient.model.booking.BookingResponse"
+                app:nullable="true" />
+    </dialog>
+    <fragment
+            android:id="@+id/appointmentDetailsFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.booking.AppointmentDetailsFragment"
+            android:label="appointment_detailsfragment"
+            tools:layout="@layout/appointment_detailsfragment">
+        <argument
+                android:name="confirmappointments"
+                app:argType="com.korashiGroup.salamtakPatient.model.booking.AppointmentDetailBooking"
+                app:nullable="true" />
+        <argument
+                android:name="status"
+                app:argType="boolean" />
+        <action
+                android:id="@+id/action_appointmentDetailsFragment_to_myScheduleFragment"
+                app:destination="@id/myScheduleFragment"
+                app:popUpTo="@id/myScheduleFragment" />
+
+    </fragment>
+    <fragment
+            android:id="@+id/bookingAppointmentFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.booking.BookingAppointmentFragment"
+            android:label="BookingAppointmentFragment"
+            tools:layout="@layout/booking_appointmentfragment">
+        <action
+                android:id="@+id/action_bookingAppointmentFragment_to_bookAppointmentFragment"
+                app:destination="@id/bookAppointmentFragment" />
+        <action
+                android:id="@+id/action_bookingAppointmentFragment_to_searchFragment"
+                app:destination="@id/searchFragment"
+                app:popUpTo="@id/searchFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/bookAppointmentFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.booking.BookAppointmentFragment"
+            android:label="book_appointmentfragment"
+            tools:layout="@layout/book_appointmentfragment">
+        <argument
+                android:name="doctorclinks"
+                app:argType="com.korashiGroup.salamtakPatient.model.booking.clink.GetDoctorClinksResponse" />
+        <action
+                android:id="@+id/action_bookAppointmentFragment_to_appointmentDetailsFragment"
+                app:destination="@id/appointmentDetailsFragment" />
+        <argument
+                android:name="status"
+                app:argType="string"
+                app:nullable="true" />
+        <action
+                android:id="@+id/action_bookAppointmentFragment_to_dialogBottomSheetFragment"
+                app:destination="@id/dialogBottomSheetFragment" />
+    </fragment>
+    <dialog
+            android:id="@+id/dialogSchduleFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.dialog.DialogSchduleFragment"
+            android:label="dialog_schdulefragment"
+            tools:layout="@layout/dialog_schdulefragment">
+        <action
+                android:id="@+id/action_dialogSchduleFragment_to_bookAppointmentFragment"
+                app:destination="@id/bookAppointmentFragment" />
+        <argument
+                android:name="schedule"
+                app:argType="string"
+                app:nullable="true" />
+        <argument
+                android:name="AppointmentId"
+                app:argType="integer" />
+        <action
+                android:id="@+id/action_dialogSchduleFragment_to_dialogBottomSheetFragment"
+                app:destination="@id/dialogBottomSheetFragment" />
+        <action
+                android:id="@+id/action_dialogSchduleFragment_to_medicalHistoryFragment"
+                app:destination="@id/medicalHistoryFragment" />
+    </dialog>
+    <fragment
+            android:id="@+id/healthEntityFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.healthy.HealthEntityFragment"
+            android:label="health_entityfragment"
+            tools:layout="@layout/health_entityfragment">
+        <argument
+                android:name="healthname"
+                app:argType="string" />
+        <argument
+                android:name="healthtype"
+                app:argType="integer" />
+        <action
+                android:id="@+id/action_healthEntityFragment_to_dialogBottomSheetFragment"
+                app:destination="@id/dialogBottomSheetFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/medicalHistoryFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.medicalhistory.MedicalHistoryFragment"
+            android:label="medical_historyfragment"
+            tools:layout="@layout/medical_historyfragment">
+        <argument
+                android:name="doctorclinks"
+                app:argType="com.korashiGroup.salamtakPatient.model.booking.clink.GetDoctorClinksResponse"
+                app:nullable="true" />
+        <argument
+                android:name="AppointmentId"
+                app:argType="integer" />
+    </fragment>
+    <fragment
+            android:id="@+id/healthyTopicsFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.healthy.HealthyTopicsFragment"
+            android:label="healthy_topicsfragment"
+            tools:layout="@layout/healthy_topicsfragment" >
+        <argument
+                android:name="GatesId"
+                app:argType="integer"
+        />
+    </fragment>
+    <fragment
+            android:id="@+id/videoCallFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.addagora.VideoCallFragment"
+            android:label="video_callfragment"
+            tools:layout="@layout/video_callfragment">
+        <deepLink
+                android:id="@+id/deepLink"
+                app:uri="www.salamtakpatient.com/{callingType}" />
+        <argument
+                android:name="callingType"
+                app:argType="string"
+        />
+    </fragment>
+    <fragment android:id="@+id/personalInfoFragment2"
+              android:name="com.korashiGroup.salamtakPatient.fragment.navstrepercontent.PersonalInfoFragment"
+              android:label="personalinfofragment" tools:layout="@layout/personalinfofragment"/>
+    <dialog android:id="@+id/dialogSignUp" android:name="com.korashiGroup.salamtakPatient.fragment.dialog.DialogSignUp"
+            android:label="fragment_dialog_sign_up" tools:layout="@layout/fragment_dialog_sign_up"/>
+    <fragment android:id="@+id/askDoctorFragment"
+              android:name="com.korashiGroup.salamtakPatient.fragment.askdoctor.AskDoctorFragment"
+              android:label="ask_doctor_fragment" tools:layout="@layout/ask_doctor_fragment">
+        <action android:id="@+id/action_askDoctorFragment_to_dialogBottomSheetFragment"
+                app:destination="@id/dialogBottomSheetFragment"/>
+    </fragment>
 
 </navigation>

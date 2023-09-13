@@ -1,6 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/nav_streper">
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/nav_streper"
+            app:startDestination="@id/personalInfoFragment2">
+
+    <dialog
+            android:id="@+id/dialogBottomSheetFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.dialog.DialogBottomSheetFragment"
+            android:label="dialog_bottom_sheetfragment"
+            tools:layout="@layout/dialog_bottom_sheetfragment" >
+        <argument
+                android:name="changeview"
+                app:argType="string"
+                app:nullable="true" />
+    </dialog>
+    <fragment
+            android:id="@+id/personalInfoFragment2"
+            android:name="com.korashiGroup.salamtakPatient.fragment.navstrepercontent.PersonalInfoFragment"
+            android:label="personalinfofragment"
+            tools:layout="@layout/personalinfofragment" >
+        <action
+                android:id="@+id/action_personalInfoFragment2_to_dialogBottomSheetFragment"
+                app:destination="@id/dialogBottomSheetFragment" />
+        <action
+                android:id="@+id/action_personalInfoFragment2_to_locationFragment2"
+                app:destination="@id/locationFragment2" />
+    </fragment>
+
+    <fragment
+            android:id="@+id/locationFragment2"
+            android:name="com.korashiGroup.salamtakPatient.fragment.navstrepercontent.LocationFragment"
+            android:label="locationfragment"
+            tools:layout="@layout/locationfragment" >
+        <action
+                android:id="@+id/action_locationFragment2_to_dialogBottomSheetFragment"
+                app:destination="@id/dialogBottomSheetFragment" />
+        <action
+                android:id="@+id/action_locationFragment2_to_medicalStateFragment2"
+                app:destination="@id/medicalStateFragment2" />
+    </fragment>
+    <fragment
+            android:id="@+id/medicalStateFragment2"
+            android:name="com.korashiGroup.salamtakPatient.fragment.navstrepercontent.MedicalStateFragment"
+            android:label="medical_statefragment"
+            tools:layout="@layout/medical_statefragment" >
+        <action
+                android:id="@+id/action_medicalStateFragment2_to_dialogBottomSheetFragment"
+                app:destination="@id/dialogBottomSheetFragment" />
+    </fragment>
+
 
 </navigation>
