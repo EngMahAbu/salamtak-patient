@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.dialog.DialogSchduleFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_Canceled"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp"
+        android:visibility="gone">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_Edit"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_edit"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_Edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/avenirltstd_roman"
+            android:gravity="start"
+            android:padding="2dp"
+            android:text="@string/edit_appointment"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_Edit"
+            app:layout_constraintStart_toEndOf="@+id/iv_Edit"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_Help"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_help"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_Edit" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_Help"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/avenirltstd_roman"
+            android:gravity="start"
+            android:padding="2dp"
+            android:text="@string/help"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_Help"
+            app:layout_constraintStart_toEndOf="@+id/iv_Help"
+            app:layout_constraintTop_toBottomOf="@+id/tv_Edit" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_CancelAppointment"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_cancel"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_Help" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_CancelAppointment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/avenirltstd_roman"
+            android:gravity="start"
+            android:padding="2dp"
+            android:text="@string/cancelappointment"
+            android:textColor="@color/color_orange"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_CancelAppointment"
+            app:layout_constraintStart_toEndOf="@+id/iv_CancelAppointment"
+            app:layout_constraintTop_toBottomOf="@+id/tv_Help" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_CancelAppointments"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp"
+        android:visibility="gone"
+        >
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_CancelAppointments"
+            android:layout_width="68dp"
+            android:layout_height="68dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_cancelappointement"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_CancelAppointments"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/avenirltstd_black"
+            android:gravity="center"
+            android:padding="3dp"
+            android:text="@string/are_you_sure_you_want_to_cancel_this_appointment"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_CancelAppointments"
+            app:layout_constraintWidth_percent=".85" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_btn_confirm"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            app:layout_constraintEnd_toStartOf="@+id/btn_Reschedule"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_CancelAppointments">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/bg_button_schedule"
+                android:fontFamily="@font/avenirltstd_roman"
+                android:text="@string/confirm"
+                android:textColor="@color/blue"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toStartOf="parent"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_Reschedule"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/bg_chooselang_button"
+            android:fontFamily="@font/avenirltstd_roman"
+            android:text="@string/reschedule"
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/layout_btn_confirm"
+            app:layout_constraintTop_toBottomOf="@+id/tv_CancelAppointments" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/layout_btn_confirm"
+            app:layout_constraintEnd_toEndOf="@+id/layout_btn_confirm"
+            app:layout_constraintStart_toStartOf="@+id/layout_btn_confirm"
+            app:layout_constraintTop_toTopOf="@+id/layout_btn_confirm" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_Re_BookingAppointment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp"
+        android:visibility="gone">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_Re_BookingAppointment"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_calenderblack"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_Re_BookingAppointment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/avenirltstd_roman"
+            android:gravity="start"
+            android:padding="2dp"
+            android:text="@string/re_booking_appointment"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_Re_BookingAppointment"
+            app:layout_constraintStart_toEndOf="@+id/iv_Re_BookingAppointment"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_MedicalHistory"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_medicalhistory"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_Re_BookingAppointment" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_MedicalHistory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/avenirltstd_roman"
+            android:gravity="start"
+            android:padding="2dp"
+            android:text="@string/medical_history"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_MedicalHistory"
+            app:layout_constraintStart_toEndOf="@+id/iv_MedicalHistory"
+            app:layout_constraintTop_toBottomOf="@+id/tv_Re_BookingAppointment" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_Rate"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:adjustViewBounds="true"
+            android:visibility="gone"
+            android:src="@drawable/ic_blackstar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_MedicalHistory" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_Rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/avenirltstd_roman"
+            android:gravity="start"
+            android:padding="2dp"
+            android:text="@string/rate"
+            android:visibility="gone"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_Rate"
+            app:layout_constraintStart_toEndOf="@+id/iv_Rate"
+            app:layout_constraintTop_toBottomOf="@+id/tv_MedicalHistory" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

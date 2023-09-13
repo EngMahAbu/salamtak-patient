@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment.booking.AppointmentDetailsFragment">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/ic_arrowleft"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_name" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/avenirltstd_black"
+        android:text="Dr.Mohamed Farag"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/iv_arrow"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_doctorsDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="15dp"
+                android:padding="8dp"
+                android:background="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_arrow">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/iv_doctorProfile"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/ic_docspecialization"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_doctorName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/avenirltstd_roman"
+                    android:gravity="start"
+                    android:padding="3dp"
+                    android:text="Dr. Mohamed Farag Abdullatif"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toEndOf="@+id/iv_doctorProfile"
+                    app:layout_constraintTop_toTopOf="@+id/iv_doctorProfile" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_Specialization"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/avenirltstd_roman"
+                    android:gravity="start"
+                    android:padding="2dp"
+                    android:text="Genecology and Infertility"
+                    android:textColor="@color/gray"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/iv_doctorProfile"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_doctorName" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/iv_star"
+                    android:layout_width="18dp"
+                    android:layout_height="15dp"
+                    android:layout_marginStart="10dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ic_star"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/iv_doctorProfile"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_Specialization" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_Reviews"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/avenirltstd_roman"
+                    android:gravity="start"
+                    android:padding="2dp"
+                    android:text="@string/reviews"
+                    android:textColor="#757575"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toEndOf="@+id/iv_star"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_Specialization" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_Sharelink"
+                android:layout_width="0dp"
+                android:layout_height="46dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/bg_helpgray"
+                android:padding="8dp"
+                android:visibility="invisible"
+                android:layout_marginStart="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/layout_Addtofavorite"
+                app:layout_constraintTop_toBottomOf="@+id/layout_doctorsDetail">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_Sharelink"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/avenirltstd_roman"
+                    android:text="@string/sharelink"
+                    android:textColor="@color/dark_gray"
+                    android:textSize="14sp"
+                    android:drawableStart="@drawable/ic_share"
+                    android:drawablePadding="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+                />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_Addtofavorite"
+                android:layout_width="0dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_help"
+                android:padding="8dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toStartOf="@+id/layout_Sharelink"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layout_doctorsDetail">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_Addtofavorite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/avenirltstd_roman"
+                    android:text="@string/add_to_favorite"
+                    android:textColor="@color/color_primary"
+                    android:textSize="14sp"
+                    android:drawableStart="@drawable/ic_heart"
+                    android:drawablePadding="10dp"
+                    android:gravity="center"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+                />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_AboutDoctor"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/avenirltstd_roman"
+                android:gravity="start"
+                android:layout_marginTop="5dp"
+                android:padding="2dp"
+                android:text="@string/about_doctor"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layout_Sharelink" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/AboutDoctor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="10dp"
+                android:fontFamily="@font/avenirltstd_roman"
+                android:gravity="start"
+                android:layout_marginTop="5dp"
+                android:padding="2dp"
+                android:textColor="@color/gray"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_AboutDoctor" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_DoctorsClinics"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/avenirltstd_roman"
+                android:gravity="start"
+                android:layout_marginTop="15dp"
+                android:padding="2dp"
+                android:text="@string/doctor_s_clinics"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/AboutDoctor" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_clinkDoctors"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:paddingBottom="10dp"
+                tools:listitem="@layout/item_layout_clinks"
+                app:layout_constraintTop_toBottomOf="@+id/tv_DoctorsClinics"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@+id/rv_clinkDoctors"
+                app:layout_constraintStart_toStartOf="@+id/rv_clinkDoctors"
+                app:layout_constraintBottom_toBottomOf="@+id/rv_clinkDoctors"
+                app:layout_constraintTop_toTopOf="@+id/rv_clinkDoctors"
+                android:visibility="gone"
+                />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

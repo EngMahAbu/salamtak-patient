@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="450dp"
+    android:id="@+id/bookwithinsurance"
+    app:behavior_hideable="true"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+    android:background="@color/bg_color_gray"
+    tools:context=".fragment.home.FilterFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:padding="3dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_Apply"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent">
+
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="15dp"
+            >
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_Examination"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_ExaminationtypeId"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@color/blue"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/iv_ExaminationtypearrowRight"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginEnd="15dp"
+                            android:adjustViewBounds="true"
+                            android:visibility="gone"
+                            android:src="@drawable/ic_arrowup"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/layout_ivCollabsarrowdownExaminationtype"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginEnd="15dp"
+                            android:background="@drawable/bg_circle"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/ivCollabsarrowdownExaminationtype"
+                                android:layout_width="12dp"
+                                android:layout_height="12dp"
+                                android:adjustViewBounds="true"
+                                android:src="@drawable/ic_arrowdwonwhite"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_Examinationtype"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:fontFamily="@font/avenirltstd_roman"
+                            android:text="booking with "
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                              android:id="@+id/tv_companyname"
+                              android:textColor="@color/black"
+                              android:text="Insurance Company"
+                              android:layout_marginStart="15dp"
+                              app:layout_constraintStart_toStartOf="parent"
+                              app:layout_constraintBottom_toBottomOf="@+id/layout_Examinationtypedetails"
+                              app:layout_constraintTop_toBottomOf="@+id/layout_ExaminationtypeId"
+                              app:layout_constraintEnd_toStartOf="@+id/layout_Examinationtypedetails"/>
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_Examinationtypedetails"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginBottom="5dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/tv_companyname"
+                        app:layout_constraintTop_toBottomOf="@+id/layout_ExaminationtypeId">
+
+                        <androidx.appcompat.widget.AppCompatSpinner
+                                android:id="@+id/sp_status"
+                                android:layout_width="0dp"
+                                android:layout_height="48dp"
+                                android:layout_marginBottom="15dp"
+                                android:layout_marginEnd="12dp"
+                                android:layout_marginTop="20dp"
+                                android:background="@drawable/spinner_style"
+                                android:textSize="12sp"
+                                android:entries="@array/choose"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="1.0"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_bias="0.6"/>
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/iv_sparrowdown"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginEnd="15dp"
+                            android:layout_marginBottom="12dp"
+                            android:gravity="start"
+                            android:src="@drawable/ic_arrowdwon"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/layout_ReleaseDate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:layout_marginTop="10dp"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_companyname">
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tv_ReleaseDate"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:fontFamily="@font/avenirltstd_roman"
+                                android:gravity="start"
+                                android:padding="2dp"
+                                android:text="@string/release_date"
+                                android:textColor="@color/black"
+                                android:textSize="15sp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/location"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="15dp"
+                                android:layout_marginEnd="15dp"
+                                android:fontFamily="@font/avenirltstd_black"
+                                android:gravity="start"
+                                android:padding="2dp"
+                                android:text="20/08/2023"
+                                android:textColor="@color/gray"
+                                android:textSize="12sp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/tv_ReleaseDate"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/layout_Expirydate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:layout_marginTop="10dp"
+                            app:layout_constraintTop_toBottomOf="@+id/layout_ReleaseDate">
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tv_Expirydate"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:fontFamily="@font/avenirltstd_roman"
+                                android:gravity="start"
+                                android:padding="2dp"
+                                android:text="@string/release_date"
+                                android:textColor="@color/black"
+                                android:textSize="15sp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/Expirydate"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="15dp"
+                                android:layout_marginEnd="15dp"
+                                android:fontFamily="@font/avenirltstd_black"
+                                android:gravity="start"
+                                android:padding="2dp"
+                                android:text="25/08/2023"
+                                android:textColor="@color/gray"
+                                android:textSize="12sp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/tv_Expirydate"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/card_certificate"
+                            android:layout_width="match_parent"
+                            android:layout_height="150dp"
+                            android:layout_margin="12dp"
+                            app:cardCornerRadius="6dp"
+                            app:cardElevation="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/layout_Expirydate"
+                    >
+
+                        <ImageView
+                                android:id="@+id/iv_certificate"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/certificate_image" />
+                    </com.google.android.material.card.MaterialCardView>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_Apply"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/bg_chooselang_button"
+        android:fontFamily="@font/avenirltstd_black"
+        android:padding="5dp"
+        android:text="@string/apply"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout"
+        app:layout_constraintWidth_percent=".9" />
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/btn_Apply"
+            app:layout_constraintStart_toStartOf="@+id/btn_Apply"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_Apply"
+            app:layout_constraintTop_toTopOf="@+id/btn_Apply"
+            android:visibility="gone"
+            />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="100dp"
+        android:layout_height="4dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="5dp"
+        android:adjustViewBounds="true"
+        android:background="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

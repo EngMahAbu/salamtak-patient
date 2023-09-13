@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment.navstrepercontent.CertificatesFragment">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="3dp">
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_certificate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/avenirltstd_roman"
+        android:text="@string/enter_english_data_for_your_certificate"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+       app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textinput_Title_in_English"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="15dp"
+        android:background="@drawable/bg_edittext"
+        android:elevation="1dp"
+        android:paddingTop="2dp"
+        app:boxBackgroundMode="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_certificate">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_Title_in_English"
+            android:layout_width="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:gravity="start"
+            android:hint="@string/title_in_english"
+            android:textColor="@color/gray"
+            android:fontFamily="@font/avenirltstd_roman"
+            android:textSize="12sp"
+            android:layout_height="50dp"
+            android:inputType="text" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_Description_in_English"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_edittext"
+        android:layout_marginTop="12dp"
+        android:elevation="1dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textinput_Title_in_English"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="5dp"
+        >
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textinput_Description_in_English"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:boxBackgroundColor="@color/white"
+            app:boxBackgroundMode="none"
+            android:gravity="top"
+            android:hint="@string/description_in_english_optional"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_Description_in_English"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:textColor="@color/gray"
+                android:fontFamily="@font/avenirltstd_roman"
+                android:textSize="12sp"
+                android:gravity="top"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_certificateArabic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/avenirltstd_roman"
+        android:text="@string/enter_arabic_data_for_your_certificate"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_Description_in_English" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textinput_Title_in_Arabic"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="15dp"
+        android:background="@drawable/bg_edittext"
+        android:elevation="1dp"
+        android:paddingTop="2dp"
+        app:boxBackgroundMode="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_certificateArabic">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_Title_in_Arabic"
+            android:layout_width="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:gravity="start"
+            android:hint="@string/title_in_arabic"
+            android:textColor="@color/gray"
+            android:fontFamily="@font/avenirltstd_roman"
+            android:textSize="12sp"
+            android:layout_height="50dp"
+            android:inputType="text" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_Description_in_Arabic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_edittext"
+        android:layout_marginTop="12dp"
+        android:elevation="1dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textinput_Title_in_Arabic"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="5dp"
+        >
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textinput_Description_in_Arabic"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:boxBackgroundColor="@color/white"
+            app:boxBackgroundMode="none"
+            android:gravity="top"
+            android:hint="@string/description_in_arabic_optional"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_Description_in_Arabic"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:textColor="@color/gray"
+                android:fontFamily="@font/avenirltstd_roman"
+                android:textSize="12sp"
+                android:gravity="top"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_the_year_of_obtaining_the_certificate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/avenirltstd_roman"
+        android:text="@string/enter_the_year_of_obtaining_the_certificate"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_Description_in_Arabic" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_choose_year"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_edittext"
+        android:layout_marginTop="12dp"
+        android:elevation="1dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_the_year_of_obtaining_the_certificate"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        >
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_Date"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="start"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/ic_calender"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textinput_choose_year"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginEnd="25dp"
+            android:paddingTop="2dp"
+            app:boxBackgroundColor="@color/white"
+            app:boxBackgroundMode="none"
+            android:hint="@string/choose_year"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_choose_year"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:textColor="@color/gray"
+                android:fontFamily="@font/avenirltstd_roman"
+                android:textSize="12sp"
+                android:layout_gravity="center_horizontal"
+                android:inputType="numberPassword" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_takePhoto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/bg_constraint"
+        app:layout_constraintTop_toBottomOf="@+id/layout_choose_year"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_addImage"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="start"
+            android:adjustViewBounds="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/iv_addimage"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_uploadPhoto"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/avenirltstd_roman"
+            android:gravity="center"
+            android:text="@string/upload_certificate_image"
+            android:textColor="@color/gray"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_addImage"
+            app:layout_constraintWidth_percent=".85" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_add"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_certificate_button"
+        android:fontFamily="@font/avenirltstd_roman"
+        android:padding="5dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/add_another_certificate"
+        android:textColor="@color/blue"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_takePhoto"
+        app:layout_constraintWidth_percent=".9"
+        />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

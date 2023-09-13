@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_doctorsDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="3dp"
+        android:background="@drawable/bg_edittext"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_doctorProfile"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:src="@drawable/ic_docspecialization"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_doctorName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/avenirltstd_roman"
+            android:gravity="start"
+            android:padding="3dp"
+            android:text="Dr. Mohamed Farag Abdullatif"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@+id/iv_doctorProfile"
+            app:layout_constraintTop_toTopOf="@+id/iv_doctorProfile" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_Specialization"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/avenirltstd_roman"
+            android:gravity="start"
+            android:padding="2dp"
+            android:text="Genecology and Infertility"
+            android:textColor="@color/gray"
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@+id/iv_doctorProfile"
+            app:layout_constraintTop_toBottomOf="@+id/tv_doctorName" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_star"
+            android:layout_width="18dp"
+            android:layout_height="15dp"
+            android:layout_marginStart="10dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_star"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_doctorProfile"
+            app:layout_constraintTop_toBottomOf="@+id/tv_Specialization" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_Reviews"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:fontFamily="@font/avenirltstd_roman"
+            android:gravity="start"
+            android:padding="2dp"
+            android:text="@string/reviews"
+            android:textColor="@color/gray"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_star"
+            app:layout_constraintTop_toBottomOf="@+id/tv_Specialization" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>

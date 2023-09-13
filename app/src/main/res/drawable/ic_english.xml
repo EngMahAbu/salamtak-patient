@@ -1,0 +1,22 @@
+<vector android:autoMirrored="true" android:height="13dp"
+    android:viewportHeight="13" android:viewportWidth="19"
+    android:width="19dp" xmlns:android="http://schemas.android.com/apk/res/android">
+    <path android:fillColor="#F0F0F0" android:pathData="M19,12.833H0V0.166H19V12.833Z"/>
+    <path android:fillColor="#D80027" android:pathData="M10.688,12.833H8.313V7.688H0V5.313H8.313V0.167H10.688V5.313H19V7.688H10.688V12.833Z"/>
+    <path android:fillColor="#0052B4" android:pathData="M14.613,4.297L19,1.86V4.297H14.613Z"/>
+    <path android:fillColor="#0052B4" android:pathData="M11.565,4.297L19,0.167V1.335L13.668,4.297H11.565Z"/>
+    <path android:fillColor="#0052B4" android:pathData="M17.02,0.167L11.565,3.198V0.167H17.02Z"/>
+    <path android:fillColor="#F0F0F0" android:pathData="M11.565,4.297L19,0.167V1.335L13.668,4.297H11.565Z"/>
+    <path android:fillColor="#D80027" android:pathData="M11.565,4.297L19,0.167V1.335L13.668,4.297H11.565Z"/>
+    <path android:fillColor="#0052B4" android:pathData="M3.352,4.297L0,2.435V4.297H3.352Z"/>
+    <path android:fillColor="#0052B4" android:pathData="M7.435,3.772V0.167H0.946L7.435,3.772Z"/>
+    <path android:fillColor="#D80027" android:pathData="M5.332,4.297L0,1.335V0.167L7.435,4.297H5.332Z"/>
+    <path android:fillColor="#0052B4" android:pathData="M4.387,8.703L0,11.14V8.703H4.387Z"/>
+    <path android:fillColor="#0052B4" android:pathData="M7.435,8.703L0,12.833V11.665L5.332,8.703H7.435Z"/>
+    <path android:fillColor="#0052B4" android:pathData="M1.98,12.833L7.435,9.803V12.833H1.98Z"/>
+    <path android:fillColor="#F0F0F0" android:pathData="M7.435,8.703L0,12.833V11.665L5.332,8.703H7.435Z"/>
+    <path android:fillColor="#D80027" android:pathData="M7.435,8.703L0,12.833V11.665L5.332,8.703H7.435Z"/>
+    <path android:fillColor="#0052B4" android:pathData="M15.648,8.703L19,10.566V8.703H15.648Z"/>
+    <path android:fillColor="#0052B4" android:pathData="M11.565,9.228V12.833H18.054L11.565,9.228Z"/>
+    <path android:fillColor="#D80027" android:pathData="M13.668,8.703L19,11.665V12.833L11.565,8.703H13.668Z"/>
+</vector>

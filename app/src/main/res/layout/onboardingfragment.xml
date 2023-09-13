@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.splash.ChooseLanguageFragment">
+
+    <!--    <androidx.core.widget.NestedScrollView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent">-->
+
+    <!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="match_parent">-->
+
+
+    <!--          -->
+
+    <!--            <androidx.viewpager2.widget.ViewPager2-->
+    <!--                android:id="@+id/vp_container"-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_margin="15dp"-->
+    <!--                app:layout_constraintEnd_toEndOf="parent"-->
+    <!--                app:layout_constraintStart_toStartOf="parent"-->
+    <!--                app:layout_constraintTop_toBottomOf="@+id/iv_logo" />-->
+
+
+
+    <!--&lt;!&ndash;            <com.google.android.material.imageview.ShapeableImageView&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:id="@+id/iv_doctors"&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:layout_width="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:layout_marginTop="20dp"&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:adjustViewBounds="true"&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:src="@drawable/ic_doctors"&ndash;&gt;-->
+    <!--&lt;!&ndash;                app:layout_constraintEnd_toEndOf="parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;                app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;                app:layout_constraintTop_toBottomOf="@+id/iv_logo" />&ndash;&gt;-->
+
+    <!--&lt;!&ndash;            <androidx.appcompat.widget.AppCompatTextView&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:id="@+id/tv_booking"&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:layout_width="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:layout_marginTop="15dp"&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:fontFamily="@font/avenirltstd_black"&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:text="@string/salamtakbooking"&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:textColor="@color/black"&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:textSize="14sp"&ndash;&gt;-->
+    <!--&lt;!&ndash;                app:layout_constraintEnd_toEndOf="parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;                app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;                app:layout_constraintTop_toBottomOf="@+id/iv_doctors" />&ndash;&gt;-->
+
+    <!--&lt;!&ndash;            <androidx.appcompat.widget.AppCompatTextView&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:id="@+id/tv_bookingtext"&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:layout_width="0dp"&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:layout_marginTop="15dp"&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:fontFamily="@font/avenirltstd_black"&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:gravity="center_horizontal"&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:text="@string/screen_booking_text"&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:textColor="@color/gray"&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:textSize="14sp"&ndash;&gt;-->
+    <!--&lt;!&ndash;                app:layout_constraintEnd_toEndOf="parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;                app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;                app:layout_constraintTop_toBottomOf="@+id/tv_booking"&ndash;&gt;-->
+    <!--&lt;!&ndash;                app:layout_constraintWidth_percent=".95" />&ndash;&gt;-->
+
+
+    <!--           -->
+    <!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+    <!--    </androidx.core.widget.NestedScrollView>-->
+
+
+
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vp_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+         />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_skip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="15dp"
+        android:fontFamily="@font/avenirltstd_roman"
+        android:text="@string/skip"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="@+id/vp_container"
+        app:layout_constraintTop_toTopOf="@+id/vp_container" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/next"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/bg_chooselang_button"
+        android:fontFamily="@font/avenirltstd_black"
+        android:text="@string/next"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_percent=".8"
+
+        />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="100dp"
+        android:layout_height="5dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="4dp"
+        android:adjustViewBounds="true"
+        android:background="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment.splash.ChooseLanguageFragment">
+
+<androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_marginTop="50dp"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_startPick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="25dp"
+        android:textSize="14sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/avenirltstd_black"
+        android:text="@string/togetstartpickyourlanguage"
+        app:layout_constraintTop_toBottomOf="@+id/iv_assets"/>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_assets"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_logo"
+        android:src="@drawable/ic_patientwelcome"
+        />
+
+
+    <RadioGroup
+        android:id="@+id/radio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_startPick"
+        android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/radio_english"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:drawableStart="@drawable/ic_english"
+                android:drawablePadding="10dp"
+                android:elevation="1dp"
+                android:background="@drawable/bg_chooselang_radiobtn"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/avenirltstd_black"
+                android:text="@string/english"
+                android:layout_margin="5dp"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        <RadioButton
+            android:id="@+id/radio_arabic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_arabic"
+            android:text="@string/arabic"
+            android:textSize="14sp"
+            android:elevation="1dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/bg_chooselang_radiobtn"
+            android:fontFamily="@font/avenirltstd_black"
+            android:textColor="@color/black"
+            android:drawablePadding="10dp"
+            />
+    </RadioGroup>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_choose"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintWidth_percent=".9"
+        android:text="@string/choose"
+        android:fontFamily="@font/avenirltstd_black"
+        android:textSize="14sp"
+        android:textColor="@color/white"
+        android:background="@drawable/bg_chooselang_button"
+        />
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="70dp"
+        android:layout_height="3dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="15dp"
+        android:adjustViewBounds="true"
+        android:background="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

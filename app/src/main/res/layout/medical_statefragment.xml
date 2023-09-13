@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment.navstrepercontent.MedicalStateFragment">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/layout_btn"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="3dp">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textinput_Hight"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_margin="15dp"
+                android:background="@drawable/bg_edittext"
+                android:elevation="1dp"
+                android:hint="@string/hight"
+                android:paddingTop="2dp"
+                app:boxBackgroundMode="none"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_Hight"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/avenirltstd_roman"
+                    android:gravity="start"
+                    android:imeOptions="actionNext"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
+                    android:textColor="@color/gray"
+                    android:textSize="12sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textinput_Weight"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_margin="15dp"
+                android:background="@drawable/bg_edittext"
+                android:elevation="1dp"
+                android:hint="@string/weight"
+                android:paddingTop="2dp"
+                app:boxBackgroundMode="none"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textinput_Hight">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_Weight"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/avenirltstd_roman"
+                    android:gravity="start"
+                    android:imeOptions="actionNext"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
+                    android:textColor="@color/gray"
+                    android:textSize="12sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_BloodGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/bg_edittext"
+                android:elevation="1dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textinput_Weight">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_arrowdownArea"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:gravity="start"
+                    android:src="@drawable/ic_arrowdwon"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textinput_BloodGroup"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_marginEnd="25dp"
+                    android:layout_marginBottom="5dp"
+                    android:hint="@string/blood_group"
+                    android:paddingTop="2dp"
+                    app:boxBackgroundColor="@color/white"
+                    app:boxBackgroundMode="none"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_BloodGroup"
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_gravity="center_horizontal"
+                        android:fontFamily="@font/avenirltstd_roman"
+                        android:padding="5dp"
+                        android:inputType="text"
+                        android:importantForAutofill="no"
+                        android:imeOptions="actionNext"
+                        android:enabled="false"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_MedicalAllergies"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/bg_edittext"
+                android:elevation="1dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layout_BloodGroup">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_arrowdownMedicalAllergies"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:gravity="start"
+                    android:src="@drawable/ic_arrowdwon"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textinput_MedicalAllergies"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_marginEnd="25dp"
+                    android:layout_marginBottom="5dp"
+                    android:hint="@string/medical_allergies"
+                    android:paddingTop="2dp"
+                    app:boxBackgroundColor="@color/white"
+                    app:boxBackgroundMode="none"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_MedicalAllergies"
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_gravity="center_horizontal"
+                        android:fontFamily="@font/avenirltstd_roman"
+                        android:padding="5dp"
+                        android:inputType="text"
+                        android:importantForAutofill="no"
+                        android:imeOptions="actionNext"
+                        android:enabled="false"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_FoodAllergies"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/bg_edittext"
+                android:elevation="1dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layout_MedicalAllergies">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_arrowdownFoodAllergies"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:gravity="start"
+                    android:src="@drawable/ic_arrowdwon"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textinput_FoodAllergies"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_marginEnd="25dp"
+                    android:layout_marginBottom="5dp"
+                    android:hint="@string/food_allergies"
+                    android:paddingTop="2dp"
+                    app:boxBackgroundColor="@color/white"
+                    app:boxBackgroundMode="none"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_FoodAllergies"
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_gravity="center_horizontal"
+                        android:fontFamily="@font/avenirltstd_roman"
+                        android:padding="5dp"
+                        android:inputType="text"
+                        android:importantForAutofill="no"
+                        android:imeOptions="actionNext"
+                        android:enabled="false"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textinput_PressureMMGG"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_margin="15dp"
+                android:background="@drawable/bg_edittext"
+                android:elevation="1dp"
+                android:hint="@string/pressure_mm_gg"
+                android:paddingTop="2dp"
+                app:boxBackgroundMode="none"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layout_FoodAllergies">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_PressureMMGG"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/avenirltstd_roman"
+                    android:gravity="start"
+                    android:imeOptions="actionNext"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:textColor="@color/gray"
+                    android:textSize="12sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textinput_SugarLevelMGDL"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_margin="15dp"
+                android:background="@drawable/bg_edittext"
+                android:elevation="1dp"
+                android:hint="@string/sugar_level_mg_dl"
+                android:paddingTop="2dp"
+                app:boxBackgroundMode="none"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textinput_PressureMMGG">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_SugarLevelMGDL"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/avenirltstd_roman"
+                    android:gravity="start"
+                    android:importantForAutofill="no"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:textColor="@color/gray"
+                    android:textSize="12sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textinput_OtherAllergies"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_margin="15dp"
+                android:background="@drawable/bg_edittext"
+                android:elevation="1dp"
+                android:hint="@string/other_allergies"
+                android:paddingTop="2dp"
+                app:boxBackgroundMode="none"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textinput_SugarLevelMGDL">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_OtherAllergies"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/avenirltstd_roman"
+                    android:gravity="start"
+                    android:padding="5dp"
+                    android:imeOptions="actionNext"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:textColor="@color/gray"
+                    android:textSize="12sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textinput_Prescriptions"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_margin="15dp"
+                android:background="@drawable/bg_edittext"
+                android:elevation="1dp"
+                android:hint="@string/prescriptions"
+                android:paddingTop="2dp"
+                app:boxBackgroundMode="none"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textinput_OtherAllergies">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_Prescriptions"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/avenirltstd_roman"
+                    android:gravity="start"
+                    android:padding="5dp"
+                    android:importantForAutofill="no"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:textColor="@color/gray"
+                    android:textSize="12sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textinput_CurrentMedication"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_margin="15dp"
+                android:background="@drawable/bg_edittext"
+                android:elevation="1dp"
+                android:hint="@string/current_medication"
+                android:paddingTop="2dp"
+                app:boxBackgroundMode="none"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textinput_Prescriptions">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_CurrentMedication"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/avenirltstd_roman"
+                    android:gravity="start"
+                    android:inputType="text"
+                    android:padding="5dp"
+                    android:imeOptions="actionNext"
+                    android:importantForAutofill="no"
+                    android:textColor="@color/gray"
+                    android:textSize="12sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textinput_PastMedication"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_margin="15dp"
+                android:background="@drawable/bg_edittext"
+                android:elevation="1dp"
+                android:hint="@string/past_medication"
+                android:paddingTop="2dp"
+                app:boxBackgroundMode="none"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textinput_CurrentMedication">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_PastMedication"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/avenirltstd_roman"
+                    android:gravity="start"
+                    android:inputType="text"
+                    android:padding="5dp"
+                    android:importantForAutofill="no"
+                    android:imeOptions="actionNext"
+                    android:textColor="@color/gray"
+                    android:textSize="12sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textinput_Injuries"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_margin="15dp"
+                android:background="@drawable/bg_edittext"
+                android:elevation="1dp"
+                android:hint="@string/injuries"
+                android:paddingTop="2dp"
+                app:boxBackgroundMode="none"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textinput_PastMedication">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_Injuries"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/avenirltstd_roman"
+                    android:gravity="start"
+                    android:inputType="text"
+                    android:imeOptions="actionNext"
+                    android:importantForAutofill="no"
+                    android:padding="5dp"
+                    android:textColor="@color/gray"
+                    android:textSize="12sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textinput_ChronicDiseases"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_margin="15dp"
+                android:background="@drawable/bg_edittext"
+                android:elevation="1dp"
+                android:hint="@string/chronic_diseases"
+                android:paddingTop="2dp"
+                app:boxBackgroundMode="none"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textinput_Injuries">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_ChronicDiseases"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/avenirltstd_roman"
+                    android:gravity="start"
+                    android:imeOptions="actionNext"
+                    android:importantForAutofill="no"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@color/gray"
+                    android:textSize="12sp"
+                    tools:ignore="DuplicateClickableBoundsCheck" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textinput_Surgeries"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_margin="15dp"
+                android:background="@drawable/bg_edittext"
+                android:elevation="1dp"
+                android:hint="@string/surgeries"
+                android:paddingTop="2dp"
+                app:boxBackgroundMode="none"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textinput_Injuries">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_Surgeries"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/avenirltstd_roman"
+                    android:gravity="start"
+                    android:inputType="text"
+                    android:importantForAutofill="no"
+                    android:imeOptions="actionDone"
+                    android:textColor="@color/gray"
+                    android:textSize="12sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_next"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/bg_chooselang_button"
+            android:fontFamily="@font/avenirltstd_black"
+            android:padding="5dp"
+            android:text="@string/next"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent=".9" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@+id/layout_btn"
+        app:layout_constraintBottom_toBottomOf="@+id/layout_btn"
+        app:layout_constraintStart_toStartOf="@+id/layout_btn"
+        app:layout_constraintEnd_toEndOf="@+id/layout_btn"
+         />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="100dp"
+        android:layout_height="4dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="5dp"
+        android:adjustViewBounds="true"
+        android:visibility="visible"
+        android:background="@color/black"
+        android:contentDescription="TODO"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progress_barInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

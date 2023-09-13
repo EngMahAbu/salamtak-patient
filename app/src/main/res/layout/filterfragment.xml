@@ -1,0 +1,888 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.home.FilterFragment">
+
+<!--    <com.google.android.material.imageview.ShapeableImageView-->
+<!--        android:id="@+id/iv_arrow"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="15dp"-->
+<!--        android:adjustViewBounds="true"-->
+<!--        android:src="@drawable/ic_arrowleft"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/tv_Filter"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/tv_Filter" />-->
+
+<!--    <androidx.appcompat.widget.AppCompatTextView-->
+<!--        android:id="@+id/tv_Filter"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="15dp"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:fontFamily="@font/avenirltstd_black"-->
+<!--        android:text="@string/filter"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="16sp"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/iv_arrow"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--    <androidx.appcompat.widget.AppCompatTextView-->
+<!--        android:id="@+id/tv_RESET"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:layout_marginEnd="15dp"-->
+<!--        android:fontFamily="@font/avenirltstd_roman"-->
+<!--        android:text="@string/reset"-->
+<!--        android:textColor="@color/green"-->
+<!--        android:textSize="14sp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+
+<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        android:id="@+id/layout"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:padding="3dp"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/btn_Apply"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/tv_Filter">-->
+
+
+<!--        <androidx.core.widget.NestedScrollView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            android:fillViewport="true"-->
+<!--            android:layout_marginBottom="15dp"-->
+<!--            >-->
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent">-->
+
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:id="@+id/layout_specialization"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="20dp"-->
+<!--                android:background="@color/white"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:id="@+id/layout_specialization_Header"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="40dp"-->
+<!--                    android:background="#E9EAEF"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                    <com.google.android.material.imageview.ShapeableImageView-->
+<!--                        android:id="@+id/iv_arrowRight"-->
+<!--                        android:layout_width="20dp"-->
+<!--                        android:layout_height="20dp"-->
+<!--                        android:layout_marginEnd="15dp"-->
+<!--                        android:adjustViewBounds="true"-->
+<!--                        android:src="@drawable/ic_arrowup"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                        android:id="@+id/layout_ivCollabsarrowdown"-->
+<!--                        android:layout_width="20dp"-->
+<!--                        android:layout_height="20dp"-->
+<!--                        android:layout_marginEnd="15dp"-->
+<!--                        android:background="@drawable/bg_circle"-->
+<!--                        android:visibility="gone"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                        <com.google.android.material.imageview.ShapeableImageView-->
+<!--                            android:id="@+id/ivCollabsarrowdown"-->
+<!--                            android:layout_width="12dp"-->
+<!--                            android:layout_height="12dp"-->
+<!--                            android:adjustViewBounds="true"-->
+<!--                            android:src="@drawable/ic_arrowdwonwhite"-->
+<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintTop_toTopOf="parent" />-->
+<!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+
+<!--                    <androidx.appcompat.widget.AppCompatTextView-->
+<!--                        android:id="@+id/tv_Specialization"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="15dp"-->
+<!--                        android:fontFamily="@font/avenirltstd_roman"-->
+<!--                        android:text="@string/specialization"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textSize="16sp"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:id="@+id/layout_specializationDetails"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/layout_specialization_Header">-->
+
+<!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                        android:id="@+id/layout_Choose_Specialization"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="15dp"-->
+<!--                        android:layout_marginTop="12dp"-->
+<!--                        android:layout_marginEnd="15dp"-->
+<!--                        android:background="@drawable/bg_edittext"-->
+<!--                        android:elevation="1dp"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                        <androidx.appcompat.widget.AppCompatImageView-->
+<!--                            android:id="@+id/iv_arrowdown"-->
+<!--                            android:layout_width="20dp"-->
+<!--                            android:layout_height="20dp"-->
+<!--                            android:layout_gravity="center_horizontal"-->
+<!--                            android:layout_marginEnd="12dp"-->
+<!--                            android:layout_marginBottom="12dp"-->
+<!--                            android:gravity="start"-->
+<!--                            android:src="@drawable/ic_arrowdwon"-->
+<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent" />-->
+
+<!--                        <com.google.android.material.textfield.TextInputLayout-->
+<!--                            android:id="@+id/textinput_Specialization"-->
+<!--                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="55dp"-->
+<!--                            android:layout_marginEnd="25dp"-->
+<!--                            android:layout_marginBottom="5dp"-->
+<!--                            android:hint="@string/choose_specialization"-->
+<!--                            android:paddingTop="2dp"-->
+<!--                            app:boxBackgroundColor="@color/white"-->
+<!--                            app:boxBackgroundMode="none"-->
+<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                            <com.google.android.material.textfield.TextInputEditText-->
+<!--                                android:id="@+id/et_Specialization"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="55dp"-->
+<!--                                android:layout_gravity="center_horizontal"-->
+<!--                                android:fontFamily="@font/avenirltstd_roman"-->
+<!--                                android:inputType="number"-->
+<!--                                android:textColor="@color/gray"-->
+<!--                                android:textSize="12sp" />-->
+
+<!--                        </com.google.android.material.textfield.TextInputLayout>-->
+
+<!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                        android:id="@+id/layout_Choose_Sub_Specialization"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="15dp"-->
+<!--                        android:layout_marginTop="12dp"-->
+<!--                        android:layout_marginEnd="15dp"-->
+<!--                        android:background="@drawable/bg_edittext"-->
+<!--                        android:elevation="1dp"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/layout_Choose_Specialization">-->
+
+<!--                        <androidx.appcompat.widget.AppCompatImageView-->
+<!--                            android:id="@+id/iv_Subarrowdown"-->
+<!--                            android:layout_width="20dp"-->
+<!--                            android:layout_height="20dp"-->
+<!--                            android:layout_gravity="center_horizontal"-->
+<!--                            android:layout_marginEnd="12dp"-->
+<!--                            android:layout_marginBottom="12dp"-->
+<!--                            android:gravity="start"-->
+<!--                            android:src="@drawable/ic_arrowdwon"-->
+<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent" />-->
+
+<!--                        <com.google.android.material.textfield.TextInputLayout-->
+<!--                            android:id="@+id/textinput_Sub_Specialization"-->
+<!--                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="55dp"-->
+<!--                            android:layout_marginEnd="25dp"-->
+<!--                            android:layout_marginBottom="5dp"-->
+<!--                            android:hint="@string/choose_sub_specialization"-->
+<!--                            android:paddingTop="2dp"-->
+<!--                            app:boxBackgroundColor="@color/white"-->
+<!--                            app:boxBackgroundMode="none"-->
+<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                            <com.google.android.material.textfield.TextInputEditText-->
+<!--                                android:id="@+id/et_Sub_Specialization"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="55dp"-->
+<!--                                android:layout_gravity="center_horizontal"-->
+<!--                                android:fontFamily="@font/avenirltstd_roman"-->
+<!--                                android:inputType="number"-->
+<!--                                android:textColor="@color/gray"-->
+<!--                                android:textSize="12sp" />-->
+
+<!--                        </com.google.android.material.textfield.TextInputLayout>-->
+
+<!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                        android:id="@+id/layout_Choose_Seniority_Level"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="15dp"-->
+<!--                        android:layout_marginTop="12dp"-->
+<!--                        android:layout_marginEnd="15dp"-->
+<!--                        android:layout_marginBottom="10dp"-->
+<!--                        android:background="@drawable/bg_edittext"-->
+<!--                        android:elevation="1dp"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/layout_Choose_Sub_Specialization">-->
+
+<!--                        <androidx.appcompat.widget.AppCompatImageView-->
+<!--                            android:id="@+id/iv_Seniorityarrowdown"-->
+<!--                            android:layout_width="20dp"-->
+<!--                            android:layout_height="20dp"-->
+<!--                            android:layout_gravity="center_horizontal"-->
+<!--                            android:layout_marginEnd="12dp"-->
+<!--                            android:layout_marginBottom="12dp"-->
+<!--                            android:gravity="start"-->
+<!--                            android:src="@drawable/ic_arrowdwon"-->
+<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent" />-->
+
+<!--                        <com.google.android.material.textfield.TextInputLayout-->
+<!--                            android:id="@+id/textinput_Seniority"-->
+<!--                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="55dp"-->
+<!--                            android:layout_marginEnd="25dp"-->
+<!--                            android:layout_marginBottom="5dp"-->
+<!--                            android:hint="@string/choose_seniority_level"-->
+<!--                            android:paddingTop="2dp"-->
+<!--                            app:boxBackgroundColor="@color/white"-->
+<!--                            app:boxBackgroundMode="none"-->
+<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                            <com.google.android.material.textfield.TextInputEditText-->
+<!--                                android:id="@+id/et_Seniority"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="55dp"-->
+<!--                                android:layout_gravity="center_horizontal"-->
+<!--                                android:fontFamily="@font/avenirltstd_roman"-->
+<!--                                android:inputType="number"-->
+<!--                                android:textColor="@color/gray"-->
+<!--                                android:textSize="12sp" />-->
+
+<!--                        </com.google.android.material.textfield.TextInputLayout>-->
+
+<!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:id="@+id/layout_Location"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="@color/white"-->
+<!--                android:paddingTop="2dp"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/layout_specialization">-->
+
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:id="@+id/layout_Location_Header"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="40dp"-->
+<!--                    android:background="#E9EAEF"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                    <com.google.android.material.imageview.ShapeableImageView-->
+<!--                        android:id="@+id/iv_LocationarrowRight"-->
+<!--                        android:layout_width="20dp"-->
+<!--                        android:layout_height="20dp"-->
+<!--                        android:layout_marginEnd="15dp"-->
+<!--                        android:adjustViewBounds="true"-->
+<!--                        android:src="@drawable/ic_arrowup"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                        android:id="@+id/layout_ivHideLocationarrowRight"-->
+<!--                        android:layout_width="20dp"-->
+<!--                        android:layout_height="20dp"-->
+<!--                        android:layout_marginEnd="15dp"-->
+<!--                        android:background="@drawable/bg_circle"-->
+<!--                        android:visibility="gone"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                        <com.google.android.material.imageview.ShapeableImageView-->
+<!--                            android:id="@+id/ivHideLocationarrowRight"-->
+<!--                            android:layout_width="12dp"-->
+<!--                            android:layout_height="12dp"-->
+<!--                            android:adjustViewBounds="true"-->
+<!--                            android:src="@drawable/ic_arrowdwonwhite"-->
+<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintTop_toTopOf="parent" />-->
+<!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+
+<!--                    <androidx.appcompat.widget.AppCompatTextView-->
+<!--                        android:id="@+id/tv_Location"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="15dp"-->
+<!--                        android:fontFamily="@font/avenirltstd_roman"-->
+<!--                        android:text="@string/location"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textSize="16sp"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:id="@+id/layout_Location_Details"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/layout_Location_Header">-->
+
+<!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                        android:id="@+id/layout_Choose_City"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="15dp"-->
+<!--                        android:layout_marginTop="12dp"-->
+<!--                        android:layout_marginEnd="15dp"-->
+<!--                        android:background="@drawable/bg_edittext"-->
+<!--                        android:elevation="1dp"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                        <androidx.appcompat.widget.AppCompatImageView-->
+<!--                            android:id="@+id/iv_arrowdownChoose_City"-->
+<!--                            android:layout_width="20dp"-->
+<!--                            android:layout_height="20dp"-->
+<!--                            android:layout_gravity="center_horizontal"-->
+<!--                            android:layout_marginEnd="12dp"-->
+<!--                            android:layout_marginBottom="12dp"-->
+<!--                            android:gravity="start"-->
+<!--                            android:src="@drawable/ic_arrowdwon"-->
+<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent" />-->
+
+<!--                        <com.google.android.material.textfield.TextInputLayout-->
+<!--                            android:id="@+id/textinput_Choose_City"-->
+<!--                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="55dp"-->
+<!--                            android:layout_marginEnd="25dp"-->
+<!--                            android:layout_marginBottom="5dp"-->
+<!--                            android:hint="@string/choose_city"-->
+<!--                            android:paddingTop="2dp"-->
+<!--                            app:boxBackgroundColor="@color/white"-->
+<!--                            app:boxBackgroundMode="none"-->
+<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                            <com.google.android.material.textfield.TextInputEditText-->
+<!--                                android:id="@+id/et_Choose_City"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="55dp"-->
+<!--                                android:layout_gravity="center_horizontal"-->
+<!--                                android:fontFamily="@font/avenirltstd_roman"-->
+<!--                                android:inputType="number"-->
+<!--                                android:textColor="@color/gray"-->
+<!--                                android:textSize="12sp" />-->
+
+<!--                        </com.google.android.material.textfield.TextInputLayout>-->
+
+<!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                        android:id="@+id/layout_Choose_Area"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="15dp"-->
+<!--                        android:layout_marginTop="12dp"-->
+<!--                        android:layout_marginEnd="15dp"-->
+<!--                        android:layout_marginBottom="10dp"-->
+<!--                        android:background="@drawable/bg_edittext"-->
+<!--                        android:elevation="1dp"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/layout_Choose_City">-->
+
+<!--                        <androidx.appcompat.widget.AppCompatImageView-->
+<!--                            android:id="@+id/iv_arrowdownArea"-->
+<!--                            android:layout_width="20dp"-->
+<!--                            android:layout_height="20dp"-->
+<!--                            android:layout_gravity="center_horizontal"-->
+<!--                            android:layout_marginEnd="12dp"-->
+<!--                            android:layout_marginBottom="12dp"-->
+<!--                            android:gravity="start"-->
+<!--                            android:src="@drawable/ic_arrowdwon"-->
+<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent" />-->
+
+<!--                        <com.google.android.material.textfield.TextInputLayout-->
+<!--                            android:id="@+id/textinput_Choose_Area"-->
+<!--                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="55dp"-->
+<!--                            android:layout_marginEnd="25dp"-->
+<!--                            android:layout_marginBottom="5dp"-->
+<!--                            android:hint="@string/choose_area"-->
+<!--                            android:paddingTop="2dp"-->
+<!--                            app:boxBackgroundColor="@color/white"-->
+<!--                            app:boxBackgroundMode="none"-->
+<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                            <com.google.android.material.textfield.TextInputEditText-->
+<!--                                android:id="@+id/et_Choose_Area"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="55dp"-->
+<!--                                android:layout_gravity="center_horizontal"-->
+<!--                                android:fontFamily="@font/avenirltstd_roman"-->
+<!--                                android:inputType="number"-->
+<!--                                android:textColor="@color/gray"-->
+<!--                                android:textSize="12sp" />-->
+
+<!--                        </com.google.android.material.textfield.TextInputLayout>-->
+
+<!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:id="@+id/layout_Fees"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="@color/white"-->
+<!--                android:paddingTop="2dp"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/layout_Location">-->
+
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:id="@+id/layout_Fees_Header"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="40dp"-->
+<!--                    android:background="#E9EAEF"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                    <com.google.android.material.imageview.ShapeableImageView-->
+<!--                        android:id="@+id/iv_FeesarrowRight"-->
+<!--                        android:layout_width="20dp"-->
+<!--                        android:layout_height="20dp"-->
+<!--                        android:layout_marginEnd="15dp"-->
+<!--                        android:adjustViewBounds="true"-->
+<!--                        android:src="@drawable/ic_arrowup"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                        android:id="@+id/layout_ivHideFeesarrowRight"-->
+<!--                        android:layout_width="20dp"-->
+<!--                        android:layout_height="20dp"-->
+<!--                        android:layout_marginEnd="15dp"-->
+<!--                        android:background="@drawable/bg_circle"-->
+<!--                        android:visibility="gone"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                        <com.google.android.material.imageview.ShapeableImageView-->
+<!--                            android:id="@+id/ivHideFeesarrowRight"-->
+<!--                            android:layout_width="12dp"-->
+<!--                            android:layout_height="12dp"-->
+<!--                            android:adjustViewBounds="true"-->
+<!--                            android:src="@drawable/ic_arrowdwonwhite"-->
+<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintTop_toTopOf="parent" />-->
+<!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+
+<!--                    <androidx.appcompat.widget.AppCompatTextView-->
+<!--                        android:id="@+id/tv_Fees"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="15dp"-->
+<!--                        android:fontFamily="@font/avenirltstd_roman"-->
+<!--                        android:text="@string/fees"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textSize="16sp"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:id="@+id/layout_Fees_Details"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/layout_Fees_Header">-->
+
+<!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                        android:id="@+id/layout_Fees_from"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="15dp"-->
+<!--                        android:layout_marginTop="12dp"-->
+<!--                        android:layout_marginEnd="15dp"-->
+<!--                        android:background="@drawable/bg_edittext"-->
+<!--                        android:elevation="1dp"-->
+<!--                        app:layout_constraintEnd_toStartOf="@+id/layout_Fees_to"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                        <TextView-->
+<!--                            android:id="@+id/tv_from"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="20dp"-->
+<!--                            android:layout_gravity="center_horizontal"-->
+<!--                            android:layout_marginEnd="12dp"-->
+<!--                            android:layout_marginBottom="12dp"-->
+<!--                            android:gravity="center"-->
+<!--                            android:text="@string/egp"-->
+<!--                            android:textColor="@color/black"-->
+<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            app:layout_constraintStart_toEndOf="@+id/textinput_Fees_from" />-->
+
+<!--                        <com.google.android.material.textfield.TextInputLayout-->
+<!--                            android:id="@+id/textinput_Fees_from"-->
+<!--                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="55dp"-->
+<!--                            android:layout_marginEnd="15dp"-->
+<!--                            android:layout_marginBottom="5dp"-->
+<!--                            android:hint="@string/from"-->
+<!--                            android:paddingTop="2dp"-->
+<!--                            app:boxBackgroundColor="@color/white"-->
+<!--                            app:boxBackgroundMode="none"-->
+<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                            app:layout_constraintEnd_toStartOf="@+id/tv_from"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                            <com.google.android.material.textfield.TextInputEditText-->
+<!--                                android:id="@+id/et_Fees_from"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="55dp"-->
+<!--                                android:layout_gravity="center_horizontal"-->
+<!--                                android:fontFamily="@font/avenirltstd_roman"-->
+<!--                                android:inputType="number"-->
+<!--                                android:textColor="@color/gray"-->
+<!--                                android:textSize="12sp" />-->
+
+<!--                        </com.google.android.material.textfield.TextInputLayout>-->
+
+<!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                        android:id="@+id/layout_Fees_to"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="15dp"-->
+<!--                        android:layout_marginTop="12dp"-->
+<!--                        android:layout_marginEnd="15dp"-->
+<!--                        android:layout_marginBottom="10dp"-->
+<!--                        android:background="@drawable/bg_edittext"-->
+<!--                        android:elevation="1dp"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintStart_toEndOf="@+id/layout_Fees_from"-->
+<!--                        app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                        <TextView-->
+<!--                            android:id="@+id/tv_Fees_to"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="20dp"-->
+<!--                            android:layout_gravity="center_horizontal"-->
+<!--                            android:layout_marginEnd="12dp"-->
+<!--                            android:layout_marginBottom="12dp"-->
+<!--                            android:gravity="center"-->
+<!--                            android:text="@string/egp"-->
+<!--                            android:textColor="@color/black"-->
+<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            app:layout_constraintStart_toEndOf="@+id/textinput_Fees_to" />-->
+
+<!--                        <com.google.android.material.textfield.TextInputLayout-->
+<!--                            android:id="@+id/textinput_Fees_to"-->
+<!--                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="55dp"-->
+<!--                            android:layout_marginEnd="15dp"-->
+<!--                            android:layout_marginBottom="5dp"-->
+<!--                            android:hint="@string/to"-->
+<!--                            android:paddingTop="2dp"-->
+<!--                            app:boxBackgroundColor="@color/white"-->
+<!--                            app:boxBackgroundMode="none"-->
+<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                            app:layout_constraintEnd_toStartOf="@+id/tv_Fees_to"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                            <com.google.android.material.textfield.TextInputEditText-->
+<!--                                android:id="@+id/et_Fees_to"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="55dp"-->
+<!--                                android:layout_gravity="center_horizontal"-->
+<!--                                android:fontFamily="@font/avenirltstd_roman"-->
+<!--                                android:inputType="number"-->
+<!--                                android:textColor="@color/gray"-->
+<!--                                android:textSize="12sp" />-->
+
+<!--                        </com.google.android.material.textfield.TextInputLayout>-->
+
+<!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:id="@+id/layout_Gender"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="@color/white"-->
+<!--                android:paddingTop="2dp"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/layout_Fees">-->
+
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:id="@+id/layout_Gender_Header"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="40dp"-->
+<!--                    android:background="#E9EAEF"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                    <com.google.android.material.imageview.ShapeableImageView-->
+<!--                        android:id="@+id/iv_GenderarrowRight"-->
+<!--                        android:layout_width="20dp"-->
+<!--                        android:layout_height="20dp"-->
+<!--                        android:layout_marginEnd="15dp"-->
+<!--                        android:adjustViewBounds="true"-->
+<!--                        android:src="@drawable/ic_arrowup"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                        android:id="@+id/layout_ivHideGenderarrowRight"-->
+<!--                        android:layout_width="20dp"-->
+<!--                        android:layout_height="20dp"-->
+<!--                        android:layout_marginEnd="15dp"-->
+<!--                        android:background="@drawable/bg_circle"-->
+<!--                        android:visibility="gone"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                        <com.google.android.material.imageview.ShapeableImageView-->
+<!--                            android:id="@+id/ivHideGenderarrowRight"-->
+<!--                            android:layout_width="12dp"-->
+<!--                            android:layout_height="12dp"-->
+<!--                            android:adjustViewBounds="true"-->
+<!--                            android:src="@drawable/ic_arrowdwonwhite"-->
+<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintTop_toTopOf="parent" />-->
+<!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+
+<!--                    <androidx.appcompat.widget.AppCompatTextView-->
+<!--                        android:id="@+id/tv_Gender"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="15dp"-->
+<!--                        android:fontFamily="@font/avenirltstd_roman"-->
+<!--                        android:text="@string/gender"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textSize="16sp"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:id="@+id/layout_Gender_details"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/layout_Gender_Header">-->
+
+<!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                        android:id="@+id/layout_Choose_Gender"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="15dp"-->
+<!--                        android:layout_marginTop="12dp"-->
+<!--                        android:layout_marginEnd="15dp"-->
+<!--                        android:layout_marginBottom="10dp"-->
+<!--                        android:background="@drawable/bg_edittext"-->
+<!--                        android:elevation="1dp"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                        <androidx.appcompat.widget.AppCompatImageView-->
+<!--                            android:id="@+id/iv_arrowdownChoose_Gender"-->
+<!--                            android:layout_width="20dp"-->
+<!--                            android:layout_height="20dp"-->
+<!--                            android:layout_gravity="center_horizontal"-->
+<!--                            android:layout_marginEnd="12dp"-->
+<!--                            android:layout_marginBottom="12dp"-->
+<!--                            android:gravity="start"-->
+<!--                            android:src="@drawable/ic_arrowdwon"-->
+<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent" />-->
+
+<!--                        <com.google.android.material.textfield.TextInputLayout-->
+<!--                            android:id="@+id/textinput_Choose_Gender"-->
+<!--                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="55dp"-->
+<!--                            android:layout_marginEnd="25dp"-->
+<!--                            android:layout_marginBottom="5dp"-->
+<!--                            android:hint="@string/choose_gender"-->
+<!--                            android:paddingTop="2dp"-->
+<!--                            app:boxBackgroundColor="@color/white"-->
+<!--                            app:boxBackgroundMode="none"-->
+<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                            <com.google.android.material.textfield.TextInputEditText-->
+<!--                                android:id="@+id/et_Choose_Gender"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="55dp"-->
+<!--                                android:layout_gravity="center_horizontal"-->
+<!--                                android:fontFamily="@font/avenirltstd_roman"-->
+<!--                                android:inputType="number"-->
+<!--                                android:textColor="@color/gray"-->
+<!--                                android:textSize="12sp" />-->
+
+<!--                        </com.google.android.material.textfield.TextInputLayout>-->
+
+<!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--        </androidx.core.widget.NestedScrollView>-->
+
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+
+<!--    <androidx.appcompat.widget.AppCompatButton-->
+<!--        android:id="@+id/btn_Apply"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="15dp"-->
+<!--        android:layout_marginBottom="10dp"-->
+<!--        android:background="@drawable/bg_chooselang_button"-->
+<!--        android:enabled="false"-->
+<!--        android:fontFamily="@font/avenirltstd_black"-->
+<!--        android:padding="5dp"-->
+<!--        android:text="@string/apply"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:textSize="14sp"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/imageView"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/layout"-->
+<!--        app:layout_constraintWidth_percent=".9" />-->
+
+<!--    <ImageView-->
+<!--        android:id="@+id/imageView"-->
+<!--        android:layout_width="100dp"-->
+<!--        android:layout_height="4dp"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:layout_marginBottom="5dp"-->
+<!--        android:adjustViewBounds="true"-->
+<!--        android:background="@color/black"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
+
+    <include android:id="@+id/layout_bottomsheetpersistant"
+        layout="@layout/layout_bottomsheet_filter"/>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <CheckBox
+        android:id="@+id/ch_examinationtype"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:buttonTint="@color/color_primary"
+        android:elevation="1dp"
+        android:fontFamily="@font/avenirltstd_black"
+        android:minWidth="48dp"
+        android:minHeight="0dp"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/iv_examination"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="15dp"
+        android:visibility="gone"
+        android:background="@drawable/bg_circlemove"
+        app:layout_constraintBottom_toBottomOf="@+id/ch_examinationtype"
+        app:layout_constraintStart_toEndOf="@+id/ch_examinationtype"
+        app:layout_constraintTop_toTopOf="@+id/ch_examinationtype"
+        >
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivExaminationtype"
+            android:layout_width="15dp"
+            android:layout_height="14dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_call"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_Examinationtype"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:fontFamily="@font/avenirltstd_roman"
+        android:gravity="start"
+        android:padding="3dp"
+        android:text="@string/Clinic_Booking"
+        android:textColor="@color/gray"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/iv_examination"
+        app:layout_constraintTop_toTopOf="@+id/iv_examination"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_examination"
+        />
+</android.support.constraint.ConstraintLayout>
