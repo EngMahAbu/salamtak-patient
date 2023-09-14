@@ -368,13 +368,13 @@
             android:name="com.korashiGroup.salamtakPatient.fragment.addagora.VideoCallFragment"
             android:label="video_callfragment"
             tools:layout="@layout/video_callfragment">
-        <deepLink
-                android:id="@+id/deepLink"
-                app:uri="www.salamtakpatient.com/{callingType}" />
-        <argument
-                android:name="callingType"
-                app:argType="string"
-        />
+        <argument android:name="deeplink" app:argType="string"
+                  app:nullable="true"/>
+        <argument android:name="DoctorImage" app:argType="string" app:nullable="true"/>
+        <argument android:name="DoctorName" app:argType="string" app:nullable="true"/>
+        <argument android:name="token" app:argType="string" app:nullable="true"/>
+        <deepLink android:id="@+id/deepLink2"
+                  app:uri="www.videocall.com/viedio/{deeplink,DoctorImage,DoctorName,token}"/>
     </fragment>
     <fragment android:id="@+id/personalInfoFragment2"
               android:name="com.korashiGroup.salamtakPatient.fragment.navstrepercontent.PersonalInfoFragment"

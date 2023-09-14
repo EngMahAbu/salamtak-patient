@@ -7,12 +7,12 @@
     android:background="@color/video_screen_color"
     tools:context=".fragment.addagora.VideoCallFragment">
 
-
+// video
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_Videocalling"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
+         android:visibility="gone"
        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -207,7 +207,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
+//audio
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_VoiceCallng"
         android:layout_width="match_parent"

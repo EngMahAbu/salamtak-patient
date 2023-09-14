@@ -13,9 +13,11 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class MyFirebaseMessagingService : FirebaseMessagingService() {
-    private  val TAG = "MyFirebaseMessagingServ"
+    private val TAG = "MyFirebaseMessagingServ"
+    private var linkAudioOrVideo = ""
+
     @Inject
-    lateinit var mNotificationManager:MyNotificationManager
+    lateinit var mNotificationManager: MyNotificationManager
     override fun onNewToken(token: String) {
         super.onNewToken(token)
         Log.e("fcm", "Refreshed token: $token")
@@ -24,22 +26,24 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)
-     //   Log.e(TAG, "data: ${message.data}")
+        //   Log.e(TAG, "data: ${message.data}")
 
 
 //        val uri: Uri = Uri.parse(message.notification?.link.toString())
 //        val url = uri.toString()
-       val x="link=SalamtakPatient://2?token=0068c6a0bb92eb943b28327bb286bd0b03fIAAOoKBCtgBYc!!1Lec0lHlOuG9rjSxmjXTiGegqvDQYBhA!!fbM8AAAAAEACzX8YFbnqVZAEAAQCmNJRk&" +
-               "DoctorName=Mostafa *Ali*aaaaaa&DoctorImage=!!Images!!Doctor!!Profile!!9406c34c-521b-4730-8741-5f23b65d148a.jfif&Channelname=46c8b940-6214-4a6c-9310-f39bc6018ee7&PatientID=151&" +
-               "date=2023-06-22 14:43:46"
-        val link="{link=SalamtakPatient://2?token=0068c6a0bb92eb943b28327bb286bd0b03fIAAOoKBCtgBYc!!1Lec0lHlOuG9rjSxmjXTiGegqvDQYBhA!!fbM8AAAAAEACzX8YFbnqVZAEAAQCmNJRk&DoctorName=Mostafa *Ali*aaaaaa&DoctorImage=!!Images!!Doctor!!Profile!!9406c34c-521b-4730-8741-5f23b65d148a.jfif&Channelname=46c8b940-6214-4a6c-9310-f39bc6018ee7&PatientID=151&date=2023-06-22 14:43:46}"
+        val x =
+            "link=SalamtakPatient://2?token=0068c6a0bb92eb943b28327bb286bd0b03fIAAOoKBCtgBYc!!1Lec0lHlOuG9rjSxmjXTiGegqvDQYBhA!!fbM8AAAAAEACzX8YFbnqVZAEAAQCmNJRk&" +
+                    "DoctorName=Mostafa *Ali*aaaaaa&DoctorImage=!!Images!!Doctor!!Profile!!9406c34c-521b-4730-8741-5f23b65d148a.jfif&Channelname=46c8b940-6214-4a6c-9310-f39bc6018ee7&PatientID=151&" +
+                    "date=2023-06-22 14:43:46"
+        val link =
+            "{link=SalamtakPatient://2?token=0068c6a0bb92eb943b28327bb286bd0b03fIAAOoKBCtgBYc!!1Lec0lHlOuG9rjSxmjXTiGegqvDQYBhA!!fbM8AAAAAEACzX8YFbnqVZAEAAQCmNJRk&DoctorName=Mostafa *Ali*aaaaaa&DoctorImage=!!Images!!Doctor!!Profile!!9406c34c-521b-4730-8741-5f23b65d148a.jfif&Channelname=46c8b940-6214-4a6c-9310-f39bc6018ee7&PatientID=151&date=2023-06-22 14:43:46}"
 
-        val value=message.data.values
-        val entriess=message.data.entries
-        var result=""
-        for (enter in entriess ){
+        val value = message.data.values
+        val entriess = message.data.entries
+        var result = ""
+        for (enter in entriess) {
             Log.e(TAG, "enter.value: ${enter.value}")
-            result=enter.value
+            result = enter.value
         }
 
 //        for (values in value ){
@@ -48,26 +52,32 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 //        }
 
 
-       val map=getQueryString(x)
+        val map = getQueryString(x)
         Log.e(TAG, "map: $map")
 
 
-        if (link.contains("SalamtakPatient://2") || link.contains("SalamtakPatient://3")){
-            Log.e(TAG, "map: yes")
+        if (link.contains("SalamtakPatient://2")) {
+            linkAudioOrVideo = "audio"
+        } else {
+            linkAudioOrVideo = "video"
         }
 
-            val deepLinkItem=DeepLinkItem(map?.get("link"),
-                map?.get("token"), map?.get("DoctorName"), map?.get("DoctorImage"),
-                map?.get("Channelname"), map?.get("date")
-
-            )
-            Log.e("Element  ", "deepLinkItem: ${deepLinkItem}")
+        val deepLinkItem = DeepLinkItem(
+            map?.get("token")?.let { getDeepLink(it) }, map?.get("DoctorName"),
+            map?.get("DoctorImage")?.let { getDeepLink(it) },
+            map?.get("Channelname"), map?.get("date"), linkAudioOrVideo
+        )
+        Log.e("Element  ", "deepLinkItem: ${deepLinkItem}")
 
         val uri: Uri = Uri.parse(link)
-       val jsonobject= convertUriToJson(uri)
+        val jsonobject = convertUriToJson(uri)
 
-       Log.e(TAG, "jsonobject: ${jsonobject}")
-        mNotificationManager.textNotification(message.notification?.title.toString(), message.notification?.body.toString())
+        Log.e(TAG, "jsonobject: ${jsonobject}")
+        mNotificationManager.textNotification(
+            message.notification?.title.toString(),
+            message.notification?.body.toString(),
+            deepLinkItem
+        )
 
     }
 
@@ -97,5 +107,10 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         return json
     }
 
-    
+
+    private fun getDeepLink(item: String): String {
+        return item.replace("!!", "/")
+    }
+
+
 }

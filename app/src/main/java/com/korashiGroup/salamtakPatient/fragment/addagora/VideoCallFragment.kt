@@ -1,12 +1,14 @@
 package com.korashiGroup.salamtakPatient.fragment.addagora
 
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.SurfaceView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -15,6 +17,7 @@ import coil.load
 import coil.transform.CircleCropTransformation
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.databinding.VideoCallfragmentBinding
+import com.korashiGroup.salamtakPatient.notification.DeepLinkItem
 import com.korashiGroup.salamtakPatient.utils.SpUtil
 import dagger.hilt.android.AndroidEntryPoint
 import io.agora.rtc2.*
@@ -25,7 +28,7 @@ import javax.inject.Inject
 class VideoCallFragment : Fragment() {
 
     private lateinit var binding: VideoCallfragmentBinding
-    private val args:VideoCallFragmentArgs by navArgs()
+    private val args: VideoCallFragmentArgs by navArgs()
 
     @Inject
     lateinit var sp: SpUtil
@@ -36,8 +39,8 @@ class VideoCallFragment : Fragment() {
         android.Manifest.permission.CAMERA
     )
 
-    private val token = "0068c6a0bb92eb943b28327bb286bd0b03fIADisjO69QIrYxB5ccdjtLf1Z0lfOJfB7Irtzyyxv+ji+a81asMAAAAAEABSo3ACX+mGZAEAAQCXo4Vk"
-    private val channelName = "f890a3ec-4071-45bd-8e00-30f29b251d86"
+    private val token = args.token
+    private val channelName = "args.channelname"
     private val appId = "8c6a0bb92eb943b28327bb286bd0b03f"
     private val uid = 0
     private var isJoined = false
@@ -54,28 +57,31 @@ class VideoCallFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding= VideoCallfragmentBinding.inflate(layoutInflater,container,false)
+        binding = VideoCallfragmentBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.tvName.text=args.callingType
+        if (args.token.isNullOrEmpty() && args.deeplink.isNullOrEmpty() && args.doctorName.isNullOrEmpty() && args.doctorImage.isNullOrEmpty()) {
+            Toast.makeText(requireContext(), "null", Toast.LENGTH_SHORT).show()
+        }
+        binding.tvName.text = args.doctorName
         if (!checkSelfPermission()) {
             ActivityCompat.requestPermissions(requireActivity(), REQUESTED_PERMISSIONS, PERMISSION_REQ_ID);
         }
         initButton()
-        if (args.callingType=="voice"){
-            binding.layoutVideocalling.visibility=View.GONE
-            binding.layoutVoiceCallng.visibility=View.VISIBLE
+        if (args.deeplink == "audio") {
+            binding.layoutVideocalling.visibility = View.GONE
+            binding.layoutVoiceCallng.visibility = View.VISIBLE
             setupVoiceSDKEngine()
-        }else{
-            binding.layoutVideocalling.visibility=View.VISIBLE
-            binding.layoutVoiceCallng.visibility=View.GONE
+        } else {
+            binding.layoutVideocalling.visibility = View.VISIBLE
+            binding.layoutVoiceCallng.visibility = View.GONE
             setupVideoSDKEngine()
         }
 
-        binding.ivProfile.load("https://salamtechapi.azurewebsites.net/${sp.getUser()?.image}") {
+        binding.ivProfile.load("https://salamtechapi.azurewebsites.net/${args.doctorImage}") {
             crossfade(true)
             crossfade(1000)
             placeholder(R.drawable.ic_profile)
@@ -86,10 +92,10 @@ class VideoCallFragment : Fragment() {
     }
 
 
-    private fun initButton(){
+    private fun initButton() {
 
         binding.ivVideo.setOnClickListener {
-             joinCall()
+            joinCall()
         }
 
         binding.ivEndCall.setOnClickListener {
@@ -238,7 +244,7 @@ class VideoCallFragment : Fragment() {
     }
 
     private fun setupRemoteVideo(uid: Int) {
-        val container =  binding.remoteVideoViewContainer
+        val container = binding.remoteVideoViewContainer
         remoteSurfaceView = SurfaceView(requireContext())
         remoteSurfaceView!!.setZOrderMediaOverlay(false)
         container.addView(remoteSurfaceView)
@@ -268,58 +274,57 @@ class VideoCallFragment : Fragment() {
         )
     }
 
-    fun onSwitchCameraClicked()
-    {
+    fun onSwitchCameraClicked() {
 
         agoraEngine?.switchCamera()
     }
 
-    private fun onSwitchSpeakerClicked(){
-        if(binding.ivSpeaker.isSelected){
-            binding.ivSpeaker.isSelected=false
+    private fun onSwitchSpeakerClicked() {
+        if (binding.ivSpeaker.isSelected) {
+            binding.ivSpeaker.isSelected = false
             binding.ivSpeaker.setImageResource(R.drawable.ic_speaker)
-        }else{
-            binding.ivSpeaker.isSelected=true
+        } else {
+            binding.ivSpeaker.isSelected = true
             binding.ivSpeaker.setImageResource(R.drawable.ic_speaker_up)
         }
         agoraEngine?.setEnableSpeakerphone(binding.ivSpeaker.isSelected)
     }
 
-    private fun onSwitchSpeakerVoiceClicked(){
-        if(binding.ivVoiceSpeaker.isSelected){
-            binding.ivVoiceSpeaker.isSelected=false
+    private fun onSwitchSpeakerVoiceClicked() {
+        if (binding.ivVoiceSpeaker.isSelected) {
+            binding.ivVoiceSpeaker.isSelected = false
             binding.ivVoiceSpeaker.setImageResource(R.drawable.ic_speaker)
-        }else{
-            binding.ivVoiceSpeaker.isSelected=true
+        } else {
+            binding.ivVoiceSpeaker.isSelected = true
             binding.ivVoiceSpeaker.setImageResource(R.drawable.ic_speaker_up)
         }
         agoraEngine?.setEnableSpeakerphone(binding.ivVoiceSpeaker.isSelected)
     }
 
-    private fun onLocalAudioMuteClicked(){
+    private fun onLocalAudioMuteClicked() {
 
 
-        if(binding.ivMic.isSelected){
-            binding.ivMic.isSelected=false
+        if (binding.ivMic.isSelected) {
+            binding.ivMic.isSelected = false
             binding.ivMic.clearColorFilter()
             binding.ivMic.setImageResource(R.drawable.ic_mic)
-        }else{
-            binding.ivMic.isSelected=true
+        } else {
+            binding.ivMic.isSelected = true
             binding.ivMic.setImageResource(R.drawable.ic_mic_off)
         }
         agoraEngine?.muteLocalAudioStream(binding.ivMic.isSelected)
 
     }
 
-    private fun onLocalAudioMuteVoiceClicked(){
+    private fun onLocalAudioMuteVoiceClicked() {
 
 
-        if(binding.ivVoiceMic.isSelected){
-            binding.ivVoiceMic.isSelected=false
+        if (binding.ivVoiceMic.isSelected) {
+            binding.ivVoiceMic.isSelected = false
             binding.ivVoiceMic.clearColorFilter()
             binding.ivVoiceMic.setImageResource(R.drawable.ic_mic)
-        }else{
-            binding.ivVoiceMic.isSelected=true
+        } else {
+            binding.ivVoiceMic.isSelected = true
             binding.ivVoiceMic.setImageResource(R.drawable.ic_mic_off)
         }
         agoraEngine?.muteLocalAudioStream(binding.ivVoiceMic.isSelected)
@@ -351,7 +356,6 @@ class VideoCallFragment : Fragment() {
             agoraEngine = null
         }.start()
     }
-
 
 
 }

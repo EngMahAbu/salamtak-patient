@@ -1,5 +1,6 @@
 package com.korashiGroup.salamtakPatient.notification
 
+import android.R.id
 import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -17,17 +18,29 @@ import javax.inject.Inject
 
 class MyNotificationManager @Inject constructor(private val mCtx: Application) {
 
-    fun textNotification(title: String?, message: String?) {
+    fun textNotification(title: String?, message: String?,deepLinkItem: DeepLinkItem?) {
         val rand = Random()
         val idNotification = rand.nextInt(1000000000)
-        // deep link
-        val args = Bundle()
-        args.putString("callingType", title)
+
+//        val bundle = Bundle()
+//        bundle.putSerializable("orderId", deepLinkItem)
+//
+//        val args: VideoCallFragmentArgs = VideoCallFragmentArgs.fromBundle(bundle)
+
         val pendingDeeplink= NavDeepLinkBuilder(mCtx).setGraph(R.navigation.nav_graph).setDestination(R.id.videoCallFragment)
             .setArguments(Bundle().apply {
-                putString("callingType","osama")
+                putString("deeplink", deepLinkItem?.link)
+                putString("DoctorName", deepLinkItem?.DoctorName)
+                putString("DoctorImage", deepLinkItem?.DoctorImage)
+                putString("token", deepLinkItem?.token)
+
             })
             .createPendingIntent()
+
+//        val pendingDeeplink= NavDeepLinkBuilder(mCtx).setGraph(R.navigation.nav_graph).setDestination(R.id.videoCallFragment).setArguments(args.toBundle())
+//          .createPendingIntent()
+
+
         val soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val notificationManager =  mCtx.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
