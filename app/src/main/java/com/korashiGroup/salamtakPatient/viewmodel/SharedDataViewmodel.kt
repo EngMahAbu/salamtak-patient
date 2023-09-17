@@ -22,6 +22,8 @@ class SharedDataViewmodel:ViewModel() {
     val doctorId=MutableLiveData<Int>()
     val profileStatus=MutableLiveData<Int>()
     val birthDate=MutableLiveData<String>()
+    val releaeDate=MutableLiveData<String>()
+    val endDate=MutableLiveData<String>()
     val chooseGender=MutableLiveData<ChooseGender>()
     val country=MutableLiveData<DataCountry>()
     val ClinicSchedualByClinicDayId=MutableLiveData<ClinicSchedualByClinicDayId>()
@@ -83,6 +85,13 @@ class SharedDataViewmodel:ViewModel() {
         this.birthDate.postValue(birthdate)
     }
 
+    fun getReleaseDate(releaseDate: String){
+        this.releaeDate.postValue(releaseDate)
+    }
+
+    fun getEdndDate(enddate: String){
+        this.endDate.postValue(enddate)
+    }
     fun getCountry(selectCountry: DataCountry){
         country.postValue(selectCountry)
     }

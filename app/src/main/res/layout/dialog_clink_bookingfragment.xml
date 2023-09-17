@@ -95,6 +95,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/layout_btnDone"
         app:layout_constraintTop_toTopOf="@+id/layout_btnDone"
         android:visibility="gone"
+        android:indeterminateTint="@color/blue"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

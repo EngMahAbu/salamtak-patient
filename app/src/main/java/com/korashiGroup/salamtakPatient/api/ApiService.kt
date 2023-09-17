@@ -242,5 +242,11 @@ interface ApiService {
         @Body part: RequestBody
     ): Response<QuestionAndAnswerResponse>
 
+    @POST("{culture}/Insurance_Companies/CreatePatient_Insurance")
+    suspend fun createPatient_Insurance(
+        @Path("culture") culture: String,
+        @Body part: RequestBody
+    ): Response<QuestionAndAnswerResponse>
+
 
 }

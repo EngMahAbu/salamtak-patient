@@ -607,7 +607,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
     fun setupInsuranceSpinner(list: List<InsuranceCompany>) {
 
         val insuranceCompanyList=ArrayList<String>()
-         insuranceCompanyList.add("Select")
+        insuranceCompanyList.add("Select")
         list.forEach {
             insuranceCompanyList.add(it.name)
         }

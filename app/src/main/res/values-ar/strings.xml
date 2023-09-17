@@ -238,6 +238,7 @@
     <string name="fillallfields">Fill All Fields</string>
     <string name="insurance_company">insurance Company</string>
     <string name="notnow">Not Now</string>
+    <string name="end_date">End Date</string>
 
 
 </resources>

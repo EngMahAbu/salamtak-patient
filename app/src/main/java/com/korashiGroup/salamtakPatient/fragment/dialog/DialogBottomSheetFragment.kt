@@ -217,7 +217,7 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
         }
 
         binding.itemDatespiner.btnGetDate.setOnClickListener {
-            getDate()
+            args.changeview?.let { it1 -> getDate(it1) }
             dismiss()
         }
 
@@ -240,6 +240,12 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
 
         when (selectviews) {
             "date" -> {
+                binding.layoutDateOfbirth.visibility = View.VISIBLE
+                binding.btnDone.visibility = View.GONE
+                binding.tvAllSpecial.visibility = View.GONE
+            }
+
+            "endDate" -> {
                 binding.layoutDateOfbirth.visibility = View.VISIBLE
                 binding.btnDone.visibility = View.GONE
                 binding.tvAllSpecial.visibility = View.GONE
@@ -705,10 +711,17 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
         this.startActivity(intent)
     }
 
-    private fun getDate() {
-        val birthdate =
+    private fun getDate(date:String) {
+        val dateResult =
             "" + binding.itemDatespiner.datePicker1.getDayOfMonth() + "-" + (binding.itemDatespiner.datePicker1.getMonth() + 1) + "-" + binding.itemDatespiner.datePicker1.getYear()
-        sharedDataViewmodel.getBirthDate(birthdate)
+        if (date=="date"){
+            sharedDataViewmodel.getBirthDate(dateResult)
+            sharedDataViewmodel.getReleaseDate(dateResult)
+        }else if (date=="endDate"){
+            sharedDataViewmodel.getEdndDate(dateResult)
+        }
+
+
     }
 
     private fun imageServices() {

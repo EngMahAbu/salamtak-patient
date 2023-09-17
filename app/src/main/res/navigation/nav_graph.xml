@@ -274,6 +274,8 @@
                 android:id="@+id/action_appointmentDetailsFragment_to_myScheduleFragment"
                 app:destination="@id/myScheduleFragment"
                 app:popUpTo="@id/myScheduleFragment" />
+        <action android:id="@+id/action_appointmentDetailsFragment_to_dialogBottomSheetFragment"
+                app:destination="@id/dialogBottomSheetFragment"/>
 
     </fragment>
     <fragment
