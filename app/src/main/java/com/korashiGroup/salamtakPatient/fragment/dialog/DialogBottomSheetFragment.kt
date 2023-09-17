@@ -641,20 +641,8 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
     }
 
     override fun onItemSelected(specialist: SpecialistData) {
-
-        when (args.changeview) {
-            "services" -> {
-                sharedDataViewmodel.getspecialication(specialist)
-                findNavController().navigate(R.id.searchFragment)
-                dismiss()
-            }
-
-            "Specialist" -> {
-                sharedDataViewmodel.getspecialication(specialist)
-
-            }
-        }
-    }
+            sharedDataViewmodel.getspecialication(specialist)
+         }
 
 
     override fun onSelectSubcialist(listofsubSpecialist: MutableList<SubSpecialistData>) {
@@ -793,7 +781,6 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
         }
 
     }
-
 
 
 }

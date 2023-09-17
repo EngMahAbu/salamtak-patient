@@ -72,6 +72,8 @@
                 android:id="@+id/action_dialogBottomSheetFragment_to_loginFragment"
                 app:destination="@id/loginFragment"
         />
+
+
     </dialog>
     <fragment
             android:id="@+id/forgetPasswordFragment"
@@ -171,6 +173,8 @@
         <action
                 android:id="@+id/action_homeFragment_to_videoCallFragment"
                 app:destination="@id/videoCallFragment" />
+        <action android:id="@+id/action_homeFragment_to_dialogSpecificationFragment"
+                app:destination="@id/dialogSpecificationFragment"/>
 
 
     </fragment>
@@ -187,7 +191,8 @@
                 app:destination="@id/filterFragment" />
         <action
                 android:id="@+id/action_searchFragment_to_dialogBottomSheetFragment"
-                app:destination="@id/dialogBottomSheetFragment" />
+                app:destination="@id/dialogBottomSheetFragment"
+               />
         <action
                 android:id="@+id/action_searchFragment_to_dialogClinkBookingFragment"
                 app:destination="@id/dialogClinkBookingFragment" />
@@ -387,5 +392,8 @@
         <action android:id="@+id/action_askDoctorFragment_to_dialogBottomSheetFragment"
                 app:destination="@id/dialogBottomSheetFragment"/>
     </fragment>
+    <dialog android:id="@+id/dialogSpecificationFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.dialog.DialogSpecificationFragment"
+            android:label="dialog_specilizationfragment" tools:layout="@layout/dialog_specilizationfragment"/>
 
 </navigation>

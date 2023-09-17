@@ -252,6 +252,7 @@
     <string name="askdoctor">Ask a Doctor</string>
     <string name="fillallfields">Fill All Fields</string>
     <string name="insurance_company">insurance Company</string>
+    <string name="notnow">Not Now</string>
 
     <array name="choose">
         <item>Select</item>

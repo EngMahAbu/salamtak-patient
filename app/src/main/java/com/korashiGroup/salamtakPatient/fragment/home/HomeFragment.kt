@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -12,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import coil.load
 import coil.transform.CircleCropTransformation
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.adapter.*
 import com.korashiGroup.salamtakPatient.databinding.HomefragmentBinding
@@ -381,7 +383,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
     override fun onItemClick(servicesID: Int) {
         medicalExaminatioId = servicesID
         val action =
-            HomeFragmentDirections.actionHomeFragmentToDialogBottomSheetFragment("services")
+            HomeFragmentDirections.actionHomeFragmentToDialogSpecificationFragment()
         findNavController().navigate(action)
     }
 

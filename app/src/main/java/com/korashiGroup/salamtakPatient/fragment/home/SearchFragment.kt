@@ -21,7 +21,6 @@ import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.adapter.SearchDoctorsAdapter
 import com.korashiGroup.salamtakPatient.adapter.CalenderAdapter
 import com.korashiGroup.salamtakPatient.databinding.SearchfragmentBinding
-import com.korashiGroup.salamtakPatient.model.CalendarDateModel
 import com.korashiGroup.salamtakPatient.model.booking.ClinicSchedualByClinicDayId
 import com.korashiGroup.salamtakPatient.model.booking.PatientAppointmentRequest
 import com.korashiGroup.salamtakPatient.model.docotorsearch.DoctorSearchRequest
@@ -32,7 +31,7 @@ import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.snackbar.Snackbar
-import com.korashiGroup.salamtakPatient.model.CityData
+import com.korashiGroup.salamtakPatient.model.*
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCompany
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
@@ -394,7 +393,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                 is Resource.sucess -> {
                     hideprogressbar()
                     it.let {
-                        bottomsheetbeahavoir.state = BottomSheetBehavior.STATE_HIDDEN
+                    //    bottomsheetbeahavoir.state = BottomSheetBehavior.STATE_HIDDEN
                         searchDoctorsAdapter.submitList(it.data?.data?.items)
                         searchDoctorsAdapter.notifyDataSetChanged()
                         updateUi(it.data?.data?.items as List<Item>)
@@ -607,7 +606,8 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
 
     fun setupInsuranceSpinner(list: List<InsuranceCompany>) {
 
-        var insuranceCompanyList=ArrayList<String>()
+        val insuranceCompanyList=ArrayList<String>()
+         insuranceCompanyList.add("Select")
         list.forEach {
             insuranceCompanyList.add(it.name)
         }
@@ -623,7 +623,12 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                 parent: AdapterView<*>,
                 view: View?, position: Int, id: Long
             ) {
-                insuranceId=list[position].iD
+                if (position==0){
+                    insuranceId=""
+                }else{
+                    insuranceId=list[position+1].iD
+                }
+
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
@@ -732,14 +737,14 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
     }
 
     private fun reset(){
-        binding.layoutBottomsheetpersistant.etChooseCity.setText("")
-        binding.layoutBottomsheetpersistant.etSeniority.setText("")
-        binding.layoutBottomsheetpersistant.etSpecialization.setText("")
-        binding.layoutBottomsheetpersistant.etSubSpecialization.setText("")
-        binding.layoutBottomsheetpersistant.etChooseArea.setText("")
-        binding.layoutBottomsheetpersistant.etChooseGender.setText("")
-        binding.layoutBottomsheetpersistant.etFeesFrom.setText("")
-        binding.layoutBottomsheetpersistant.etFeesTo.setText("")
+        val subSpecialistData=SubSpecialistData(0,"",false,"")
+        val list=ArrayList<SubSpecialistData>()
+        list.add(subSpecialistData)
+       sharedDataViewmodel.getCity(CityData(0,"",0,false,"",""))
+        sharedDataViewmodel.getArea(AreaData(0,""))
+        sharedDataViewmodel.getspecialication(SpecialistData(0,"",false,""))
+        sharedDataViewmodel.getSeniorityLevelData(SeniorityLevelData(0,""))
+        sharedDataViewmodel.getSubSpecialication(list)
     }
 
 }
