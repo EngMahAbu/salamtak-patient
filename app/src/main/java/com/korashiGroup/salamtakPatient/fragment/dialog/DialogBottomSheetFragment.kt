@@ -642,7 +642,6 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
 
     override fun onItemSelected(specialist: SpecialistData) {
 
-
         when (args.changeview) {
             "services" -> {
                 sharedDataViewmodel.getspecialication(specialist)

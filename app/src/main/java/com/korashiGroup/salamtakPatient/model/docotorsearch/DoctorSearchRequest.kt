@@ -29,5 +29,7 @@ data class DoctorSearchRequest(
     @SerializedName("SpecialistId")
     val specialistId: Int=0,
     @SerializedName("SubSpecialistId")
-    val subSpecialistId: List<Int?>?=null
+    val subSpecialistId: List<Int?>?=null,
+    @SerializedName("InsuranceID")
+    val insuranceID: String="",
 )

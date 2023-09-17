@@ -324,7 +324,26 @@
                                 </com.google.android.material.textfield.TextInputLayout>
 
                             </androidx.constraintlayout.widget.ConstraintLayout>
-
+                            <androidx.appcompat.widget.AppCompatButton
+                                    android:id="@+id/btn_layout_Choose_Specialization"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:background="@android:color/transparent"
+                                    app:layout_constraintEnd_toEndOf="@+id/layout_Choose_Specialization"
+                                    app:layout_constraintStart_toStartOf="@+id/layout_Choose_Specialization"
+                                    app:layout_constraintTop_toTopOf="@+id/layout_Choose_Specialization"
+                                    app:layout_constraintBottom_toBottomOf="@+id/layout_Choose_Specialization"
+                            />
+                            <androidx.appcompat.widget.AppCompatButton
+                                    android:id="@+id/btn_layout_Choose_Sub_Specialization"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:background="@android:color/transparent"
+                                    app:layout_constraintEnd_toEndOf="@+id/layout_Choose_Sub_Specialization"
+                                    app:layout_constraintStart_toStartOf="@+id/layout_Choose_Sub_Specialization"
+                                    app:layout_constraintTop_toTopOf="@+id/layout_Choose_Sub_Specialization"
+                                    app:layout_constraintBottom_toBottomOf="@+id/layout_Choose_Sub_Specialization"
+                            />
                             <androidx.constraintlayout.widget.ConstraintLayout
                                     android:id="@+id/layout_Choose_Sub_Specialization"
                                     android:layout_width="match_parent"
@@ -380,6 +399,18 @@
                                 </com.google.android.material.textfield.TextInputLayout>
 
                             </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                            <androidx.appcompat.widget.AppCompatButton
+                                    android:id="@+id/btn_layout_Choose_Seniority_Level"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:background="@android:color/transparent"
+                                    app:layout_constraintEnd_toEndOf="@+id/layout_Choose_Seniority_Level"
+                                    app:layout_constraintStart_toStartOf="@+id/layout_Choose_Seniority_Level"
+                                    app:layout_constraintTop_toTopOf="@+id/layout_Choose_Seniority_Level"
+                                    app:layout_constraintBottom_toBottomOf="@+id/layout_Choose_Seniority_Level"
+                            />
 
                             <androidx.constraintlayout.widget.ConstraintLayout
                                     android:id="@+id/layout_Choose_Seniority_Level"
@@ -443,6 +474,121 @@
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/layout_insuranceCompany"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:background="@color/white"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/layout_specialization">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/layout_insuranceCompanyfilter"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:background="#E9EAEF"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                    android:id="@+id/iv_insuranceCompanyRight"
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_marginEnd="15dp"
+                                    android:adjustViewBounds="true"
+                                    android:src="@drawable/ic_arrowup"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"/>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:id="@+id/layout_ivinsuranceCompany"
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_marginEnd="15dp"
+                                    android:background="@drawable/bg_circle"
+                                    android:visibility="gone"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent">
+
+                                <com.google.android.material.imageview.ShapeableImageView
+                                        android:id="@+id/ivinsuranceCompany"
+                                        android:layout_width="12dp"
+                                        android:layout_height="12dp"
+                                        android:adjustViewBounds="true"
+                                        android:src="@drawable/ic_arrowdwonwhite"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent"/>
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/tv_insuranceCompany"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="15dp"
+                                    android:fontFamily="@font/avenirltstd_roman"
+                                    android:text="@string/insurance_company"
+                                    android:textColor="@color/black"
+                                    android:textSize="16sp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"/>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/layout_insuranceCompanyspinner"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginStart="15dp"
+                                android:layout_marginEnd="15dp"
+                                android:layout_marginBottom="5dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/layout_insuranceCompanyfilter">
+
+                            <androidx.appcompat.widget.AppCompatSpinner
+                                    android:id="@+id/sp_insuranceCompany"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="40dp"
+                                    android:layout_marginBottom="15dp"
+                                    android:layout_marginEnd="12dp"
+                                    android:layout_marginTop="20dp"
+                                    android:background="@drawable/spinner_style"
+                                    android:textSize="12sp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintHorizontal_bias="1.0"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintVertical_bias="0.6"/>
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                    android:id="@+id/iv_sparrowdowninsuranceCompany"
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_marginEnd="15dp"
+                                    android:layout_marginBottom="12dp"
+                                    android:gravity="start"
+                                    android:src="@drawable/ic_arrowdwon"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"/>
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
                     <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/layout_Location"
                             android:layout_width="match_parent"
@@ -451,7 +597,7 @@
                             android:paddingTop="2dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/layout_specialization">
+                            app:layout_constraintTop_toBottomOf="@+id/layout_insuranceCompany">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                                 android:id="@+id/layout_Location_Header"
@@ -519,6 +665,27 @@
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/layout_Location_Header">
+
+                            <androidx.appcompat.widget.AppCompatButton
+                                    android:id="@+id/btn_layout_Choose_City"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:background="@android:color/transparent"
+                                    app:layout_constraintEnd_toEndOf="@+id/layout_Choose_City"
+                                    app:layout_constraintStart_toStartOf="@+id/layout_Choose_City"
+                                    app:layout_constraintTop_toTopOf="@+id/layout_Choose_City"
+                                    app:layout_constraintBottom_toBottomOf="@+id/layout_Choose_City"
+                            />
+                            <androidx.appcompat.widget.AppCompatButton
+                                    android:id="@+id/btn_layout_Choose_Area"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:background="@android:color/transparent"
+                                    app:layout_constraintEnd_toEndOf="@+id/layout_Choose_Area"
+                                    app:layout_constraintStart_toStartOf="@+id/layout_Choose_Area"
+                                    app:layout_constraintTop_toTopOf="@+id/layout_Choose_Area"
+                                    app:layout_constraintBottom_toBottomOf="@+id/layout_Choose_Area"
+                            />
 
                             <androidx.constraintlayout.widget.ConstraintLayout
                                     android:id="@+id/layout_Choose_City"
@@ -910,6 +1077,15 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/layout_Gender_Header">
 
+                            <androidx.appcompat.widget.AppCompatButton
+                                    android:id="@+id/btn_layout_Choose_Gender"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:background="@android:color/transparent"
+                                    app:layout_constraintEnd_toEndOf="@+id/layout_Choose_Gender"
+                                    app:layout_constraintStart_toStartOf="@+id/layout_Choose_Gender"
+                                    app:layout_constraintTop_toTopOf="@+id/layout_Choose_Gender"
+                                    app:layout_constraintBottom_toBottomOf="@+id/layout_Choose_Gender"/>
                             <androidx.constraintlayout.widget.ConstraintLayout
                                     android:id="@+id/layout_Choose_Gender"
                                     android:layout_width="match_parent"

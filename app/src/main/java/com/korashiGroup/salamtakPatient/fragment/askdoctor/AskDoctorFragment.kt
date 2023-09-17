@@ -81,12 +81,13 @@ class AskDoctorFragment : Fragment() {
             isMe=false
         }
 
-        binding.layoutChooseSpecialization.setOnClickListener {
-            val action=AskDoctorFragmentDirections.actionAskDoctorFragmentToDialogBottomSheetFragment("Specialist")
-            findNavController().navigate(action)
+
+        binding.btnLayoutChooseSpecialization.setOnClickListener {
+                val action=AskDoctorFragmentDirections.actionAskDoctorFragmentToDialogBottomSheetFragment("Specialist")
+                findNavController().navigate(action)
         }
 
-        binding.layoutChooseGender.setOnClickListener {
+        binding.btnLayoutChooseGender.setOnClickListener {
             val action=AskDoctorFragmentDirections.actionAskDoctorFragmentToDialogBottomSheetFragment("gender")
             findNavController().navigate(action)
         }

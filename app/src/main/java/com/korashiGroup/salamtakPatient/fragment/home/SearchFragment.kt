@@ -31,7 +31,9 @@ import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.imageview.ShapeableImageView
+import com.google.android.material.snackbar.Snackbar
 import com.korashiGroup.salamtakPatient.model.CityData
+import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCompany
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
@@ -39,6 +41,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
 class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.Booking {
@@ -47,6 +50,8 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
     private lateinit var searchServicesAdapter: CalenderAdapter
     private lateinit var searchDoctorsAdapter: SearchDoctorsAdapter
     private lateinit var bottomsheetbeahavoir: BottomSheetBehavior<ConstraintLayout>
+    private val list=ArrayList<InsuranceCompany>()
+    private var insuranceId=""
 
     private val sdf = SimpleDateFormat("MMMM yyyy", Locale.getDefault())
     private val cal = Calendar.getInstance(Locale.US)
@@ -108,6 +113,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         initButton()
         setupSpinner()
         getSearchDoctors()
+        callBackInsuranceCompany()
     }
 
     private fun initButton() {
@@ -139,14 +145,14 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                     BottomSheetBehavior.STATE_HIDDEN else BottomSheetBehavior.STATE_EXPANDED
         }
 
-        binding.layoutBottomsheetpersistant.layoutChooseSpecialization.setOnClickListener {
+        binding.layoutBottomsheetpersistant.btnLayoutChooseSpecialization.setOnClickListener {
             val action =
                 SearchFragmentDirections.actionSearchFragmentToDialogBottomSheetFragment("Specialist")
             findNavController().navigate(action)
 
         }
 
-        binding.layoutBottomsheetpersistant.layoutChooseSubSpecialization.setOnClickListener {
+        binding.layoutBottomsheetpersistant.btnLayoutChooseSubSpecialization.setOnClickListener {
 
             if (binding.layoutBottomsheetpersistant.etSpecialization.text?.toString()
                     ?.isEmpty()!!
@@ -160,19 +166,19 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             }
         }
 
-        binding.layoutBottomsheetpersistant.layoutChooseSeniorityLevel.setOnClickListener {
+        binding.layoutBottomsheetpersistant.btnLayoutChooseSeniorityLevel.setOnClickListener {
 
             val action =
                 SearchFragmentDirections.actionSearchFragmentToDialogBottomSheetFragment("SeniorityLevel")
             findNavController().navigate(action)
         }
-        binding.layoutBottomsheetpersistant.layoutChooseCity.setOnClickListener {
+        binding.layoutBottomsheetpersistant.btnLayoutChooseCity.setOnClickListener {
 
             val action =
                 SearchFragmentDirections.actionSearchFragmentToDialogBottomSheetFragment("AllCity")
             findNavController().navigate(action)
         }
-        binding.layoutBottomsheetpersistant.layoutChooseArea.setOnClickListener {
+        binding.layoutBottomsheetpersistant.btnLayoutChooseArea.setOnClickListener {
             if (binding.layoutBottomsheetpersistant.etChooseCity.text?.toString()?.isEmpty()!!) {
                 Toast.makeText(requireContext(), "Chose City first ", Toast.LENGTH_SHORT).show()
             } else {
@@ -181,7 +187,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                 findNavController().navigate(action)
             }
         }
-        binding.layoutBottomsheetpersistant.layoutChooseGender.setOnClickListener {
+        binding.layoutBottomsheetpersistant.btnLayoutChooseGender.setOnClickListener {
 
             val action =
                 SearchFragmentDirections.actionSearchFragmentToDialogBottomSheetFragment("gender")
@@ -213,7 +219,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                 seniortyLevelId,
                 0,
                 specialistId,
-                sub_SpecialistId
+                sub_SpecialistId,insuranceId
             )
             viewmodel.searchDoctors(doctorssearchRequset)
             bottomsheetbeahavoir.state=BottomSheetBehavior.STATE_HIDDEN
@@ -268,6 +274,13 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             binding.layoutBottomsheetpersistant.layoutGenderDetails,
             binding.layoutBottomsheetpersistant.layoutIvHideGenderarrowRight,
             binding.layoutBottomsheetpersistant.ivGenderarrowRight
+        )
+
+        collabsedFiller(
+            binding.layoutBottomsheetpersistant.layoutInsuranceCompanyfilter,
+            binding.layoutBottomsheetpersistant.layoutInsuranceCompanyspinner,
+            binding.layoutBottomsheetpersistant.layoutIvinsuranceCompany,
+            binding.layoutBottomsheetpersistant.ivInsuranceCompanyRight
         )
 
         binding.layoutBottomsheetpersistant.ivArrow.setOnClickListener {
@@ -589,7 +602,70 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
 
             }
         }
+
     }
+
+    fun setupInsuranceSpinner(list: List<InsuranceCompany>) {
+
+        var insuranceCompanyList=ArrayList<String>()
+        list.forEach {
+            insuranceCompanyList.add(it.name)
+        }
+
+        val typeadapter = ArrayAdapter(
+            requireActivity(),
+            androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,insuranceCompanyList
+        )
+        binding.layoutBottomsheetpersistant.spInsuranceCompany.adapter = typeadapter
+        binding.layoutBottomsheetpersistant.spInsuranceCompany.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View?, position: Int, id: Long
+            ) {
+                insuranceId=list[position].iD
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // write code to perform some action
+
+            }
+        }
+    }
+
+    private fun callBackInsuranceCompany(){
+
+        viewmodel.InsuranceCompany?.observe(viewLifecycleOwner,
+            androidx.lifecycle.Observer {
+                when (it) {
+
+                    is Resource.Loading -> {
+
+                    }
+
+                    is Resource.sucess -> {
+
+
+                        it.data?.data?.forEach {
+                            list.add(it)
+                        }
+                        setupInsuranceSpinner(list)
+
+                    }
+
+                    is Resource.Error -> {
+
+                        Snackbar.make(requireView(), "${it.message}", Snackbar.LENGTH_SHORT).show()
+                    }
+                }
+
+            })
+
+        viewmodel.getAllInsurance_Companies()
+
+    }
+
+
 
 
     private fun getSearchDoctors() {

@@ -36,6 +36,16 @@
                 android:layout_height="match_parent"
                 android:padding="3dp"
         >
+            <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_layout_Choose_Specialization"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@android:color/transparent"
+                    app:layout_constraintEnd_toEndOf="@+id/layout_Choose_Specialization"
+                    app:layout_constraintStart_toStartOf="@+id/layout_Choose_Specialization"
+                    app:layout_constraintTop_toTopOf="@+id/layout_Choose_Specialization"
+                   app:layout_constraintBottom_toBottomOf="@+id/layout_Choose_Specialization"
+            />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layout_Choose_Specialization"
@@ -48,7 +58,7 @@
                     android:elevation="1dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                   app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
 
             >
 
@@ -62,7 +72,7 @@
                         android:gravity="start"
                         android:src="@drawable/ic_arrowdwon"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent" />
+                        app:layout_constraintEnd_toEndOf="parent"/>
 
                 <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/textinput_Specialization"
@@ -89,9 +99,14 @@
                             android:inputType="text"
                             android:enabled="false"
                             android:textColor="@color/black"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
+                <androidx.constraintlayout.widget.Group
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:constraint_referenced_ids="iv_arrowdown,textinput_Specialization"
+                        android:id="@+id/group"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
             <androidx.appcompat.widget.AppCompatTextView
@@ -110,7 +125,7 @@
                     android:visibility="gone"
                     app:layout_constraintBottom_toTopOf="@+id/textinput_Question"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/layout_Choose_Specialization" />
+                    app:layout_constraintTop_toBottomOf="@+id/layout_Choose_Specialization"/>
 
             <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textinput_Question"
@@ -138,7 +153,7 @@
                         android:importantForAutofill="no"
                         android:inputType="text"
                         android:textColor="@color/black"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"/>
 
             </com.google.android.material.textfield.TextInputLayout>
             <androidx.appcompat.widget.AppCompatTextView
@@ -151,13 +166,13 @@
                     android:fontFamily="@font/avenirltstd_roman"
                     android:gravity="center"
                     android:padding="2dp"
-                   android:text="@string/required"
+                    android:text="@string/required"
                     android:textColor="@color/red"
                     android:textSize="12sp"
                     android:visibility="gone"
                     app:layout_constraintBottom_toTopOf="@+id/textinput_QuestionDetails"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textinput_Question" />
+                    app:layout_constraintTop_toBottomOf="@+id/textinput_Question"/>
 
             <!--    <com.google.android.material.textfield.TextInputLayout-->
             <!--            android:id="@+id/textinput_QuestionDetails"-->
@@ -205,13 +220,13 @@
                     android:fontFamily="@font/avenirltstd_roman"
                     android:gravity="center"
                     android:padding="2dp"
-                   android:text="@string/required"
+                    android:text="@string/required"
                     android:textColor="@color/red"
                     android:textSize="12sp"
                     android:visibility="gone"
                     app:layout_constraintBottom_toTopOf="@+id/textinput_Age"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textinput_QuestionDetails" />
+                    app:layout_constraintTop_toBottomOf="@+id/textinput_QuestionDetails"/>
 
             <!--    </com.google.android.material.textfield.TextInputLayout>-->
 
@@ -236,7 +251,6 @@
             <!--            app:layout_constraintEnd_toEndOf="parent"-->
             <!--            app:layout_constraintTop_toBottomOf="@+id/textinput_Question"-->
             <!--    />-->
-
 
 
             <com.google.android.material.textfield.TextInputLayout
@@ -265,7 +279,7 @@
                         android:importantForAutofill="no"
                         android:inputType="number"
                         android:textColor="@color/black"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"/>
 
             </com.google.android.material.textfield.TextInputLayout>
             <androidx.appcompat.widget.AppCompatTextView
@@ -278,13 +292,13 @@
                     android:fontFamily="@font/avenirltstd_roman"
                     android:gravity="center"
                     android:padding="2dp"
-                   android:text="@string/required"
+                    android:text="@string/required"
                     android:textColor="@color/red"
                     android:textSize="12sp"
                     android:visibility="gone"
                     app:layout_constraintBottom_toTopOf="@+id/layout_Choose_Gender"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textinput_Age" />
+                    app:layout_constraintTop_toBottomOf="@+id/textinput_Age"/>
             <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layout_Choose_Gender"
                     android:layout_width="match_parent"
@@ -309,7 +323,7 @@
                         android:gravity="start"
                         android:src="@drawable/ic_arrowdwon"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent" />
+                        app:layout_constraintEnd_toEndOf="parent"/>
 
                 <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/textinput_Choose_Gender"
@@ -336,11 +350,21 @@
                             android:inputType="text"
                             android:enabled="false"
                             android:textColor="@color/black"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_layout_Choose_Gender"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@android:color/transparent"
+                    app:layout_constraintEnd_toEndOf="@+id/layout_Choose_Gender"
+                    app:layout_constraintStart_toStartOf="@+id/layout_Choose_Gender"
+                    app:layout_constraintTop_toTopOf="@+id/layout_Choose_Gender"
+                    app:layout_constraintBottom_toBottomOf="@+id/layout_Choose_Gender"
+            />
             <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_genderError"
                     android:layout_width="wrap_content"
@@ -357,7 +381,7 @@
                     android:visibility="gone"
                     app:layout_constraintBottom_toTopOf="@+id/layout_patient"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/layout_Choose_Gender" />
+                    app:layout_constraintTop_toBottomOf="@+id/layout_Choose_Gender"/>
             <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layout_patient"
                     android:layout_width="match_parent"
@@ -383,7 +407,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/btn_other"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"/>
 
                 <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btn_other"
@@ -399,7 +423,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/btn_me"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"/>
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -414,14 +438,13 @@
                     android:fontFamily="@font/avenirltstd_roman"
                     android:gravity="center"
                     android:padding="2dp"
-                   android:text="@string/required"
+                    android:text="@string/required"
                     android:textColor="@color/red"
                     android:textSize="12sp"
                     android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/layout_patient" />
-
+                    app:layout_constraintTop_toBottomOf="@+id/layout_patient"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -439,7 +462,7 @@
             app:layout_constraintTop_toBottomOf="@+id/all_layout"
             app:layout_constraintWidth_percent=".9"
             android:padding="8dp"
-           >
+    >
         <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_send"
                 android:layout_width="0dp"
@@ -467,5 +490,5 @@
             app:layout_constraintBottom_toBottomOf="@+id/layout"
             app:layout_constraintEnd_toEndOf="@+id/layout"
             app:layout_constraintStart_toStartOf="@+id/layout"
-            app:layout_constraintTop_toTopOf="@+id/layout" />
+            app:layout_constraintTop_toTopOf="@+id/layout"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

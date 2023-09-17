@@ -118,7 +118,7 @@ class AppointmentDetailsFragment : Fragment() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun bindDataToViews(){
-        var locale = if (DateUtils.getLanguage() == "AR") {
+        var locale = if (DateUtils.getLanguage() == "ar") {
             Locale("ar")
         } else {
             Locale("en")
