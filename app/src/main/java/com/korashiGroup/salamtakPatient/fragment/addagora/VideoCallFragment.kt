@@ -39,7 +39,7 @@ class VideoCallFragment : Fragment() {
         android.Manifest.permission.CAMERA
     )
 
-    private val token = args.token
+    private val token = "rgs.deepLink?.token"
     private val channelName = "args.channelname"
     private val appId = "8c6a0bb92eb943b28327bb286bd0b03f"
     private val uid = 0
@@ -63,15 +63,16 @@ class VideoCallFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (args.token.isNullOrEmpty() && args.deeplink.isNullOrEmpty() && args.doctorName.isNullOrEmpty() && args.doctorImage.isNullOrEmpty()) {
-            Toast.makeText(requireContext(), "null", Toast.LENGTH_SHORT).show()
-        }
-        binding.tvName.text = args.doctorName
+//        if (args.deepLink?.token.isNullOrEmpty() || args.deepLink?.date.isNullOrEmpty() || args.deepLink?.DoctorImage.isNullOrEmpty()
+//            || args.deepLink?.link.isNullOrEmpty()) {
+//            Toast.makeText(requireContext(), "null", Toast.LENGTH_SHORT).show()
+//        }
+        binding.tvName.text = args.doctorname
         if (!checkSelfPermission()) {
             ActivityCompat.requestPermissions(requireActivity(), REQUESTED_PERMISSIONS, PERMISSION_REQ_ID);
         }
         initButton()
-        if (args.deeplink == "audio") {
+        if (args.link == "audio") {
             binding.layoutVideocalling.visibility = View.GONE
             binding.layoutVoiceCallng.visibility = View.VISIBLE
             setupVoiceSDKEngine()
@@ -81,7 +82,7 @@ class VideoCallFragment : Fragment() {
             setupVideoSDKEngine()
         }
 
-        binding.ivProfile.load("https://salamtechapi.azurewebsites.net/${args.doctorImage}") {
+        binding.ivProfile.load("https://salamtechapi.azurewebsites.net/${args.doctorimage}") {
             crossfade(true)
             crossfade(1000)
             placeholder(R.drawable.ic_profile)

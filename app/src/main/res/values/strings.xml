@@ -254,6 +254,12 @@
     <string name="insurance_company">insurance Company</string>
     <string name="notnow">Not Now</string>
     <string name="end_date">End Date</string>
+    <string name="enterreleasedate">Enter Release Date</string>
+    <string name="enterenddate">Enter End date</string>
+    <string name="your_appointment_is">Your Appointment is</string>
+    <string name="thank_you_for_using_your_salamtak_app_we_wish_you_good_health">Thank you for using your salamtak app.
+        We wish you good health
+    </string>
 
     <array name="choose">
         <item>Select</item>

@@ -9,6 +9,7 @@ import com.korashiGroup.salamtakPatient.model.docotorsearch.DoctorSearchRequest
 import com.korashiGroup.salamtakPatient.model.docotorsearch.DoctorsearchItemResponse
 import com.korashiGroup.salamtakPatient.model.healthy.GetHealthEntityResponse
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCompanyResponse
+import com.korashiGroup.salamtakPatient.model.insurance.SendInsuranceCardResponce
 import com.korashiGroup.salamtakPatient.model.populardoctors.GetDoctorHealthTopicsResponse
 import com.korashiGroup.salamtakPatient.model.populardoctors.GetDoctorSpotLightResponse
 import com.korashiGroup.salamtakPatient.model.populardoctors.PopularDoctorsResponseItem
@@ -246,7 +247,7 @@ interface ApiService {
     suspend fun createPatient_Insurance(
         @Path("culture") culture: String,
         @Body part: RequestBody
-    ): Response<QuestionAndAnswerResponse>
+    ): Response<SendInsuranceCardResponce>
 
 
 }

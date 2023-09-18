@@ -90,7 +90,6 @@
             android:gravity="start"
             android:layout_marginTop="5dp"
             android:hint="@string/full_name_in_english_first_middle_last"
-            android:digits="jjfhd.,566ddbbbjshjksdj6.,mifghdkjwaxmjjkd1!#$^548^"
             android:textColor="@color/black"
             android:fontFamily="@font/avenirltstd_roman"
             android:textSize="12sp"
@@ -140,7 +139,6 @@
             android:textColor="@color/black"
             android:fontFamily="@font/avenirltstd_roman"
             android:textSize="12sp"
-            android:digits="غظضذخثتشرقصفعسنملكيطحزوهدبا"
             android:layout_marginTop="5dp"
             android:layout_height="60dp"
             android:inputType="text" />

@@ -12,6 +12,7 @@ import android.os.Bundle
 import androidx.core.app.NotificationCompat
 import androidx.navigation.NavDeepLinkBuilder
 import com.korashiGroup.salamtakPatient.R
+import com.korashiGroup.salamtakPatient.fragment.addagora.VideoCallFragmentArgs
 import java.util.*
 import javax.inject.Inject
 
@@ -22,20 +23,17 @@ class MyNotificationManager @Inject constructor(private val mCtx: Application) {
         val rand = Random()
         val idNotification = rand.nextInt(1000000000)
 
-//        val bundle = Bundle()
-//        bundle.putSerializable("orderId", deepLinkItem)
-//
-//        val args: VideoCallFragmentArgs = VideoCallFragmentArgs.fromBundle(bundle)
+        val pendingDeeplink =
+                NavDeepLinkBuilder(mCtx).setGraph(R.navigation.nav_graph).setDestination(R.id.videoCallFragment)
+                    .setArguments(Bundle().apply {
+                     putString("link", deepLinkItem?.link)
+                       putString("doctorname", deepLinkItem?.DoctorName)
+                       putString("doctorimage", deepLinkItem?.DoctorImage)
+//                        putString("token", deepLinkItem?.token)
 
-        val pendingDeeplink= NavDeepLinkBuilder(mCtx).setGraph(R.navigation.nav_graph).setDestination(R.id.videoCallFragment)
-            .setArguments(Bundle().apply {
-                putString("deeplink", deepLinkItem?.link)
-                putString("DoctorName", deepLinkItem?.DoctorName)
-                putString("DoctorImage", deepLinkItem?.DoctorImage)
-                putString("token", deepLinkItem?.token)
 
-            })
-            .createPendingIntent()
+                    })
+                    .createPendingIntent()
 
 //        val pendingDeeplink= NavDeepLinkBuilder(mCtx).setGraph(R.navigation.nav_graph).setDestination(R.id.videoCallFragment).setArguments(args.toBundle())
 //          .createPendingIntent()

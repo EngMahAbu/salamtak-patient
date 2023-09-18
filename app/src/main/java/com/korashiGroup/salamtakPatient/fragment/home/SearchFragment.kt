@@ -626,7 +626,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                 if (position==0){
                     insuranceId=""
                 }else{
-                    insuranceId=list[position+1].iD
+                    insuranceId=list[position-1].iD
                 }
 
             }

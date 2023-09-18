@@ -675,7 +675,7 @@ class PersonalInfoFragment : Fragment() {
 
         sharedDataViewmodel.updateProfileStatus.observe(viewLifecycleOwner, Observer {
             status=it
-            binding.btnNext.text=getString(R.string.update)
+            binding.btnNext.text=getString(R.string.next)
             if (it){
                 viewmodel.getPatientInfo()
             }

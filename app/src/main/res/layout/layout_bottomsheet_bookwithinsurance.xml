@@ -305,31 +305,40 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_Apply"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/bg_chooselang_button"
-        android:fontFamily="@font/avenirltstd_black"
-        android:padding="5dp"
-        android:text="@string/apply"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout"
-        app:layout_constraintWidth_percent=".9" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_btn_applay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layout">
+
+            <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/applay"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_chooselang_button"
+                    android:fontFamily="@font/avenirltstd_black"
+                    android:padding="5dp"
+                    android:text="@string/apply"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintWidth_percent=".9" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
         <ProgressBar
             android:id="@+id/progress_bar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@+id/btn_Apply"
-            app:layout_constraintStart_toStartOf="@+id/btn_Apply"
-            app:layout_constraintBottom_toBottomOf="@+id/btn_Apply"
-            app:layout_constraintTop_toTopOf="@+id/btn_Apply"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            app:layout_constraintEnd_toEndOf="@+id/layout_btn_applay"
+            app:layout_constraintStart_toStartOf="@+id/layout_btn_applay"
+            app:layout_constraintBottom_toBottomOf="@+id/layout_btn_applay"
+            app:layout_constraintTop_toTopOf="@+id/layout_btn_applay"
+            android:indeterminateTint="@color/white"
             android:visibility="gone"
             />
 

@@ -23,6 +23,7 @@ import com.google.gson.Gson
 import com.korashiGroup.salamtakPatient.model.askandanswer.QuestionAndAnswerResponse
 import com.korashiGroup.salamtakPatient.model.askandanswer.QuestionRequest
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCompanyResponse
+import com.korashiGroup.salamtakPatient.model.insurance.SendInsuranceCardResponce
 import com.korashiGroup.salamtakPatient.model.salamtakgate.BlogsResponse
 import com.korashiGroup.salamtakPatient.model.salamtakgate.SalamtakGateResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -67,6 +68,7 @@ class DialogBottomSheetViewmodel @Inject constructor(private val repositry: Regi
     val gatesResponse=MutableLiveData<Resource<SalamtakGateResponse>>()
     val blogsResponse=MutableLiveData<Resource<BlogsResponse>>()
     val questionAndAnswerResponse=MutableLiveData<Resource<QuestionAndAnswerResponse>>()
+    val insuranceResponse=MutableLiveData<Resource<SendInsuranceCardResponce>>()
 
 
 
@@ -550,6 +552,25 @@ class DialogBottomSheetViewmodel @Inject constructor(private val repositry: Regi
         val error = Gson().fromJson<QuestionAndAnswerResponse>(response.errorBody()!!.string(), QuestionAndAnswerResponse::class.java)
         return error.message?.let { Resource.Error(it) }
     }
+
+
+    fun createPatient_Insurance( questionRequest:MultipartBody)=viewModelScope.launch(Dispatchers.IO+handler) {
+        insuranceResponse.postValue(Resource.Loading())
+        val response=repositry.createPatient_Insurance(questionRequest)
+        insuranceResponse.postValue(response?.let { handlecreatePatient_Insurance(it) })
+    }
+
+    private fun handlecreatePatient_Insurance(response: Response<SendInsuranceCardResponce>): Resource<SendInsuranceCardResponce>? {
+        if (response.isSuccessful){
+            response.body()?.let {
+                return Resource.sucess(it)
+            }
+        }
+        val error = Gson().fromJson<SendInsuranceCardResponce>(response.errorBody()!!.string(), SendInsuranceCardResponce::class.java)
+        return error.message?.let { Resource.Error(it) }
+    }
+
+
 
 
     val handler = CoroutineExceptionHandler { _, exception ->

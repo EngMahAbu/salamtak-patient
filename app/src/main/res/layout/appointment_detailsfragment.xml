@@ -555,6 +555,7 @@
     <include
             android:id="@+id/layoutBottomsheetpersistant"
             layout="@layout/layout_bottomsheet_bookwithinsurance"
+
     />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

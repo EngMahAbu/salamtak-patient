@@ -276,6 +276,8 @@
                 app:popUpTo="@id/myScheduleFragment" />
         <action android:id="@+id/action_appointmentDetailsFragment_to_dialogBottomSheetFragment"
                 app:destination="@id/dialogBottomSheetFragment"/>
+        <action android:id="@+id/action_appointmentDetailsFragment_to_confirmedFragment"
+                app:destination="@id/confirmedFragment"/>
 
     </fragment>
     <fragment
@@ -375,13 +377,12 @@
             android:name="com.korashiGroup.salamtakPatient.fragment.addagora.VideoCallFragment"
             android:label="video_callfragment"
             tools:layout="@layout/video_callfragment">
-        <argument android:name="deeplink" app:argType="string"
+        <argument android:name="link" app:argType="string"
                   app:nullable="true"/>
-        <argument android:name="DoctorImage" app:argType="string" app:nullable="true"/>
-        <argument android:name="DoctorName" app:argType="string" app:nullable="true"/>
-        <argument android:name="token" app:argType="string" app:nullable="true"/>
-        <deepLink android:id="@+id/deepLink2"
-                  app:uri="www.videocall.com/viedio/{deeplink,DoctorImage,DoctorName,token}"/>
+        <deepLink android:id="@+id/deepLink" app:uri="www.salamtakpatient.com/{link,doctorname,doctorimage}"
+                  android:autoVerify="true"/>
+        <argument android:name="doctorname" app:argType="string" app:nullable="true"/>
+        <argument android:name="doctorimage" app:argType="string" app:nullable="true"/>
     </fragment>
     <fragment android:id="@+id/personalInfoFragment2"
               android:name="com.korashiGroup.salamtakPatient.fragment.navstrepercontent.PersonalInfoFragment"
@@ -397,5 +398,10 @@
     <dialog android:id="@+id/dialogSpecificationFragment"
             android:name="com.korashiGroup.salamtakPatient.fragment.dialog.DialogSpecificationFragment"
             android:label="dialog_specilizationfragment" tools:layout="@layout/dialog_specilizationfragment"/>
+    <fragment android:id="@+id/confirmedFragment"
+              android:name="com.korashiGroup.salamtakPatient.fragment.booking.ConfirmedFragment"
+              android:label="confirmedfragment" tools:layout="@layout/confirmedfragment">
+        <argument android:name="date" app:argType="string" app:nullable="true"/>
+    </fragment>
 
 </navigation>

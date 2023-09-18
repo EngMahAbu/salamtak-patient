@@ -2,6 +2,7 @@ package com.korashiGroup.salamtakPatient.fragment.booking
 
 import android.Manifest
 import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -46,6 +47,9 @@ import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCompany
 import com.korashiGroup.salamtakPatient.utils.*
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import dagger.hilt.android.AndroidEntryPoint
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -54,20 +58,21 @@ import kotlin.collections.ArrayList
 @AndroidEntryPoint
 class AppointmentDetailsFragment : Fragment() {
 
-    private lateinit var binding:AppointmentDetailsfragmentBinding
+    private lateinit var binding: AppointmentDetailsfragmentBinding
     private val args: AppointmentDetailsFragmentArgs by navArgs()
     private val viewmodel: DialogBottomSheetViewmodel by viewModels()
     private lateinit var bottomsheetbeahavoir: BottomSheetBehavior<ConstraintLayout>
     val sharedDataViewmodel: SharedDataViewmodel by activityViewModels()
-    private val list=ArrayList<InsuranceCompany>()
+    private val list = ArrayList<InsuranceCompany>()
+    private var partMap: Map<String, Any> = mutableMapOf()
     private var imageFile: File? = null
-    private var insuranceId=""
+    private var insuranceId = ""
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding= AppointmentDetailsfragmentBinding.inflate(layoutInflater,container,false)
+        binding = AppointmentDetailsfragmentBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -83,26 +88,28 @@ class AppointmentDetailsFragment : Fragment() {
             BottomSheetBehavior.from(binding.layoutBottomsheetpersistant.bookwithinsurance)
         bottomsheetbeahavoir.state = BottomSheetBehavior.STATE_HIDDEN
         bindDataToViews()
+        callBackInsuranceCompany()
         initButton()
         callBack()
         getdata()
 
     }
 
-    private fun initButton(){
-        binding.ivArrow.setOnClickListener{
-            if (args.status==true) {
+    private fun initButton() {
+        binding.ivArrow.setOnClickListener {
+            if (args.status == true) {
                 findNavController().navigate(R.id.searchFragment)
-            }else{
+            } else {
                 findNavController().navigate(R.id.myScheduleFragment)
             }
         }
 
         binding.btnConfirm.setOnClickListener {
             viewmodel.createPatientAppointment(
-                PatientAppointmentRequest(args.confirmappointments?.doctorId,
-                    args.confirmappointments?.DoctorWorkingDayTimeId,args.confirmappointments?.formattedDate
-                    ,true,"")
+                PatientAppointmentRequest(
+                    args.confirmappointments?.doctorId,
+                    args.confirmappointments?.DoctorWorkingDayTimeId, args.confirmappointments?.formattedDate, true, ""
+                )
             )
         }
 
@@ -110,7 +117,7 @@ class AppointmentDetailsFragment : Fragment() {
             bottomsheetbeahavoir.state =
                 if (bottomsheetbeahavoir.state == BottomSheetBehavior.STATE_EXPANDED)
                     BottomSheetBehavior.STATE_HIDDEN else BottomSheetBehavior.STATE_EXPANDED
-            callBackInsuranceCompany()
+
         }
 
         binding.layoutBottomsheetpersistant.cardCertificate.setOnClickListener {
@@ -118,18 +125,25 @@ class AppointmentDetailsFragment : Fragment() {
         }
 
         binding.layoutBottomsheetpersistant.ivReleaseDate.setOnClickListener {
-            val action=AppointmentDetailsFragmentDirections.actionAppointmentDetailsFragmentToDialogBottomSheetFragment("date")
+            val action =
+                AppointmentDetailsFragmentDirections.actionAppointmentDetailsFragmentToDialogBottomSheetFragment("date")
             findNavController().navigate(action)
         }
         binding.layoutBottomsheetpersistant.ivEndDate.setOnClickListener {
-            val action=AppointmentDetailsFragmentDirections.actionAppointmentDetailsFragmentToDialogBottomSheetFragment("endDate")
+            val action =
+                AppointmentDetailsFragmentDirections.actionAppointmentDetailsFragmentToDialogBottomSheetFragment("endDate")
             findNavController().navigate(action)
+        }
+
+        binding.layoutBottomsheetpersistant.applay.setOnClickListener {
+            sendData()
+
         }
 
     }
 
     fun setupSpinner(list: List<InsuranceCompany>) {
-        val insuranceCompanyList=ArrayList<String>()
+        val insuranceCompanyList = ArrayList<String>()
         insuranceCompanyList.add("Select")
         list.forEach {
             insuranceCompanyList.add(it.name)
@@ -145,10 +159,10 @@ class AppointmentDetailsFragment : Fragment() {
                 parent: AdapterView<*>,
                 view: View?, position: Int, id: Long
             ) {
-                if (position==0){
-                    insuranceId=""
-                }else{
-                    insuranceId=list[position+1].iD
+                if (position == 0) {
+                    insuranceId = ""
+                } else {
+                    insuranceId = list[position - 1].iD
                 }
             }
 
@@ -161,7 +175,7 @@ class AppointmentDetailsFragment : Fragment() {
 
 
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun bindDataToViews(){
+    private fun bindDataToViews() {
         var locale = if (DateUtils.getLanguage() == "ar") {
             Locale("ar")
         } else {
@@ -171,33 +185,34 @@ class AppointmentDetailsFragment : Fragment() {
         val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", locale)
         val date: Date = inputFormat.parse(args.confirmappointments?.formattedDate)
         val outputText: String = outputFormat.format(date)
-        binding.tvDoctorName.text=args.confirmappointments?.doctorName
-        binding.tvSpecialization.text=args.confirmappointments?.SpecialistName
-        binding.tvDate.text=DateParsing(args.confirmappointments?.formattedDate.toString())
-        binding.Service.text=args.confirmappointments?.MedicalExaminationTypeName
-        binding.WaitingTime.text=args.confirmappointments?.timeInterval.toString()
-        binding.TotalFees.text=args.confirmappointments?.fees.toString()+" "+getString(R.string.le)
+        binding.tvDoctorName.text = args.confirmappointments?.doctorName
+        binding.tvSpecialization.text = args.confirmappointments?.SpecialistName
+        binding.tvDate.text = DateParsing(args.confirmappointments?.formattedDate.toString())
+        binding.Service.text = args.confirmappointments?.MedicalExaminationTypeName
+        binding.WaitingTime.text = args.confirmappointments?.timeInterval.toString()
+        binding.TotalFees.text = args.confirmappointments?.fees.toString() + " " + getString(R.string.le)
 
     }
 
-    private fun callBack(){
+    private fun callBack() {
 
-      viewmodel?.patientAppointmentResponse?.observe(viewLifecycleOwner,
+        viewmodel?.patientAppointmentResponse?.observe(viewLifecycleOwner,
             Observer {
                 when (it) {
 
                     is Resource.Loading -> {
-                        showprogtessbar()
+                        binding.progressBar.visibility = View.VISIBLE
                     }
 
                     is Resource.sucess -> {
-                        hideprogressbar()
-                        Toast.makeText(requireContext()," booking Successfully",Toast.LENGTH_SHORT).show()
-                        findNavController().navigate(R.id.myScheduleFragment)
+                        binding.progressBar.visibility = View.GONE
+                        Toast.makeText(requireContext(), " booking Successfully", Toast.LENGTH_SHORT).show()
+                        val action=AppointmentDetailsFragmentDirections.actionAppointmentDetailsFragmentToConfirmedFragment(binding.tvDate.text.toString())
+                        findNavController().navigate(action)
                     }
 
                     is Resource.Error -> {
-                        hideprogressbar()
+                        binding.progressBar.visibility = View.GONE
                         Snackbar.make(requireView(), "${it.message}", Snackbar.LENGTH_SHORT).show()
                     }
                 }
@@ -206,7 +221,7 @@ class AppointmentDetailsFragment : Fragment() {
 
     }
 
-    private fun callBackInsuranceCompany(){
+    private fun callBackInsuranceCompany() {
 
         viewmodel?.InsuranceCompany?.observe(viewLifecycleOwner,
             Observer {
@@ -240,28 +255,101 @@ class AppointmentDetailsFragment : Fragment() {
     }
 
 
+    private fun sendData() {
+
+        imageFile?.let {
+
+            partMap = partMap + mapOf("document" to it)
+
+        }
+        partMap = partMap + mapOf("Insurance_CompanyID" to insuranceId)
+        if (binding.layoutBottomsheetpersistant.releaseDate.text.toString().trim().isNotBlank()) {
+            partMap = partMap + mapOf("IssueDate" to binding.layoutBottomsheetpersistant.releaseDate.text.toString())
+        } else {
+            Snackbar.make(
+                requireView(),
+                getString(R.string.enterreleasedate),
+                Snackbar.LENGTH_SHORT
+            ).show()
+        }
+
+        if (binding.layoutBottomsheetpersistant.endDate.text.toString().trim().isNotBlank()) {
+            partMap = partMap + mapOf("EndDate" to binding.layoutBottomsheetpersistant.endDate.text.toString())
+        } else {
+            Snackbar.make(
+                requireView(),
+                getString(R.string.enterenddate),
+                Snackbar.LENGTH_SHORT
+            ).show()
+        }
+        val builder = MultipartBody.Builder().setType(MultipartBody.FORM)
+        for (item in partMap) {
+            val key = item.key
+            if (key.contains("document")) {
+                val file = item.value as File
+                builder.addFormDataPart(
+                    key,
+                    "${file.name}.jpeg",
+                    file.asRequestBody("image/*".toMediaTypeOrNull())
+                )
+            }
+            builder.addFormDataPart(key, item.value.toString())
+        }
+
+        viewmodel.createPatient_Insurance(builder.build())
+        viewmodel.insuranceResponse.observe(viewLifecycleOwner, Observer {
+
+            when (it) {
+
+                is Resource.Loading -> {
+                    showprogtessbar()
+                }
+
+                is Resource.sucess -> {
+                    hideprogressbar()
+                    Snackbar.make(
+                        requireView(),
+                        getString(R.string.datasentsuccessfully),
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                    bottomsheetbeahavoir.state=BottomSheetBehavior.STATE_HIDDEN
+                }
+
+                is Resource.Error -> {
+                    hideprogressbar()
+                    Snackbar.make(requireView(), "${it.message}", Snackbar.LENGTH_SHORT).show()
+                }
+            }
+
+
+        })
+
+    }
 
 
     private fun showprogtessbar() {
-        binding.progressBar.visibility = View.VISIBLE
+
+        binding.layoutBottomsheetpersistant.progressBar.visibility = View.VISIBLE
+        binding.layoutBottomsheetpersistant.applay.text = ""
     }
 
     private fun hideprogressbar() {
         binding.progressBar.visibility = View.GONE
-
+        binding.layoutBottomsheetpersistant.progressBar.visibility = View.GONE
+        binding.layoutBottomsheetpersistant.applay.text = getString(R.string.apply)
     }
 
 
-    private fun DateParsing(dateParsing:String):String{
-        var day=""
+    private fun DateParsing(dateParsing: String): String {
+        var day = ""
         try {
             val sdf = SimpleDateFormat("dd-MM-yyyy  hh:mm a", Locale.getDefault())
             val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
             val date = dateParsing.let { format.parse(it) }
             day = sdf.format(date)
 
-        }catch (e:Exception){
-            Log.e("",e.localizedMessage)
+        } catch (e: Exception) {
+            Log.e("", e.localizedMessage)
         }
         return day
     }
@@ -406,14 +494,15 @@ class AppointmentDetailsFragment : Fragment() {
             }).onSameThread().check()
     }
 
-    private fun getdata(){
+    private fun getdata() {
         sharedDataViewmodel.releaeDate.observe(viewLifecycleOwner, Observer {
-            binding.layoutBottomsheetpersistant.releaseDate.text=it
+            binding.layoutBottomsheetpersistant.releaseDate.text = it
         })
 
         sharedDataViewmodel.endDate.observe(viewLifecycleOwner, Observer {
-            binding.layoutBottomsheetpersistant.endDate.text=it
+            binding.layoutBottomsheetpersistant.endDate.text = it
         })
     }
+
 
 }

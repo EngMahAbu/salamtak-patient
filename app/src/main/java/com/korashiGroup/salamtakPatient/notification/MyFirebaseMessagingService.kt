@@ -56,17 +56,20 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         Log.e(TAG, "map: $map")
 
 
-        if (link.contains("SalamtakPatient://2")) {
+        if (map?.get("link")?.contains("SalamtakPatient://2") == true) {
             linkAudioOrVideo = "audio"
         } else {
             linkAudioOrVideo = "video"
         }
 
-        val deepLinkItem = DeepLinkItem(
-            map?.get("token")?.let { getDeepLink(it) }, map?.get("DoctorName"),
-            map?.get("DoctorImage")?.let { getDeepLink(it) },
-            map?.get("Channelname"), map?.get("date"), linkAudioOrVideo
-        )
+        val deepLinkItem = map?.get("link")?.let { getDeepLink(it) }?.let {
+            DeepLinkItem(
+                it,
+                map?.get("token")?.let { getDeepLink(it) }, map?.get("DoctorName"),
+                map?.get("DoctorImage")?.let { getDeepLink(it) },
+                map?.get("Channelname"), map?.get("date"), linkAudioOrVideo
+            )
+        }
         Log.e("Element  ", "deepLinkItem: ${deepLinkItem}")
 
         val uri: Uri = Uri.parse(link)
