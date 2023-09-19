@@ -29,14 +29,13 @@ class MyNotificationManager @Inject constructor(private val mCtx: Application) {
                      putString("link", deepLinkItem?.link)
                        putString("doctorname", deepLinkItem?.DoctorName)
                        putString("doctorimage", deepLinkItem?.DoctorImage)
-//                        putString("token", deepLinkItem?.token)
-
-
+                       putString("token", deepLinkItem?.token)
+                       putString("channelname", deepLinkItem?.Channelname)
                     })
                     .createPendingIntent()
 
 //        val pendingDeeplink= NavDeepLinkBuilder(mCtx).setGraph(R.navigation.nav_graph).setDestination(R.id.videoCallFragment).setArguments(args.toBundle())
-//          .createPendingIntent()
+//          .createPendingIntent()    4fe6b1ff-ca38-4aee-b533-ff3c6b4dae48
 
 
         val soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)

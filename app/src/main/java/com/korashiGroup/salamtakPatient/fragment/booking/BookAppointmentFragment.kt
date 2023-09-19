@@ -118,7 +118,7 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
 
         }
 
-        binding.layoutChooseService.setOnClickListener {
+        binding.btnLayoutChooseService.setOnClickListener {
 
             val action =
                 BookAppointmentFragmentDirections.actionBookAppointmentFragmentToDialogBottomSheetFragment(
@@ -142,7 +142,7 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
             setUpCalendar()
         }
 
-        binding.layoutChooseClinic.setOnClickListener {
+        binding.btnLayoutChooseClinic.setOnClickListener {
             bottomsheetbeahavoir.state =
                 if (bottomsheetbeahavoir.state == BottomSheetBehavior.STATE_EXPANDED)
                     BottomSheetBehavior.STATE_HIDDEN else BottomSheetBehavior.STATE_EXPANDED

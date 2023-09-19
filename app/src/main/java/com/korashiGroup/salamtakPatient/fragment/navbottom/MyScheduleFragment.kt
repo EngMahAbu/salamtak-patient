@@ -170,9 +170,7 @@ class MyScheduleFragment : Fragment(), MyScheduleAdapter.ActionSchedule,
 
                         "Finished" -> {
                             val Finshedlist = it.data?.data?.filter {
-                                it?.isCancel == false
-                                it?.canRate==true
-                                it?.isSeen==true
+                                it?.IsCompleted==true
                             }
 
 

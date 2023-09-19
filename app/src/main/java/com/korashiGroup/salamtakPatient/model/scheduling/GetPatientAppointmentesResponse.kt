@@ -50,5 +50,8 @@ data class DataAppointment(
     @SerializedName("SpecialistName")
     val specialistName: String?,
     @SerializedName("SubSpecialistName")
-    val subSpecialistName: List<String?>?
+    val subSpecialistName: List<String?>?,
+    @SerializedName("IsCompleted")
+    val IsCompleted: Boolean?,
+
 )

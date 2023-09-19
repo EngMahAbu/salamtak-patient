@@ -39,8 +39,8 @@ class VideoCallFragment : Fragment() {
         android.Manifest.permission.CAMERA
     )
 
-    private val token = "rgs.deepLink?.token"
-    private val channelName = "args.channelname"
+    //private val token ="args.doctorname"
+    //private val channelName = "args.channelname"
     private val appId = "8c6a0bb92eb943b28327bb286bd0b03f"
     private val uid = 0
     private var isJoined = false
@@ -68,6 +68,7 @@ class VideoCallFragment : Fragment() {
 //            Toast.makeText(requireContext(), "null", Toast.LENGTH_SHORT).show()
 //        }
         binding.tvName.text = args.doctorname
+        binding.tvVname.text = args.doctorname
         if (!checkSelfPermission()) {
             ActivityCompat.requestPermissions(requireActivity(), REQUESTED_PERMISSIONS, PERMISSION_REQ_ID);
         }
@@ -83,6 +84,13 @@ class VideoCallFragment : Fragment() {
         }
 
         binding.ivProfile.load("https://salamtechapi.azurewebsites.net/${args.doctorimage}") {
+            crossfade(true)
+            crossfade(1000)
+            placeholder(R.drawable.ic_profile)
+            transformations(CircleCropTransformation())
+        }
+
+        binding.ivBack.load("https://salamtechapi.azurewebsites.net/${args.doctorimage}") {
             crossfade(true)
             crossfade(1000)
             placeholder(R.drawable.ic_profile)
@@ -156,7 +164,7 @@ class VideoCallFragment : Fragment() {
             agoraEngine!!.startPreview()
             // Join the channel with a temp token.
             // You need to specify the user ID yourself, and ensure that it is unique in the channel.
-            agoraEngine!!.joinChannel(token, channelName, uid, options)
+            agoraEngine!!.joinChannel(args.token, args.channelname, uid, options)
         } else {
             Toast.makeText(requireContext(), "Permissions was not granted", Toast.LENGTH_SHORT)
                 .show()
@@ -173,7 +181,7 @@ class VideoCallFragment : Fragment() {
 
         // Join the channel with a temp token.
         // You need to specify the user ID yourself, and ensure that it is unique in the channel.
-        agoraEngine!!.joinChannel(token, channelName, uid, options)
+        agoraEngine!!.joinChannel(args.token, args.channelname, uid, options)
     }
 
     fun joinLeaveChannel() {

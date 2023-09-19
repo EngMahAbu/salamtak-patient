@@ -117,7 +117,16 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_Specialization" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
+        <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_layout_ChooseClinic"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@android:color/transparent"
+                app:layout_constraintEnd_toEndOf="@+id/layout_ChooseClinic"
+                app:layout_constraintStart_toStartOf="@+id/layout_ChooseClinic"
+                app:layout_constraintTop_toTopOf="@+id/layout_ChooseClinic"
+                app:layout_constraintBottom_toBottomOf="@+id/layout_ChooseClinic"
+        />
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_ChooseClinic"
         android:layout_width="match_parent"
@@ -174,6 +183,16 @@
         </com.google.android.material.textfield.TextInputLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_layout_ChooseService"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@android:color/transparent"
+                app:layout_constraintEnd_toEndOf="@+id/layout_ChooseService"
+                app:layout_constraintStart_toStartOf="@+id/layout_ChooseService"
+                app:layout_constraintTop_toTopOf="@+id/layout_ChooseService"
+                app:layout_constraintBottom_toBottomOf="@+id/layout_ChooseService"
+        />
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_ChooseService"
         android:layout_width="match_parent"

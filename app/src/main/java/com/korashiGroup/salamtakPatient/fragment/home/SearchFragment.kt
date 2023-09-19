@@ -90,7 +90,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         binding.ivPrevious.isEnabled = step != 1
         examinationtypeid = HomeFragment.instance?.let {
             it.medicalExaminatioId?.toInt()
-        }?:1
+        }!!
         bottomsheetbeahavoir =
             BottomSheetBehavior.from(binding.layoutBottomsheetpersistant.filterBottomsheet)
         bottomsheetbeahavoir.state = BottomSheetBehavior.STATE_HIDDEN
@@ -576,6 +576,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
 
     fun setupSpinner() {
         val typelist = arrayOf(
+            "select",
             getString(R.string.Clinic_Booking),
             getString(R.string.Home_Visit),
             getString(R.string.Video_Call),
@@ -593,7 +594,12 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                 parent: AdapterView<*>,
                 view: View?, position: Int, id: Long
             ) {
-                examinationtypeid = position + 1
+                if (position==0){
+                    examinationtypeid = examinationtypeid
+                }else{
+                    examinationtypeid=position
+                }
+
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {

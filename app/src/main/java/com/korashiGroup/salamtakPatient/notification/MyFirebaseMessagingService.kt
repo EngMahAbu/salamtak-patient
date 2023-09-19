@@ -52,7 +52,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 //        }
 
 
-        val map = getQueryString(x)
+        val map = getQueryString(result)
         Log.e(TAG, "map: $map")
 
 
@@ -62,14 +62,11 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             linkAudioOrVideo = "video"
         }
 
-        val deepLinkItem = map?.get("link")?.let { getDeepLink(it) }?.let {
-            DeepLinkItem(
-                it,
-                map?.get("token")?.let { getDeepLink(it) }, map?.get("DoctorName"),
-                map?.get("DoctorImage")?.let { getDeepLink(it) },
-                map?.get("Channelname"), map?.get("date"), linkAudioOrVideo
-            )
-        }
+        val deepLinkItem = DeepLinkItem(
+            map?.get("token")?.let { getDeepLink(it) }, map?.get("DoctorName"),
+            map?.get("DoctorImage")?.let { getDeepLink(it) },
+            map?.get("Channelname"), map?.get("date"), "video"
+        )
         Log.e("Element  ", "deepLinkItem: ${deepLinkItem}")
 
         val uri: Uri = Uri.parse(link)

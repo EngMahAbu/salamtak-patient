@@ -4,14 +4,11 @@ package com.korashiGroup.salamtakPatient.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.CompoundButton
-import android.widget.CompoundButton.OnCheckedChangeListener
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.korashiGroup.salamtakPatient.databinding.ItemLayoutCounteryBinding
 import com.korashiGroup.salamtakPatient.databinding.ItemLayoutSpecialistBinding
 import com.korashiGroup.salamtakPatient.model.SpecialistData
-import com.korashiGroup.salamtakPatient.model.register.DataCountry
 
 
 class SpecialistAdapter(private val select:SelectSpecialist):ListAdapter<SpecialistData,SpecialistAdapter.ViewHolder>(DiffCallback()) {

@@ -54,17 +54,17 @@ class MedicalStateFragment : Fragment() {
             sendPatientMedicalInfo()
         }
 
-        binding.layoutBloodGroup.setOnClickListener {
+        binding.btnLayoutBloodGroup.setOnClickListener {
             val action=MedicalStateFragmentDirections.actionMedicalStateFragment2ToDialogBottomSheetFragment("bloodTypes")
             findNavController().navigate(action)
         }
 
-        binding.layoutMedicalAllergies.setOnClickListener {
+        binding.btnLayoutMedicalAllergies.setOnClickListener {
             val action=MedicalStateFragmentDirections.actionMedicalStateFragment2ToDialogBottomSheetFragment("medicineAllergy")
             findNavController().navigate(action)
         }
 
-        binding.layoutFoodAllergies.setOnClickListener {
+        binding.btnLayoutFoodAllergies.setOnClickListener {
             val action=MedicalStateFragmentDirections.actionMedicalStateFragment2ToDialogBottomSheetFragment("FoodAllergy")
             findNavController().navigate(action)
         }

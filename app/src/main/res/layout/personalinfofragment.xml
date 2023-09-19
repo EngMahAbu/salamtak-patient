@@ -316,7 +316,16 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
+            <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_layout_gender"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@android:color/transparent"
+                    app:layout_constraintEnd_toEndOf="@+id/layout_gender"
+                    app:layout_constraintStart_toStartOf="@+id/layout_gender"
+                    app:layout_constraintTop_toTopOf="@+id/layout_gender"
+                    app:layout_constraintBottom_toBottomOf="@+id/layout_gender"
+            />
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_genderError"
                 android:layout_width="wrap_content"
@@ -393,7 +402,16 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
+            <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_layout_Date_ofbirth"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@android:color/transparent"
+                    app:layout_constraintEnd_toEndOf="@+id/layout_Date_ofbirth"
+                    app:layout_constraintStart_toStartOf="@+id/layout_Date_ofbirth"
+                    app:layout_constraintTop_toTopOf="@+id/layout_Date_ofbirth"
+                    app:layout_constraintBottom_toBottomOf="@+id/layout_Date_ofbirth"
+            />
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_dateOfBirthError"
                 android:layout_width="wrap_content"
@@ -469,7 +487,16 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
+            <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_layout_Nationality"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@android:color/transparent"
+                    app:layout_constraintEnd_toEndOf="@+id/layout_Nationality"
+                    app:layout_constraintStart_toStartOf="@+id/layout_Nationality"
+                    app:layout_constraintTop_toTopOf="@+id/layout_Nationality"
+                    app:layout_constraintBottom_toBottomOf="@+id/layout_Nationality"
+            />
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_NationaltyError"
                 android:layout_width="wrap_content"

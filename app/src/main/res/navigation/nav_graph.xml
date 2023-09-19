@@ -379,10 +379,13 @@
             tools:layout="@layout/video_callfragment">
         <argument android:name="link" app:argType="string"
                   app:nullable="true"/>
-        <deepLink android:id="@+id/deepLink" app:uri="www.salamtakpatient.com/{link,doctorname,doctorimage}"
+        <deepLink android:id="@+id/deepLink"
+                  app:uri="www.salamtakpatient.com/{link,doctorname,doctorimage,token,channelname}"
                   android:autoVerify="true"/>
         <argument android:name="doctorname" app:argType="string" app:nullable="true"/>
         <argument android:name="doctorimage" app:argType="string" app:nullable="true"/>
+        <argument android:name="token" app:argType="string" app:nullable="true"/>
+        <argument android:name="channelname" app:argType="string" app:nullable="true"/>
     </fragment>
     <fragment android:id="@+id/personalInfoFragment2"
               android:name="com.korashiGroup.salamtakPatient.fragment.navstrepercontent.PersonalInfoFragment"

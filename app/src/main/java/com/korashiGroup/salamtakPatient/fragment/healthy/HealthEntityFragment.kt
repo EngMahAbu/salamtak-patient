@@ -88,13 +88,13 @@ class HealthEntityFragment : Fragment(),MedicalHealthAdapter.Action {
                     BottomSheetBehavior.STATE_HIDDEN else BottomSheetBehavior.STATE_EXPANDED
         }
 
-        binding.layoutBottomsheetpersistant.layoutChooseCity.setOnClickListener {
+        binding.layoutBottomsheetpersistant.btnLayoutChooseCity.setOnClickListener {
 
             val action=HealthEntityFragmentDirections.actionHealthEntityFragmentToDialogBottomSheetFragment("AllCity")
             findNavController().navigate(action)
         }
 
-        binding.layoutBottomsheetpersistant.layoutChooseArea.setOnClickListener {
+        binding.layoutBottomsheetpersistant.btnLayoutChooseArea.setOnClickListener {
 
             val action=HealthEntityFragmentDirections.actionHealthEntityFragmentToDialogBottomSheetFragment("AllArea")
             findNavController().navigate(action)

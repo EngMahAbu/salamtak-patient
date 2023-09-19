@@ -71,14 +71,14 @@ class LocationFragment : Fragment() {
             }
         }
 
-        binding.layoutChooseCity.setOnClickListener {
+        binding.btnLayoutChooseCity.setOnClickListener {
 
             val action =
                 LocationFragmentDirections.actionLocationFragment2ToDialogBottomSheetFragment("AllCity")
             findNavController().navigate(action)
         }
 
-        binding.layoutChooseArea.setOnClickListener {
+        binding.btnLayoutChooseArea.setOnClickListener {
             if (!binding.etChooseCity.text.toString().isNullOrEmpty()) {
                 val action =
                     LocationFragmentDirections.actionLocationFragment2ToDialogBottomSheetFragment("AllArea")

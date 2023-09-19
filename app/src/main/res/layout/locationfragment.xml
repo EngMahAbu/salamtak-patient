@@ -151,6 +151,27 @@
         </com.google.android.material.textfield.TextInputLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_layout_Choose_City"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@android:color/transparent"
+                    app:layout_constraintEnd_toEndOf="@+id/layout_Choose_City"
+                    app:layout_constraintStart_toStartOf="@+id/layout_Choose_City"
+                    app:layout_constraintTop_toTopOf="@+id/layout_Choose_City"
+                    app:layout_constraintBottom_toBottomOf="@+id/layout_Choose_City"
+            />
+            <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_layout_Choose_Area"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@android:color/transparent"
+                    app:layout_constraintEnd_toEndOf="@+id/layout_Choose_Area"
+                    app:layout_constraintStart_toStartOf="@+id/layout_Choose_Area"
+                    app:layout_constraintTop_toTopOf="@+id/layout_Choose_Area"
+                    app:layout_constraintBottom_toBottomOf="@+id/layout_Choose_Area"
+            />
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_areaError"
                 android:layout_width="wrap_content"

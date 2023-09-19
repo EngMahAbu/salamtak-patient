@@ -654,7 +654,6 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
             dismiss()
         } else {
             sharedDataViewmodel.getspecialication(specialist)
-            dismiss()
         }
     }
 
@@ -750,13 +749,6 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
                 getString(R.string.Home_Visit),
                 Id = 2
 
-            )
-        )
-        list.add(
-            ImageServices(
-                R.drawable.ic_chat,
-                getString(R.string.Chat),
-                Id = 3
             )
         )
         list.add(

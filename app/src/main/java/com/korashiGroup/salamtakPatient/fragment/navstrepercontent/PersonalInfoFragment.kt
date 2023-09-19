@@ -146,21 +146,21 @@ class PersonalInfoFragment : Fragment() {
         }
 
 
-        binding.layoutGender.setOnClickListener {
+        binding.btnLayoutGender.setOnClickListener {
             val action =
                 PersonalInfoFragmentDirections.actionPersonalInfoFragment2ToDialogBottomSheetFragment(
                     "gender"
                 )
             findNavController().navigate(action)
         }
-        binding.layoutDateOfbirth.setOnClickListener {
+        binding.btnLayoutDateOfbirth.setOnClickListener {
             val action =
                 PersonalInfoFragmentDirections.actionPersonalInfoFragment2ToDialogBottomSheetFragment(
                     "date"
                 )
             findNavController().navigate(action)
         }
-        binding.layoutNationality.setOnClickListener {
+        binding.btnLayoutNationality.setOnClickListener {
             val action =
                 PersonalInfoFragmentDirections.actionPersonalInfoFragment2ToDialogBottomSheetFragment(
                     "Nationality"

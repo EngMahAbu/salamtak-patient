@@ -80,6 +80,38 @@
                     android:textSize="12sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
+            <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_layout_BloodGroup"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@android:color/transparent"
+                    app:layout_constraintEnd_toEndOf="@+id/layout_BloodGroup"
+                    app:layout_constraintStart_toStartOf="@+id/layout_BloodGroup"
+                    app:layout_constraintTop_toTopOf="@+id/layout_BloodGroup"
+                    app:layout_constraintBottom_toBottomOf="@+id/layout_BloodGroup"
+            />
+            <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_layout_MedicalAllergies"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@android:color/transparent"
+                    app:layout_constraintEnd_toEndOf="@+id/layout_MedicalAllergies"
+                    app:layout_constraintStart_toStartOf="@+id/layout_MedicalAllergies"
+                    app:layout_constraintTop_toTopOf="@+id/layout_MedicalAllergies"
+                    app:layout_constraintBottom_toBottomOf="@+id/layout_MedicalAllergies"
+            />
+
+            <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_layout_FoodAllergies"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@android:color/transparent"
+                    app:layout_constraintEnd_toEndOf="@+id/layout_FoodAllergies"
+                    app:layout_constraintStart_toStartOf="@+id/layout_FoodAllergies"
+                    app:layout_constraintTop_toTopOf="@+id/layout_FoodAllergies"
+                    app:layout_constraintBottom_toBottomOf="@+id/layout_FoodAllergies"
+            />
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout_BloodGroup"
                 android:layout_width="match_parent"
