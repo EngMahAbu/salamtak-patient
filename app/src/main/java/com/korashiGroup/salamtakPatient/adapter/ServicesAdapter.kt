@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.korashiGroup.salamtakPatient.databinding.ItemLayoutRvservicesBinding
 import com.korashiGroup.salamtakPatient.model.ImageServices
+import java.util.logging.Handler
 
 
 class ServicesAdapter(private val onServicesClick:Action ):ListAdapter<ImageServices,ServicesAdapter.ViewHolder>(DiffCallback()) {
@@ -28,7 +29,13 @@ class ServicesAdapter(private val onServicesClick:Action ):ListAdapter<ImageServ
         holder.binding.tvServiceName.text=services.textService
 
         holder.binding.cardview.setOnClickListener {
+
             services.Id?.let { it1 -> onServicesClick.onItemClick(it1) }
+            it.isEnabled=false
+            android.os.Handler().postDelayed({
+                it.isEnabled=true
+            }, 2000)
+
         }
 
     }

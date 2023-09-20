@@ -15,6 +15,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.CompoundButton
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
@@ -26,6 +27,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import coil.transform.CircleCropTransformation
 import com.bumptech.glide.Glide
@@ -43,6 +45,10 @@ import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.karumi.dexter.listener.single.PermissionListener
+import com.korashiGroup.salamtakPatient.adapter.InsuranceCardAdapter
+import com.korashiGroup.salamtakPatient.adapter.MedicalServicesAdapter
+import com.korashiGroup.salamtakPatient.model.SpecialistData
+import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCard
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCompany
 import com.korashiGroup.salamtakPatient.utils.*
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
@@ -56,17 +62,15 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
-class AppointmentDetailsFragment : Fragment() {
+class AppointmentDetailsFragment : Fragment(),InsuranceCardAdapter.SelectInsuranceCard {
 
     private lateinit var binding: AppointmentDetailsfragmentBinding
     private val args: AppointmentDetailsFragmentArgs by navArgs()
     private val viewmodel: DialogBottomSheetViewmodel by viewModels()
     private lateinit var bottomsheetbeahavoir: BottomSheetBehavior<ConstraintLayout>
     val sharedDataViewmodel: SharedDataViewmodel by activityViewModels()
-    private val list = ArrayList<InsuranceCompany>()
-    private var partMap: Map<String, Any> = mutableMapOf()
-    private var imageFile: File? = null
-    private var insuranceId = ""
+    private lateinit var insuranceCardAdapter: InsuranceCardAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -88,10 +92,10 @@ class AppointmentDetailsFragment : Fragment() {
             BottomSheetBehavior.from(binding.layoutBottomsheetpersistant.bookwithinsurance)
         bottomsheetbeahavoir.state = BottomSheetBehavior.STATE_HIDDEN
         bindDataToViews()
-        callBackInsuranceCompany()
+        insuranceCardRecylerview()
         initButton()
         callBack()
-        getdata()
+        callBackGetInsuranceCards()
 
     }
 
@@ -113,65 +117,31 @@ class AppointmentDetailsFragment : Fragment() {
             )
         }
 
-        binding.btnBookWithInsurance.setOnClickListener {
-            bottomsheetbeahavoir.state =
-                if (bottomsheetbeahavoir.state == BottomSheetBehavior.STATE_EXPANDED)
-                    BottomSheetBehavior.STATE_HIDDEN else BottomSheetBehavior.STATE_EXPANDED
-
+        binding.layoutBottomsheetpersistant.btnAddCard.setOnClickListener {
+            findNavController().navigate(R.id.dialogAddInsuranceCardFragment)
         }
 
-        binding.layoutBottomsheetpersistant.cardCertificate.setOnClickListener {
-            selectPic(it)
-        }
 
-        binding.layoutBottomsheetpersistant.ivReleaseDate.setOnClickListener {
-            val action =
-                AppointmentDetailsFragmentDirections.actionAppointmentDetailsFragmentToDialogBottomSheetFragment("date")
-            findNavController().navigate(action)
-        }
-        binding.layoutBottomsheetpersistant.ivEndDate.setOnClickListener {
-            val action =
-                AppointmentDetailsFragmentDirections.actionAppointmentDetailsFragmentToDialogBottomSheetFragment("endDate")
-            findNavController().navigate(action)
-        }
-
-        binding.layoutBottomsheetpersistant.applay.setOnClickListener {
-            sendData()
-
-        }
-
-    }
-
-    fun setupSpinner(list: List<InsuranceCompany>) {
-        val insuranceCompanyList = ArrayList<String>()
-        insuranceCompanyList.add("Select")
-        list.forEach {
-            insuranceCompanyList.add(it.name)
-        }
-        val typeadapter = ArrayAdapter(
-            requireActivity(),
-            androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, insuranceCompanyList
-        )
-        binding.layoutBottomsheetpersistant.spStatus.adapter = typeadapter
-        binding.layoutBottomsheetpersistant.spStatus.onItemSelectedListener = object :
-            AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>,
-                view: View?, position: Int, id: Long
-            ) {
-                if (position == 0) {
-                    insuranceId = ""
-                } else {
-                    insuranceId = list[position - 1].iD
-                }
+        binding.chCard.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked){
+                bottomsheetbeahavoir.state =
+                    if (bottomsheetbeahavoir.state == BottomSheetBehavior.STATE_EXPANDED)
+                        BottomSheetBehavior.STATE_HIDDEN else BottomSheetBehavior.STATE_EXPANDED
+                buttonView.isChecked=false
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>) {
-                // write code to perform some action
+        }
 
-            }
+
+    }
+    private fun insuranceCardRecylerview() {
+       insuranceCardAdapter = InsuranceCardAdapter(this)
+        binding.layoutBottomsheetpersistant.rvInsuranceCard.apply {
+            adapter = insuranceCardAdapter
+            setHasFixedSize(true)
         }
     }
+
 
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -221,123 +191,31 @@ class AppointmentDetailsFragment : Fragment() {
 
     }
 
-    private fun callBackInsuranceCompany() {
-
-        viewmodel?.InsuranceCompany?.observe(viewLifecycleOwner,
+    private fun callBackGetInsuranceCards(){
+        viewmodel?.insurancecardResponse?.observe(viewLifecycleOwner,
             Observer {
                 when (it) {
 
                     is Resource.Loading -> {
-
+                        binding.layoutBottomsheetpersistant.rvInsuranceCardProgressBar.visibility = View.VISIBLE
                     }
 
                     is Resource.sucess -> {
-
-
-                        it.data?.data?.forEach {
-                            list.add(it)
-                        }
-                        setupSpinner(list)
-
-
+                        binding.layoutBottomsheetpersistant.rvInsuranceCardProgressBar.visibility = View.GONE
+                        insuranceCardAdapter.submitList(it.data?.data)
+                        insuranceCardAdapter.notifyDataSetChanged()
                     }
 
                     is Resource.Error -> {
-
+                        binding.layoutBottomsheetpersistant.rvInsuranceCardProgressBar.visibility = View.GONE
                         Snackbar.make(requireView(), "${it.message}", Snackbar.LENGTH_SHORT).show()
                     }
                 }
 
             })
-
-        viewmodel.getAllInsurance_Companies()
-
+        viewmodel.getPatient_Insurance()
     }
 
-
-    private fun sendData() {
-
-        imageFile?.let {
-
-            partMap = partMap + mapOf("document" to it)
-
-        }
-        partMap = partMap + mapOf("Insurance_CompanyID" to insuranceId)
-        if (binding.layoutBottomsheetpersistant.releaseDate.text.toString().trim().isNotBlank()) {
-            partMap = partMap + mapOf("IssueDate" to binding.layoutBottomsheetpersistant.releaseDate.text.toString())
-        } else {
-            Snackbar.make(
-                requireView(),
-                getString(R.string.enterreleasedate),
-                Snackbar.LENGTH_SHORT
-            ).show()
-        }
-
-        if (binding.layoutBottomsheetpersistant.endDate.text.toString().trim().isNotBlank()) {
-            partMap = partMap + mapOf("EndDate" to binding.layoutBottomsheetpersistant.endDate.text.toString())
-        } else {
-            Snackbar.make(
-                requireView(),
-                getString(R.string.enterenddate),
-                Snackbar.LENGTH_SHORT
-            ).show()
-        }
-        val builder = MultipartBody.Builder().setType(MultipartBody.FORM)
-        for (item in partMap) {
-            val key = item.key
-            if (key.contains("document")) {
-                val file = item.value as File
-                builder.addFormDataPart(
-                    key,
-                    "${file.name}.jpeg",
-                    file.asRequestBody("image/*".toMediaTypeOrNull())
-                )
-            }
-            builder.addFormDataPart(key, item.value.toString())
-        }
-
-        viewmodel.createPatient_Insurance(builder.build())
-        viewmodel.insuranceResponse.observe(viewLifecycleOwner, Observer {
-
-            when (it) {
-
-                is Resource.Loading -> {
-                    showprogtessbar()
-                }
-
-                is Resource.sucess -> {
-                    hideprogressbar()
-                    Snackbar.make(
-                        requireView(),
-                        getString(R.string.datasentsuccessfully),
-                        Snackbar.LENGTH_SHORT
-                    ).show()
-                    bottomsheetbeahavoir.state=BottomSheetBehavior.STATE_HIDDEN
-                }
-
-                is Resource.Error -> {
-                    hideprogressbar()
-                    Snackbar.make(requireView(), "${it.message}", Snackbar.LENGTH_SHORT).show()
-                }
-            }
-
-
-        })
-
-    }
-
-
-    private fun showprogtessbar() {
-
-        binding.layoutBottomsheetpersistant.progressBar.visibility = View.VISIBLE
-        binding.layoutBottomsheetpersistant.applay.text = ""
-    }
-
-    private fun hideprogressbar() {
-        binding.progressBar.visibility = View.GONE
-        binding.layoutBottomsheetpersistant.progressBar.visibility = View.GONE
-        binding.layoutBottomsheetpersistant.applay.text = getString(R.string.apply)
-    }
 
 
     private fun DateParsing(dateParsing: String): String {
@@ -355,153 +233,9 @@ class AppointmentDetailsFragment : Fragment() {
     }
 
 
-    private fun selectPic(view: View) {
-        val pictureImageDialog = AlertDialog.Builder(requireContext())
-        if (view.id == binding.layoutBottomsheetpersistant.cardCertificate.id) {
-            pictureImageDialog.setTitle("Select Action")
-            val pictureImageItem = arrayOf("Select From Camera", "Select From Gallery", "Cancel")
-            pictureImageDialog.setItems(pictureImageItem) { dialog, which ->
-                when (which) {
-                    0 -> checkPermissionFromCamera()
-                    1 -> checkPicPermission()
-                    2 -> dialog.dismiss()
-                }
-            }
-        }
-        pictureImageDialog.show()
 
-    }
-
-    private fun checkPermissionFromCamera() {
-
-        Dexter.withContext(requireActivity())
-            .withPermissions(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
-            .withListener(
-                object : MultiplePermissionsListener {
-                    override fun onPermissionsChecked(report: MultiplePermissionsReport?) {
-                        report?.let {
-
-                            if (report.areAllPermissionsGranted()) {
-                                openCamera()
-                            }
-                        }
-                    }
-
-                    override fun onPermissionRationaleShouldBeShown(
-                        p0: MutableList<PermissionRequest>?,
-                        p1: PermissionToken?
-                    ) {
-
-                        requireActivity().showRationalePermission()
-
-                    }
-
-                }
-            ).onSameThread().check()
-    }
-
-    private fun openCamera() {
-        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        cameraOpening.launch(cameraIntent)
-    }
-
-    private fun getPicFromGallery() {
-        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
-        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-        intent.addCategory(Intent.CATEGORY_OPENABLE)
-        intent.type = "image/*"
-        galleryOpening.launch(intent)
-    }
-
-    private var galleryOpening =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                val data: Intent? = result.data
-                if (data?.clipData != null) {
-                    val count = data.clipData?.itemCount
-                    for (i in 0 until count!!) {
-                        val imageUri =
-                            data.clipData?.getItemAt(i)?.uri ?: return@registerForActivityResult
-                        val imageStream = imageUri.let {
-                            requireActivity().contentResolver.openInputStream(it)
-                        }
-                        val selectedImage = BitmapFactory.decodeStream(imageStream)
-                        val resizedBitmap = selectedImage.resizePic(1000)
-                        val file = resizedBitmap.toFile(requireContext(), 20.getRandomString())
-                        Glide.with(requireContext())
-                            .load(file)
-                            .into(binding.layoutBottomsheetpersistant.ivCertificate)
-                    }
-                } else if (data?.data != null) {
-                    val imageUri = data.data ?: return@registerForActivityResult
-                    val imageStream = imageUri.let {
-                        requireActivity().contentResolver.openInputStream(it)
-                    }
-                    val selectedImage = BitmapFactory.decodeStream(imageStream)
-                    val resizedBitmap = selectedImage.resizePic(1000)
-                    val file = resizedBitmap.toFile(requireContext(), 20.getRandomString())
-                    imageFile = file
-                    Glide.with(requireContext())
-                        .load(file)
-                        .into(binding.layoutBottomsheetpersistant.ivCertificate)
-                }
-            }
-        }
-    private var cameraOpening =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                val data: Intent? = result.data
-                data?.let {
-                    val bitmap = data.extras?.get("data") as Bitmap
-                    val resizedBitmap = bitmap.resizePic(2000)
-                    val file = resizedBitmap.toFile(requireContext(), 20.getRandomString())
-                    imageFile = file
-                    Glide.with(requireContext())
-                        .load(file)
-                        .into(binding.layoutBottomsheetpersistant.ivCertificate)
-                }
-            }
-        }
-
-    private fun checkPicPermission() {
-        Dexter.withContext(requireContext())
-            .withPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
-            .withListener(object : PermissionListener {
-                override fun onPermissionGranted(p0: PermissionGrantedResponse?) {
-
-                    getPicFromGallery()
-                }
-
-                override fun onPermissionDenied(p0: PermissionDeniedResponse?) {
-
-                    Toast.makeText(
-                        requireContext(),
-                        "you have denied permission for select image",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    requireActivity().showRationalePermission()
-
-                }
-
-                override fun onPermissionRationaleShouldBeShown(
-                    p0: PermissionRequest?,
-                    p1: PermissionToken?
-                ) {
-                    requireActivity().showRationalePermission()
-
-                }
-
-            }).onSameThread().check()
-    }
-
-    private fun getdata() {
-        sharedDataViewmodel.releaeDate.observe(viewLifecycleOwner, Observer {
-            binding.layoutBottomsheetpersistant.releaseDate.text = it
-        })
-
-        sharedDataViewmodel.endDate.observe(viewLifecycleOwner, Observer {
-            binding.layoutBottomsheetpersistant.endDate.text = it
-        })
+    override fun onItemSelected(card: InsuranceCard) {
+        Snackbar.make(requireView(), "${card.insCompanyName}", Snackbar.LENGTH_SHORT).show()
     }
 
 

@@ -159,4 +159,8 @@ class RegisterRepositry @Inject constructor(private val apiService: ApiService) 
     ) = sp.getUserLang(Constans.Language)
         ?.let { apiService.createPatient_Insurance(it, insuranceRequest) }
 
+    suspend fun getPatient_Insurance(
+    ) = sp.getUserLang(Constans.Language)
+        ?.let { apiService.getPatient_Insurance(it) }
+
 }

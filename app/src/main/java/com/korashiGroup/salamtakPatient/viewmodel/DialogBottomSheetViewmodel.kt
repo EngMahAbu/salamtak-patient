@@ -22,6 +22,7 @@ import com.korashiGroup.salamtakPatient.utils.Resource
 import com.google.gson.Gson
 import com.korashiGroup.salamtakPatient.model.askandanswer.QuestionAndAnswerResponse
 import com.korashiGroup.salamtakPatient.model.askandanswer.QuestionRequest
+import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCardResponse
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCompanyResponse
 import com.korashiGroup.salamtakPatient.model.insurance.SendInsuranceCardResponce
 import com.korashiGroup.salamtakPatient.model.salamtakgate.BlogsResponse
@@ -69,6 +70,7 @@ class DialogBottomSheetViewmodel @Inject constructor(private val repositry: Regi
     val blogsResponse=MutableLiveData<Resource<BlogsResponse>>()
     val questionAndAnswerResponse=MutableLiveData<Resource<QuestionAndAnswerResponse>>()
     val insuranceResponse=MutableLiveData<Resource<SendInsuranceCardResponce>>()
+    val insurancecardResponse=MutableLiveData<Resource<InsuranceCardResponse>>()
 
 
 
@@ -567,6 +569,23 @@ class DialogBottomSheetViewmodel @Inject constructor(private val repositry: Regi
             }
         }
         val error = Gson().fromJson<SendInsuranceCardResponce>(response.errorBody()!!.string(), SendInsuranceCardResponce::class.java)
+        return error.message?.let { Resource.Error(it) }
+    }
+
+
+    fun getPatient_Insurance( )=viewModelScope.launch(Dispatchers.IO+handler) {
+        insurancecardResponse.postValue(Resource.Loading())
+        val response=repositry.getPatient_Insurance()
+        insurancecardResponse.postValue(response?.let { handlegetPatient_Insurance(it) })
+    }
+
+    private fun handlegetPatient_Insurance(response: Response<InsuranceCardResponse>): Resource<InsuranceCardResponse>? {
+        if (response.isSuccessful){
+            response.body()?.let {
+                return Resource.sucess(it)
+            }
+        }
+        val error = Gson().fromJson<InsuranceCardResponse>(response.errorBody()!!.string(), InsuranceCardResponse::class.java)
         return error.message?.let { Resource.Error(it) }
     }
 

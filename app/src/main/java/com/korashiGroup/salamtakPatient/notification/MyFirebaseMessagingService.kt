@@ -56,7 +56,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         Log.e(TAG, "map: $map")
 
 
-        if (map?.get("link")?.contains("SalamtakPatient://2") == true) {
+        if (map?.get("link")?.contains("SalamtakPatient://2?") == true) {
             linkAudioOrVideo = "audio"
         } else {
             linkAudioOrVideo = "video"
@@ -65,7 +65,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         val deepLinkItem = DeepLinkItem(
             map?.get("token")?.let { getDeepLink(it) }, map?.get("DoctorName"),
             map?.get("DoctorImage")?.let { getDeepLink(it) },
-            map?.get("Channelname"), map?.get("date"), "video"
+            map?.get("Channelname"), map?.get("date"), linkAudioOrVideo
         )
         Log.e("Element  ", "deepLinkItem: ${deepLinkItem}")
 

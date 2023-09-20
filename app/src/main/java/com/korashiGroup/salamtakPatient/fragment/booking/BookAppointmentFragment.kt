@@ -376,6 +376,9 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
                     }else if (appointmentTime[i]?.maxNoOfPatients!=null){
                         numbersofpatient= appointmentTime[i]?.maxNoOfPatients!!
                         intervaltime=((hours * 60) / numbersofpatient).toInt()
+                        if (intervaltime==0){
+                            intervaltime=1
+                        }
                     }else{
                         Snackbar.make(requireView(), getString(R.string.there_is_no_appointment_available), Snackbar.LENGTH_SHORT).show()
                     }

@@ -204,6 +204,9 @@ class DialogClinkBookingFragment : BottomSheetDialogFragment(),
                     }else if (appointmentTime[i]?.maxNoOfPatients!=null){
                         numbersofpatient= appointmentTime[i]?.maxNoOfPatients!!
                         intervaltime=((hours * 60) / numbersofpatient).toInt()
+                        if (intervaltime==0){
+                            intervaltime=1
+                        }
                     }else{
                         Toast.makeText(
                             requireContext(),

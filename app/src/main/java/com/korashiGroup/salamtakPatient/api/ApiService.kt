@@ -8,6 +8,7 @@ import com.korashiGroup.salamtakPatient.model.booking.clink.GetDoctorClinksRespo
 import com.korashiGroup.salamtakPatient.model.docotorsearch.DoctorSearchRequest
 import com.korashiGroup.salamtakPatient.model.docotorsearch.DoctorsearchItemResponse
 import com.korashiGroup.salamtakPatient.model.healthy.GetHealthEntityResponse
+import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCardResponse
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCompanyResponse
 import com.korashiGroup.salamtakPatient.model.insurance.SendInsuranceCardResponce
 import com.korashiGroup.salamtakPatient.model.populardoctors.GetDoctorHealthTopicsResponse
@@ -248,6 +249,12 @@ interface ApiService {
         @Path("culture") culture: String,
         @Body part: RequestBody
     ): Response<SendInsuranceCardResponce>
+
+
+    @GET("{culture}/Insurance_Companies/GetPatient_Insurance")
+    suspend fun getPatient_Insurance(
+        @Path("culture") culture: String,
+    ):Response<InsuranceCardResponse>
 
 
 }

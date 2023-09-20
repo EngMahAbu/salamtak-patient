@@ -292,6 +292,8 @@
                 android:id="@+id/action_bookingAppointmentFragment_to_searchFragment"
                 app:destination="@id/searchFragment"
                 app:popUpTo="@id/searchFragment" />
+        <action android:id="@+id/action_bookingAppointmentFragment_to_dialogAddInsuranceCardFragment"
+                app:destination="@id/dialogAddInsuranceCardFragment"/>
     </fragment>
     <fragment
             android:id="@+id/bookAppointmentFragment"
@@ -406,5 +408,12 @@
               android:label="confirmedfragment" tools:layout="@layout/confirmedfragment">
         <argument android:name="date" app:argType="string" app:nullable="true"/>
     </fragment>
+    <dialog android:id="@+id/dialogAddInsuranceCardFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.dialog.DialogAddInsuranceCardFragment"
+            android:label="dialog_add_insurance_cardfragment" tools:layout="@layout/dialog_add_insurance_cardfragment">
+
+        <action android:id="@+id/action_dialogAddInsuranceCardFragment_to_dialogBottomSheetFragment"
+                app:destination="@id/dialogBottomSheetFragment"/>
+    </dialog>
 
 </navigation>

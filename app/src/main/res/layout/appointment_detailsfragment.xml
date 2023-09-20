@@ -13,565 +13,566 @@
             android:layout_height="match_parent">
 
 
-    <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/iv_arrow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:adjustViewBounds="true"
-            android:src="@drawable/ic_arrowleft"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_Filter"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tv_Filter"/>
+        <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/iv_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_arrowleft"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_Filter"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_Filter"/>
 
-    <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_Filter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/avenirltstd_black"
-            android:text="@string/summary"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@+id/iv_arrow"
-            app:layout_constraintTop_toTopOf="parent"/>
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/avenirltstd_black"
+                android:text="@string/summary"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/iv_arrow"
+                app:layout_constraintTop_toTopOf="parent"/>
 
-    <androidx.core.widget.NestedScrollView
-            android:id="@+id/layout"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_arrow"
-            app:layout_constraintBottom_toTopOf="@+id/layout_btn_confirm"
-    >
+        <androidx.core.widget.NestedScrollView
+                android:id="@+id/layout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_arrow"
+                app:layout_constraintBottom_toTopOf="@+id/layout_btn_confirm"
+        >
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="3dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_doctorsDetail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:padding="8dp"
+                        android:background="@drawable/bg_edittext"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/iv_doctorProfile"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:src="@drawable/ic_docspecialization"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_doctorName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:fontFamily="@font/avenirltstd_roman"
+                            android:gravity="start"
+                            android:padding="3dp"
+                            android:text="Dr. Mohamed Farag Abdullatif"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            app:layout_constraintStart_toEndOf="@+id/iv_doctorProfile"
+                            app:layout_constraintTop_toTopOf="@+id/iv_doctorProfile"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_Specialization"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/avenirltstd_roman"
+                            android:gravity="start"
+                            android:padding="2dp"
+                            android:text="Genecology and Infertility"
+                            android:textColor="@color/gray"
+                            android:textSize="15sp"
+                            app:layout_constraintStart_toEndOf="@+id/iv_doctorProfile"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_doctorName"/>
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/iv_star"
+                            android:layout_width="18dp"
+                            android:layout_height="15dp"
+                            android:layout_marginStart="10dp"
+                            android:adjustViewBounds="true"
+                            android:src="@drawable/ic_star"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/iv_doctorProfile"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_Specialization"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_Reviews"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:fontFamily="@font/avenirltstd_roman"
+                            android:gravity="start"
+                            android:padding="2dp"
+                            android:text="@string/reviews"
+                            android:textColor="@color/gray"
+                            android:textSize="15sp"
+                            app:layout_constraintStart_toEndOf="@+id/iv_star"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_Specialization"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_appointmentdetails"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@+id/layout_doctorsDetail"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent">
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/layout_appointment_details"
+                            android:layout_width="match_parent"
+                            android:layout_height="54dp"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginEnd="15dp"
+                            android:background="@drawable/bg_completeprofile"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tv_completeProfile"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/avenirltstd_roman"
+                                android:gravity="center"
+                                android:padding="2dp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginStart="15dp"
+                                android:text="@string/appointment_details"
+                                android:textColor="@color/blue"
+                                android:textSize="18sp"
+                        />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/layout_details"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginEnd="15dp"
+                            android:background="@drawable/bg_layoutdetails"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/layout_appointment_details">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/layout_Subspecialization"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="5dp"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:id="@+id/layout_BookingDateTime"
+                                    android:layout_width="37dp"
+                                    android:layout_height="37dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_marginStart="10dp"
+                                    android:background="@drawable/bg_image_circle"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent">
+
+                                <com.google.android.material.imageview.ShapeableImageView
+                                        android:id="@+id/iv_sub_specialization"
+                                        android:layout_width="18dp"
+                                        android:layout_height="18dp"
+                                        android:adjustViewBounds="true"
+                                        android:src="@drawable/ic_calenderbook"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent"/>
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/tv_BookingDateTime"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="5dp"
+                                    android:fontFamily="@font/avenirltstd_roman"
+                                    android:gravity="start"
+                                    android:padding="2dp"
+                                    android:text="@string/booking_date_time"
+                                    android:textColor="@color/gray"
+                                    android:textSize="15sp"
+                                    app:layout_constraintStart_toEndOf="@+id/layout_BookingDateTime"
+                                    app:layout_constraintTop_toTopOf="@+id/layout_BookingDateTime"/>
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/tv_date"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="5dp"
+                                    android:fontFamily="@font/avenirltstd_black"
+                                    android:gravity="start"
+                                    android:padding="2dp"
+                                    android:text="08 Feb, 2022 (08:00PM)"
+                                    android:textColor="@color/black"
+                                    android:textSize="12sp"
+                                    app:layout_constraintStart_toEndOf="@+id/layout_BookingDateTime"
+                                    app:layout_constraintBottom_toBottomOf="@+id/layout_BookingDateTime"
+                                    app:layout_constraintTop_toBottomOf="@+id/tv_BookingDateTime"/>
+
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:id="@+id/layout_Service"
+                                    android:layout_width="37dp"
+                                    android:layout_height="37dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_marginStart="10dp"
+                                    android:background="@drawable/bg_image_circle"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/layout_BookingDateTime">
+
+                                <com.google.android.material.imageview.ShapeableImageView
+                                        android:id="@+id/iv_Service"
+                                        android:layout_width="18dp"
+                                        android:layout_height="18dp"
+                                        android:adjustViewBounds="true"
+                                        android:src="@drawable/ic_vediodetails"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent"/>
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/tv_Service"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="5dp"
+                                    android:fontFamily="@font/avenirltstd_roman"
+                                    android:gravity="start"
+                                    android:padding="2dp"
+                                    android:text="@string/service"
+                                    android:textColor="@color/gray"
+                                    android:textSize="15sp"
+                                    app:layout_constraintStart_toEndOf="@+id/layout_Service"
+                                    app:layout_constraintTop_toTopOf="@+id/layout_Service"/>
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/Service"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="5dp"
+                                    android:fontFamily="@font/avenirltstd_black"
+                                    android:gravity="start"
+                                    android:padding="2dp"
+                                    android:text="Video Call (30 min.)"
+                                    android:textColor="@color/black"
+                                    android:textSize="12sp"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toEndOf="@+id/layout_Service"
+                                    app:layout_constraintBottom_toBottomOf="@+id/layout_Service"
+                                    app:layout_constraintTop_toBottomOf="@+id/tv_Service"/>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:id="@+id/layout_WaitingTime"
+                                    android:layout_width="37dp"
+                                    android:layout_height="37dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_marginStart="10dp"
+                                    android:background="@drawable/bg_image_circle"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/layout_Service">
+
+                                <com.google.android.material.imageview.ShapeableImageView
+                                        android:id="@+id/iv_WaitingTime"
+                                        android:layout_width="18dp"
+                                        android:layout_height="18dp"
+                                        android:adjustViewBounds="true"
+                                        android:src="@drawable/ic_watingtime"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent"/>
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/tv_WaitingTime"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="5dp"
+                                    android:fontFamily="@font/avenirltstd_roman"
+                                    android:gravity="start"
+                                    android:padding="2dp"
+                                    android:text="@string/waiting_time"
+                                    android:textColor="@color/gray"
+                                    android:textSize="15sp"
+                                    app:layout_constraintStart_toEndOf="@+id/layout_WaitingTime"
+                                    app:layout_constraintTop_toTopOf="@+id/layout_WaitingTime"/>
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/WaitingTime"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="5dp"
+                                    android:fontFamily="@font/avenirltstd_black"
+                                    android:gravity="start"
+                                    android:padding="2dp"
+                                    android:text="15 Min."
+                                    android:textColor="@color/black"
+                                    android:textSize="12sp"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toEndOf="@+id/layout_WaitingTime"
+                                    app:layout_constraintBottom_toBottomOf="@+id/layout_WaitingTime"
+                                    app:layout_constraintTop_toBottomOf="@+id/tv_WaitingTime"/>
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_fees"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        app:layout_constraintTop_toBottomOf="@+id/layout_appointmentdetails"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent">
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/layout_Fees"
+                            android:layout_width="match_parent"
+                            android:layout_height="54dp"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginEnd="15dp"
+                            android:background="@drawable/bg_completeprofile"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tv_Fees"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/avenirltstd_roman"
+                                android:gravity="center"
+                                android:padding="2dp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginStart="15dp"
+                                android:text="@string/fees"
+                                android:textColor="@color/blue"
+                                android:textSize="18sp"
+                        />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/layout_Feesdetails"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginEnd="15dp"
+                            android:background="@drawable/bg_layoutdetails"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/layout_Fees">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/layout_Feess"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="5dp"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:id="@+id/layout_TotalFees"
+                                    android:layout_width="37dp"
+                                    android:layout_height="37dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_marginStart="10dp"
+                                    android:background="@drawable/bg_image_circle"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent">
+
+                                <com.google.android.material.imageview.ShapeableImageView
+                                        android:id="@+id/iv_TotalFees"
+                                        android:layout_width="18dp"
+                                        android:layout_height="18dp"
+                                        android:adjustViewBounds="true"
+                                        android:src="@drawable/ic_totalfess"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent"/>
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/tv_TotalFees"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="5dp"
+                                    android:fontFamily="@font/avenirltstd_roman"
+                                    android:gravity="start"
+                                    android:padding="2dp"
+                                    android:text="@string/total_fees"
+                                    android:textColor="@color/gray"
+                                    android:textSize="15sp"
+                                    app:layout_constraintStart_toEndOf="@+id/layout_TotalFees"
+                                    app:layout_constraintTop_toTopOf="@+id/layout_TotalFees"/>
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/TotalFees"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="5dp"
+                                    android:fontFamily="@font/avenirltstd_black"
+                                    android:gravity="start"
+                                    android:padding="2dp"
+                                    android:text="350 LE"
+                                    android:textColor="@color/black"
+                                    android:textSize="12sp"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toEndOf="@+id/layout_TotalFees"
+                                    app:layout_constraintBottom_toBottomOf="@+id/layout_TotalFees"
+                                    app:layout_constraintTop_toBottomOf="@+id/tv_TotalFees"/>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_btn_insurance"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_margin="15dp"
+                        app:layout_constraintTop_toBottomOf="@+id/layout_fees"
+                        app:layout_constraintEnd_toEndOf="parent"
+                >
+                    <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btn_bookWithInsurance"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="12dp"
+                            android:background="@drawable/bg_chooselang_button"
+                            android:fontFamily="@font/avenirltstd_roman"
+                            android:padding="5dp"
+                            android:text="@string/addcard"
+                            android:textColor="@color/white"
+                            android:textSize="14sp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintWidth_percent=".6"/>
+
+                    <CheckBox
+                            android:id="@+id/ch_Card"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:drawablePadding="10dp"
+                            android:elevation="1dp"
+                            android:layout_marginBottom="20dp"
+                            android:fontFamily="@font/avenirltstd_black"
+                            android:text="@string/book_with_insurance"
+                            android:buttonTint="@color/color_primary"
+                            android:padding="3dp"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_btn_confirm"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="3dp">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/layout_doctorsDetail"
-                    android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintTop_toBottomOf="@+id/layout"
+                app:layout_constraintBottom_toTopOf="@+id/imageView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+            <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_confirm"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="25dp"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:padding="8dp"
-                    android:background="@drawable/bg_edittext"
+                    android:background="@drawable/bg_chooselang_button"
+                    android:fontFamily="@font/avenirltstd_black"
+                    android:padding="5dp"
+                    android:text="@string/confirm"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/iv_doctorProfile"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:src="@drawable/ic_docspecialization"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
-
-                <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_doctorName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:fontFamily="@font/avenirltstd_roman"
-                        android:gravity="start"
-                        android:padding="3dp"
-                        android:text="Dr. Mohamed Farag Abdullatif"
-                        android:textColor="@color/black"
-                        android:textSize="15sp"
-                        app:layout_constraintStart_toEndOf="@+id/iv_doctorProfile"
-                        app:layout_constraintTop_toTopOf="@+id/iv_doctorProfile"/>
-
-                <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_Specialization"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="5dp"
-                        android:fontFamily="@font/avenirltstd_roman"
-                        android:gravity="start"
-                        android:padding="2dp"
-                        android:text="Genecology and Infertility"
-                        android:textColor="@color/gray"
-                        android:textSize="15sp"
-                        app:layout_constraintStart_toEndOf="@+id/iv_doctorProfile"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_doctorName"/>
-
-                <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/iv_star"
-                        android:layout_width="18dp"
-                        android:layout_height="15dp"
-                        android:layout_marginStart="10dp"
-                        android:adjustViewBounds="true"
-                        android:src="@drawable/ic_star"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/iv_doctorProfile"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_Specialization"/>
-
-                <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_Reviews"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:fontFamily="@font/avenirltstd_roman"
-                        android:gravity="start"
-                        android:padding="2dp"
-                        android:text="@string/reviews"
-                        android:textColor="@color/gray"
-                        android:textSize="15sp"
-                        app:layout_constraintStart_toEndOf="@+id/iv_star"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_Specialization"/>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/layout_appointmentdetails"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@+id/layout_doctorsDetail"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent">
-                <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/layout_appointment_details"
-                        android:layout_width="match_parent"
-                        android:layout_height="54dp"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="25dp"
-                        android:layout_marginEnd="15dp"
-                        android:background="@drawable/bg_completeprofile"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tv_completeProfile"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/avenirltstd_roman"
-                            android:gravity="center"
-                            android:padding="2dp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginStart="15dp"
-                            android:text="@string/appointment_details"
-                            android:textColor="@color/blue"
-                            android:textSize="18sp"
-                    />
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-                <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/layout_details"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginEnd="15dp"
-                        android:background="@drawable/bg_layoutdetails"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/layout_appointment_details">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/layout_Subspecialization"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="5dp"
-                            app:layout_constraintTop_toTopOf="parent">
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                                android:id="@+id/layout_BookingDateTime"
-                                android:layout_width="37dp"
-                                android:layout_height="37dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginStart="10dp"
-                                android:background="@drawable/bg_image_circle"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent">
-
-                            <com.google.android.material.imageview.ShapeableImageView
-                                    android:id="@+id/iv_sub_specialization"
-                                    android:layout_width="18dp"
-                                    android:layout_height="18dp"
-                                    android:adjustViewBounds="true"
-                                    android:src="@drawable/ic_calenderbook"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"/>
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tv_BookingDateTime"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="5dp"
-                                android:fontFamily="@font/avenirltstd_roman"
-                                android:gravity="start"
-                                android:padding="2dp"
-                                android:text="@string/booking_date_time"
-                                android:textColor="@color/gray"
-                                android:textSize="15sp"
-                                app:layout_constraintStart_toEndOf="@+id/layout_BookingDateTime"
-                                app:layout_constraintTop_toTopOf="@+id/layout_BookingDateTime"/>
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tv_date"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="5dp"
-                                android:fontFamily="@font/avenirltstd_black"
-                                android:gravity="start"
-                                android:padding="2dp"
-                                android:text="08 Feb, 2022 (08:00PM)"
-                                android:textColor="@color/black"
-                                android:textSize="12sp"
-                                app:layout_constraintStart_toEndOf="@+id/layout_BookingDateTime"
-                                app:layout_constraintBottom_toBottomOf="@+id/layout_BookingDateTime"
-                                app:layout_constraintTop_toBottomOf="@+id/tv_BookingDateTime"/>
-
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                                android:id="@+id/layout_Service"
-                                android:layout_width="37dp"
-                                android:layout_height="37dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginStart="10dp"
-                                android:background="@drawable/bg_image_circle"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/layout_BookingDateTime">
-
-                            <com.google.android.material.imageview.ShapeableImageView
-                                    android:id="@+id/iv_Service"
-                                    android:layout_width="18dp"
-                                    android:layout_height="18dp"
-                                    android:adjustViewBounds="true"
-                                    android:src="@drawable/ic_vediodetails"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"/>
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tv_Service"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="5dp"
-                                android:fontFamily="@font/avenirltstd_roman"
-                                android:gravity="start"
-                                android:padding="2dp"
-                                android:text="@string/service"
-                                android:textColor="@color/gray"
-                                android:textSize="15sp"
-                                app:layout_constraintStart_toEndOf="@+id/layout_Service"
-                                app:layout_constraintTop_toTopOf="@+id/layout_Service"/>
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/Service"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="5dp"
-                                android:fontFamily="@font/avenirltstd_black"
-                                android:gravity="start"
-                                android:padding="2dp"
-                                android:text="Video Call (30 min.)"
-                                android:textColor="@color/black"
-                                android:textSize="12sp"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toEndOf="@+id/layout_Service"
-                                app:layout_constraintBottom_toBottomOf="@+id/layout_Service"
-                                app:layout_constraintTop_toBottomOf="@+id/tv_Service"/>
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                                android:id="@+id/layout_WaitingTime"
-                                android:layout_width="37dp"
-                                android:layout_height="37dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginStart="10dp"
-                                android:background="@drawable/bg_image_circle"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/layout_Service">
-
-                            <com.google.android.material.imageview.ShapeableImageView
-                                    android:id="@+id/iv_WaitingTime"
-                                    android:layout_width="18dp"
-                                    android:layout_height="18dp"
-                                    android:adjustViewBounds="true"
-                                    android:src="@drawable/ic_watingtime"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"/>
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tv_WaitingTime"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="5dp"
-                                android:fontFamily="@font/avenirltstd_roman"
-                                android:gravity="start"
-                                android:padding="2dp"
-                                android:text="@string/waiting_time"
-                                android:textColor="@color/gray"
-                                android:textSize="15sp"
-                                app:layout_constraintStart_toEndOf="@+id/layout_WaitingTime"
-                                app:layout_constraintTop_toTopOf="@+id/layout_WaitingTime"/>
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/WaitingTime"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="5dp"
-                                android:fontFamily="@font/avenirltstd_black"
-                                android:gravity="start"
-                                android:padding="2dp"
-                                android:text="15 Min."
-                                android:textColor="@color/black"
-                                android:textSize="12sp"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toEndOf="@+id/layout_WaitingTime"
-                                app:layout_constraintBottom_toBottomOf="@+id/layout_WaitingTime"
-                                app:layout_constraintTop_toBottomOf="@+id/tv_WaitingTime"/>
-
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/layout_fees"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    app:layout_constraintTop_toBottomOf="@+id/layout_appointmentdetails"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent">
-                <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/layout_Fees"
-                        android:layout_width="match_parent"
-                        android:layout_height="54dp"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginEnd="15dp"
-                        android:background="@drawable/bg_completeprofile"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tv_Fees"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/avenirltstd_roman"
-                            android:gravity="center"
-                            android:padding="2dp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginStart="15dp"
-                            android:text="@string/fees"
-                            android:textColor="@color/blue"
-                            android:textSize="18sp"
-                    />
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/layout_Feesdetails"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginEnd="15dp"
-                        android:background="@drawable/bg_layoutdetails"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/layout_Fees">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/layout_Feess"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="5dp"
-                            app:layout_constraintTop_toTopOf="parent">
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                                android:id="@+id/layout_TotalFees"
-                                android:layout_width="37dp"
-                                android:layout_height="37dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginStart="10dp"
-                                android:background="@drawable/bg_image_circle"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent">
-
-                            <com.google.android.material.imageview.ShapeableImageView
-                                    android:id="@+id/iv_TotalFees"
-                                    android:layout_width="18dp"
-                                    android:layout_height="18dp"
-                                    android:adjustViewBounds="true"
-                                    android:src="@drawable/ic_totalfess"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"/>
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tv_TotalFees"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="5dp"
-                                android:fontFamily="@font/avenirltstd_roman"
-                                android:gravity="start"
-                                android:padding="2dp"
-                                android:text="@string/total_fees"
-                                android:textColor="@color/gray"
-                                android:textSize="15sp"
-                                app:layout_constraintStart_toEndOf="@+id/layout_TotalFees"
-                                app:layout_constraintTop_toTopOf="@+id/layout_TotalFees"/>
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/TotalFees"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="5dp"
-                                android:fontFamily="@font/avenirltstd_black"
-                                android:gravity="start"
-                                android:padding="2dp"
-                                android:text="350 LE"
-                                android:textColor="@color/black"
-                                android:textSize="12sp"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toEndOf="@+id/layout_TotalFees"
-                                app:layout_constraintBottom_toBottomOf="@+id/layout_TotalFees"
-                                app:layout_constraintTop_toBottomOf="@+id/tv_TotalFees"/>
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/layout_btn_insurance"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_margin="15dp"
-                    app:layout_constraintTop_toBottomOf="@+id/layout_fees"
-                    app:layout_constraintEnd_toEndOf="parent"
-                   >
-                <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btn_bookWithInsurance"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="12dp"
-                        android:background="@drawable/bg_chooselang_button"
-                        android:fontFamily="@font/avenirltstd_roman"
-                        android:padding="5dp"
-                        android:text="@string/addcard"
-                        android:textColor="@color/white"
-                        android:textSize="14sp"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintWidth_percent=".6"/>
-
-                <CheckBox
-                        android:id="@+id/radio_Specialist"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:drawablePadding="10dp"
-                        android:elevation="1dp"
-                        android:layout_marginBottom="20dp"
-                        android:fontFamily="@font/avenirltstd_black"
-                        android:text="@string/book_with_insurance"
-                        android:buttonTint="@color/color_primary"
-                        android:padding="3dp"
-                        android:textColor="@color/black"
-                        android:textSize="14sp"
-                        app:layout_constraintEnd_toEndOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
+                    app:layout_constraintWidth_percent=".9"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layout_btn_confirm"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            app:layout_constraintTop_toBottomOf="@+id/layout"
-            app:layout_constraintBottom_toTopOf="@+id/imageView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-        <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_confirm"
-                android:layout_width="0dp"
+        <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_chooselang_button"
-                android:fontFamily="@font/avenirltstd_black"
-                android:padding="5dp"
-                android:text="@string/confirm"
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                app:layout_constraintTop_toTopOf="parent"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/layout_btn_confirm"
+                app:layout_constraintStart_toStartOf="@+id/layout_btn_confirm"
+                app:layout_constraintBottom_toBottomOf="@+id/layout_btn_confirm"
+                app:layout_constraintTop_toTopOf="@+id/layout_btn_confirm"
+        />
+
+        <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="100dp"
+                android:layout_height="4dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="5dp"
+                android:adjustViewBounds="true"
+                android:background="@color/black"
+                android:contentDescription="TODO"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintWidth_percent=".9"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-    <ProgressBar
-            android:id="@+id/progress_bar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="@+id/layout_btn_confirm"
-            app:layout_constraintStart_toStartOf="@+id/layout_btn_confirm"
-            app:layout_constraintBottom_toBottomOf="@+id/layout_btn_confirm"
-            app:layout_constraintTop_toTopOf="@+id/layout_btn_confirm"
-    />
-
-    <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="100dp"
-            android:layout_height="4dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="5dp"
-            android:adjustViewBounds="true"
-            android:background="@color/black"
-            android:contentDescription="TODO"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <include
             android:id="@+id/layoutBottomsheetpersistant"
             layout="@layout/layout_bottomsheet_bookwithinsurance"
-             android:visibility="gone"
+
     />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
