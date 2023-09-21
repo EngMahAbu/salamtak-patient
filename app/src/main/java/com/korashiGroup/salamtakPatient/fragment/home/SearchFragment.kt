@@ -3,6 +3,7 @@ package com.korashiGroup.salamtakPatient.fragment.home
 import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -135,7 +136,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         }
 
         binding.ivArrow.setOnClickListener {
-            findNavController().navigate(R.id.homeFragment)
+            findNavController().popBackStack()
         }
 
         binding.layoutFilter.setOnClickListener {
@@ -148,6 +149,10 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             val action =
                 SearchFragmentDirections.actionSearchFragmentToDialogBottomSheetFragment("Specialist")
             findNavController().navigate(action)
+            it.isEnabled=false
+            Handler().postDelayed({
+                it.isEnabled=true
+            }, 1000)
 
         }
 
@@ -163,6 +168,10 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                     SearchFragmentDirections.actionSearchFragmentToDialogBottomSheetFragment("SubSpecialist")
                 findNavController().navigate(action)
             }
+            it.isEnabled=false
+            Handler().postDelayed({
+                it.isEnabled=true
+            }, 1000)
         }
 
         binding.layoutBottomsheetpersistant.btnLayoutChooseSeniorityLevel.setOnClickListener {
@@ -170,12 +179,20 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             val action =
                 SearchFragmentDirections.actionSearchFragmentToDialogBottomSheetFragment("SeniorityLevel")
             findNavController().navigate(action)
+            it.isEnabled=false
+            Handler().postDelayed({
+                it.isEnabled=true
+            }, 1000)
         }
         binding.layoutBottomsheetpersistant.btnLayoutChooseCity.setOnClickListener {
 
             val action =
                 SearchFragmentDirections.actionSearchFragmentToDialogBottomSheetFragment("AllCity")
             findNavController().navigate(action)
+            it.isEnabled=false
+            Handler().postDelayed({
+                it.isEnabled=true
+            }, 1000)
         }
         binding.layoutBottomsheetpersistant.btnLayoutChooseArea.setOnClickListener {
             if (binding.layoutBottomsheetpersistant.etChooseCity.text?.toString()?.isEmpty()!!) {
@@ -185,12 +202,20 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                     SearchFragmentDirections.actionSearchFragmentToDialogBottomSheetFragment("AllArea")
                 findNavController().navigate(action)
             }
+            it.isEnabled=false
+            Handler().postDelayed({
+                it.isEnabled=true
+            }, 1000)
         }
         binding.layoutBottomsheetpersistant.btnLayoutChooseGender.setOnClickListener {
 
             val action =
                 SearchFragmentDirections.actionSearchFragmentToDialogBottomSheetFragment("gender")
             findNavController().navigate(action)
+            it.isEnabled=false
+            Handler().postDelayed({
+                it.isEnabled=true
+            }, 1000)
         }
 
         binding.layoutBottomsheetpersistant.btnApply.setOnClickListener {
@@ -283,7 +308,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         )
 
         binding.layoutBottomsheetpersistant.ivArrow.setOnClickListener {
-            findNavController().navigate(R.id.searchFragment)
+            findNavController().popBackStack()
         }
 
     }

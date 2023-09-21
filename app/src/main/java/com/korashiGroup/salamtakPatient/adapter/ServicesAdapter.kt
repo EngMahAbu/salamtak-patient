@@ -34,7 +34,7 @@ class ServicesAdapter(private val onServicesClick:Action ):ListAdapter<ImageServ
             it.isEnabled=false
             android.os.Handler().postDelayed({
                 it.isEnabled=true
-            }, 2000)
+            }, 1000)
 
         }
 

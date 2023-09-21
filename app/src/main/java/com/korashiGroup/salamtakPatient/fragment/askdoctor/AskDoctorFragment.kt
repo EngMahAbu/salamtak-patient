@@ -1,6 +1,7 @@
 package com.korashiGroup.salamtakPatient.fragment.askdoctor
 
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -85,11 +86,19 @@ class AskDoctorFragment : Fragment() {
         binding.btnLayoutChooseSpecialization.setOnClickListener {
                 val action=AskDoctorFragmentDirections.actionAskDoctorFragmentToDialogBottomSheetFragment("Specialist")
                 findNavController().navigate(action)
+            it.isEnabled=false
+           Handler().postDelayed({
+                it.isEnabled=true
+            }, 1000)
         }
 
         binding.btnLayoutChooseGender.setOnClickListener {
             val action=AskDoctorFragmentDirections.actionAskDoctorFragmentToDialogBottomSheetFragment("gender")
             findNavController().navigate(action)
+            it.isEnabled=false
+            Handler().postDelayed({
+                it.isEnabled=true
+            }, 1000)
         }
 
     }

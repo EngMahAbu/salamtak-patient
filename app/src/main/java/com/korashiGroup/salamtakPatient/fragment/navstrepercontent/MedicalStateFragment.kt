@@ -1,6 +1,7 @@
 package com.korashiGroup.salamtakPatient.fragment.navstrepercontent
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -57,16 +58,28 @@ class MedicalStateFragment : Fragment() {
         binding.btnLayoutBloodGroup.setOnClickListener {
             val action=MedicalStateFragmentDirections.actionMedicalStateFragment2ToDialogBottomSheetFragment("bloodTypes")
             findNavController().navigate(action)
+            it.isEnabled=false
+            Handler().postDelayed({
+                it.isEnabled=true
+            }, 1000)
         }
 
         binding.btnLayoutMedicalAllergies.setOnClickListener {
             val action=MedicalStateFragmentDirections.actionMedicalStateFragment2ToDialogBottomSheetFragment("medicineAllergy")
             findNavController().navigate(action)
+            it.isEnabled=false
+            Handler().postDelayed({
+                it.isEnabled=true
+            }, 1000)
         }
 
         binding.btnLayoutFoodAllergies.setOnClickListener {
             val action=MedicalStateFragmentDirections.actionMedicalStateFragment2ToDialogBottomSheetFragment("FoodAllergy")
             findNavController().navigate(action)
+            it.isEnabled=false
+            Handler().postDelayed({
+                it.isEnabled=true
+            }, 1000)
         }
 
 

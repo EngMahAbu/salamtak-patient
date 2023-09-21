@@ -1,6 +1,7 @@
 package com.korashiGroup.salamtakPatient.fragment.loginandforgetpassword
 
 import android.os.Bundle
+import android.os.Handler
 import android.text.method.PasswordTransformationMethod
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -60,6 +61,10 @@ class ChangepasswordFragment : Fragment() {
         binding.layoutHelp.setOnClickListener {
             val action=ChangepasswordFragmentDirections.actionChangepasswordFragmentToDialogBottomSheetFragment("help")
             findNavController().navigate(action)
+            it.isEnabled=false
+            Handler().postDelayed({
+                it.isEnabled=true
+            }, 1000)
         }
 
 

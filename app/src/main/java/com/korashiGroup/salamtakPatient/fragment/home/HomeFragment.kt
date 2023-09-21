@@ -382,7 +382,6 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
 
     override fun onItemClick(servicesID: Int) {
         medicalExaminatioId = servicesID
-
         val action =
             HomeFragmentDirections.actionHomeFragmentToDialogBottomSheetFragment("services")
         findNavController().navigate(action)

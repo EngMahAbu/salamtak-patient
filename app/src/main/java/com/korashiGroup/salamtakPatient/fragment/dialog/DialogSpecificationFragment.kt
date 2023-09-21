@@ -12,10 +12,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.snackbar.Snackbar
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.adapter.SpecificationAdapter
 import com.korashiGroup.salamtakPatient.databinding.DialogSpecilizationfragmentBinding
 import com.korashiGroup.salamtakPatient.model.SpecialistData
+import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCard
 import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
@@ -109,8 +111,8 @@ class DialogSpecificationFragment : BottomSheetDialogFragment(),SpecificationAda
             findNavController().navigate(R.id.searchFragment)
 
 
-
     }
+
 
 
 }

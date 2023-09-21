@@ -1,6 +1,7 @@
 package com.korashiGroup.salamtakPatient.fragment.dialog
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -63,6 +64,7 @@ class DialogSchduleFragment : BottomSheetDialogFragment() {
             val action=DialogSchduleFragmentDirections.actionDialogSchduleFragmentToBookAppointmentFragment(getDoctorClinksResponse,"Edit Appointment")
             findNavController().navigate(action)
 
+
         }
 
         binding.btnReschedule.setOnClickListener {
@@ -83,6 +85,10 @@ class DialogSchduleFragment : BottomSheetDialogFragment() {
         binding.tvHelp.setOnClickListener {
             val action=DialogSchduleFragmentDirections.actionDialogSchduleFragmentToDialogBottomSheetFragment("help")
             findNavController().navigate(action)
+            it.isEnabled=false
+            Handler().postDelayed({
+                it.isEnabled=true
+            }, 1000)
         }
 
         binding.tvMedicalHistory.setOnClickListener {

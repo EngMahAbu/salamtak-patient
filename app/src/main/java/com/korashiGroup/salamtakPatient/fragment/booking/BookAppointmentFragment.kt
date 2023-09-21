@@ -2,6 +2,7 @@ package com.korashiGroup.salamtakPatient.fragment.booking
 
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -125,6 +126,10 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
                     "examinationtype"
                 )
             findNavController().navigate(action)
+            it.isEnabled=false
+            Handler().postDelayed({
+                it.isEnabled=true
+            }, 1000)
         }
 
 

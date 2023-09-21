@@ -66,9 +66,9 @@ class MainActivity : AppCompatActivity() ,LoginFragment.onSomeEventListener{
     }
 
 
-//    override fun onSupportNavigateUp(): Boolean {
-//        return navController.navigateUp() || super.onSupportNavigateUp()
-//    }
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onSupportNavigateUp()
+    }
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)

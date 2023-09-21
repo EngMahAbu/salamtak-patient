@@ -379,7 +379,7 @@ class DialogBottomSheetViewmodel @Inject constructor(private val repositry: Regi
     }
 
      fun getHealthEntityPagedList(CityId :Int,AreaId :Int,HealthEntityTypeId :Int,
-                                         MaxResultCount :Int,SkipCount :Int)=viewModelScope.launch {
+                                         MaxResultCount :Int,SkipCount :Int)=viewModelScope.launch(Dispatchers.IO+handler) {
         healthyResponse.postValue(Resource.Loading())
         val response = repositry.getHealthEntityPagedList(CityId,AreaId,HealthEntityTypeId,MaxResultCount,SkipCount)
 

@@ -91,6 +91,19 @@
                     app:layout_constraintTop_toTopOf="@+id/rv_insuranceCard"
             />
 
+            <TextView android:id="@+id/crd_view"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="@string/no_data_to_show"
+                      android:textColor="@color/red"
+                      android:visibility="gone"
+                      app:layout_constraintStart_toStartOf="@+id/rv_insuranceCard"
+                      app:layout_constraintEnd_toEndOf="@+id/rv_insuranceCard"
+                      app:layout_constraintTop_toTopOf="@+id/rv_insuranceCard"
+                      app:layout_constraintBottom_toBottomOf="@+id/rv_insuranceCard"
+                      android:textSize="20sp"
+            />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
         <androidx.appcompat.widget.AppCompatButton

@@ -471,28 +471,13 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/layout_btn_insurance"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
                         android:layout_marginBottom="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_margin="15dp"
                         app:layout_constraintTop_toBottomOf="@+id/layout_fees"
                         app:layout_constraintEnd_toEndOf="parent"
                 >
-                    <androidx.appcompat.widget.AppCompatButton
-                            android:id="@+id/btn_bookWithInsurance"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="12dp"
-                            android:background="@drawable/bg_chooselang_button"
-                            android:fontFamily="@font/avenirltstd_roman"
-                            android:padding="5dp"
-                            android:text="@string/addcard"
-                            android:textColor="@color/white"
-                            android:textSize="14sp"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintWidth_percent=".6"/>
 
                     <CheckBox
                             android:id="@+id/ch_Card"

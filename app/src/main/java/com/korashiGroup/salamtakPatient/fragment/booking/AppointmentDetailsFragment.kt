@@ -48,6 +48,7 @@ import com.karumi.dexter.listener.single.PermissionListener
 import com.korashiGroup.salamtakPatient.adapter.InsuranceCardAdapter
 import com.korashiGroup.salamtakPatient.adapter.MedicalServicesAdapter
 import com.korashiGroup.salamtakPatient.model.SpecialistData
+import com.korashiGroup.salamtakPatient.model.docotorsearch.Item
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCard
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCompany
 import com.korashiGroup.salamtakPatient.utils.*
@@ -95,7 +96,6 @@ class AppointmentDetailsFragment : Fragment(),InsuranceCardAdapter.SelectInsuran
         insuranceCardRecylerview()
         initButton()
         callBack()
-        callBackGetInsuranceCards()
 
     }
 
@@ -127,6 +127,7 @@ class AppointmentDetailsFragment : Fragment(),InsuranceCardAdapter.SelectInsuran
                 bottomsheetbeahavoir.state =
                     if (bottomsheetbeahavoir.state == BottomSheetBehavior.STATE_EXPANDED)
                         BottomSheetBehavior.STATE_HIDDEN else BottomSheetBehavior.STATE_EXPANDED
+                callBackGetInsuranceCards()
                 buttonView.isChecked=false
             }
 
@@ -203,6 +204,7 @@ class AppointmentDetailsFragment : Fragment(),InsuranceCardAdapter.SelectInsuran
                     is Resource.sucess -> {
                         binding.layoutBottomsheetpersistant.rvInsuranceCardProgressBar.visibility = View.GONE
                         insuranceCardAdapter.submitList(it.data?.data)
+                        it.data?.let { it1 -> updateUi(it1.data) }
                         insuranceCardAdapter.notifyDataSetChanged()
                     }
 
@@ -230,6 +232,14 @@ class AppointmentDetailsFragment : Fragment(),InsuranceCardAdapter.SelectInsuran
             Log.e("", e.localizedMessage)
         }
         return day
+    }
+
+    private fun updateUi(it: List<InsuranceCard>) {
+        if (it.isNullOrEmpty()) {
+            binding.layoutBottomsheetpersistant.crdView.visibility = View.VISIBLE
+        } else {
+            binding.layoutBottomsheetpersistant.crdView.visibility = View.GONE
+        }
     }
 
 

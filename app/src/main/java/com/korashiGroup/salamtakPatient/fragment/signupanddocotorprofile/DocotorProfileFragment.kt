@@ -3,6 +3,7 @@ package com.korashiGroup.salamtakPatient.fragment.signupanddocotorprofile
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -70,6 +71,10 @@ class DocotorProfileFragment : Fragment() {
                     "help"
                 )
             findNavController().navigate(action)
+            it.isEnabled=false
+            Handler().postDelayed({
+                it.isEnabled=true
+            }, 1000)
         }
         binding.btnNext.setOnClickListener {
            findNavController().navigate(R.id.homeFragment)

@@ -1,6 +1,7 @@
 package com.korashiGroup.salamtakPatient.fragment.navbottom
 
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -58,18 +59,30 @@ class MoreFragment : Fragment() {
             val action =
                 MoreFragmentDirections.actionMoreFragmentToDialogBottomSheetFragment("lang")
             findNavController().navigate(action)
+            it.isEnabled=false
+            Handler().postDelayed({
+                it.isEnabled=true
+            }, 1000)
         }
 
         binding.layoutCallUs.setOnClickListener {
             val action =
                 MoreFragmentDirections.actionMoreFragmentToDialogBottomSheetFragment("help")
             findNavController().navigate(action)
+            it.isEnabled=false
+            Handler().postDelayed({
+                it.isEnabled=true
+            }, 1000)
         }
 
         binding.layoutSignOut.setOnClickListener {
             val action =
                 MoreFragmentDirections.actionMoreFragmentToDialogBottomSheetFragment("signout")
             findNavController().navigate(action)
+            it.isEnabled=false
+            Handler().postDelayed({
+                it.isEnabled=true
+            }, 1000)
         }
 
         binding.layoutChangePassword.setOnClickListener {

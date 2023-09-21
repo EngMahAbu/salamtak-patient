@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.os.Handler
 import android.provider.MediaStore
 import android.text.TextUtils
 import android.util.Log
@@ -152,6 +153,10 @@ class PersonalInfoFragment : Fragment() {
                     "gender"
                 )
             findNavController().navigate(action)
+            it.isEnabled=false
+            Handler().postDelayed({
+                it.isEnabled=true
+            }, 1000)
         }
         binding.btnLayoutDateOfbirth.setOnClickListener {
             val action =
@@ -159,6 +164,10 @@ class PersonalInfoFragment : Fragment() {
                     "date"
                 )
             findNavController().navigate(action)
+            it.isEnabled=false
+            Handler().postDelayed({
+                it.isEnabled=true
+            }, 1000)
         }
         binding.btnLayoutNationality.setOnClickListener {
             val action =
@@ -166,6 +175,10 @@ class PersonalInfoFragment : Fragment() {
                     "Nationality"
                 )
             findNavController().navigate(action)
+            it.isEnabled=false
+            Handler().postDelayed({
+                it.isEnabled=true
+            }, 1000)
         }
 
 

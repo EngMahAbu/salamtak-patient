@@ -1,6 +1,7 @@
 package com.korashiGroup.salamtakPatient.fragment.navstrepercontent
 
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -76,6 +77,10 @@ class LocationFragment : Fragment() {
             val action =
                 LocationFragmentDirections.actionLocationFragment2ToDialogBottomSheetFragment("AllCity")
             findNavController().navigate(action)
+            it.isEnabled=false
+            Handler().postDelayed({
+                it.isEnabled=true
+            }, 1000)
         }
 
         binding.btnLayoutChooseArea.setOnClickListener {
@@ -86,6 +91,10 @@ class LocationFragment : Fragment() {
             } else {
                 Toast.makeText(requireContext(), "choose city first", Toast.LENGTH_SHORT).show()
             }
+            it.isEnabled=false
+            Handler().postDelayed({
+                it.isEnabled=true
+            }, 1000)
 
         }
     }

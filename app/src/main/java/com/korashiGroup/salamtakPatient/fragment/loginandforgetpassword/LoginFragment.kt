@@ -2,6 +2,7 @@ package com.korashiGroup.salamtakPatient.fragment.loginandforgetpassword
 
 import android.app.Activity
 import android.os.Bundle
+import android.os.Handler
 import android.text.method.PasswordTransformationMethod
 import android.view.LayoutInflater
 import android.view.View
@@ -107,6 +108,10 @@ class LoginFragment : Fragment() {
             val action =
                 LoginFragmentDirections.actionLoginFragmentToDialogBottomSheetFragment("help")
             findNavController().navigate(action)
+            it.isEnabled=false
+            Handler().postDelayed({
+                it.isEnabled=true
+            }, 1000)
         }
         binding.tvForgetPassword.setOnClickListener {
             findNavController().navigate(R.id.forgetPasswordFragment)

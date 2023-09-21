@@ -27,8 +27,11 @@ class InsuranceCardAdapter(private val select:SelectInsuranceCard):ListAdapter<I
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val sp=getItem(position)
 
-        holder.binding.radioSpecialist.text=sp.insCompanyName
-
+        if (sp.insCompanyName==null){
+            holder.binding.radioSpecialist.text="null"
+        }else{
+            holder.binding.radioSpecialist.text=sp.insCompanyName
+        }
         holder.binding.radioSpecialist.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 select.onItemSelected(sp)

@@ -6,8 +6,8 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.os.Handler
 import android.provider.MediaStore
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +21,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.snackbar.Snackbar
 import com.karumi.dexter.Dexter
@@ -34,7 +33,6 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.karumi.dexter.listener.single.PermissionListener
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.databinding.DialogAddInsuranceCardfragmentBinding
-import com.korashiGroup.salamtakPatient.fragment.booking.AppointmentDetailsFragmentDirections
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCompany
 import com.korashiGroup.salamtakPatient.utils.*
 import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
@@ -46,7 +44,7 @@ import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 
 @AndroidEntryPoint
-class DialogAddInsuranceCardFragment : BottomSheetDialogFragment() {
+class DialogAddInsuranceCardFragment : BottomSheetDialogFragment(){
     private lateinit var binding:DialogAddInsuranceCardfragmentBinding
     private val viewmodel: DialogBottomSheetViewmodel by viewModels()
     val sharedDataViewmodel: SharedDataViewmodel by activityViewModels()
@@ -60,7 +58,7 @@ class DialogAddInsuranceCardFragment : BottomSheetDialogFragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding= DialogAddInsuranceCardfragmentBinding.inflate(layoutInflater,container,false)
-        return inflater.inflate(R.layout.dialog_add_insurance_cardfragment, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -68,6 +66,7 @@ class DialogAddInsuranceCardFragment : BottomSheetDialogFragment() {
         initButton()
         getdata()
         callBackInsuranceCompany()
+
     }
 
 
@@ -78,13 +77,21 @@ class DialogAddInsuranceCardFragment : BottomSheetDialogFragment() {
 
         binding.ivReleaseDate.setOnClickListener {
             val action =
-                AppointmentDetailsFragmentDirections.actionAppointmentDetailsFragmentToDialogBottomSheetFragment("date")
+                DialogAddInsuranceCardFragmentDirections.actionDialogAddInsuranceCardFragmentToDialogBottomSheetFragment("date")
             findNavController().navigate(action)
+            it.isEnabled=false
+            Handler().postDelayed({
+                it.isEnabled=true
+            }, 1000)
         }
         binding.ivEndDate.setOnClickListener {
             val action =
-                AppointmentDetailsFragmentDirections.actionAppointmentDetailsFragmentToDialogBottomSheetFragment("endDate")
+                DialogAddInsuranceCardFragmentDirections.actionDialogAddInsuranceCardFragmentToDialogBottomSheetFragment("endDate")
             findNavController().navigate(action)
+            it.isEnabled=false
+            Handler().postDelayed({
+                it.isEnabled=true
+            }, 1000)
         }
 
         binding.applay.setOnClickListener {
