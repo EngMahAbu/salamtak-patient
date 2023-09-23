@@ -261,6 +261,8 @@
         We wish you good health
     </string>
     <string name="addcard">+Add Card</string>
+    <string name="rate_doctor">Rate Doctor</string>
+    <string name="write_a_comment">Write a comment...</string>
 
     <array name="choose">
         <item>Select</item>

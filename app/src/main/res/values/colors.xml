@@ -26,5 +26,7 @@
     <color name="dark_gray">#606A80</color>
     <color name="white_gray">#E9EAEF</color>
     <color name="video_screen_color">#E5E5E5</color>
+    <color name="ratingsolid">#E9EAEF</color>
+    <color name="ratingcorner">#FAFAFA</color>
 
 </resources>

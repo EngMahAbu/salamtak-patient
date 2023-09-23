@@ -15,6 +15,7 @@ import com.korashiGroup.salamtakPatient.model.populardoctors.GetDoctorHealthTopi
 import com.korashiGroup.salamtakPatient.model.populardoctors.GetDoctorSpotLightResponse
 import com.korashiGroup.salamtakPatient.model.populardoctors.PopularDoctorsResponseItem
 import com.korashiGroup.salamtakPatient.model.profile.*
+import com.korashiGroup.salamtakPatient.model.rating.RatingResponse
 import com.korashiGroup.salamtakPatient.model.register.*
 import com.korashiGroup.salamtakPatient.model.salamtakgate.BlogsResponse
 import com.korashiGroup.salamtakPatient.model.salamtakgate.SalamtakGateResponse
@@ -158,11 +159,7 @@ interface ApiService {
         @Body locationRequest: LocationRequest
     ): Response<PatientLocationResponse>
 
-    @POST("{culture}/Patient/CreatePatientMedicallInfo")
-    suspend fun CreatePatientMedicallInfo(
-        @Path("culture") culture: String,
-        @Body medicalInfoRequest: Map<String, String>,
-    ): Response<PatientMedicalInfoResponse>
+
 
 
     @POST("{culture}/User/ResetPassword")
@@ -255,6 +252,19 @@ interface ApiService {
     suspend fun getPatient_Insurance(
         @Path("culture") culture: String,
     ):Response<InsuranceCardResponse>
+
+    @POST("{culture}/Patient/CreatePatientMedicallInfo")
+    suspend fun CreatePatientMedicallInfo(
+        @Path("culture") culture: String,
+        @Body medicalInfoRequest: Map<String, String>,
+    ): Response<PatientMedicalInfoResponse>
+
+    @POST("{culture}/DoctorRate/CreateDoctorRate")
+    suspend fun createDoctorRate(
+        @Path("culture") culture: String,
+        @Body doctorRateRequest: Map<String, String>,
+    ): Response<RatingResponse>
+
 
 
 }

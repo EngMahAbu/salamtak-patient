@@ -335,6 +335,8 @@
         <action
                 android:id="@+id/action_dialogSchduleFragment_to_medicalHistoryFragment"
                 app:destination="@id/medicalHistoryFragment" />
+        <action android:id="@+id/action_dialogSchduleFragment_to_dialogRatingDoctorFragment"
+                app:destination="@id/dialogRatingDoctorFragment"/>
     </dialog>
     <fragment
             android:id="@+id/healthEntityFragment"
@@ -414,6 +416,12 @@
 
         <action android:id="@+id/action_dialogAddInsuranceCardFragment_to_dialogBottomSheetFragment"
                 app:destination="@id/dialogBottomSheetFragment"/>
+    </dialog>
+    <dialog android:id="@+id/dialogRatingDoctorFragment"
+              android:name="com.korashiGroup.salamtakPatient.fragment.dialog.DialogRatingDoctorFragment"
+              android:label="fragment_dailog_rating_doctor" tools:layout="@layout/fragment_dailog_rating_doctor">
+        <argument android:name="doctorDetails" app:argType="com.korashiGroup.salamtakPatient.model.rating.DotorDetails"
+                  app:nullable="true"/>
     </dialog>
 
 </navigation>

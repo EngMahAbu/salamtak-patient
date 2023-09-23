@@ -45,7 +45,7 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
 
 
     private lateinit var binding: DialogBottomSheetfragmentBinding
-    val viewmodel: DialogBottomSheetViewmodel by viewModels()
+    private val viewmodel: DialogBottomSheetViewmodel by viewModels()
     val sharedDataViewmodel: SharedDataViewmodel by activityViewModels()
     private val args: DialogBottomSheetFragmentArgs by navArgs()
     private lateinit var counteriesAdapter: NationalityAdapter

@@ -18,6 +18,7 @@ import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.korashiGroup.salamtakPatient.model.rating.DotorDetails
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -93,6 +94,39 @@ class DialogSchduleFragment : BottomSheetDialogFragment() {
 
         binding.tvMedicalHistory.setOnClickListener {
             val action=DialogSchduleFragmentDirections.actionDialogSchduleFragmentToMedicalHistoryFragment(getDoctorClinksResponse,args.appointmentId)
+            findNavController().navigate(action)
+        }
+
+        binding.tvRate.setOnClickListener {
+            val action=DialogSchduleFragmentDirections.actionDialogSchduleFragmentToDialogRatingDoctorFragment(
+                getDoctorClinksResponse.data?.firstName?.let { it1 ->
+                    getDoctorClinksResponse.data!!.firstNameAr?.let { it2 ->
+                        getDoctorClinksResponse.data!!.middelName?.let { it3 ->
+                            getDoctorClinksResponse.data!!.middelNameAr?.let { it4 ->
+                                getDoctorClinksResponse.data!!.lastName?.let { it5 ->
+                                    getDoctorClinksResponse.data!!.lastNameAr?.let { it6 ->
+                                        getDoctorClinksResponse.data!!.id?.let { it7 ->
+                                            getDoctorClinksResponse.data!!.image?.let { it8 ->
+                                                getDoctorClinksResponse.data!!.specialistName?.let { it9 ->
+                                                    DotorDetails(
+                                                        it1,
+                                                        it2,
+                                                        it3,
+                                                        it4,
+                                                        it5,
+                                                        it6,
+                                                        it7, it8, it9
+                                                    )
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            )
             findNavController().navigate(action)
         }
 

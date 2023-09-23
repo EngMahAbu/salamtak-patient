@@ -34,6 +34,14 @@
 
     </style>
 
+    <style name="ratingBar" parent="Widget.AppCompat.RatingBar">
+        <!--non selected-->
+        <item name="colorControlNormal">#4D000000</item>
+        <!--        //selected star-->
+        <item name="colorControlActivated">#FCB427</item>
+
+    </style>
+
     <style name="autoscroll">
         <item name="android:lines">4</item>
         <item name="android:maxLines">20</item>
