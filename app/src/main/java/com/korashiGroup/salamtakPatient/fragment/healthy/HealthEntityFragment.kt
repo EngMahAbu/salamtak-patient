@@ -28,6 +28,8 @@ import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.snackbar.Snackbar
+import com.korashiGroup.salamtakPatient.model.healthy.ItemHealth
+import com.korashiGroup.salamtakPatient.model.salamtakgate.Blogs
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -122,6 +124,7 @@ class HealthEntityFragment : Fragment(),MedicalHealthAdapter.Action {
                 is Resource.sucess->{
                     binding.progressBar.visibility=View.GONE
                     healthAdapter.submitList(response.data?.data?.items)
+                    response.data?.data?.items?.let { updateUi(it) }
                     healthAdapter.notifyDataSetChanged()
                 }
 
@@ -157,6 +160,14 @@ class HealthEntityFragment : Fragment(),MedicalHealthAdapter.Action {
             this.startActivity(intent)
         }
 
+    }
+
+    private fun updateUi(it: List<ItemHealth?>) {
+        if (it.isNullOrEmpty()) {
+            binding.crdView.visibility = View.VISIBLE
+        } else {
+            binding.crdView.visibility = View.GONE
+        }
     }
 
 

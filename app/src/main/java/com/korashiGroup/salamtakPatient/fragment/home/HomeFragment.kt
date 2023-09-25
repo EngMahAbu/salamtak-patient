@@ -111,6 +111,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
         imageMedicalServicesAdapter = MedicalServicesAdapter()
         binding.rvSalamtakmedicalServices.apply {
             adapter = imageMedicalServicesAdapter
+            layoutManager = GridLayoutManager(requireContext(), 3)
             setHasFixedSize(true)
         }
     }
@@ -218,6 +219,13 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
                 R.drawable.ic_radiologycenter,
                 getString(R.string.radiologycenter),
                 R.color.color_5, 4
+            )
+        )
+        list.add(
+            ImageServices(
+                R.drawable.salamtak,
+                getString(R.string.engile),
+                R.color.color_6, 7
             )
         )
         imageMedicalServicesAdapter.submitList(list)

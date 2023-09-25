@@ -22,11 +22,13 @@
     <color name="color_3">#C0ECCC</color>
     <color name="color_4">#F4CDA6</color>
     <color name="color_5">#A4C7E3</color>
+    <color name="color_6">#D0DFEC</color>
     <color name="color_orange">#CB544B</color>
     <color name="dark_gray">#606A80</color>
     <color name="white_gray">#E9EAEF</color>
     <color name="video_screen_color">#E5E5E5</color>
     <color name="ratingsolid">#E9EAEF</color>
     <color name="ratingcorner">#FAFAFA</color>
+
 
 </resources>

@@ -98,6 +98,7 @@
     <string name="pharmacies">الصيدليات</string>
     <string name="laboratories">المختبرات</string>
     <string name="radiologycenter">مركز الاشعة</string>
+    <string name="engile">Salamtak Angel</string>
     <string name="search">بحث</string>
     <string name="search_by_doctor_name">البحث باسم الطبيب ...</string>
     <string name="doctors_found">العثور على الأطباء</string>

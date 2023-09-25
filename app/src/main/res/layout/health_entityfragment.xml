@@ -91,6 +91,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/rv_Doctors" />
+
+        <TextView android:id="@+id/crd_view"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="@string/no_data_to_show"
+                  android:textColor="@color/red"
+                  android:visibility="gone"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintTop_toTopOf="parent"
+                  app:layout_constraintBottom_toBottomOf="parent"
+                  android:textSize="20sp"
+                  android:padding="30dp"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <include
