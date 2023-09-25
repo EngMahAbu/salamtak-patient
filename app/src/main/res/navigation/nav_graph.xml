@@ -209,6 +209,8 @@
         <action
                 android:id="@+id/action_myScheduleFragment_to_dialogSchduleFragment"
                 app:destination="@id/dialogSchduleFragment" />
+        <action android:id="@+id/action_myScheduleFragment_to_dailogAddMapFragment"
+                app:destination="@id/dailogAddMapFragment"/>
     </fragment>
     <fragment
             android:id="@+id/moreFragment"
@@ -422,6 +424,12 @@
               android:label="fragment_dailog_rating_doctor" tools:layout="@layout/fragment_dailog_rating_doctor">
         <argument android:name="doctorDetails" app:argType="com.korashiGroup.salamtakPatient.model.rating.DotorDetails"
                   app:nullable="true"/>
+    </dialog>
+    <dialog android:id="@+id/dailogAddMapFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.dialog.DailogAddMapFragment"
+            android:label="dailog_add_mapfragment" tools:layout="@layout/dailog_add_mapfragment">
+        <argument android:name="latitude" app:argType="string" app:nullable="true"/>
+        <argument android:name="longitude" app:argType="string" app:nullable="true"/>
     </dialog>
 
 </navigation>

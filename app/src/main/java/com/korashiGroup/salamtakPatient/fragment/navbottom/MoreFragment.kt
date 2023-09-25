@@ -26,6 +26,7 @@ class MoreFragment : Fragment() {
     val sharedDataViewmodel: SharedDataViewmodel by activityViewModels()
     @Inject
     lateinit var sp: SpUtil
+    private var skipStatus=""
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -50,6 +51,7 @@ class MoreFragment : Fragment() {
             transformations(CircleCropTransformation())
         }
         initButton()
+        getSkipLoginStatus()
     }
 
 
@@ -93,16 +95,23 @@ class MoreFragment : Fragment() {
             findNavController().navigate(R.id.webViewFragment)
         }
         binding.layoutNextAvailableBooking.setOnClickListener {
-            sharedDataViewmodel.skipLoginStatus.observe(viewLifecycleOwner, Observer {
-                if (it=="skip"){
-                    return@Observer
+                if (skipStatus=="skip"){
+                    return@setOnClickListener
                 }else{
                     findNavController().navigate(R.id.editProfileFragment)
                 }
-            })
 
         }
 
+
+
+    }
+
+    private fun getSkipLoginStatus(){
+        sharedDataViewmodel.skipLoginStatus.observe(viewLifecycleOwner, Observer {
+            skipStatus=it
+
+        })
     }
 
 

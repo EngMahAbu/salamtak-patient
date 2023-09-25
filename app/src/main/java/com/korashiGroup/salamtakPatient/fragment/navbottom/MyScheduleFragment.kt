@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -254,6 +255,13 @@ class MyScheduleFragment : Fragment(), MyScheduleAdapter.ActionSchedule,
         sharedDataViewmodel.getDocotorId(doctorId)
         val action=MyScheduleFragmentDirections.actionMyScheduleFragmentToDialogSchduleFragment(sechdule,AppointmentId)
         findNavController().navigate(action)
+    }
+
+    override fun onLocationClicked(lat: String, long: String) {
+
+            val action=MyScheduleFragmentDirections.actionMyScheduleFragmentToDailogAddMapFragment(lat,long)
+            findNavController().navigate(action)
+
     }
 
     override fun onItemClick( medicalExamination: MedicalExamination) {

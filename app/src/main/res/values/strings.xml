@@ -263,6 +263,10 @@
     <string name="addcard">+Add Card</string>
     <string name="rate_doctor">Rate Doctor</string>
     <string name="write_a_comment">Write a comment...</string>
+    <string name="weneedpermissiontoaccesslocation">We need your Permission to accsess location</string>
+    <string name="worning">Worning</string>
+    <string name="ok">OK</string>
+    <string name="thereisnolocatio">There is no location</string>
 
     <array name="choose">
         <item>Select</item>

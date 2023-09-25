@@ -25,6 +25,8 @@ import com.korashiGroup.salamtakPatient.utils.SpUtil
 import com.korashiGroup.salamtakPatient.viewmodel.RegisterViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 
@@ -36,6 +38,7 @@ class LoginFragment : Fragment() {
     val viewmodel: RegisterViewmodel by viewModels()
     val sharedDataViewmodel: SharedDataViewmodel by activityViewModels()
     var someEventListener: onSomeEventListener? = null
+    private val currentTime = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
     @Inject
     lateinit var sp: SpUtil
 
@@ -192,8 +195,9 @@ class LoginFragment : Fragment() {
                         loginresponse.data?.data?.let { it1 -> sp.saveUserToken(TOKEN, it1.token) }
                     }
                     loginresponse.data!!?.data?.let { DateUtils.setToken(it.token) }
+                    DateUtils.setCurrentTime(currentTime.toString())
                     sharedDataViewmodel.getProfileStatus( loginresponse.data?.data?.profileStatus!!)
-                     if (loginresponse.data?.data?.profileStatus!!<3) {
+                     if (loginresponse.data?.data?.profileStatus!!<2) {
                           findNavController().navigate(R.id.docotorProfileFragment)
                      }else{
                          val action=LoginFragmentDirections.actionLoginFragmentToHomeFragment()

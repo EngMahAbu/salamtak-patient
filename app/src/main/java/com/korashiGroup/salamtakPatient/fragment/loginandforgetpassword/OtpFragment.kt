@@ -29,6 +29,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import okhttp3.internal.format
+import java.text.SimpleDateFormat
+import java.util.*
 
 @AndroidEntryPoint
 class OtpFragment : Fragment() {
@@ -38,6 +40,7 @@ class OtpFragment : Fragment() {
     private val viewmodel: RegisterViewmodel by viewModels()
     val sharedDataViewmodel: SharedDataViewmodel by activityViewModels()
     private var otpCode: String? = null
+    private val currentTime = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -242,6 +245,7 @@ class OtpFragment : Fragment() {
                     hideprogressbar()
                     it?.data?.let { response ->
                         DateUtils.setToken(response.data.token)
+                        DateUtils.setCurrentTime(currentTime.toString())
                         Log.e("token","${response.data.token}")
                     }
 

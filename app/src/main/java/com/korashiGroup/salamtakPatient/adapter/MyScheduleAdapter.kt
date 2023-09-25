@@ -4,11 +4,13 @@ package com.korashiGroup.salamtakPatient.adapter
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.CircleCropTransformation
+import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.databinding.ItemLayoutScheduleBinding
 import com.korashiGroup.salamtakPatient.model.scheduling.DataAppointment
 import java.text.SimpleDateFormat
@@ -35,6 +37,7 @@ class MyScheduleAdapter(private val schedule: ActionSchedule) :
             waitingTime.text = " ${DateParsing(services.appointmentDate.toString())}"
             Feesresult.text = services.fees.toString()
         }
+
         holder.binding.btnMoreAction.setOnClickListener {
 
             services.appointmentDate?.let { it1 ->
@@ -52,6 +55,16 @@ class MyScheduleAdapter(private val schedule: ActionSchedule) :
                         }
                     }
                 }
+            }
+        }
+        holder.binding.Address.setOnClickListener {
+            if (!services.clinicLatitude.isNullOrEmpty() && !services.clinicLongitude.isNullOrEmpty()){
+            services.clinicLatitude?.let { it1 -> services.clinicLongitude?.let { it2 ->
+                schedule.onLocationClicked(it1,
+                    it2)
+            } }
+            }else{
+                Toast.makeText(it.context, it.context.getString(R.string.thereisnolocatio) , Toast.LENGTH_LONG).show()
             }
         }
 
@@ -82,6 +95,7 @@ class MyScheduleAdapter(private val schedule: ActionSchedule) :
 
     interface ActionSchedule {
         fun onItemClick(clinicId: Int, doctorId: Int,clinkname:String,formaterDate:String,medicalExaminationTypeId:Int,AppointmentId:Int)
+        fun onLocationClicked(lat:String,long:String)
     }
 
     private fun DateParsing(dateParsing:String):String{

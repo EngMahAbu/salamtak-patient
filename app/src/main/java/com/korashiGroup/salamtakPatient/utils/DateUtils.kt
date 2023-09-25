@@ -27,6 +27,12 @@ object DateUtils {
         return df.parse(date).time
     }
 
+    fun setCurrentTime(CurrentTime: String){
+        SharedPreferencesTool.setString(context, SharedPreferencesKeys.CurrentTime.name, CurrentTime)
+    }
+    fun getCurrentTime(): String? {
+        return SharedPreferencesTool.getString(context,SharedPreferencesKeys.CurrentTime.name)
+    }
 
     fun getToken(): String? {
         return SharedPreferencesTool.getString(context,SharedPreferencesKeys.PREF_USER_TOKEN.name)

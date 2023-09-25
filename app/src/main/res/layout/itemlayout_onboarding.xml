@@ -7,20 +7,22 @@
         android:id="@+id/layout_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         >
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/iv_onboarding"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:src="@drawable/ic_online"
-            android:adjustViewBounds="true"
-            android:layout_marginBottom="15dp"
-            android:scaleType="fitXY"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_onboarding"
+                    android:layout_width="match_parent"
+                    android:layout_height="350dp"
+                    android:src="@drawable/ic_doctor"
+                    android:scaleType="fitXY"
+                    android:layout_marginBottom="15dp"
+                    android:adjustViewBounds="true"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+
+
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iv_logo"

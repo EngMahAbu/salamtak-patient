@@ -60,7 +60,7 @@ class OnboardingFragment : Fragment() {
 
         list.add(
             Onboarding(
-            R.drawable.ic_patient,
+            R.drawable.ic_doctor,
                 getString(R.string.salamtak_booking),
                 getString(R.string.screen_booking_text)
         )
