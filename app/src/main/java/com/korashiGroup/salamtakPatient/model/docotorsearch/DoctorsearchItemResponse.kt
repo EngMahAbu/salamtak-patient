@@ -10,7 +10,7 @@ data class DoctorsearchItemResponse(
 
 data class Data(
     @SerializedName("Items")
-    val items: List<Item?>?,
+    val items: MutableList<Item?>?,
     @SerializedName("TotalCount")
     val totalCount: Int?
 )

@@ -18,6 +18,7 @@ import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.korashiGroup.salamtakPatient.model.booking.clink.Data
 import com.korashiGroup.salamtakPatient.model.rating.DotorDetails
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,6 +30,7 @@ class DialogSchduleFragment : BottomSheetDialogFragment() {
     val sharedDataViewmodel: SharedDataViewmodel by activityViewModels()
     private val args:DialogSchduleFragmentArgs by navArgs()
     private lateinit var getDoctorClinksResponse: GetDoctorClinksResponse
+    private lateinit var doctorclinks:Data
     override fun getTheme(): Int {
         return R.style.AppBottomSheetDialogTheme
 
@@ -61,22 +63,28 @@ class DialogSchduleFragment : BottomSheetDialogFragment() {
         }
 
         binding.tvEdit.setOnClickListener {
-
+            if (this::getDoctorClinksResponse.isInitialized){
             val action=DialogSchduleFragmentDirections.actionDialogSchduleFragmentToBookAppointmentFragment(getDoctorClinksResponse,"Edit Appointment")
-            findNavController().navigate(action)
+            findNavController().navigate(action) }else{
+                return@setOnClickListener
+            }
 
 
         }
 
         binding.btnReschedule.setOnClickListener {
-
+            if (this::getDoctorClinksResponse.isInitialized){
             val action=DialogSchduleFragmentDirections.actionDialogSchduleFragmentToBookAppointmentFragment(getDoctorClinksResponse,"Reschedule")
-            findNavController().navigate(action)
+            findNavController().navigate(action) }else{
+                return@setOnClickListener
+            }
         }
         binding.tvReBookingAppointment.setOnClickListener {
-
+            if (this::getDoctorClinksResponse.isInitialized){
             val action=DialogSchduleFragmentDirections.actionDialogSchduleFragmentToBookAppointmentFragment(getDoctorClinksResponse,"Re-Booking Appointment")
-            findNavController().navigate(action)
+            findNavController().navigate(action) }else{
+                return@setOnClickListener
+            }
         }
 
         binding.btnConfirm.setOnClickListener {
@@ -93,30 +101,35 @@ class DialogSchduleFragment : BottomSheetDialogFragment() {
         }
 
         binding.tvMedicalHistory.setOnClickListener {
+            if (this::getDoctorClinksResponse.isInitialized){
             val action=DialogSchduleFragmentDirections.actionDialogSchduleFragmentToMedicalHistoryFragment(getDoctorClinksResponse,args.appointmentId)
-            findNavController().navigate(action)
+            findNavController().navigate(action) }else{
+            return@setOnClickListener
+        }
         }
 
         binding.tvRate.setOnClickListener {
-            val action=DialogSchduleFragmentDirections.actionDialogSchduleFragmentToDialogRatingDoctorFragment(
-                getDoctorClinksResponse.data?.firstName?.let { it1 ->
-                    getDoctorClinksResponse.data!!.firstNameAr?.let { it2 ->
-                        getDoctorClinksResponse.data!!.middelName?.let { it3 ->
-                            getDoctorClinksResponse.data!!.middelNameAr?.let { it4 ->
-                                getDoctorClinksResponse.data!!.lastName?.let { it5 ->
-                                    getDoctorClinksResponse.data!!.lastNameAr?.let { it6 ->
-                                        getDoctorClinksResponse.data!!.id?.let { it7 ->
-                                            getDoctorClinksResponse.data!!.image?.let { it8 ->
-                                                getDoctorClinksResponse.data!!.specialistName?.let { it9 ->
-                                                    DotorDetails(
-                                                        it1,
-                                                        it2,
-                                                        it3,
-                                                        it4,
-                                                        it5,
-                                                        it6,
-                                                        it7, it8, it9
-                                                    )
+            if (this::getDoctorClinksResponse.isInitialized){
+                val action=DialogSchduleFragmentDirections.actionDialogSchduleFragmentToDialogRatingDoctorFragment(
+                    getDoctorClinksResponse.data?.firstName?.let { it1 ->
+                        getDoctorClinksResponse.data!!.firstNameAr?.let { it2 ->
+                            getDoctorClinksResponse.data!!.middelName?.let { it3 ->
+                                getDoctorClinksResponse.data!!.middelNameAr?.let { it4 ->
+                                    getDoctorClinksResponse.data!!.lastName?.let { it5 ->
+                                        getDoctorClinksResponse.data!!.lastNameAr?.let { it6 ->
+                                            getDoctorClinksResponse.data!!.id?.let { it7 ->
+                                                getDoctorClinksResponse.data!!.image?.let { it8 ->
+                                                    getDoctorClinksResponse.data!!.specialistName?.let { it9 ->
+                                                        DotorDetails(
+                                                            it1,
+                                                            it2,
+                                                            it3,
+                                                            it4,
+                                                            it5,
+                                                            it6,
+                                                            it7, it8, it9
+                                                        )
+                                                    }
                                                 }
                                             }
                                         }
@@ -125,9 +138,12 @@ class DialogSchduleFragment : BottomSheetDialogFragment() {
                             }
                         }
                     }
-                }
-            )
-            findNavController().navigate(action)
+                )
+                findNavController().navigate(action)
+            }else{
+                return@setOnClickListener
+            }
+
         }
 
 
@@ -143,7 +159,7 @@ class DialogSchduleFragment : BottomSheetDialogFragment() {
 
                 }
                 is Resource.sucess -> {
-
+                  doctorclinks= it.data?.data!!
                     getDoctorClinksResponse= GetDoctorClinksResponse(it.data?.data,it.message)
                 }
                 is Resource.Error -> {

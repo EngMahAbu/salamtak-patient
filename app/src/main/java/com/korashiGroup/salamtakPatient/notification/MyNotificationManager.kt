@@ -23,14 +23,15 @@ class MyNotificationManager @Inject constructor(private val mCtx: Application) {
         val rand = Random()
         val idNotification = rand.nextInt(1000000000)
 
-        val pendingDeeplink =
+        if (!deepLinkItem?.token.isNullOrEmpty()){
+            val pendingDeeplink =
                 NavDeepLinkBuilder(mCtx).setGraph(R.navigation.nav_graph).setDestination(R.id.videoCallFragment)
                     .setArguments(Bundle().apply {
-                     putString("link", deepLinkItem?.link)
-                       putString("doctorname", deepLinkItem?.DoctorName)
-                       putString("doctorimage", deepLinkItem?.DoctorImage)
-                       putString("token", deepLinkItem?.token)
-                       putString("channelname", deepLinkItem?.Channelname)
+                        putString("link", deepLinkItem?.link)
+                        putString("doctorname", deepLinkItem?.DoctorName)
+                        putString("doctorimage", deepLinkItem?.DoctorImage)
+                        putString("token", deepLinkItem?.token)
+                        putString("channelname", deepLinkItem?.Channelname)
                     })
                     .createPendingIntent()
 
@@ -38,36 +39,74 @@ class MyNotificationManager @Inject constructor(private val mCtx: Application) {
 //          .createPendingIntent()    4fe6b1ff-ca38-4aee-b533-ff3c6b4dae48
 
 
-        val soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-        val notificationManager =  mCtx.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val notificationChannel = NotificationChannel(
-                "Channel_id_default", "Channel_name_default", NotificationManager.IMPORTANCE_HIGH
-            )
-            val attributes = AudioAttributes.Builder()
-                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                .setUsage(AudioAttributes.USAGE_NOTIFICATION)
-                .build()
+            val soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+            val notificationManager =  mCtx.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                val notificationChannel = NotificationChannel(
+                    "Channel_id_default", "Channel_name_default", NotificationManager.IMPORTANCE_HIGH
+                )
+                val attributes = AudioAttributes.Builder()
+                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                    .setUsage(AudioAttributes.USAGE_NOTIFICATION)
+                    .build()
 
-            notificationChannel.description = "Channel_description_default"
-            notificationChannel.enableLights(true)
-            notificationChannel.enableVibration(true)
-            notificationChannel.setSound(soundUri, attributes)
-            notificationManager.createNotificationChannel(notificationChannel)
+                notificationChannel.description = "Channel_description_default"
+                notificationChannel.enableLights(true)
+                notificationChannel.enableVibration(true)
+                notificationChannel.setSound(soundUri, attributes)
+                notificationManager.createNotificationChannel(notificationChannel)
+            }
+            val notificationBuilder = NotificationCompat.Builder(mCtx, "Channel_id_default")
+
+
+            notificationBuilder.setAutoCancel(true)
+                .setWhen(System.currentTimeMillis())
+                .setSmallIcon(R.drawable.ic_notifications)
+                .setTicker(mCtx.resources.getString(R.string.app_name))
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setSound(soundUri)
+                .setContentIntent(pendingDeeplink)
+                .setContentTitle(title)
+                .setContentText(message)
+            notificationManager.notify(idNotification, notificationBuilder.build())
         }
-        val notificationBuilder = NotificationCompat.Builder(mCtx, "Channel_id_default")
+        else{
+
+            val pendingDeeplink =
+                NavDeepLinkBuilder(mCtx).setGraph(R.navigation.nav_graph).setDestination(R.id.splashFragment)
+                                       .createPendingIntent()
+            val soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+            val notificationManager =  mCtx.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                val notificationChannel = NotificationChannel(
+                    "Channel_id_default", "Channel_name_default", NotificationManager.IMPORTANCE_HIGH
+                )
+                val attributes = AudioAttributes.Builder()
+                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                    .setUsage(AudioAttributes.USAGE_NOTIFICATION)
+                    .build()
+
+                notificationChannel.description = "Channel_description_default"
+                notificationChannel.enableLights(true)
+                notificationChannel.enableVibration(true)
+                notificationChannel.setSound(soundUri, attributes)
+                notificationManager.createNotificationChannel(notificationChannel)
+            }
+            val notificationBuilder = NotificationCompat.Builder(mCtx, "Channel_id_default")
 
 
-        notificationBuilder.setAutoCancel(true)
-            .setWhen(System.currentTimeMillis())
-            .setSmallIcon(R.drawable.ic_notifications)
-            .setTicker(mCtx.resources.getString(R.string.app_name))
-            .setPriority(NotificationCompat.PRIORITY_HIGH)
-            .setSound(soundUri)
-            .setContentIntent(pendingDeeplink)
-            .setContentTitle(title)
-            .setContentText(message)
-        notificationManager.notify(idNotification, notificationBuilder.build())
+            notificationBuilder.setAutoCancel(true)
+                .setWhen(System.currentTimeMillis())
+                .setSmallIcon(R.drawable.ic_notifications)
+                .setTicker(mCtx.resources.getString(R.string.app_name))
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setSound(soundUri)
+                .setContentIntent(pendingDeeplink)
+                .setContentTitle(title)
+                .setContentText(message)
+            notificationManager.notify(idNotification, notificationBuilder.build())
+        }
+
     }
 
 }

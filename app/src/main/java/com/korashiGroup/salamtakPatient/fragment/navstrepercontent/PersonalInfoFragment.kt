@@ -65,8 +65,8 @@ class PersonalInfoFragment : Fragment() {
     private val viewmodel: DialogBottomSheetViewmodel by viewModels()
     val sharedDataViewmodel: SharedDataViewmodel by activityViewModels()
     private var partMap: Map<String, Any> = mutableMapOf()
+    private lateinit var updateProfileInfo: UpdateProfileInfo
     private var status = false
-    private lateinit var updateProfileInfo:UpdateProfileInfo
 
     @Inject
     lateinit var sp: SpUtil
@@ -86,8 +86,8 @@ class PersonalInfoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initbutton()
-         getdata()
-         callBackGetdataInfo()
+        getdata()
+        callBackGetdataInfo()
     }
 
 
@@ -97,8 +97,7 @@ class PersonalInfoFragment : Fragment() {
         binding.etFullNameEn.setText(sp.getUserNameInEnglish(NameEN))
         binding.etFullNameAR.setText(sp.getUserNameInArabic(NameAR))
 
-        val mobileNumber = binding.etPhoneNumber.text.toString()
-        val email = binding.etEmail.text.toString()
+
 //        val gender = binding.etGender.text.toString()
 //        val birthDate = binding.etDateOfbirth.text.toString()
 //        val nationality = binding.etNationality.text.toString()
@@ -116,8 +115,6 @@ class PersonalInfoFragment : Fragment() {
             if (isvalidateFeilds(
                     binding.etFullNameEn.text.toString(),
                     binding.etFullNameAR.text.toString(),
-                    mobileNumber,
-                    email,
                     binding.etGender.text.toString(),
                     binding.etDateOfbirth.text.toString(),
                     binding.etNationality.text.toString()
@@ -134,7 +131,8 @@ class PersonalInfoFragment : Fragment() {
 
             } else {
 
-                Toast.makeText(requireContext(),"error",Toast.LENGTH_SHORT
+                Toast.makeText(
+                    requireContext(), "error", Toast.LENGTH_SHORT
                 ).show()
 
             }
@@ -153,9 +151,9 @@ class PersonalInfoFragment : Fragment() {
                     "gender"
                 )
             findNavController().navigate(action)
-            it.isEnabled=false
+            it.isEnabled = false
             Handler().postDelayed({
-                it.isEnabled=true
+                it.isEnabled = true
             }, 1000)
         }
         binding.btnLayoutDateOfbirth.setOnClickListener {
@@ -164,9 +162,9 @@ class PersonalInfoFragment : Fragment() {
                     "date"
                 )
             findNavController().navigate(action)
-            it.isEnabled=false
+            it.isEnabled = false
             Handler().postDelayed({
-                it.isEnabled=true
+                it.isEnabled = true
             }, 1000)
         }
         binding.btnLayoutNationality.setOnClickListener {
@@ -175,9 +173,9 @@ class PersonalInfoFragment : Fragment() {
                     "Nationality"
                 )
             findNavController().navigate(action)
-            it.isEnabled=false
+            it.isEnabled = false
             Handler().postDelayed({
-                it.isEnabled=true
+                it.isEnabled = true
             }, 1000)
         }
 
@@ -188,14 +186,11 @@ class PersonalInfoFragment : Fragment() {
     private fun isvalidateFeilds(
         fullNameEn: String,
         fullNameAr: String,
-        mobileNumber: String,
-        email: String,
         gender: String,
         dateOfBirth: String,
         nationality: String
     ): Boolean {
 
-        var isValid = true
 
         if (fullNameEn.trim().isNullOrEmpty()) {
             binding.etFullNameEn.setCompoundDrawablesWithIntrinsicBounds(
@@ -207,7 +202,7 @@ class PersonalInfoFragment : Fragment() {
             binding.tvFullNameError.text = getString(R.string.required)
             binding.tvFullNameError.visibility = View.VISIBLE
             binding.textinputFullNameEn.setBackgroundResource(R.drawable.bg_edittext_error)
-            isValid = false
+            return false
         } else if (fullNameEn.trim().split(" ").size < 3) {
             binding.tvFullNameError.visibility = View.VISIBLE
             binding.tvFullNameError.text = getString(R.string.Enter_fullName_english)
@@ -218,13 +213,12 @@ class PersonalInfoFragment : Fragment() {
                 0
             )
             binding.textinputFullNameEn.setBackgroundResource(R.drawable.bg_edittext_error)
-            isValid = false
+            return false
 
         } else {
             binding.tvFullNameError.visibility = View.GONE
             binding.textinputFullNameEn.setBackgroundResource(R.drawable.bg_edittext)
             binding.etFullNameEn.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
-            isValid = true
         }
 
 
@@ -239,7 +233,7 @@ class PersonalInfoFragment : Fragment() {
             binding.tvFullNameARError.visibility = View.VISIBLE
             binding.textinputFullNameAr.setBackgroundResource(R.drawable.bg_edittext_error)
 
-            isValid = false
+            return false
         } else if (fullNameAr.trim().split(" ").size < 3) {
             binding.tvFullNameARError.text = getString(R.string.Enter_fullName_Arabic)
             binding.tvFullNameARError.visibility = View.VISIBLE
@@ -250,67 +244,23 @@ class PersonalInfoFragment : Fragment() {
                 0
             )
             binding.textinputFullNameAr.setBackgroundResource(R.drawable.bg_edittext_error)
-            isValid = false
+            return false
 
         } else {
             binding.tvFullNameARError.visibility = View.GONE
             binding.textinputFullNameAr.setBackgroundResource(R.drawable.bg_edittext)
             binding.etFullNameAR.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
-            isValid = true
-        }
-
-        if (mobileNumber.trim().isEmpty()) {
-            binding.tvPohneError.text = getString(R.string.required)
-            binding.tvPohneError.visibility = View.GONE
-            binding.textinputPhoneNumber.setBackgroundResource(R.drawable.bg_edittext_error)
-            binding.etPhoneNumber.setCompoundDrawablesWithIntrinsicBounds(
-                0,
-                0,
-                R.drawable.ic_error,
-                0
-            )
-            isValid = false
-        } else {
-            binding.tvPohneError.visibility = View.GONE
-            binding.textinputPhoneNumber.setBackgroundResource(R.drawable.bg_edittext)
-            binding.etPhoneNumber.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
-
-            isValid = true
-        }
-
-
-
-        if (email.trim().isEmpty()) {
-            binding.tvEmailError.text = getString(R.string.required)
-            binding.tvEmailError.visibility = View.GONE
-            binding.textinputEmail.setBackgroundResource(R.drawable.bg_edittext_error)
-            binding.etEmail.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
-            isValid = false
-        } else if (!email.isValidEmail()) {
-            binding.tvEmailError.text = getString(R.string.match_email)
-            binding.tvEmailError.visibility = View.GONE
-            binding.textinputEmail.setBackgroundResource(R.drawable.bg_edittext_error)
-            binding.etEmail.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
-            isValid = false
-        } else {
-            binding.tvEmailError.visibility = View.GONE
-            binding.textinputEmail.setBackgroundResource(R.drawable.bg_edittext)
-            binding.etEmail.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
-
-            isValid = true
         }
         if (gender.trim().isEmpty()) {
             binding.tvGenderError.text = getString(R.string.required)
             binding.tvGenderError.visibility = View.VISIBLE
             binding.layoutGender.setBackgroundResource(R.drawable.bg_edittext_error)
             binding.etGender.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
-            isValid = false
+            return false
         } else {
             binding.tvGenderError.visibility = View.GONE
             binding.layoutGender.setBackgroundResource(R.drawable.bg_edittext)
             binding.etGender.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
-
-            isValid = true
         }
         if (dateOfBirth.trim().isEmpty()) {
             binding.tvDateOfBirthError.text = getString(R.string.required)
@@ -322,13 +272,12 @@ class PersonalInfoFragment : Fragment() {
                 R.drawable.ic_error,
                 0
             )
-            isValid = false
+            return false
         } else {
             binding.tvDateOfBirthError.visibility = View.GONE
             binding.layoutDateOfbirth.setBackgroundResource(R.drawable.bg_edittext)
             binding.etDateOfbirth.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
 
-            isValid = true
         }
 
         if (nationality.trim().isEmpty()) {
@@ -341,17 +290,14 @@ class PersonalInfoFragment : Fragment() {
                 R.drawable.ic_error,
                 0
             )
-            isValid = false
+            return false
         } else {
             binding.tvNationaltyError.visibility = View.GONE
             binding.layoutNationality.setBackgroundResource(R.drawable.bg_edittext)
             binding.etNationality.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
-
-            isValid = true
         }
 
-
-        return isValid
+        return true
 
     }
 
@@ -518,7 +464,7 @@ class PersonalInfoFragment : Fragment() {
         partMap = partMap + mapOf("NationalityId" to nationalityId)
         partMap = partMap + mapOf("Birthdate" to Birthdate)
         partMap = partMap + mapOf("GenderId" to genderID)
-       partMap = partMap + mapOf("OccupationId" to "ok")
+        partMap = partMap + mapOf("OccupationId" to "ok")
         val builder = MultipartBody.Builder().setType(MultipartBody.FORM)
         for (item in partMap) {
             val key = item.key
@@ -561,6 +507,7 @@ class PersonalInfoFragment : Fragment() {
 
 
                     }
+
                     is Resource.Error -> {
                         binding.progressBar.visibility = View.GONE
 
@@ -581,7 +528,7 @@ class PersonalInfoFragment : Fragment() {
 
             }
 
-        }else{
+        } else {
             viewmodel.updatePatientProfile(builder.build())
             viewmodel.updatePatientProfileResponse.observe(viewLifecycleOwner) { response ->
                 when (response) {
@@ -596,6 +543,7 @@ class PersonalInfoFragment : Fragment() {
                         }
 
                     }
+
                     is Resource.Error -> {
                         binding.progressBar.visibility = View.GONE
 
@@ -620,8 +568,8 @@ class PersonalInfoFragment : Fragment() {
         }
     }
 
-    private fun callBackGetdataInfo(){
-        viewmodel.patientInfoResponse.observe(viewLifecycleOwner, Observer {response->
+    private fun callBackGetdataInfo() {
+        viewmodel.patientInfoResponse.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
 
                 is Resource.Loading -> {
@@ -631,12 +579,13 @@ class PersonalInfoFragment : Fragment() {
                 is Resource.sucess -> {
                     hideprogressbar()
                     response.data?.data?.let {
-                        val date=DateParsing(it.birthdate.toString())
-                        updateProfileInfo= UpdateProfileInfo(it.genderId,it.nationalityId,it.nationalityName,date)
+                        val date = DateParsing(it.birthdate.toString())
+                        updateProfileInfo = UpdateProfileInfo(it.genderId, it.nationalityId, it.nationalityName, date)
                         bindDataToViews(it)
                     }
 
                 }
+
                 is Resource.Error -> {
                     hideprogressbar()
                     response.data?.let {
@@ -648,26 +597,26 @@ class PersonalInfoFragment : Fragment() {
         })
     }
 
-     private fun updatedata(patientInfo:UpdateProfileInfo){
-         patientInfo.genderId?.let { it1 ->
-             if (it1==1){
-                 ChooseGender(
-                     getString(R.string.male),
-                     it1
-                 )
-             }else{
-                 ChooseGender(
-                     getString(R.string.female),
-                     it1
-                 )
-             }
+    private fun updatedata(patientInfo: UpdateProfileInfo) {
+        patientInfo.genderId?.let { it1 ->
+            if (it1 == 1) {
+                ChooseGender(
+                    getString(R.string.male),
+                    it1
+                )
+            } else {
+                ChooseGender(
+                    getString(R.string.female),
+                    it1
+                )
+            }
 
-         }?.let { it2 -> sharedDataViewmodel.getGender(it2) }
+        }?.let { it2 -> sharedDataViewmodel.getGender(it2) }
 
-         patientInfo.nationalityId?.let { it1 -> DataCountry(it1, patientInfo.nationalityName.toString()) }
-             ?.let { it2 -> sharedDataViewmodel.getCountry(it2) }
-         patientInfo.date?.let { it1 -> sharedDataViewmodel.getBirthDate(it1) }
-     }
+        patientInfo.nationalityId?.let { it1 -> DataCountry(it1, patientInfo.nationalityName.toString()) }
+            ?.let { it2 -> sharedDataViewmodel.getCountry(it2) }
+        patientInfo.date?.let { it1 -> sharedDataViewmodel.getBirthDate(it1) }
+    }
 
 
     private fun getdata() {
@@ -687,10 +636,10 @@ class PersonalInfoFragment : Fragment() {
         })
 
         sharedDataViewmodel.updateProfileStatus.observe(viewLifecycleOwner, Observer {
-            status=it
-            binding.btnNext.text=getString(R.string.next)
-            if (it){
+            status = it
+            if (it) {
                 viewmodel.getPatientInfo()
+                binding.btnNext.text = getString(R.string.update)
             }
         })
 
@@ -703,9 +652,10 @@ class PersonalInfoFragment : Fragment() {
     private fun hideprogressbar() {
         binding.progressBarInfo.visibility = View.GONE
     }
-    private fun bindDataToViews(patientInfo:PatientDataInfo) {
 
-        if (patientInfo!=null) {
+    private fun bindDataToViews(patientInfo: PatientDataInfo) {
+
+        if (patientInfo != null) {
             binding.etFullNameEn.setText(patientInfo.fullName)
             binding.etFullNameAR.setText(patientInfo.fullNameAr)
             if (patientInfo.genderId == 1) {
@@ -722,20 +672,20 @@ class PersonalInfoFragment : Fragment() {
                 transformations(CircleCropTransformation())
             }
         }
-       updatedata(updateProfileInfo)
+        updatedata(updateProfileInfo)
     }
 
 
-    private fun DateParsing(dateParsing:String):String{
-        var day=""
-      try {
+    private fun DateParsing(dateParsing: String): String {
+        var day = ""
+        try {
             val sdf = SimpleDateFormat("d-M-yyyy", Locale.US)
             val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.US)
             val date = dateParsing.let { format.parse(it) }
-             day = sdf.format(date)
+            day = sdf.format(date)
 
-        }catch (e:Exception){
-            Log.e("",e.localizedMessage)
+        } catch (e: Exception) {
+            Log.e("", e.localizedMessage)
         }
         return day
     }

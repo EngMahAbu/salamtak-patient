@@ -89,6 +89,7 @@
             android:layout_gravity="center_horizontal"
             android:gravity="start"
             android:layout_marginTop="5dp"
+            android:imeOptions="actionNext"
             android:hint="@string/full_name_in_english_first_middle_last"
             android:textColor="@color/black"
             android:fontFamily="@font/avenirltstd_roman"
@@ -136,6 +137,7 @@
             android:layout_width="match_parent"
             android:layout_gravity="center_horizontal"
             android:gravity="start"
+            android:imeOptions="actionNext"
             android:textColor="@color/black"
             android:fontFamily="@font/avenirltstd_roman"
             android:textSize="12sp"
@@ -185,6 +187,8 @@
             android:textColor="@color/black"
             android:fontFamily="@font/avenirltstd_roman"
             android:textSize="12sp"
+            android:imeOptions="actionNext"
+            android:digits="jjfhdddbbbjshjksdj6mifghdkjwaxmjjk0123456789d"
             android:layout_marginTop="5dp"
             android:layout_height="60dp"
             android:inputType="number" />
@@ -231,6 +235,7 @@
             android:textColor="@color/black"
             android:fontFamily="@font/avenirltstd_roman"
             android:textSize="12sp"
+            android:imeOptions="actionNext"
             android:layout_marginTop="5dp"
             android:layout_height="60dp"
             android:inputType="textEmailAddress" />
@@ -304,8 +309,9 @@
                 android:fontFamily="@font/avenirltstd_roman"
                 android:textSize="12sp"
                 android:layout_marginTop="5dp"
+                android:imeOptions="actionNext"
                 android:layout_gravity="center_horizontal"
-                android:inputType="numberPassword" />
+                android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -429,8 +435,9 @@
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/avenirltstd_roman"
                 android:textSize="12sp"
+                android:imeOptions="actionDone"
                 android:layout_gravity="center_horizontal"
-                android:inputType="numberPassword" />
+                android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

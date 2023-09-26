@@ -7,6 +7,7 @@ import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AbsListView
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -18,6 +19,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.adapter.SearchDoctorsAdapter
 import com.korashiGroup.salamtakPatient.adapter.CalenderAdapter
@@ -34,11 +36,13 @@ import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.snackbar.Snackbar
 import com.korashiGroup.salamtakPatient.model.*
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCompany
+import com.korashiGroup.salamtakPatient.utils.Constans.Query_Page_Size
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import org.checkerframework.common.returnsreceiver.qual.This
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -238,10 +242,10 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                 feesFrom,
                 feesTo,
                 genderId,
-                2,
+                10,
                 examinationtypeid,
                 seniortyLevelId,
-                0,
+                viewmodel.doctorSearchPage,
                 specialistId,
                 sub_SpecialistId,insuranceId
             )
@@ -264,7 +268,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         binding.rvDoctors.apply {
             adapter = searchDoctorsAdapter
             layoutManager = LinearLayoutManager(requireContext())
-            setHasFixedSize(true)
+            addOnScrollListener(this@SearchFragment.scrollListener)
         }
     }
 
@@ -351,10 +355,10 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                 feesFrom = 0,
                 feesTo = 0,
                 genderId,
-                20,
+                10,
                 examinationtypeid,
                 0,
-                0,
+                viewmodel.doctorSearchPage,
                 specialistId
             )
             viewmodel.searchDoctors(doctorssearchRequset)
@@ -419,9 +423,15 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                     hideprogressbar()
                     it.let {
                     //    bottomsheetbeahavoir.state = BottomSheetBehavior.STATE_HIDDEN
-                        searchDoctorsAdapter.submitList(it.data?.data?.items)
+                        searchDoctorsAdapter.submitList(it.data?.data?.items?.toList())
                         searchDoctorsAdapter.notifyDataSetChanged()
                         updateUi(it.data?.data?.items as List<Item>)
+                        val totalresult= (it.data.data.totalCount)?.div((10+2))
+                        isLastPage = viewmodel.doctorSearchPage == totalresult
+                        if (isLastPage){
+                                binding.rvDoctors.setPadding(0,0,0,0)
+                        }
+
                     }
 
                 }
@@ -480,11 +490,13 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
     private fun showprogtessbar() {
         binding.progressBar.visibility = View.VISIBLE
         binding.layoutBottomsheetpersistant.progressBar.visibility = View.VISIBLE
+        isloading=true
     }
 
     private fun hideprogressbar() {
         binding.progressBar.visibility = View.GONE
         binding.layoutBottomsheetpersistant.progressBar.visibility = View.GONE
+        isloading=false
 
     }
 
@@ -520,10 +532,10 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             feesFrom = 0,
             feesTo = 0,
             genderId,
-            20,
+            10,
             examinationtypeid,
             0,
-            0,
+            viewmodel.doctorSearchPage,
             specialistId
         )
         viewmodel.searchDoctors(doctorssearchRequset)
@@ -724,7 +736,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                             10,
                             examinationtypeid,
                             0,
-                            0,
+                            viewmodel.doctorSearchPage,
                             specialistId
                         )
                         viewmodel.searchDoctors(doctorssearchRequset)
@@ -737,10 +749,10 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                             feesFrom = 0,
                             feesTo,
                             genderId,
-                            20,
+                            10,
                             examinationtypeid,
                             0,
-                            0,
+                            viewmodel.doctorSearchPage,
                             specialistId
                         )
                         viewmodel.searchDoctors(doctorssearchRequset)
@@ -777,5 +789,52 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         sharedDataViewmodel.getSeniorityLevelData(SeniorityLevelData(0,""))
         sharedDataViewmodel.getSubSpecialication(list)
     }
+
+    var isloading=false
+    var isLastPage=false
+    var isScrolling=false
+    val scrollListener=object :RecyclerView.OnScrollListener(){
+        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+            super.onScrollStateChanged(recyclerView, newState)
+            if (newState==AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL){
+                isScrolling=true
+            }
+        }
+
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+            super.onScrolled(recyclerView, dx, dy)
+
+            val layoutmanger=recyclerView.layoutManager as LinearLayoutManager
+            val firstVisibleItemPosition=layoutmanger.findFirstVisibleItemPosition()
+            val visibleItemCount=layoutmanger.childCount
+            val totalItemCount=layoutmanger.itemCount
+            val isNotLoadingAndIsNotLastPage = !isloading && !isLastPage
+            val isAtLastItem=firstVisibleItemPosition + visibleItemCount >= totalItemCount
+            val isNotAtBeginning= firstVisibleItemPosition>=0
+            val isTotalMoreThanvisible=totalItemCount>=Query_Page_Size
+            val shouldPaginate=isNotLoadingAndIsNotLastPage && isAtLastItem && isNotAtBeginning && isTotalMoreThanvisible && isScrolling
+            if (shouldPaginate){
+                val doctorssearchRequset = DoctorSearchRequest(
+                    areaId,
+                    formattedDate,
+                    cityId,
+                    binding.etSearch.text.toString(),
+                    feesFrom = 0,
+                    feesTo,
+                    genderId,
+                    10,
+                    examinationtypeid,
+                    0,
+                    viewmodel.doctorSearchPage,
+                    specialistId
+                )
+                viewmodel.searchDoctors(doctorssearchRequset)
+                isScrolling=false
+
+            }
+
+        }
+    }
+
 
 }

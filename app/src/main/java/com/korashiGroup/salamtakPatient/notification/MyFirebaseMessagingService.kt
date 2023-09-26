@@ -58,7 +58,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         if (map?.get("link")?.contains("SalamtakPatient://2?") == true) {
             linkAudioOrVideo = "audio"
-        } else {
+        } else if (map?.get("link")?.contains("SalamtakPatient://3?") == true) {
             linkAudioOrVideo = "video"
         }
 

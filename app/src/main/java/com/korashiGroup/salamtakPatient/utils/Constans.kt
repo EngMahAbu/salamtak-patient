@@ -12,6 +12,7 @@ object Constans {
     const val Language = "LANg"
     const val PROFILE_STATUS = "ProfileStatus"
     const val TOKEN = "TOKEN"
+    const val Query_Page_Size = 10
 
 
 }

@@ -38,7 +38,8 @@ import javax.inject.Inject
 @HiltViewModel
 class DialogBottomSheetViewmodel @Inject constructor(private val repositry: RegisterRepositry):ViewModel(){
 
-
+    var doctorSearchPage=0
+    var doctorSearchItemResponse:DoctorsearchItemResponse?=null
     val nationalityResponse=MutableLiveData<Resource<GetCountry>>()
     val specialistResponse=MutableLiveData<Resource<GetSpecialistResponse>>()
     val subSpecialistResponse=MutableLiveData<Resource<GetSubSpecilistResponse>>()
@@ -221,7 +222,18 @@ class DialogBottomSheetViewmodel @Inject constructor(private val repositry: Regi
     private fun handlingSearchDoctors(response: Response<DoctorsearchItemResponse>): Resource<DoctorsearchItemResponse>? {
         if (response.isSuccessful){
             response.body()?.let {
-                return Resource.sucess(it)
+                doctorSearchPage+=10
+                if (doctorSearchItemResponse==null){
+                    doctorSearchItemResponse=it
+                }else{
+                    val oldItems=doctorSearchItemResponse?.data?.items
+                    val newItems=it.data?.items
+                    if (newItems != null) {
+                        oldItems?.addAll(newItems)
+                    }
+                }
+
+                return Resource.sucess(doctorSearchItemResponse?:it)
             }
         }
         return Resource.Error(response.message())

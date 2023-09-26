@@ -36,7 +36,6 @@ class SignupFragment : Fragment() {
     private var user: CreateUser? = null
     @Inject
     lateinit var sp:SpUtil
-    var isValid = true
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -193,7 +192,7 @@ class SignupFragment : Fragment() {
             binding.tvFullNameError.text = getString(R.string.required)
             binding.tvFullNameError.visibility = View.VISIBLE
             binding.textinputFullNameEn.setBackgroundResource(R.drawable.bg_edittext_error)
-            isValid = false
+          return false
         } else if (fullNameEn.trim().split(" ").size < 3) {
             binding.tvFullNameError.visibility = View.VISIBLE
             binding.tvFullNameError.text = getString(R.string.Enter_fullName_english)
@@ -204,13 +203,13 @@ class SignupFragment : Fragment() {
                 0
             )
             binding.textinputFullNameEn.setBackgroundResource(R.drawable.bg_edittext_error)
-            isValid = false
+            return false
 
         } else {
             binding.tvFullNameError.visibility = View.GONE
             binding.textinputFullNameEn.setBackgroundResource(R.drawable.bg_edittext)
             binding.etFullNameEn.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
-            isValid = true
+
         }
 
 
@@ -225,7 +224,7 @@ class SignupFragment : Fragment() {
             binding.tvFullNameARError.visibility = View.VISIBLE
             binding.textinputFullNameAr.setBackgroundResource(R.drawable.bg_edittext_error)
 
-            isValid = false
+           return false
         } else if (fullNameAr.trim().split(" ").size < 3) {
             binding.tvFullNameARError.text = getString(R.string.Enter_fullName_Arabic)
             binding.tvFullNameARError.visibility = View.VISIBLE
@@ -236,13 +235,12 @@ class SignupFragment : Fragment() {
                 0
             )
             binding.textinputFullNameAr.setBackgroundResource(R.drawable.bg_edittext_error)
-            isValid = false
+           return false
 
         } else {
             binding.tvFullNameARError.visibility = View.GONE
             binding.textinputFullNameAr.setBackgroundResource(R.drawable.bg_edittext)
             binding.etFullNameAR.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
-            isValid = true
         }
 
         if (mobileNumber.trim().isEmpty()) {
@@ -255,13 +253,12 @@ class SignupFragment : Fragment() {
                 R.drawable.ic_error,
                 0
             )
-            isValid = false
+           return false
         } else {
             binding.tvPohneError.visibility = View.GONE
             binding.textinputPhoneNumber.setBackgroundResource(R.drawable.bg_edittext)
             binding.etPhoneNumber.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
 
-            isValid = true
         }
 
 
@@ -271,19 +268,18 @@ class SignupFragment : Fragment() {
             binding.tvEmailError.visibility = View.VISIBLE
             binding.textinputEmail.setBackgroundResource(R.drawable.bg_edittext_error)
             binding.etEmail.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
-            isValid = false
+            return false
         } else if (!email.isValidEmail()) {
             binding.tvEmailError.text = getString(R.string.match_email)
             binding.tvEmailError.visibility = View.VISIBLE
             binding.textinputEmail.setBackgroundResource(R.drawable.bg_edittext_error)
             binding.etEmail.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
-            isValid = false
+           return false
         } else {
             binding.tvEmailError.visibility = View.GONE
             binding.textinputEmail.setBackgroundResource(R.drawable.bg_edittext)
             binding.etEmail.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
 
-            isValid = true
         }
 
 
@@ -292,19 +288,18 @@ class SignupFragment : Fragment() {
             binding.tvPasswordError.visibility = View.VISIBLE
             binding.layoutPassword.setBackgroundResource(R.drawable.bg_edittext_error)
             binding.etPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
-            isValid = false
+            return false
         } else if (password.length < 6) {
             binding.tvPasswordError.text = getString(R.string.lesstthan6number)
             binding.tvPasswordError.visibility = View.VISIBLE
             binding.layoutPassword.setBackgroundResource(R.drawable.bg_edittext_error)
             binding.etPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
-            isValid = false
+           return false
         } else {
             binding.tvPasswordError.visibility = View.GONE
             binding.layoutPassword.setBackgroundResource(R.drawable.bg_edittext)
             binding.etPassword.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
 
-            isValid = true
         }
 
         if (confirmPassword.trim().isNullOrEmpty()) {
@@ -317,7 +312,7 @@ class SignupFragment : Fragment() {
                 R.drawable.ic_error,
                 0
             )
-            isValid = false
+            return false
         } else if (confirmPassword.length < 6) {
             binding.tvConfirmpasswordError.text = getString(R.string.lesstthan6number)
             binding.tvConfirmpasswordError.visibility = View.VISIBLE
@@ -328,7 +323,7 @@ class SignupFragment : Fragment() {
                 R.drawable.ic_error,
                 0
             )
-            isValid = false
+           return false
         } else if (password != confirmPassword) {
             binding.tvConfirmpasswordError.text = getString(R.string.doesnotmatch)
             binding.tvPasswordError.text = getString(R.string.doesnotmatch)
@@ -347,7 +342,7 @@ class SignupFragment : Fragment() {
                 R.drawable.ic_error,
                 0
             )
-            isValid = false
+            return false
         } else {
             binding.tvConfirmpasswordError.visibility = View.GONE
             binding.tvPasswordError.visibility = View.GONE
@@ -360,10 +355,10 @@ class SignupFragment : Fragment() {
             )
             binding.layoutPassword.setBackgroundResource(R.drawable.bg_edittext)
             binding.etPassword.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
-            isValid = true
+
         }
 
-        return isValid
+        return true
 
     }
 
