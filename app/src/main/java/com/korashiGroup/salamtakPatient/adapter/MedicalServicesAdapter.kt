@@ -17,7 +17,7 @@ import com.korashiGroup.salamtakPatient.model.ImageServices
 import com.korashiGroup.salamtakPatient.model.Onboarding
 
 
-class MedicalServicesAdapter():ListAdapter<ImageServices,MedicalServicesAdapter.ViewHolder>(DiffCallback()) {
+class MedicalServicesAdapter(val onclick:Action):ListAdapter<ImageServices,MedicalServicesAdapter.ViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
@@ -36,14 +36,9 @@ class MedicalServicesAdapter():ListAdapter<ImageServices,MedicalServicesAdapter.
 
         holder.itemView.setOnClickListener {
 
-            val action= services.Id?.let { it1 ->
-                HomeFragmentDirections.actionHomeFragmentToHealthEntityFragment(services.textService,
-                    it1
-                )
-            }
-            if (action != null) {
-                it.findNavController().navigate(action)
-            }
+            services.Id?.let { it1 -> onclick.onItemClick(it1,services.textService) }
+
+
         }
 
     }

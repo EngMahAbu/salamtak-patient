@@ -7,6 +7,7 @@ import com.korashiGroup.salamtakPatient.model.booking.*
 import com.korashiGroup.salamtakPatient.model.booking.clink.GetDoctorClinksResponse
 import com.korashiGroup.salamtakPatient.model.docotorsearch.DoctorSearchRequest
 import com.korashiGroup.salamtakPatient.model.docotorsearch.DoctorsearchItemResponse
+import com.korashiGroup.salamtakPatient.model.emr.EmrPatientResponse
 import com.korashiGroup.salamtakPatient.model.healthy.GetHealthEntityResponse
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCardResponse
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCompanyResponse
@@ -265,6 +266,17 @@ interface ApiService {
         @Body doctorRateRequest: Map<String, String>,
     ): Response<RatingResponse>
 
+    @GET("{culture}/Patient/GetPatientEmrDetails")
+    suspend fun getPatientDetails(
+        @Path("culture") culture: String,
+        @Query("appointmentId") appointmentId :Int,
+    ):Response<EmrPatientResponse>
 
+
+    @POST("{culture}/PatientAppointment/EditPatientAppointment'")
+    suspend fun editPatientAppointment(
+        @Path("culture") culture: String,
+        @Body appointmentRequest: EditPatientAppointmentRequest
+    ): Response<CreatepatientAppointementsResponse>
 
 }

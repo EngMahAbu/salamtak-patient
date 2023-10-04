@@ -147,7 +147,7 @@ class DocotorProfileFragment : Fragment() {
                 binding.ivGraystep3.visibility = View.GONE
                 binding.layoutStep2.visibility = View.VISIBLE
                 binding.layoutStep3.visibility = View.VISIBLE
-                binding.btnNext.visibility=View.VISIBLE
+             //   binding.btnNext.visibility=View.VISIBLE
                 binding.imageView.visibility=View.VISIBLE
 
             }

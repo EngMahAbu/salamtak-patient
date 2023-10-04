@@ -3,8 +3,8 @@
     <string name="togetstartpickyourlanguage">To Get Start Pick Your Language</string>
     <string name="english">انجليزى</string>
     <string name="arabic">عربى</string>
-    <string name="salamtakbooking">Salamtak Booking</string>
-    <string name="screen_booking_text">Is designed to accommodate an easy way and professional tool to book reservations while furnishing all related information that would be of an interest for both patient and doctor. Nevertheless, reservations confirmation and reminder technique are also part of the features that Salamtak booking provides.</string>
+    <string name="salamtakbooking">الحجوزات</string>
+    <string name="screen_booking_text">Salamtak Booking يوفر آلية تنفيذ الحجوزات بسلاسة شديدة وما يتبع الحجز من خطوات سواء لتأكيد الحجز وكذلك توصيح كافة البيانات ذات الاهمية سوا للطبيب او المريض وتوضيح الخدمات المقدمة من العيادة للمريض</string>
     <string name="skip">تخطى</string>
     <string name="salamtakhomebooking">Salamtak Home Visit</string>
     <string name="salamtakconnect">Salamtak Connect</string>
@@ -81,6 +81,12 @@
     <string name="search_by_name_of_country">البحث عن طريق اسم الدولة</string>
     <string name="powered_by">Powered By</string>
     <string name="salamtak_booking">Salamtak Booking</string>
+    <string name="home_visit">الزيارة المنزلية</string>
+    <string name="home_visitdesc">Salamtak Home  يمكن الطبيب من تنسيق مواعيد وحجوزات العيادة بالمرونة التي تتيح له ايضا تخصيص الوقت اللازم لحجوزات الزيارات المنزلية</string>
+    <string name="live_chat">التواصل مع الطبيب</string>
+    <string name="live_chatdesc">خدمة سلامتك كونكت تسمح بالتواصل بين الطبيب والمريض لتبادل المعلومات اللي تتيح بنسبة كبيرة جدا الغاء كل من الزيارة الأولي والثالثة</string>
+
+
     <string name="verification_code_will_be_sent_within_1_30">سيتم إرسال رمز التحقق في غضون 1:30</string>
     <string name="conter">1:30</string>
     <string name="complete_your_profile">أكمل ملفك الشخصي</string>
@@ -189,7 +195,7 @@
     <string name="edit_appointment">تعديل الموعد</string>
     <string name="cancelappointment">إلغاء الموعد</string>
     <string name="are_you_sure_you_want_to_cancel_this_appointment">هل أنت متأكد أنك تريد إلغاء هذا الموعد؟</string>
-    <string name="reschedule">إعادة الجدولة</string>
+    <string name="reschedule">لا</string>
     <string name="re_booking_appointment">إعادة حجز موعد</string>
     <string name="medical_history">الروشتة</string>
     <string name="rate">معدل</string>
@@ -218,41 +224,45 @@
     <string name="datasentupdatedsuccessfully">تم تحديث البيانات بنجاح</string>
     <string name="Notification_channel_Id">Notification_channel_Id</string>
     <string name="Notification_channel_Name">Notification_channel_Name</string>
-    <string name="book_with_insurance">Book With insurance</string>
-    <string name="release_date">Release Date</string>
-    <string name="update">Update</string>
-    <string name="salamtak_gates">Salamtak Gate</string>
-    <string name="skip_login_explore_our_features">Skip Login,Explore our features</string>
-    <string name="you_must_sign_up_to_book_your_doctor">You must Sign Up to book your doctor</string>
+    <string name="book_with_insurance">احجز مع التأمين</string>
+    <string name="release_date">تاريخ الافراج عنه</string>
+    <string name="update">تحديث</string>
+    <string name="salamtak_gates">بوابة سلامتك</string>
+    <string name="skip_login_explore_our_features">تخطي تسجيل الدخول، واستكشاف الميزات لدينا</string>
+    <string name="you_must_sign_up_to_book_your_doctor">يجب عليك التسجيل لحجز طبيبك</string>
     <string name="no_data_to_show">لا يوجد بيانات </string>
     <string name="have_amedicalquestion">هل لديك سؤال طبي؟</string>
     <string name="ask_a_doctor_for_free_and_get_response_in_24_hours">اسأل الطبيب مجانًا واحصل على الرد خلال 24
         ساعة
     </string>
     <string name="ask_now">أسأل الأن </string>
-    <string name="your_question">Your Question</string>
-    <string name="question_descreption_explanation_of_your_medical_symotoms">Question Descreption *(Explanation of your
-        medical symotoms)
+    <string name="your_question">سؤالك</string>
+    <string name="question_descreption_explanation_of_your_medical_symotoms">وصف السؤال *(شرح أعراضك الطبية)
     </string>
-    <string name="age">Age</string>
-    <string name="askdoctor">Ask a Doctor</string>
-    <string name="fillallfields">Fill All Fields</string>
-    <string name="insurance_company">insurance Company</string>
-    <string name="notnow">Not Now</string>
-    <string name="end_date">End Date</string>
-    <string name="enterreleasedate">Enter Release Date</string>
-    <string name="enterenddate">Enter End date</string>
-    <string name="your_appointment_is">Your Appointment is</string>
-    <string name="thank_you_for_using_your_salamtak_app_we_wish_you_good_health">Thank you for using your salamtak app.
-        We wish you good health
+    <string name="age">العمر</string>
+    <string name="askdoctor">اسأل طبيب</string>
+    <string name="fillallfields">املأ جميع الحقول</string>
+    <string name="insurance_company">شركة التأمين</string>
+    <string name="notnow">ليس الآن</string>
+    <string name="end_date">تاريخ الانتهاء</string>
+    <string name="enterreleasedate">أدخل تاريخ الإصدار</string>
+    <string name="enterenddate">أدخل تاريخ الانتهاء</string>
+    <string name="your_appointment_is">موعدك هو</string>
+    <string name="thank_you_for_using_your_salamtak_app_we_wish_you_good_health">شكرًا لك على استخدام تطبيق سلامتك.
+        نتمنى لكم صحة جيدة
     </string>
-    <string name="addcard">+Add Card</string>
-    <string name="rate_doctor">Rate Doctor</string>
-    <string name="write_a_comment">Write a comment...</string>
-    <string name="weneedpermissiontoaccesslocation">We need your Permission to accsess location</string>
-    <string name="worning">Worning</string>
-    <string name="ok">OK</string>
-    <string name="thereisnolocatio">There is no location</string>
+    <string name="addcard">+إضافة بطاقة</string>
+    <string name="rate_doctor">قيم الطبيب</string>
+    <string name="write_a_comment">أكتب تعليقا...</string>
+    <string name="weneedpermissiontoaccesslocation">نحن بحاجة إلى إذنك للوصول إلى الموقع</string>
+    <string name="worning">تحذير</string>
+    <string name="ok">تم</string>
+    <string name="thereisnolocatio">لا يوجد موقع</string>
+    <string name="description">الوصف : </string>
+    <string name="title">العنوان :</string>
+    <string name="signupedit">يجب عليك التسجيل لحجز طبيبك</string>
+    <string name="me">لنفســــى</string>
+    <string name="anotherpatient">لمريض آخــــر</string>
 
 
 </resources>

@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import coil.load
@@ -30,7 +31,7 @@ import java.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.Action, GatesAdapter.Action {
+class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.Action, GatesAdapter.Action,MedicalServicesAdapter.Action {
 
     private lateinit var binding: HomefragmentBinding
     private lateinit var imageServicesAdapter: ServicesAdapter
@@ -48,7 +49,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
     var medicalExaminatioId: Int? = null
     val regviewmodel: RegisterViewmodel by viewModels()
     val viewmodel: DialogBottomSheetViewmodel by viewModels()
-
+    var skip=""
 
     companion object {
         var instance: HomeFragment? = null
@@ -66,9 +67,9 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         instance = this
         bindDataToViews()
+        skipLogin()
         imageVideoAdapter = ImageVideoAdapter()
         servicesRecylerview()
         medicalServicesRecylerview()
@@ -78,6 +79,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
         medicalServices()
         callBack()
         initButton()
+
     }
 
     private fun initButton() {
@@ -92,7 +94,14 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
 //        }
 
         binding.askQuestion.setOnClickListener {
-            findNavController().navigate(R.id.askDoctorFragment)
+            if (skip=="skip"){
+               return@setOnClickListener
+            }else {
+                findNavController().navigate(R.id.askDoctorFragment)
+            }
+        }
+        binding.layoutSignup.setOnClickListener {
+            findNavController().navigate(R.id.signupFragment)
         }
 
     }
@@ -108,7 +117,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
     }
 
     private fun medicalServicesRecylerview() {
-        imageMedicalServicesAdapter = MedicalServicesAdapter()
+        imageMedicalServicesAdapter = MedicalServicesAdapter(this)
         binding.rvSalamtakmedicalServices.apply {
             adapter = imageMedicalServicesAdapter
             layoutManager = GridLayoutManager(requireContext(), 3)
@@ -432,7 +441,38 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
     }
 
     override fun onItemGatesClick(gateId: Int) {
-        val action = HomeFragmentDirections.actionHomeFragmentToHealthyTopicsFragment(gateId)
-        findNavController().navigate(action)
+        if (skip=="skip"){
+            return
+        }else {
+            val action = HomeFragmentDirections.actionHomeFragmentToHealthyTopicsFragment(gateId)
+            findNavController().navigate(action)
+        }
     }
+
+    override fun onItemClick(healthEntityTypeId: Int, healthName: String) {
+        if (skip=="skip"){
+            return
+        }else {
+            val action =
+                HomeFragmentDirections.actionHomeFragmentToHealthEntityFragment(
+                    healthName,
+                    healthEntityTypeId
+                )
+            findNavController().navigate(action)
+        }
+
+    }
+
+        private fun skipLogin(){
+            sharedDataViewmodel.skipLoginStatus.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+                skip=it
+
+                if (it=="skip"){
+                    binding.layoutSignup.visibility=View.VISIBLE
+                }else {
+                    binding.layoutSignup.visibility=View.GONE
+                }
+
+            })
+        }
 }

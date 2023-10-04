@@ -73,7 +73,7 @@ class MyNotificationManager @Inject constructor(private val mCtx: Application) {
         else{
 
             val pendingDeeplink =
-                NavDeepLinkBuilder(mCtx).setGraph(R.navigation.nav_graph).setDestination(R.id.splashFragment)
+                NavDeepLinkBuilder(mCtx).setGraph(R.navigation.nav_graph).setDestination(R.id.myScheduleFragment)
                                        .createPendingIntent()
             val soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
             val notificationManager =  mCtx.getSystemService(NOTIFICATION_SERVICE) as NotificationManager

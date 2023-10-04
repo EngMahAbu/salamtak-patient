@@ -43,7 +43,7 @@ class SplashFragment : Fragment() {
                 findNavController().navigate(R.id.chooseLanguageFragment)
             }else if (!DateUtils.getLanguageFromMore().isNullOrEmpty()){
 
-                    if (skip=="skip"){
+                    if (DateUtils.getLanguageSkip()=="skip"){
                         findNavController().navigate(R.id.loginFragment)
                     }else{
                         findNavController().navigate(R.id.moreFragment)

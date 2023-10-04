@@ -292,57 +292,7 @@
                                     app:layout_constraintBottom_toBottomOf="@+id/layout_Service"
                                     app:layout_constraintTop_toBottomOf="@+id/tv_Service"/>
 
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                    android:id="@+id/layout_WaitingTime"
-                                    android:layout_width="37dp"
-                                    android:layout_height="37dp"
-                                    android:layout_marginTop="10dp"
-                                    android:layout_marginStart="10dp"
-                                    android:background="@drawable/bg_image_circle"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toBottomOf="@+id/layout_Service">
 
-                                <com.google.android.material.imageview.ShapeableImageView
-                                        android:id="@+id/iv_WaitingTime"
-                                        android:layout_width="18dp"
-                                        android:layout_height="18dp"
-                                        android:adjustViewBounds="true"
-                                        android:src="@drawable/ic_watingtime"
-                                        app:layout_constraintBottom_toBottomOf="parent"
-                                        app:layout_constraintEnd_toEndOf="parent"
-                                        app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toTopOf="parent"/>
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                    android:id="@+id/tv_WaitingTime"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="5dp"
-                                    android:fontFamily="@font/avenirltstd_roman"
-                                    android:gravity="start"
-                                    android:padding="2dp"
-                                    android:text="@string/waiting_time"
-                                    android:textColor="@color/gray"
-                                    android:textSize="15sp"
-                                    app:layout_constraintStart_toEndOf="@+id/layout_WaitingTime"
-                                    app:layout_constraintTop_toTopOf="@+id/layout_WaitingTime"/>
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                    android:id="@+id/WaitingTime"
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="5dp"
-                                    android:fontFamily="@font/avenirltstd_black"
-                                    android:gravity="start"
-                                    android:padding="2dp"
-                                    android:text="15 Min."
-                                    android:textColor="@color/black"
-                                    android:textSize="12sp"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toEndOf="@+id/layout_WaitingTime"
-                                    app:layout_constraintBottom_toBottomOf="@+id/layout_WaitingTime"
-                                    app:layout_constraintTop_toBottomOf="@+id/tv_WaitingTime"/>
 
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -558,7 +508,6 @@
     <include
             android:id="@+id/layoutBottomsheetpersistant"
             layout="@layout/layout_bottomsheet_bookwithinsurance"
-
     />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -12,7 +12,7 @@ data class GetHealthEntityResponse(
 
 data class Data(
     @SerializedName("Items")
-    val items: List<ItemHealth?>?,
+    val items: MutableList<ItemHealth?>,
     @SerializedName("TotalCount")
     val totalCount: Int?
 )

@@ -23,6 +23,7 @@ import com.korashiGroup.salamtakPatient.utils.DateUtils
 import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.viewmodel.RegisterViewmodel
 import com.karumi.dexter.Dexter.withContext
+import com.korashiGroup.salamtakPatient.fragment.signupanddocotorprofile.SignupFragmentDirections
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -59,7 +60,6 @@ class OtpFragment : Fragment() {
             binding.tvVerification.text =
                 format(getString(R.string.verification_code) + args.user?.phone)
         }
-        getUserCallback()
         initButton()
         setupFocusEdittext()
         otpCallBack()
@@ -72,22 +72,30 @@ class OtpFragment : Fragment() {
             findNavController().navigate(R.id.forgetPasswordFragment)
         }
         binding.layoutHelp.setOnClickListener {
-            findNavController().navigate(R.id.dialogBottomSheetFragment)
+            val action= OtpFragmentDirections.actionOtpFragmentToDialogBottomSheetFragment("help")
+            findNavController().navigate(action)
         }
 
         binding.btnSend.setOnClickListener {
 
             if (args.responsemodel?.code.toString() == getCodeFromEdittext()) {
-                findNavController().navigate(R.id.docotorProfileFragment)
+//                args.user?.let { it1 ->
+//                    viewmodel.createuser(
+//                        it1
+//                    )
+//                }
+                getUserCallback()
+
                 Toast.makeText(requireContext(), getString(R.string.verified), Toast.LENGTH_SHORT)
                     .show()
             } else if (otpCode == getCodeFromEdittext()) {
-                args.user?.let { it1 ->
-                    viewmodel.createuser(
-                        it1
-                    )
-                }
-                findNavController().navigate(R.id.docotorProfileFragment)
+//                args.user?.let { it1 ->
+//                    viewmodel.createuser(
+//                        it1
+//                    )
+//                }
+                getUserCallback()
+            //    findNavController().navigate(R.id.docotorProfileFragment)
                 Toast.makeText(requireContext(), getString(R.string.verified), Toast.LENGTH_SHORT)
                     .show()
             } else if (args.userforgetpassword?.code.toString() == getCodeFromEdittext()) {
@@ -107,6 +115,11 @@ class OtpFragment : Fragment() {
                     getString(R.string.invalid_code),
                     Toast.LENGTH_SHORT
                 ).show()
+                binding.etOtpFirst.setText("")
+                binding.etOtpsecond.setText("")
+                binding.etOtpthird.setText("")
+                binding.etOtpforth.setText("")
+                binding.etOtpFirst.requestFocus()
             }
 
         }
@@ -248,7 +261,7 @@ class OtpFragment : Fragment() {
                         DateUtils.setCurrentTime(currentTime.toString())
                         Log.e("token","${response.data.token}")
                     }
-
+                    findNavController().navigate(R.id.docotorProfileFragment)
                 }
                 is Resource.Error -> {
                     hideprogressbar()

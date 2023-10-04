@@ -98,6 +98,7 @@ class MyScheduleFragment : Fragment(), MyScheduleAdapter.ActionSchedule,
         }
 
         binding.layoutBottomsheetpersistant.btnApply.setOnClickListener {
+            callback()
             bottomsheetbeahavoir.state = BottomSheetBehavior.STATE_HIDDEN
         }
 
@@ -149,7 +150,7 @@ class MyScheduleFragment : Fragment(), MyScheduleAdapter.ActionSchedule,
                     when (sechdule) {
                         "Upcoming" -> {
                             val upcominglist = it.data?.data?.filter {
-                                it?.appointmentDate!! > formattedDate
+                                it?.appointmentDate!! > formattedDate && it.isCancel==false && it.IsCompleted==false
                             }
                             Log.e("true", upcominglist.toString())
                             myScheduleAdapter.submitList(upcominglist)
@@ -159,7 +160,6 @@ class MyScheduleFragment : Fragment(), MyScheduleAdapter.ActionSchedule,
                         "Canceled" -> {
                             val Canceledlist = it.data?.data?.filter {
                                 it?.isCancel == true
-
                             }
 
 
@@ -182,9 +182,12 @@ class MyScheduleFragment : Fragment(), MyScheduleAdapter.ActionSchedule,
                         }
 
                         else -> {
-                            myScheduleAdapter.submitList(it.data?.data)
+                            val upcominglist = it.data?.data?.filter {
+                                it?.appointmentDate!! > formattedDate && it.isCancel==false && it.IsCompleted==false
+                            }
+                            myScheduleAdapter.submitList(upcominglist)
                             myScheduleAdapter.notifyDataSetChanged()
-                            updateUi(it.data?.data as List<DataAppointment>)
+                            updateUi(upcominglist as  List<DataAppointment> )
                         }
 
                     }

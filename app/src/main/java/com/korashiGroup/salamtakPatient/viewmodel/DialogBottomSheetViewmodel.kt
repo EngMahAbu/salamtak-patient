@@ -39,7 +39,9 @@ import javax.inject.Inject
 class DialogBottomSheetViewmodel @Inject constructor(private val repositry: RegisterRepositry):ViewModel(){
 
     var doctorSearchPage=0
-    var doctorSearchItemResponse:DoctorsearchItemResponse?=null
+    private var doctorSearchItemResponse:DoctorsearchItemResponse?=null
+    var healthEntityPage=0
+    var healthEntityResponse:GetHealthEntityResponse?=null
     val nationalityResponse=MutableLiveData<Resource<GetCountry>>()
     val specialistResponse=MutableLiveData<Resource<GetSpecialistResponse>>()
     val subSpecialistResponse=MutableLiveData<Resource<GetSubSpecilistResponse>>()
@@ -233,7 +235,7 @@ class DialogBottomSheetViewmodel @Inject constructor(private val repositry: Regi
                     }
                 }
 
-                return Resource.sucess(doctorSearchItemResponse?:it)
+                return Resource.sucess(it)
             }
         }
         return Resource.Error(response.message())
@@ -391,9 +393,9 @@ class DialogBottomSheetViewmodel @Inject constructor(private val repositry: Regi
     }
 
      fun getHealthEntityPagedList(CityId :Int,AreaId :Int,HealthEntityTypeId :Int,
-                                         MaxResultCount :Int,SkipCount :Int)=viewModelScope.launch(Dispatchers.IO+handler) {
+                                         MaxResultCount :Int,healthEntityPage:Int)=viewModelScope.launch(Dispatchers.IO+handler) {
         healthyResponse.postValue(Resource.Loading())
-        val response = repositry.getHealthEntityPagedList(CityId,AreaId,HealthEntityTypeId,MaxResultCount,SkipCount)
+        val response = repositry.getHealthEntityPagedList(CityId,AreaId,HealthEntityTypeId,MaxResultCount,healthEntityPage)
 
         healthyResponse.postValue(response?.let { handleGetHealthEntityPagedList(it) })
     }
@@ -401,7 +403,19 @@ class DialogBottomSheetViewmodel @Inject constructor(private val repositry: Regi
     private fun handleGetHealthEntityPagedList(response: Response<GetHealthEntityResponse>): Resource<GetHealthEntityResponse>? {
         if (response.isSuccessful){
             response.body()?.let {
-                return Resource.sucess(it)
+                healthEntityPage+=10
+                if (healthEntityResponse==null){
+                    healthEntityResponse=it
+                }else{
+                    val oldItems=healthEntityResponse?.data?.items
+                    val newItems=it.data?.items
+                    if (newItems != null) {
+                        oldItems?.addAll(newItems)
+                    }
+
+                }
+
+                return Resource.sucess(healthEntityResponse?:it)
             }
         }
         val error = Gson().fromJson<GetHealthEntityResponse>(response.errorBody()!!.string(), GetHealthEntityResponse::class.java)

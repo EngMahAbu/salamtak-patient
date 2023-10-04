@@ -55,6 +55,14 @@ object DateUtils {
         return SharedPreferencesTool.getString(context,SharedPreferencesKeys.LanguageMore.name)
     }
 
+    fun setLanguageSkip(skip: String) {
+        SharedPreferencesTool.setString(context, SharedPreferencesKeys.Skip.name, skip)
+    }
+
+    fun getLanguageSkip(): String? {
+        return SharedPreferencesTool.getString(context,SharedPreferencesKeys.Skip.name)
+    }
+
     fun getFcmToken(): String? {
         return SharedPreferencesTool.getString(context,SharedPreferencesKeys.PREF_USER_FCM_TOKEN.name)
     }

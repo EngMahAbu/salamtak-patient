@@ -140,7 +140,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         }
 
         binding.ivArrow.setOnClickListener {
-            findNavController().popBackStack()
+            findNavController().navigate(R.id.homeFragment)
         }
 
         binding.layoutFilter.setOnClickListener {
@@ -245,7 +245,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                 10,
                 examinationtypeid,
                 seniortyLevelId,
-                viewmodel.doctorSearchPage,
+                0,
                 specialistId,
                 sub_SpecialistId,insuranceId
             )
@@ -358,7 +358,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                 10,
                 examinationtypeid,
                 0,
-                viewmodel.doctorSearchPage,
+               0,
                 specialistId
             )
             viewmodel.searchDoctors(doctorssearchRequset)
@@ -532,10 +532,10 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             feesFrom = 0,
             feesTo = 0,
             genderId,
-            10,
+            120,
             examinationtypeid,
             0,
-            viewmodel.doctorSearchPage,
+            0,
             specialistId
         )
         viewmodel.searchDoctors(doctorssearchRequset)
@@ -576,7 +576,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             sharedDataViewmodel.getClinicSchedualByClinicDayId(clinicSchedualByClinicDayId)
             sharedDataViewmodel.getDocotorId(doctorId)
             findNavController().navigate(R.id.bookingAppointmentFragment)
-        }
+       }
     }
 
     private fun getDayId() {
@@ -733,10 +733,10 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                            feesFrom = 0,
                             feesTo,
                             genderId,
-                            10,
+                            120,
                             examinationtypeid,
                             0,
-                            viewmodel.doctorSearchPage,
+                            0,
                             specialistId
                         )
                         viewmodel.searchDoctors(doctorssearchRequset)
@@ -749,10 +749,10 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                             feesFrom = 0,
                             feesTo,
                             genderId,
-                            10,
+                            120,
                             examinationtypeid,
                             0,
-                            viewmodel.doctorSearchPage,
+                            0,
                             specialistId
                         )
                         viewmodel.searchDoctors(doctorssearchRequset)
@@ -822,7 +822,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                     feesFrom = 0,
                     feesTo,
                     genderId,
-                    10,
+                    120,
                     examinationtypeid,
                     0,
                     viewmodel.doctorSearchPage,

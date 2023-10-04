@@ -63,21 +63,23 @@ class DialogSchduleFragment : BottomSheetDialogFragment() {
         }
 
         binding.tvEdit.setOnClickListener {
-            if (this::getDoctorClinksResponse.isInitialized){
-            val action=DialogSchduleFragmentDirections.actionDialogSchduleFragmentToBookAppointmentFragment(getDoctorClinksResponse,"Edit Appointment")
-            findNavController().navigate(action) }else{
-                return@setOnClickListener
-            }
-
+//            if (this::getDoctorClinksResponse.isInitialized){
+//            val action=DialogSchduleFragmentDirections.actionDialogSchduleFragmentToBookAppointmentFragment(getDoctorClinksResponse,"Edit Appointment")
+//            findNavController().navigate(action) }else{
+//                return@setOnClickListener
+//            }
+            binding.layoutCanceled.visibility=View.GONE
+            binding.layoutCancelAppointments.visibility=View.VISIBLE
 
         }
 
         binding.btnReschedule.setOnClickListener {
-            if (this::getDoctorClinksResponse.isInitialized){
-            val action=DialogSchduleFragmentDirections.actionDialogSchduleFragmentToBookAppointmentFragment(getDoctorClinksResponse,"Reschedule")
-            findNavController().navigate(action) }else{
-                return@setOnClickListener
-            }
+//            if (this::getDoctorClinksResponse.isInitialized){
+//            val action=DialogSchduleFragmentDirections.actionDialogSchduleFragmentToBookAppointmentFragment(getDoctorClinksResponse,"Reschedule")
+//            findNavController().navigate(action) }else{
+//                return@setOnClickListener
+//            }
+            dismiss()
         }
         binding.tvReBookingAppointment.setOnClickListener {
             if (this::getDoctorClinksResponse.isInitialized){
@@ -186,6 +188,8 @@ class DialogSchduleFragment : BottomSheetDialogFragment() {
                 is Resource.sucess -> {
                     binding.progressBar.visibility=View.GONE
                     Toast.makeText(requireContext(),"Appointment Canceled Successfully",Toast.LENGTH_SHORT).show()
+                        val action=DialogSchduleFragmentDirections.actionDialogSchduleFragmentToBookAppointmentFragment(getDoctorClinksResponse,"Edit Appointment")
+                        findNavController().navigate(action)
                     dismiss()
                 }
                 is Resource.Error -> {

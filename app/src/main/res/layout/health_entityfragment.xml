@@ -71,7 +71,7 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_Doctors"
+        android:id="@+id/rv_HelthEntity"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -87,10 +87,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/rv_Doctors"
+        app:layout_constraintBottom_toBottomOf="@+id/rv_HelthEntity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/rv_Doctors" />
+        app:layout_constraintTop_toTopOf="@+id/rv_HelthEntity" />
 
         <TextView android:id="@+id/crd_view"
                   android:layout_width="wrap_content"

@@ -93,10 +93,9 @@
             app:layout_constraintBottom_toTopOf="@+id/iv_korahilogo"/>
         <ImageView
             android:id="@+id/iv_korahilogo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:src="@drawable/ic_korashilogo"
+            android:layout_width="180dp"
+            android:layout_height="120dp"
+            android:src="@drawable/ic_korashi_logo"
             android:layout_marginBottom="30dp"
             app:layout_constraintBottom_toTopOf="@+id/imageView"
             app:layout_constraintEnd_toEndOf="parent"

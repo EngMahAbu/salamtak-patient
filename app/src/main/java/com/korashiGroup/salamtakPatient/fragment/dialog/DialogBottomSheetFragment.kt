@@ -780,6 +780,7 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
                     sp.saveUserLang(Constans.Language, lang!!)
                     DateUtils.setLanguageFromMore(lang!!)
                     DateUtils.setLanguage(lang!!)
+                    skipLogin()
                 }
 
                 binding.itemLanguage.radioArabic.id -> {
@@ -787,12 +788,26 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
                     sp.saveUserLang(Constans.Language, lang!!)
                     DateUtils.setLanguageFromMore(lang!!)
                     DateUtils.setLanguage(lang!!)
+                    skipLogin()
                 }
 
             }
 
         }
 
+    }
+
+    private fun skipLogin(){
+        sharedDataViewmodel.skipLoginStatus.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+
+
+            if (it=="skip"){
+                DateUtils.setLanguageSkip("skip")
+            }else {
+                DateUtils.setLanguageSkip("")
+            }
+
+        })
     }
 
 

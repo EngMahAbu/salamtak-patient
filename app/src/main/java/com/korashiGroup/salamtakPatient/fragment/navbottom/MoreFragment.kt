@@ -52,6 +52,7 @@ class MoreFragment : Fragment() {
         }
         initButton()
         getSkipLoginStatus()
+        editUi()
     }
 
 
@@ -94,14 +95,14 @@ class MoreFragment : Fragment() {
         binding.layoutTermsConditions.setOnClickListener {
             findNavController().navigate(R.id.webViewFragment)
         }
-        binding.layoutNextAvailableBooking.setOnClickListener {
-                if (skipStatus=="skip"){
-                    return@setOnClickListener
-                }else{
-                    findNavController().navigate(R.id.editProfileFragment)
+      binding.layoutNextAvailableBooking.setOnClickListener {
+//                if (skipStatus=="skip"){
+//                    return@setOnClickListener
+//                }else{
+                 findNavController().navigate(R.id.editProfileFragment)
                 }
-
-        }
+//
+//        }
 
 
 
@@ -110,8 +111,29 @@ class MoreFragment : Fragment() {
     private fun getSkipLoginStatus(){
         sharedDataViewmodel.skipLoginStatus.observe(viewLifecycleOwner, Observer {
             skipStatus=it
+            if (it=="skip"){
+                binding.layoutNextAvailableBooking.visibility=View.GONE
+                binding.layoutChangePassword.visibility=View.GONE
+                binding.layoutSignOut.visibility=View.GONE
+            }else{
+                binding.layoutNextAvailableBooking.visibility=View.VISIBLE
+                binding.layoutChangePassword.visibility=View.VISIBLE
+                binding.layoutSignOut.visibility=View.VISIBLE
+            }
 
         })
+    }
+
+    private fun editUi(){
+        if (skipStatus=="skip"){
+            binding.layoutNextAvailableBooking.visibility=View.GONE
+            binding.layoutChangePassword.visibility=View.GONE
+            binding.layoutSignOut.visibility=View.GONE
+        }else{
+            binding.layoutNextAvailableBooking.visibility=View.VISIBLE
+            binding.layoutChangePassword.visibility=View.VISIBLE
+            binding.layoutSignOut.visibility=View.VISIBLE
+        }
     }
 
 

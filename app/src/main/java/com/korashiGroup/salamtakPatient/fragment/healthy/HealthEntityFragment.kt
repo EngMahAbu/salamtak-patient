@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AbsListView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
@@ -17,6 +18,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.adapter.MedicalHealthAdapter
 import com.korashiGroup.salamtakPatient.adapter.MedicalServicesAdapter
@@ -28,6 +30,7 @@ import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.snackbar.Snackbar
+import com.korashiGroup.salamtakPatient.model.docotorsearch.DoctorSearchRequest
 import com.korashiGroup.salamtakPatient.model.healthy.ItemHealth
 import com.korashiGroup.salamtakPatient.model.salamtakgate.Blogs
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,6 +44,7 @@ class HealthEntityFragment : Fragment(),MedicalHealthAdapter.Action {
     val sharedDataViewmodel: SharedDataViewmodel by activityViewModels()
     private val args:HealthEntityFragmentArgs by navArgs()
     private lateinit var healthAdapter: MedicalHealthAdapter
+    val allHealthItem= mutableListOf<ItemHealth>()
     private var cityId=0
     private var areaId=0
 
@@ -68,10 +72,10 @@ class HealthEntityFragment : Fragment(),MedicalHealthAdapter.Action {
 
     private fun medicalServicesRecylerview(){
         healthAdapter = MedicalHealthAdapter(this)
-        binding.rvDoctors.apply {
+        binding.rvHelthEntity.apply {
             adapter = healthAdapter
             layoutManager = LinearLayoutManager(requireContext())
-            setHasFixedSize(true)
+            addOnScrollListener(this@HealthEntityFragment.scrollListener)
         }
     }
 
@@ -81,7 +85,8 @@ class HealthEntityFragment : Fragment(),MedicalHealthAdapter.Action {
         }
 
         binding.layoutBottomsheetpersistant.btnApply.setOnClickListener {
-            viewmodel.getHealthEntityPagedList(cityId,areaId,args.healthtype,15,0)
+            viewmodel.healthEntityPage=0
+            viewmodel.getHealthEntityPagedList(cityId,areaId,args.healthtype,10,viewmodel.healthEntityPage)
             bottomsheetbeahavoir.state = BottomSheetBehavior.STATE_HIDDEN
         }
 
@@ -123,9 +128,20 @@ class HealthEntityFragment : Fragment(),MedicalHealthAdapter.Action {
 
                 is Resource.sucess->{
                     binding.progressBar.visibility=View.GONE
-                    healthAdapter.submitList(response.data?.data?.items)
+
+                      val list = response.data?.data?.items
+                    list?.forEach {
+                        it?.let { it1 -> allHealthItem.add(it1) }
+                    }
+                        healthAdapter.submitList(list?.toList())
+
+                    val totalresult= (response.data?.data?.totalCount)?.div((10+2))
+                    isLastPage = viewmodel.healthEntityPage == totalresult
+                    if (isLastPage){
+                        binding.rvHelthEntity.setPadding(0,0,0,0)
+                    }
                     response.data?.data?.items?.let { updateUi(it) }
-                    healthAdapter.notifyDataSetChanged()
+
                 }
 
                 is Resource.Error->{
@@ -135,7 +151,7 @@ class HealthEntityFragment : Fragment(),MedicalHealthAdapter.Action {
             }
 
         })
-        viewmodel.getHealthEntityPagedList(cityId,areaId,args.healthtype,10,0)
+        viewmodel.getHealthEntityPagedList(cityId,areaId,args.healthtype,10,viewmodel.healthEntityPage)
 
     }
 
@@ -169,6 +185,39 @@ class HealthEntityFragment : Fragment(),MedicalHealthAdapter.Action {
             binding.crdView.visibility = View.GONE
         }
     }
+
+    var isloading=false
+    var isLastPage=false
+    var isScrolling=false
+    val scrollListener=object : RecyclerView.OnScrollListener(){
+        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+            super.onScrollStateChanged(recyclerView, newState)
+            if (newState== AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL){
+                isScrolling=true
+            }
+        }
+
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+            super.onScrolled(recyclerView, dx, dy)
+
+            val layoutmanger=recyclerView.layoutManager as LinearLayoutManager
+            val firstVisibleItemPosition=layoutmanger.findFirstVisibleItemPosition()
+            val visibleItemCount=layoutmanger.childCount
+            val totalItemCount=layoutmanger.itemCount
+            val isNotLoadingAndIsNotLastPage = !isloading && !isLastPage
+            val isAtLastItem=firstVisibleItemPosition + visibleItemCount >= totalItemCount
+            val isNotAtBeginning= firstVisibleItemPosition>=0
+            val isTotalMoreThanvisible=totalItemCount>= Constans.Query_Page_Size
+            val shouldPaginate=isNotLoadingAndIsNotLastPage && isAtLastItem && isNotAtBeginning && isTotalMoreThanvisible && isScrolling
+            if (shouldPaginate){
+                viewmodel.getHealthEntityPagedList(cityId,areaId,args.healthtype,10,viewmodel.healthEntityPage)
+                isScrolling=false
+
+            }
+
+        }
+    }
+
 
 
 }

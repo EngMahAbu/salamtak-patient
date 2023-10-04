@@ -22,6 +22,7 @@ import com.korashiGroup.salamtakPatient.utils.Resource
 import com.google.gson.Gson
 import com.korashiGroup.salamtakPatient.model.askandanswer.QuestionAndAnswerResponse
 import com.korashiGroup.salamtakPatient.model.askandanswer.QuestionRequest
+import com.korashiGroup.salamtakPatient.model.emr.EmrPatientResponse
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCardResponse
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCompanyResponse
 import com.korashiGroup.salamtakPatient.model.insurance.SendInsuranceCardResponce
@@ -41,6 +42,8 @@ class PatientViewmodel @Inject constructor(private val repositry: RegisterReposi
 
 
     val doctorRateResponse=MutableLiveData<Resource<RatingResponse>>()
+    val emrResponse=MutableLiveData<Resource<EmrPatientResponse>>()
+    val editAppointmentResponse=MutableLiveData<Resource<CreatepatientAppointementsResponse>>()
 
 
     fun createDoctorRate(doctorRateRequest: HashMap<String, String> )=viewModelScope.launch(Dispatchers.IO+handler) {
@@ -59,6 +62,38 @@ class PatientViewmodel @Inject constructor(private val repositry: RegisterReposi
         return error.Message?.let { Resource.Error(it) }
     }
 
+    fun getPatientDetails( appointmentId :Int)=viewModelScope.launch(Dispatchers.IO+handler) {
+        emrResponse.postValue(Resource.Loading())
+        val response=repositry.getPatientDetails(appointmentId)
+        emrResponse.postValue(response?.let { handleGetPatientDetails(it) })
+    }
+
+    private fun handleGetPatientDetails(response: Response<EmrPatientResponse>): Resource<EmrPatientResponse>? {
+        if (response.isSuccessful){
+            response.body()?.let {
+                return Resource.sucess(it)
+            }
+        }
+        val error = Gson().fromJson<EmrPatientResponse>(response.errorBody()!!.string(), EmrPatientResponse::class.java)
+        return error.message?.let { Resource.Error(it) }
+    }
+
+
+    fun getEditPatientAppointment(appointmentRequest: EditPatientAppointmentRequest)=viewModelScope.launch(Dispatchers.IO+handler) {
+        editAppointmentResponse.postValue(Resource.Loading())
+        val response=repositry.editPatientAppointment(appointmentRequest)
+        editAppointmentResponse.postValue(response?.let { handlegetEditPatientAppointment(it) })
+    }
+
+    private fun handlegetEditPatientAppointment(response: Response<CreatepatientAppointementsResponse>): Resource<CreatepatientAppointementsResponse>? {
+        if (response.isSuccessful){
+            response.body()?.let {
+                return Resource.sucess(it)
+            }
+        }
+        val error = Gson().fromJson<CreatepatientAppointementsResponse>(response.errorBody()!!.string(), CreatepatientAppointementsResponse::class.java)
+        return error.message?.let { Resource.Error(it) }
+    }
 
 
 

@@ -2,6 +2,7 @@ package com.korashiGroup.salamtakPatient.repository
 
 import com.korashiGroup.salamtakPatient.api.ApiService
 import com.korashiGroup.salamtakPatient.model.askandanswer.QuestionRequest
+import com.korashiGroup.salamtakPatient.model.booking.EditPatientAppointmentRequest
 import com.korashiGroup.salamtakPatient.model.booking.PatientAppointmentRequest
 import com.korashiGroup.salamtakPatient.model.docotorsearch.DoctorSearchRequest
 import com.korashiGroup.salamtakPatient.model.profile.LocationRequest
@@ -164,5 +165,12 @@ class RegisterRepositry @Inject constructor(private val apiService: ApiService) 
         ?.let { apiService.getPatient_Insurance(it) }
     suspend fun createDoctorRate(doctorRateRequest: HashMap<String, String>) = sp.getUserLang(Constans.Language)
         ?.let { apiService.createDoctorRate(it,doctorRateRequest) }
+
+    suspend fun getPatientDetails(appointmentId :Int) = sp.getUserLang(Constans.Language)
+        ?.let { apiService.getPatientDetails(it, appointmentId) }
+
+    suspend fun editPatientAppointment(appointmentRequest: EditPatientAppointmentRequest) =
+        sp.getUserLang(Constans.Language)
+            ?.let { apiService.editPatientAppointment(it, appointmentRequest) }
 
 }

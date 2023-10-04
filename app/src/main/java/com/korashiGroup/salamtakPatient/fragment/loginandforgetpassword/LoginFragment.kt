@@ -15,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.databinding.LoginfragmentBinding
+import com.korashiGroup.salamtakPatient.model.register.DataLogin
 import com.korashiGroup.salamtakPatient.model.register.LoginUser
 import com.korashiGroup.salamtakPatient.utils.Constans.Language
 import com.korashiGroup.salamtakPatient.utils.Constans.TOKEN
@@ -126,7 +127,9 @@ class LoginFragment : Fragment() {
         binding.tvSkipLogin.setOnClickListener {
             sharedDataViewmodel.getSkipLoginStatus("skip")
             someEventListener?.someEvent("skip")
+            sp.save(UserLOGIN, DataLogin(0,"","","","",0,0,""))
             findNavController().navigate(R.id.homeFragment)
+
         }
 
     }

@@ -7,9 +7,7 @@
     <string name="english">English</string>
     <string name="arabic">Arabic</string>
     <string name="salamtakbooking">Salamtak Booking</string>
-    <string name="screen_booking_text">Is designed to accommodate an easy way and professional tool to book reservations
-        while furnishing all related information that would be of an interest for both patient and doctor. Nevertheless,
-        reservations confirmation and reminder technique are also part of the features that Salamtak booking provides.
+    <string name="screen_booking_text">Salamtak Booking provides an easy way for the patient to book an appointment with his favourite doctor with the possobility of following up on the latest offers of doctors in all specialities
     </string>
     <string name="skip">Skip</string>
     <string name="salamtakhomebooking">Salamtak Home Visit</string>
@@ -90,6 +88,11 @@
     <string name="search_by_name_of_country">Search by name of country</string>
     <string name="powered_by">Powered By</string>
     <string name="salamtak_booking">Salamtak Booking</string>
+    <string name="home_visit">Home Visit</string>
+    <string name="home_visitdesc">Salamtak Home Visit provides a radical solution to the problem of booking a home visit to the doctor so that it does not conflict with his clinic reservations</string>
+    <string name="live_chat">Live Chat</string>
+    <string name="live_chatdesc">Save your time and effort as Salamtak live chat allows you to provide the first and third visits for both the patient and the doctor</string>
+
     <string name="verification_code_will_be_sent_within_1_30">Verification code will be sent within</string>
     <string name="conter">1:30</string>
     <string name="complete_your_profile">Complete your profile</string>
@@ -202,7 +205,7 @@
     <string name="cancelappointment">CancelAppointment</string>
     <string name="are_you_sure_you_want_to_cancel_this_appointment">Are you sure you want to cancel this appointment
     </string>
-    <string name="reschedule">Reschedule</string>
+    <string name="reschedule">No</string>
     <string name="re_booking_appointment">Re-Booking Appointment</string>
     <string name="medical_history">Medical History</string>
     <string name="rate">Rate</string>
@@ -269,6 +272,11 @@
     <string name="worning">Worning</string>
     <string name="ok">OK</string>
     <string name="thereisnolocatio">There is no location</string>
+    <string name="description">Description :</string>
+    <string name="title">TiTle :</string>
+    <string name="signupedit">You must Sign Up to book your doctor</string>
+    <string name="me">Me</string>
+    <string name="anotherpatient">Another patient</string>
 
     <array name="choose">
         <item>Select</item>
