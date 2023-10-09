@@ -31,6 +31,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import coil.transform.CircleCropTransformation
 import com.bumptech.glide.Glide
+import com.fawry.fawrypay.FawrySdk
+import com.fawry.fawrypay.interfaces.FawryPreLaunch
+import com.fawry.fawrypay.interfaces.FawrySdkCallbacks
+import com.fawry.fawrypay.models.*
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.databinding.AppointmentDetailsfragmentBinding
@@ -72,6 +76,22 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
     val sharedDataViewmodel: SharedDataViewmodel by activityViewModels()
     private lateinit var insuranceCardAdapter: InsuranceCardAdapter
 
+    //Replace this with Testing/Staging/Production URL
+    var baseUrl = "https://atfawry.fawrystaging.com/"
+
+    //customer info
+    var customerName = ""
+    var customerMobile = ""
+    var customerEmail =
+        "" //required in saving cards for payment with card tokenization
+    var customerProfileId = "2" //required in saving cards for payment with card tokenization
+
+    //merchant info
+    val merchantCode = "+/IAAY2notiBHP5krjVCyg=="
+    val merchantSecretCode = "26c56f1a-45aa-4fbd-8928-c11eca24d7a1"
+    val chargeItems = ArrayList<PayableItem>()
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -97,6 +117,14 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
         initButton()
         callBack()
 
+        val billItem = BillItems(
+            itemId = "testId",
+            description = "",
+            quantity = "1",
+            price = args.confirmappointments?.fees.toString()
+        )
+        chargeItems.add(billItem)
+
     }
 
     private fun initButton() {
@@ -111,7 +139,7 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
         binding.btnConfirm.setOnClickListener {
            val mediaclName=args.confirmappointments?.MedicalExaminationTypeName
             if (mediaclName =="Calls" || mediaclName =="Video Calls" || mediaclName =="التليفون" ||mediaclName=="فيديو"){
-                Toast.makeText(requireContext(), "call", Toast.LENGTH_SHORT).show()
+                startPayment()
             } else {
                 viewmodel.createPatientAppointment(
                     PatientAppointmentRequest(
@@ -255,6 +283,78 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
     override fun onItemSelected(card: InsuranceCard) {
         Snackbar.make(requireView(), "${card.insCompanyName}", Snackbar.LENGTH_SHORT).show()
     }
+
+    private fun startPayment() {
+        var lang = FawrySdk.Languages.ARABIC
+        if (DateUtils.getLanguage() == "en") {
+            lang = FawrySdk.Languages.ENGLISH
+        }
+
+        FawrySdk.launchAnonymousSDK(
+            requireActivity(), lang, baseUrl,
+            FawryLaunchModel(
+                launchCustomerModel = LaunchCustomerModel(
+                    customerName = customerName,
+                    customerEmail = customerEmail,
+                    customerMobile = customerMobile,
+                    customerProfileId = customerProfileId
+                ),
+                launchMerchantModel = LaunchMerchantModel(
+                    merchantCode = merchantCode,
+                    secretCode = merchantSecretCode,
+                    merchantRefNum = "${System.currentTimeMillis()}"
+                ),
+                allow3DPayment = true,
+                chargeItems = chargeItems,
+                skipReceipt = false,
+                skipLogin = true,
+                payWithCardToken = true,
+                authCaptureMode = false
+            ),
+            object : FawrySdkCallbacks {
+                override fun onPreLaunch(onPreLaunch: FawryPreLaunch) {
+                    onPreLaunch.onContinue()
+                }
+
+                override fun onInit() {
+
+                }
+
+                override fun onSuccess(msg: String, data: Any?) {
+                    Log.d("SDK_Team", "$data")
+                    //           Toast.makeText(this@MainActivity, "on success ${msg}", Toast.LENGTH_SHORT)
+                    //      .show()
+
+                    viewmodel.createPatientAppointment(
+                        PatientAppointmentRequest(
+                            args.confirmappointments?.doctorId,
+                            args.confirmappointments?.DoctorWorkingDayTimeId,
+                            args.confirmappointments?.formattedDate,
+                            true,
+                            ""
+                        )
+                    )
+                }
+
+                override fun onPaymentCompleted(msg: String, data: Any?) {
+
+//                    Toast.makeText(
+//                        requireContext(),
+//                        "on payment completed $data",
+//                        Toast.LENGTH_SHORT
+//                    ).show()
+                }
+
+                override fun onFailure(error: String) {
+//                    Toast.makeText(
+//                        requireContext(),
+//                        "on failure ${error}",
+//                        Toast.LENGTH_SHORT
+//                    ).show()
+                }
+            })
+    }
+
 
 
 }

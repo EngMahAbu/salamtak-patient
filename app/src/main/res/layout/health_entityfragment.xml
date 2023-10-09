@@ -70,7 +70,55 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-    <androidx.recyclerview.widget.RecyclerView
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_salamtakAngel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="15dp"
+                android:padding="3dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_arrow">
+
+            <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_emergencies"
+                    android:layout_width="0dp"
+                    android:layout_height="55dp"
+                    android:layout_marginStart="15dp"
+                    android:background="@drawable/bg_button_sellector"
+                    android:fontFamily="@font/avenirltstd_roman"
+                    android:text="@string/emergencies"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_QandA"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_QandA"
+                    android:layout_width="0dp"
+                    android:layout_height="55dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/bg_help"
+                    android:fontFamily="@font/avenirltstd_roman"
+                    android:text="@string/qanda"
+                    android:textColor="@color/blue"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/btn_emergencies"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+        <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_HelthEntity"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -79,7 +127,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_margin="15dp"
         tools:listitem="@layout/item_layout_health"
-        app:layout_constraintTop_toBottomOf="@+id/tv_Health"
+        app:layout_constraintTop_toBottomOf="@+id/layout_salamtakAngel"
         />
 
     <ProgressBar

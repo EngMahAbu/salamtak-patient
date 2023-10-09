@@ -263,6 +263,8 @@
     <string name="signupedit">يجب عليك التسجيل لحجز طبيبك</string>
     <string name="me">لنفســــى</string>
     <string name="anotherpatient">لمريض آخــــر</string>
+    <string name="qanda"><![CDATA[Q&A]]></string>
+    <string name="emergencies">Emergencies</string>
 
 
 </resources>

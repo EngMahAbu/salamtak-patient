@@ -277,6 +277,8 @@
     <string name="signupedit">You must Sign Up to book your doctor</string>
     <string name="me">Me</string>
     <string name="anotherpatient">Another patient</string>
+    <string name="qanda"><![CDATA[Q&A]]></string>
+    <string name="emergencies">Emergencies</string>
 
     <array name="choose">
         <item>Select</item>

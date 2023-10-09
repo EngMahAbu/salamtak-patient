@@ -1,6 +1,7 @@
 package com.korashiGroup.salamtakPatient.fragment.healthy
 
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
@@ -60,7 +61,11 @@ class HealthEntityFragment : Fragment(),MedicalHealthAdapter.Action {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
      binding.tvHealth.text=args.healthname
-
+        if (args.healthtype==7){
+            binding.layoutSalamtakAngel.visibility=View.VISIBLE
+        }else{
+            binding.layoutSalamtakAngel.visibility=View.GONE
+        }
         bottomsheetbeahavoir =
             BottomSheetBehavior.from(binding.layoutBottomsheetpersistant.MedicalServices)
         bottomsheetbeahavoir.state = BottomSheetBehavior.STATE_HIDDEN
@@ -83,6 +88,26 @@ class HealthEntityFragment : Fragment(),MedicalHealthAdapter.Action {
         binding.ivArrow.setOnClickListener {
             findNavController().popBackStack()
         }
+
+        binding.btnEmergencies.setOnClickListener {
+            binding.btnEmergencies.setBackgroundResource(R.drawable.bg_button_sellector)
+            binding.btnEmergencies.setTextColor(Color.parseColor("#FFFFFFFF"))
+            binding.btnQandA.setBackgroundResource(R.drawable.bg_help)
+            binding.btnQandA.setTextColor(Color.parseColor("#262D70"))
+
+
+
+        }
+
+        binding.btnQandA.setOnClickListener {
+            binding.btnQandA.setBackgroundResource(R.drawable.bg_button_sellector)
+            binding.btnQandA.setTextColor(Color.parseColor("#FFFFFFFF"))
+            binding.btnEmergencies.setBackgroundResource(R.drawable.bg_help)
+            binding.btnEmergencies.setTextColor(Color.parseColor("#262D70"))
+
+
+        }
+
 
         binding.layoutBottomsheetpersistant.btnApply.setOnClickListener {
             viewmodel.healthEntityPage=0

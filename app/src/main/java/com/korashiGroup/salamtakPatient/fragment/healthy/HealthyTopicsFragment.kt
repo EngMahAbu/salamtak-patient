@@ -1,5 +1,6 @@
 package com.korashiGroup.salamtakPatient.fragment.healthy
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -57,6 +58,8 @@ class HealthyTopicsFragment : Fragment() {
         binding.ivArrow.setOnClickListener {
             findNavController().popBackStack()
         }
+
+
     }
 
 
