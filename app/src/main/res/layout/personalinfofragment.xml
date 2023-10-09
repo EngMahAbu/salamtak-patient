@@ -94,6 +94,7 @@
                     android:hint="@string/full_name_in_english_first_middle_last"
                     android:imeOptions="actionNext"
                     android:importantForAutofill="no"
+                    android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890!@#$%^*?"
                     android:inputType="text"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
@@ -141,6 +142,7 @@
                     android:fontFamily="@font/avenirltstd_roman"
                     android:gravity="start"
                     android:inputType="text"
+                    android:digits="غظضذخثتشرقصفعسنملكيطحزوهدبا !@#$%^*?"
                     android:imeOptions="actionNext"
                     android:importantForAutofill="no"
                     android:textColor="@color/black"

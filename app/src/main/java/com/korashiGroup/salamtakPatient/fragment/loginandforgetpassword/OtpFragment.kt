@@ -256,7 +256,7 @@ class OtpFragment : Fragment() {
                     it?.data?.let { response ->
                         DateUtils.setToken(response.data.token)
                         DateUtils.setCurrentTime(currentTime.toString())
-                        sp.save(Constans.UserLOGIN, DataLogin(0,"",response.data.name,response.data.nameAR.toString(),"",0,0,""))
+                        sp.save(Constans.UserLOGIN, DataLogin(0,"",response.data.name,"","",0,0,""))
 
                         Log.e("token","${response.data.token}")
                     }

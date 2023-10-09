@@ -61,6 +61,7 @@ class HealthEntityFragment : Fragment(),MedicalHealthAdapter.Action {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
      binding.tvHealth.text=args.healthname
+
         if (args.healthtype==7){
             binding.layoutSalamtakAngel.visibility=View.VISIBLE
         }else{
@@ -94,9 +95,6 @@ class HealthEntityFragment : Fragment(),MedicalHealthAdapter.Action {
             binding.btnEmergencies.setTextColor(Color.parseColor("#FFFFFFFF"))
             binding.btnQandA.setBackgroundResource(R.drawable.bg_help)
             binding.btnQandA.setTextColor(Color.parseColor("#262D70"))
-
-
-
         }
 
         binding.btnQandA.setOnClickListener {
@@ -104,8 +102,6 @@ class HealthEntityFragment : Fragment(),MedicalHealthAdapter.Action {
             binding.btnQandA.setTextColor(Color.parseColor("#FFFFFFFF"))
             binding.btnEmergencies.setBackgroundResource(R.drawable.bg_help)
             binding.btnEmergencies.setTextColor(Color.parseColor("#262D70"))
-
-
         }
 
 
