@@ -24,6 +24,9 @@ import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.viewmodel.RegisterViewmodel
 import com.karumi.dexter.Dexter.withContext
 import com.korashiGroup.salamtakPatient.fragment.signupanddocotorprofile.SignupFragmentDirections
+import com.korashiGroup.salamtakPatient.model.register.DataLogin
+import com.korashiGroup.salamtakPatient.utils.Constans
+import com.korashiGroup.salamtakPatient.utils.SpUtil
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -32,6 +35,7 @@ import kotlinx.coroutines.launch
 import okhttp3.internal.format
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class OtpFragment : Fragment() {
@@ -41,6 +45,8 @@ class OtpFragment : Fragment() {
     private val viewmodel: RegisterViewmodel by viewModels()
     val sharedDataViewmodel: SharedDataViewmodel by activityViewModels()
     private var otpCode: String? = null
+    @Inject
+    lateinit var sp: SpUtil
     private val currentTime = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -79,23 +85,14 @@ class OtpFragment : Fragment() {
         binding.btnSend.setOnClickListener {
 
             if (args.responsemodel?.code.toString() == getCodeFromEdittext()) {
-//                args.user?.let { it1 ->
-//                    viewmodel.createuser(
-//                        it1
-//                    )
-//                }
+
                 getUserCallback()
 
                 Toast.makeText(requireContext(), getString(R.string.verified), Toast.LENGTH_SHORT)
                     .show()
             } else if (otpCode == getCodeFromEdittext()) {
-//                args.user?.let { it1 ->
-//                    viewmodel.createuser(
-//                        it1
-//                    )
-//                }
+
                 getUserCallback()
-            //    findNavController().navigate(R.id.docotorProfileFragment)
                 Toast.makeText(requireContext(), getString(R.string.verified), Toast.LENGTH_SHORT)
                     .show()
             } else if (args.userforgetpassword?.code.toString() == getCodeFromEdittext()) {
@@ -259,8 +256,11 @@ class OtpFragment : Fragment() {
                     it?.data?.let { response ->
                         DateUtils.setToken(response.data.token)
                         DateUtils.setCurrentTime(currentTime.toString())
+                        sp.save(Constans.UserLOGIN, DataLogin(0,"",response.data.name,response.data.nameAR.toString(),"",0,0,""))
+
                         Log.e("token","${response.data.token}")
                     }
+
                     findNavController().navigate(R.id.docotorProfileFragment)
                 }
                 is Resource.Error -> {

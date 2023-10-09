@@ -3,7 +3,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="google_maps_key" translatable="false">AIzaSyCXXrHGIHS6yTgVnm8jL-nes8ERGqRChhM</string>
-    <string name="togetstartpickyourlanguage">To Get Start Pick Your Language</string>
+    <string name="togetstartpickyourlanguage">To Get Started Select Your Language</string>
     <string name="english">English</string>
     <string name="arabic">Arabic</string>
     <string name="salamtakbooking">Salamtak Booking</string>

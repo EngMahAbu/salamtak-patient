@@ -58,7 +58,7 @@ class MyScheduleFragment : Fragment(), MyScheduleAdapter.ActionSchedule,
         bottomsheetbeahavoir =
             BottomSheetBehavior.from(binding.layoutBottomsheetpersistant.examinationtypeBottomsheet)
         bottomsheetbeahavoir.state = BottomSheetBehavior.STATE_HIDDEN
-        val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").apply {
+        val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US).apply {
             this.timeZone = TimeZone.getTimeZone("CST")
         }
         formattedDate = formatter.format(now.time)

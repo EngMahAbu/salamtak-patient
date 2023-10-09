@@ -63,7 +63,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
-class AppointmentDetailsFragment : Fragment(),InsuranceCardAdapter.SelectInsuranceCard {
+class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsuranceCard {
 
     private lateinit var binding: AppointmentDetailsfragmentBinding
     private val args: AppointmentDetailsFragmentArgs by navArgs()
@@ -109,12 +109,20 @@ class AppointmentDetailsFragment : Fragment(),InsuranceCardAdapter.SelectInsuran
         }
 
         binding.btnConfirm.setOnClickListener {
-            viewmodel.createPatientAppointment(
-                PatientAppointmentRequest(
-                    args.confirmappointments?.doctorId,
-                    args.confirmappointments?.DoctorWorkingDayTimeId, args.confirmappointments?.formattedDate, true, ""
+           val mediaclName=args.confirmappointments?.MedicalExaminationTypeName
+            if (mediaclName =="Calls" || mediaclName =="Video Calls" || mediaclName =="التليفون" ||mediaclName=="فيديو"){
+                Toast.makeText(requireContext(), "call", Toast.LENGTH_SHORT).show()
+            } else {
+                viewmodel.createPatientAppointment(
+                    PatientAppointmentRequest(
+                        args.confirmappointments?.doctorId,
+                        args.confirmappointments?.DoctorWorkingDayTimeId,
+                        args.confirmappointments?.formattedDate,
+                        true,
+                        ""
+                    )
                 )
-            )
+            }
         }
 
         binding.layoutBottomsheetpersistant.btnAddCard.setOnClickListener {
@@ -123,26 +131,26 @@ class AppointmentDetailsFragment : Fragment(),InsuranceCardAdapter.SelectInsuran
 
 
         binding.chCard.setOnCheckedChangeListener { buttonView, isChecked ->
-            if (isChecked){
+            if (isChecked) {
                 bottomsheetbeahavoir.state =
                     if (bottomsheetbeahavoir.state == BottomSheetBehavior.STATE_EXPANDED)
                         BottomSheetBehavior.STATE_HIDDEN else BottomSheetBehavior.STATE_EXPANDED
                 callBackGetInsuranceCards()
-                buttonView.isChecked=false
+                buttonView.isChecked = false
             }
 
         }
 
 
     }
+
     private fun insuranceCardRecylerview() {
-       insuranceCardAdapter = InsuranceCardAdapter(this)
+        insuranceCardAdapter = InsuranceCardAdapter(this)
         binding.layoutBottomsheetpersistant.rvInsuranceCard.apply {
             adapter = insuranceCardAdapter
             setHasFixedSize(true)
         }
     }
-
 
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -177,7 +185,10 @@ class AppointmentDetailsFragment : Fragment(),InsuranceCardAdapter.SelectInsuran
                     is Resource.sucess -> {
                         binding.progressBar.visibility = View.GONE
                         Toast.makeText(requireContext(), " booking Successfully", Toast.LENGTH_SHORT).show()
-                        val action=AppointmentDetailsFragmentDirections.actionAppointmentDetailsFragmentToConfirmedFragment(binding.tvDate.text.toString())
+                        val action =
+                            AppointmentDetailsFragmentDirections.actionAppointmentDetailsFragmentToConfirmedFragment(
+                                binding.tvDate.text.toString()
+                            )
                         findNavController().navigate(action)
                     }
 
@@ -191,7 +202,7 @@ class AppointmentDetailsFragment : Fragment(),InsuranceCardAdapter.SelectInsuran
 
     }
 
-    private fun callBackGetInsuranceCards(){
+    private fun callBackGetInsuranceCards() {
         viewmodel?.insurancecardResponse?.observe(viewLifecycleOwner,
             Observer {
                 when (it) {
@@ -218,7 +229,6 @@ class AppointmentDetailsFragment : Fragment(),InsuranceCardAdapter.SelectInsuran
     }
 
 
-
     private fun DateParsing(dateParsing: String): String {
         var day = ""
         try {
@@ -240,7 +250,6 @@ class AppointmentDetailsFragment : Fragment(),InsuranceCardAdapter.SelectInsuran
             binding.layoutBottomsheetpersistant.crdView.visibility = View.GONE
         }
     }
-
 
 
     override fun onItemSelected(card: InsuranceCard) {
