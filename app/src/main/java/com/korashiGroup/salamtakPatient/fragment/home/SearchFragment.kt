@@ -242,7 +242,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                 feesFrom,
                 feesTo,
                 genderId,
-                10,
+                100,
                 examinationtypeid,
                 seniortyLevelId,
                 0,
@@ -312,7 +312,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         )
 
         binding.layoutBottomsheetpersistant.ivArrow.setOnClickListener {
-            findNavController().popBackStack()
+            findNavController().navigate(R.id.searchFragment)
         }
 
     }
@@ -355,7 +355,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                 feesFrom = 0,
                 feesTo = 0,
                 genderId,
-                10,
+                100,
                 examinationtypeid,
                 0,
                0,
@@ -532,7 +532,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             feesFrom = 0,
             feesTo = 0,
             genderId,
-            120,
+            100,
             examinationtypeid,
             0,
             0,
@@ -733,7 +733,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                            feesFrom = 0,
                             feesTo,
                             genderId,
-                            120,
+                            100,
                             examinationtypeid,
                             0,
                             0,
@@ -749,7 +749,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                             feesFrom = 0,
                             feesTo,
                             genderId,
-                            120,
+                            100,
                             examinationtypeid,
                             0,
                             0,

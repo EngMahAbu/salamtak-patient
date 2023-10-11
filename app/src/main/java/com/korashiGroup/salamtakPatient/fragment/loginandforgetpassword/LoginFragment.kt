@@ -200,7 +200,7 @@ class LoginFragment : Fragment() {
                     loginresponse.data!!?.data?.let { DateUtils.setToken(it.token) }
                     DateUtils.setCurrentTime(currentTime.toString())
                     sharedDataViewmodel.getProfileStatus( loginresponse.data?.data?.profileStatus!!)
-                     if (loginresponse.data?.data?.profileStatus!!<3) {
+                     if (loginresponse.data?.data?.profileStatus!!<2) {
                           findNavController().navigate(R.id.docotorProfileFragment)
                      }else{
                          val action=LoginFragmentDirections.actionLoginFragmentToHomeFragment()

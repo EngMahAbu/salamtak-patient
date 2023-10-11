@@ -415,7 +415,7 @@ class DialogBottomSheetViewmodel @Inject constructor(private val repositry: Regi
 
                 }
 
-                return Resource.sucess(healthEntityResponse?:it)
+                return Resource.sucess(it)
             }
         }
         val error = Gson().fromJson<GetHealthEntityResponse>(response.errorBody()!!.string(), GetHealthEntityResponse::class.java)

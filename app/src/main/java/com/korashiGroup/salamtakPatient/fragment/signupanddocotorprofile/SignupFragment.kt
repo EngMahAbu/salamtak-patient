@@ -114,6 +114,9 @@ class SignupFragment : Fragment() {
                     sp.saveUserNameInEnglish(NameEN, fullNameEn)
                     sp.saveUserfromSignup(UserSIGNUP, user!!)
                     viewmodel.registerUser( user!!)
+                }else{
+                    Snackbar.make(requireView(), getString(R.string.fillallfields), Snackbar.LENGTH_SHORT)
+                        .show()
                 }
 
 

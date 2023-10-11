@@ -7,5 +7,10 @@ data class PatientAppointmentRequest(
     val DoctorWorkingDayTimeId:Int?,
     val AppointmentDate:String?,
     val IsBook:Boolean?,
-    val image:String?
+    val image:String?,
+    var PaymentMethodID:Int=0,
+    var Fawryrefnum:String="",
+    var FawrySign:String="",
+    var Patient_InsuranceID:Int?=null
+
 ): Serializable

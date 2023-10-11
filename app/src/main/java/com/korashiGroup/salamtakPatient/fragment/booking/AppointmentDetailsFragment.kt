@@ -1,25 +1,14 @@
 package com.korashiGroup.salamtakPatient.fragment.booking
 
-import android.Manifest
-import android.app.Activity
-import android.app.Dialog
-import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.CompoundButton
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -27,10 +16,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import coil.transform.CircleCropTransformation
-import com.bumptech.glide.Glide
 import com.fawry.fawrypay.FawrySdk
 import com.fawry.fawrypay.interfaces.FawryPreLaunch
 import com.fawry.fawrypay.interfaces.FawrySdkCallbacks
@@ -41,27 +28,13 @@ import com.korashiGroup.salamtakPatient.databinding.AppointmentDetailsfragmentBi
 import com.korashiGroup.salamtakPatient.model.booking.PatientAppointmentRequest
 import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
 import com.google.android.material.snackbar.Snackbar
-import com.karumi.dexter.Dexter
-import com.karumi.dexter.MultiplePermissionsReport
-import com.karumi.dexter.PermissionToken
-import com.karumi.dexter.listener.PermissionDeniedResponse
-import com.karumi.dexter.listener.PermissionGrantedResponse
-import com.karumi.dexter.listener.PermissionRequest
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener
-import com.karumi.dexter.listener.single.PermissionListener
+import com.google.gson.Gson
 import com.korashiGroup.salamtakPatient.adapter.InsuranceCardAdapter
-import com.korashiGroup.salamtakPatient.adapter.MedicalServicesAdapter
-import com.korashiGroup.salamtakPatient.model.SpecialistData
-import com.korashiGroup.salamtakPatient.model.docotorsearch.Item
+import com.korashiGroup.salamtakPatient.model.faweryjson.Fawery
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCard
-import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCompany
 import com.korashiGroup.salamtakPatient.utils.*
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import dagger.hilt.android.AndroidEntryPoint
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody.Companion.asRequestBody
-import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -90,7 +63,7 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
     val merchantCode = "+/IAAY2notiBHP5krjVCyg=="
     val merchantSecretCode = "26c56f1a-45aa-4fbd-8928-c11eca24d7a1"
     val chargeItems = ArrayList<PayableItem>()
-
+     var Patient_InsuranceID:Int?=null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -124,6 +97,12 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
             price = args.confirmappointments?.fees.toString()
         )
         chargeItems.add(billItem)
+        if (args.confirmappointments?.MedicalExaminationTypeName=="Clinic Bookings"
+            || args.confirmappointments?.MedicalExaminationTypeName=="عيادة"){
+            binding.chCard.visibility=View.VISIBLE
+        }else{
+            binding.chCard.visibility=View.GONE
+        }
 
     }
 
@@ -140,16 +119,45 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
            val mediaclName=args.confirmappointments?.MedicalExaminationTypeName
             if (mediaclName =="Calls" || mediaclName =="Video Calls" || mediaclName =="التليفون" ||mediaclName=="فيديو"){
                 startPayment()
-            } else {
-                viewmodel.createPatientAppointment(
+            } else if (mediaclName=="Home visits" || mediaclName=="كشف منزلى"){
+
+                Patient_InsuranceID.let { it1 ->
                     PatientAppointmentRequest(
                         args.confirmappointments?.doctorId,
                         args.confirmappointments?.DoctorWorkingDayTimeId,
                         args.confirmappointments?.formattedDate,
                         true,
-                        ""
+                        "",
+                        1,
+                        "",
+                        "",
+                        it1
                     )
-                )
+                }?.let { it2 ->
+                    viewmodel.createPatientAppointment(
+                        it2
+                    )
+                }
+
+            }
+            else {
+                Patient_InsuranceID?.let { it1 ->
+                    PatientAppointmentRequest(
+                        args.confirmappointments?.doctorId,
+                        args.confirmappointments?.DoctorWorkingDayTimeId,
+                        args.confirmappointments?.formattedDate,
+                        true,
+                        "",
+                        1,
+                        "",
+                        "",
+                        it1
+                    )
+                }?.let { it2 ->
+                    viewmodel.createPatientAppointment(
+                        it2
+                    )
+                }
             }
         }
 
@@ -281,7 +289,9 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
 
 
     override fun onItemSelected(card: InsuranceCard) {
-        Snackbar.make(requireView(), "${card.insCompanyName}", Snackbar.LENGTH_SHORT).show()
+       // Snackbar.make(requireView(), "insCompanyID:${card.id}", Snackbar.LENGTH_SHORT).show()
+        Patient_InsuranceID=card.id
+
     }
 
     private fun startPayment() {
@@ -324,16 +334,48 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
                     Log.d("SDK_Team", "$data")
                     //           Toast.makeText(this@MainActivity, "on success ${msg}", Toast.LENGTH_SHORT)
                     //      .show()
+                    val gson = Gson()
+                    val fawery = gson?.fromJson(data.toString(), Fawery::class.java)
 
-                    viewmodel.createPatientAppointment(
-                        PatientAppointmentRequest(
+                    //    val map = getQueryString(data.toString())
+                    // val paymentMethod= map?.get("referenceNumber")
+                    if (fawery?.signature.isNullOrEmpty()){
+                        val patientrequest= PatientAppointmentRequest(
                             args.confirmappointments?.doctorId,
                             args.confirmappointments?.DoctorWorkingDayTimeId,
                             args.confirmappointments?.formattedDate,
                             true,
+                            "",
+                            3,
+                            fawery?.referenceNumber!!,
                             ""
+
                         )
-                    )
+
+                        viewmodel.createPatientAppointment(
+                            patientrequest
+                        )
+                    }else{
+
+                        val patientrequest= PatientAppointmentRequest(
+                            args.confirmappointments?.doctorId,
+                            args.confirmappointments?.DoctorWorkingDayTimeId,
+                            args.confirmappointments?.formattedDate,
+                            true,
+                            "",
+                            3,
+                            fawery?.referenceNumber!!,
+                            fawery.signature!!
+
+                        )
+
+                        viewmodel.createPatientAppointment(
+                            patientrequest
+                        )
+
+                    }
+
+
                 }
 
                 override fun onPaymentCompleted(msg: String, data: Any?) {
@@ -354,6 +396,21 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
                 }
             })
     }
+
+    fun getQueryString(url: String?): HashMap<String, String>? {
+        val uri: Uri = Uri.parse(url)
+        val map: HashMap<String, String> = HashMap()
+        for (paramName in uri.getQueryParameterNames()) {
+            if (paramName != null) {
+                val paramValue: String? = uri.getQueryParameter(paramName)
+                if (paramValue != null) {
+                    map[paramName] = paramValue
+                }
+            }
+        }
+        return map
+    }
+
 
 
 

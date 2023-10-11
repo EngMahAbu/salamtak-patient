@@ -4,7 +4,9 @@ import android.net.Uri
 import android.util.Log
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import com.google.gson.Gson
 import com.korashiGroup.salamtakPatient.R
+import com.korashiGroup.salamtakPatient.model.faweryjson.Fawery
 import com.korashiGroup.salamtakPatient.utils.DateUtils
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONObject
@@ -51,14 +53,17 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 //            result=values
 //        }
 
+        val gson = Gson()
+        val deeplink = gson?.fromJson(result, DeepLinkItem::class.java)
+
 
         val map = getQueryString(result)
         Log.e(TAG, "map: $map")
 
 
-        if (map?.get("link")?.contains("SalamtakPatient://2?") == true) {
+        if (deeplink?.link=="SalamtakPatient://2?") {
             linkAudioOrVideo = "audio"
-        } else if (map?.get("link")?.contains("SalamtakPatient://3?") == true) {
+        } else  {
             linkAudioOrVideo = "video"
         }
 

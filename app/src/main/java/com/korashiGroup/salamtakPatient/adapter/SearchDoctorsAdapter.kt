@@ -29,7 +29,7 @@ class SearchDoctorsAdapter(private val booking: Booking) :
 
         holder.binding.apply {
             tvDoctorName.text = services.doctorName
-            tvSpecialization.text = services.specialistName
+            tvSpecialization.text = "${services.specialistName} - ${services.seniortyLevelName}"
 
             services.subSpecialistName?.forEach {
                 subspecialist= "$subspecialist $it,"

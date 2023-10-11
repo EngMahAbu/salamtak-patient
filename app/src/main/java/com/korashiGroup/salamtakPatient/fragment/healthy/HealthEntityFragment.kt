@@ -172,7 +172,7 @@ class HealthEntityFragment : Fragment(),MedicalHealthAdapter.Action {
             }
 
         })
-        viewmodel.getHealthEntityPagedList(cityId,areaId,args.healthtype,10,viewmodel.healthEntityPage)
+        viewmodel.getHealthEntityPagedList(cityId,areaId,args.healthtype,100,0)
 
     }
 
