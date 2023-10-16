@@ -36,7 +36,7 @@ class SearchDoctorsAdapter(private val booking: Booking) :
             }
             subSpecialization.text = subspecialist
             subspecialist=""
-            location.text = services.clinicDto?.Address
+            location.text = services.clinicDto?.AreaName
             waitingTime.text = "${services.waitingTime}"
             Feesresult.text = "${services.feesFrom.toString()} ${holder.binding.Feesresult.context.getString(R.string.le)}"
         }

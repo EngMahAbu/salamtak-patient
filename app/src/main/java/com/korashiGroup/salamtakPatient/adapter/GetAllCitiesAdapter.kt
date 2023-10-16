@@ -26,7 +26,7 @@ class GetAllCitiesAdapter(private val selectCity: SelectCity):ListAdapter<CityDa
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val sp=getItem(position)
 
-        if (DefaultLocaleHelper.getInstance(holder.binding.radioSpecialist.context).getCurrentLocale()=="AR"){
+        if (DefaultLocaleHelper.getInstance(holder.binding.radioSpecialist.context).getCurrentLocale()=="ar"){
             holder.binding.radioSpecialist.text=sp.nameAr
         }else{
             holder.binding.radioSpecialist.text=sp.name

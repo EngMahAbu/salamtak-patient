@@ -627,7 +627,7 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
         args.doctorclinks.data?.subSpecialistName?.forEach {
             subspecialist = "$subspecialist $it,"
         }
-        binding.tvSpecialization.text = subspecialist
+        binding.tvSpecialization.text = "${subspecialist} - ${args.doctorclinks.data?.seniorityLevelName}"
 
         binding.ivDoctorProfile.load("https://salamtechapi.azurewebsites.net/${args.doctorclinks.data?.image}") {
             crossfade(true)

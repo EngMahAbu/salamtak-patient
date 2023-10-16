@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.AbsListView
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -124,6 +125,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
 
         binding.layoutBottomsheetpersistant.tvRESET.setOnClickListener {
             reset()
+            binding.tvSearch.text=getString(R.string.search)
         }
 
         binding.ivNext.setOnClickListener {
@@ -268,7 +270,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         binding.rvDoctors.apply {
             adapter = searchDoctorsAdapter
             layoutManager = LinearLayoutManager(requireContext())
-            addOnScrollListener(this@SearchFragment.scrollListener)
+            //addOnScrollListener(this@SearchFragment.scrollListener)
         }
     }
 
@@ -346,6 +348,12 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
     private fun bindFields() {
         sharedDataViewmodel.specialication.observe(viewLifecycleOwner) {
             binding.layoutBottomsheetpersistant.etSpecialization.setText(it.name)
+            if (it.name.isNullOrEmpty()){
+                binding.tvSearch.setText(getString(R.string.search))
+            }else{
+                binding.tvSearch.setText(it.name)
+            }
+
             specialistId = it.id
             val doctorssearchRequset = DoctorSearchRequest(
                 0,
@@ -613,7 +621,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
 
     fun setupSpinner() {
         val typelist = arrayOf(
-            "select",
+            getString(R.string.select),
             getString(R.string.Clinic_Booking),
             getString(R.string.Home_Visit),
             getString(R.string.Video_Call),
@@ -650,7 +658,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
     fun setupInsuranceSpinner(list: List<InsuranceCompany>) {
 
         val insuranceCompanyList=ArrayList<String>()
-        insuranceCompanyList.add("Select")
+        insuranceCompanyList.add(getString(R.string.select))
         list.forEach {
             insuranceCompanyList.add(it.name)
         }
@@ -780,6 +788,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
     }
 
     private fun reset(){
+
         val subSpecialistData=SubSpecialistData(0,"",false,"")
         val list=ArrayList<SubSpecialistData>()
         list.add(subSpecialistData)

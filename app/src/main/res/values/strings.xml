@@ -279,6 +279,7 @@
     <string name="anotherpatient">Another patient</string>
     <string name="qanda"><![CDATA[Q&A]]></string>
     <string name="emergencies">Emergencies</string>
+    <string name="select">Select</string>
 
     <array name="choose">
         <item>Select</item>

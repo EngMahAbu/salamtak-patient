@@ -88,6 +88,8 @@ data class Item(
 data class ClinicDto(
     @SerializedName("Address")
     val Address: String?,
+    @SerializedName("AreaName")
+    val AreaName: String?,
     @SerializedName("ClinicLatitude")
     val ClinicLatitude: String?,
     @SerializedName("ClinicLongitude")
