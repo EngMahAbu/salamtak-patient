@@ -92,11 +92,11 @@
     <string name="complete_your_profile">أكمل ملفك الشخصي</string>
     <string name="you_must_complete_your_profile_to_can_book_your_doctor">يجب عليك إكمال ملف التعريف الخاص بك لتتمكن من حجز طبيبك</string>
     <string name="salamtak_services">خدمات سلامتك</string>
-    <string name="Clinic_Booking">عيادة</string>
+    <string name="Clinic_Booking">كشف بالعيادة</string>
     <string name="Home_Visit">كشف منزلى</string>
     <string name="Chat">دردشه</string>
-    <string name="Call">التليفون</string>
-    <string name="Video_Call">فيديو</string>
+    <string name="Call">مكالمة صوتية</string>
+    <string name="Video_Call">مكالمة فيديو</string>
     <string name="medical_services_directory">ارشادات سلامتك</string>
     <string name="see_all">مشاهدةالكل</string>
     <string name="hospitals">المستشفيات</string>

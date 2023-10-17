@@ -303,7 +303,8 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
                                 fees,
                                 medicalExaminationTypeName,
                                 it.data?.data?.doctorDto?.specialistName,
-                                args.doctorclinks.data!!.image
+                                args.doctorclinks.data!!.image,
+                                medicalExaminationId
                             )
                         }
                     }
@@ -355,7 +356,8 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
                                 fees,
                                 medicalExaminationTypeName,
                                 it.data?.data?.doctorDto?.specialistName,
-                                args.doctorclinks.data!!.image
+                                args.doctorclinks.data!!.image,
+                                medicalExaminationId
                             )
                         }
                     }

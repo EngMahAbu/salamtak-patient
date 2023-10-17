@@ -130,7 +130,7 @@ class DialogClinkBookingFragment : BottomSheetDialogFragment(),
                     hideprogressbar()
                     val appointmentDetailBooking= args.appointmentrequest.DoctorId?.let { it1 ->
                         AppointmentDetailBooking(it.data?.data?.doctorName,
-                            it1,formattedDate,intervalTime,doctorWorkingDayTimeId,fees,medicalExaminationTypeName,it.data?.data?.doctorDto?.specialistName,args.appointmentrequest.image)
+                            it1,formattedDate,intervalTime,doctorWorkingDayTimeId,fees,medicalExaminationTypeName,it.data?.data?.doctorDto?.specialistName,args.appointmentrequest.image,null)
                     }
                    val action=DialogClinkBookingFragmentDirections.actionDialogClinkBookingFragmentToAppointmentDetailsFragment(appointmentDetailBooking
                   ,true )

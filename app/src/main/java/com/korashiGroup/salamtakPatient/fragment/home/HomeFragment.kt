@@ -232,7 +232,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
         )
         list.add(
             ImageServices(
-                R.drawable.salamtak,
+                R.drawable.ic_salamtak_angel,
                 getString(R.string.engile),
                 R.color.color_6, 7
             )

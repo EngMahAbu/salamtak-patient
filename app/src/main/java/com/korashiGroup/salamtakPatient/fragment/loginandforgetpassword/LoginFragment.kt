@@ -92,6 +92,7 @@ class LoginFragment : Fragment() {
 
         binding.next.setOnClickListener {
             sharedDataViewmodel.getSkipLoginStatus("")
+            DateUtils.setLanguageSkip("")
             someEventListener?.someEvent("")
             val mobile = binding.textinputMobile.editText?.text.toString()
             val password = binding.textinputPassword.editText?.text.toString()

@@ -98,7 +98,7 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
         )
         chargeItems.add(billItem)
         if (args.confirmappointments?.MedicalExaminationTypeName=="Clinic Bookings"
-            || args.confirmappointments?.MedicalExaminationTypeName=="عيادة"){
+            || args.confirmappointments?.MedicalExaminationTypeName=="كشف بالعيادة"){
             binding.chCard.visibility=View.VISIBLE
         }else{
             binding.chCard.visibility=View.GONE
@@ -117,7 +117,7 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
 
         binding.btnConfirm.setOnClickListener {
            val mediaclName=args.confirmappointments?.MedicalExaminationTypeName
-            if (mediaclName =="Calls" || mediaclName =="Video Calls" || mediaclName =="التليفون" ||mediaclName=="فيديو"){
+            if (mediaclName =="Calls" || mediaclName =="Video Calls" || mediaclName =="مكالمة صوتية" ||mediaclName=="مكالمة فيديو"){
                 startPayment()
             } else if (mediaclName=="Home visits" || mediaclName=="كشف منزلى"){
 
@@ -395,20 +395,6 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
 //                    ).show()
                 }
             })
-    }
-
-    fun getQueryString(url: String?): HashMap<String, String>? {
-        val uri: Uri = Uri.parse(url)
-        val map: HashMap<String, String> = HashMap()
-        for (paramName in uri.getQueryParameterNames()) {
-            if (paramName != null) {
-                val paramValue: String? = uri.getQueryParameter(paramName)
-                if (paramValue != null) {
-                    map[paramName] = paramValue
-                }
-            }
-        }
-        return map
     }
 
 
