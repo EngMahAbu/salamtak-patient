@@ -96,7 +96,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         binding.ivPrevious.isEnabled = step != 1
         examinationtypeid = HomeFragment.instance?.let {
             it.medicalExaminatioId?.toInt()
-        }!!
+        }?:1
         bottomsheetbeahavoir =
             BottomSheetBehavior.from(binding.layoutBottomsheetpersistant.filterBottomsheet)
         bottomsheetbeahavoir.state = BottomSheetBehavior.STATE_HIDDEN

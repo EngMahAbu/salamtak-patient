@@ -24,6 +24,7 @@ import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.viewmodel.RegisterViewmodel
 import com.karumi.dexter.Dexter.withContext
 import com.korashiGroup.salamtakPatient.fragment.signupanddocotorprofile.SignupFragmentDirections
+import com.korashiGroup.salamtakPatient.model.register.CreateUser
 import com.korashiGroup.salamtakPatient.model.register.DataLogin
 import com.korashiGroup.salamtakPatient.utils.Constans
 import com.korashiGroup.salamtakPatient.utils.SpUtil
@@ -123,7 +124,11 @@ class OtpFragment : Fragment() {
 
         binding.tvResendCode.setOnClickListener {
             binding.tvResendCode.visibility = View.GONE
-            args.user?.let { it1 -> viewmodel.Sentotp( it1) }
+            val arg=args.user
+            if (arg!=null){
+                arg?.let { it1 -> viewmodel.Sentotp( it1) }
+            }
+
         }
 
 

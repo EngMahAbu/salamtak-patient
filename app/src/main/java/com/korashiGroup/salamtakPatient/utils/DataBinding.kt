@@ -6,6 +6,8 @@ import android.net.Uri
 import android.view.View
 import android.widget.Toast
 import androidx.databinding.BindingAdapter
+import java.text.SimpleDateFormat
+import java.util.*
 
 object DataBinding {
 
@@ -26,5 +28,13 @@ object DataBinding {
 
     fun Context.displayToastText(txt:String){
         Toast.makeText(this,txt, Toast.LENGTH_SHORT).show()
+    }
+
+    fun getCurrentDateTime():String{
+        val time = Calendar.getInstance().time
+        val formatter = SimpleDateFormat("yyyy-MM-dd")
+        val current = formatter.format(time)
+
+        return current
     }
 }

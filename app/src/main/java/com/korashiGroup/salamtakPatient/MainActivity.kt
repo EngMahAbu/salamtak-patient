@@ -15,7 +15,7 @@ import com.korashiGroup.salamtakPatient.utils.localization.DefaultLocaleHelper
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() ,LoginFragment.onSomeEventListener{
+class MainActivity : AppCompatActivity(), LoginFragment.onSomeEventListener {
 
     private lateinit var navController: NavController
     private lateinit var binding: ActivityMainBinding
@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() ,LoginFragment.onSomeEventListener{
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.bottomViewNav.selectedItemId=R.id.homeFragment
         instance = this
 
         setupNavigationBottom()
@@ -43,6 +44,7 @@ class MainActivity : AppCompatActivity() ,LoginFragment.onSomeEventListener{
             when (destination.id) {
                 R.id.homeFragment,
                 R.id.moreFragment,
+                R.id.offersFragment,
                 R.id.myScheduleFragment -> {
                     binding.bottomViewNav.visibility = View.VISIBLE
                 }
@@ -76,10 +78,12 @@ class MainActivity : AppCompatActivity() ,LoginFragment.onSomeEventListener{
     }
 
     override fun someEvent(skipLogin: String?) {
-        if(skipLogin=="skip"){
+        if (skipLogin == "skip") {
             binding.bottomViewNav.getMenu().getItem(1).setEnabled(false)
-        }else{
+            binding.bottomViewNav.getMenu().getItem(2).setEnabled(false)
+        } else {
             binding.bottomViewNav.getMenu().getItem(1).setEnabled(true)
+            binding.bottomViewNav.getMenu().getItem(2).setEnabled(true)
         }
     }
 

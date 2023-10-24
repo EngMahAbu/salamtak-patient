@@ -8,6 +8,11 @@
     <item android:id="@+id/myScheduleFragment"
         android:title="@string/my_schedule"
         android:icon="@drawable/schedule"/>
+
+    <item android:id="@+id/offersFragment"
+          android:title="@string/offers"
+          android:icon="@drawable/ic_offer"/>
+
     <item android:id="@+id/moreFragment"
         android:title="@string/more"
         android:icon="@drawable/ic_more"/>

@@ -97,7 +97,7 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
             price = args.confirmappointments?.fees.toString()
         )
         chargeItems.add(billItem)
-        if (args.confirmappointments?.MedicalExaminationTypeName=="Clinic Bookings"
+        if (args.confirmappointments?.MedicalExaminationTypeName=="In-Clinic Booking"
             || args.confirmappointments?.MedicalExaminationTypeName=="كشف بالعيادة"){
             binding.chCard.visibility=View.VISIBLE
         }else{
@@ -117,9 +117,9 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
 
         binding.btnConfirm.setOnClickListener {
            val mediaclName=args.confirmappointments?.MedicalExaminationTypeName
-            if (mediaclName =="Calls" || mediaclName =="Video Calls" || mediaclName =="مكالمة صوتية" ||mediaclName=="مكالمة فيديو"){
+            if (mediaclName =="Call" || mediaclName =="Video Call" || mediaclName =="مكالمة صوتية" ||mediaclName=="مكالمة فيديو"){
                 startPayment()
-            } else if (mediaclName=="Home visits" || mediaclName=="كشف منزلى"){
+            } else if (mediaclName=="Home visit" || mediaclName=="كشف منزلى" || mediaclName=="In-Clinic Booking" || mediaclName=="كشف بالعيادة"){
 
                 Patient_InsuranceID.let { it1 ->
                     PatientAppointmentRequest(

@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.databinding.SplashfragmentBinding
+import com.korashiGroup.salamtakPatient.utils.DataBinding
 import com.korashiGroup.salamtakPatient.utils.DateUtils
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import java.text.SimpleDateFormat
@@ -23,7 +24,6 @@ class SplashFragment : Fragment() {
     private lateinit var binding: SplashfragmentBinding
     val sharedDataViewmodel: SharedDataViewmodel by activityViewModels()
     private var skip=""
-    private val currentTime = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,8 +53,7 @@ class SplashFragment : Fragment() {
 
             }else if(!DateUtils.getToken().isNullOrEmpty()){
                 Log.e("lang",DateUtils.getLanguage().toString())
-                val currentdate=DateUtils.getCurrentTime()
-                if (currentdate==currentTime.toString()){
+                if (DateUtils.getCurrentTime()==DataBinding.getCurrentDateTime()){
                     findNavController().navigate(R.id.homeFragment)
                 }else{
                     findNavController().navigate(R.id.loginFragment)

@@ -23,6 +23,7 @@ import com.google.gson.Gson
 import com.korashiGroup.salamtakPatient.model.askandanswer.QuestionAndAnswerResponse
 import com.korashiGroup.salamtakPatient.model.askandanswer.QuestionRequest
 import com.korashiGroup.salamtakPatient.model.emr.EmrPatientResponse
+import com.korashiGroup.salamtakPatient.model.favorite.FavoriteDoctorResponse
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCardResponse
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCompanyResponse
 import com.korashiGroup.salamtakPatient.model.insurance.SendInsuranceCardResponce
@@ -44,7 +45,7 @@ class PatientViewmodel @Inject constructor(private val repositry: RegisterReposi
     val doctorRateResponse=MutableLiveData<Resource<RatingResponse>>()
     val emrResponse=MutableLiveData<Resource<EmrPatientResponse>>()
     val editAppointmentResponse=MutableLiveData<Resource<CreatepatientAppointementsResponse>>()
-
+    val favoriteDoctorResponse=MutableLiveData<Resource<FavoriteDoctorResponse>>()
 
     fun createDoctorRate(doctorRateRequest: HashMap<String, String> )=viewModelScope.launch(Dispatchers.IO+handler) {
         doctorRateResponse.postValue(Resource.Loading())
@@ -92,6 +93,24 @@ class PatientViewmodel @Inject constructor(private val repositry: RegisterReposi
             }
         }
         val error = Gson().fromJson<CreatepatientAppointementsResponse>(response.errorBody()!!.string(), CreatepatientAppointementsResponse::class.java)
+        return error.message?.let { Resource.Error(it) }
+    }
+
+
+
+    fun getPatientFavoritDoctor()=viewModelScope.launch(Dispatchers.IO+handler) {
+        favoriteDoctorResponse.postValue(Resource.Loading())
+        val response=repositry.getPatientFavoritDoctor()
+        favoriteDoctorResponse.postValue(response?.let { handlegetPatientFavoritDoctor(it) })
+    }
+
+    private fun handlegetPatientFavoritDoctor(response: Response<FavoriteDoctorResponse>): Resource<FavoriteDoctorResponse>? {
+        if (response.isSuccessful){
+            response.body()?.let {
+                return Resource.sucess(it)
+            }
+        }
+        val error = Gson().fromJson<FavoriteDoctorResponse>(response.errorBody()!!.string(), FavoriteDoctorResponse::class.java)
         return error.message?.let { Resource.Error(it) }
     }
 

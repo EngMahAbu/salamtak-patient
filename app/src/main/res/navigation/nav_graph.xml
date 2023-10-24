@@ -431,5 +431,15 @@
         <argument android:name="latitude" app:argType="string" app:nullable="true"/>
         <argument android:name="longitude" app:argType="string" app:nullable="true"/>
     </dialog>
+    <fragment android:id="@+id/favoriteDoctorFragment"
+              android:name="com.korashiGroup.salamtakPatient.fragment.favoritedoctor.FavoriteDoctorFragment"
+              android:label="favorite_doctorfragment" tools:layout="@layout/favorite_doctorfragment">
+        <action android:id="@+id/action_favoriteDoctorFragment_to_bookingAppointmentFragment"
+                app:destination="@id/bookingAppointmentFragment"/>
+    </fragment>
+    <fragment android:id="@+id/offersFragment"
+              android:name="com.korashiGroup.salamtakPatient.fragment.offers.OffersFragment"
+              android:label="offersfragment"
+              tools:layout="@layout/offersfragment"/>
 
 </navigation>

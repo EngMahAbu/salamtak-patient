@@ -7,7 +7,8 @@
     <string name="english">English</string>
     <string name="arabic">Arabic</string>
     <string name="salamtakbooking">Salamtak Booking</string>
-    <string name="screen_booking_text">Salamtak Booking provides an easy way for the patient to book an appointment with his favourite doctor with the possobility of following up on the latest offers of doctors in all specialities
+    <string name="screen_booking_text">Salamtak Booking provides an easy way for the patient to book an appointment with
+        his favourite doctor with the possobility of following up on the latest offers of doctors in all specialities
     </string>
     <string name="skip">Skip</string>
     <string name="salamtakhomebooking">Salamtak Home Visit</string>
@@ -89,9 +90,13 @@
     <string name="powered_by">Powered By</string>
     <string name="salamtak_booking">Salamtak Booking</string>
     <string name="home_visit">Home Visit</string>
-    <string name="home_visitdesc">Salamtak Home Visit provides a radical solution to the problem of booking a home visit to the doctor so that it does not conflict with his clinic reservations</string>
+    <string name="home_visitdesc">Salamtak Home Visit provides a radical solution to the problem of booking a home visit
+        to the doctor so that it does not conflict with his clinic reservations
+    </string>
     <string name="live_chat">Live Chat</string>
-    <string name="live_chatdesc">Save your time and effort as Salamtak live chat allows you to provide the first and third visits for both the patient and the doctor</string>
+    <string name="live_chatdesc">Save your time and effort as Salamtak live chat allows you to provide the first and
+        third visits for both the patient and the doctor
+    </string>
 
     <string name="verification_code_will_be_sent_within_1_30">Verification code will be sent within</string>
     <string name="conter">1:30</string>
@@ -100,7 +105,7 @@
         your doctor
     </string>
     <string name="salamtak_services">Salamtak Services</string>
-    <string name="Clinic_Booking">Clinic Booking</string>
+    <string name="Clinic_Booking">In-Clinic Booking</string>
     <string name="Home_Visit">Home Visit</string>
     <string name="Chat">Chat</string>
     <string name="Call">Call</string>
@@ -280,6 +285,13 @@
     <string name="qanda"><![CDATA[Q&A]]></string>
     <string name="emergencies">Emergencies</string>
     <string name="select">Select</string>
+    <string name="favorite_doctor">Favorite Doctor</string>
+    <string name="confirmed">Confirmed !</string>
+    <string name="offers">Offers</string>
+    <string name="offers_not_available_at_the_moment">Offers not available at the moment.</string>
+    <string name="we_are_working_on_delivering_the_best_offers_to_you_please_come_back_and_check_later">We are working
+        on delivering the best offers to you.Please come back and check later
+    </string>
 
     <array name="choose">
         <item>Select</item>

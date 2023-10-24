@@ -20,6 +20,7 @@ import com.korashiGroup.salamtakPatient.model.register.LoginUser
 import com.korashiGroup.salamtakPatient.utils.Constans.Language
 import com.korashiGroup.salamtakPatient.utils.Constans.TOKEN
 import com.korashiGroup.salamtakPatient.utils.Constans.UserLOGIN
+import com.korashiGroup.salamtakPatient.utils.DataBinding
 import com.korashiGroup.salamtakPatient.utils.DateUtils
 import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.utils.SpUtil
@@ -199,7 +200,7 @@ class LoginFragment : Fragment() {
                         loginresponse.data?.data?.let { it1 -> sp.saveUserToken(TOKEN, it1.token) }
                     }
                     loginresponse.data!!?.data?.let { DateUtils.setToken(it.token) }
-                    DateUtils.setCurrentTime(currentTime.toString())
+                    DateUtils.setCurrentTime(DataBinding.getCurrentDateTime())
                     sharedDataViewmodel.getProfileStatus( loginresponse.data?.data?.profileStatus!!)
                      if (loginresponse.data?.data?.profileStatus!!<2) {
                           findNavController().navigate(R.id.docotorProfileFragment)

@@ -31,5 +31,6 @@ data class DataLogin(
     @SerializedName("RoleID")
     val roleID: Int,
     @SerializedName("Token")
-    val token: String
+    val token: String,
+
 ):Serializable

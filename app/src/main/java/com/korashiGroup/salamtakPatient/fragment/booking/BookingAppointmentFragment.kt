@@ -9,17 +9,12 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import coil.transform.CircleCropTransformation
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.adapter.ClinksDoctorsAdapter
-import com.korashiGroup.salamtakPatient.adapter.SearchDoctorsAdapter
 import com.korashiGroup.salamtakPatient.databinding.BookingAppointmentfragmentBinding
-import com.korashiGroup.salamtakPatient.fragment.dialog.DialogBottomSheetFragmentArgs
-import com.korashiGroup.salamtakPatient.fragment.home.SearchFragmentDirections
-import com.korashiGroup.salamtakPatient.model.booking.PatientAppointmentRequest
 import com.korashiGroup.salamtakPatient.model.booking.clink.GetDoctorClinksResponse
 import com.korashiGroup.salamtakPatient.utils.DateUtils
 import com.korashiGroup.salamtakPatient.utils.Resource

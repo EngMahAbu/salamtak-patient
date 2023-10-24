@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import coil.transform.CircleCropTransformation
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -94,11 +95,11 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
 //        }
 
         binding.askQuestion.setOnClickListener {
-            if (skip=="skip"){
-               return@setOnClickListener
-            }else {
+//            if (skip=="skip"){
+//               return@setOnClickListener
+//            }else {
                 findNavController().navigate(R.id.askDoctorFragment)
-            }
+         //   }
         }
         binding.layoutSignup.setOnClickListener {
             findNavController().navigate(R.id.signupFragment)
@@ -109,7 +110,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
     private fun servicesRecylerview() {
         imageServicesAdapter = ServicesAdapter(this)
         binding.rvSalamtakServices.apply {
-            layoutManager = GridLayoutManager(requireContext(), 3)
+            layoutManager = GridLayoutManager(requireContext(), 2)
             adapter = imageServicesAdapter
             setHasFixedSize(true)
         }
@@ -138,6 +139,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
         gatesAdapter = GatesAdapter(this)
         binding.rvHealthTopics.apply {
             adapter = gatesAdapter
+            layoutManager = GridLayoutManager(requireContext(), 3)
             setHasFixedSize(true)
         }
     }
@@ -156,7 +158,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
 
         list.add(
             ImageServices(
-                R.drawable.ic_clinic_booking,
+                R.drawable.ic_inclinlbooking,
                 getString(R.string.Clinic_Booking),
                 Id = 1
             )
@@ -164,7 +166,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
 
         list.add(
             ImageServices(
-                R.drawable.ic_hom_visit,
+                R.drawable.ic_homevisit,
                 getString(R.string.Home_Visit),
                 Id = 2
 
@@ -172,14 +174,14 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
         )
         list.add(
             ImageServices(
-                R.drawable.ic_call,
+                R.drawable.calling,
                 getString(R.string.Call),
                 Id = 4
             )
         )
         list.add(
             ImageServices(
-                R.drawable.ic_videocall,
+                R.drawable.video,
                 getString(R.string.Video_Call),
                 Id = 3
             )
@@ -441,12 +443,12 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
     }
 
     override fun onItemGatesClick(gateId: Int) {
-        if (skip=="skip"){
-            return
-        }else {
+//        if (skip=="skip"){
+//            return
+//        }else {
             val action = HomeFragmentDirections.actionHomeFragmentToHealthyTopicsFragment(gateId)
             findNavController().navigate(action)
-        }
+      //  }
     }
 
     override fun onItemClick(healthEntityTypeId: Int, healthName: String) {

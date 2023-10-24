@@ -8,6 +8,7 @@ import com.korashiGroup.salamtakPatient.model.booking.clink.GetDoctorClinksRespo
 import com.korashiGroup.salamtakPatient.model.docotorsearch.DoctorSearchRequest
 import com.korashiGroup.salamtakPatient.model.docotorsearch.DoctorsearchItemResponse
 import com.korashiGroup.salamtakPatient.model.emr.EmrPatientResponse
+import com.korashiGroup.salamtakPatient.model.favorite.FavoriteDoctorResponse
 import com.korashiGroup.salamtakPatient.model.healthy.GetHealthEntityResponse
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCardResponse
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCompanyResponse
@@ -278,5 +279,10 @@ interface ApiService {
         @Path("culture") culture: String,
         @Body appointmentRequest: EditPatientAppointmentRequest
     ): Response<CreatepatientAppointementsResponse>
+
+    @GET("{culture}/Patient/GetPatientFavoritDoctor")
+    suspend fun getPatientFavoritDoctor(
+        @Path("culture") culture: String,
+    ):Response<FavoriteDoctorResponse>
 
 }
