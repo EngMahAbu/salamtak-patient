@@ -105,13 +105,13 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         servicesRecylerview()
         doctorsRecylerview()
         initButtonCollabsedFiller()
-        bindFields()
         val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US).apply {
             this.timeZone = TimeZone.getTimeZone("CST")
         }
         formattedDate = formatter.format(now.time)
 
         doctorsSearch()
+        bindFields()
         callBackGetClinicSchedualByClinicDayId()
         getDayId()
         setUpCalendar()
@@ -355,21 +355,41 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             }
 
             specialistId = it.id
-            val doctorssearchRequset = DoctorSearchRequest(
-                0,
-                formattedDate,
-                0,
-                "",
-                feesFrom = 0,
-                feesTo = 0,
-                genderId,
-                100,
-                examinationtypeid,
-                0,
-               0,
-                specialistId
-            )
-            viewmodel.searchDoctors(doctorssearchRequset)
+            if (specialistId==0){
+                specialistId=1
+                val doctorssearchRequset = DoctorSearchRequest(
+                    0,
+                    formattedDate,
+                    0,
+                    "",
+                    feesFrom = 0,
+                    feesTo = 0,
+                    genderId,
+                    100,
+                    examinationtypeid,
+                    0,
+                    0,
+                    specialistId
+                )
+                viewmodel.searchDoctors(doctorssearchRequset)
+            }else{
+                val doctorssearchRequset = DoctorSearchRequest(
+                    0,
+                    formattedDate,
+                    0,
+                    "",
+                    feesFrom = 0,
+                    feesTo = 0,
+                    genderId,
+                    100,
+                    examinationtypeid,
+                    0,
+                    0,
+                    specialistId
+                )
+                viewmodel.searchDoctors(doctorssearchRequset)
+            }
+
         }
         sharedDataViewmodel.subSpecialication.observe(viewLifecycleOwner) {
             var name = ""

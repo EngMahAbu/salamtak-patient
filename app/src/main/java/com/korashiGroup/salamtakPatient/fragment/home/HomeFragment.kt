@@ -89,10 +89,9 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
 //            findNavController().navigate(action)
 //        }
 //
-//        binding.ivNotification.setOnClickListener {
-//            val action = HomeFragmentDirections.actionHomeFragmentToVideoCallFragment("video")
-//            findNavController().navigate(action)
-//        }
+        binding.ivNotification.setOnClickListener {
+            findNavController().navigate(R.id.notificationListFragment)
+        }
 
         binding.askQuestion.setOnClickListener {
 //            if (skip=="skip"){

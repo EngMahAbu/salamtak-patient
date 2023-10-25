@@ -292,6 +292,7 @@
     <string name="we_are_working_on_delivering_the_best_offers_to_you_please_come_back_and_check_later">We are working
         on delivering the best offers to you.Please come back and check later
     </string>
+    <string name="notifications">Notifications</string>
 
     <array name="choose">
         <item>Select</item>

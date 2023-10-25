@@ -8,7 +8,9 @@ import com.korashiGroup.salamtakPatient.model.booking.clink.GetDoctorClinksRespo
 import com.korashiGroup.salamtakPatient.model.docotorsearch.DoctorSearchRequest
 import com.korashiGroup.salamtakPatient.model.docotorsearch.DoctorsearchItemResponse
 import com.korashiGroup.salamtakPatient.model.emr.EmrPatientResponse
+import com.korashiGroup.salamtakPatient.model.favorite.AddToFavoriteResponse
 import com.korashiGroup.salamtakPatient.model.favorite.FavoriteDoctorResponse
+import com.korashiGroup.salamtakPatient.model.favorite.FavoriteRequest
 import com.korashiGroup.salamtakPatient.model.healthy.GetHealthEntityResponse
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCardResponse
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCompanyResponse
@@ -23,6 +25,7 @@ import com.korashiGroup.salamtakPatient.model.salamtakgate.BlogsResponse
 import com.korashiGroup.salamtakPatient.model.salamtakgate.SalamtakGateResponse
 import com.korashiGroup.salamtakPatient.model.scheduling.CancelPatientAppointmentResponse
 import com.korashiGroup.salamtakPatient.model.scheduling.GetPatientAppointmentesResponse
+import com.korashiGroup.salamtakPatient.notification.NotificationListResponse
 import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.*
@@ -284,5 +287,16 @@ interface ApiService {
     suspend fun getPatientFavoritDoctor(
         @Path("culture") culture: String,
     ):Response<FavoriteDoctorResponse>
+
+    @GET("{culture}/Notification/GetUserNotifications")
+    suspend fun getUserNotifications(
+        @Path("culture") culture: String,
+    ):Response<NotificationListResponse>
+
+    @POST("{culture}/Patient/CreatePatientFavoritDoctor")
+    suspend fun createPatientFavoritDoctor(
+        @Path("culture") culture: String,
+        @Body favoriteRequest: FavoriteRequest
+    ): Response<AddToFavoriteResponse>
 
 }

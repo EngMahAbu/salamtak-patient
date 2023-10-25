@@ -272,6 +272,7 @@
     <string name="offers_not_available_at_the_moment">لا يوجد عروض متاحة فى الوقت الحالى </string>
     <string name="we_are_working_on_delivering_the_best_offers_to_you_please_come_back_and_check_later">نحن نعمل على تقديم أفضل العروض لك.يرجى العودة والتحقق لاحقا.
     </string>
+    <string name="notifications">الاشعارات </string>
 
 
 </resources>

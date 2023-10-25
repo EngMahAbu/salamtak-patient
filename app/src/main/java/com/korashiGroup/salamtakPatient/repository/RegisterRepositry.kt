@@ -5,6 +5,7 @@ import com.korashiGroup.salamtakPatient.model.askandanswer.QuestionRequest
 import com.korashiGroup.salamtakPatient.model.booking.EditPatientAppointmentRequest
 import com.korashiGroup.salamtakPatient.model.booking.PatientAppointmentRequest
 import com.korashiGroup.salamtakPatient.model.docotorsearch.DoctorSearchRequest
+import com.korashiGroup.salamtakPatient.model.favorite.FavoriteRequest
 import com.korashiGroup.salamtakPatient.model.profile.LocationRequest
 import com.korashiGroup.salamtakPatient.model.register.*
 import com.korashiGroup.salamtakPatient.utils.Constans
@@ -175,5 +176,12 @@ class RegisterRepositry @Inject constructor(private val apiService: ApiService) 
     suspend fun getPatientFavoritDoctor() =
         sp.getUserLang(Constans.Language)
             ?.let { apiService.getPatientFavoritDoctor(it) }
+
+    suspend fun getUserNotifications() =
+        sp.getUserLang(Constans.Language)
+            ?.let { apiService.getUserNotifications(it) }
+    suspend fun createPatientFavoritDoctor(favoriteRequest: FavoriteRequest) =
+        sp.getUserLang(Constans.Language)
+            ?.let { apiService.createPatientFavoritDoctor(it,favoriteRequest) }
 
 }

@@ -80,7 +80,10 @@ data class Data(
     @SerializedName("UserId")
     val userId: Int?,
     @SerializedName("Website")
-    val website: Any?
+    val website: Any?,
+    @SerializedName("IsFavoiritDoctor")
+    val isFavoiritDoctor: Boolean?,
+
 ): Serializable
 data class ClinicDto(
     @SerializedName("Address")

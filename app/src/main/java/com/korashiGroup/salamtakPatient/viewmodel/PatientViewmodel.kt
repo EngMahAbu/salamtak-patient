@@ -23,13 +23,16 @@ import com.google.gson.Gson
 import com.korashiGroup.salamtakPatient.model.askandanswer.QuestionAndAnswerResponse
 import com.korashiGroup.salamtakPatient.model.askandanswer.QuestionRequest
 import com.korashiGroup.salamtakPatient.model.emr.EmrPatientResponse
+import com.korashiGroup.salamtakPatient.model.favorite.AddToFavoriteResponse
 import com.korashiGroup.salamtakPatient.model.favorite.FavoriteDoctorResponse
+import com.korashiGroup.salamtakPatient.model.favorite.FavoriteRequest
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCardResponse
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCompanyResponse
 import com.korashiGroup.salamtakPatient.model.insurance.SendInsuranceCardResponce
 import com.korashiGroup.salamtakPatient.model.rating.RatingResponse
 import com.korashiGroup.salamtakPatient.model.salamtakgate.BlogsResponse
 import com.korashiGroup.salamtakPatient.model.salamtakgate.SalamtakGateResponse
+import com.korashiGroup.salamtakPatient.notification.NotificationListResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
@@ -46,6 +49,8 @@ class PatientViewmodel @Inject constructor(private val repositry: RegisterReposi
     val emrResponse=MutableLiveData<Resource<EmrPatientResponse>>()
     val editAppointmentResponse=MutableLiveData<Resource<CreatepatientAppointementsResponse>>()
     val favoriteDoctorResponse=MutableLiveData<Resource<FavoriteDoctorResponse>>()
+    val notificationResponse=MutableLiveData<Resource<NotificationListResponse>>()
+    val favoriteResponse=MutableLiveData<Resource<AddToFavoriteResponse>>()
 
     fun createDoctorRate(doctorRateRequest: HashMap<String, String> )=viewModelScope.launch(Dispatchers.IO+handler) {
         doctorRateResponse.postValue(Resource.Loading())
@@ -114,6 +119,40 @@ class PatientViewmodel @Inject constructor(private val repositry: RegisterReposi
         return error.message?.let { Resource.Error(it) }
     }
 
+
+    fun getUserNotifications()=viewModelScope.launch(Dispatchers.IO+handler) {
+        notificationResponse.postValue(Resource.Loading())
+        val response=repositry.getUserNotifications()
+        notificationResponse.postValue(response?.let { handlegetUserNotifications(it) })
+    }
+
+    private fun handlegetUserNotifications(response: Response<NotificationListResponse>): Resource<NotificationListResponse>? {
+        if (response.isSuccessful){
+            response.body()?.let {
+                return Resource.sucess(it)
+            }
+        }
+        val error = Gson().fromJson<NotificationListResponse>(response.errorBody()!!.string(), NotificationListResponse::class.java)
+        return error.message?.let { Resource.Error(it) }
+    }
+
+
+
+    fun createPatientFavoriteDoctor(favoriteRequest: FavoriteRequest)=viewModelScope.launch(Dispatchers.IO+handler) {
+        favoriteResponse.postValue(Resource.Loading())
+        val response=repositry.createPatientFavoritDoctor(favoriteRequest)
+        favoriteResponse.postValue(response?.let { handlecreatePatientFavoriteDoctor(it) })
+    }
+
+    private fun handlecreatePatientFavoriteDoctor(response: Response<AddToFavoriteResponse>): Resource<AddToFavoriteResponse>? {
+        if (response.isSuccessful){
+            response.body()?.let {
+                return Resource.sucess(it)
+            }
+        }
+        val error = Gson().fromJson<AddToFavoriteResponse>(response.errorBody()!!.string(), AddToFavoriteResponse::class.java)
+        return error.message?.let { Resource.Error(it) }
+    }
 
 
     val handler = CoroutineExceptionHandler { _, exception ->

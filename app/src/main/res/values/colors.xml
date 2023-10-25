@@ -29,6 +29,7 @@
     <color name="video_screen_color">#E5E5E5</color>
     <color name="ratingsolid">#E9EAEF</color>
     <color name="ratingcorner">#FAFAFA</color>
+    <color name="yellow">#EFCC07</color>
 
 
 </resources>

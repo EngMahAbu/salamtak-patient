@@ -12,13 +12,16 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import coil.transform.CircleCropTransformation
+import com.google.android.material.snackbar.Snackbar
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.adapter.ClinksDoctorsAdapter
 import com.korashiGroup.salamtakPatient.databinding.BookingAppointmentfragmentBinding
 import com.korashiGroup.salamtakPatient.model.booking.clink.GetDoctorClinksResponse
+import com.korashiGroup.salamtakPatient.model.favorite.FavoriteRequest
 import com.korashiGroup.salamtakPatient.utils.DateUtils
 import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
+import com.korashiGroup.salamtakPatient.viewmodel.PatientViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,9 +30,12 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
 
     private lateinit var binding: BookingAppointmentfragmentBinding
     private val viewmodel: DialogBottomSheetViewmodel by viewModels()
+    private val patientViewModel: PatientViewmodel by viewModels()
     val sharedDataViewmodel: SharedDataViewmodel by activityViewModels()
     private lateinit var clinksDoctorsAdapter: ClinksDoctorsAdapter
     private lateinit var getDoctorClinksResponse: GetDoctorClinksResponse
+    private var doctorId: Int? = null
+    private var isFavorite: Boolean? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,12 +52,20 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
         callBack()
         clinksRecylerview()
         initButton()
+        addFavoriteDoctor()
     }
 
 
     private fun initButton() {
         binding.ivArrow.setOnClickListener {
             findNavController().navigate(R.id.searchFragment)
+        }
+
+        binding.layoutAddtofavorite.setOnClickListener {
+            val favoriteRequest = doctorId?.let { it1 -> isFavorite?.let { it2 -> FavoriteRequest(it1, it2) } }
+            if (favoriteRequest != null) {
+                patientViewModel.createPatientFavoriteDoctor(favoriteRequest)
+            }
         }
     }
 
@@ -72,6 +86,7 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
                 is Resource.Loading -> {
                     showprogtessbar()
                 }
+
                 is Resource.sucess -> {
                     hideprogressbar()
                     binding.ivDoctorProfile.load("https://salamtechapi.azurewebsites.net/${it.data?.data?.image}") {
@@ -79,6 +94,7 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
                         crossfade(1000)
                         transformations(CircleCropTransformation())
                     }
+
                     getDoctorClinksResponse = GetDoctorClinksResponse(it.data?.data, it.message)
                     binding.AboutDoctor.text = it.data?.data?.doctorInfo
                     val name = if (DateUtils.getLanguage() == "en") {
@@ -87,6 +103,14 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
                         "${it.data?.data?.firstNameAr} ${it.data?.data?.middelNameAr} ${it.data?.data?.lastNameAr}"
 
                     }
+                    if (it.data?.data?.isFavoiritDoctor==false){
+                        isFavorite = true
+                        binding.tvAddtofavorite.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_heart,0,0,0)
+                    }else{
+                        isFavorite=false
+                        binding.tvAddtofavorite.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_favoritered,0,0,0)
+                    }
+
                     binding.tvDoctorName.text = name
                     binding.tvName.text = name
                     var subspecialist: String? = ""
@@ -98,6 +122,7 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
                     clinksDoctorsAdapter.notifyDataSetChanged()
 
                 }
+
                 is Resource.Error -> {
                     hideprogressbar()
 
@@ -108,12 +133,44 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
         })
         sharedDataViewmodel.doctorId.observe(viewLifecycleOwner, Observer {
             viewmodel.getDoctorProfileByDoctorId(it)
+            doctorId = it
         })
+
+    }
+
+
+    private fun addFavoriteDoctor() {
+        patientViewModel.favoriteResponse.observe(viewLifecycleOwner, Observer { response ->
+            when (response) {
+
+                is Resource.Loading -> {
+
+                }
+
+                is Resource.sucess -> {
+                    if (isFavorite==false){
+                        isFavorite = true
+                        binding.tvAddtofavorite.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_heart,0,0,0)
+                    }else{
+                        isFavorite=false
+                        binding.tvAddtofavorite.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_favoritered,0,0,0)
+                    }
+                }
+
+                is Resource.Error -> {
+                    Snackbar.make(requireView(), "${response.message}", Snackbar.LENGTH_SHORT)
+                        .show()
+                }
+            }
+
+        })
+
 
     }
 
     private fun showprogtessbar() {
         binding.progressBar.visibility = View.VISIBLE
+
     }
 
     private fun hideprogressbar() {

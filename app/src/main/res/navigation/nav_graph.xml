@@ -441,5 +441,8 @@
               android:name="com.korashiGroup.salamtakPatient.fragment.offers.OffersFragment"
               android:label="offersfragment"
               tools:layout="@layout/offersfragment"/>
+    <fragment android:id="@+id/notificationListFragment"
+              android:name="com.korashiGroup.salamtakPatient.notification.NotificationListFragment"
+              android:label="notification_listfragment" tools:layout="@layout/notification_listfragment"/>
 
 </navigation>
