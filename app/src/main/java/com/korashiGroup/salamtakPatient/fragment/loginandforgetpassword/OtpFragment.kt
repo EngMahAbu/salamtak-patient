@@ -26,6 +26,8 @@ import com.karumi.dexter.Dexter.withContext
 import com.korashiGroup.salamtakPatient.fragment.signupanddocotorprofile.SignupFragmentDirections
 import com.korashiGroup.salamtakPatient.model.register.CreateUser
 import com.korashiGroup.salamtakPatient.model.register.DataLogin
+import com.korashiGroup.salamtakPatient.model.register.ResetRequest
+import com.korashiGroup.salamtakPatient.model.register.UserForgetInfo
 import com.korashiGroup.salamtakPatient.utils.Constans
 import com.korashiGroup.salamtakPatient.utils.SpUtil
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
@@ -71,6 +73,7 @@ class OtpFragment : Fragment() {
         setupFocusEdittext()
         otpCallBack()
         timer()
+        otpCallBackForgetPassword()
     }
 
     private fun initButton() {
@@ -127,6 +130,14 @@ class OtpFragment : Fragment() {
             val arg=args.user
             if (arg!=null){
                 arg?.let { it1 -> viewmodel.Sentotp( it1) }
+            }else{
+                if (args.userforgetpassword?.phone?.contains(".com") == true){
+                    val resetRequest= ResetRequest(args.userforgetpassword?.phone?.toString(),args.userforgetpassword?.phone?.toString(),1,3)
+                    viewmodel.resetPassword(resetRequest)
+                }else{
+                    val resetRequest= ResetRequest(args.userforgetpassword?.phone?.toString(),args.userforgetpassword?.phone,2,3)
+                    viewmodel.resetPassword(resetRequest)
+                }
             }
 
         }
@@ -213,6 +224,34 @@ class OtpFragment : Fragment() {
             }
 
             override fun afterTextChanged(s: Editable?) {
+            }
+
+        })
+
+    }
+
+
+    private fun otpCallBackForgetPassword(){
+        viewmodel.resetPasswordesponse.observe(viewLifecycleOwner, Observer {
+
+            when (it) {
+                is Resource.Loading -> {
+                    showprogtessbar()
+                }
+
+                is Resource.sucess -> {
+                    hideprogressbar()
+                    timer()
+                    it.data?.let { response ->
+
+                        args.userforgetpassword?.code = response.data?.code!!
+                    }
+                }
+                is Resource.Error -> {
+                    hideprogressbar()
+                    Toast.makeText(requireContext(),"${it.message}",Toast.LENGTH_SHORT).show()
+                }
+
             }
 
         })

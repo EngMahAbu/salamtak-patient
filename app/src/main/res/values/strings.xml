@@ -231,7 +231,7 @@
     <string name="there_is_no_appointment_available">There Is No Appointment Available</string>
     <string name="login_success">you Are login Successfully</string>
     <string name="choose_language">Choose language</string>
-    <string name="agree_to">Agree To</string>
+    <string name="agree_to">By signing up you agree To</string>
     <string name="Enter_mobile_or_email">Enter mobile or email</string>
     <string name="enter_your_email_we_will_send_you_code_to_reset_the_password">Enter your email we will send you code
         to reset the password

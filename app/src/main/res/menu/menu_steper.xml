@@ -3,7 +3,6 @@
 
     <item android:id="@+id/personalInfoFragment"
         android:title="Personal Info."
-        android:icon="@drawable/ic_arabic"
         />
 
     <item android:id="@+id/specialtyFragment"

@@ -571,9 +571,9 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
     }
 
     override fun onItemClick(clinicId: Int, doctorId: Int, clinkname: String) {
-        if (skip=="skip"){
-            findNavController().navigate(R.id.dialogSignUp)
-        }else {
+//        if (skip=="skip"){
+//            findNavController().navigate(R.id.dialogSignUp)
+//        }else {
             val clinicSchedualByClinicDayId = ClinicSchedualByClinicDayId(
                 clinicId,
                 dayId,
@@ -584,7 +584,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             sharedDataViewmodel.getClinicSchedualByClinicDayId(clinicSchedualByClinicDayId)
             sharedDataViewmodel.getDocotorId(doctorId)
             findNavController().navigate(R.id.bookingAppointmentFragment)
-       }
+//       }
     }
 
     private fun getDayId() {

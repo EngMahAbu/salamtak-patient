@@ -93,7 +93,7 @@ class SignupFragment : Fragment() {
 
 
         binding.btnSignUp.setOnClickListener {
-            if (binding.chTerms.isChecked) {
+//            if (binding.chTerms.isChecked) {
                 var fullNameEn = binding.etFullNameEn.text.toString()
                 var fullNameAr = binding.etFullNameAR.text.toString()
                 var mobileNumber = binding.etPhoneNumber.text.toString()
@@ -120,13 +120,13 @@ class SignupFragment : Fragment() {
                 }
 
 
-            } else {
-                Toast.makeText(
-                    requireContext(),
-                    getString(R.string.terms_conditions),
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
+//            } else {
+//                Toast.makeText(
+//                    requireContext(),
+//                    getString(R.string.terms_conditions),
+//                    Toast.LENGTH_SHORT
+//                ).show()
+//            }
 
 
         }
