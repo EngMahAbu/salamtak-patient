@@ -48,7 +48,7 @@
             android:layout_margin="15dp"
             android:textColor="@color/black"
             android:gravity="center"
-            android:fontFamily="@font/avenirltstd_book"
+            android:fontFamily="@font/avenirltstd_black"
             android:text="jhjhjhkhjbjjkljljjljlkjkljkljkljkl"
             app:layout_constraintTop_toBottomOf="@+id/iv_onboarding"/>
         <androidx.appcompat.widget.AppCompatTextView
@@ -58,10 +58,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_margin="20dp"
+            android:padding="3dp"
+            android:maxLines="8"
             android:textColor="@color/black"
             android:fontFamily="@font/avenirltstd_book"
             android:text="jhjhjhkhjbjjkljljjljlkjkljkljkljkl"
-            app:layout_constraintTop_toBottomOf="@+id/tv_title"/>
+            app:layout_constraintTop_toBottomOf="@+id/tv_title"
+         app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -147,22 +147,23 @@
                        app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/sub_specialization"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:fontFamily="@font/avenirltstd_black"
-                        android:gravity="start"
-                        android:padding="2dp"
-                        android:text="Gynecology and Infertility"
-                        android:textColor="@color/gray"
-                        android:textSize="12sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/tv_sub_specialization"
-                        app:layout_constraintBottom_toBottomOf="@+id/layout_Sub_specialization"
-                        app:layout_constraintTop_toTopOf="parent" />
+                            android:id="@+id/sub_specialization"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:fontFamily="@font/avenirltstd_black"
+                            android:gravity="end"
+                            android:padding="2dp"
+                            android:text="Gynecology and Infertility"
+                            android:textColor="@color/gray"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/tv_sub_specialization"
+                            app:layout_constraintBottom_toBottomOf="@+id/layout_Sub_specialization"
+                            app:layout_constraintTop_toTopOf="parent" app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintVertical_bias="0.687"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/Address"

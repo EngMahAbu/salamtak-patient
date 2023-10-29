@@ -78,6 +78,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
     var sub_SpecialistId = mutableListOf<Int>()
     val sharedDataViewmodel: SharedDataViewmodel by activityViewModels()
     val viewmodel: DialogBottomSheetViewmodel by viewModels()
+    var totalsDoctors=0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -96,7 +97,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         binding.ivPrevious.isEnabled = step != 1
         examinationtypeid = HomeFragment.instance?.let {
             it.medicalExaminatioId?.toInt()
-        }?:1
+        }?:0
         bottomsheetbeahavoir =
             BottomSheetBehavior.from(binding.layoutBottomsheetpersistant.filterBottomsheet)
         bottomsheetbeahavoir.state = BottomSheetBehavior.STATE_HIDDEN
@@ -329,14 +330,14 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         var isVisible = true
         view.setOnClickListener {
             if (isVisible) {
-                hideview.visibility = View.GONE
-                layout.visibility = View.VISIBLE
-                imagearrowup.visibility = View.GONE
-                isVisible = false
-            } else {
                 hideview.visibility = View.VISIBLE
                 layout.visibility = View.GONE
                 imagearrowup.visibility = View.VISIBLE
+                isVisible = false
+            } else {
+                hideview.visibility = View.GONE
+                layout.visibility = View.VISIBLE
+                imagearrowup.visibility = View.GONE
                 isVisible = true
             }
         }
@@ -356,7 +357,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
 
             specialistId = it.id
             if (specialistId==0){
-                specialistId=1
+
                 val doctorssearchRequset = DoctorSearchRequest(
                     0,
                     formattedDate,
@@ -459,7 +460,8 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                         if (isLastPage){
                                 binding.rvDoctors.setPadding(0,0,0,0)
                         }
-
+                        totalsDoctors= it.data.data.totalCount!!
+                        binding.tvCountofDoctors.text="${totalsDoctors.toString()}${getString(R.string.doctors_found)}"
                     }
 
                 }
@@ -591,9 +593,9 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
     }
 
     override fun onItemClick(clinicId: Int, doctorId: Int, clinkname: String) {
-//        if (skip=="skip"){
-//            findNavController().navigate(R.id.dialogSignUp)
-//        }else {
+        if (skip=="skip"){
+            findNavController().navigate(R.id.dialogSignUp)
+        }else {
             val clinicSchedualByClinicDayId = ClinicSchedualByClinicDayId(
                 clinicId,
                 dayId,
@@ -604,7 +606,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             sharedDataViewmodel.getClinicSchedualByClinicDayId(clinicSchedualByClinicDayId)
             sharedDataViewmodel.getDocotorId(doctorId)
             findNavController().navigate(R.id.bookingAppointmentFragment)
-//       }
+       }
     }
 
     private fun getDayId() {

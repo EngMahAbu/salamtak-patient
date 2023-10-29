@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
@@ -47,6 +48,7 @@ class MainActivity : AppCompatActivity(), LoginFragment.onSomeEventListener {
                 R.id.offersFragment,
                 R.id.myScheduleFragment -> {
                     binding.bottomViewNav.visibility = View.VISIBLE
+
                 }
 
                 else -> {

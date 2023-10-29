@@ -212,7 +212,8 @@ class DialogSchduleFragment : BottomSheetDialogFragment() {
             binding.layoutReBookingAppointment.visibility=View.VISIBLE
         }
             else->{
-             binding.layoutReBookingAppointment.visibility=View.VISIBLE
+                binding.layoutCanceled.visibility=View.VISIBLE
+
             }
         }
     }

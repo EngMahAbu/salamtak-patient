@@ -12,6 +12,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import coil.load
 import coil.transform.CircleCropTransformation
@@ -109,6 +110,7 @@ class VideoCallFragment : Fragment() {
 
         binding.ivEndCall.setOnClickListener {
             leaveChannel()
+            findNavController().navigate(R.id.homeFragment)
         }
 
         binding.ivSpeaker.setOnClickListener {
@@ -130,6 +132,7 @@ class VideoCallFragment : Fragment() {
         }
         binding.ivVoiceEndCall.setOnClickListener {
             joinLeaveChannel()
+
         }
 
     }
@@ -189,6 +192,7 @@ class VideoCallFragment : Fragment() {
             agoraEngine!!.leaveChannel()
             binding.infoText.text = "Join"
             binding.ivVoiceEndCall.setBackgroundResource(R.drawable.background_iconcallovalgreen)
+            findNavController().navigate(R.id.homeFragment)
         } else {
             joinChannel()
             binding.infoText.text = "Leave"

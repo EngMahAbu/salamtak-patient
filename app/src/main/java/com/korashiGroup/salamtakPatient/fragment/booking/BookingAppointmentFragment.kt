@@ -106,9 +106,11 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
                     if (it.data?.data?.isFavoiritDoctor==false){
                         isFavorite = true
                         binding.tvAddtofavorite.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_heart,0,0,0)
+                        binding.tvAddtofavorite.text=getString(R.string.add_to_favorite)
                     }else{
                         isFavorite=false
                         binding.tvAddtofavorite.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_favoritered,0,0,0)
+                        binding.tvAddtofavorite.text=getString(R.string.remove_from_favorite)
                     }
 
                     binding.tvDoctorName.text = name
@@ -151,9 +153,11 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
                     if (isFavorite==false){
                         isFavorite = true
                         binding.tvAddtofavorite.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_heart,0,0,0)
+                        binding.tvAddtofavorite.text=getString(R.string.add_to_favorite)
                     }else{
                         isFavorite=false
                         binding.tvAddtofavorite.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_favoritered,0,0,0)
+                        binding.tvAddtofavorite.text=getString(R.string.remove_from_favorite)
                     }
                 }
 

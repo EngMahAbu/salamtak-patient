@@ -30,7 +30,7 @@
     <string name="confirm_new_password">تأكيد كلمة المرور الجديدة</string>
     <string name="save">حفظ</string>
     <string name="sign_up">تسجيل</string>
-    <string name="lets_start">لنبدأ</string>
+    <string name="lets_start">ابدأ التطبيق</string>
     <string name="upload_your_photo">ارفع صورتك</string>
     <string name="full_name_in_english_first_middle_last">الاسم الكامل بالانجليزي (الاول - الوسط - الاخير)</string>
     <string name="full_name_in_arabic_first_middle_last">الاسم الكامل بالعربية (الأول - الأوسط - الأخير)</string>
@@ -73,7 +73,7 @@
     <string name="Enter_fullName_english">أدخل الاسم الكامل باللغة الإنجليزية (الأول - الأوسط - الأخير)</string>
     <string name="Enter_fullName_Arabic">أدخل الاسم الكامل بالعربية (الأول - الأوسط - الأخير)</string>
     <string name="match_email">بريد غير صالح</string>
-    <string name="lesstthan6number">كلمة المرور يجب أن تكون>6</string>
+    <string name="lesstthan6number">كلمة المرور يجب أن تكون أكبر من 6 ارقام</string>
     <string name="doesnotmatch">غير متطابق</string>
     <string name="male">ذكر</string>
     <string name="female">أنثى</string>
@@ -123,7 +123,7 @@
     <string name="upcoming">القادمة</string>
     <string name="canceled">ألغيت</string>
     <string name="finished">منتهي</string>
-    <string name="address">عنوان</string>
+    <string name="address">العنوان</string>
     <string name="waiting_time">وقت الانتظار</string>
     <string name="fees">مصاريف</string>
     <string name="reset">إعادة ضبط</string>
@@ -184,12 +184,13 @@
     <string name="confirm">تأكيد</string>
     <string name="sharelink">شارلينك</string>
     <string name="add_to_favorite">أضف إلى المفضلة</string>
+    <string name="remove_from_favorite">حذف من المضلة</string>
     <string name="about_doctor">معلومات عن الطبيب</string>
     <string name="doctor_s_clinics">عيادات الطبيب</string>
     <string name="book_appointment">ميعاد الحجز</string>
     <string name="choose_clinic">اختر العيادة</string>
     <string name="choose_service">اختر الخدمة</string>
-    <string name="examination_type">نوع الفحص</string>
+    <string name="examination_type">الخدمة</string>
     <string name="date_time">التاريخ / الوقت</string>
     <string name="more_actions">المزيد من الإجراءات</string>
     <string name="edit_appointment">تعديل الموعد</string>
@@ -239,7 +240,7 @@
     <string name="your_question">سؤالك</string>
     <string name="question_descreption_explanation_of_your_medical_symotoms">وصف السؤال *(شرح أعراضك الطبية)
     </string>
-    <string name="age">العمر</string>
+    <string name="age">كم عمرك (بالسنوات)</string>
     <string name="askdoctor">اسأل طبيب</string>
     <string name="fillallfields">املأ جميع الحقول</string>
     <string name="insurance_company">شركة التأمين</string>
@@ -273,6 +274,9 @@
     <string name="we_are_working_on_delivering_the_best_offers_to_you_please_come_back_and_check_later">نحن نعمل على تقديم أفضل العروض لك.يرجى العودة والتحقق لاحقا.
     </string>
     <string name="notifications">الاشعارات </string>
+    <string name="city">المدينة</string>
+    <string name="area">المنطقة</string>
+    <string name="phone">تليفون</string>
 
 
 </resources>

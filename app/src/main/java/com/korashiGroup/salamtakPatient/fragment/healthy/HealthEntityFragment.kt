@@ -31,6 +31,7 @@ import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.snackbar.Snackbar
+import com.korashiGroup.salamtakPatient.model.*
 import com.korashiGroup.salamtakPatient.model.docotorsearch.DoctorSearchRequest
 import com.korashiGroup.salamtakPatient.model.healthy.ItemHealth
 import com.korashiGroup.salamtakPatient.model.salamtakgate.Blogs
@@ -88,6 +89,10 @@ class HealthEntityFragment : Fragment(),MedicalHealthAdapter.Action {
     private fun initButton(){
         binding.ivArrow.setOnClickListener {
             findNavController().popBackStack()
+        }
+
+        binding.layoutBottomsheetpersistant.tvReset.setOnClickListener {
+            reset()
         }
 
         binding.btnEmergencies.setOnClickListener {
@@ -237,6 +242,11 @@ class HealthEntityFragment : Fragment(),MedicalHealthAdapter.Action {
             }
 
         }
+    }
+
+    private fun reset(){
+        sharedDataViewmodel.getCity(CityData(0,"",0,false,"",""))
+        sharedDataViewmodel.getArea(AreaData(0,""))
     }
 
 

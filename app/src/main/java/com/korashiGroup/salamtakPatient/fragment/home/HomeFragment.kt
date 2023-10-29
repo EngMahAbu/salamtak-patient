@@ -157,7 +157,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
 
         list.add(
             ImageServices(
-                R.drawable.ic_inclinlbooking,
+                R.drawable.ic_inclink_book,
                 getString(R.string.Clinic_Booking),
                 Id = 1
             )
@@ -171,18 +171,19 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
 
             )
         )
-        list.add(
-            ImageServices(
-                R.drawable.calling,
-                getString(R.string.Call),
-                Id = 4
-            )
-        )
+
         list.add(
             ImageServices(
                 R.drawable.video,
                 getString(R.string.Video_Call),
                 Id = 3
+            )
+        )
+        list.add(
+            ImageServices(
+                R.drawable.calling,
+                getString(R.string.Call),
+                Id = 4
             )
         )
         imageServicesAdapter.submitList(list)
@@ -429,7 +430,6 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
         binding.ivPatientProfile.load("https://salamtechapi.azurewebsites.net/${sp.getUser()?.image}") {
             crossfade(true)
             crossfade(1000)
-            placeholder(R.drawable.ic_profile)
             transformations(CircleCropTransformation())
         }
 

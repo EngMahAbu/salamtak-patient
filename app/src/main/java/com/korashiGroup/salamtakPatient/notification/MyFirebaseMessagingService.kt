@@ -53,15 +53,16 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 //            result=values
 //        }
 
-        val gson = Gson()
-        val deeplink = gson?.fromJson(result, DeepLinkItem::class.java)
+//        val gson = Gson()
+//        val deeplink = gson.fromJson(result, DeepLinkItem::class.java)
 
-
+//          val lin=deeplink.link
+//              Log.e(TAG, "map: $lin")
         val map = getQueryString(result)
         Log.e(TAG, "map: $map")
 
 
-        if (deeplink?.link=="SalamtakPatient://2?") {
+        if (result.contains("SalamtakPatient://4?")) {
             linkAudioOrVideo = "audio"
         } else  {
             linkAudioOrVideo = "video"
@@ -70,7 +71,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         val deepLinkItem = DeepLinkItem(
             map?.get("token")?.let { getDeepLink(it) }, map?.get("DoctorName"),
             map?.get("DoctorImage")?.let { getDeepLink(it) },
-            map?.get("Channelname"), map?.get("date"), linkAudioOrVideo
+            map?.get("Channelname"), map?.get("date"),linkAudioOrVideo
         )
         Log.e("Element  ", "deepLinkItem: ${deepLinkItem}")
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/bg_color_gray"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.booking.AppointmentDetailsFragment">
 
@@ -114,39 +114,39 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/layout_Sharelink"
-                android:layout_width="0dp"
-                android:layout_height="46dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:background="@drawable/bg_helpgray"
-                android:padding="8dp"
-                android:layout_marginStart="10dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_Sharelink"
+            android:layout_width="0dp"
+            android:layout_height="46dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/bg_helpgray"
+            android:padding="8dp"
+            android:visibility="invisible"
+            android:layout_marginStart="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/layout_Addtofavorite"
+            app:layout_constraintTop_toBottomOf="@+id/layout_doctorsDetail">
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_Sharelink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/avenirltstd_roman"
+                android:text="@string/sharelink"
+                android:textColor="@color/dark_gray"
+                android:textSize="14sp"
+                android:drawableStart="@drawable/ic_share"
+                android:drawablePadding="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/layout_Addtofavorite"
-                app:layout_constraintTop_toBottomOf="@+id/layout_doctorsDetail">
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+        />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_Sharelink"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/avenirltstd_roman"
-                    android:text="@string/sharelink"
-                    android:textColor="@color/dark_gray"
-                    android:textSize="14sp"
-                    android:drawableStart="@drawable/ic_share"
-                    android:drawablePadding="10dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-                />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout_Addtofavorite"
                 android:layout_width="0dp"
                 android:layout_height="46dp"

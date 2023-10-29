@@ -7,8 +7,7 @@
     <string name="english">English</string>
     <string name="arabic">Arabic</string>
     <string name="salamtakbooking">Salamtak Booking</string>
-    <string name="screen_booking_text">Salamtak Booking provides an easy way for the patient to book an appointment with
-        his favourite doctor with the possobility of following up on the latest offers of doctors in all specialities
+    <string name="screen_booking_text">Salamtak booking provides an easy way for the patient to book an appointment with a doctor who meets Patients needs. The possibility of following up on the latest offers of doctors in all specialties is an added value provided by salamtak application.
     </string>
     <string name="skip">Skip</string>
     <string name="salamtakhomebooking">Salamtak Home Visit</string>
@@ -17,7 +16,7 @@
     <string name="login">Login</string>
     <string name="help">Help</string>
     <string name="next">Next</string>
-    <string name="lets_start">Lets start</string>
+    <string name="lets_start">Get Started</string>
     <string name="mobile_number">mobile number</string>
     <string name="password">Password</string>
     <string name="forgetpasword">Forget Password ?</string>
@@ -81,7 +80,7 @@
     <string name="Enter_fullName_english">Enter Full Name in English (first - middle - last)</string>
     <string name="Enter_fullName_Arabic">Enter Full Name in Arabic (first - middle - last)</string>
     <string name="match_email">invalid mail</string>
-    <string name="lesstthan6number"><![CDATA[password should be >6]]></string>
+    <string name="lesstthan6number">password should be more than 6 numbers </string>
     <string name="doesnotmatch">Doesn\'t Match</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
@@ -90,12 +89,10 @@
     <string name="powered_by">Powered By</string>
     <string name="salamtak_booking">Salamtak Booking</string>
     <string name="home_visit">Home Visit</string>
-    <string name="home_visitdesc">Salamtak Home Visit provides a radical solution to the problem of booking a home visit
-        to the doctor so that it does not conflict with his clinic reservations
+    <string name="home_visitdesc">Salamtak home visit provides the proper solution of booking a home visit. Home visit better services and mor choices are now available by salamtak application more than ever.The good days of the “Family doctor” is back.
     </string>
     <string name="live_chat">Live Chat</string>
-    <string name="live_chatdesc">Save your time and effort as Salamtak live chat allows you to provide the first and
-        third visits for both the patient and the doctor
+    <string name="live_chatdesc">Salamtak connect enables patient, with a click of his finger tips to enjoy full medical diagnosis in simple medical cases for at least professional medical guidons via connecting with salamtaks,doctors using call or video call services. Save the first visit (identify scans and lab analysis) and third visit (follow up consultation) by using Salamtak connect.
     </string>
 
     <string name="verification_code_will_be_sent_within_1_30">Verification code will be sent within</string>
@@ -123,7 +120,7 @@
     <string name="doctors_found">Doctors Found</string>
     <string name="all">All</string>
     <string name="home">Home</string>
-    <string name="my_schedule">My Schedule</string>
+    <string name="my_schedule">Schedule</string>
     <string name="more">More</string>
     <string name="reviews">Reviews</string>
     <string name="next_available_booking_at_08_nov_from_06_30_pm">Next Available Booking at 08 Nov. from 06:30 PM
@@ -198,12 +195,13 @@
     <string name="confirm">Confirm</string>
     <string name="sharelink">Sharelink</string>
     <string name="add_to_favorite">Add to favorite</string>
+    <string name="remove_from_favorite">Remove from favorite</string>
     <string name="about_doctor">About Doctor</string>
     <string name="doctor_s_clinics">Doctor’s Clinics</string>
     <string name="book_appointment">Book Appointment</string>
     <string name="choose_clinic">Choose Clinic</string>
     <string name="choose_service">Choose Service</string>
-    <string name="examination_type">Examination type</string>
+    <string name="examination_type">Services</string>
     <string name="date_time">Date / Time</string>
     <string name="more_actions">More Actions</string>
     <string name="edit_appointment">Edit Appointment</string>
@@ -250,7 +248,7 @@
     <string name="you_must_sign_up_to_book_your_doctor">You must Sign Up to book your doctor</string>
     <string name="no_data_to_show">No data to show</string>
     <string name="have_amedicalquestion">Have a Medical Question?</string>
-    <string name="ask_a_doctor_for_free_and_get_response_in_24_hours">Ask a doctor for free and get response in 24
+    <string name="ask_a_doctor_for_free_and_get_response_in_24_hours">Ask a doctor for free and get a response in 24
         hours
     </string>
     <string name="ask_now">Ask Now</string>
@@ -258,7 +256,7 @@
     <string name="question_descreption_explanation_of_your_medical_symotoms">Question Descreption *(Explanation of your
         medical symotoms)
     </string>
-    <string name="age">Age</string>
+    <string name="age">How old are you?(years)</string>
     <string name="askdoctor">Ask a Doctor</string>
     <string name="fillallfields">Fill All Fields</string>
     <string name="insurance_company">insurance Company</string>
@@ -293,6 +291,9 @@
         on delivering the best offers to you.Please come back and check later
     </string>
     <string name="notifications">Notifications</string>
+    <string name="city">City</string>
+    <string name="area">Area</string>
+    <string name="phone">Phone</string>
 
     <array name="choose">
         <item>Select</item>

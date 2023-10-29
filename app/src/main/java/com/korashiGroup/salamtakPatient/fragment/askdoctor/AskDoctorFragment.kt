@@ -101,6 +101,10 @@ class AskDoctorFragment : Fragment() {
             }, 1000)
         }
 
+        binding.ivArrow.setOnClickListener {
+            findNavController().navigate(R.id.homeFragment)
+        }
+
     }
 
     private fun callBack(){
