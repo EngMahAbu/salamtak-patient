@@ -462,7 +462,6 @@
         android:background="@drawable/more_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layout_Language">
 
         <com.google.android.material.imageview.ShapeableImageView
@@ -508,6 +507,70 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_Delete"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:elevation="1dp"
+                    android:background="@drawable/more_background"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_SignOut">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/iv_Delete"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:adjustViewBounds="true"
+                        android:layout_marginStart="10dp"
+                        android:src="@drawable/ic_trash"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                <TextView
+                        android:id="@+id/tv_Delete"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:fontFamily="@font/avenirltstd_black"
+                        android:gravity="start"
+                        android:text="@string/deleteacount"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toEndOf="@+id/iv_Delete"
+                        app:layout_constraintTop_toTopOf="@+id/iv_Delete"
+                        app:layout_constraintBottom_toBottomOf="@+id/iv_Delete"
+                />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/iv_ArrowDelete"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="10dp"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/ic_arrowred"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                />
+
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>

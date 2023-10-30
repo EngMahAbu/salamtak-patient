@@ -277,6 +277,8 @@
     <string name="city">المدينة</string>
     <string name="area">المنطقة</string>
     <string name="phone">تليفون</string>
+    <string name="deleteacount">حذف الحساب</string>
+    <string name="are_you_sure_you_want_to_delete_your_account">Are you sure you want to delete your Account</string>
 
 
 </resources>

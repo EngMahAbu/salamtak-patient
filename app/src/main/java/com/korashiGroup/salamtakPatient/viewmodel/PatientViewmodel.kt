@@ -22,6 +22,7 @@ import com.korashiGroup.salamtakPatient.utils.Resource
 import com.google.gson.Gson
 import com.korashiGroup.salamtakPatient.model.askandanswer.QuestionAndAnswerResponse
 import com.korashiGroup.salamtakPatient.model.askandanswer.QuestionRequest
+import com.korashiGroup.salamtakPatient.model.deleteuser.DeleteUserResponse
 import com.korashiGroup.salamtakPatient.model.emr.EmrPatientResponse
 import com.korashiGroup.salamtakPatient.model.favorite.AddToFavoriteResponse
 import com.korashiGroup.salamtakPatient.model.favorite.FavoriteDoctorResponse
@@ -51,6 +52,8 @@ class PatientViewmodel @Inject constructor(private val repositry: RegisterReposi
     val favoriteDoctorResponse=MutableLiveData<Resource<FavoriteDoctorResponse>>()
     val notificationResponse=MutableLiveData<Resource<NotificationListResponse>>()
     val favoriteResponse=MutableLiveData<Resource<AddToFavoriteResponse>>()
+    val profileResponse=MutableLiveData<Resource<GetPatientProfileResponse>>()
+    val deleteUserResponse=MutableLiveData<Resource<DeleteUserResponse>>()
 
     fun createDoctorRate(doctorRateRequest: HashMap<String, String> )=viewModelScope.launch(Dispatchers.IO+handler) {
         doctorRateResponse.postValue(Resource.Loading())
@@ -153,6 +156,40 @@ class PatientViewmodel @Inject constructor(private val repositry: RegisterReposi
         val error = Gson().fromJson<AddToFavoriteResponse>(response.errorBody()!!.string(), AddToFavoriteResponse::class.java)
         return error.message?.let { Resource.Error(it) }
     }
+
+    fun getPatientProfileByPateintId()=viewModelScope.launch(Dispatchers.IO+handler) {
+        profileResponse.postValue(Resource.Loading())
+        val response=repositry.getPatient()
+        profileResponse.postValue(response?.let { handlegetPatientProfileByPateintId(it) })
+    }
+
+    private fun handlegetPatientProfileByPateintId(response: Response<GetPatientProfileResponse>): Resource<GetPatientProfileResponse>? {
+        if (response.isSuccessful){
+            response.body()?.let {
+                return Resource.sucess(it)
+            }
+        }
+        val error = Gson().fromJson<GetPatientProfileResponse>(response.errorBody()!!.string(), GetPatientProfileResponse::class.java)
+        return error.message?.let { Resource.Error(it) }
+    }
+
+
+    fun deleteUser()=viewModelScope.launch(Dispatchers.IO+handler) {
+        deleteUserResponse.postValue(Resource.Loading())
+        val response=repositry.deleteUser()
+        deleteUserResponse.postValue(response?.let { handledeleteUser(it) })
+    }
+
+    private fun handledeleteUser(response: Response<DeleteUserResponse>): Resource<DeleteUserResponse>? {
+        if (response.isSuccessful){
+            response.body()?.let {
+                return Resource.sucess(it)
+            }
+        }
+        val error = Gson().fromJson<DeleteUserResponse>(response.errorBody()!!.string(), DeleteUserResponse::class.java)
+        return error.message?.let { Resource.Error(it) }
+    }
+
 
 
     val handler = CoroutineExceptionHandler { _, exception ->

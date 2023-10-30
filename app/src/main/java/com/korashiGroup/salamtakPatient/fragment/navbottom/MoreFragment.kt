@@ -88,6 +88,16 @@ class MoreFragment : Fragment() {
             }, 1000)
         }
 
+        binding.layoutDelete.setOnClickListener {
+            val action =
+                MoreFragmentDirections.actionMoreFragmentToDialogBottomSheetFragment("delete")
+            findNavController().navigate(action)
+            it.isEnabled=false
+            Handler().postDelayed({
+                it.isEnabled=true
+            }, 1000)
+        }
+
         binding.layoutChangePassword.setOnClickListener {
             val action = MoreFragmentDirections.actionMoreFragmentToChangepasswordFragment(0)
             findNavController().navigate(action)

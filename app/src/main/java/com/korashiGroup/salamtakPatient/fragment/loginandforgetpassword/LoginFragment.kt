@@ -12,9 +12,11 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.fawry.fawrypay.models.City
 import com.google.android.material.snackbar.Snackbar
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.databinding.LoginfragmentBinding
+import com.korashiGroup.salamtakPatient.model.CityData
 import com.korashiGroup.salamtakPatient.model.register.DataLogin
 import com.korashiGroup.salamtakPatient.model.register.LoginUser
 import com.korashiGroup.salamtakPatient.utils.Constans.Language
@@ -24,6 +26,7 @@ import com.korashiGroup.salamtakPatient.utils.DataBinding
 import com.korashiGroup.salamtakPatient.utils.DateUtils
 import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.utils.SpUtil
+import com.korashiGroup.salamtakPatient.viewmodel.PatientViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.RegisterViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import dagger.hilt.android.AndroidEntryPoint
@@ -75,6 +78,7 @@ class LoginFragment : Fragment() {
         initButton()
         callBack()
         bindDataToviews()
+
     }
 
     private fun initButton() {
@@ -195,6 +199,7 @@ class LoginFragment : Fragment() {
 
                 is Resource.sucess -> {
                     hideprogressbar()
+
                     loginresponse.let {
                         it.data?.data?.let { it1 -> sp.save(UserLOGIN, it1) }
                         loginresponse.data?.data?.let { it1 -> sp.saveUserToken(TOKEN, it1.token) }
@@ -204,6 +209,7 @@ class LoginFragment : Fragment() {
                     sharedDataViewmodel.getProfileStatus( loginresponse.data?.data?.profileStatus!!)
                      if (loginresponse.data?.data?.profileStatus!!<2) {
                           findNavController().navigate(R.id.docotorProfileFragment)
+
                      }else{
                          val action=LoginFragmentDirections.actionLoginFragmentToHomeFragment()
                         findNavController().navigate(action)
@@ -243,6 +249,9 @@ class LoginFragment : Fragment() {
         }
 
     }
+
+
+
 
 
     interface onSomeEventListener {

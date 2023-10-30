@@ -18,6 +18,7 @@ import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.snackbar.Snackbar
 import com.korashiGroup.salamtakPatient.model.booking.clink.Data
 import com.korashiGroup.salamtakPatient.model.rating.DotorDetails
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,11 +27,11 @@ import dagger.hilt.android.AndroidEntryPoint
 class DialogSchduleFragment : BottomSheetDialogFragment() {
 
     private lateinit var binding: DialogSchdulefragmentBinding
-    private  val viewmodel: DialogBottomSheetViewmodel by viewModels()
+    private val viewmodel: DialogBottomSheetViewmodel by viewModels()
     val sharedDataViewmodel: SharedDataViewmodel by activityViewModels()
-    private val args:DialogSchduleFragmentArgs by navArgs()
+    private val args: DialogSchduleFragmentArgs by navArgs()
     private lateinit var getDoctorClinksResponse: GetDoctorClinksResponse
-    private lateinit var doctorclinks:Data
+    private lateinit var doctorclinks: Data
     override fun getTheme(): Int {
         return R.style.AppBottomSheetDialogTheme
 
@@ -53,12 +54,12 @@ class DialogSchduleFragment : BottomSheetDialogFragment() {
         initButton()
     }
 
-    private fun initButton(){
+    private fun initButton() {
 
         binding.tvCancelAppointment.setOnClickListener {
 
-            binding.layoutCanceled.visibility=View.GONE
-            binding.layoutCancelAppointments.visibility=View.VISIBLE
+            binding.layoutCanceled.visibility = View.GONE
+            binding.layoutCancelAppointments.visibility = View.VISIBLE
 
         }
 
@@ -68,8 +69,8 @@ class DialogSchduleFragment : BottomSheetDialogFragment() {
 //            findNavController().navigate(action) }else{
 //                return@setOnClickListener
 //            }
-            binding.layoutCanceled.visibility=View.GONE
-            binding.layoutCancelAppointments.visibility=View.VISIBLE
+            binding.layoutCanceled.visibility = View.GONE
+            binding.layoutCancelAppointments.visibility = View.VISIBLE
 
         }
 
@@ -82,9 +83,13 @@ class DialogSchduleFragment : BottomSheetDialogFragment() {
             dismiss()
         }
         binding.tvReBookingAppointment.setOnClickListener {
-            if (this::getDoctorClinksResponse.isInitialized){
-            val action=DialogSchduleFragmentDirections.actionDialogSchduleFragmentToBookAppointmentFragment(getDoctorClinksResponse,"Re-Booking Appointment")
-            findNavController().navigate(action) }else{
+            if (this::getDoctorClinksResponse.isInitialized) {
+                val action = DialogSchduleFragmentDirections.actionDialogSchduleFragmentToBookAppointmentFragment(
+                    getDoctorClinksResponse,
+                    "Re-Booking Appointment"
+                )
+                findNavController().navigate(action)
+            } else {
                 return@setOnClickListener
             }
         }
@@ -94,25 +99,29 @@ class DialogSchduleFragment : BottomSheetDialogFragment() {
         }
 
         binding.tvHelp.setOnClickListener {
-            val action=DialogSchduleFragmentDirections.actionDialogSchduleFragmentToDialogBottomSheetFragment("help")
+            val action = DialogSchduleFragmentDirections.actionDialogSchduleFragmentToDialogBottomSheetFragment("help")
             findNavController().navigate(action)
-            it.isEnabled=false
+            it.isEnabled = false
             Handler().postDelayed({
-                it.isEnabled=true
+                it.isEnabled = true
             }, 1000)
         }
 
         binding.tvMedicalHistory.setOnClickListener {
-            if (this::getDoctorClinksResponse.isInitialized){
-            val action=DialogSchduleFragmentDirections.actionDialogSchduleFragmentToMedicalHistoryFragment(getDoctorClinksResponse,args.appointmentId)
-            findNavController().navigate(action) }else{
-            return@setOnClickListener
-        }
+            if (this::getDoctorClinksResponse.isInitialized) {
+                val action = DialogSchduleFragmentDirections.actionDialogSchduleFragmentToMedicalHistoryFragment(
+                    getDoctorClinksResponse,
+                    args.appointmentId
+                )
+                findNavController().navigate(action)
+            } else {
+                return@setOnClickListener
+            }
         }
 
         binding.tvRate.setOnClickListener {
-            if (this::getDoctorClinksResponse.isInitialized){
-                val action=DialogSchduleFragmentDirections.actionDialogSchduleFragmentToDialogRatingDoctorFragment(
+            if (this::getDoctorClinksResponse.isInitialized) {
+                val action = DialogSchduleFragmentDirections.actionDialogSchduleFragmentToDialogRatingDoctorFragment(
                     getDoctorClinksResponse.data?.firstName?.let { it1 ->
                         getDoctorClinksResponse.data!!.firstNameAr?.let { it2 ->
                             getDoctorClinksResponse.data!!.middelName?.let { it3 ->
@@ -142,28 +151,29 @@ class DialogSchduleFragment : BottomSheetDialogFragment() {
                     }
                 )
                 findNavController().navigate(action)
-            }else{
+            } else {
                 return@setOnClickListener
             }
 
         }
 
 
-
     }
 
-    private fun callBack(){
+    private fun callBack() {
 
         viewmodel.doctorClinkResponse.observe(viewLifecycleOwner, Observer {
-            when(it){
+            when (it) {
 
                 is Resource.Loading -> {
 
                 }
+
                 is Resource.sucess -> {
-                  doctorclinks= it.data?.data!!
-                    getDoctorClinksResponse= GetDoctorClinksResponse(it.data?.data,it.message)
+                    doctorclinks = it.data?.data!!
+                    getDoctorClinksResponse = GetDoctorClinksResponse(it.data?.data, it.message)
                 }
+
                 is Resource.Error -> {
 
 
@@ -178,22 +188,31 @@ class DialogSchduleFragment : BottomSheetDialogFragment() {
 
     }
 
-    private fun callBackCancelAppointment(){
+    private fun callBackCancelAppointment() {
         viewmodel.cancelPatientResponse.observe(viewLifecycleOwner, Observer {
-            when(it){
+            when (it) {
 
                 is Resource.Loading -> {
-                    binding.progressBar.visibility=View.VISIBLE
+                    binding.progressBar.visibility = View.VISIBLE
                 }
+
                 is Resource.sucess -> {
-                    binding.progressBar.visibility=View.GONE
-                    Toast.makeText(requireContext(),"Appointment Canceled Successfully",Toast.LENGTH_SHORT).show()
-                        val action=DialogSchduleFragmentDirections.actionDialogSchduleFragmentToBookAppointmentFragment(getDoctorClinksResponse,"Edit Appointment")
-                        findNavController().navigate(action)
+                    binding.progressBar.visibility = View.GONE
+                    Toast.makeText(requireContext(), "Appointment Canceled Successfully", Toast.LENGTH_SHORT).show()
+                    val action = DialogSchduleFragmentDirections.actionDialogSchduleFragmentToBookAppointmentFragment(
+                        getDoctorClinksResponse,
+                        "Edit Appointment"
+                    )
+                    findNavController().navigate(action)
                     dismiss()
                 }
+
                 is Resource.Error -> {
-                    binding.progressBar.visibility=View.GONE
+                    binding.progressBar.visibility = View.GONE
+
+                    it.message?.let { it1 ->
+                        Toast.makeText(requireContext(), it1, Toast.LENGTH_LONG).show()
+                    }
                 }
 
             }
@@ -201,18 +220,22 @@ class DialogSchduleFragment : BottomSheetDialogFragment() {
         viewmodel.cancelPatientAppointment(args.appointmentId)
     }
 
-    private fun showView(){
-        when(args.schedule){
-            "Upcoming"->{
-             binding.layoutCanceled.visibility=View.VISIBLE
+    private fun showView() {
+        when (args.schedule) {
+            "Upcoming" -> {
+                binding.layoutCanceled.visibility = View.VISIBLE
             }
-            "Finished"->{
-                binding.layoutReBookingAppointment.visibility=View.VISIBLE
-            }"Canceled"->{
-            binding.layoutReBookingAppointment.visibility=View.VISIBLE
-        }
-            else->{
-                binding.layoutCanceled.visibility=View.VISIBLE
+
+            "Finished" -> {
+                binding.layoutReBookingAppointment.visibility = View.VISIBLE
+            }
+
+            "Canceled" -> {
+                binding.layoutReBookingAppointment.visibility = View.VISIBLE
+            }
+
+            else -> {
+                binding.layoutCanceled.visibility = View.VISIBLE
 
             }
         }

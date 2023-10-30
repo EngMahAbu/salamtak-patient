@@ -16,9 +16,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import coil.transform.CircleCropTransformation
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.snackbar.Snackbar
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.adapter.*
 import com.korashiGroup.salamtakPatient.databinding.HomefragmentBinding
+import com.korashiGroup.salamtakPatient.model.CityData
 import com.korashiGroup.salamtakPatient.model.ImageServices
 import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.utils.SpUtil
@@ -26,6 +28,7 @@ import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.RegisterViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import com.korashiGroup.salamtakPatient.utils.DateUtils
+import com.korashiGroup.salamtakPatient.viewmodel.PatientViewmodel
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
@@ -38,7 +41,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
     private lateinit var imageServicesAdapter: ServicesAdapter
     private lateinit var imageMedicalServicesAdapter: MedicalServicesAdapter
     private lateinit var imageVideoAdapter: ImageVideoAdapter
-
+    private val patientviewmodel: PatientViewmodel by viewModels()
     //    private lateinit var popularDoctorsAdapter: PopularDoctorsAdapter
 //    private lateinit var healthTopicsAdapter: HealthTopicsAdapter
 //    private lateinit var spotlightAdapter: SpotlightAdapter
@@ -80,7 +83,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
         medicalServices()
         callBack()
         initButton()
-
+        profileCallBack()
     }
 
     private fun initButton() {
@@ -476,4 +479,32 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
 
             })
         }
+
+    private fun profileCallBack(){
+
+        patientviewmodel.profileResponse.observe(viewLifecycleOwner, Observer {
+
+            when (it) {
+
+                is Resource.Loading -> {
+
+                }
+
+                is Resource.sucess -> {
+
+                    sharedDataViewmodel.getCity(CityData(it.data!!.data.cityId,"",it.data!!.data.cityId,false,it.data.data.cityName,""))
+                }
+
+                is Resource.Error -> {
+
+                    Snackbar.make(requireView(), "${it.message}", Snackbar.LENGTH_SHORT)
+                        .show()
+                }
+            }
+
+        })
+            patientviewmodel.getPatientProfileByPateintId()
+    }
+
+
 }

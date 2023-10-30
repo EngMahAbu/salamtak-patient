@@ -24,6 +24,7 @@ import com.korashiGroup.salamtakPatient.utils.SpUtil
 import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import com.google.android.material.snackbar.Snackbar
+import com.korashiGroup.salamtakPatient.model.CityData
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
@@ -153,6 +154,7 @@ class LocationFragment : Fragment() {
         sharedDataViewmodel.getCity.observe(viewLifecycleOwner, Observer {
             cityId = it.id
             binding.etChooseCity.setText(it.name)
+            sharedDataViewmodel.getCity(CityData(0,"",it.id,false,it.name,""))
         })
 
         sharedDataViewmodel.getArea.observe(viewLifecycleOwner, Observer {

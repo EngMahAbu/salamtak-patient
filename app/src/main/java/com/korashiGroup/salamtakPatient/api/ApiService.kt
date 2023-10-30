@@ -5,6 +5,7 @@ import com.korashiGroup.salamtakPatient.model.askandanswer.QuestionAndAnswerResp
 import com.korashiGroup.salamtakPatient.model.askandanswer.QuestionRequest
 import com.korashiGroup.salamtakPatient.model.booking.*
 import com.korashiGroup.salamtakPatient.model.booking.clink.GetDoctorClinksResponse
+import com.korashiGroup.salamtakPatient.model.deleteuser.DeleteUserResponse
 import com.korashiGroup.salamtakPatient.model.docotorsearch.DoctorSearchRequest
 import com.korashiGroup.salamtakPatient.model.docotorsearch.DoctorsearchItemResponse
 import com.korashiGroup.salamtakPatient.model.emr.EmrPatientResponse
@@ -298,5 +299,16 @@ interface ApiService {
         @Path("culture") culture: String,
         @Body favoriteRequest: FavoriteRequest
     ): Response<AddToFavoriteResponse>
+
+
+    @GET("{culture}/Patient/GetPatient")
+    suspend fun getPatient(
+        @Path("culture") culture: String,
+    ):Response<GetPatientProfileResponse>
+
+    @DELETE("{culture}/User/DeleteUser")
+    suspend fun deleteUser(
+        @Path("culture") culture: String,
+    ):Response<DeleteUserResponse>
 
 }

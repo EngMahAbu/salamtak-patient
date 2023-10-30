@@ -294,6 +294,8 @@
     <string name="city">City</string>
     <string name="area">Area</string>
     <string name="phone">Phone</string>
+    <string name="deleteacount">Delete Acount</string>
+    <string name="are_you_sure_you_want_to_delete_your_account">Are you sure you want to delete your Account</string>
 
     <array name="choose">
         <item>Select</item>

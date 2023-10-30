@@ -10,6 +10,7 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -31,7 +32,9 @@ import com.korashiGroup.salamtakPatient.utils.localization.DefaultLocaleHelper
 import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.snackbar.Snackbar
 import com.korashiGroup.salamtakPatient.fragment.loginandforgetpassword.LoginFragment
+import com.korashiGroup.salamtakPatient.viewmodel.PatientViewmodel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -58,6 +61,7 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
     private lateinit var bloodTypesAdapter: BloodTypesAdapter
     private lateinit var medicineAllergyAdapter: MedicineAllergyAdapter
     private lateinit var foodAllergyAdapter: FoodAllergyAdapter
+    private val patientviewmodel: PatientViewmodel by viewModels()
     var lang: String? = null
 
 
@@ -233,6 +237,16 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
             dismiss()
         }
 
+        binding.itemDelete.btnNo.setOnClickListener {
+            dismiss()
+        }
+
+        binding.itemDelete.btnYes.setOnClickListener {
+
+            deleteUserCallback()
+            dismiss()
+        }
+
     }
 
 
@@ -273,6 +287,11 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
 
             "signout" -> {
                 binding.layoutSignOut.visibility = View.VISIBLE
+                binding.btnDone.visibility = View.GONE
+                binding.tvAllSpecial.visibility = View.GONE
+            }
+            "delete" -> {
+                binding.layoutDelete.visibility = View.VISIBLE
                 binding.btnDone.visibility = View.GONE
                 binding.tvAllSpecial.visibility = View.GONE
             }
@@ -808,6 +827,32 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
             }
 
         })
+    }
+
+    private fun deleteUserCallback(){
+
+        patientviewmodel.deleteUserResponse.observe(viewLifecycleOwner, Observer {
+
+            when (it) {
+
+                is Resource.Loading -> {
+
+                }
+
+                is Resource.sucess -> {
+            findNavController().navigate(R.id.loginFragment)
+
+                }
+
+                is Resource.Error -> {
+
+                    Snackbar.make(requireView(), "${it.message}", Snackbar.LENGTH_SHORT)
+                        .show()
+                }
+            }
+
+        })
+        patientviewmodel.deleteUser()
     }
 
 

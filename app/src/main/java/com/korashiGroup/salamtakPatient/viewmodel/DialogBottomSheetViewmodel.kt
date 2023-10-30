@@ -336,6 +336,7 @@ class DialogBottomSheetViewmodel @Inject constructor(private val repositry: Regi
                 return Resource.sucess(it)
             }
         }
+
         val error = Gson().fromJson<CancelPatientAppointmentResponse>(response.errorBody()!!.string(), CancelPatientAppointmentResponse::class.java)
         return error.message?.let { Resource.Error(it) }
 

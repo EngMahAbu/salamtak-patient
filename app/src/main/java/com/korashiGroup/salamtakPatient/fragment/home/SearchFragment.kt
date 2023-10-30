@@ -106,13 +106,12 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         servicesRecylerview()
         doctorsRecylerview()
         initButtonCollabsedFiller()
-        val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US).apply {
+        val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH).apply {
             this.timeZone = TimeZone.getTimeZone("CST")
         }
         formattedDate = formatter.format(now.time)
-
-        doctorsSearch()
         bindFields()
+        doctorsSearch()
         callBackGetClinicSchedualByClinicDayId()
         getDayId()
         setUpCalendar()
@@ -347,6 +346,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
 
 
     private fun bindFields() {
+        getCity()
         sharedDataViewmodel.specialication.observe(viewLifecycleOwner) {
             binding.layoutBottomsheetpersistant.etSpecialization.setText(it.name)
             if (it.name.isNullOrEmpty()){
@@ -356,40 +356,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             }
 
             specialistId = it.id
-            if (specialistId==0){
 
-                val doctorssearchRequset = DoctorSearchRequest(
-                    0,
-                    formattedDate,
-                    0,
-                    "",
-                    feesFrom = 0,
-                    feesTo = 0,
-                    genderId,
-                    100,
-                    examinationtypeid,
-                    0,
-                    0,
-                    specialistId
-                )
-                viewmodel.searchDoctors(doctorssearchRequset)
-            }else{
-                val doctorssearchRequset = DoctorSearchRequest(
-                    0,
-                    formattedDate,
-                    0,
-                    "",
-                    feesFrom = 0,
-                    feesTo = 0,
-                    genderId,
-                    100,
-                    examinationtypeid,
-                    0,
-                    0,
-                    specialistId
-                )
-                viewmodel.searchDoctors(doctorssearchRequset)
-            }
 
         }
         sharedDataViewmodel.subSpecialication.observe(viewLifecycleOwner) {
@@ -414,12 +381,6 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                 seniortyLevelId = it.id
             } else seniortyLevelId = 0
         }
-        sharedDataViewmodel.getCity.observe(viewLifecycleOwner) {
-            binding.layoutBottomsheetpersistant.etChooseCity.setText(it.name)
-            if (!binding.layoutBottomsheetpersistant.etChooseCity.toString().isEmpty()) {
-                cityId = it.id
-            } else cityId = 0
-        }
 
         sharedDataViewmodel.getArea.observe(viewLifecycleOwner) {
             binding.layoutBottomsheetpersistant.etChooseArea.setText(it.name)
@@ -435,6 +396,8 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             } else genderId = 0
 
         }
+
+
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -454,13 +417,13 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                     //    bottomsheetbeahavoir.state = BottomSheetBehavior.STATE_HIDDEN
                         searchDoctorsAdapter.submitList(it.data?.data?.items?.toList())
                         searchDoctorsAdapter.notifyDataSetChanged()
-                        updateUi(it.data?.data?.items as List<Item>)
-                        val totalresult= (it.data.data.totalCount)?.div((10+2))
-                        isLastPage = viewmodel.doctorSearchPage == totalresult
-                        if (isLastPage){
-                                binding.rvDoctors.setPadding(0,0,0,0)
-                        }
-                        totalsDoctors= it.data.data.totalCount!!
+        //                updateUi(it.data?.data?.items as List<Item>)
+//                        val totalresult= (it.data.data.totalCount)?.div((10+2))
+//                        isLastPage = viewmodel.doctorSearchPage == totalresult
+//                        if (isLastPage){
+//                                binding.rvDoctors.setPadding(0,0,0,0)
+//                        }
+                        totalsDoctors= it.data?.data?.totalCount!!
                         binding.tvCountofDoctors.text="${totalsDoctors.toString()}${getString(R.string.doctors_found)}"
                     }
 
@@ -476,7 +439,26 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             }
 
         }
+        sharedDataViewmodel.getCity.observe(viewLifecycleOwner) {
+            binding.layoutBottomsheetpersistant.etChooseCity.setText(it.name)
+            binding.tvCity.text=it.name
 
+        val doctorssearchRequset = DoctorSearchRequest(
+            0,
+            formattedDate,
+            it.id,
+            "",
+            feesFrom = 0,
+            feesTo = 0,
+            genderId,
+            40,
+            examinationtypeid,
+            0,
+            0,
+            specialistId
+        )
+        viewmodel.searchDoctors(doctorssearchRequset)
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -864,6 +846,18 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
 
             }
 
+        }
+    }
+
+
+
+    private fun getCity(){
+        sharedDataViewmodel.getCity.observe(viewLifecycleOwner) {
+            binding.layoutBottomsheetpersistant.etChooseCity.setText(it.name)
+            binding.tvCity.text=it.name
+            if (!binding.layoutBottomsheetpersistant.etChooseCity.toString().isEmpty()) {
+                cityId = it.id
+            } else cityId = 0
         }
     }
 

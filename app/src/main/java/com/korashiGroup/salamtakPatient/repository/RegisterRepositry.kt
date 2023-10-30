@@ -184,4 +184,12 @@ class RegisterRepositry @Inject constructor(private val apiService: ApiService) 
         sp.getUserLang(Constans.Language)
             ?.let { apiService.createPatientFavoritDoctor(it,favoriteRequest) }
 
+    suspend fun getPatient() =
+        sp.getUserLang(Constans.Language)
+            ?.let { apiService.getPatient(it) }
+
+    suspend fun deleteUser() =
+        sp.getUserLang(Constans.Language)
+            ?.let { apiService.deleteUser(it) }
+
 }
