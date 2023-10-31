@@ -22,6 +22,7 @@ import com.korashiGroup.salamtakPatient.model.booking.PatientAppointmentRequest
 import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.korashiGroup.salamtakPatient.utils.DateUtils.convertLongToDate
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.time.Duration
@@ -29,6 +30,7 @@ import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 import java.util.*
+import kotlin.time.Duration.Companion.hours
 
 @AndroidEntryPoint
 class DialogClinkBookingFragment : BottomSheetDialogFragment(),

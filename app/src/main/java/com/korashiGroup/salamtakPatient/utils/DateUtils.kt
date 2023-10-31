@@ -13,7 +13,7 @@ object DateUtils {
 
     fun convertLongToDate(time:Long):String{
         val date= Date(time)
-        val sdf= SimpleDateFormat("dd:MM:yyyy", Locale.US)
+        val sdf= SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US)
         return sdf.format(date)
     }
 

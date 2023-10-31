@@ -13,9 +13,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.databinding.ItemLayoutAppointmentsavailableBinding
 import com.korashiGroup.salamtakPatient.model.booking.AppointmentBooking
+import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 import java.util.*
+import kotlin.math.roundToLong
 
 
 class AppointmentsAvailableAdapter(private val selecttime: Action) :
@@ -37,7 +39,12 @@ class AppointmentsAvailableAdapter(private val selecttime: Action) :
         val appoinments = getItem(position)
         var timefrom = LocalTime.parse(appoinments.time)
         holder.binding.tvTime.text =timefrom.format(DateTimeFormatter.ofPattern("hh:mm a",Locale.getDefault()))
-        timefrom = timefrom.plusHours(2)
+        if (holder.binding.tvTime.text.contains("AM")){
+            timefrom =timefrom.plusMinutes(119)
+        }else{
+            timefrom = timefrom.plusHours(2)
+        }
+
 
         holder.itemView.setOnClickListener {
             selectedItemPosition = holder.bindingAdapterPosition
