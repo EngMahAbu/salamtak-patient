@@ -63,6 +63,7 @@
                         android:layout_marginStart="10dp"
                         android:adjustViewBounds="true"
                         android:src="@drawable/ic_star"
+                        android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/iv_doctorProfile"
                         app:layout_constraintTop_toBottomOf="@+id/tv_doctorName" />
@@ -75,6 +76,7 @@
                         android:fontFamily="@font/avenirltstd_roman"
                         android:gravity="start"
                         android:padding="2dp"
+                        android:visibility="gone"
                         android:text="@string/reviews"
                         android:textColor="@color/gray"
                         android:textSize="15sp"

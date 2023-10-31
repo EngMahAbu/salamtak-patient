@@ -60,19 +60,19 @@ class OnboardingFragment : Fragment() {
 
         list.add(
             Onboarding(
-            R.drawable.ic_patient,
+            R.drawable.ic_updatedocotor,
                 getString(R.string.salamtak_booking),
                 getString(R.string.screen_booking_text)
         )
         )
 
         list.add(Onboarding(
-            R.drawable.ic_connect_salamtak,
+            R.drawable.ic_update_patient,
             getString(R.string.home_visit),
             getString(R.string.home_visitdesc)
         ))
         list.add(Onboarding(
-            R.drawable.ic_patient,
+            R.drawable.ic_updateconnect,
             getString(R.string.live_chat),
             getString(R.string.live_chatdesc)
         ))

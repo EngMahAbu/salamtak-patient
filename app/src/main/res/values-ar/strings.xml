@@ -232,7 +232,7 @@
     <string name="skip_login_explore_our_features">تخطي تسجيل الدخول، واستكشف الميزات لدينا</string>
     <string name="you_must_sign_up_to_book_your_doctor">يجب عليك التسجيل لحجز طبيبك</string>
     <string name="no_data_to_show">لا يوجد بيانات </string>
-    <string name="have_amedicalquestion">هل لديك سؤال طبي؟</string>
+    <string name="have_amedicalquestion">مساعدة سلامتك</string>
     <string name="ask_a_doctor_for_free_and_get_response_in_24_hours">اسأل الطبيب مجانًا واحصل على الرد خلال 24
         ساعة
     </string>
@@ -268,9 +268,10 @@
     <string name="emergencies">Emergencies</string>
     <string name="select">اختر</string>
     <string name="favorite_doctor">الطبيب المفضل</string>
-    <string name="confirmed">تـأكـيد !</string>
+    <string name="confirmed">تـأكـيد </string>
     <string name="offers">العروض</string>
     <string name="offers_not_available_at_the_moment">لا يوجد عروض متاحة فى الوقت الحالى </string>
+    <string name="promotion_not_available_at_the_moment">Promotion not available at the moment.</string>
     <string name="we_are_working_on_delivering_the_best_offers_to_you_please_come_back_and_check_later">نحن نعمل على تقديم أفضل العروض لك.يرجى العودة والتحقق لاحقا.
     </string>
     <string name="notifications">الاشعارات </string>

@@ -93,6 +93,7 @@
                     android:layout_marginStart="10dp"
                     android:adjustViewBounds="true"
                     android:src="@drawable/ic_star"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/iv_doctorProfile"
                     app:layout_constraintTop_toBottomOf="@+id/tv_Specialization" />
@@ -107,6 +108,7 @@
                     android:gravity="start"
                     android:padding="2dp"
                     android:text="@string/reviews"
+                    android:visibility="gone"
                     android:textColor="#757575"
                     android:textSize="15sp"
                     app:layout_constraintStart_toEndOf="@+id/iv_star"
@@ -154,7 +156,8 @@
                 android:layout_marginTop="10dp"
                 android:background="@drawable/bg_help"
                 android:padding="8dp"
-                app:layout_constraintEnd_toStartOf="@+id/layout_Sharelink"
+                app:layout_constraintWidth_percent=".75"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintHorizontal_chainStyle="spread_inside"
                 app:layout_constraintStart_toStartOf="parent"
@@ -172,6 +175,7 @@
                     android:drawableStart="@drawable/ic_heart"
                     android:drawablePadding="10dp"
                     android:gravity="center"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -209,43 +213,95 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_AboutDoctor" />
 
+    <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/AboutDoctor"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="10dp"
+            >
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="3dp"
+        >
+
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_DoctorsClinics"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:fontFamily="@font/avenirltstd_roman"
-                android:gravity="start"
-                android:layout_marginTop="15dp"
-                android:padding="2dp"
-                android:text="@string/doctor_s_clinics"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/AboutDoctor" />
+                    android:id="@+id/tv_DoctorsClinics"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/avenirltstd_roman"
+                    android:gravity="start"
+                    android:layout_marginTop="15dp"
+                    android:padding="2dp"
+                    android:text="@string/doctor_s_clinics"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_clinkDoctors"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_margin="10dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:paddingBottom="10dp"
-                tools:listitem="@layout/item_layout_clinks"
-                app:layout_constraintTop_toBottomOf="@+id/tv_DoctorsClinics"
-                app:layout_constraintBottom_toBottomOf="parent"
-                />
+                    android:id="@+id/rv_clinkDoctors"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:paddingBottom="10dp"
+                    tools:listitem="@layout/item_layout_clinks"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_DoctorsClinics"
+
+            />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/Reviews"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/avenirltstd_black"
+                    android:gravity="start"
+                    android:padding="2dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="15dp"
+                    android:text="@string/reviews"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rv_clinkDoctors"
+            />
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_Reviews"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:paddingBottom="10dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_layout_reviews"
+                    app:layout_constraintTop_toBottomOf="@+id/Reviews"
+                    app:layout_constraintBottom_toBottomOf="parent"
+            />
             <ProgressBar
-                android:id="@+id/progress_bar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="@+id/rv_clinkDoctors"
-                app:layout_constraintStart_toStartOf="@+id/rv_clinkDoctors"
-                app:layout_constraintBottom_toBottomOf="@+id/rv_clinkDoctors"
-                app:layout_constraintTop_toTopOf="@+id/rv_clinkDoctors"
-                android:visibility="gone"
-                />
+                    android:id="@+id/progress_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="@+id/rv_clinkDoctors"
+                    app:layout_constraintStart_toStartOf="@+id/rv_clinkDoctors"
+                    app:layout_constraintBottom_toBottomOf="@+id/rv_clinkDoctors"
+                    app:layout_constraintTop_toTopOf="@+id/rv_clinkDoctors"
+                    android:visibility="gone"
+            />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

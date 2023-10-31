@@ -48,8 +48,12 @@ class ChangepasswordFragment : Fragment() {
 
         if (args.userId!=0){
             binding.layoutOldPassword.visibility=View.GONE
+            binding.ivLogo.visibility=View.VISIBLE
+            binding.layoutHelp.visibility=View.VISIBLE
         }else{
             binding.layoutOldPassword.visibility=View.VISIBLE
+            binding.ivLogo.visibility=View.GONE
+            binding.layoutHelp.visibility=View.GONE
         }
         initButton()
         callBack()

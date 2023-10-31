@@ -22,6 +22,7 @@ import com.korashiGroup.salamtakPatient.model.populardoctors.PopularDoctorsRespo
 import com.korashiGroup.salamtakPatient.model.profile.*
 import com.korashiGroup.salamtakPatient.model.rating.RatingResponse
 import com.korashiGroup.salamtakPatient.model.register.*
+import com.korashiGroup.salamtakPatient.model.reviews.ReviewsResponse
 import com.korashiGroup.salamtakPatient.model.salamtakgate.BlogsResponse
 import com.korashiGroup.salamtakPatient.model.salamtakgate.SalamtakGateResponse
 import com.korashiGroup.salamtakPatient.model.scheduling.CancelPatientAppointmentResponse
@@ -310,5 +311,11 @@ interface ApiService {
     suspend fun deleteUser(
         @Path("culture") culture: String,
     ):Response<DeleteUserResponse>
+
+    @GET("{culture}/DoctorRate/GetDoctorReviews")
+    suspend fun getDoctorReviews(
+        @Path("culture") culture: String,
+        @Query("doctorId") doctorId :Int,
+    ):Response<ReviewsResponse>
 
 }

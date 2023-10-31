@@ -38,13 +38,13 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginStart="15dp"
                 android:adjustViewBounds="true"
-                android:src="@drawable/ic_patientprofile"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
         <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/iv_cam"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/ic_salamtakpatientlogo"
                 android:adjustViewBounds="true"
                 app:layout_constraintBottom_toBottomOf="@+id/iv_PatientProfile"
                 app:layout_constraintEnd_toEndOf="@+id/iv_PatientProfile"
@@ -375,11 +375,10 @@
 
                     <com.google.android.material.imageview.ShapeableImageView
                             android:id="@+id/iv_doctorProfile"
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
                             android:layout_marginStart="5dp"
-                            android:adjustViewBounds="true"
-                            android:src="@drawable/ic_quiz"
+                            android:src="@drawable/ic_salamtekhelp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"

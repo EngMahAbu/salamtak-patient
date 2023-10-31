@@ -100,6 +100,8 @@ class HealthEntityFragment : Fragment(),MedicalHealthAdapter.Action {
             binding.btnEmergencies.setTextColor(Color.parseColor("#FFFFFFFF"))
             binding.btnQandA.setBackgroundResource(R.drawable.bg_help)
             binding.btnQandA.setTextColor(Color.parseColor("#262D70"))
+            binding.layoutFilter.visibility=View.VISIBLE
+            viewmodel.getHealthEntityPagedList(cityId,areaId,args.healthtype,100,0)
         }
 
         binding.btnQandA.setOnClickListener {
@@ -107,6 +109,9 @@ class HealthEntityFragment : Fragment(),MedicalHealthAdapter.Action {
             binding.btnQandA.setTextColor(Color.parseColor("#FFFFFFFF"))
             binding.btnEmergencies.setBackgroundResource(R.drawable.bg_help)
             binding.btnEmergencies.setTextColor(Color.parseColor("#262D70"))
+            binding.layoutFilter.visibility=View.GONE
+            viewmodel.getHealthEntityPagedList(cityId,areaId,0,100,0)
+
         }
 
 
@@ -166,7 +171,7 @@ class HealthEntityFragment : Fragment(),MedicalHealthAdapter.Action {
                     if (isLastPage){
                         binding.rvHelthEntity.setPadding(0,0,0,0)
                     }
-                    response.data?.data?.items?.let { updateUi(it) }
+                 //   response.data?.data?.items?.let { updateUi(it) }
 
                 }
 
@@ -177,8 +182,9 @@ class HealthEntityFragment : Fragment(),MedicalHealthAdapter.Action {
             }
 
         })
-        viewmodel.getHealthEntityPagedList(cityId,areaId,args.healthtype,100,0)
-
+        sharedDataViewmodel.getCity.observe(viewLifecycleOwner) {
+            viewmodel.getHealthEntityPagedList(it.id, areaId, args.healthtype, 100, 0)
+        }
     }
 
     private fun bindDataToUi(){

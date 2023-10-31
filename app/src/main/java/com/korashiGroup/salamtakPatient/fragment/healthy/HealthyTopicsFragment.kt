@@ -29,12 +29,13 @@ import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
+
 @AndroidEntryPoint
 class HealthyTopicsFragment : Fragment() {
 
-    private lateinit var binding:HealthyTopicsfragmentBinding
-    private val args:HealthyTopicsFragmentArgs by navArgs()
-    private val viewmodel:DialogBottomSheetViewmodel by viewModels ()
+    private lateinit var binding: HealthyTopicsfragmentBinding
+    private val args: HealthyTopicsFragmentArgs by navArgs()
+    private val viewmodel: DialogBottomSheetViewmodel by viewModels()
     private lateinit var blogsGatesAdapter: BlogsGatesAdapter
 
     override fun onCreateView(
@@ -42,7 +43,7 @@ class HealthyTopicsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding= HealthyTopicsfragmentBinding.inflate(layoutInflater,container,false)
+        binding = HealthyTopicsfragmentBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -54,7 +55,7 @@ class HealthyTopicsFragment : Fragment() {
         callBack()
     }
 
-    private fun initButton(){
+    private fun initButton() {
         binding.ivArrow.setOnClickListener {
             findNavController().popBackStack()
         }
@@ -72,7 +73,7 @@ class HealthyTopicsFragment : Fragment() {
         }
     }
 
-    private fun callBack(){
+    private fun callBack() {
         viewmodel.blogsResponse.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             when (it) {
 
@@ -107,10 +108,23 @@ class HealthyTopicsFragment : Fragment() {
 
     private fun updateUi(it: List<Blogs>) {
         if (it.isNullOrEmpty()) {
-            binding.crdView.visibility = View.VISIBLE
-        } else {
-            binding.crdView.visibility = View.GONE
+
+
+//            binding.crdView.visibility = View.VISIBLE
+//        } else {
+//            binding.crdView.visibility = View.GONE
+
+            if (args.gatesId == 5) {
+                binding.layoutPromotion.visibility = View.VISIBLE
+            } else {
+                binding.layoutPromotion.visibility = View.GONE
+
+            }
+
+
         }
+
+
     }
 
 }

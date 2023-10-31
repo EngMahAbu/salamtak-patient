@@ -9,12 +9,15 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import coil.transform.CircleCropTransformation
 import com.google.android.material.snackbar.Snackbar
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.adapter.ClinksDoctorsAdapter
+import com.korashiGroup.salamtakPatient.adapter.ReveiwsAdapter
+import com.korashiGroup.salamtakPatient.adapter.ServicesAdapter
 import com.korashiGroup.salamtakPatient.databinding.BookingAppointmentfragmentBinding
 import com.korashiGroup.salamtakPatient.model.booking.clink.GetDoctorClinksResponse
 import com.korashiGroup.salamtakPatient.model.favorite.FavoriteRequest
@@ -33,6 +36,7 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
     private val patientViewModel: PatientViewmodel by viewModels()
     val sharedDataViewmodel: SharedDataViewmodel by activityViewModels()
     private lateinit var clinksDoctorsAdapter: ClinksDoctorsAdapter
+    private lateinit var reveiwsAdapter: ReveiwsAdapter
     private lateinit var getDoctorClinksResponse: GetDoctorClinksResponse
     private var doctorId: Int? = null
     private var isFavorite: Boolean? = null
@@ -51,8 +55,10 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
 
         callBack()
         clinksRecylerview()
+        reviewsRecylerview()
         initButton()
         addFavoriteDoctor()
+        reviewsFavoriteDoctor()
     }
 
 
@@ -76,6 +82,15 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
             layoutManager = LinearLayoutManager(requireContext())
             setHasFixedSize(true)
         }
+    }
+
+    private fun reviewsRecylerview() {
+        reveiwsAdapter = ReveiwsAdapter()
+        binding.rvReviews.apply {
+            adapter = reveiwsAdapter
+            setHasFixedSize(true)
+        }
+
     }
 
     private fun callBack() {
@@ -172,6 +187,36 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
 
     }
 
+
+    private fun reviewsFavoriteDoctor() {
+        patientViewModel.reviewsResponse.observe(viewLifecycleOwner, Observer { response ->
+            when (response) {
+
+                is Resource.Loading -> {
+
+                }
+
+                is Resource.sucess -> {
+                    reveiwsAdapter.submitList(response.data?.data)
+                    reveiwsAdapter.notifyDataSetChanged()
+
+                }
+
+                is Resource.Error -> {
+                    Snackbar.make(requireView(), "${response.message}", Snackbar.LENGTH_SHORT)
+                        .show()
+                }
+            }
+
+        })
+        sharedDataViewmodel.doctorId.observe(viewLifecycleOwner, Observer {
+            patientViewModel.getDoctorReviews(it)
+        })
+
+
+
+    }
+
     private fun showprogtessbar() {
         binding.progressBar.visibility = View.VISIBLE
 
@@ -189,5 +234,7 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
             )
         findNavController().navigate(action)
     }
+
+
 
 }

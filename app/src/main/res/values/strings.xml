@@ -7,7 +7,7 @@
     <string name="english">English</string>
     <string name="arabic">Arabic</string>
     <string name="salamtakbooking">Salamtak Booking</string>
-    <string name="screen_booking_text">Salamtak booking provides an easy way for the patient to book an appointment with a doctor who meets Patients needs. The possibility of following up on the latest offers of doctors in all specialties is an added value provided by salamtak application.
+    <string name="screen_booking_text">Salamtak Booking provides an easy way for patient to book an appointment with a doctor who meets Patients needs. The possibility of following up on the latest offers of doctors in all specialties is an added value provided by Salamtak application.
     </string>
     <string name="skip">Skip</string>
     <string name="salamtakhomebooking">Salamtak Home Visit</string>
@@ -89,10 +89,10 @@
     <string name="powered_by">Powered By</string>
     <string name="salamtak_booking">Salamtak Booking</string>
     <string name="home_visit">Home Visit</string>
-    <string name="home_visitdesc">Salamtak home visit provides the proper solution of booking a home visit. Home visit better services and mor choices are now available by salamtak application more than ever.The good days of the “Family doctor” is back.
+    <string name="home_visitdesc">Salamtak Home Visit provides the proper solution for booking a Home Visit. Home Visit better services and more choices, are now available by Salamtak application more than ever.The good days of the “Family doctor” is back.
     </string>
-    <string name="live_chat">Live Chat</string>
-    <string name="live_chatdesc">Salamtak connect enables patient, with a click of his finger tips to enjoy full medical diagnosis in simple medical cases for at least professional medical guidons via connecting with salamtaks,doctors using call or video call services. Save the first visit (identify scans and lab analysis) and third visit (follow up consultation) by using Salamtak connect.
+    <string name="live_chat">Salamtak Connect</string>
+    <string name="live_chatdesc">Salamtak Connect enables patient, with a click of a finger tip, to enjoy full medical diagnosis “in simple medical cases“ by using call or video call services. it is a valuable tool that provides, at least, professional medical guidance. Now you can save the First Visit (identify scans and lab analysis) and Third Visit (follow up consultation) by using Salamtak Connect.
     </string>
 
     <string name="verification_code_will_be_sent_within_1_30">Verification code will be sent within</string>
@@ -166,7 +166,7 @@
     <string name="save_edit">Save Edit</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="profile_info">Profile Info.</string>
-    <string name="medical_state">Medical State</string>
+    <string name="medical_state">Medical Record</string>
     <string name="street">Street</string>
     <string name="building_number">Building Number</string>
     <string name="floor_number">Floor Number</string>
@@ -247,7 +247,7 @@
     <string name="skip_login_explore_our_features">Skip Login,Explore our features</string>
     <string name="you_must_sign_up_to_book_your_doctor">You must Sign Up to book your doctor</string>
     <string name="no_data_to_show">No data to show</string>
-    <string name="have_amedicalquestion">Have a Medical Question?</string>
+    <string name="have_amedicalquestion"> Salamtak Help</string>
     <string name="ask_a_doctor_for_free_and_get_response_in_24_hours">Ask a doctor for free and get a response in 24
         hours
     </string>
@@ -284,9 +284,10 @@
     <string name="emergencies">Emergencies</string>
     <string name="select">Select</string>
     <string name="favorite_doctor">Favorite Doctor</string>
-    <string name="confirmed">Confirmed !</string>
+    <string name="confirmed">Confirmed</string>
     <string name="offers">Offers</string>
     <string name="offers_not_available_at_the_moment">Offers not available at the moment.</string>
+    <string name="promotion_not_available_at_the_moment">Promotion not available at the moment.</string>
     <string name="we_are_working_on_delivering_the_best_offers_to_you_please_come_back_and_check_later">We are working
         on delivering the best offers to you.Please come back and check later
     </string>

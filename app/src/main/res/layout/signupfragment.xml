@@ -365,7 +365,6 @@
                 android:text="@string/have_an_account"
                 android:textColor="#616161"
                 android:textSize="14sp"
-                app:layout_constraintEnd_toStartOf="@+id/tv_login"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_signup" />
@@ -505,7 +504,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="20dp"
             android:text="@string/agree_to"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/layout_confirmpassword" />
@@ -514,7 +513,7 @@
             android:id="@+id/tv_termsandconditions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="20dp"
             android:layout_marginStart="2dp"
             android:fontFamily="@font/avenirltstd_roman"
            android:text="@string/terms_conditions"

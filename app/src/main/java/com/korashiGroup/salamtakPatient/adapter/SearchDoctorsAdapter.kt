@@ -8,10 +8,12 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.CircleCropTransformation
+import com.dro.doctoronline_doctorapp.localDataBase.SharedPreferencesTool.getString
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.databinding.ItemLayoutDoctorsBinding
 import com.korashiGroup.salamtakPatient.model.docotorsearch.Item
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
+import okhttp3.internal.format
 
 
 class SearchDoctorsAdapter(private val booking: Booking) :
@@ -39,6 +41,8 @@ class SearchDoctorsAdapter(private val booking: Booking) :
             location.text = services.clinicDto?.AreaName
             waitingTime.text = "${services.waitingTime}"
             Feesresult.text = "${services.feesFrom.toString()} ${holder.binding.Feesresult.context.getString(R.string.le)}"
+            holder.binding.ratingBar.rating= services.rate?.toFloat() ?: 1.0f
+            holder.binding.Reviews.text="${services.rate?.toDouble()}"
         }
         holder.binding.btnBooking.setOnClickListener {
 

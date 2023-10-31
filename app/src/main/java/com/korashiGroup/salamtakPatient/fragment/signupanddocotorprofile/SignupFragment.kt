@@ -316,18 +316,20 @@ class SignupFragment : Fragment() {
                 0
             )
             return false
-        } else if (confirmPassword.length < 6) {
-            binding.tvConfirmpasswordError.text = getString(R.string.lesstthan6number)
-            binding.tvConfirmpasswordError.visibility = View.VISIBLE
-            binding.layoutConfirmpassword.setBackgroundResource(R.drawable.bg_edittext_error)
-            binding.confirmEtPassword.setCompoundDrawablesWithIntrinsicBounds(
-                0,
-                0,
-                R.drawable.ic_error,
-                0
-            )
-           return false
-        } else if (password != confirmPassword) {
+        }
+//        else if (confirmPassword.length < 6) {
+//            binding.tvConfirmpasswordError.text = getString(R.string.lesstthan6number)
+//            binding.tvConfirmpasswordError.visibility = View.VISIBLE
+//            binding.layoutConfirmpassword.setBackgroundResource(R.drawable.bg_edittext_error)
+//            binding.confirmEtPassword.setCompoundDrawablesWithIntrinsicBounds(
+//                0,
+//                0,
+//                R.drawable.ic_error,
+//                0
+//            )
+//           return false
+//        }
+        else if (password != confirmPassword) {
             binding.tvConfirmpasswordError.text = getString(R.string.doesnotmatch)
             binding.tvPasswordError.text = getString(R.string.doesnotmatch)
             binding.tvConfirmpasswordError.visibility = View.VISIBLE
