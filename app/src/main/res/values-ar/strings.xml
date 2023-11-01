@@ -210,6 +210,7 @@
     <string name="spotlight">أضواء كاشفة</string>
     <string name="good_morning">صباح الخير</string>
     <string name="good_evening">مساء الخير</string>
+    <string name="afternoon">مساء الخير</string>
     <string name="verified">تم التحقق</string>
     <string name="invalid_code">الرمز غير صحيح</string>
     <string name="le">جنيه</string>

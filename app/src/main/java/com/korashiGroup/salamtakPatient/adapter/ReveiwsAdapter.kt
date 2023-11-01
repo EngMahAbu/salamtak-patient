@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.databinding.ItemLayoutBlogofGatesBinding
 import com.korashiGroup.salamtakPatient.databinding.ItemLayoutGatesBinding
 import com.korashiGroup.salamtakPatient.databinding.ItemLayoutReviewsBinding
@@ -29,10 +30,12 @@ class ReveiwsAdapter( ):ListAdapter<ReviewsData,ReveiwsAdapter.ViewHolder>(DiffC
         val services=getItem(position)
         Glide.with(holder.binding.ivDoctorProfile.context)
             .load("https://salamtechapi.azurewebsites.net/${services.patientImage}")
+            .placeholder(R.drawable.ic_docspecialization)
             .into(holder.binding.ivDoctorProfile)
         holder.binding.apply {
             tvDoctorName.text=services.patientName
             ratingBar.rating=services.rate.toFloat()
+            tvReviewsDetails.text=services.comment
         }
 
     }

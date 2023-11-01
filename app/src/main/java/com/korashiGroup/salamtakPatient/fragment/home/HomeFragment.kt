@@ -411,22 +411,22 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
 
 
     private fun bindDataToViews() {
-
-        val currentTime = SimpleDateFormat("HH:mm:ss a", Locale.getDefault()).format(Date())
+        binding.tvWelcome.text =getTimeOfDayDescription()
+     //   val currentTime = SimpleDateFormat("HH:mm:ss a", Locale.getDefault()).format(Date())
 
         if (DateUtils.getLanguage()=="en") {
-            if (currentTime.contains("pm") || currentTime.contains("PM")|| currentTime.contains("م")) {
-                binding.tvWelcome.text = getString(R.string.good_evening)
-            } else {
-                binding.tvWelcome.text = getString(R.string.good_morning)
-            }
+//            if (currentTime.contains("pm") || currentTime.contains("PM")|| currentTime.contains("م")) {
+//                binding.tvWelcome.text = getString(R.string.good_evening)
+//            } else {
+//                binding.tvWelcome.text = getString(R.string.good_morning)
+//            }
             binding.tvPatientname.text = sp.getUser()?.name
         } else {
-            if (currentTime.contains("am") || currentTime.contains("AM") ||currentTime.contains("ص")) {
-                binding.tvWelcome.text = getString(R.string.good_morning)
-            } else {
-                binding.tvWelcome.text = getString(R.string.good_evening)
-            }
+//            if (currentTime.contains("am") || currentTime.contains("AM") ||currentTime.contains("ص")) {
+//                binding.tvWelcome.text = getString(R.string.good_morning)
+//            } else {
+//                binding.tvWelcome.text = getString(R.string.good_evening)
+//            }
             binding.tvPatientname.text = sp.getUser()?.NameAR
         }
 
@@ -504,6 +504,18 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
 
         })
             patientviewmodel.getPatientProfileByPateintId()
+    }
+
+
+    fun getTimeOfDayDescription(): String {
+        val calendar = Calendar.getInstance()
+        val hour = calendar.get(Calendar.HOUR_OF_DAY)
+
+        return when {
+            hour in 6 until 12 ->  getString(R.string.good_morning)
+            hour in 12 until 18 -> getString(R.string.afternoon)
+            else -> getString(R.string.good_evening)
+        }
     }
 
 
