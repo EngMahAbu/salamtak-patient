@@ -147,8 +147,8 @@
     <string name="fees">Fees</string>
     <string name="reset">Reset</string>
     <string name="specialization">Specialist</string>
-    <string name="choose_specialization">Choose Specialisty</string>
-    <string name="choose_sub_specialization">Choose sub Specialisty</string>
+    <string name="choose_specialization">Choose Speciality</string>
+    <string name="choose_sub_specialization">Choose sub Speciality</string>
     <string name="choose_Seniority_Level">Choose Seniority Level</string>
     <string name="choose_city">Choose City</string>
     <string name="choose_area">Choose Area</string>
@@ -260,7 +260,7 @@
     <string name="ask_a_doctor_for_free_and_get_response_in_24_hours">Get professional medical answers to all your questions
     </string>
     <string name="ask_now">Ask Now</string>
-    <string name="your_question">Your Question</string>
+    <string name="your_question">Your question</string>
     <string name="question_descreption_explanation_of_your_medical_symotoms">Question Descreption *(Explanation of your
         medical symotoms)
     </string>
@@ -286,8 +286,8 @@
     <string name="description">Description :</string>
     <string name="title">TiTle :</string>
     <string name="signupedit">You must Sign Up to book your doctor</string>
-    <string name="me">Me</string>
-    <string name="anotherpatient">Another patient</string>
+    <string name="me">For Me</string>
+    <string name="anotherpatient">For Someone else</string>
     <string name="qanda"><![CDATA[Q&A]]></string>
     <string name="emergencies">Emergencies</string>
     <string name="select">Select</string>

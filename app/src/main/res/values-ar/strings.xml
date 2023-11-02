@@ -13,12 +13,12 @@
     <string name="login">الدخول</string>
     <string name="help">المساعده</string>
     <string name="next">التالى</string>
-    <string name="mobile_number">رقم الموبايل </string>
+    <string name="mobile_number">رقم الهاتف </string>
     <string name="password">كلمة المرور</string>
-    <string name="forgetpasword">هل نسيت كلمة المرور؟</string>
+    <string name="forgetpasword"> نسيت كلمة المرور؟</string>
     <string name="egypt">مصر</string>
-    <string name="doyothaveacount">ليس لديك حساب</string>
-    <string name="signup">تسجيل</string>
+    <string name="doyothaveacount">ليس لديك حساب؟</string>
+    <string name="signup">اشتراك</string>
     <string name="forsupportcallus">للحصول على الدعم اتصل بنا</string>
     <string name="callnumber">17143</string>
     <string name="mobile_number_email">رقم الهاتف أو البريد الإلكتروني</string>
@@ -28,7 +28,7 @@
     <string name="resend_verification_code">إعادة إرسال رمز التحقق</string>
     <string name="change_password">تغيير كلمة المرور</string>
     <string name="new_password">كلمة المرور الجديدة</string>
-    <string name="confirm_new_password">تأكيد كلمة المرور الجديدة</string>
+    <string name="confirm_new_password">تأكيد كلمة المرور </string>
     <string name="save">حفظ</string>
     <string name="sign_up">اشتراك</string>
     <string name="lets_start">ابدأ التطبيق</string>
@@ -232,7 +232,7 @@
     <string name="release_date">تاريخ الافراج عنه</string>
     <string name="update">تحديث</string>
     <string name="salamtak_gates">بوابة سلامتك</string>
-    <string name="skip_login_explore_our_features">تخطي تسجيل الدخول، واستكشف الميزات لدينا</string>
+    <string name="skip_login_explore_our_features">تخطي تسجيل الدخول،استكشف ميزاتنا.</string>
     <string name="you_must_sign_up_to_book_your_doctor">يجب عليك التسجيل لحجز طبيبك</string>
     <string name="no_data_to_show">لا يوجد بيانات </string>
     <string name="have_amedicalquestion">مساعدة سلامتك</string>
@@ -241,7 +241,7 @@
     </string>
     <string name="ask_now">أسأل الأن </string>
     <string name="your_question">سؤالك</string>
-    <string name="question_descreption_explanation_of_your_medical_symotoms">وصف السؤال *(شرح أعراضك الطبية)
+    <string name="question_descreption_explanation_of_your_medical_symotoms">وصف السؤال *(شرح الاعراض الطبية لديك)
     </string>
     <string name="age">كم عمرك (بالسنوات)</string>
     <string name="askdoctor">اسأل طبيب</string>

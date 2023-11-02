@@ -271,7 +271,7 @@
                     app:boxBackgroundMode="none"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textinput_QuestionDetails">
+                    app:layout_constraintTop_toBottomOf="@+id/layout_Choose_Gender">
 
                 <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_Age"
@@ -317,7 +317,7 @@
                     android:elevation="1dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textinput_Age">
+                    app:layout_constraintTop_toBottomOf="@+id/textinput_QuestionDetails">
 
                 <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/iv_arrowdownChoose_Gender"
@@ -398,7 +398,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/layout_Choose_Gender">
+                    app:layout_constraintTop_toBottomOf="@+id/textinput_Age">
 
                 <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btn_me"
@@ -410,6 +410,7 @@
                         android:text="@string/me"
                         android:textColor="@color/blue"
                         android:textSize="14sp"
+                        android:textAllCaps="false"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/btn_other"
                         app:layout_constraintStart_toStartOf="parent"
@@ -421,6 +422,7 @@
                         android:layout_height="55dp"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="15dp"
+                        android:textAllCaps="false"
                         android:background="@drawable/btn_sellector"
                         android:fontFamily="@font/avenirltstd_roman"
                         android:text="@string/anotherpatient"
@@ -477,6 +479,7 @@
                 android:fontFamily="@font/avenirltstd_black"
                 android:padding="5dp"
                 android:text="@string/send"
+                android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 android:layout_marginStart="15dp"
