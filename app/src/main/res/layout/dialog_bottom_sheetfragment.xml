@@ -188,7 +188,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_Specialist"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="550dp"
             android:layout_marginBottom="5dp"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"

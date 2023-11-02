@@ -51,7 +51,6 @@
                     android:id="@+id/iv_doctorProfile"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:src="@drawable/ic_docspecialization"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -209,6 +208,7 @@
                     android:gravity="start"
                     android:layout_marginTop="5dp"
                     android:padding="2dp"
+                    android:visibility="gone"
                     android:text="@string/about_doctor"
                     android:textColor="@color/black"
                     android:textSize="18sp"
@@ -223,6 +223,7 @@
                     android:layout_marginEnd="10dp"
                     android:fontFamily="@font/avenirltstd_roman"
                     android:gravity="start"
+                    android:visibility="gone"
                     android:layout_marginTop="5dp"
                     android:padding="2dp"
                     android:textColor="@color/gray"
@@ -273,6 +274,21 @@
                     android:textColor="@color/black"
                     android:textSize="15sp"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rv_clinkDoctors"
+            />
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/see_All"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/avenirltstd_black"
+                    android:gravity="start"
+                    android:padding="2dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:text="@string/see_all"
+                    android:textColor="@color/green"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/rv_clinkDoctors"
             />
 

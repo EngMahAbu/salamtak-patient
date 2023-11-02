@@ -120,6 +120,11 @@ class MoreFragment : Fragment() {
         }
 
 
+        binding.layoutAboutApp.setOnClickListener {
+            findNavController().navigate(R.id.aboutAppFragment)
+        }
+
+
 
     }
 
@@ -131,11 +136,13 @@ class MoreFragment : Fragment() {
                 binding.layoutChangePassword.visibility=View.GONE
                 binding.layoutSignOut.visibility=View.GONE
                 binding.layoutFavoriteDoctor.visibility=View.GONE
+                binding.layoutDelete.visibility=View.GONE
             }else{
                 binding.layoutNextAvailableBooking.visibility=View.VISIBLE
                 binding.layoutChangePassword.visibility=View.VISIBLE
                 binding.layoutSignOut.visibility=View.VISIBLE
                 binding.layoutFavoriteDoctor.visibility=View.VISIBLE
+                binding.layoutDelete.visibility=View.VISIBLE
             }
 
         })

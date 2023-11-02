@@ -17,6 +17,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="@dimen/_5sdp"
+                android:visibility="gone"
                 android:src="@drawable/ic_docspecialization"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -86,7 +87,8 @@
                 app:layout_constraintTop_toBottomOf="@+id/tv_doctorName"
                 app:layout_constraintStart_toEndOf="@+id/iv_star"
                 android:rating="2"
-                android:theme="@style/ratingBar"
+
+               android:theme="@style/ratingBar"
                 android:layout_marginTop="@dimen/_5sdp"
                 style="?android:attr/ratingBarStyleSmall"
                 android:transformPivotX="0dp"
@@ -112,7 +114,7 @@
                 android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/iv_doctorProfile" />
+                app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

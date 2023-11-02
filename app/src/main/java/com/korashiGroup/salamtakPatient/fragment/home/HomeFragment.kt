@@ -239,7 +239,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
             ImageServices(
                 R.drawable.ic_salamtak_angel,
                 getString(R.string.engile),
-                R.color.color_6, 7
+                R.color.white, 7
             )
         )
         imageMedicalServicesAdapter.submitList(list)
@@ -430,11 +430,11 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
             binding.tvPatientname.text = sp.getUser()?.NameAR
         }
 
-        binding.ivPatientProfile.load("https://salamtechapi.azurewebsites.net/${sp.getUser()?.image}") {
-            crossfade(true)
-            crossfade(1000)
-            transformations(CircleCropTransformation())
-        }
+//        binding.ivPatientProfile.load("https://salamtechapi.azurewebsites.net/${sp.getUser()?.image}") {
+//            crossfade(true)
+//            crossfade(1000)
+//            transformations(CircleCropTransformation())
+//        }
 
     }
 

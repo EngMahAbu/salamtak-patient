@@ -131,7 +131,7 @@ class ChangepasswordFragment : Fragment() {
 
 
                 } else {
-                    Toast.makeText(requireContext(), " not match", Toast.LENGTH_SHORT).show()
+                  //  Toast.makeText(requireContext(), " not match", Toast.LENGTH_SHORT).show()
                 }
 
             }
@@ -142,54 +142,90 @@ class ChangepasswordFragment : Fragment() {
 
     private fun isvalidateFeilds(password: String, confirmPassword: String): Boolean {
 
-        var isValid = true
+
+        if (binding.etOldpassword.text?.trim()!!.isEmpty()) {
+            binding.textinputPassword.error = "no *"
+            binding.tvOldpasswordError.visibility = View.VISIBLE
+            binding.tvOldpasswordError.text = getString(R.string.required)
+            binding.layoutOldPassword.setBackgroundResource(R.drawable.bg_edittext_error)
+            binding.etOldpassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
+            return false
+        }
+//        else if (password.length < 6) {
+//            binding.textinputPassword.error = "passwored should > 6 "
+//            binding.tvPasswordError.visibility = View.VISIBLE
+//            binding.tvPasswordError.text = getString(R.string.lesstthan6number)
+//            binding.layoutPassword.setBackgroundResource(R.drawable.bg_edittext_error)
+//            binding.etPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
+//            return false
+//        }
+        else {
+            binding.textinputPassword.error = null
+            binding.tvOldpasswordError.visibility = View.GONE
+            binding.layoutOldPassword.setBackgroundResource(R.drawable.bg_edittext)
+            binding.etOldpassword.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
+        }
+
+
 
         if (password.trim().isEmpty()) {
             binding.textinputPassword.error = "no *"
+            binding.tvPasswordError.visibility = View.VISIBLE
+            binding.tvPasswordError.text = getString(R.string.required)
             binding.layoutPassword.setBackgroundResource(R.drawable.bg_edittext_error)
             binding.etPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
-            isValid = false
+            return false
         } else if (password.length < 6) {
             binding.textinputPassword.error = "passwored should > 6 "
+            binding.tvPasswordError.visibility = View.VISIBLE
+            binding.tvPasswordError.text = getString(R.string.lesstthan6number)
             binding.layoutPassword.setBackgroundResource(R.drawable.bg_edittext_error)
             binding.etPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
-            isValid = false
+            return false
         } else {
             binding.textinputPassword.error = null
+            binding.tvPasswordError.visibility = View.GONE
             binding.layoutPassword.setBackgroundResource(R.drawable.bg_edittext)
             binding.etPassword.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
 
-            isValid = true
+
         }
 
         if (confirmPassword.trim().isEmpty()) {
             binding.confirmtextinputPassword.error = "no *"
+            binding.tvConfirmpasswordError.text = getString(R.string.required)
+            binding.tvConfirmpasswordError.visibility = View.VISIBLE
             binding.layoutConfirmpassword.setBackgroundResource(R.drawable.bg_edittext_error)
             binding.confirmEtPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
-            isValid = false
-        } else if (confirmPassword.length < 6) {
-            binding.confirmtextinputPassword.error = "passwored should be > 6 "
-            binding.layoutConfirmpassword.setBackgroundResource(R.drawable.bg_edittext_error)
-            binding.confirmEtPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
-            isValid = false
-        }else if (!confirmPassword.equals(password)) {
+            return false
+        }
+//        else if (confirmPassword.length < 6) {
+//            binding.confirmtextinputPassword.error = "passwored should be > 6 "
+//            binding.layoutConfirmpassword.setBackgroundResource(R.drawable.bg_edittext_error)
+//            binding.confirmEtPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
+//            return false
+//        }
+        else if (!confirmPassword.equals(password)) {
             binding.confirmtextinputPassword.error = "passwored not matched "
             binding.textinputPassword.error = "passwored not matched "
+            binding.tvConfirmpasswordError.text = getString(R.string.doesnotmatch)
+            binding.tvPasswordError.text = getString(R.string.doesnotmatch)
+            binding.tvConfirmpasswordError.visibility = View.VISIBLE
             binding.layoutConfirmpassword.setBackgroundResource(R.drawable.bg_edittext_error)
             binding.confirmEtPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
             binding.layoutPassword.setBackgroundResource(R.drawable.bg_edittext_error)
             binding.etPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
-            isValid = false
+            return false
         }
         else {
             binding.confirmtextinputPassword.error = null
             binding.layoutConfirmpassword.setBackgroundResource(R.drawable.bg_edittext)
             binding.confirmEtPassword.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
+            binding.tvConfirmpasswordError.visibility = View.GONE
 
-            isValid = true
         }
 
-        return isValid
+        return true
 
     }
 

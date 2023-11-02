@@ -60,7 +60,8 @@ class ChooseLanguageFragment : Fragment() {
                     lang = "en"
                     sp.saveUserLang(Language, lang!!)
                     DateUtils.setLanguage(lang!!)
-
+                  binding.tvStartPick.text="To get started, select your language"
+                    binding.btnChoose.text="Confirm"
 
                 }
                 R.id.radio_arabic -> {
@@ -68,6 +69,8 @@ class ChooseLanguageFragment : Fragment() {
                     lang = "ar"
                     sp.saveUserLang(Language, lang!!)
                     DateUtils.setLanguage(lang!!)
+                    binding.tvStartPick.text="للبدء, اختار اللغة"
+                    binding.btnChoose.text="تأكيد"
 
                 }
             }

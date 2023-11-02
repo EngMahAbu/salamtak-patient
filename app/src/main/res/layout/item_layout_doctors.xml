@@ -92,10 +92,23 @@
                         android:gravity="start"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:text="0"
-                        android:textColor="@color/gray"
-                        android:textSize="15sp"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
                         app:layout_constraintStart_toEndOf="@+id/ratingBar"
                         app:layout_constraintTop_toBottomOf="@+id/tv_Specialization" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/Ratecount"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:fontFamily="@font/avenirltstd_roman"
+                            android:gravity="start"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:text="0"
+                            android:textColor="@color/gray"
+                            android:textSize="11sp"
+                            app:layout_constraintStart_toEndOf="@+id/Reviews"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_Specialization" />
                     <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/tv_Reviews"
                             android:layout_width="0dp"
@@ -103,11 +116,11 @@
                             android:layout_marginStart="5dp"
                             android:fontFamily="@font/avenirltstd_roman"
                             android:gravity="start"
-                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_marginTop="@dimen/_8sdp"
                             android:text="@string/reviews"
                             android:textColor="@color/gray"
-                            android:textSize="15sp"
-                            app:layout_constraintStart_toEndOf="@+id/Reviews"
+                            android:textSize="10sp"
+                            app:layout_constraintStart_toEndOf="@+id/Ratecount"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/tv_Specialization" />
 

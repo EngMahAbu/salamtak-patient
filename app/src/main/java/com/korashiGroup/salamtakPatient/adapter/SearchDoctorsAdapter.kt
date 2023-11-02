@@ -14,6 +14,7 @@ import com.korashiGroup.salamtakPatient.databinding.ItemLayoutDoctorsBinding
 import com.korashiGroup.salamtakPatient.model.docotorsearch.Item
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import okhttp3.internal.format
+import kotlin.math.roundToInt
 
 
 class SearchDoctorsAdapter(private val booking: Booking) :
@@ -41,8 +42,9 @@ class SearchDoctorsAdapter(private val booking: Booking) :
             location.text = services.clinicDto?.AreaName
             waitingTime.text = "${services.waitingTime}"
             Feesresult.text = "${services.feesFrom.toString()} ${holder.binding.Feesresult.context.getString(R.string.le)}"
-            holder.binding.ratingBar.rating= services.rate?.toFloat() ?: 1.0f
-            holder.binding.Reviews.text="${services.rate?.toDouble()}"
+            holder.binding.ratingBar.rating= services.rate?.toFloat()?: 1.0f
+            holder.binding.Reviews.text="${services.rate?.roundToInt()?.toDouble()}"
+            holder.binding.Ratecount.text="${services.RateCount?.toInt()}"
         }
         holder.binding.btnBooking.setOnClickListener {
 

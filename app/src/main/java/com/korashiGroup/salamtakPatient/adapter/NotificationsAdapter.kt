@@ -41,7 +41,7 @@ class NotificationsAdapter() :
         if (services.isSeen){
             holder.binding.layoutServices.setBackgroundColor( ContextCompat.getColor(holder.binding.layoutServices.context, R.color.white))
         }else{
-            holder.binding.layoutServices.setBackgroundColor( ContextCompat.getColor(holder.binding.layoutServices.context, R.color.yellow))
+            holder.binding.layoutServices.setBackgroundColor( ContextCompat.getColor(holder.binding.layoutServices.context, R.color.color7))
         }
 
     }

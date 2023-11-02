@@ -296,6 +296,8 @@
                 app:popUpTo="@id/searchFragment" />
         <action android:id="@+id/action_bookingAppointmentFragment_to_dialogAddInsuranceCardFragment"
                 app:destination="@id/dialogAddInsuranceCardFragment"/>
+        <action android:id="@+id/action_bookingAppointmentFragment_to_allReviewsFragment"
+                app:destination="@id/allReviewsFragment"/>
     </fragment>
     <fragment
             android:id="@+id/bookAppointmentFragment"
@@ -444,5 +446,13 @@
     <fragment android:id="@+id/notificationListFragment"
               android:name="com.korashiGroup.salamtakPatient.notification.NotificationListFragment"
               android:label="notification_listfragment" tools:layout="@layout/notification_listfragment"/>
+    <fragment android:id="@+id/allReviewsFragment"
+              android:name="com.korashiGroup.salamtakPatient.fragment.allreviews.AllReviewsFragment"
+              android:label="all_reviewsfragment" tools:layout="@layout/all_reviewsfragment">
+
+    </fragment>
+    <fragment android:id="@+id/aboutAppFragment"
+              android:name="com.korashiGroup.salamtakPatient.fragment.webView.AboutAppFragment"
+              android:label="about_appfragment" tools:layout="@layout/about_appfragment"/>
 
 </navigation>

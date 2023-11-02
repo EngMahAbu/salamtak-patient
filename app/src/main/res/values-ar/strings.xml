@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="togetstartpickyourlanguage">للبدء.اختر لغتك</string>
-    <string name="english">انجليزى</string>
-    <string name="arabic">عربى</string>
+    <string name="togetstartpickyourlanguage">للبدء, اختار اللغة</string>
+    <string name="english">اللغة الانجليزية</string>
+    <string name="arabic">اللغة العربية</string>
+    <string name="app_name">Salamtak|سلامتك</string>
     <string name="salamtakbooking">الحجوزات</string>
-    <string name="screen_booking_text">Salamtak Booking يوفر آلية تنفيذ الحجوزات بسلاسة شديدة وما يتبع الحجز من خطوات سواء لتأكيد الحجز وكذلك توصيح كافة البيانات ذات الاهمية سوا للطبيب او المريض وتوضيح الخدمات المقدمة من العيادة للمريض</string>
+    <string name="screen_booking_text">Salamtak Booking يوفر آلية تنفيذ الحجوزات بسلاسة شديدة وما يتبع الحجز من خطوات سواء لتأكيد الحجز وكذلك توضيح كافة البيانات ذات الاهمية سوا للطبيب او المريض وتوضيح الخدمات المقدمة من العيادة للمريض</string>
     <string name="skip">تخطى</string>
     <string name="salamtakhomebooking">Salamtak Home Visit</string>
     <string name="salamtakconnect">Salamtak Connect</string>
-    <string name="choose">اختر</string>
-    <string name="login">تسجيل الدخول</string>
-    <string name="help">مساعده</string>
+    <string name="choose">تأكيد</string>
+    <string name="login">الدخول</string>
+    <string name="help">المساعده</string>
     <string name="next">التالى</string>
     <string name="mobile_number">رقم الموبايل </string>
     <string name="password">كلمة المرور</string>
@@ -29,7 +30,7 @@
     <string name="new_password">كلمة المرور الجديدة</string>
     <string name="confirm_new_password">تأكيد كلمة المرور الجديدة</string>
     <string name="save">حفظ</string>
-    <string name="sign_up">تسجيل</string>
+    <string name="sign_up">اشتراك</string>
     <string name="lets_start">ابدأ التطبيق</string>
     <string name="upload_your_photo">ارفع صورتك</string>
     <string name="full_name_in_english_first_middle_last">الاسم الكامل بالانجليزي (الاول - الوسط - الاخير)</string>
@@ -70,17 +71,18 @@
     <string name="upload_front_syndicate_card_image">Upload front Syndicate Card image</string>
     <string name="upload_back_syndicate_card_image">Upload back Syndicate Card image</string>
     <string name="required">" مطلوب *"</string>
-    <string name="Enter_fullName_english">أدخل الاسم الكامل باللغة الإنجليزية (الأول - الأوسط - الأخير)</string>
-    <string name="Enter_fullName_Arabic">أدخل الاسم الكامل بالعربية (الأول - الأوسط - الأخير)</string>
-    <string name="match_email">بريد غير صالح</string>
-    <string name="lesstthan6number">كلمة المرور يجب أن تكون أكبر من 6 ارقام</string>
-    <string name="doesnotmatch">غير متطابق</string>
+    <string name="phonedigits">.رقم الهاتف يتكون من 11 رقم فقط</string>
+    <string name="Enter_fullName_english">.يجب أن يتكون الاسم من ثلاث كلمات باللغة الانجليزية على الاقل</string>
+    <string name="Enter_fullName_Arabic">.يجب أن يتكون الاسم من ثلاث كلمات باللغة العربية على الاقل</string>
+    <string name="match_email">ادخل بريد الكترونى صحيح</string>
+    <string name="lesstthan6number">.كلمة المرور تتكون من 6 احرف على الاقل (أرقاموحروف)</string>
+    <string name="doesnotmatch">.كلمة المرور غير متطابقة</string>
     <string name="male">ذكر</string>
     <string name="female">أنثى</string>
     <string name="choose_your_nationality">اختر دولتك</string>
     <string name="search_by_name_of_country">البحث عن طريق اسم الدولة</string>
     <string name="powered_by">برعاية</string>
-    <string name="salamtak_booking">Salamtak Booking</string>
+    <string name="salamtak_booking">الحجوزات</string>
     <string name="home_visit">الزيارة المنزلية</string>
     <string name="home_visitdesc">Salamtak Home  يمكن الطبيب من تنسيق مواعيد وحجوزات العيادة بالمرونة التي تتيح له ايضا تخصيص الوقت اللازم لحجوزات الزيارات المنزلية</string>
     <string name="live_chat">التواصل مع الطبيب</string>
@@ -145,7 +147,7 @@
     <string name="about_app">حول التطبيق</string>
     <string name="call_us">اتصل بنا</string>
     <string name="terms_conditions">الشروط والأحكام</string>
-    <string name="language">لغة</string>
+    <string name="language">اللغة</string>
     <string name="sign_out">خروج</string>
     <string name="old_password">كلمة المرور القديمة</string>
     <string name="change_language">تغيير اللغة</string>
@@ -218,7 +220,7 @@
     <string name="there_is_no_appointment_available">لا يوجد موعد متاح</string>
     <string name="login_success">قمت بتسجيل الدخول بنجاح</string>
     <string name="choose_language">اختر اللغة</string>
-    <string name="agree_to">موافق علي</string>
+    <string name="agree_to">بقيامك بالتسجيل فأنت توافق على</string>
     <string name="Enter_mobile_or_email">أدخل الجوال أو البريد الإلكتروني</string>
     <string name="enter_your_email_we_will_send_you_code_to_reset_the_password">أدخل بريدك الإلكتروني أو هاتفك وسنرسل لك رمزًا لإعادة تعيين كلمة المرور</string>
     <string name="gotohome">اذهب الى الرئيسية</string>
@@ -281,6 +283,8 @@
     <string name="phone">تليفون</string>
     <string name="deleteacount">حذف الحساب</string>
     <string name="are_you_sure_you_want_to_delete_your_account">Are you sure you want to delete your Account</string>
+    <string name="all_reviews">المراجعات</string>
+    <string name="lang">Arabic</string>
 
 
 </resources>

@@ -83,6 +83,7 @@ data class Item(
     val waitingTime: Int?,
     @SerializedName("clinicDto")
     val clinicDto: ClinicDto?,
+    val RateCount: Int?,
 )
 
 data class ClinicDto(

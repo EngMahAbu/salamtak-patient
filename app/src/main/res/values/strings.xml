@@ -1,23 +1,25 @@
 <resources>
-    <string name="app_name">Salamtak Patient</string>
+    <string name="app_name">Salamtak|سلامتك</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="google_maps_key" translatable="false">AIzaSyCXXrHGIHS6yTgVnm8jL-nes8ERGqRChhM</string>
-    <string name="togetstartpickyourlanguage">To Get Started Select Your Language</string>
+    <string name="togetstartpickyourlanguage">To get started, select your language</string>
     <string name="english">English</string>
     <string name="arabic">Arabic</string>
     <string name="salamtakbooking">Salamtak Booking</string>
-    <string name="screen_booking_text">Salamtak Booking provides an easy way for patient to book an appointment with a doctor who meets Patients needs. The possibility of following up on the latest offers of doctors in all specialties is an added value provided by Salamtak application.
+    <string name="screen_booking_text">Salamtak Booking provides an easy way for patient to book an appointment with a
+        doctor who meets patients\' needs. The possibility of following up on the latest offers of doctors in all
+        specialties is an added value provided by Salamtak application.
     </string>
     <string name="skip">Skip</string>
     <string name="salamtakhomebooking">Salamtak Home Visit</string>
     <string name="salamtakconnect">Salamtak Connect</string>
-    <string name="choose">choose</string>
+    <string name="choose">Confirm</string>
     <string name="login">Login</string>
     <string name="help">Help</string>
     <string name="next">Next</string>
     <string name="lets_start">Get Started</string>
-    <string name="mobile_number">mobile number</string>
+    <string name="mobile_number">Phone Number</string>
     <string name="password">Password</string>
     <string name="forgetpasword">Forget Password ?</string>
     <string name="egypt">Egypt</string>
@@ -32,13 +34,13 @@
     <string name="resend_verification_code">Resend verification code</string>
     <string name="change_password">Change password</string>
     <string name="new_password">New Password</string>
-    <string name="confirm_new_password">Confirm new Password</string>
+    <string name="confirm_new_password">Confirm Password</string>
     <string name="save">Save</string>
-    <string name="sign_up">Sign Up</string>
+    <string name="sign_up">Sign up</string>
     <string name="upload_your_photo">Upload your photo</string>
     <string name="full_name_in_english_first_middle_last">Full Name in English (first - middle - last)</string>
     <string name="full_name_in_arabic_first_middle_last">Full Name in Arabic (first - middle - last)</string>
-    <string name="e_mail">E-mail</string>
+    <string name="e_mail">Email</string>
     <string name="have_an_account">Have an account?</string>
     <string name="the_terms_and_conditions">the terms and conditions</string>
     <string name="doctor_profile">Patient profile</string>
@@ -77,11 +79,12 @@
     <string name="upload_front_syndicate_card_image">Upload front Syndicate Card image</string>
     <string name="upload_back_syndicate_card_image">Upload back Syndicate Card image</string>
     <string name="required">" required *"</string>
-    <string name="Enter_fullName_english">Enter Full Name in English (first - middle - last)</string>
-    <string name="Enter_fullName_Arabic">Enter Full Name in Arabic (first - middle - last)</string>
-    <string name="match_email">invalid mail</string>
-    <string name="lesstthan6number">password should be more than 6 numbers </string>
-    <string name="doesnotmatch">Doesn\'t Match</string>
+    <string name="phonedigits">.The phone number consist of 11 digits only.</string>
+    <string name="Enter_fullName_english">.Name must be consist of at least three English words</string>
+    <string name="Enter_fullName_Arabic">.Name must be consist of at least three Arabic words</string>
+    <string name="match_email">.Invalid Email Address</string>
+    <string name="lesstthan6number">.Password consists of min 6 characters (Numbers &amp; letters)</string>
+    <string name="doesnotmatch">.Password is not identical</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
     <string name="choose_your_nationality">Choose your nationality</string>
@@ -89,10 +92,15 @@
     <string name="powered_by">Powered By</string>
     <string name="salamtak_booking">Salamtak Booking</string>
     <string name="home_visit">Home Visit</string>
-    <string name="home_visitdesc">Salamtak Home Visit provides the proper solution for booking a Home Visit. Home Visit better services and more choices, are now available by Salamtak application more than ever.The good days of the “Family doctor” is back.
+    <string name="home_visitdesc">Salamtak Home Visit provides the proper solution for booking a Home Visit. Home Visit
+        better services and more choices, are now available by Salamtak application more than ever.The good days of the
+        “Family doctor” is back.
     </string>
     <string name="live_chat">Salamtak Connect</string>
-    <string name="live_chatdesc">Salamtak Connect enables patient, with a click of a finger tip, to enjoy full medical diagnosis “in simple medical cases“ by using call or video call services. it is a valuable tool that provides, at least, professional medical guidance. Now you can save the First Visit (identify scans and lab analysis) and Third Visit (follow up consultation) by using Salamtak Connect.
+    <string name="live_chatdesc">Salamtak Connect enables patient, with a click of a finger tip, to enjoy full medical
+        diagnosis “in simple medical cases“ by using call or video call services. it is a valuable tool that provides,
+        at least, professional medical guidance. Now you can save the First Visit (identify scans and lab analysis) and
+        Third Visit (follow up consultation) by using Salamtak Connect.
     </string>
 
     <string name="verification_code_will_be_sent_within_1_30">Verification code will be sent within</string>
@@ -138,14 +146,14 @@
     <string name="waiting_time">Waiting Time</string>
     <string name="fees">Fees</string>
     <string name="reset">Reset</string>
-    <string name="specialization">Specialization</string>
-    <string name="choose_specialization">Choose_Specialization</string>
-    <string name="choose_sub_specialization">Choose_Sub_Specialization</string>
+    <string name="specialization">Specialist</string>
+    <string name="choose_specialization">Choose Specialisty</string>
+    <string name="choose_sub_specialization">Choose sub Specialisty</string>
     <string name="choose_Seniority_Level">Choose Seniority Level</string>
     <string name="choose_city">Choose City</string>
     <string name="choose_area">Choose Area</string>
     <string name="to">To</string>
-    <string name="egp">EGP</string>
+    <string name="egp">Egp</string>
     <string name="from">From</string>
     <string name="choose_seniority_level">Choose Seniority Level</string>
     <string name="choose_gender">Choose Gender</string>
@@ -155,7 +163,7 @@
     <string name="occupation">Occupation</string>
     <string name="about_app">About App</string>
     <string name="call_us">Call Us</string>
-    <string name="terms_conditions"><![CDATA[Terms & Conditions]]></string>
+    <string name="terms_conditions"> <![CDATA[Terms & Conditions]]></string>
     <string name="language">Language</string>
     <string name="sign_out">Sign out</string>
     <string name="old_password">Old Password</string>
@@ -230,7 +238,7 @@
     <string name="there_is_no_appointment_available">There Is No Appointment Available</string>
     <string name="login_success">you Are login Successfully</string>
     <string name="choose_language">Choose language</string>
-    <string name="agree_to">By signing up you agree To</string>
+    <string name="agree_to">By signing up you agree To Salamtak\'s </string>
     <string name="Enter_mobile_or_email">Enter mobile or email</string>
     <string name="enter_your_email_we_will_send_you_code_to_reset_the_password">Enter your email we will send you code
         to reset the password
@@ -248,9 +256,8 @@
     <string name="skip_login_explore_our_features">Skip Login,Explore our features</string>
     <string name="you_must_sign_up_to_book_your_doctor">You must Sign Up to book your doctor</string>
     <string name="no_data_to_show">No data to show</string>
-    <string name="have_amedicalquestion"> Salamtak Help</string>
-    <string name="ask_a_doctor_for_free_and_get_response_in_24_hours">Ask a doctor for free and get a response in 24
-        hours
+    <string name="have_amedicalquestion">Salamtak Help</string>
+    <string name="ask_a_doctor_for_free_and_get_response_in_24_hours">Get professional medical answers to all your questions
     </string>
     <string name="ask_now">Ask Now</string>
     <string name="your_question">Your Question</string>
@@ -298,6 +305,8 @@
     <string name="phone">Phone</string>
     <string name="deleteacount">Delete Acount</string>
     <string name="are_you_sure_you_want_to_delete_your_account">Are you sure you want to delete your Account</string>
+    <string name="all_reviews">All Reviews</string>
+    <string name="lang">English</string>
 
     <array name="choose">
         <item>Select</item>

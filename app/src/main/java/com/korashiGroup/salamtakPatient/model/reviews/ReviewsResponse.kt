@@ -2,6 +2,7 @@ package com.korashiGroup.salamtakPatient.model.reviews
 
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class ReviewsResponse(
     @SerializedName("Data")
@@ -12,7 +13,7 @@ data class ReviewsResponse(
     val messageCode: Int,
     @SerializedName("Success")
     val success: Boolean
-)
+):Serializable
 
 data class ReviewsData(
     @SerializedName("Comment")
@@ -23,4 +24,4 @@ data class ReviewsData(
     val patientName: String,
     @SerializedName("Rate")
     val rate: Int
-)
+):Serializable

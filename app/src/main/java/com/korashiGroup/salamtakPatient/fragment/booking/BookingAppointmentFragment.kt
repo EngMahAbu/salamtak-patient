@@ -21,6 +21,8 @@ import com.korashiGroup.salamtakPatient.adapter.ServicesAdapter
 import com.korashiGroup.salamtakPatient.databinding.BookingAppointmentfragmentBinding
 import com.korashiGroup.salamtakPatient.model.booking.clink.GetDoctorClinksResponse
 import com.korashiGroup.salamtakPatient.model.favorite.FavoriteRequest
+import com.korashiGroup.salamtakPatient.model.reviews.ReviewsData
+import com.korashiGroup.salamtakPatient.model.reviews.ReviewsResponse
 import com.korashiGroup.salamtakPatient.utils.DateUtils
 import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
@@ -38,6 +40,7 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
     private lateinit var clinksDoctorsAdapter: ClinksDoctorsAdapter
     private lateinit var reveiwsAdapter: ReveiwsAdapter
     private lateinit var getDoctorClinksResponse: GetDoctorClinksResponse
+    private lateinit var reviewsData:ReviewsResponse
     private var doctorId: Int? = null
     private var isFavorite: Boolean? = null
 
@@ -73,6 +76,12 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
                 patientViewModel.createPatientFavoriteDoctor(favoriteRequest)
             }
         }
+
+        binding.seeAll.setOnClickListener {
+            val action=BookingAppointmentFragmentDirections.actionBookingAppointmentFragmentToAllReviewsFragment()
+            findNavController().navigate(action)
+        }
+
     }
 
     private fun clinksRecylerview() {
@@ -198,6 +207,7 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
 
                 is Resource.sucess -> {
                     reveiwsAdapter.submitList(response.data?.data)
+                    reviewsData= response.data!!
                     reveiwsAdapter.notifyDataSetChanged()
 
                 }
