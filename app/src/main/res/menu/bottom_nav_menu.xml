@@ -6,7 +6,7 @@
         android:icon="@drawable/ic_home"/>
 
     <item android:id="@+id/myScheduleFragment"
-        android:title="@string/my_schedule"
+        android:title="@string/schedule"
         android:icon="@drawable/schedule"/>
 
     <item android:id="@+id/offersFragment"

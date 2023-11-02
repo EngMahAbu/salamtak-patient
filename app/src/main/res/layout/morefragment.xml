@@ -41,61 +41,63 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:background="@drawable/bg_buttonsearch"
+        android:background="@drawable/bg_button_sellector"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_more">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/iv_PatientProfile"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginBottom="10dp"
-            android:adjustViewBounds="true"
-            android:src="@drawable/ic_patientprofile"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            />
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/iv_person"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:adjustViewBounds="true"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_PatientProfile"
-            app:layout_constraintEnd_toEndOf="@+id/iv_PatientProfile"
-            app:layout_constraintStart_toStartOf="@+id/iv_PatientProfile"
-            app:layout_constraintTop_toTopOf="@+id/iv_PatientProfile" />
+<!--        <com.google.android.material.imageview.ShapeableImageView-->
+<!--            android:id="@+id/iv_PatientProfile"-->
+<!--            android:layout_width="60dp"-->
+<!--            android:layout_height="60dp"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:layout_marginStart="15dp"-->
+<!--            android:layout_marginBottom="10dp"-->
+<!--            android:adjustViewBounds="true"-->
+<!--            android:src="@drawable/ic_patientprofile"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            />-->
+<!--        <com.google.android.material.imageview.ShapeableImageView-->
+<!--            android:id="@+id/iv_person"-->
+<!--            android:layout_width="30dp"-->
+<!--            android:layout_height="30dp"-->
+<!--            android:adjustViewBounds="true"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/iv_PatientProfile"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/iv_PatientProfile"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/iv_PatientProfile"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/iv_PatientProfile" />-->
 
         <TextView
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="15dp"
             android:fontFamily="@font/avenirltstd_black"
             android:gravity="start"
             android:text="Osama"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="15sp"
-            app:layout_constraintStart_toEndOf="@+id/iv_PatientProfile"
-            app:layout_constraintTop_toTopOf="@+id/iv_PatientProfile" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
         <TextView
             android:id="@+id/tv_Edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="15dp"
             android:layout_marginEnd="10dp"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="@dimen/_10sdp"
             android:fontFamily="@font/avenirltstd_roman"
             android:gravity="start"
             android:text="@string/click_here_to_edit_your_profile"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="13sp"
-            app:layout_constraintStart_toEndOf="@+id/iv_PatientProfile"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_name" />
 
         <com.google.android.material.imageview.ShapeableImageView
@@ -144,7 +146,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:fontFamily="@font/avenirltstd_black"
+            android:fontFamily="@font/avenirltstd_book"
             android:gravity="start"
             android:text="@string/change_password"
             android:textColor="@color/black"
@@ -200,7 +202,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:fontFamily="@font/avenirltstd_black"
+                android:fontFamily="@font/avenirltstd_book"
                 android:gravity="start"
                 android:text="@string/favorite_doctor"
                 android:textColor="@color/black"
@@ -256,7 +258,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:fontFamily="@font/avenirltstd_black"
+            android:fontFamily="@font/avenirltstd_book"
             android:gravity="start"
             android:text="@string/about_app"
             android:textColor="@color/black"
@@ -312,7 +314,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:fontFamily="@font/avenirltstd_black"
+            android:fontFamily="@font/avenirltstd_book"
             android:gravity="start"
             android:text="@string/call_us"
             android:textColor="@color/black"
@@ -368,7 +370,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:fontFamily="@font/avenirltstd_black"
+            android:fontFamily="@font/avenirltstd_book"
             android:gravity="start"
             android:text="@string/terms_conditions"
             android:textColor="@color/black"
@@ -426,7 +428,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:fontFamily="@font/avenirltstd_black"
+            android:fontFamily="@font/avenirltstd_book"
             android:gravity="start"
             android:text="@string/language"
             android:textColor="@color/black"
@@ -481,10 +483,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:fontFamily="@font/avenirltstd_black"
+            android:fontFamily="@font/avenirltstd_book"
             android:gravity="start"
             android:text="@string/sign_out"
-            android:textColor="@color/black"
+            android:textColor="@color/red"
             android:textSize="16sp"
             app:layout_constraintStart_toEndOf="@+id/iv_SignOut"
             app:layout_constraintTop_toTopOf="@+id/iv_SignOut"
@@ -517,7 +519,6 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="@dimen/_5sdp"
                     android:elevation="1dp"
-                    android:visibility="gone"
                     android:background="@drawable/more_background"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -541,10 +542,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp"
-                        android:fontFamily="@font/avenirltstd_black"
+                        android:fontFamily="@font/avenirltstd_book"
                         android:gravity="start"
                         android:text="@string/deleteacount"
-                        android:textColor="@color/black"
+                        android:textColor="@color/red"
                         android:textSize="16sp"
                         app:layout_constraintStart_toEndOf="@+id/iv_Delete"
                         app:layout_constraintTop_toTopOf="@+id/iv_Delete"

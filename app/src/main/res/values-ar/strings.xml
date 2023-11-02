@@ -99,20 +99,20 @@
     <string name="Chat">دردشه</string>
     <string name="Call">مكالمة صوتية</string>
     <string name="Video_Call">مكالمة فيديو</string>
-    <string name="medical_services_directory">ارشادات سلامتك</string>
+    <string name="medical_services_directory">Guide سلامتك</string>
     <string name="see_all">مشاهدةالكل</string>
     <string name="hospitals">المستشفيات</string>
     <string name="polyclinics">العيادات</string>
     <string name="pharmacies">الصيدليات</string>
     <string name="laboratories">المختبرات</string>
-    <string name="radiologycenter">مركز الاشعة</string>
-    <string name="engile">Salamtak Angel</string>
+    <string name="radiologycenter">مراكز الاشعة</string>
+    <string name="engile"> سلامتك انجل</string>
     <string name="search">بحث</string>
     <string name="search_by_doctor_name">البحث باسم الطبيب ...</string>
     <string name="doctors_found">العثور على الأطباء</string>
     <string name="all">الجميع</string>
     <string name="home">الرئيسية</string>
-    <string name="my_schedule">جدولي</string>
+    <string name="my_schedule">الجدول الزمنى الخاص بى</string>
     <string name="more">المزيد</string>
     <string name="reviews">المراجعات</string>
     <string name="next_available_booking_at_08_nov_from_06_30_pm">Next Available Booking at 08 Nov. from 06:30 PM</string>
@@ -124,7 +124,7 @@
     <string name="filter">فلتر</string>
     <string name="upcoming">القادمة</string>
     <string name="canceled">ألغيت</string>
-    <string name="finished">منتهي</string>
+    <string name="finished">منتهية</string>
     <string name="address">العنوان</string>
     <string name="waiting_time">وقت الانتظار</string>
     <string name="fees">مصاريف</string>
@@ -148,7 +148,7 @@
     <string name="call_us">اتصل بنا</string>
     <string name="terms_conditions">الشروط والأحكام</string>
     <string name="language">اللغة</string>
-    <string name="sign_out">خروج</string>
+    <string name="sign_out">تسجيل الخروج</string>
     <string name="old_password">كلمة المرور القديمة</string>
     <string name="change_language">تغيير اللغة</string>
     <string name="yes">نعم</string>
@@ -235,7 +235,7 @@
     <string name="skip_login_explore_our_features">تخطي تسجيل الدخول،استكشف ميزاتنا.</string>
     <string name="you_must_sign_up_to_book_your_doctor">يجب عليك التسجيل لحجز طبيبك</string>
     <string name="no_data_to_show">لا يوجد بيانات </string>
-    <string name="have_amedicalquestion">مساعدة سلامتك</string>
+    <string name="have_amedicalquestion">هل لديك سؤال طبى؟</string>
     <string name="ask_a_doctor_for_free_and_get_response_in_24_hours">اسأل الطبيب مجانًا واحصل على الرد خلال 24
         ساعة
     </string>
@@ -270,7 +270,7 @@
     <string name="qanda"><![CDATA[Q&A]]></string>
     <string name="emergencies">Emergencies</string>
     <string name="select">اختر</string>
-    <string name="favorite_doctor">الطبيب المفضل</string>
+    <string name="favorite_doctor">الدكتور المفضل</string>
     <string name="confirmed">تـأكـيد </string>
     <string name="offers">العروض</string>
     <string name="offers_not_available_at_the_moment">لا يوجد عروض متاحة فى الوقت الحالى </string>
@@ -282,9 +282,10 @@
     <string name="area">المنطقة</string>
     <string name="phone">تليفون</string>
     <string name="deleteacount">حذف الحساب</string>
-    <string name="are_you_sure_you_want_to_delete_your_account">Are you sure you want to delete your Account</string>
+    <string name="are_you_sure_you_want_to_delete_your_account">هل انت متأكد أنك تريد خذف حسابك؟</string>
     <string name="all_reviews">المراجعات</string>
     <string name="lang">Arabic</string>
+    <string name="schedule">الجدول</string>
 
 
 </resources>

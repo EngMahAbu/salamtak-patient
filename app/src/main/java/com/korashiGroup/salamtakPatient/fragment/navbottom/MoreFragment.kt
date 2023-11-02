@@ -44,12 +44,12 @@ class MoreFragment : Fragment() {
             binding.tvName.text = sp.getUser()?.NameAR
         }
 
-        binding.ivPatientProfile.load("https://salamtechapi.azurewebsites.net/${sp.getUser()?.image}") {
-            crossfade(true)
-            crossfade(1000)
-            placeholder(R.drawable.ic_profile)
-            transformations(CircleCropTransformation())
-        }
+//        binding.ivPatientProfile.load("https://salamtechapi.azurewebsites.net/${sp.getUser()?.image}") {
+//            crossfade(true)
+//            crossfade(1000)
+//            placeholder(R.drawable.ic_profile)
+//            transformations(CircleCropTransformation())
+//        }
         initButton()
         getSkipLoginStatus()
         editUi()

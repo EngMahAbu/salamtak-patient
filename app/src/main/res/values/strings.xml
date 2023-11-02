@@ -115,20 +115,20 @@
     <string name="Chat">Chat</string>
     <string name="Call">Call</string>
     <string name="Video_Call">Video Call</string>
-    <string name="medical_services_directory">Salamtak Guide</string>
+    <string name="medical_services_directory">Salamtak </string>
     <string name="see_all">See All</string>
     <string name="hospitals">Hospitals</string>
     <string name="polyclinics">Polyclinics</string>
     <string name="pharmacies">Pharmacies</string>
     <string name="laboratories">Laboratories</string>
-    <string name="radiologycenter">Radiology Center</string>
+    <string name="radiologycenter">Radiology Centers</string>
     <string name="engile">Salamtak ِِAngel</string>
     <string name="search">Search</string>
     <string name="search_by_doctor_name">Search by doctor name...</string>
     <string name="doctors_found">Doctors Found</string>
     <string name="all">All</string>
     <string name="home">Home</string>
-    <string name="my_schedule">Schedule</string>
+    <string name="my_schedule">My Schedule</string>
     <string name="more">More</string>
     <string name="reviews">Reviews</string>
     <string name="next_available_booking_at_08_nov_from_06_30_pm">Next Available Booking at 08 Nov. from 06:30 PM
@@ -141,7 +141,7 @@
     <string name="filter">Filter</string>
     <string name="upcoming">Upcoming</string>
     <string name="canceled">Canceled</string>
-    <string name="finished">Finished</string>
+    <string name="finished">Completed</string>
     <string name="address">Address</string>
     <string name="waiting_time">Waiting Time</string>
     <string name="fees">Fees</string>
@@ -170,7 +170,7 @@
     <string name="change_language">Change Language</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="are_you_sure_you_want_to_sign_out">Are you sure you want to sign out?</string>
+    <string name="are_you_sure_you_want_to_sign_out">Are you sure you want to Sign Out?</string>
     <string name="save_edit">Save Edit</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="profile_info">Profile Info.</string>
@@ -307,6 +307,7 @@
     <string name="are_you_sure_you_want_to_delete_your_account">Are you sure you want to delete your Account</string>
     <string name="all_reviews">All Reviews</string>
     <string name="lang">English</string>
+    <string name="schedule">Schedule</string>
 
     <array name="choose">
         <item>Select</item>
