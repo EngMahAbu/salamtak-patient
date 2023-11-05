@@ -115,7 +115,7 @@
     <string name="Chat">Chat</string>
     <string name="Call">Call</string>
     <string name="Video_Call">Video Call</string>
-    <string name="medical_services_directory">Salamtak </string>
+    <string name="medical_services_directory">Salamtak</string>
     <string name="see_all">See All</string>
     <string name="hospitals">Hospitals</string>
     <string name="polyclinics">Polyclinics</string>
@@ -238,7 +238,7 @@
     <string name="there_is_no_appointment_available">There Is No Appointment Available</string>
     <string name="login_success">you Are login Successfully</string>
     <string name="choose_language">Choose language</string>
-    <string name="agree_to">By signing up you agree To Salamtak\'s </string>
+    <string name="agree_to">By signing up you agree To Salamtak\'s</string>
     <string name="Enter_mobile_or_email">Enter mobile or email</string>
     <string name="enter_your_email_we_will_send_you_code_to_reset_the_password">Enter your email we will send you code
         to reset the password
@@ -257,7 +257,8 @@
     <string name="you_must_sign_up_to_book_your_doctor">You must Sign Up to book your doctor</string>
     <string name="no_data_to_show">No data to show</string>
     <string name="have_amedicalquestion">Salamtak Help</string>
-    <string name="ask_a_doctor_for_free_and_get_response_in_24_hours">Get professional medical answers to all your questions
+    <string name="ask_a_doctor_for_free_and_get_response_in_24_hours">Get professional medical answers to all your
+        questions
     </string>
     <string name="ask_now">Ask Now</string>
     <string name="your_question">Your question</string>
@@ -285,7 +286,7 @@
     <string name="thereisnolocatio">There is no location</string>
     <string name="description">Description :</string>
     <string name="title">TiTle :</string>
-    <string name="signupedit">You must Sign Up to book your doctor</string>
+    <string name="signupedit">Please Sign Up to book your doctor</string>
     <string name="me">For Me</string>
     <string name="anotherpatient">For Someone else</string>
     <string name="qanda"><![CDATA[Q&A]]></string>
@@ -308,6 +309,7 @@
     <string name="all_reviews">All Reviews</string>
     <string name="lang">English</string>
     <string name="schedule">Schedule</string>
+    <string name="questionanswer">Question answer</string>
 
     <array name="choose">
         <item>Select</item>

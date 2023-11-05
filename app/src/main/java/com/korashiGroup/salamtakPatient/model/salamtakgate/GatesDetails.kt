@@ -1,0 +1,10 @@
+package com.korashiGroup.salamtakPatient.model.salamtakgate
+
+import java.io.Serializable
+
+data class GatesDetails(
+    val gatesId:Int,
+    val title:String,
+    val description:String,
+    val image:String
+):Serializable

@@ -454,7 +454,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
     }
 
     override fun onItemClick(healthEntityTypeId: Int, healthName: String) {
-        if (skip=="skip"){
+        if (DateUtils.getToken().isNullOrEmpty()){
             return
         }else {
             val action =
@@ -471,7 +471,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
             sharedDataViewmodel.skipLoginStatus.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
                 skip=it
 
-                if (it=="skip"){
+                if (DateUtils.getToken().isNullOrEmpty()){
                     binding.layoutSignup.visibility=View.VISIBLE
                 }else {
                     binding.layoutSignup.visibility=View.GONE

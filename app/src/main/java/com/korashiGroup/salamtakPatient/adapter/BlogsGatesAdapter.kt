@@ -13,9 +13,10 @@ import com.korashiGroup.salamtakPatient.databinding.ItemLayoutRvservicesBinding
 import com.korashiGroup.salamtakPatient.model.ImageServices
 import com.korashiGroup.salamtakPatient.model.salamtakgate.Blogs
 import com.korashiGroup.salamtakPatient.model.salamtakgate.Gates
+import com.korashiGroup.salamtakPatient.model.salamtakgate.GatesDetails
 
 
-class BlogsGatesAdapter( ):ListAdapter<Blogs,BlogsGatesAdapter.ViewHolder>(DiffCallback()) {
+class BlogsGatesAdapter(val details:Action ):ListAdapter<Blogs,BlogsGatesAdapter.ViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
@@ -28,9 +29,15 @@ class BlogsGatesAdapter( ):ListAdapter<Blogs,BlogsGatesAdapter.ViewHolder>(DiffC
         Glide.with(holder.binding.ivDoctorProfile.context)
             .load("https://salamtechapi.azurewebsites.net/${services.image}")
             .into(holder.binding.ivDoctorProfile)
+
         holder.binding.apply {
-            tvDoctorName.text=services.title
-            tvDescription.text=services.description
+            //tvDoctorName.text=services.title
+           // tvDescription.text=services.description
+        }
+
+        holder.binding.ivDoctorProfile.setOnClickListener {
+            val gatesDetails=GatesDetails(services.typeID,services.title,services.description,services.image)
+            details.onItemGatesClick(gatesDetails)
         }
 
     }
@@ -53,7 +60,7 @@ class BlogsGatesAdapter( ):ListAdapter<Blogs,BlogsGatesAdapter.ViewHolder>(DiffC
     }
 
     interface Action{
-        fun onItemGatesClick(gateId: Int)
+        fun onItemGatesClick(gatesDetails: GatesDetails)
     }
 
 

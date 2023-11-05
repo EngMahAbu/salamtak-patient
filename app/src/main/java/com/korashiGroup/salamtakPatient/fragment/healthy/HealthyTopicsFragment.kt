@@ -21,6 +21,7 @@ import com.korashiGroup.salamtakPatient.databinding.HealthEntityfragmentBinding
 import com.korashiGroup.salamtakPatient.databinding.HealthyTopicsfragmentBinding
 import com.korashiGroup.salamtakPatient.fragment.loginandforgetpassword.LoginFragmentDirections
 import com.korashiGroup.salamtakPatient.model.salamtakgate.Blogs
+import com.korashiGroup.salamtakPatient.model.salamtakgate.GatesDetails
 import com.korashiGroup.salamtakPatient.model.scheduling.DataAppointment
 import com.korashiGroup.salamtakPatient.utils.Constans
 import com.korashiGroup.salamtakPatient.utils.DateUtils
@@ -31,7 +32,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 @AndroidEntryPoint
-class HealthyTopicsFragment : Fragment() {
+class HealthyTopicsFragment : Fragment() ,BlogsGatesAdapter.Action{
 
     private lateinit var binding: HealthyTopicsfragmentBinding
     private val args: HealthyTopicsFragmentArgs by navArgs()
@@ -57,7 +58,7 @@ class HealthyTopicsFragment : Fragment() {
 
     private fun initButton() {
         binding.ivArrow.setOnClickListener {
-            findNavController().popBackStack()
+            findNavController().navigate(R.id.homeFragment)
         }
 
 
@@ -65,7 +66,7 @@ class HealthyTopicsFragment : Fragment() {
 
 
     private fun blogsGateRecylerview() {
-        blogsGatesAdapter = BlogsGatesAdapter()
+        blogsGatesAdapter = BlogsGatesAdapter(this)
         binding.rvGates.apply {
             adapter = blogsGatesAdapter
             layoutManager = LinearLayoutManager(requireContext())
@@ -125,6 +126,11 @@ class HealthyTopicsFragment : Fragment() {
         }
 
 
+    }
+
+    override fun onItemGatesClick(gatesDetails: GatesDetails) {
+        val action=HealthyTopicsFragmentDirections.actionHealthyTopicsFragmentToGatesDetailsFragment(gatesDetails)
+        findNavController().navigate(action)
     }
 
 }

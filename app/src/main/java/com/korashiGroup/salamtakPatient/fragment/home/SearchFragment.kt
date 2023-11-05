@@ -38,6 +38,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.korashiGroup.salamtakPatient.model.*
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCompany
 import com.korashiGroup.salamtakPatient.utils.Constans.Query_Page_Size
+import com.korashiGroup.salamtakPatient.utils.DateUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
@@ -556,7 +557,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
 
     override fun onItemClick(clinicId: Int, doctorId: Int, fessTo: Int,image:String) {
 
-              if (skip=="skip"){
+              if (DateUtils.getToken().isNullOrEmpty()){
                  findNavController().navigate(R.id.dialogSignUp)
               }else{
                   this.doctorId = doctorId
@@ -575,7 +576,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
     }
 
     override fun onItemClick(clinicId: Int, doctorId: Int, clinkname: String) {
-        if (skip=="skip"){
+        if (DateUtils.getToken().isNullOrEmpty()){
             findNavController().navigate(R.id.dialogSignUp)
         }else {
             val clinicSchedualByClinicDayId = ClinicSchedualByClinicDayId(

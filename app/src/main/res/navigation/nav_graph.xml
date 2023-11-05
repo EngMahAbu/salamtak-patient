@@ -379,6 +379,8 @@
                 android:name="GatesId"
                 app:argType="integer"
         />
+        <action android:id="@+id/action_healthyTopicsFragment_to_gatesDetailsFragment"
+                app:destination="@id/gatesDetailsFragment"/>
     </fragment>
     <fragment
             android:id="@+id/videoCallFragment"
@@ -454,5 +456,13 @@
     <fragment android:id="@+id/aboutAppFragment"
               android:name="com.korashiGroup.salamtakPatient.fragment.webView.AboutAppFragment"
               android:label="about_appfragment" tools:layout="@layout/about_appfragment"/>
+    <fragment android:id="@+id/gatesDetailsFragment"
+              android:name="com.korashiGroup.salamtakPatient.fragment.healthy.GatesDetailsFragment"
+              android:label="gates_detailsfragment" tools:layout="@layout/gates_detailsfragment">
+        <argument android:name="gatesdetails"
+                  app:argType="com.korashiGroup.salamtakPatient.model.salamtakgate.GatesDetails" app:nullable="true"/>
+        <action android:id="@+id/action_gatesDetailsFragment_to_healthyTopicsFragment"
+                app:destination="@id/healthyTopicsFragment"/>
+    </fragment>
 
 </navigation>
