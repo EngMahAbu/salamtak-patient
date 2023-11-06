@@ -51,7 +51,7 @@ class MoreFragment : Fragment() {
 //            transformations(CircleCropTransformation())
 //        }
         initButton()
-        getSkipLoginStatus()
+       // getSkipLoginStatus()
         editUi()
     }
 
@@ -128,35 +128,45 @@ class MoreFragment : Fragment() {
 
     }
 
-    private fun getSkipLoginStatus(){
-        sharedDataViewmodel.skipLoginStatus.observe(viewLifecycleOwner, Observer {
-            skipStatus=it
-            if (it=="skip"){
-                binding.layoutNextAvailableBooking.visibility=View.GONE
-                binding.layoutChangePassword.visibility=View.GONE
-                binding.layoutSignOut.visibility=View.GONE
-                binding.layoutFavoriteDoctor.visibility=View.GONE
-                binding.layoutDelete.visibility=View.GONE
-            }else{
-                binding.layoutNextAvailableBooking.visibility=View.VISIBLE
-                binding.layoutChangePassword.visibility=View.VISIBLE
-                binding.layoutSignOut.visibility=View.VISIBLE
-                binding.layoutFavoriteDoctor.visibility=View.VISIBLE
-                binding.layoutDelete.visibility=View.VISIBLE
-            }
-
-        })
-    }
+//    private fun getSkipLoginStatus(){
+//        sharedDataViewmodel.skipLoginStatus.observe(viewLifecycleOwner, Observer {
+//            skipStatus=it
+//            if (DateUtils.getToken().isNullOrEmpty()){
+//                binding.layoutNextAvailableBooking.visibility=View.GONE
+//                binding.layoutChangePassword.visibility=View.GONE
+//                binding.layoutSignOut.visibility=View.GONE
+//                binding.layoutFavoriteDoctor.visibility=View.GONE
+//                binding.layoutDelete.visibility=View.GONE
+//            }else{
+//                binding.layoutNextAvailableBooking.visibility=View.VISIBLE
+//                binding.layoutChangePassword.visibility=View.VISIBLE
+//                binding.layoutSignOut.visibility=View.VISIBLE
+//                binding.layoutFavoriteDoctor.visibility=View.VISIBLE
+//                binding.layoutDelete.visibility=View.VISIBLE
+//            }
+//
+//        })
+//    }
 
     private fun editUi(){
-        if (skipStatus=="skip"){
+        if (DateUtils.getToken().isNullOrEmpty()){
             binding.layoutNextAvailableBooking.visibility=View.GONE
             binding.layoutChangePassword.visibility=View.GONE
             binding.layoutSignOut.visibility=View.GONE
+            binding.layoutNextAvailableBooking.visibility=View.GONE
+            binding.layoutChangePassword.visibility=View.GONE
+            binding.layoutSignOut.visibility=View.GONE
+            binding.layoutFavoriteDoctor.visibility=View.GONE
+            binding.layoutDelete.visibility=View.GONE
         }else{
             binding.layoutNextAvailableBooking.visibility=View.VISIBLE
             binding.layoutChangePassword.visibility=View.VISIBLE
             binding.layoutSignOut.visibility=View.VISIBLE
+            binding.layoutNextAvailableBooking.visibility=View.VISIBLE
+            binding.layoutChangePassword.visibility=View.VISIBLE
+            binding.layoutSignOut.visibility=View.VISIBLE
+            binding.layoutFavoriteDoctor.visibility=View.VISIBLE
+            binding.layoutDelete.visibility=View.VISIBLE
         }
     }
 

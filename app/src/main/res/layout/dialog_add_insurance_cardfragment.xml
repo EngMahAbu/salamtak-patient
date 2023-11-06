@@ -57,7 +57,7 @@
                                 android:src="@drawable/ic_arrowup"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"/>
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                                 android:id="@+id/layout_ivCollabsarrowdownExaminationtype"
@@ -79,7 +79,7 @@
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
+                                    app:layout_constraintTop_toTopOf="parent"/>
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -94,24 +94,25 @@
                                 android:textSize="16sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"/>
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content"
-                              android:id="@+id/tv_companyname"
-                              android:textColor="@color/black"
-                              android:text="Insurance Company"
-                              android:layout_marginStart="15dp"
-                              app:layout_constraintStart_toStartOf="parent"
-                              app:layout_constraintBottom_toBottomOf="@+id/layout_Examinationtypedetails"
-                              app:layout_constraintTop_toBottomOf="@+id/layout_ExaminationtypeId"
-                              app:layout_constraintEnd_toStartOf="@+id/layout_Examinationtypedetails"/>
+                    <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tv_companyname"
+                            android:textColor="@color/black"
+                            android:text="@string/insurance_company"
+                            android:layout_marginStart="15dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintBottom_toBottomOf="@+id/layout_Examinationtypedetails"
+                            app:layout_constraintTop_toBottomOf="@+id/layout_ExaminationtypeId"
+                            app:layout_constraintEnd_toStartOf="@+id/layout_Examinationtypedetails"/>
                     <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/layout_Examinationtypedetails"
                             android:layout_width="0dp"
                             android:layout_height="50dp"
                             android:layout_marginTop="5dp"
-                            android:layout_marginStart="15dp"
                             android:layout_marginEnd="15dp"
                             android:layout_marginBottom="5dp"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -140,12 +141,12 @@
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
                                 android:layout_gravity="center_horizontal"
-                                android:layout_marginEnd="15dp"
+                                android:layout_marginEnd="5dp"
                                 android:layout_marginBottom="12dp"
                                 android:gravity="start"
                                 android:src="@drawable/ic_arrowdwon"
                                 app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent" />
+                                app:layout_constraintEnd_toEndOf="parent"/>
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -173,7 +174,7 @@
                                 android:textSize="15sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"/>
 
                         <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/releaseDate"
@@ -189,7 +190,7 @@
                                 android:textSize="12sp"
                                 app:layout_constraintStart_toEndOf="@+id/tv_ReleaseDate"
                                 app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"/>
 
                         <androidx.appcompat.widget.AppCompatImageView
                                 android:id="@+id/iv_releaseDate"
@@ -202,7 +203,7 @@
                                 android:src="@drawable/ic_calender"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent" />
+                                app:layout_constraintEnd_toEndOf="parent"/>
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -228,7 +229,7 @@
                                 android:textSize="15sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"/>
 
                         <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/endDate"
@@ -244,7 +245,7 @@
                                 android:textSize="12sp"
                                 app:layout_constraintStart_toEndOf="@+id/tv_Expirydate"
                                 app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"/>
                         <androidx.appcompat.widget.AppCompatImageView
                                 android:id="@+id/iv_endDate"
                                 android:layout_width="20dp"
@@ -255,7 +256,7 @@
                                 android:src="@drawable/ic_calender"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent" />
+                                app:layout_constraintEnd_toEndOf="parent"/>
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -277,12 +278,11 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:scaleType="fitXY"
-                                android:src="@drawable/certificate_image" />
+                                android:src="@drawable/certificate_image"/>
                     </com.google.android.material.card.MaterialCardView>
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -314,7 +314,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintWidth_percent=".9" />
+                app:layout_constraintWidth_percent=".9"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     <ProgressBar

@@ -18,8 +18,6 @@ class AutoCompleteAdapter(context: Context, countryItem: MutableList<CountryList
 
      //   private lateinit var countryItem:List<CountryList>
 
-
-
     override fun getFilter(): Filter {
         return countryFilter
     }

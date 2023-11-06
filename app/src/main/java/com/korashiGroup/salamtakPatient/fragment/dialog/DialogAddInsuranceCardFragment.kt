@@ -378,7 +378,7 @@ class DialogAddInsuranceCardFragment : BottomSheetDialogFragment(){
 
                 is Resource.Error -> {
                     hideprogressbar()
-                    Snackbar.make(requireView(), "${it.message}", Snackbar.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(),"${it.message}", Toast.LENGTH_SHORT).show()
                 }
             }
 

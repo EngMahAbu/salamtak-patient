@@ -9,14 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.databinding.ItemLayoutAllReviewsBinding
-import com.korashiGroup.salamtakPatient.databinding.ItemLayoutBlogofGatesBinding
-import com.korashiGroup.salamtakPatient.databinding.ItemLayoutGatesBinding
-import com.korashiGroup.salamtakPatient.databinding.ItemLayoutReviewsBinding
-import com.korashiGroup.salamtakPatient.databinding.ItemLayoutRvservicesBinding
-import com.korashiGroup.salamtakPatient.model.ImageServices
 import com.korashiGroup.salamtakPatient.model.reviews.ReviewsData
-import com.korashiGroup.salamtakPatient.model.salamtakgate.Blogs
-import com.korashiGroup.salamtakPatient.model.salamtakgate.Gates
 
 
 class ALLReveiwsAdapter( ):ListAdapter<ReviewsData,ALLReveiwsAdapter.ViewHolder>(DiffCallback()) {

@@ -3,12 +3,10 @@ package com.korashiGroup.salamtakPatient.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.CompoundButton
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.korashiGroup.salamtakPatient.databinding.ItemLayoutSubspecialistBinding
-import com.korashiGroup.salamtakPatient.model.SubSpecialistData
 import com.korashiGroup.salamtakPatient.model.profile.DataBloodType
 
 

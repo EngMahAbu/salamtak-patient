@@ -13,11 +13,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.databinding.ItemLayoutAppointmentsavailableBinding
 import com.korashiGroup.salamtakPatient.model.booking.AppointmentBooking
-import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 import java.util.*
-import kotlin.math.roundToLong
 
 
 class AppointmentsAvailableAdapter(private val selecttime: Action) :
@@ -63,9 +61,6 @@ class AppointmentsAvailableAdapter(private val selecttime: Action) :
             notifyDataSetChanged()
 
         }
-
-
-
 
         if (selectedItemPosition == position) {
 

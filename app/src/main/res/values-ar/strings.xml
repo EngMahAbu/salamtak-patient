@@ -288,5 +288,7 @@
     <string name="schedule">الجدول</string>
     <string name="questionanswer">Question answer</string>
 
-
+    <array name="choose">
+        <item>اختار</item>
+    </array>
 </resources>

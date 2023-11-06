@@ -4,18 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import coil.load
-import coil.transform.CircleCropTransformation
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.snackbar.Snackbar
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.adapter.*
@@ -30,7 +24,6 @@ import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import com.korashiGroup.salamtakPatient.utils.DateUtils
 import com.korashiGroup.salamtakPatient.viewmodel.PatientViewmodel
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
@@ -73,7 +66,11 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
         super.onViewCreated(view, savedInstanceState)
         instance = this
         bindDataToViews()
-        skipLogin()
+        if (DateUtils.getToken().isNullOrEmpty()){
+            binding.layoutSignup.visibility=View.VISIBLE
+        }else {
+            binding.layoutSignup.visibility=View.GONE
+        }
         imageVideoAdapter = ImageVideoAdapter()
         servicesRecylerview()
         medicalServicesRecylerview()
@@ -190,8 +187,6 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
             )
         )
         imageServicesAdapter.submitList(list)
-        imageServicesAdapter.notifyDataSetChanged()
-
     }
 
     private fun medicalServices() {
@@ -243,8 +238,6 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
             )
         )
         imageMedicalServicesAdapter.submitList(list)
-        imageMedicalServicesAdapter.notifyDataSetChanged()
-
     }
 
     private fun callBack() {
@@ -471,11 +464,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
             sharedDataViewmodel.skipLoginStatus.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
                 skip=it
 
-                if (DateUtils.getToken().isNullOrEmpty()){
-                    binding.layoutSignup.visibility=View.VISIBLE
-                }else {
-                    binding.layoutSignup.visibility=View.GONE
-                }
+
 
             })
         }
