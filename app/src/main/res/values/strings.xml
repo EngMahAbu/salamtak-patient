@@ -267,7 +267,7 @@
     </string>
     <string name="age">How old are you?(years)</string>
     <string name="askdoctor">Ask a Doctor</string>
-    <string name="fillallfields">Fill All Fields</string>
+    <string name="fillallfields">Complete All Fields</string>
     <string name="insurance_company">insurance Company</string>
     <string name="notnow">Not Now</string>
     <string name="end_date">End Date</string>
@@ -310,6 +310,7 @@
     <string name="lang">English</string>
     <string name="schedule">Schedule</string>
     <string name="questionanswer">Question answer</string>
+    <string name="insurance_company_required">Insurance company required</string>
 
     <array name="choose">
         <item>Select</item>

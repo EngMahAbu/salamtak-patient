@@ -82,7 +82,7 @@ class HealthEntityFragment : Fragment(),MedicalHealthAdapter.Action {
         binding.rvHelthEntity.apply {
             adapter = healthAdapter
             layoutManager = LinearLayoutManager(requireContext())
-            addOnScrollListener(this@HealthEntityFragment.scrollListener)
+          //  addOnScrollListener(this@HealthEntityFragment.scrollListener)
         }
     }
 
@@ -117,7 +117,7 @@ class HealthEntityFragment : Fragment(),MedicalHealthAdapter.Action {
 
         binding.layoutBottomsheetpersistant.btnApply.setOnClickListener {
             viewmodel.healthEntityPage=0
-            viewmodel.getHealthEntityPagedList(cityId,areaId,args.healthtype,10,viewmodel.healthEntityPage)
+            viewmodel.getHealthEntityPagedList(cityId,areaId,args.healthtype,100,0)
             bottomsheetbeahavoir.state = BottomSheetBehavior.STATE_HIDDEN
         }
 
@@ -166,11 +166,11 @@ class HealthEntityFragment : Fragment(),MedicalHealthAdapter.Action {
                     }
                         healthAdapter.submitList(list?.toList())
 
-                    val totalresult= (response.data?.data?.totalCount)?.div((10+2))
-                    isLastPage = viewmodel.healthEntityPage == totalresult
-                    if (isLastPage){
-                        binding.rvHelthEntity.setPadding(0,0,0,0)
-                    }
+//                    val totalresult= (response.data?.data?.totalCount)?.div((10+2))
+//                    isLastPage = viewmodel.healthEntityPage == totalresult
+//                    if (isLastPage){
+//                        binding.rvHelthEntity.setPadding(0,0,0,0)
+//                    }
                  //   response.data?.data?.items?.let { updateUi(it) }
 
                 }

@@ -116,6 +116,7 @@ class OtpFragment : Fragment() {
                     getString(R.string.invalid_code),
                     Toast.LENGTH_SHORT
                 ).show()
+                binding.tvInvalidcode.visibility=View.VISIBLE
                 binding.etOtpFirst.setText("")
                 binding.etOtpsecond.setText("")
                 binding.etOtpthird.setText("")

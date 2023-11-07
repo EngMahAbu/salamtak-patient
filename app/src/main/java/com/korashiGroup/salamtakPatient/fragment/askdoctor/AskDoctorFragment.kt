@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.activityViewModels
@@ -15,6 +16,8 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.databinding.AskDoctorFragmentBinding
+import com.korashiGroup.salamtakPatient.model.SpecialistData
+import com.korashiGroup.salamtakPatient.model.register.ChooseGender
 import com.korashiGroup.salamtakPatient.utils.Constans
 import com.korashiGroup.salamtakPatient.utils.DateUtils
 import com.korashiGroup.salamtakPatient.utils.Resource
@@ -48,9 +51,9 @@ class AskDoctorFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        sharedDataViewmodel.getspecialication(SpecialistData(0,"",false,""))
+        sharedDataViewmodel.getGender(ChooseGender("",0))
         initButton()
-        validateTextError()
         getDataFromViews()
         callBack()
         chooseAskPatient()
@@ -78,8 +81,7 @@ class AskDoctorFragment : Fragment() {
                 }
                 viewmodel.createQandAForPatient(builder.build())
             } else {
-                Snackbar.make(requireView(), getString(R.string.fillallfields), Snackbar.LENGTH_SHORT)
-                    .show()
+                Toast.makeText(requireContext(),getString(R.string.fillallfields), Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -123,6 +125,7 @@ class AskDoctorFragment : Fragment() {
             findNavController().navigate(R.id.homeFragment)
         }
 
+
     }
 
     private fun callBack() {
@@ -138,6 +141,8 @@ class AskDoctorFragment : Fragment() {
                     hideprogressbar()
                     Snackbar.make(requireView(), getString(R.string.datasentsuccessfully), Snackbar.LENGTH_SHORT)
                         .show()
+                    sharedDataViewmodel.getspecialication(SpecialistData(0,"",false,""))
+                    sharedDataViewmodel.getGender(ChooseGender("",0))
                     findNavController().navigate(R.id.homeFragment)
                 }
 
@@ -156,6 +161,8 @@ class AskDoctorFragment : Fragment() {
 
 
     private fun validateQuestionInput(): Boolean {
+       validateTextError()
+
         var value = false
         if (binding.etSpecialization.text?.trim().isNullOrEmpty()) {
             binding.tvSpecError.visibility = View.VISIBLE
@@ -185,20 +192,17 @@ class AskDoctorFragment : Fragment() {
         }
 
         if (binding.etAge.text?.trim().isNullOrEmpty()) {
-            binding.tvAgeError.visibility = View.VISIBLE
+            binding.tvGenderError.visibility = View.VISIBLE
 
         } else {
-            binding.tvAgeError.visibility = View.GONE
+            binding.tvGenderError.visibility = View.GONE
             partMap = partMap + mapOf("Age" to binding.etAge.text.toString().toInt())
         }
 
         if (binding.etChooseGender.text?.trim().isNullOrEmpty()) {
-            binding.tvGenderError.visibility = View.VISIBLE
-
-
+            binding.tvAgeError.visibility = View.VISIBLE
         } else {
-            binding.tvGenderError.visibility = View.GONE
-
+            binding.tvAgeError.visibility = View.GONE
         }
 
         if (isMe == null) {
@@ -216,7 +220,6 @@ class AskDoctorFragment : Fragment() {
 
 
     private fun validateTextError() {
-
         binding.etSpecialization.doOnTextChanged { text, start, before, count ->
             if (binding.etSpecialization.text?.trim().isNullOrEmpty()) {
                 binding.tvSpecError.visibility = View.VISIBLE
@@ -236,8 +239,6 @@ class AskDoctorFragment : Fragment() {
 
             }
         }
-
-
         binding.etQuestion.doOnTextChanged { text, start, before, count ->
             if (binding.etQuestion.text?.trim().isNullOrEmpty()) {
                 binding.tvQuestionError.visibility = View.VISIBLE
@@ -264,8 +265,6 @@ class AskDoctorFragment : Fragment() {
         binding.etAge.doOnTextChanged { text, start, before, count ->
             if (binding.etAge.text?.trim().isNullOrEmpty()) {
                 binding.tvAgeError.visibility = View.VISIBLE
-
-
             } else {
                 binding.tvAgeError.visibility = View.GONE
                 partMap = partMap + mapOf("Age" to binding.etAge.text.toString().toInt())
@@ -276,14 +275,11 @@ class AskDoctorFragment : Fragment() {
         binding.etChooseGender.doOnTextChanged { text, start, before, count ->
             if (binding.etChooseGender.text?.trim().isNullOrEmpty()) {
                 binding.tvGenderError.visibility = View.VISIBLE
-
-
             } else {
                 binding.tvGenderError.visibility = View.GONE
-
             }
-
         }
+
 
 
     }

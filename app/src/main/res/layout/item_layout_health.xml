@@ -328,6 +328,7 @@
                         android:text="@string/Call"
                         android:textColor="@color/white"
                         android:textSize="13sp"
+                        android:textAllCaps="false"
                         android:drawablePadding="5dp"
                         android:gravity="center_vertical"
                         android:paddingStart="120dp"

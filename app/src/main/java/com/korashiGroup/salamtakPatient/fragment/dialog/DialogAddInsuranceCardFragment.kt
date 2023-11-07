@@ -95,7 +95,14 @@ class DialogAddInsuranceCardFragment : BottomSheetDialogFragment(){
         }
 
         binding.applay.setOnClickListener {
-            sendData()
+
+            if (insuranceId.isNullOrEmpty()){
+                Toast.makeText(requireContext(),getString(R.string.insurance_company_required), Toast.LENGTH_SHORT).show()
+            }else{
+                partMap = partMap + mapOf("Insurance_CompanyID" to insuranceId)
+                sendData()
+            }
+
 
         }
     }
@@ -319,11 +326,8 @@ class DialogAddInsuranceCardFragment : BottomSheetDialogFragment(){
     private fun sendData() {
 
         imageFile?.let {
-
             partMap = partMap + mapOf("document" to it)
-
         }
-        partMap = partMap + mapOf("Insurance_CompanyID" to insuranceId)
         if (binding.releaseDate.text.toString().trim().isNotBlank()) {
             partMap = partMap + mapOf("IssueDate" to binding.releaseDate.text.toString())
         } else {

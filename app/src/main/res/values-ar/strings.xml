@@ -287,6 +287,7 @@
     <string name="lang">Arabic</string>
     <string name="schedule">الجدول</string>
     <string name="questionanswer">Question answer</string>
+    <string name="insurance_company_required">مطلوب شركة تأمين</string>
 
     <array name="choose">
         <item>اختار</item>

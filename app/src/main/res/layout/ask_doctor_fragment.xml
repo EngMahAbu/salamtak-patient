@@ -18,7 +18,7 @@
             android:layout_marginTop="@dimen/_5sdp"
             android:src="@drawable/ic_arrowleft"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"/>
     <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_askDoctor"
             android:layout_width="wrap_content"
@@ -56,7 +56,7 @@
                     app:layout_constraintEnd_toEndOf="@+id/layout_Choose_Specialization"
                     app:layout_constraintStart_toStartOf="@+id/layout_Choose_Specialization"
                     app:layout_constraintTop_toTopOf="@+id/layout_Choose_Specialization"
-                   app:layout_constraintBottom_toBottomOf="@+id/layout_Choose_Specialization"
+                    app:layout_constraintBottom_toBottomOf="@+id/layout_Choose_Specialization"
             />
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -233,7 +233,7 @@
                     android:textColor="@color/red"
                     android:textSize="12sp"
                     android:visibility="gone"
-                    app:layout_constraintBottom_toTopOf="@+id/textinput_Age"
+                    app:layout_constraintBottom_toTopOf="@+id/layout_Choose_Gender"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textinput_QuestionDetails"/>
 
@@ -305,9 +305,9 @@
                     android:textColor="@color/red"
                     android:textSize="12sp"
                     android:visibility="gone"
-                    app:layout_constraintBottom_toTopOf="@+id/layout_Choose_Gender"
+                    app:layout_constraintBottom_toTopOf="@+id/textinput_Age"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textinput_Age"/>
+                    app:layout_constraintTop_toBottomOf="@+id/layout_Choose_Gender"/>
             <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layout_Choose_Gender"
                     android:layout_width="match_parent"
@@ -388,56 +388,51 @@
                     android:textColor="@color/red"
                     android:textSize="12sp"
                     android:visibility="gone"
-                    app:layout_constraintBottom_toTopOf="@+id/layout_patient"
+                    app:layout_constraintBottom_toTopOf="@+id/layout_Choose_me"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/layout_Choose_Gender"/>
+                    app:layout_constraintTop_toBottomOf="@+id/textinput_Age"/>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/layout_Choose_me"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="15dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/bg_edittext"
-                android:elevation="1dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textinput_Age">
-            <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_arrowdownChoose_me"
-                    android:layout_width="20dp"
-                    android:layout_height="0dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginEnd="12dp"
-                    android:gravity="start"
-                    android:src="@drawable/ic_arrowdwon"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"/>
-            <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_questionsAnswer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_Choose_me"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
                     android:layout_marginStart="15dp"
-                    android:layout_marginTop="7dp"
-                    android:layout_marginBottom="8dp"
-                    android:fontFamily="@font/avenirltstd_roman"
-                    android:gravity="center"
-                    android:padding="2dp"
-                    android:text="@string/questionanswer"
-                    android:textColor="@color/gray"
-                    android:textSize="16sp"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/bg_edittext"
+                    android:elevation="1dp"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+                    app:layout_constraintTop_toBottomOf="@+id/textinput_Age">
+                <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_arrowdownChoose_me"
+                        android:layout_width="20dp"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginEnd="12dp"
+                        android:gravity="start"
+                        android:src="@drawable/ic_arrowdwon"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+                <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_questionsAnswer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="7dp"
+                        android:layout_marginBottom="8dp"
+                        android:fontFamily="@font/avenirltstd_roman"
+                        android:gravity="center"
+                        android:padding="2dp"
+                        android:text="@string/questionanswer"
+                        android:textColor="@color/gray"
+                        android:textSize="16sp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -510,7 +505,7 @@
                             android:layout_margin="2dp"
                             android:textColor="@color/black"
                             android:textSize="12sp"
-                            app:layout_constraintEnd_toEndOf="parent" />
+                            app:layout_constraintEnd_toEndOf="parent"/>
 
                     <RadioButton
                             android:id="@+id/radio_someoneElse"
@@ -535,7 +530,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
-                    android:layout_marginTop="7dp"
                     android:layout_marginBottom="8dp"
                     android:fontFamily="@font/avenirltstd_roman"
                     android:gravity="center"

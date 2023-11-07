@@ -797,7 +797,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         val subSpecialistData=SubSpecialistData(0,"",false,"")
         val list=ArrayList<SubSpecialistData>()
         list.add(subSpecialistData)
-       sharedDataViewmodel.getCity(CityData(0,"",0,false,"",""))
+        sharedDataViewmodel.getCity(CityData(0,"",0,false,"",""))
         sharedDataViewmodel.getArea(AreaData(0,""))
         sharedDataViewmodel.getspecialication(SpecialistData(0,"",false,""))
         sharedDataViewmodel.getSeniorityLevelData(SeniorityLevelData(0,""))

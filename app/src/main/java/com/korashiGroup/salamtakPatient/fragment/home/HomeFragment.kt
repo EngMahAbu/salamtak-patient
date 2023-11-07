@@ -1,5 +1,6 @@
 package com.korashiGroup.salamtakPatient.fragment.home
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.adapter.*
 import com.korashiGroup.salamtakPatient.databinding.HomefragmentBinding
+import com.korashiGroup.salamtakPatient.fragment.loginandforgetpassword.LoginFragment
 import com.korashiGroup.salamtakPatient.model.CityData
 import com.korashiGroup.salamtakPatient.model.ImageServices
 import com.korashiGroup.salamtakPatient.utils.Resource
@@ -35,6 +37,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
     private lateinit var imageMedicalServicesAdapter: MedicalServicesAdapter
     private lateinit var imageVideoAdapter: ImageVideoAdapter
     private val patientviewmodel: PatientViewmodel by viewModels()
+    var someEventListener: LoginFragment.onSomeEventListener? = null
     //    private lateinit var popularDoctorsAdapter: PopularDoctorsAdapter
 //    private lateinit var healthTopicsAdapter: HealthTopicsAdapter
 //    private lateinit var spotlightAdapter: SpotlightAdapter
@@ -53,6 +56,15 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
 
     }
 
+    override fun onAttach(activity: Activity) {
+        super.onAttach(activity)
+        someEventListener = try {
+            activity as LoginFragment.onSomeEventListener
+        } catch (e: ClassCastException) {
+            throw ClassCastException("$activity must implement onSomeEventListener")
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -68,8 +80,10 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
         bindDataToViews()
         if (DateUtils.getToken().isNullOrEmpty()){
             binding.layoutSignup.visibility=View.VISIBLE
+            someEventListener?.someEvent("skip")
         }else {
             binding.layoutSignup.visibility=View.GONE
+            someEventListener?.someEvent("")
         }
         imageVideoAdapter = ImageVideoAdapter()
         servicesRecylerview()
