@@ -80,9 +80,12 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
         bindDataToViews()
         if (DateUtils.getToken().isNullOrEmpty()){
             binding.layoutSignup.visibility=View.VISIBLE
+            binding.ivNotification.visibility=View.GONE
             someEventListener?.someEvent("skip")
+
         }else {
             binding.layoutSignup.visibility=View.GONE
+            binding.ivNotification.visibility=View.VISIBLE
             someEventListener?.someEvent("")
         }
         imageVideoAdapter = ImageVideoAdapter()

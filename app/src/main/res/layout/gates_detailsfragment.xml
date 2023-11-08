@@ -19,38 +19,23 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
-    <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_Health"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="15dp"
-            android:fontFamily="@font/avenirltstd_black"
-            android:text="@string/salamtak_gates"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@+id/iv_arrow"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_arrow"/>
-
     <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_doctorsDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
             android:padding="8dp"
             android:background="@drawable/bg_edittext"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_Health">
+            app:layout_constraintTop_toBottomOf="@+id/iv_arrow">
 
         <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/iv_doctorProfile"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
                 android:scaleType="fitXY"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -71,7 +56,20 @@
                         app:layout_constraintStart_toEndOf="@+id/iv_doctorProfile"
                         app:layout_constraintTop_toTopOf="@+id/iv_doctorProfile"/>
 
-                <kr.co.prnd.readmore.ReadMoreTextView
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_Health"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/avenirltstd_black"
+                android:text="@string/salamtak_gates"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_doctorProfile"/>
+
+                <TextView
                         android:id="@+id/tv_description"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -79,18 +77,16 @@
                         android:layout_marginEnd="10dp"
                         android:layout_marginBottom="5dp"
                         android:layout_marginTop="@dimen/_10sdp"
-                        android:fontFamily="@font/avenirltstd_roman"
+                        android:fontFamily="@font/avenirltstd_black"
                         android:gravity="start"
                         android:padding="2dp"
                         android:text="@string/genecology_and_infertility"
-                        android:textColor="@color/dark_gray"
-                        android:textSize="12sp"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/iv_doctorProfile"
-                        app:readMoreColor="@color/blue"
-                        app:readMoreText="@string/readmore"
-                        tools:ignore="TouchTargetSizeCheck" />
+                        app:layout_constraintTop_toBottomOf="@+id/tv_Health"
+                         />
 
 
 

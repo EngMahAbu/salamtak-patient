@@ -102,6 +102,26 @@
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_questionAnswer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        <include
+                android:id="@+id/item_questionAnswer"
+                layout="@layout/item_layoutquestionanswer"
+        />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_Language"
         android:layout_width="match_parent"

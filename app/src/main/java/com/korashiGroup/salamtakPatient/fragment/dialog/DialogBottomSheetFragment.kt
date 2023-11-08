@@ -34,6 +34,7 @@ import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.snackbar.Snackbar
 import com.korashiGroup.salamtakPatient.fragment.loginandforgetpassword.LoginFragment
+import com.korashiGroup.salamtakPatient.model.register.ChoosePatient
 import com.korashiGroup.salamtakPatient.viewmodel.PatientViewmodel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -96,6 +97,7 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
         setupresyclerviewGetAllArea()
         initButton()
         chooseGender()
+        choosePatient()
         examinationRecylerview()
         imageServices()
     }
@@ -115,7 +117,7 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
         binding.itemSpecialist.rvSpecialist.apply {
             adapter = specialistAdapter
             layoutManager = LinearLayoutManager(requireContext())
-            addItemDecoration(object : DividerItemDecoration(activity, LinearLayout.VERTICAL) {})
+           // addItemDecoration(object : DividerItemDecoration(activity, LinearLayout.VERTICAL) {})
         }
     }
 
@@ -124,7 +126,7 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
         binding.itemSubSpecialist.rvSubspecialist.apply {
             adapter = subSpecialistAdapter
             layoutManager = LinearLayoutManager(requireContext())
-            addItemDecoration(object : DividerItemDecoration(activity, LinearLayout.VERTICAL) {})
+        //    addItemDecoration(object : DividerItemDecoration(activity, LinearLayout.VERTICAL) {})
         }
     }
 
@@ -216,7 +218,9 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
             dismiss()
         }
         binding.itemGender.btnDone.setOnClickListener {
-
+            dismiss()
+        }
+        binding.itemQuestionAnswer.btnDone.setOnClickListener {
             dismiss()
         }
 
@@ -275,6 +279,11 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
 
             "gender" -> {
                 binding.layoutGender.visibility = View.VISIBLE
+                binding.btnDone.visibility = View.GONE
+                binding.tvAllSpecial.visibility = View.GONE
+            }
+            "question" -> {
+                binding.layoutQuestionAnswer.visibility = View.VISIBLE
                 binding.btnDone.visibility = View.GONE
                 binding.tvAllSpecial.visibility = View.GONE
             }
@@ -730,6 +739,25 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
         }
 
     }
+
+    private fun choosePatient() {
+
+        binding.itemQuestionAnswer.radio.setOnCheckedChangeListener { group, checkedId ->
+            when (checkedId) {
+                R.id.radio_isMe -> {
+                    val choosePatientType = ChoosePatient(true,getString(R.string.me) )
+                    sharedDataViewmodel.getPatientType(choosePatientType)
+                }
+
+                R.id.radio_someOne-> {
+                    val choosePatientType = ChoosePatient(false,getString(R.string.anotherpatient) )
+                    sharedDataViewmodel.getPatientType(choosePatientType)
+                }
+            }
+        }
+
+    }
+
 
     private fun call() {
 

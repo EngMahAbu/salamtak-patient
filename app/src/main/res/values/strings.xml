@@ -156,7 +156,7 @@
     <string name="egp">Egp</string>
     <string name="from">From</string>
     <string name="choose_seniority_level">Choose Seniority Level</string>
-    <string name="choose_gender">Choose Gender</string>
+    <string name="choose_gender">Gender</string>
     <string name="apply">Apply</string>
     <string name="location">Location</string>
     <string name="done">Done</string>
@@ -260,7 +260,7 @@
     <string name="ask_a_doctor_for_free_and_get_response_in_24_hours">Get professional medical answers to all your
         questions
     </string>
-    <string name="ask_now">Ask Now</string>
+    <string name="ask_now">Ask now</string>
     <string name="your_question">Your question</string>
     <string name="question_descreption_explanation_of_your_medical_symotoms">Question Descreption *(Explanation of your
         medical symotoms)
@@ -309,7 +309,7 @@
     <string name="all_reviews">All Reviews</string>
     <string name="lang">English</string>
     <string name="schedule">Schedule</string>
-    <string name="questionanswer">Question answer</string>
+    <string name="questionanswer">Question owner</string>
     <string name="insurance_company_required">Insurance company required</string>
 
     <array name="choose">

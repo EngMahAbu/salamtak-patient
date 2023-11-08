@@ -392,15 +392,29 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textinput_Age"/>
 
+
+            <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_layoutChoose_me"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@android:color/transparent"
+                    app:layout_constraintEnd_toEndOf="@+id/layout_Choose_me"
+                    app:layout_constraintStart_toStartOf="@+id/layout_Choose_me"
+                    app:layout_constraintTop_toTopOf="@+id/layout_Choose_me"
+                    app:layout_constraintBottom_toBottomOf="@+id/layout_Choose_me"
+            />
+
             <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layout_Choose_me"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="55dp"
                     android:layout_marginStart="15dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="15dp"
                     android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="@dimen/_5sdp"
                     android:background="@drawable/bg_edittext"
                     android:elevation="1dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textinput_Age">
@@ -415,113 +429,35 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"/>
-                <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_questionsAnswer"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="7dp"
-                        android:layout_marginBottom="8dp"
-                        android:fontFamily="@font/avenirltstd_roman"
-                        android:gravity="center"
-                        android:padding="2dp"
-                        android:text="@string/questionanswer"
-                        android:textColor="@color/gray"
-                        android:textSize="16sp"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/layout_patient"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="15dp"
-                    android:background="@color/bg_color_gray"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:visibility="gone"
-                    app:layout_constraintTop_toBottomOf="@+id/layout_Choose_me">
-
-                <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btn_me"
-                        android:layout_width="0dp"
+                <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/textinput_Choose_me"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
                         android:layout_height="55dp"
-                        android:layout_marginStart="15dp"
-                        android:background="@drawable/btn_sellector"
-                        android:fontFamily="@font/avenirltstd_roman"
-                        android:text="@string/me"
-                        android:visibility="gone"
-                        android:textColor="@color/blue"
-                        android:textSize="14sp"
-                        android:textAllCaps="false"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/btn_other"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
-
-                <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btn_other"
-                        android:layout_width="0dp"
-                        android:layout_height="55dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="15dp"
-                        android:textAllCaps="false"
-                        android:visibility="gone"
-                        android:background="@drawable/btn_sellector"
-                        android:fontFamily="@font/avenirltstd_roman"
-                        android:text="@string/anotherpatient"
-                        android:textColor="@color/blue"
-                        android:textSize="14sp"
+                        android:layout_marginEnd="25dp"
+                        android:layout_marginBottom="5dp"
+                        android:hint="@string/questionanswer"
+                        android:paddingTop="4dp"
+                        app:boxBackgroundColor="@color/white"
+                        app:boxBackgroundMode="none"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/btn_me"
-                        app:layout_constraintTop_toTopOf="parent"/>
-
-                <RadioGroup
-                        android:id="@+id/radio"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="30dp"
-                        android:layout_marginEnd="30dp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:orientation="vertical">
+                        app:layout_constraintTop_toTopOf="parent">
 
-                    <RadioButton
-                            android:id="@+id/radio_isme"
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_Choose_me"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:drawablePadding="10dp"
-                            android:elevation="1dp"
-                            android:background="@drawable/bg_chooselang_radiobtn"
-                            android:layout_marginBottom="20dp"
-                            android:fontFamily="@font/avenirltstd_black"
-                            android:text="@string/me"
-                            android:layout_margin="2dp"
+                            android:layout_height="55dp"
+                            android:layout_gravity="center_horizontal"
+                            android:fontFamily="@font/avenirltstd_roman"
+                            android:inputType="text"
+                            android:enabled="false"
                             android:textColor="@color/black"
-                            android:textSize="12sp"
-                            app:layout_constraintEnd_toEndOf="parent"/>
+                            android:textSize="16sp"/>
 
-                    <RadioButton
-                            android:id="@+id/radio_someoneElse"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/anotherpatient"
-                            android:textSize="12sp"
-                            android:elevation="1dp"
-                            android:layout_margin="2dp"
-                            android:background="@drawable/bg_chooselang_radiobtn"
-                            android:fontFamily="@font/avenirltstd_black"
-                            android:textColor="@color/black"
-                            android:drawablePadding="10dp"
-                    />
-                </RadioGroup>
-
+                </com.google.android.material.textfield.TextInputLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -540,7 +476,7 @@
                     android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/layout_patient"/>
+                    app:layout_constraintTop_toBottomOf="@+id/layout_Choose_me"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

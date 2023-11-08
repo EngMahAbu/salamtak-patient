@@ -18,6 +18,7 @@ import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.databinding.AskDoctorFragmentBinding
 import com.korashiGroup.salamtakPatient.model.SpecialistData
 import com.korashiGroup.salamtakPatient.model.register.ChooseGender
+import com.korashiGroup.salamtakPatient.model.register.ChoosePatient
 import com.korashiGroup.salamtakPatient.utils.Constans
 import com.korashiGroup.salamtakPatient.utils.DateUtils
 import com.korashiGroup.salamtakPatient.utils.Resource
@@ -53,23 +54,16 @@ class AskDoctorFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         sharedDataViewmodel.getspecialication(SpecialistData(0,"",false,""))
         sharedDataViewmodel.getGender(ChooseGender("",0))
+        sharedDataViewmodel.getPatientType(ChoosePatient(false,""))
         initButton()
         getDataFromViews()
         callBack()
-        chooseAskPatient()
     }
 
     private fun initButton() {
-
-        binding.layoutChooseMe.setOnClickListener {
-            if (isShoww) {
-                binding.layoutPatient.visibility = View.VISIBLE
-                isShoww = false
-            } else {
-                binding.layoutPatient.visibility = View.GONE
-                isShoww = true
-            }
-
+        binding.btnLayoutChooseMe.setOnClickListener {
+            val action=AskDoctorFragmentDirections.actionAskDoctorFragmentToDialogBottomSheetFragment("question")
+            findNavController().navigate(action)
         }
 
         binding.btnSend.setOnClickListener {
@@ -84,24 +78,6 @@ class AskDoctorFragment : Fragment() {
                 Toast.makeText(requireContext(),getString(R.string.fillallfields), Toast.LENGTH_SHORT).show()
             }
         }
-
-
-        binding.btnMe.setOnClickListener {
-            binding.btnMe.setBackgroundResource(R.drawable.bg_btnisme)
-            binding.btnMe.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
-            binding.btnOther.setBackgroundResource(R.drawable.btn_sellector)
-            binding.btnOther.setTextColor(ContextCompat.getColor(requireContext(), R.color.blue))
-            isMe = true
-        }
-
-        binding.btnOther.setOnClickListener {
-            binding.btnOther.setBackgroundResource(R.drawable.bg_btnisme)
-            binding.btnOther.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
-            binding.btnMe.setBackgroundResource(R.drawable.btn_sellector)
-            binding.btnMe.setTextColor(ContextCompat.getColor(requireContext(), R.color.blue))
-            isMe = false
-        }
-
 
         binding.btnLayoutChooseSpecialization.setOnClickListener {
             val action = AskDoctorFragmentDirections.actionAskDoctorFragmentToDialogBottomSheetFragment("Specialist")
@@ -205,7 +181,7 @@ class AskDoctorFragment : Fragment() {
             binding.tvAgeError.visibility = View.GONE
         }
 
-        if (isMe == null) {
+        if (binding.etChooseMe.text?.trim().isNullOrEmpty()) {
             binding.tvPatientError.visibility = View.VISIBLE
             return value
 
@@ -279,38 +255,7 @@ class AskDoctorFragment : Fragment() {
                 binding.tvGenderError.visibility = View.GONE
             }
         }
-
-
-
     }
-
-
-    private fun chooseAskPatient() {
-
-        binding.radio.setOnCheckedChangeListener { group, checkedId ->
-            when (checkedId) {
-                R.id.radio_isme -> {
-                    // Pirates are the best
-                    isMe = true
-                    binding.tvPatientError.visibility = View.GONE
-                    partMap = (partMap + mapOf("IsForMe" to isMe!!))
-
-                }
-
-                R.id.radio_someoneElse -> {
-                    isMe = false
-                    binding.tvPatientError.visibility = View.GONE
-                    partMap = (partMap + mapOf("IsForMe" to isMe!!))
-
-                }
-            }
-
-
-        }
-
-
-    }
-
 
     private fun getDataFromViews() {
         sharedDataViewmodel.specialication.observe(viewLifecycleOwner) {
@@ -323,16 +268,20 @@ class AskDoctorFragment : Fragment() {
             partMap = partMap + mapOf("GenderID" to it.id)
         }
 
+        sharedDataViewmodel.patientType.observe(viewLifecycleOwner) {
+            binding.etChooseMe.setText(it.type)
+            isMe=it.status
+            partMap = partMap + mapOf("IsForMe" to it.status)
+        }
+
     }
 
     private fun showprogtessbar() {
         binding.progressBarInfo.visibility = View.VISIBLE
-        binding.btnMe.text = ""
     }
 
     private fun hideprogressbar() {
         binding.progressBarInfo.visibility = View.GONE
-        binding.btnMe.text = getString(R.string.send)
     }
 
 }

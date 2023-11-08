@@ -9,6 +9,7 @@ import com.korashiGroup.salamtakPatient.model.profile.DataBloodType
 import com.korashiGroup.salamtakPatient.model.profile.DataFoodAllergy
 import com.korashiGroup.salamtakPatient.model.profile.DataMedicineAllergy
 import com.korashiGroup.salamtakPatient.model.register.ChooseGender
+import com.korashiGroup.salamtakPatient.model.register.ChoosePatient
 import com.korashiGroup.salamtakPatient.model.register.DataCountry
 import dagger.hilt.android.lifecycle.HiltViewModel
 
@@ -34,6 +35,7 @@ class SharedDataViewmodel:ViewModel() {
     val foodAllergyList=MutableLiveData<List<DataFoodAllergy>>()
     val medicalInfoStatus=MutableLiveData<Boolean>()
     val skipLoginStatus=MutableLiveData<String>()
+    val patientType=MutableLiveData<ChoosePatient>()
 
 
 
@@ -68,6 +70,10 @@ class SharedDataViewmodel:ViewModel() {
 
     fun getGender(gender: ChooseGender){
         chooseGender.postValue(gender)
+    }
+
+    fun getPatientType(type: ChoosePatient){
+        patientType.postValue(type)
     }
 
     fun getClinicSchedualByClinicDayId(ClinicSchedual:ClinicSchedualByClinicDayId){

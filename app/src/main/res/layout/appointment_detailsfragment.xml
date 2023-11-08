@@ -508,7 +508,7 @@
     <include
             android:id="@+id/layoutBottomsheetpersistant"
             layout="@layout/layout_bottomsheet_bookwithinsurance"
-
+android:visibility="gone"
     />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
