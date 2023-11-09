@@ -4,13 +4,13 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -19,20 +19,23 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import coil.transform.CircleCropTransformation
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.snackbar.Snackbar
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.adapter.AppointmentsAvailableAdapter
-import com.korashiGroup.salamtakPatient.adapter.ChooseClinksDoctorsAdapter
 import com.korashiGroup.salamtakPatient.adapter.CalenderAdapter
+import com.korashiGroup.salamtakPatient.adapter.ChooseClinksDoctorsAdapter
 import com.korashiGroup.salamtakPatient.databinding.BookAppointmentfragmentBinding
 import com.korashiGroup.salamtakPatient.model.CalendarDateModel
+import com.korashiGroup.salamtakPatient.model.booking.AppointmentBooking
+import com.korashiGroup.salamtakPatient.model.booking.AppointmentDetailBooking
+import com.korashiGroup.salamtakPatient.model.booking.BookingData
+import com.korashiGroup.salamtakPatient.model.booking.PatientAppointmentRequest
 import com.korashiGroup.salamtakPatient.utils.DateUtils
 import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
-import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.snackbar.Snackbar
-import com.korashiGroup.salamtakPatient.model.booking.*
 import com.korashiGroup.salamtakPatient.viewmodel.PatientViewmodel
+import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.time.Duration
@@ -169,10 +172,14 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
                 val date: Date =
                     SimpleDateFormat("yyyy-MM-dd").parse(formattedDate)
                 Log.d("day",date.toString())
-                val startHour: Date = time?.let { it1 -> SimpleDateFormat("hh:mm").parse(it1) }!!
-                val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US)
-                val total = date.time + startHour.time
-                formattedDate = formatter.format(total)
+               // val startHour: Date = time?.let { it1 -> SimpleDateFormat("hh:mm").parse(it1) }!!
+                val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
+               // val total = date.time + startHour.time
+                val dateFormat = SimpleDateFormat("dd-MMM-yyyy HH:mm")
+                val sdf1 = SimpleDateFormat("dd-MMM-yyyy")
+                val dateTime = sdf1.format(date) + " " + time
+                val requiredDate = dateFormat.parse(dateTime)
+                formattedDate = formatter.format(requiredDate)
                 val patientAppointmentRequest = PatientAppointmentRequest(
                     args.doctorclinks.data?.id,
                     doctorWorkingDayTimeId,

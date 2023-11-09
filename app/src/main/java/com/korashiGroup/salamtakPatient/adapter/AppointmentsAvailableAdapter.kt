@@ -37,13 +37,6 @@ class AppointmentsAvailableAdapter(private val selecttime: Action) :
         val appoinments = getItem(position)
         var timefrom = LocalTime.parse(appoinments.time)
         holder.binding.tvTime.text =timefrom.format(DateTimeFormatter.ofPattern("hh:mm a",Locale.getDefault()))
-//        if (holder.binding.tvTime.text.contains("AM")){
-//            timefrom =timefrom.plusMinutes(120)
-//        }else{
-//            timefrom = timefrom.plusHours(2)
-//        }
-        timefrom = timefrom.plusHours(2)
-
         holder.itemView.setOnClickListener {
             selectedItemPosition = holder.bindingAdapterPosition
             appoinments.timeInterval?.let { it1 ->
@@ -51,7 +44,7 @@ class AppointmentsAvailableAdapter(private val selecttime: Action) :
                     appoinments.DoctorWorkingDayTimeId?.let { it3 ->
                         appoinments.MedicalExaminationTypeName?.let { it4 ->
                             selecttime.onItemClick(
-                                timefrom.toString(),
+                               timefrom.toString(),
                                 it1, it2, it3, it4
                             )
                         }
