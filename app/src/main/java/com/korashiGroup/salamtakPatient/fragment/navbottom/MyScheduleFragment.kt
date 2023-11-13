@@ -261,10 +261,12 @@ class MyScheduleFragment : Fragment(), MyScheduleAdapter.ActionSchedule,
     }
 
     override fun onLocationClicked(lat: String, long: String) {
-
-            val action=MyScheduleFragmentDirections.actionMyScheduleFragmentToDailogAddMapFragment(lat,long)
-            findNavController().navigate(action)
-
+            if (lat=="null" && long=="null"){
+                Toast.makeText(requireContext(), getString(R.string.thereisnolocatio) , Toast.LENGTH_LONG).show()
+            }else{
+                val action=MyScheduleFragmentDirections.actionMyScheduleFragmentToDailogAddMapFragment(lat,long)
+                findNavController().navigate(action)
+            }
     }
 
     override fun onItemClick( medicalExamination: MedicalExamination) {
