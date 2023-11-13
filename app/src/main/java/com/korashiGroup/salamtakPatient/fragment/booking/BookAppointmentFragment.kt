@@ -173,10 +173,10 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
                     SimpleDateFormat("yyyy-MM-dd").parse(formattedDate)
                 Log.d("day",date.toString())
                // val startHour: Date = time?.let { it1 -> SimpleDateFormat("hh:mm").parse(it1) }!!
-                val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
+                val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US)
                // val total = date.time + startHour.time
-                val dateFormat = SimpleDateFormat("dd-MMM-yyyy HH:mm")
-                val sdf1 = SimpleDateFormat("dd-MMM-yyyy")
+                val dateFormat = SimpleDateFormat("dd-MMM-yyyy HH:mm", Locale.US)
+                val sdf1 = SimpleDateFormat("dd-MMM-yyyy", Locale.US)
                 val dateTime = sdf1.format(date) + " " + time
                 val requiredDate = dateFormat.parse(dateTime)
                 formattedDate = formatter.format(requiredDate)

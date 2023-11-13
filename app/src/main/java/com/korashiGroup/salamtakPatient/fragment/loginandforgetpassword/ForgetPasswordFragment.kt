@@ -21,6 +21,7 @@ import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.viewmodel.RegisterViewmodel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import okhttp3.internal.format
 
 @AndroidEntryPoint
 class ForgetPasswordFragment : Fragment() {
@@ -38,7 +39,9 @@ class ForgetPasswordFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        binding.tvSendEmail.text="${getString(R.string.enter_your_registered)} ${format(getString(R.string.e_mail),requireContext().getColor(R.color.green))}" +
+                " ${format(getString(R.string.or),requireContext().getColor(R.color.black))} ${format(getString(R.string.mobile_number),requireContext().getColor(R.color.green))} " +
+                " ${format(getString(R.string.enter_your_email_we_will_send_you_code_to_reset_the_password),requireContext().getColor(R.color.black))}"
         initButton()
         otpCallBack()
     }

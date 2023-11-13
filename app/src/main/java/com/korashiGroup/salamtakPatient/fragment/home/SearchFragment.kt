@@ -443,7 +443,6 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         sharedDataViewmodel.getCity.observe(viewLifecycleOwner) {
             binding.layoutBottomsheetpersistant.etChooseCity.setText(it.name)
             binding.tvCity.text=it.name
-
         val doctorssearchRequset = DoctorSearchRequest(
             0,
             formattedDate,
@@ -786,10 +785,11 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
     }
 
     private fun skipLogin(){
-        sharedDataViewmodel.skipLoginStatus.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-            skip=it
-
-        })
+        if (DateUtils.getToken().isNullOrEmpty()){
+                binding.layoutCity.visibility=View.GONE
+        }else{
+            binding.layoutCity.visibility=View.VISIBLE
+        }
     }
 
     private fun reset(){

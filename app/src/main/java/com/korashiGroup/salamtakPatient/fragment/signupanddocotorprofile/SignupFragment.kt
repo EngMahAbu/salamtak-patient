@@ -171,8 +171,7 @@ class SignupFragment : Fragment() {
                     0
                 )
 
-            }
-            else if (binding.etPhoneNumber.text?.length!! <11){
+            } else if (binding.etPhoneNumber.text?.length!! < 11) {
                 binding.tvPohneError.text = getString(R.string.phonedigits)
                 binding.tvPohneError.visibility = View.VISIBLE
                 binding.textinputPhoneNumber.setBackgroundResource(R.drawable.bg_edittext_error)
@@ -182,9 +181,7 @@ class SignupFragment : Fragment() {
                     R.drawable.ic_error,
                     0
                 )
-            }
-
-            else {
+            } else {
                 binding.tvPohneError.visibility = View.GONE
                 binding.textinputPhoneNumber.setBackgroundResource(R.drawable.bg_edittext)
                 binding.etPhoneNumber.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
@@ -247,19 +244,17 @@ class SignupFragment : Fragment() {
                     0
                 )
 
-            }
-        else if ( binding.confirmEtPassword.text?.length!! < 6) {
-            binding.tvConfirmpasswordError.text = getString(R.string.lesstthan6number)
-            binding.tvConfirmpasswordError.visibility = View.VISIBLE
-            binding.layoutConfirmpassword.setBackgroundResource(R.drawable.bg_edittext_error)
-            binding.confirmEtPassword.setCompoundDrawablesWithIntrinsicBounds(
-                0,
-                0,
-                R.drawable.ic_error,
-                0
-            )
-        }
-            else if (binding.confirmEtPassword.text?.toString() != binding.etPassword.text?.toString()) {
+            } else if (binding.confirmEtPassword.text?.length!! < 6) {
+                binding.tvConfirmpasswordError.text = getString(R.string.lesstthan6number)
+                binding.tvConfirmpasswordError.visibility = View.VISIBLE
+                binding.layoutConfirmpassword.setBackgroundResource(R.drawable.bg_edittext_error)
+                binding.confirmEtPassword.setCompoundDrawablesWithIntrinsicBounds(
+                    0,
+                    0,
+                    R.drawable.ic_error,
+                    0
+                )
+            } else if (binding.confirmEtPassword.text?.toString() != binding.etPassword.text?.toString()) {
                 binding.tvConfirmpasswordError.text = getString(R.string.doesnotmatch)
                 binding.tvPasswordError.text = getString(R.string.doesnotmatch)
                 binding.tvConfirmpasswordError.visibility = View.VISIBLE
@@ -344,7 +339,7 @@ class SignupFragment : Fragment() {
             when (it) {
 
                 is Resource.Loading -> {
-                  //  showprogtessbar()
+                    //  showprogtessbar()
                 }
 
                 is Resource.sucess -> {
@@ -389,157 +384,151 @@ class SignupFragment : Fragment() {
         confirmPassword: String
     ): Boolean {
 
-      var value = false
+        var value = false
+
+        if (fullNameEn.trim().isNullOrEmpty()) {
+            binding.etFullNameEn.setCompoundDrawablesWithIntrinsicBounds(
+                0,
+                0,
+                R.drawable.ic_error,
+                0
+            )
+            binding.tvFullNameError.text = getString(R.string.required)
+            binding.tvFullNameError.visibility = View.VISIBLE
+            binding.textinputFullNameEn.setBackgroundResource(R.drawable.bg_edittext_error)
+
+
+        } else if (fullNameEn.trim().split(" ").size < 3) {
+            binding.tvFullNameError.visibility = View.VISIBLE
+            binding.tvFullNameError.text = getString(R.string.Enter_fullName_english)
+            binding.etFullNameEn.setCompoundDrawablesWithIntrinsicBounds(
+                0,
+                0,
+                R.drawable.ic_error,
+                0
+            )
+            binding.textinputFullNameEn.setBackgroundResource(R.drawable.bg_edittext_error)
+
+
+        } else {
+            binding.tvFullNameError.visibility = View.GONE
+            binding.textinputFullNameEn.setBackgroundResource(R.drawable.bg_edittext)
+            binding.etFullNameEn.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
+
+        }
+
+
+        if (fullNameAr.trim().isNullOrEmpty()) {
+            binding.etFullNameAR.setCompoundDrawablesWithIntrinsicBounds(
+                0,
+                0,
+                R.drawable.ic_error,
+                0
+            )
+            binding.tvFullNameARError.text = getString(R.string.required)
+            binding.tvFullNameARError.visibility = View.VISIBLE
+            binding.textinputFullNameAr.setBackgroundResource(R.drawable.bg_edittext_error)
+
+
+        } else if (fullNameAr.trim().split(" ").size < 3) {
+            binding.tvFullNameARError.text = getString(R.string.Enter_fullName_Arabic)
+            binding.tvFullNameARError.visibility = View.VISIBLE
+            binding.etFullNameAR.setCompoundDrawablesWithIntrinsicBounds(
+                0,
+                0,
+                R.drawable.ic_error,
+                0
+            )
+            binding.textinputFullNameAr.setBackgroundResource(R.drawable.bg_edittext_error)
+
+
+        } else {
+            binding.tvFullNameARError.visibility = View.GONE
+            binding.textinputFullNameAr.setBackgroundResource(R.drawable.bg_edittext)
+            binding.etFullNameAR.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
+        }
+
+        if (mobileNumber.trim().isEmpty()) {
+            binding.tvPohneError.text = getString(R.string.required)
+            binding.tvPohneError.visibility = View.VISIBLE
+            binding.textinputPhoneNumber.setBackgroundResource(R.drawable.bg_edittext_error)
+            binding.etPhoneNumber.setCompoundDrawablesWithIntrinsicBounds(
+                0,
+                0,
+                R.drawable.ic_error,
+                0
+            )
+
+        } else if (mobileNumber.length < 11) {
+            binding.tvPohneError.text = getString(R.string.phonedigits)
+            binding.tvPohneError.visibility = View.VISIBLE
+            binding.textinputPhoneNumber.setBackgroundResource(R.drawable.bg_edittext_error)
+            binding.etPhoneNumber.setCompoundDrawablesWithIntrinsicBounds(
+                0,
+                0,
+                R.drawable.ic_error,
+                0
+            )
+        } else {
+            binding.tvPohneError.visibility = View.GONE
+            binding.textinputPhoneNumber.setBackgroundResource(R.drawable.bg_edittext)
+            binding.etPhoneNumber.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
+
+        }
 
 
 
-            if (fullNameEn.trim().isNullOrEmpty()) {
-                binding.etFullNameEn.setCompoundDrawablesWithIntrinsicBounds(
-                    0,
-                    0,
-                    R.drawable.ic_error,
-                    0
-                )
-                binding.tvFullNameError.text = getString(R.string.required)
-                binding.tvFullNameError.visibility = View.VISIBLE
-                binding.textinputFullNameEn.setBackgroundResource(R.drawable.bg_edittext_error)
+        if (email.trim().isEmpty()) {
+            binding.tvEmailError.text = getString(R.string.required)
+            binding.tvEmailError.visibility = View.VISIBLE
+            binding.textinputEmail.setBackgroundResource(R.drawable.bg_edittext_error)
+            binding.etEmail.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
+
+        } else if (!email.isValidEmail()) {
+            binding.tvEmailError.text = getString(R.string.match_email)
+            binding.tvEmailError.visibility = View.VISIBLE
+            binding.textinputEmail.setBackgroundResource(R.drawable.bg_edittext_error)
+            binding.etEmail.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
+
+        } else {
+            binding.tvEmailError.visibility = View.GONE
+            binding.textinputEmail.setBackgroundResource(R.drawable.bg_edittext)
+            binding.etEmail.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
+
+        }
 
 
-            } else if (fullNameEn.trim().split(" ").size < 3) {
-                binding.tvFullNameError.visibility = View.VISIBLE
-                binding.tvFullNameError.text = getString(R.string.Enter_fullName_english)
-                binding.etFullNameEn.setCompoundDrawablesWithIntrinsicBounds(
-                    0,
-                    0,
-                    R.drawable.ic_error,
-                    0
-                )
-                binding.textinputFullNameEn.setBackgroundResource(R.drawable.bg_edittext_error)
+        if (password.trim().isEmpty()) {
+            binding.tvPasswordError.text = getString(R.string.required)
+            binding.tvPasswordError.visibility = View.VISIBLE
+            binding.layoutPassword.setBackgroundResource(R.drawable.bg_edittext_error)
+            binding.etPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
 
+        } else if (password.length < 6) {
+            binding.tvPasswordError.text = getString(R.string.lesstthan6number)
+            binding.tvPasswordError.visibility = View.VISIBLE
+            binding.layoutPassword.setBackgroundResource(R.drawable.bg_edittext_error)
+            binding.etPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
 
-            } else {
-                binding.tvFullNameError.visibility = View.GONE
-                binding.textinputFullNameEn.setBackgroundResource(R.drawable.bg_edittext)
-                binding.etFullNameEn.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
+        } else {
+            binding.tvPasswordError.visibility = View.GONE
+            binding.layoutPassword.setBackgroundResource(R.drawable.bg_edittext)
+            binding.etPassword.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
 
-            }
+        }
 
+        if (confirmPassword.trim().isNullOrEmpty()) {
+            binding.tvConfirmpasswordError.text = getString(R.string.required)
+            binding.tvConfirmpasswordError.visibility = View.VISIBLE
+            binding.layoutConfirmpassword.setBackgroundResource(R.drawable.bg_edittext_error)
+            binding.confirmEtPassword.setCompoundDrawablesWithIntrinsicBounds(
+                0,
+                0,
+                R.drawable.ic_error,
+                0
+            )
 
-            if (fullNameAr.trim().isNullOrEmpty()) {
-                binding.etFullNameAR.setCompoundDrawablesWithIntrinsicBounds(
-                    0,
-                    0,
-                    R.drawable.ic_error,
-                    0
-                )
-                binding.tvFullNameARError.text = getString(R.string.required)
-                binding.tvFullNameARError.visibility = View.VISIBLE
-                binding.textinputFullNameAr.setBackgroundResource(R.drawable.bg_edittext_error)
-
-
-            } else if (fullNameAr.trim().split(" ").size < 3) {
-                binding.tvFullNameARError.text = getString(R.string.Enter_fullName_Arabic)
-                binding.tvFullNameARError.visibility = View.VISIBLE
-                binding.etFullNameAR.setCompoundDrawablesWithIntrinsicBounds(
-                    0,
-                    0,
-                    R.drawable.ic_error,
-                    0
-                )
-                binding.textinputFullNameAr.setBackgroundResource(R.drawable.bg_edittext_error)
-
-
-            } else {
-                binding.tvFullNameARError.visibility = View.GONE
-                binding.textinputFullNameAr.setBackgroundResource(R.drawable.bg_edittext)
-                binding.etFullNameAR.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
-            }
-
-            if (mobileNumber.trim().isEmpty()) {
-                binding.tvPohneError.text = getString(R.string.required)
-                binding.tvPohneError.visibility = View.VISIBLE
-                binding.textinputPhoneNumber.setBackgroundResource(R.drawable.bg_edittext_error)
-                binding.etPhoneNumber.setCompoundDrawablesWithIntrinsicBounds(
-                    0,
-                    0,
-                    R.drawable.ic_error,
-                    0
-                )
-
-            }
-            else if (mobileNumber.length<11){
-                binding.tvPohneError.text = getString(R.string.phonedigits)
-                binding.tvPohneError.visibility = View.VISIBLE
-                binding.textinputPhoneNumber.setBackgroundResource(R.drawable.bg_edittext_error)
-                binding.etPhoneNumber.setCompoundDrawablesWithIntrinsicBounds(
-                    0,
-                    0,
-                    R.drawable.ic_error,
-                    0
-                )
-            }
-
-            else {
-                binding.tvPohneError.visibility = View.GONE
-                binding.textinputPhoneNumber.setBackgroundResource(R.drawable.bg_edittext)
-                binding.etPhoneNumber.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
-
-            }
-
-
-
-            if (email.trim().isEmpty()) {
-                binding.tvEmailError.text = getString(R.string.required)
-                binding.tvEmailError.visibility = View.VISIBLE
-                binding.textinputEmail.setBackgroundResource(R.drawable.bg_edittext_error)
-                binding.etEmail.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
-
-            } else if (!email.isValidEmail()) {
-                binding.tvEmailError.text = getString(R.string.match_email)
-                binding.tvEmailError.visibility = View.VISIBLE
-                binding.textinputEmail.setBackgroundResource(R.drawable.bg_edittext_error)
-                binding.etEmail.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
-
-            } else {
-                binding.tvEmailError.visibility = View.GONE
-                binding.textinputEmail.setBackgroundResource(R.drawable.bg_edittext)
-                binding.etEmail.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
-
-            }
-
-
-            if (password.trim().isEmpty()) {
-                binding.tvPasswordError.text = getString(R.string.required)
-                binding.tvPasswordError.visibility = View.VISIBLE
-                binding.layoutPassword.setBackgroundResource(R.drawable.bg_edittext_error)
-                binding.etPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
-
-            } else if (password.length < 6) {
-                binding.tvPasswordError.text = getString(R.string.lesstthan6number)
-                binding.tvPasswordError.visibility = View.VISIBLE
-                binding.layoutPassword.setBackgroundResource(R.drawable.bg_edittext_error)
-                binding.etPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
-
-            } else {
-                binding.tvPasswordError.visibility = View.GONE
-                binding.layoutPassword.setBackgroundResource(R.drawable.bg_edittext)
-                binding.etPassword.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
-
-            }
-
-            if (confirmPassword.trim().isNullOrEmpty()) {
-                binding.tvConfirmpasswordError.text = getString(R.string.required)
-                binding.tvConfirmpasswordError.visibility = View.VISIBLE
-                binding.layoutConfirmpassword.setBackgroundResource(R.drawable.bg_edittext_error)
-                binding.confirmEtPassword.setCompoundDrawablesWithIntrinsicBounds(
-                    0,
-                    0,
-                    R.drawable.ic_error,
-                    0
-                )
-
-            }
-        else if (confirmPassword.length < 6) {
+        } else if (confirmPassword.length < 6) {
             binding.tvConfirmpasswordError.text = getString(R.string.lesstthan6number)
             binding.tvConfirmpasswordError.visibility = View.VISIBLE
             binding.layoutConfirmpassword.setBackgroundResource(R.drawable.bg_edittext_error)
@@ -550,41 +539,40 @@ class SignupFragment : Fragment() {
                 0
             )
 
+        } else if (password != confirmPassword) {
+            binding.tvConfirmpasswordError.text = getString(R.string.doesnotmatch)
+            binding.tvPasswordError.text = getString(R.string.doesnotmatch)
+            binding.tvConfirmpasswordError.visibility = View.VISIBLE
+            binding.layoutConfirmpassword.setBackgroundResource(R.drawable.bg_edittext_error)
+            binding.confirmEtPassword.setCompoundDrawablesWithIntrinsicBounds(
+                0,
+                0,
+                R.drawable.ic_error,
+                0
+            )
+            binding.layoutConfirmpassword.setBackgroundResource(R.drawable.bg_edittext_error)
+            binding.confirmEtPassword.setCompoundDrawablesWithIntrinsicBounds(
+                0,
+                0,
+                R.drawable.ic_error,
+                0
+            )
+
+        } else {
+            binding.tvConfirmpasswordError.visibility = View.GONE
+            binding.tvPasswordError.visibility = View.GONE
+            binding.layoutConfirmpassword.setBackgroundResource(R.drawable.bg_edittext)
+            binding.confirmEtPassword.setCompoundDrawablesWithIntrinsicBounds(
+                null,
+                null,
+                null,
+                null
+            )
+            binding.layoutPassword.setBackgroundResource(R.drawable.bg_edittext)
+            binding.etPassword.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
+
         }
-            else if (password != confirmPassword) {
-                binding.tvConfirmpasswordError.text = getString(R.string.doesnotmatch)
-                binding.tvPasswordError.text = getString(R.string.doesnotmatch)
-                binding.tvConfirmpasswordError.visibility = View.VISIBLE
-                binding.layoutConfirmpassword.setBackgroundResource(R.drawable.bg_edittext_error)
-                binding.confirmEtPassword.setCompoundDrawablesWithIntrinsicBounds(
-                    0,
-                    0,
-                    R.drawable.ic_error,
-                    0
-                )
-                binding.layoutConfirmpassword.setBackgroundResource(R.drawable.bg_edittext_error)
-                binding.confirmEtPassword.setCompoundDrawablesWithIntrinsicBounds(
-                    0,
-                    0,
-                    R.drawable.ic_error,
-                    0
-                )
-
-            } else {
-                binding.tvConfirmpasswordError.visibility = View.GONE
-                binding.tvPasswordError.visibility = View.GONE
-                binding.layoutConfirmpassword.setBackgroundResource(R.drawable.bg_edittext)
-                binding.confirmEtPassword.setCompoundDrawablesWithIntrinsicBounds(
-                    null,
-                    null,
-                    null,
-                    null
-                )
-                binding.layoutPassword.setBackgroundResource(R.drawable.bg_edittext)
-                binding.etPassword.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
-
-            }
-         value=true
+        value = true
         return value
 
     }

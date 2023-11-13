@@ -6,5 +6,7 @@ data class GatesDetails(
     val gatesId:Int,
     val title:String,
     val description:String,
-    val image:String
+    val image:String,
+    val date:String,
+    val links:List<String>
 ):Serializable

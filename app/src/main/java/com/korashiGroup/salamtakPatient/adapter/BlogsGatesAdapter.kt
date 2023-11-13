@@ -26,15 +26,11 @@ class BlogsGatesAdapter(val details:Action ):ListAdapter<Blogs,BlogsGatesAdapter
             .load("https://salamtechapi.azurewebsites.net/${services.image}")
             .into(holder.binding.ivDoctorProfile)
 
-        holder.binding.apply {
-            //tvDoctorName.text=services.title
-           // tvDescription.text=services.description
-        }
-
         holder.binding.ivDoctorProfile.setOnClickListener {
-            val gatesDetails=GatesDetails(services.typeID,services.title,services.description,services.image)
+            val gatesDetails=GatesDetails(services.typeID,services.title,services.description,services.image,services.createdDate,services.links)
             details.onItemGatesClick(gatesDetails)
         }
+
 
     }
 

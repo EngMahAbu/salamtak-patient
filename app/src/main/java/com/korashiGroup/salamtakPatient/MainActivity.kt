@@ -82,10 +82,10 @@ class MainActivity : AppCompatActivity(), LoginFragment.onSomeEventListener {
     override fun someEvent(skipLogin: String?) {
         if (skipLogin == "skip") {
             binding.bottomViewNav.getMenu().getItem(1).setEnabled(false)
-            binding.bottomViewNav.getMenu().getItem(2).setEnabled(false)
+         //   binding.bottomViewNav.getMenu().getItem(2).setEnabled(false)
         } else {
             binding.bottomViewNav.getMenu().getItem(1).setEnabled(true)
-            binding.bottomViewNav.getMenu().getItem(2).setEnabled(true)
+           // binding.bottomViewNav.getMenu().getItem(2).setEnabled(true)
         }
     }
 

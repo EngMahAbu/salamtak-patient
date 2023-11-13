@@ -381,6 +381,8 @@
         />
         <action android:id="@+id/action_healthyTopicsFragment_to_gatesDetailsFragment"
                 app:destination="@id/gatesDetailsFragment"/>
+        <action android:id="@+id/action_healthyTopicsFragment_to_dialogBottomSheetFragment"
+                app:destination="@id/dialogBottomSheetFragment"/>
     </fragment>
     <fragment
             android:id="@+id/videoCallFragment"
@@ -463,6 +465,13 @@
                   app:argType="com.korashiGroup.salamtakPatient.model.salamtakgate.GatesDetails" app:nullable="true"/>
         <action android:id="@+id/action_gatesDetailsFragment_to_healthyTopicsFragment"
                 app:destination="@id/healthyTopicsFragment"/>
+        <action android:id="@+id/action_gatesDetailsFragment_to_referenceFragment"
+                app:destination="@id/referenceFragment"/>
+    </fragment>
+    <fragment android:id="@+id/referenceFragment"
+              android:name="com.korashiGroup.salamtakPatient.fragment.webView.ReferenceFragment"
+              android:label="referencefragmen" tools:layout="@layout/referencefragmen">
+        <argument android:name="link" app:argType="string" app:nullable="true"/>
     </fragment>
 
 </navigation>

@@ -30,5 +30,7 @@ data class Blogs(
     @SerializedName("Title")
     val title: String,
     @SerializedName("TypeID")
-    val typeID: Int
+    val typeID: Int,
+    @SerializedName("Links")
+    val links: List<String>,
 )

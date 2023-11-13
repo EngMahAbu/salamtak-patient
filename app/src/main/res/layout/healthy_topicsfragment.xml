@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -10,7 +10,97 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         tools:context=".fragment.healthy.HealthyTopicsFragment">
 
-    <com.google.android.material.imageview.ShapeableImageView
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/bg_help"
+                android:padding="8dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_help"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/avenirltstd_roman"
+                    android:text="@string/filter"
+                    android:textColor="#616161"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/iv_filter"
+                    android:layout_width="15dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/icon_filter"
+                    app:layout_constraintEnd_toStartOf="@+id/tv_help"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_salamtakAngel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="15dp"
+                android:padding="3dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_arrow">
+
+            <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_emergencies"
+                    android:layout_width="0dp"
+                    android:layout_height="55dp"
+                    android:layout_marginStart="15dp"
+                    android:background="@drawable/bg_button_sellector"
+                    android:fontFamily="@font/avenirltstd_roman"
+                    android:text="@string/emergencies"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textAllCaps="false"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_QandA"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_QandA"
+                    android:layout_width="0dp"
+                    android:layout_height="55dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/bg_help"
+                    android:fontFamily="@font/avenirltstd_roman"
+                    android:text="@string/qanda"
+                    android:textColor="@color/blue"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/btn_emergencies"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iv_arrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -21,18 +111,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
-    <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_Health"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/avenirltstd_black"
-            android:text="@string/salamtak_gates"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@+id/iv_arrow"
-            app:layout_constraintTop_toTopOf="parent"/>
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_Health"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/avenirltstd_black"
+                android:text="@string/salamtak_gates"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/iv_arrow"
+                app:layout_constraintTop_toTopOf="@+id/iv_arrow"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_arrow"/>
 
 
     <!--    <androidx.constraintlayout.widget.ConstraintLayout-->
@@ -172,6 +263,31 @@
             app:layout_constraintBottom_toBottomOf="parent"
             tools:listitem="@layout/item_layout_blogof_gates"
     />
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_Angles"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="15dp"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@+id/layout_salamtakAngel"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:listitem="@layout/item_layout_blogof_gates"
+    />
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="10dp"
+                android:orientation="vertical"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_Health"
+        />
     <ProgressBar
             android:id="@+id/progress_bar"
             android:layout_width="wrap_content"
@@ -194,5 +310,10 @@
               app:layout_constraintBottom_toBottomOf="parent"
               android:textSize="20sp"
               android:padding="30dp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <include
+            android:id="@+id/layoutBottomsheetpersistant"
+            layout="@layout/layout_bottomsheet_medicalservices"
+    />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

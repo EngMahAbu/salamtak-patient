@@ -96,12 +96,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
         android:fontFamily="@font/avenirltstd_black"
         android:text="@string/skip"
         android:textColor="@color/black"
         android:textSize="15sp"
-        app:layout_constraintStart_toStartOf="@+id/vp_container"
+        app:layout_constraintEnd_toEndOf="@+id/vp_container"
         app:layout_constraintTop_toTopOf="@+id/vp_container" />
 
 

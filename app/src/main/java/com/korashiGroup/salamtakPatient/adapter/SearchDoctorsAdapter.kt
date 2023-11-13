@@ -12,6 +12,7 @@ import com.dro.doctoronline_doctorapp.localDataBase.SharedPreferencesTool.getStr
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.databinding.ItemLayoutDoctorsBinding
 import com.korashiGroup.salamtakPatient.model.docotorsearch.Item
+import com.korashiGroup.salamtakPatient.utils.localization.DefaultLocaleHelper
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import okhttp3.internal.format
 import kotlin.math.roundToInt
@@ -31,7 +32,12 @@ class SearchDoctorsAdapter(private val booking: Booking) :
         val services = getItem(position)
 
         holder.binding.apply {
-            tvDoctorName.text = services.doctorName
+            if (DefaultLocaleHelper.getInstance(this.tvDoctorName.context).getCurrentLocale()=="en"){
+                tvDoctorName.text = "Dr.${services.doctorName}"
+            }else{
+                tvDoctorName.text = "دكتور.${services.doctorName}"
+            }
+
             tvSpecialization.text = "${services.specialistName} - ${services.seniortyLevelName}"
 
             services.subSpecialistName?.forEach {

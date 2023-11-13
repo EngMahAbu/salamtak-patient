@@ -5,16 +5,27 @@
         android:layout_height="wrap_content"
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+
+    >
+
     <CheckBox
             android:id="@+id/ch_examinationtype"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:buttonTint="@color/color_primary"
             android:elevation="1dp"
+            android:paddingStart="@dimen/_25sdp"
             android:fontFamily="@font/avenirltstd_black"
             android:minWidth="48dp"
             android:minHeight="0dp"
+            android:text="55555555555555555555555555555"
             android:textColor="@color/black"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"/>
@@ -24,16 +35,17 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginEnd="15dp"
-            android:background="@drawable/bg_circle"
+            android:layout_marginStart="@dimen/_25sdp"
+            android:background="@drawable/bg_circlemove"
             app:layout_constraintBottom_toBottomOf="@+id/ch_examinationtype"
-            app:layout_constraintStart_toEndOf="@+id/ch_examinationtype"
+            app:layout_constraintStart_toStartOf="@+id/ch_examinationtype"
             app:layout_constraintTop_toTopOf="@+id/ch_examinationtype"
     >
 
         <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/ivExaminationtype"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:adjustViewBounds="true"
                 android:src="@drawable/ic_doctors"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -49,6 +61,7 @@
             android:fontFamily="@font/avenirltstd_roman"
             android:gravity="start"
             android:padding="3dp"
+            android:visibility="gone"
             android:text="@string/Clinic_Booking"
             android:textColor="@color/gray"
             android:textSize="16sp"
@@ -56,4 +69,5 @@
             app:layout_constraintTop_toTopOf="@+id/iv_examination"
             app:layout_constraintBottom_toBottomOf="@+id/iv_examination"
     />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

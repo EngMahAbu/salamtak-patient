@@ -114,7 +114,6 @@ class HealthEntityFragment : Fragment(),MedicalHealthAdapter.Action {
 
         }
 
-
         binding.layoutBottomsheetpersistant.btnApply.setOnClickListener {
             viewmodel.healthEntityPage=0
             viewmodel.getHealthEntityPagedList(cityId,areaId,args.healthtype,100,0)
@@ -128,7 +127,6 @@ class HealthEntityFragment : Fragment(),MedicalHealthAdapter.Action {
         }
 
         binding.layoutBottomsheetpersistant.btnLayoutChooseCity.setOnClickListener {
-
             val action=HealthEntityFragmentDirections.actionHealthEntityFragmentToDialogBottomSheetFragment("AllCity")
             findNavController().navigate(action)
             it.isEnabled=false
@@ -138,7 +136,6 @@ class HealthEntityFragment : Fragment(),MedicalHealthAdapter.Action {
         }
 
         binding.layoutBottomsheetpersistant.btnLayoutChooseArea.setOnClickListener {
-
             val action=HealthEntityFragmentDirections.actionHealthEntityFragmentToDialogBottomSheetFragment("AllArea")
             findNavController().navigate(action)
             it.isEnabled=false

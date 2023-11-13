@@ -139,54 +139,6 @@ class LoginFragment : Fragment() {
 
         }
 
-
-        binding.etPassword.doOnTextChanged { text, start, before, count ->
-            if (binding.etPassword.text?.trim()!!.isEmpty()) {
-                binding.tvPasswordError.text = getString(R.string.required)
-                binding.tvPasswordError.visibility = View.VISIBLE
-                binding.layoutPassword.setBackgroundResource(R.drawable.bg_edittext_error)
-                binding.etPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
-
-            } else if (binding.etPassword.text?.length!! < 6) {
-                binding.tvPasswordError.text = getString(R.string.lesstthan6number)
-                binding.tvPasswordError.visibility = View.VISIBLE
-                binding.layoutPassword.setBackgroundResource(R.drawable.bg_edittext_error)
-                binding.etPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
-
-            } else {
-                binding.tvPasswordError.visibility = View.GONE
-                binding.layoutPassword.setBackgroundResource(R.drawable.bg_edittext)
-                binding.etPassword.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
-
-            }
-
-        }
-        binding.etMobile.doOnTextChanged { text, start, before, count ->
-            if (binding.etMobile.text?.trim().isNullOrEmpty()) {
-
-                binding.etMobile.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
-                binding.textinputMobile.setBackgroundResource(R.drawable.bg_edittext_error)
-                binding.tvFullNameError.text = getString(R.string.required)
-                binding.tvFullNameError.visibility = View.VISIBLE
-
-            } else  if(binding.etMobile.text?.length!!<11){
-                binding.etMobile.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
-                binding.textinputMobile.setBackgroundResource(R.drawable.bg_edittext_error)
-                binding.tvFullNameError.text = getString(R.string.phonedigits)
-                binding.tvFullNameError.visibility = View.VISIBLE
-            }
-            else {
-                binding.textinputMobile.error = null
-                binding.tvFullNameError.visibility = View.GONE
-                binding.textinputMobile.setBackgroundResource(R.drawable.bg_edittext)
-                binding.etMobile.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
-
-
-            }
-
-        }
-
-
     }
 
     private fun isvalidateFeilds(mobile: String, password: String): Boolean {

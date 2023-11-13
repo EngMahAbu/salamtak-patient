@@ -1,14 +1,18 @@
 package com.korashiGroup.salamtakPatient.adapter
 
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.CompoundButton
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.CircleCropTransformation
+import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.databinding.ItemLayoutSpecialictyBinding
 import com.korashiGroup.salamtakPatient.databinding.ItemLayoutSpecialistBinding
 import com.korashiGroup.salamtakPatient.model.SpecialistData
@@ -28,7 +32,7 @@ class SpecialistAdapter(private val select:SelectSpecialist):ListAdapter<Special
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val sp=getItem(position)
 
-        holder.binding.tvExaminationtype.text=sp.name
+        holder.binding.chExaminationtype.text=sp.name
         holder.binding.ivExaminationtype.load("https://salamtechapi.azurewebsites.net/${sp.image}") {
             crossfade(true)
             crossfade(1000)
@@ -43,8 +47,18 @@ class SpecialistAdapter(private val select:SelectSpecialist):ListAdapter<Special
             selectedPosition = holder.bindingAdapterPosition
             notifyDataSetChanged()
         }
+        holder.binding.chExaminationtype.setOnLongClickListener {
+            selectedPosition = holder.bindingAdapterPosition
+            notifyDataSetChanged()
+            holder.binding.layout.setBackgroundColor(getColor(holder.binding.tvExaminationtype.context,R.color.gray))
+            true
+        }
 
         holder.binding.chExaminationtype.isChecked = selectedPosition == position
+
+        if (selectedPosition == position) {
+        } else {
+        }
 
     }
 

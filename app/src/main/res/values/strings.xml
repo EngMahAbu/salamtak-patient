@@ -15,17 +15,17 @@
     <string name="salamtakhomebooking">Salamtak Home Visit</string>
     <string name="salamtakconnect">Salamtak Connect</string>
     <string name="choose">Confirm</string>
-    <string name="login">Login</string>
+    <string name="login">Log in</string>
     <string name="help">Help</string>
     <string name="next">Next</string>
     <string name="lets_start">Get Started</string>
     <string name="mobile_number">Phone Number</string>
     <string name="password">Password</string>
-    <string name="forgetpasword">Forget Password ?</string>
+    <string name="forgetpasword">Forget password?</string>
     <string name="egypt">Egypt</string>
     <string name="doyothaveacount">Don\'t have an acount?</string>
-    <string name="signup">Sign up</string>
-    <string name="forsupportcallus">For Support Call Us</string>
+    <string name="signup">Signup</string>
+    <string name="forsupportcallus">For support call us</string>
     <string name="callnumber">17143</string>
     <string name="mobile_number_email">Phone Number or Email</string>
     <string name="send">Send</string>
@@ -36,7 +36,7 @@
     <string name="new_password">New Password</string>
     <string name="confirm_new_password">Confirm Password</string>
     <string name="save">Save</string>
-    <string name="sign_up">Sign up</string>
+    <string name="sign_up">Signup</string>
     <string name="upload_your_photo">Upload your photo</string>
     <string name="full_name_in_english_first_middle_last">Full Name in English (first - middle - last)</string>
     <string name="full_name_in_arabic_first_middle_last">Full Name in Arabic (first - middle - last)</string>
@@ -115,7 +115,7 @@
     <string name="Chat">Chat</string>
     <string name="Call">Call</string>
     <string name="Video_Call">Video Call</string>
-    <string name="medical_services_directory">Salamtak</string>
+    <string name="medical_services_directory">Salamtak Guide</string>
     <string name="see_all">See All</string>
     <string name="hospitals">Hospitals</string>
     <string name="polyclinics">Polyclinics</string>
@@ -133,7 +133,7 @@
     <string name="reviews">Reviews</string>
     <string name="next_available_booking_at_08_nov_from_06_30_pm">Next Available Booking at 08 Nov. from 06:30 PM
     </string>
-    <string name="sub_specialization">Sub specialization</string>
+    <string name="sub_specialization">Sub speciality</string>
     <string name="book_now">Book Now</string>
     <string name="osama">Osama</string>
     <string name="said">Said</string>
@@ -142,11 +142,11 @@
     <string name="upcoming">Upcoming</string>
     <string name="canceled">Canceled</string>
     <string name="finished">Completed</string>
-    <string name="address">Address</string>
+    <string name="address">Location</string>
     <string name="waiting_time">Waiting Time</string>
     <string name="fees">Fees</string>
     <string name="reset">Reset</string>
-    <string name="specialization">Specialist</string>
+    <string name="specialization">Speciality</string>
     <string name="choose_specialization">Choose Speciality</string>
     <string name="choose_sub_specialization">Choose sub Speciality</string>
     <string name="choose_Seniority_Level">Choose Seniority Level</string>
@@ -210,11 +210,11 @@
     <string name="choose_clinic">Choose Clinic</string>
     <string name="choose_service">Choose Service</string>
     <string name="examination_type">Services</string>
-    <string name="date_time">Date / Time</string>
+    <string name="date_time">Date Time</string>
     <string name="more_actions">More Actions</string>
     <string name="edit_appointment">Edit Appointment</string>
-    <string name="cancelappointment">CancelAppointment</string>
-    <string name="are_you_sure_you_want_to_cancel_this_appointment">Are you sure you want to cancel this appointment
+    <string name="cancelappointment">Cancel Appointment</string>
+    <string name="are_you_sure_you_want_to_cancel_this_appointment">To Edit your appointment we have to cancel this one
     </string>
     <string name="reschedule">No</string>
     <string name="re_booking_appointment">Re-Booking Appointment</string>
@@ -230,7 +230,7 @@
     <string name="spotlight">Spotlight</string>
     <string name="good_morning">Good Morning</string>
     <string name="good_evening">Good Evening</string>
-    <string name="afternoon">Good afternoon</string>
+    <string name="afternoon">Good Afternoon</string>
     <string name="verified">Verified</string>
     <string name="invalid_code">Invalid Code</string>
     <string name="le">LE</string>
@@ -238,9 +238,9 @@
     <string name="there_is_no_appointment_available">There Is No Appointment Available</string>
     <string name="login_success">you Are login Successfully</string>
     <string name="choose_language">Choose language</string>
-    <string name="agree_to">By signing up you agree To Salamtak\'s</string>
+    <string name="agree_to">By signing up you agree to Salamtak\'s</string>
     <string name="Enter_mobile_or_email">Enter mobile or email</string>
-    <string name="enter_your_email_we_will_send_you_code_to_reset_the_password">Enter your email we will send you code
+    <string name="enter_your_email_we_will_send_you_code_to_reset_the_password">and we will send you a code
         to reset the password
     </string>
     <string name="gotohome">Go To Home</string>
@@ -254,7 +254,7 @@
     <string name="update">Update</string>
     <string name="salamtak_gates">Salamtak Gate</string>
     <string name="skip_login_explore_our_features">Skip Login,Explore our features</string>
-    <string name="you_must_sign_up_to_book_your_doctor">You must Sign Up to book your doctor</string>
+    <string name="you_must_sign_up_to_book_your_doctor">Please Sign up to book your doctor</string>
     <string name="no_data_to_show">No data to show</string>
     <string name="have_amedicalquestion">Salamtak Help</string>
     <string name="ask_a_doctor_for_free_and_get_response_in_24_hours">Get professional medical answers to all your
@@ -286,7 +286,7 @@
     <string name="thereisnolocatio">There is no location</string>
     <string name="description">Description :</string>
     <string name="title">TiTle :</string>
-    <string name="signupedit">Please Sign Up to book your doctor</string>
+    <string name="signupedit">Please Sign up to book your doctor</string>
     <string name="me">For Me</string>
     <string name="anotherpatient">For Someone else</string>
     <string name="qanda"><![CDATA[Q&A]]></string>
@@ -311,6 +311,15 @@
     <string name="schedule">Schedule</string>
     <string name="questionanswer">Question owner</string>
     <string name="insurance_company_required">Insurance company required</string>
+    <string name="referencelinks">Reference Links</string>
+    <string name="salamtaktrueorfalse">Salamtak True Or False</string>
+    <string name="salamtak_care">Salamtak Care</string>
+    <string name="salamatak_scoope">Salamatak Scope</string>
+    <string name="salamatk_cap">Salamatk Cap</string>
+    <string name="salamtak_promotions">Salamtak Promotions</string>
+    <string name="salamtak_angle">Salamtak Angle</string>
+    <string name="enter_your_registered">Enter your registered</string>
+    <string name="or">or</string>
 
     <array name="choose">
         <item>Select</item>

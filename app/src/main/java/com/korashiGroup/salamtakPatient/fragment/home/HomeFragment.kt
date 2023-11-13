@@ -111,11 +111,11 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
         }
 
         binding.askQuestion.setOnClickListener {
-//            if (skip=="skip"){
-//               return@setOnClickListener
-//            }else {
+            if (DateUtils.getToken().isNullOrEmpty()){
+                findNavController().navigate(R.id.dialogSignUp)
+            }else {
                 findNavController().navigate(R.id.askDoctorFragment)
-         //   }
+          }
         }
         binding.layoutSignup.setOnClickListener {
             findNavController().navigate(R.id.signupFragment)
@@ -465,7 +465,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
 
     override fun onItemClick(healthEntityTypeId: Int, healthName: String) {
         if (DateUtils.getToken().isNullOrEmpty()){
-            return
+            findNavController().navigate(R.id.dialogSignUp)
         }else {
             val action =
                 HomeFragmentDirections.actionHomeFragmentToHealthEntityFragment(

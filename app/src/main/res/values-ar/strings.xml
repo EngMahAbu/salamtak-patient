@@ -121,20 +121,20 @@
     <string name="osama">Osama</string>
     <string name="said">Said</string>
     <string name="click_here_to_edit_your_profile">اضغط هنا لتعديل ملفك الشخصي</string>
-    <string name="filter">فلتر</string>
+    <string name="filter">الفلتر</string>
     <string name="upcoming">القادمة</string>
     <string name="canceled">ألغيت</string>
     <string name="finished">منتهية</string>
     <string name="address">العنوان</string>
     <string name="waiting_time">وقت الانتظار</string>
-    <string name="fees">مصاريف</string>
-    <string name="reset">إعادة ضبط</string>
+    <string name="fees">رسوم</string>
+    <string name="reset">مسح</string>
     <string name="specialization">تخصص</string>
     <string name="choose_specialization">اختر التخصص</string>
     <string name="choose_sub_specialization">اختر التخصص الفرعي</string>
     <string name="choose_Seniority_Level">اختر مستوى الأقدمية</string>
-    <string name="choose_city">اختر المدينة</string>
-    <string name="choose_area">اختر المنطقة</string>
+    <string name="choose_city">اختار المدينة</string>
+    <string name="choose_area">اختار المنطقة</string>
     <string name="to">الى</string>
     <string name="egp">جنيه</string>
     <string name="from">من</string>
@@ -236,8 +236,7 @@
     <string name="you_must_sign_up_to_book_your_doctor">يجب عليك التسجيل لحجز طبيبك</string>
     <string name="no_data_to_show">لا يوجد بيانات </string>
     <string name="have_amedicalquestion">هل لديك سؤال طبى؟</string>
-    <string name="ask_a_doctor_for_free_and_get_response_in_24_hours">اسأل الطبيب مجانًا واحصل على الرد خلال 24
-        ساعة
+    <string name="ask_a_doctor_for_free_and_get_response_in_24_hours">احصل على اجابات طبية احترافية لجميع اسئلتك
     </string>
     <string name="ask_now">أسأل الأن </string>
     <string name="your_question">سؤالك</string>
@@ -288,6 +287,14 @@
     <string name="schedule">الجدول</string>
     <string name="questionanswer">Question answer</string>
     <string name="insurance_company_required">مطلوب شركة تأمين</string>
+    <string name="referencelinks">Reference Links</string>
+    <string name="salamtak_care">Salamtak Care</string>
+    <string name="salamatak_scoope">Salamatak Scoope</string>
+    <string name="salamatk_cap">Salamatk Cap</string>
+    <string name="salamtak_promotions">Salamtak Promotions</string>
+    <string name="salamtak_angle">Salamtak Angle</string>
+    <string name="enter_your_registered">Enter your registered</string>
+    <string name="or">or</string>
 
     <array name="choose">
         <item>اختار</item>

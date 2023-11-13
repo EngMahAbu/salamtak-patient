@@ -14,5 +14,13 @@ object Constans {
     const val TOKEN = "TOKEN"
     const val Query_Page_Size = 10
 
+    const val SalamtakGateTrueOrF=1
+    const val SalamtakGateScoope=2
+    const val SalamtakGateCare=3
+    const val SalamtakGateCap=4
+    const val SalamtakGatePromotions=5
+    const val SalamtakGateAngleICO=6
+
+
 
 }

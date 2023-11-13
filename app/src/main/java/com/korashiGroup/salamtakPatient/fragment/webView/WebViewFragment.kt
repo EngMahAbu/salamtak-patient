@@ -1,4 +1,5 @@
 package com.korashiGroup.salamtakPatient.fragment.webView
+
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -6,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebViewClient
 import com.korashiGroup.salamtakPatient.databinding.FragmentWebViewBinding
+import com.korashiGroup.salamtakPatient.utils.localization.DefaultLocaleHelper
 
 class WebViewFragment : Fragment() {
 
@@ -28,14 +30,21 @@ class WebViewFragment : Fragment() {
     }
 
     private fun initview() {
-
-        binding.webview.apply {
-
-            webViewClient = WebViewClient()
-            loadUrl("https://doctor.salamtakgroup.com/terms")
-            settings.javaScriptEnabled = true
-            settings.domStorageEnabled = true
-
+        if (DefaultLocaleHelper.getInstance(requireContext()).getCurrentLocale() == "en") {
+            createLink("https://salamtakgroup.com/Terms.html")
+        } else {
+            createLink("https://salamtakgroup.com/TermsAr.html")
         }
     }
+
+    private fun createLink(link: String) {
+        binding.webview.apply {
+            webViewClient = WebViewClient()
+            loadUrl(link)
+            settings.javaScriptEnabled = true
+            settings.domStorageEnabled = true
+        }
+
+    }
+
 }

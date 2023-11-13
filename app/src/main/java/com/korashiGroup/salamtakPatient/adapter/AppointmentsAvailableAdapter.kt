@@ -83,9 +83,6 @@ class AppointmentsAvailableAdapter(private val selecttime: Action) :
             }
         }
 
-
-
-
     }
 
 
