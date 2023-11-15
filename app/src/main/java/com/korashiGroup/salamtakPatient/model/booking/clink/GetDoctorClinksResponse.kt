@@ -113,5 +113,7 @@ data class ClinicDto(
     @SerializedName("Name")
     val name: String?,
     @SerializedName("Phone")
-    val phone: String?
+    val phone: String?,
+    @SerializedName("Services")
+    val services: List<String>
 ): Serializable

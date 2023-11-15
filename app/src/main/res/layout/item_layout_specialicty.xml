@@ -36,7 +36,6 @@
             android:layout_height="24dp"
             android:layout_marginEnd="15dp"
             android:layout_marginStart="@dimen/_25sdp"
-            android:background="@drawable/bg_circlemove"
             app:layout_constraintBottom_toBottomOf="@+id/ch_examinationtype"
             app:layout_constraintStart_toStartOf="@+id/ch_examinationtype"
             app:layout_constraintTop_toTopOf="@+id/ch_examinationtype"
@@ -44,8 +43,8 @@
 
         <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/ivExaminationtype"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:adjustViewBounds="true"
                 android:src="@drawable/ic_doctors"
                 app:layout_constraintBottom_toBottomOf="parent"

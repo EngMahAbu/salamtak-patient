@@ -43,7 +43,7 @@ class ChooseClinksDoctorsAdapter(private val book: Booking) :
 
         holder.itemView.setOnClickListener {
             selectedItemPosition = holder.bindingAdapterPosition
-            services.clinicId?.let { it1 -> services.name?.let { it2 -> book.onItemClick(it1, it2) } }
+            services.clinicId?.let { it1 -> services.name?.let { it2 -> book.onItemClick(it1, it2,services.services) } }
             notifyDataSetChanged()
         }
         if (selectedItemPosition == position) {
@@ -79,6 +79,6 @@ class ChooseClinksDoctorsAdapter(private val book: Booking) :
     }
 
     interface Booking {
-        fun onItemClick(clinkid: Int,clinkname:String)
+        fun onItemClick(clinkid: Int,clinkname:String,list: List<String>)
     }
 }

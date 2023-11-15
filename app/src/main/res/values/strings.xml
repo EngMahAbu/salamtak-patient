@@ -320,6 +320,11 @@
     <string name="salamtak_angle">Salamtak Angle</string>
     <string name="enter_your_registered">Enter your registered</string>
     <string name="or">or</string>
+    <string name="addresss">Address</string>
+    <string name="clinicservices">Clinic Services</string>
+    <string name="avilableappointemnts">"Available "</string>
+    <string name="avilableapapointemnts">Available Appointments</string>
+    <string name="reservation_required_first_come_first_served">Reservation Required,first-come,first-served</string>
 
     <array name="choose">
         <item>Select</item>

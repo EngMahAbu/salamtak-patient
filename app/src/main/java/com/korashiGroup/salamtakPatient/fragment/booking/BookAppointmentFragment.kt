@@ -549,9 +549,10 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
         this.intervalTime = intervalTime
     }
 
-    override fun onItemClick(clinkid: Int, clinkname: String) {
+    override fun onItemClick(clinkid: Int, clinkname: String,list: List<String>) {
         this.clinicId = clinkid
         this.clinkname = clinkname
+        initClinkservices(list)
     }
 
     override fun onItemClick(date: Date) {
@@ -627,22 +628,36 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
         }
 
         name =if (DateUtils.getLanguage()=="en"){
-            "${args.doctorclinks.data?.firstName} ${args.doctorclinks.data?.middelName} ${args.doctorclinks.data?.lastName}"
+            "Dr.${args.doctorclinks.data?.firstName} ${args.doctorclinks.data?.middelName} ${args.doctorclinks.data?.lastName}"
 
         }else{
-            "${args.doctorclinks.data?.firstNameAr} ${args.doctorclinks.data?.middelNameAr} ${args.doctorclinks.data?.lastNameAr}"
+            "دكتور.${args.doctorclinks.data?.firstNameAr} ${args.doctorclinks.data?.middelNameAr} ${args.doctorclinks.data?.lastNameAr}"
+        }
+        val clincServices=args.doctorclinks?.data?.clinicDtos?.get(0)?.services
+        if (clincServices != null) {
+            initClinkservices(clincServices)
         }
         binding.tvDoctorName.text = name
         var subspecialist: String? = ""
         args.doctorclinks.data?.subSpecialistName?.forEach {
             subspecialist = "$subspecialist $it,"
         }
-        binding.tvSpecialization.text = "${subspecialist} - ${args.doctorclinks.data?.seniorityLevelName}"
+        binding.tvSpecialization.text = "${args.doctorclinks.data?.seniorityLevelName} ${subspecialist}"
 
         binding.ivDoctorProfile.load("https://salamtechapi.azurewebsites.net/${args.doctorclinks.data?.image}") {
             crossfade(true)
             crossfade(1000)
             transformations(CircleCropTransformation())
         }
+    }
+
+    private fun initClinkservices(list: List<String>){
+        var str=""
+        if (list != null) {
+            for (s in list){
+                str+=s
+            }
+        }
+        binding.AboutDoctor.text=str
     }
 }

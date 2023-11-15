@@ -249,7 +249,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
         )
         list.add(
             ImageServices(
-                R.drawable.ic_salamtak_angel,
+                R.drawable.ic_angle,
                 getString(R.string.engile),
                 R.color.white, 7
             )

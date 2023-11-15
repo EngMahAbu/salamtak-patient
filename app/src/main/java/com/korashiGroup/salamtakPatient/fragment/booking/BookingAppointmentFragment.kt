@@ -143,7 +143,7 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
                     it.data?.data?.subSpecialistName?.forEach {
                         subspecialist = "$subspecialist $it,"
                     }
-                    binding.tvSpecialization.text = "${subspecialist} - ${it.data?.data?.seniorityLevelName}"
+                    binding.tvSpecialization.text = "${it.data?.data?.seniorityLevelName} ${subspecialist}"
                     clinksDoctorsAdapter.submitList(it.data?.data?.clinicDtos)
                     clinksDoctorsAdapter.notifyDataSetChanged()
 
