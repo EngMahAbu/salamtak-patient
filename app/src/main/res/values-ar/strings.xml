@@ -139,7 +139,7 @@
     <string name="egp">جنيه</string>
     <string name="from">من</string>
     <string name="choose_seniority_level">اختر مستوى الأقدمية</string>
-    <string name="choose_gender">اختر النوع</string>
+    <string name="choose_gender">اختار النوع</string>
     <string name="apply">تطبيق</string>
     <string name="location">موقع</string>
     <string name="done">منتهي</string>
@@ -285,7 +285,7 @@
     <string name="all_reviews">المراجعات</string>
     <string name="lang">Arabic</string>
     <string name="schedule">الجدول</string>
-    <string name="questionanswer">Question answer</string>
+    <string name="questionanswer">السؤال المطروح؟</string>
     <string name="insurance_company_required">مطلوب شركة تأمين</string>
     <string name="referencelinks">Reference Links</string>
     <string name="salamtak_care">Salamtak Care</string>
