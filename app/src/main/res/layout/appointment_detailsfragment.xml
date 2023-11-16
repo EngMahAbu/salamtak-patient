@@ -83,7 +83,6 @@
                             android:fontFamily="@font/avenirltstd_roman"
                             android:gravity="start"
                             android:padding="3dp"
-                            android:text="Dr. Mohamed Farag Abdullatif"
                             android:textColor="@color/black"
                             android:textSize="15sp"
                             app:layout_constraintStart_toEndOf="@+id/iv_doctorProfile"
@@ -98,7 +97,6 @@
                             android:fontFamily="@font/avenirltstd_roman"
                             android:gravity="start"
                             android:padding="2dp"
-                            android:text="Genecology and Infertility"
                             android:textColor="@color/gray"
                             android:textSize="15sp"
                             app:layout_constraintStart_toEndOf="@+id/iv_doctorProfile"
@@ -111,6 +109,7 @@
                             android:layout_marginStart="10dp"
                             android:adjustViewBounds="true"
                             android:src="@drawable/ic_star"
+                            android:visibility="gone"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/iv_doctorProfile"
                             app:layout_constraintTop_toBottomOf="@+id/tv_Specialization"/>
@@ -124,6 +123,7 @@
                             android:gravity="start"
                             android:padding="2dp"
                             android:text="@string/reviews"
+                            android:visibility="gone"
                             android:textColor="@color/gray"
                             android:textSize="15sp"
                             app:layout_constraintStart_toEndOf="@+id/iv_star"
@@ -232,7 +232,6 @@
                                     android:fontFamily="@font/avenirltstd_black"
                                     android:gravity="start"
                                     android:padding="2dp"
-                                    android:text="08 Feb, 2022 (08:00PM)"
                                     android:textColor="@color/black"
                                     android:textSize="12sp"
                                     app:layout_constraintStart_toEndOf="@+id/layout_BookingDateTime"
@@ -284,7 +283,6 @@
                                     android:fontFamily="@font/avenirltstd_black"
                                     android:gravity="start"
                                     android:padding="2dp"
-                                    android:text="Video Call (30 min.)"
                                     android:textColor="@color/black"
                                     android:textSize="12sp"
                                     app:layout_constraintEnd_toEndOf="parent"
@@ -403,7 +401,6 @@
                                     android:fontFamily="@font/avenirltstd_black"
                                     android:gravity="start"
                                     android:padding="2dp"
-                                    android:text="350 LE"
                                     android:textColor="@color/black"
                                     android:textSize="12sp"
                                     app:layout_constraintEnd_toEndOf="parent"
@@ -498,13 +495,11 @@
                 android:layout_marginBottom="5dp"
                 android:adjustViewBounds="true"
                 android:background="@color/black"
-                android:contentDescription="TODO"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
     <include
             android:id="@+id/layoutBottomsheetpersistant"
             layout="@layout/layout_bottomsheet_bookwithinsurance"

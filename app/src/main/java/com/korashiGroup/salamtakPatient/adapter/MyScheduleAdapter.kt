@@ -13,6 +13,7 @@ import coil.transform.CircleCropTransformation
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.databinding.ItemLayoutScheduleBinding
 import com.korashiGroup.salamtakPatient.model.scheduling.DataAppointment
+import com.korashiGroup.salamtakPatient.utils.localization.DefaultLocaleHelper
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -30,7 +31,11 @@ class MyScheduleAdapter(private val schedule: ActionSchedule) :
         val services = getItem(position)
 
         holder.binding.apply {
-            tvDoctorName.text = services.doctorName
+            if (DefaultLocaleHelper.getInstance(this.tvDoctorName.context).getCurrentLocale()=="en"){
+                tvDoctorName.text = "Dr.${services.doctorName}"
+            }else{
+                tvDoctorName.text = "دكتور.${services.doctorName}"
+            }
             tvSpecialization.text = "${services.specialistName} - ${services.seniorityLevelName}"
             Service.text=services.medicalExaminationTypeName
             location.text = "${services.clinicAddress}عمارة رقم ${services.BlockNo}الدور رقم ${services.FloorNo} شقة رقم${services.ApartmentNo}"
