@@ -78,10 +78,6 @@ class ForgetPasswordFragment : Fragment() {
                 }
 
             }
-            it.isEnabled=false
-            Handler().postDelayed({
-                it.isEnabled=true
-            }, 2000)
 
         }
 
@@ -94,10 +90,12 @@ class ForgetPasswordFragment : Fragment() {
             when (it) {
                 is Resource.Loading -> {
                    showprogtessbar()
+                    binding.btnSend.isEnabled=false
                 }
 
                 is Resource.sucess -> {
                        hideprogressbar()
+                    binding.btnSend.isEnabled=true
                     it?.data?.let { response ->
                         val userForgetInfo=
                             response.data?.code?.let { it1 -> it.data.data?.userId?.let { it2 ->
@@ -110,6 +108,7 @@ class ForgetPasswordFragment : Fragment() {
                     }
                 }
                 is Resource.Error -> {
+                    binding.btnSend.isEnabled=true
                   hideprogressbar()
                     Toast.makeText(requireContext(),"${it.message}",Toast.LENGTH_SHORT).show()
                 }
