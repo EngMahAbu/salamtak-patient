@@ -78,6 +78,10 @@ class ForgetPasswordFragment : Fragment() {
                 }
 
             }
+            it.isEnabled=false
+            Handler().postDelayed({
+                it.isEnabled=true
+            }, 2000)
 
         }
 

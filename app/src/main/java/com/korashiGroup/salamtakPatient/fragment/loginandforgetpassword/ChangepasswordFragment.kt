@@ -151,14 +151,14 @@ class ChangepasswordFragment : Fragment() {
             binding.etOldpassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
             return false
         }
-//        else if (password.length < 6) {
-//            binding.textinputPassword.error = "passwored should > 6 "
-//            binding.tvPasswordError.visibility = View.VISIBLE
-//            binding.tvPasswordError.text = getString(R.string.lesstthan6number)
-//            binding.layoutPassword.setBackgroundResource(R.drawable.bg_edittext_error)
-//            binding.etPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
-//            return false
-//        }
+        else if (password.length < 6) {
+            binding.textinputPassword.error = "passwored should > 6 "
+            binding.tvPasswordError.visibility = View.VISIBLE
+            binding.tvPasswordError.text = getString(R.string.lesstthan6number)
+            binding.layoutPassword.setBackgroundResource(R.drawable.bg_edittext_error)
+            binding.etPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
+            return false
+        }
         else {
             binding.textinputPassword.error = null
             binding.tvOldpasswordError.visibility = View.GONE

@@ -82,11 +82,13 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
             binding.layoutSignup.visibility=View.VISIBLE
             binding.ivNotification.visibility=View.GONE
             someEventListener?.someEvent("skip")
+            sharedDataViewmodel.getCity(CityData(1,"",1,false,"",""))
 
         }else {
             binding.layoutSignup.visibility=View.GONE
             binding.ivNotification.visibility=View.VISIBLE
             someEventListener?.someEvent("")
+            profileCallBack()
         }
         imageVideoAdapter = ImageVideoAdapter()
         servicesRecylerview()
@@ -97,7 +99,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
         medicalServices()
         callBack()
         initButton()
-        profileCallBack()
+
     }
 
     private fun initButton() {
