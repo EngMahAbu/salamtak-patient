@@ -245,7 +245,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                 feesFrom,
                 feesTo,
                 genderId,
-                100,
+                10,
                 examinationtypeid,
                 seniortyLevelId,
                 0,
@@ -271,7 +271,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         binding.rvDoctors.apply {
             adapter = searchDoctorsAdapter
             layoutManager = LinearLayoutManager(requireContext())
-            //addOnScrollListener(this@SearchFragment.scrollListener)
+            addOnScrollListener(this@SearchFragment.scrollListener)
         }
     }
 
@@ -419,13 +419,13 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                         searchDoctorsAdapter.submitList(it.data?.data?.items?.toList())
                         searchDoctorsAdapter.notifyDataSetChanged()
         //                updateUi(it.data?.data?.items as List<Item>)
-//                        val totalresult= (it.data.data.totalCount)?.div((10+2))
-//                        isLastPage = viewmodel.doctorSearchPage == totalresult
-//                        if (isLastPage){
-//                                binding.rvDoctors.setPadding(0,0,0,0)
-//                        }
+                        val totalresult= (it.data?.data?.totalCount)?.div((10+2))
+                        isLastPage = viewmodel.doctorSearchPage == totalresult
+                        if (isLastPage){
+                                binding.rvDoctors.setPadding(0,0,0,0)
+                        }
                         totalsDoctors= it.data?.data?.totalCount!!
-                        binding.tvCountofDoctors.text="${totalsDoctors.toString()}${getString(R.string.doctors_found)}"
+                        binding.tvCountofDoctors.text="${viewmodel.doctorSearchPage}${getString(R.string.doctors_found)}"
                     }
 
                 }
@@ -451,7 +451,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             feesFrom = 0,
             feesTo = 0,
             genderId,
-            40,
+           10,
             examinationtypeid,
             0,
             0,
@@ -544,7 +544,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             feesFrom = 0,
             feesTo = 0,
             genderId,
-            100,
+            viewmodel.doctorSearchPage,
             examinationtypeid,
             0,
             0,
@@ -745,7 +745,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                            feesFrom = 0,
                             feesTo,
                             genderId,
-                            100,
+                            viewmodel.doctorSearchPage,
                             examinationtypeid,
                             0,
                             0,
@@ -761,7 +761,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                             feesFrom = 0,
                             feesTo,
                             genderId,
-                            100,
+                            viewmodel.doctorSearchPage,
                             examinationtypeid,
                             0,
                             0,
@@ -836,10 +836,10 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                     feesFrom = 0,
                     feesTo,
                     genderId,
-                    120,
+                    viewmodel.doctorSearchPage,
                     examinationtypeid,
                     0,
-                    viewmodel.doctorSearchPage,
+                    0,
                     specialistId
                 )
                 viewmodel.searchDoctors(doctorssearchRequset)

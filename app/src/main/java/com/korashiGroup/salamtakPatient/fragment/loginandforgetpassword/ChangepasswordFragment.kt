@@ -120,43 +120,37 @@ class ChangepasswordFragment : Fragment() {
                 val password = binding.textinputPassword.editText?.text.toString()
                 val confirmPassword = binding.confirmtextinputPassword.editText?.text.toString()
 
-                if (isvalidateFeilds(password, confirmPassword)) {
                     if (args.userId != 0) {
-                        viewmodel.updatePassword(ResetChangePassword(password, args.userId))
+                        if (isvalidateForgetFeilds(password, confirmPassword)) {
+                            viewmodel.updatePassword(ResetChangePassword(password, args.userId))
+                        }
                     } else {
-                        viewmodel.changePassword(ChangePasswordRequest(binding.etOldpassword.text.toString(),password,
-                            sp.getUser()?.id
-                        ))
+                        if (isvalidateChangeFeilds(password, confirmPassword)) {
+                            viewmodel.changePassword(
+                                ChangePasswordRequest(
+                                    binding.etOldpassword.text.toString(), password,
+                                    sp.getUser()?.id
+                                )
+                            )
+                        }
                     }
-
-
-                } else {
-                  //  Toast.makeText(requireContext(), " not match", Toast.LENGTH_SHORT).show()
-                }
-
             }
-
-
     }
-
-
-    private fun isvalidateFeilds(password: String, confirmPassword: String): Boolean {
+    private fun isvalidateChangeFeilds(password: String, confirmPassword: String): Boolean {
 
 
         if (binding.etOldpassword.text?.trim()!!.isEmpty()) {
-            binding.textinputPassword.error = "no *"
             binding.tvOldpasswordError.visibility = View.VISIBLE
             binding.tvOldpasswordError.text = getString(R.string.required)
             binding.layoutOldPassword.setBackgroundResource(R.drawable.bg_edittext_error)
             binding.etOldpassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
             return false
         }
-        else if (password.length < 6) {
-            binding.textinputPassword.error = "passwored should > 6 "
-            binding.tvPasswordError.visibility = View.VISIBLE
-            binding.tvPasswordError.text = getString(R.string.lesstthan6number)
-            binding.layoutPassword.setBackgroundResource(R.drawable.bg_edittext_error)
-            binding.etPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
+        else if (binding.etOldpassword.text?.length!! < 6) {
+            binding.tvOldpasswordError.visibility = View.VISIBLE
+            binding.tvOldpasswordError.text = getString(R.string.lesstthan6number)
+            binding.layoutOldPassword.setBackgroundResource(R.drawable.bg_edittext_error)
+            binding.etOldpassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
             return false
         }
         else {
@@ -167,6 +161,58 @@ class ChangepasswordFragment : Fragment() {
         }
 
 
+
+        if (password.trim().isEmpty()) {
+            binding.tvPasswordError.visibility = View.VISIBLE
+            binding.tvPasswordError.text = getString(R.string.required)
+            binding.layoutPassword.setBackgroundResource(R.drawable.bg_edittext_error)
+            binding.etPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
+            return false
+        } else if (password.length < 6) {
+            binding.tvPasswordError.visibility = View.VISIBLE
+            binding.tvPasswordError.text = getString(R.string.lesstthan6number)
+            binding.layoutPassword.setBackgroundResource(R.drawable.bg_edittext_error)
+            binding.etPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
+            return false
+        } else {
+            binding.textinputPassword.error = null
+            binding.tvPasswordError.visibility = View.GONE
+            binding.layoutPassword.setBackgroundResource(R.drawable.bg_edittext)
+            binding.etPassword.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
+        }
+
+        if (confirmPassword.trim().isEmpty()) {
+            binding.tvConfirmpasswordError.text = getString(R.string.required)
+            binding.tvConfirmpasswordError.visibility = View.VISIBLE
+            binding.layoutConfirmpassword.setBackgroundResource(R.drawable.bg_edittext_error)
+            binding.confirmEtPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
+            return false
+        }
+//        else if (confirmPassword.length < 6) {
+//            binding.confirmtextinputPassword.error = "passwored should be > 6 "
+//            binding.layoutConfirmpassword.setBackgroundResource(R.drawable.bg_edittext_error)
+//            binding.confirmEtPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
+//            return false
+//        }
+        else if (!confirmPassword.equals(password)) {
+            binding.tvConfirmpasswordError.text = getString(R.string.doesnotmatch)
+            binding.tvPasswordError.text = getString(R.string.doesnotmatch)
+            binding.tvConfirmpasswordError.visibility = View.VISIBLE
+            binding.layoutConfirmpassword.setBackgroundResource(R.drawable.bg_edittext_error)
+            binding.confirmEtPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
+            binding.layoutPassword.setBackgroundResource(R.drawable.bg_edittext_error)
+            binding.etPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
+            return false
+        }
+        else {
+            binding.confirmtextinputPassword.error = null
+            binding.layoutConfirmpassword.setBackgroundResource(R.drawable.bg_edittext)
+            binding.confirmEtPassword.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
+            binding.tvConfirmpasswordError.visibility = View.GONE
+        }
+        return true
+    }
+    private fun isvalidateForgetFeilds(password: String, confirmPassword: String): Boolean {
 
         if (password.trim().isEmpty()) {
             binding.textinputPassword.error = "no *"
@@ -229,7 +275,6 @@ class ChangepasswordFragment : Fragment() {
 
     }
 
-
     private fun callBack(){
 
         viewmodel.updatePasswordesponse.observe(viewLifecycleOwner, Observer {
@@ -248,13 +293,9 @@ class ChangepasswordFragment : Fragment() {
                     binding.progressBar.visibility=View.GONE
                     Toast.makeText(requireContext(),"${it.message}",Toast.LENGTH_SHORT).show()
                 }
-
             }
         })
-
     }
-
-
     private fun callbackChangePassord(){
         viewmodel.changePasswordesponse.observe(viewLifecycleOwner, Observer {
             when (it) {
@@ -272,7 +313,6 @@ class ChangepasswordFragment : Fragment() {
                     binding.progressBar.visibility=View.GONE
                     Toast.makeText(requireContext(),"${it.message}",Toast.LENGTH_SHORT).show()
                 }
-
             }
         })
     }

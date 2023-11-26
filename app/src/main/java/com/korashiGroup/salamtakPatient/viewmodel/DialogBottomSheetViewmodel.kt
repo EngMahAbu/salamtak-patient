@@ -40,7 +40,7 @@ class DialogBottomSheetViewmodel @Inject constructor(private val repositry: Regi
 
     var doctorSearchPage=0
     private var doctorSearchItemResponse:DoctorsearchItemResponse?=null
-    var healthEntityPage=0
+    var healthEntityPage=1
     var healthEntityResponse:GetHealthEntityResponse?=null
     val nationalityResponse=MutableLiveData<Resource<GetCountry>>()
     val specialistResponse=MutableLiveData<Resource<GetSpecialistResponse>>()
@@ -227,17 +227,17 @@ class DialogBottomSheetViewmodel @Inject constructor(private val repositry: Regi
                 doctorSearchPage+=10
                 if (doctorSearchItemResponse==null){
                     doctorSearchItemResponse=it
-                }else{
-                    val oldItems=doctorSearchItemResponse?.data?.items
-                    val newItems=it.data?.items
+                }else {
+                    val oldItems = doctorSearchItemResponse?.data?.items
+                    val newItems = it.data?.items
                     if (newItems != null) {
                         oldItems?.addAll(newItems)
                     }
                 }
-
-                return Resource.sucess(it)
+                return Resource.sucess(doctorSearchItemResponse?:it)
             }
         }
+   //    val error = Gson().fromJson<DoctorsearchItemResponse>(response.errorBody()!!.string(), DoctorsearchItemResponse::class.java)
         return Resource.Error(response.message())
 
     }
