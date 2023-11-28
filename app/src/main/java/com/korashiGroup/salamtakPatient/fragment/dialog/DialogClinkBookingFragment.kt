@@ -23,6 +23,7 @@ import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.korashiGroup.salamtakPatient.utils.DateUtils.convertLongToDate
+import com.korashiGroup.salamtakPatient.utils.localization.DefaultLocaleHelper
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.time.Duration
@@ -135,8 +136,13 @@ class DialogClinkBookingFragment : BottomSheetDialogFragment(),
 
                 is Resource.sucess -> {
                     hideprogressbar()
+                    val name=if(DefaultLocaleHelper.getInstance(requireContext()).getCurrentLocale()=="ar"){
+                        "دكتور.${it.data?.data?.doctorDto?.fullNameAr}"
+                    }else{
+                        "Dr.${it.data?.data?.doctorDto?.fullName}"
+                    }
                     val appointmentDetailBooking= args.appointmentrequest.DoctorId?.let { it1 ->
-                        AppointmentDetailBooking(it.data?.data?.doctorName,
+                        AppointmentDetailBooking(name,
                             it1,formattedDate,intervalTime,doctorWorkingDayTimeId,fees,medicalExaminationTypeName,it.data?.data?.doctorDto?.specialistName,args.appointmentrequest.image,null)
                     }
                    val action=DialogClinkBookingFragmentDirections.actionDialogClinkBookingFragmentToAppointmentDetailsFragment(appointmentDetailBooking

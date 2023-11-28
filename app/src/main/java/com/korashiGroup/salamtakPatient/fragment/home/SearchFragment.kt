@@ -64,7 +64,6 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
     var specialistId = 0
     var doctorId = 0
     var dayId = 0
-    var feesTo = 0
     var seniortyLevelId = 0
     var examinationtypeid = 0
     var cityId = 0
@@ -78,7 +77,8 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
     val sharedDataViewmodel: SharedDataViewmodel by activityViewModels()
     val viewmodel: DialogBottomSheetViewmodel by viewModels()
     var totalsDoctors=0
-
+    private var feesFrom = 0
+    private var feesTo = 0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -119,6 +119,10 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
     }
 
     private fun initButton() {
+
+        binding.layoutBottomsheetpersistant.filterBottomsheet.setOnClickListener {
+            return@setOnClickListener
+        }
 
         binding.layoutBottomsheetpersistant.tvRESET.setOnClickListener {
             reset()
@@ -222,8 +226,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         }
 
         binding.layoutBottomsheetpersistant.btnApply.setOnClickListener {
-            var feesFrom = 0
-            var feesTo = 0
+
             if (binding.layoutBottomsheetpersistant.etFeesFrom.text.toString().isNullOrEmpty() &&
                 binding.layoutBottomsheetpersistant.etFeesTo.text.toString().isNullOrEmpty()
             ) {
@@ -829,7 +832,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                     formattedDate,
                     cityId,
                     binding.etSearch.text.toString(),
-                    feesFrom = 0,
+                    feesFrom,
                     feesTo,
                     genderId,
                     viewmodel.doctorSearchPage,
