@@ -38,7 +38,7 @@ import javax.inject.Inject
 @HiltViewModel
 class DialogBottomSheetViewmodel @Inject constructor(private val repositry: RegisterRepositry):ViewModel(){
 
-    var doctorSearchPage=0
+    var doctorSearchPage=1
     private var doctorSearchItemResponse:DoctorsearchItemResponse?=null
     var healthEntityPage=1
     var healthEntityResponse:GetHealthEntityResponse?=null
@@ -234,7 +234,7 @@ class DialogBottomSheetViewmodel @Inject constructor(private val repositry: Regi
                         oldItems?.addAll(newItems)
                     }
                 }
-                return Resource.sucess(doctorSearchItemResponse?:it)
+                return Resource.sucess(it)
             }
         }
    //    val error = Gson().fromJson<DoctorsearchItemResponse>(response.errorBody()!!.string(), DoctorsearchItemResponse::class.java)

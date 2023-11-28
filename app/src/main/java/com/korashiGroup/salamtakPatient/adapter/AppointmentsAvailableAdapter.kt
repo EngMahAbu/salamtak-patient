@@ -3,6 +3,7 @@ package com.korashiGroup.salamtakPatient.adapter
 
 import android.graphics.Color
 import android.os.Build
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.databinding.ItemLayoutAppointmentsavailableBinding
 import com.korashiGroup.salamtakPatient.model.booking.AppointmentBooking
+import java.text.SimpleDateFormat
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -36,7 +38,8 @@ class AppointmentsAvailableAdapter(private val selecttime: Action) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val appoinments = getItem(position)
         var timefrom = LocalTime.parse(appoinments.time)
-        holder.binding.tvTime.text =timefrom.format(DateTimeFormatter.ofPattern("hh:mm a",Locale.getDefault()))
+        holder.binding.tvTime.text =DateParsing(timefrom.toString())
+           // timefrom.format(DateTimeFormatter.ofPattern("hh:mm a", Locale.getDefault()))
         holder.itemView.setOnClickListener {
             selectedItemPosition = holder.bindingAdapterPosition
             appoinments.timeInterval?.let { it1 ->
@@ -117,6 +120,21 @@ class AppointmentsAvailableAdapter(private val selecttime: Action) :
             medicalExaminationTypeName: String
         )
     }
+
+    private fun DateParsing(dateParsing: String): String {
+        var day = ""
+        try {
+            val sdf = SimpleDateFormat("hh:mm a", Locale.getDefault())
+            val format = SimpleDateFormat("hh:mm", Locale.getDefault())
+            val date = dateParsing.let { format.parse(it) }
+            day = sdf.format(date)
+
+        } catch (e: Exception) {
+            Log.e("", e.localizedMessage)
+        }
+        return day
+    }
+
 
 
 }

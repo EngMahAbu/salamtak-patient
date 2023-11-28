@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.widget.AbsListView
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -44,7 +43,6 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.checkerframework.common.returnsreceiver.qual.This
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -90,14 +88,12 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         return binding.root
     }
 
-
-    @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("SimpleDateFormat")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.ivPrevious.isEnabled = step != 1
         examinationtypeid = HomeFragment.instance?.let {
-            it.medicalExaminatioId?.toInt()
+            it.medicalExaminatioId
         }?:0
         bottomsheetbeahavoir =
             BottomSheetBehavior.from(binding.layoutBottomsheetpersistant.filterBottomsheet)
@@ -425,7 +421,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                                 binding.rvDoctors.setPadding(0,0,0,0)
                         }
                         totalsDoctors= it.data?.data?.totalCount!!
-                        binding.tvCountofDoctors.text="${viewmodel.doctorSearchPage}${getString(R.string.doctors_found)}"
+                        binding.tvCountofDoctors.text="${totalsDoctors} ${getString(R.string.doctors_found)}"
                     }
 
                 }
@@ -745,7 +741,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                            feesFrom = 0,
                             feesTo,
                             genderId,
-                            viewmodel.doctorSearchPage,
+                            10,
                             examinationtypeid,
                             0,
                             0,
@@ -761,7 +757,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                             feesFrom = 0,
                             feesTo,
                             genderId,
-                            viewmodel.doctorSearchPage,
+                          10,
                             examinationtypeid,
                             0,
                             0,

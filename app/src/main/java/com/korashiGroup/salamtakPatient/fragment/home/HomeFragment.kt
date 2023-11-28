@@ -97,7 +97,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
         healthTopicsRecylerview()
         imageServices()
         medicalServices()
-        callBack()
+       // callBack()
         initButton()
 
     }
