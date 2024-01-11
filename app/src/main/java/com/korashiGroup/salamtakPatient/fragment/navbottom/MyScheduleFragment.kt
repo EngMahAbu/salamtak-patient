@@ -89,7 +89,9 @@ class MyScheduleFragment : Fragment(), MyScheduleAdapter.ActionSchedule,
     }
 
     private fun initButton() {
-
+        binding.layoutBottomsheetpersistant.examinationtypeBottomsheet.setOnClickListener {
+            return@setOnClickListener
+        }
         binding.layoutFilter.setOnClickListener {
             bottomsheetbeahavoir.state =
                 if (bottomsheetbeahavoir.state == BottomSheetBehavior.STATE_EXPANDED)

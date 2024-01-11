@@ -33,6 +33,7 @@ import com.korashiGroup.salamtakPatient.adapter.InsuranceCardAdapter
 import com.korashiGroup.salamtakPatient.model.faweryjson.Fawery
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCard
 import com.korashiGroup.salamtakPatient.utils.*
+import com.korashiGroup.salamtakPatient.viewmodel.PatientViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
@@ -45,6 +46,7 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
     private lateinit var binding: AppointmentDetailsfragmentBinding
     private val args: AppointmentDetailsFragmentArgs by navArgs()
     private val viewmodel: DialogBottomSheetViewmodel by viewModels()
+    private val patientViewmodel: PatientViewmodel by viewModels()
     private lateinit var bottomsheetbeahavoir: BottomSheetBehavior<ConstraintLayout>
     val sharedDataViewmodel: SharedDataViewmodel by activityViewModels()
     private lateinit var insuranceCardAdapter: InsuranceCardAdapter
@@ -60,10 +62,10 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
     var customerProfileId = "2" //required in saving cards for payment with card tokenization
 
     //merchant info
-    val merchantCode = "+/IAAY2notiBHP5krjVCyg=="
-    val merchantSecretCode = "26c56f1a-45aa-4fbd-8928-c11eca24d7a1"
+    var merchantCode = "770000017793"
+    var merchantSecretCode = "39d89b6c-5599-4a88-9854-2148179bc23d"
     val chargeItems = ArrayList<PayableItem>()
-     var Patient_InsuranceID:Int?=null
+    var Patient_InsuranceID: Int? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -89,7 +91,7 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
         insuranceCardRecylerview()
         initButton()
         callBack()
-
+        callBackFawry()
         val billItem = BillItems(
             itemId = "testId",
             description = "",
@@ -97,11 +99,12 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
             price = args.confirmappointments?.fees.toString()
         )
         chargeItems.add(billItem)
-        if (args.confirmappointments?.MedicalExaminationTypeName=="In-Clinic Booking"
-            || args.confirmappointments?.MedicalExaminationTypeName=="كشف بالعيادة"){
-            binding.chCard.visibility=View.VISIBLE
-        }else{
-            binding.chCard.visibility=View.GONE
+        if (args.confirmappointments?.MedicalExaminationTypeName == "In-Clinic Booking"
+            || args.confirmappointments?.MedicalExaminationTypeName == "كشف بالعيادة"
+        ) {
+            binding.chCard.visibility = View.VISIBLE
+        } else {
+            binding.chCard.visibility = View.GONE
         }
 
     }
@@ -116,10 +119,10 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
         }
 
         binding.btnConfirm.setOnClickListener {
-           val mediaclName=args.confirmappointments?.MedicalExaminationTypeName
-            if (mediaclName =="Call" || mediaclName =="Video Call" || mediaclName =="مكالمة صوتية" ||mediaclName=="مكالمة فيديو"){
+            val mediaclName = args.confirmappointments?.MedicalExaminationTypeName
+            if (mediaclName == "Call" || mediaclName == "Video Call" || mediaclName == "مكالمة صوتية" || mediaclName == "مكالمة فيديو") {
                 startPayment()
-            } else if (mediaclName=="Home visit" || mediaclName=="كشف منزلى" || mediaclName=="In-Clinic Booking" || mediaclName=="كشف بالعيادة"){
+            } else if (mediaclName == "Home visit" || mediaclName == "كشف منزلى" || mediaclName == "In-Clinic Booking" || mediaclName == "كشف بالعيادة") {
 
                 Patient_InsuranceID.let { it1 ->
                     PatientAppointmentRequest(
@@ -139,8 +142,7 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
                     )
                 }
 
-            }
-            else {
+            } else {
                 Patient_InsuranceID?.let { it1 ->
                     PatientAppointmentRequest(
                         args.confirmappointments?.doctorId,
@@ -204,7 +206,8 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
         binding.tvSpecialization.text = args.confirmappointments?.SpecialistName
         binding.tvDate.text = DateParsing(args.confirmappointments?.formattedDate.toString())
         binding.Service.text = args.confirmappointments?.MedicalExaminationTypeName
-        binding.TotalFees.text = args.confirmappointments?.fees.toString() + " " + getString(R.string.le)
+        binding.TotalFees.text =
+            args.confirmappointments?.fees.toString() + " " + getString(R.string.le)
 
     }
 
@@ -220,7 +223,11 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
 
                     is Resource.sucess -> {
                         binding.progressBar.visibility = View.GONE
-                        Toast.makeText(requireContext(), " booking Successfully", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            requireContext(),
+                            " booking Successfully",
+                            Toast.LENGTH_SHORT
+                        ).show()
                         val action =
                             AppointmentDetailsFragmentDirections.actionAppointmentDetailsFragmentToConfirmedFragment(
                                 binding.tvDate.text.toString()
@@ -238,24 +245,54 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
 
     }
 
+    private fun callBackFawry() {
+
+        patientViewmodel?.fawryResponse?.observe(viewLifecycleOwner,
+            Observer {
+                when (it) {
+
+                    is Resource.Loading -> {
+
+                    }
+
+                    is Resource.sucess -> {
+                        binding.progressBar.visibility = View.GONE
+                        baseUrl = it.data?.data?.uRL.toString()
+                        merchantCode = it.data?.data?.merchantCode.toString()
+                        merchantSecretCode = it.data?.data?.merchantSecretCode.toString()
+                    }
+
+                    is Resource.Error -> {
+                        binding.progressBar.visibility = View.GONE
+                        Snackbar.make(requireView(), "${it.message}", Snackbar.LENGTH_SHORT).show()
+                    }
+                }
+
+            })
+        patientViewmodel.getPatientFawry()
+    }
+
     private fun callBackGetInsuranceCards() {
         viewmodel?.insurancecardResponse?.observe(viewLifecycleOwner,
             Observer {
                 when (it) {
 
                     is Resource.Loading -> {
-                        binding.layoutBottomsheetpersistant.rvInsuranceCardProgressBar.visibility = View.VISIBLE
+                        binding.layoutBottomsheetpersistant.rvInsuranceCardProgressBar.visibility =
+                            View.VISIBLE
                     }
 
                     is Resource.sucess -> {
-                        binding.layoutBottomsheetpersistant.rvInsuranceCardProgressBar.visibility = View.GONE
+                        binding.layoutBottomsheetpersistant.rvInsuranceCardProgressBar.visibility =
+                            View.GONE
                         insuranceCardAdapter.submitList(it.data?.data)
                         it.data?.let { it1 -> updateUi(it1.data) }
                         insuranceCardAdapter.notifyDataSetChanged()
                     }
 
                     is Resource.Error -> {
-                        binding.layoutBottomsheetpersistant.rvInsuranceCardProgressBar.visibility = View.GONE
+                        binding.layoutBottomsheetpersistant.rvInsuranceCardProgressBar.visibility =
+                            View.GONE
                         Snackbar.make(requireView(), "${it.message}", Snackbar.LENGTH_SHORT).show()
                     }
                 }
@@ -289,8 +326,8 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
 
 
     override fun onItemSelected(card: InsuranceCard) {
-       // Snackbar.make(requireView(), "insCompanyID:${card.id}", Snackbar.LENGTH_SHORT).show()
-        Patient_InsuranceID=card.id
+        // Snackbar.make(requireView(), "insCompanyID:${card.id}", Snackbar.LENGTH_SHORT).show()
+        Patient_InsuranceID = card.id
 
     }
 
@@ -339,8 +376,8 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
 
                     //    val map = getQueryString(data.toString())
                     // val paymentMethod= map?.get("referenceNumber")
-                    if (fawery?.signature.isNullOrEmpty()){
-                        val patientrequest= PatientAppointmentRequest(
+                    if (fawery?.signature.isNullOrEmpty()) {
+                        val patientrequest = PatientAppointmentRequest(
                             args.confirmappointments?.doctorId,
                             args.confirmappointments?.DoctorWorkingDayTimeId,
                             args.confirmappointments?.formattedDate,
@@ -355,9 +392,9 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
                         viewmodel.createPatientAppointment(
                             patientrequest
                         )
-                    }else{
+                    } else {
 
-                        val patientrequest= PatientAppointmentRequest(
+                        val patientrequest = PatientAppointmentRequest(
                             args.confirmappointments?.doctorId,
                             args.confirmappointments?.DoctorWorkingDayTimeId,
                             args.confirmappointments?.formattedDate,
@@ -396,8 +433,6 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
                 }
             })
     }
-
-
 
 
 }

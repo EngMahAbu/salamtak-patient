@@ -87,6 +87,10 @@ class HealthEntityFragment : Fragment(),MedicalHealthAdapter.Action {
     }
 
     private fun initButton(){
+
+        binding.layoutBottomsheetpersistant.MedicalServices.setOnClickListener {
+            return@setOnClickListener
+        }
         binding.ivArrow.setOnClickListener {
             findNavController().popBackStack()
         }

@@ -36,6 +36,7 @@ import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.snackbar.Snackbar
 import com.korashiGroup.salamtakPatient.model.*
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCompany
+import com.korashiGroup.salamtakPatient.model.register.ChooseGender
 import com.korashiGroup.salamtakPatient.utils.Constans.Query_Page_Size
 import com.korashiGroup.salamtakPatient.utils.DateUtils
 import dagger.hilt.android.AndroidEntryPoint
@@ -77,8 +78,8 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
     val sharedDataViewmodel: SharedDataViewmodel by activityViewModels()
     val viewmodel: DialogBottomSheetViewmodel by viewModels()
     var totalsDoctors=0
-    private var feesFrom = 0
-    private var feesTo = 0
+    private var feesFrom:Int = 1
+    private var feesTo:Int = 600
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -227,11 +228,11 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
 
         binding.layoutBottomsheetpersistant.btnApply.setOnClickListener {
 
-            if (binding.layoutBottomsheetpersistant.etFeesFrom.text.toString().isNullOrEmpty() &&
+            if (binding.layoutBottomsheetpersistant.etFeesFrom.text.toString().isNullOrEmpty() ||
                 binding.layoutBottomsheetpersistant.etFeesTo.text.toString().isNullOrEmpty()
             ) {
-                feesFrom = 0
-                feesTo = 0
+                feesFrom = 1
+                feesTo = 1000
             } else {
                 feesFrom = binding.layoutBottomsheetpersistant.etFeesFrom.text.toString().toInt()
                 feesTo = binding.layoutBottomsheetpersistant.etFeesTo.text.toString().toInt()
@@ -421,7 +422,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                         val totalresult= (it.data?.data?.totalCount)?.div((10+2))
                         isLastPage = viewmodel.doctorSearchPage == totalresult
                         if (isLastPage){
-                                binding.rvDoctors.setPadding(0,0,0,0)
+                            binding.rvDoctors.setPadding(0,0,0,0)
                         }
                         totalsDoctors= it.data?.data?.totalCount!!
                         binding.tvCountofDoctors.text="${totalsDoctors} ${getString(R.string.doctors_found)}"
@@ -447,8 +448,8 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             formattedDate,
             it.id,
             "",
-            feesFrom = 0,
-            feesTo = 0,
+            feesFrom,
+            feesTo,
             genderId,
            10,
             examinationtypeid,
@@ -540,8 +541,8 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             formattedDate,
             cityId,
             binding.etSearch.text.toString(),
-            feesFrom = 0,
-            feesTo = 0,
+            feesFrom,
+           feesTo,
             genderId,
             viewmodel.doctorSearchPage,
             examinationtypeid,
@@ -741,7 +742,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                             formattedDate,
                             cityId,
                            it.toString(),
-                           feesFrom = 0,
+                          feesFrom,
                             feesTo,
                             genderId,
                             10,
@@ -757,7 +758,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                             formattedDate,
                             cityId,
                            binding.etSearch.text.toString(),
-                            feesFrom = 0,
+                            feesFrom,
                             feesTo,
                             genderId,
                           10,
@@ -798,6 +799,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         list.add(subSpecialistData)
         sharedDataViewmodel.getCity(CityData(0,"",0,false,"",""))
         sharedDataViewmodel.getArea(AreaData(0,""))
+        sharedDataViewmodel.getGender(ChooseGender("",0))
         sharedDataViewmodel.getspecialication(SpecialistData(0,"",false,""))
         sharedDataViewmodel.getSeniorityLevelData(SeniorityLevelData(0,""))
         sharedDataViewmodel.getSubSpecialication(list)

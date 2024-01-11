@@ -38,8 +38,8 @@ class AppointmentsAvailableAdapter(private val selecttime: Action) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val appoinments = getItem(position)
         var timefrom = LocalTime.parse(appoinments.time)
-        holder.binding.tvTime.text =DateParsing(timefrom.toString())
-           // timefrom.format(DateTimeFormatter.ofPattern("hh:mm a", Locale.getDefault()))
+       DateParsing(timefrom.toString())
+        holder.binding.tvTime.text = timefrom.format(DateTimeFormatter.ofPattern("hh:mm a", Locale.getDefault()))
         holder.itemView.setOnClickListener {
             selectedItemPosition = holder.bindingAdapterPosition
             appoinments.timeInterval?.let { it1 ->

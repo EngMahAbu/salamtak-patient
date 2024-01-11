@@ -12,6 +12,7 @@ import com.korashiGroup.salamtakPatient.model.emr.EmrPatientResponse
 import com.korashiGroup.salamtakPatient.model.favorite.AddToFavoriteResponse
 import com.korashiGroup.salamtakPatient.model.favorite.FavoriteDoctorResponse
 import com.korashiGroup.salamtakPatient.model.favorite.FavoriteRequest
+import com.korashiGroup.salamtakPatient.model.fawry.FawryResponse
 import com.korashiGroup.salamtakPatient.model.healthy.GetHealthEntityResponse
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCardResponse
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCompanyResponse
@@ -317,5 +318,9 @@ interface ApiService {
         @Path("culture") culture: String,
         @Query("doctorId") doctorId :Int,
     ):Response<ReviewsResponse>
+    @GET("{culture}/LookUp/GetPatient_Fawry_Setting")
+    suspend fun getPatientFawry(
+        @Path("culture") culture: String,
+    ):Response<FawryResponse>
 
 }

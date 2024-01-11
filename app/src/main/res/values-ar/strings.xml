@@ -13,7 +13,7 @@
     <string name="login">الدخول</string>
     <string name="help">المساعده</string>
     <string name="next">التالى</string>
-    <string name="mobile_number">رقم الهاتف </string>
+    <string name="mobile_number">رقم الموبايل </string>
     <string name="password">كلمة المرور</string>
     <string name="forgetpasword"> نسيت كلمة المرور؟</string>
     <string name="egypt">مصر</string>
@@ -34,7 +34,7 @@
     <string name="lets_start">ابدأ التطبيق</string>
     <string name="upload_your_photo">ارفع صورتك</string>
     <string name="full_name_in_english_first_middle_last">الاسم الكامل بالانجليزي (الاول - الوسط - الاخير)</string>
-    <string name="full_name_in_arabic_first_middle_last">الاسم الكامل بالعربية (الأول - الأوسط - الأخير)</string>
+    <string name="full_name_in_arabic_first_middle_last">الاسم الكامل بالعربية (الأول - الوسط - الأخير)</string>
     <string name="e_mail">بريد إلكتروني</string>
     <string name="have_an_account">هل لديك حساب؟</string>
     <string name="the_terms_and_conditions">الشروط والأحكام</string>

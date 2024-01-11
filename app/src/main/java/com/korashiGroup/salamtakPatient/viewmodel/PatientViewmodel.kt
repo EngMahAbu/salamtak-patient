@@ -27,6 +27,7 @@ import com.korashiGroup.salamtakPatient.model.emr.EmrPatientResponse
 import com.korashiGroup.salamtakPatient.model.favorite.AddToFavoriteResponse
 import com.korashiGroup.salamtakPatient.model.favorite.FavoriteDoctorResponse
 import com.korashiGroup.salamtakPatient.model.favorite.FavoriteRequest
+import com.korashiGroup.salamtakPatient.model.fawry.FawryResponse
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCardResponse
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCompanyResponse
 import com.korashiGroup.salamtakPatient.model.insurance.SendInsuranceCardResponce
@@ -56,6 +57,7 @@ class PatientViewmodel @Inject constructor(private val repositry: RegisterReposi
     val profileResponse=MutableLiveData<Resource<GetPatientProfileResponse>>()
     val deleteUserResponse=MutableLiveData<Resource<DeleteUserResponse>>()
     val reviewsResponse=MutableLiveData<Resource<ReviewsResponse>>()
+    val fawryResponse=MutableLiveData<Resource<FawryResponse>>()
 
     fun createDoctorRate(doctorRateRequest: HashMap<String, String> )=viewModelScope.launch(Dispatchers.IO+handler) {
         doctorRateResponse.postValue(Resource.Loading())
@@ -207,6 +209,22 @@ class PatientViewmodel @Inject constructor(private val repositry: RegisterReposi
             }
         }
         val error = Gson().fromJson<ReviewsResponse>(response.errorBody()!!.string(), ReviewsResponse::class.java)
+        return error.message?.let { Resource.Error(it) }
+    }
+
+    fun getPatientFawry()=viewModelScope.launch(Dispatchers.IO+handler) {
+        fawryResponse.postValue(Resource.Loading())
+        val response=repositry.getPatientFawry()
+        fawryResponse.postValue(response?.let { handleGetPatientFawry(it) })
+    }
+
+    private fun handleGetPatientFawry(response: Response<FawryResponse>): Resource<FawryResponse>? {
+        if (response.isSuccessful){
+            response.body()?.let {
+                return Resource.sucess(it)
+            }
+        }
+        val error = Gson().fromJson<FawryResponse>(response.errorBody()!!.string(), FawryResponse::class.java)
         return error.message?.let { Resource.Error(it) }
     }
 

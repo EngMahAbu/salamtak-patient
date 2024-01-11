@@ -18,6 +18,7 @@ import com.korashiGroup.salamtakPatient.databinding.HomefragmentBinding
 import com.korashiGroup.salamtakPatient.fragment.loginandforgetpassword.LoginFragment
 import com.korashiGroup.salamtakPatient.model.CityData
 import com.korashiGroup.salamtakPatient.model.ImageServices
+import com.korashiGroup.salamtakPatient.model.register.ChooseGender
 import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.utils.SpUtil
 import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
@@ -416,6 +417,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
 
     override fun onItemClick(servicesID: Int) {
         medicalExaminatioId = servicesID
+        sharedDataViewmodel.getGender(ChooseGender("",0))
         val action =
             HomeFragmentDirections.actionHomeFragmentToDialogBottomSheetFragment("services")
         findNavController().navigate(action)

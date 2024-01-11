@@ -1,14 +1,12 @@
 package com.korashiGroup.salamtakPatient.fragment.addagora
 
 import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.SurfaceView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -18,7 +16,6 @@ import coil.load
 import coil.transform.CircleCropTransformation
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.databinding.VideoCallfragmentBinding
-import com.korashiGroup.salamtakPatient.notification.DeepLinkItem
 import com.korashiGroup.salamtakPatient.utils.SpUtil
 import dagger.hilt.android.AndroidEntryPoint
 import io.agora.rtc2.*
