@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_color_gray"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".fragment.booking.BookAppointmentFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+        <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/iv_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:adjustViewBounds="true"
+                android:padding="10dp"
+                android:src="@drawable/ic_arrowleft"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_name"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/avenirltstd_black"
+                android:text="@string/book_appointment"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/iv_arrow"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_doctorsDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:padding="8dp"
+                android:background="@drawable/bg_edittext"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_arrow">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/iv_doctorProfile"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/ic_docspecialization"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_doctorName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="15dp"
+                    android:fontFamily="@font/avenirltstd_roman"
+                    android:gravity="start"
+                    android:padding="3dp"
+                    android:text="Dr. Mohamed Farag Abdullatif"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toEndOf="@+id/iv_doctorProfile"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/iv_doctorProfile"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_Specialization"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/avenirltstd_roman"
+                    android:gravity="start"
+                    android:padding="2dp"
+                    android:text="Genecology and Infertility"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/iv_doctorProfile"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_doctorName"/>
+
+            <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/iv_star"
+                    android:layout_width="18dp"
+                    android:layout_height="15dp"
+                    android:layout_marginStart="10dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ic_star"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/iv_doctorProfile"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_Specialization"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_Reviews"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:fontFamily="@font/avenirltstd_roman"
+                    android:gravity="start"
+                    android:padding="2dp"
+                    android:text="@string/reviews"
+                    android:textColor="@color/gray"
+                    android:visibility="gone"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toEndOf="@+id/iv_star"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_Specialization"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.core.widget.NestedScrollView
+                android:id="@+id/nested"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="@dimen/_8sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/layout_btnDone"
+                app:layout_constraintTop_toBottomOf="@+id/layout_doctorsDetail"
+                android:layout_marginTop="10dp">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="3dp"
+            >
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_AboutDoctor"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/avenirltstd_roman"
+                        android:gravity="start"
+                        android:layout_marginTop="5dp"
+                        android:padding="2dp"
+                        android:text="@string/clinicservices"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/AboutDoctor"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:fontFamily="@font/avenirltstd_roman"
+                        android:gravity="start"
+                        android:background="@drawable/bg_help"
+                        android:layout_marginTop="5dp"
+                        android:padding="3dp"
+                        android:text="ffdfdfddffdfd"
+                        android:textColor="@color/blue"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_AboutDoctor"/>
+
+
+                <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_layout_ChooseClinic"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:background="@android:color/transparent"
+                        app:layout_constraintEnd_toEndOf="@+id/layout_ChooseClinic"
+                        app:layout_constraintStart_toStartOf="@+id/layout_ChooseClinic"
+                        app:layout_constraintTop_toTopOf="@+id/layout_ChooseClinic"
+                        app:layout_constraintBottom_toBottomOf="@+id/layout_ChooseClinic"
+                />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_ChooseClinic"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="15dp"
+                        android:background="@drawable/bg_edittext"
+                        android:elevation="1dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/AboutDoctor">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/iv_arrowdown"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginEnd="12dp"
+                            android:layout_marginBottom="12dp"
+                            android:gravity="start"
+                            android:src="@drawable/ic_arrowdwon"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"/>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/textinput_ChooseClinic"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="55dp"
+                            android:layout_marginEnd="25dp"
+                            android:layout_marginBottom="5dp"
+                            android:hint="@string/choose_clinic"
+                            android:paddingTop="2dp"
+                            app:boxBackgroundColor="@color/white"
+                            app:boxBackgroundMode="none"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_ChooseClinic"
+                                android:layout_width="match_parent"
+                                android:layout_height="55dp"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="@font/avenirltstd_roman"
+                                android:inputType="text"
+                                android:enabled="false"
+                                android:textColorHint="@color/gray"
+                                android:textColor="@color/black"
+                                android:textSize="12sp"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_layout_ChooseService"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:background="@android:color/transparent"
+                        app:layout_constraintEnd_toEndOf="@+id/layout_ChooseService"
+                        app:layout_constraintStart_toStartOf="@+id/layout_ChooseService"
+                        app:layout_constraintTop_toTopOf="@+id/layout_ChooseService"
+                        app:layout_constraintBottom_toBottomOf="@+id/layout_ChooseService"
+                />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_ChooseService"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="15dp"
+                        android:background="@drawable/bg_edittext"
+                        android:elevation="1dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/layout_ChooseClinic">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/iv_arrowdownService"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginEnd="12dp"
+                            android:layout_marginBottom="12dp"
+                            android:gravity="start"
+                            android:src="@drawable/ic_arrowdwon"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"/>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/textinput_ChooseService"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="55dp"
+                            android:layout_marginEnd="25dp"
+                            android:layout_marginBottom="5dp"
+                            android:hint="@string/choose_service"
+                            android:paddingTop="2dp"
+                            app:boxBackgroundColor="@color/white"
+                            app:boxBackgroundMode="none"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_ChooseService"
+                                android:layout_width="match_parent"
+                                android:layout_height="55dp"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="@font/avenirltstd_roman"
+                                android:inputType="text"
+                                android:enabled="false"
+                                android:textColorHint="@color/gray"
+                                android:textColor="@color/black"
+                                android:textSize="12sp"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_combinedateandtime"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        app:layout_constraintTop_toBottomOf="@+id/layout_ChooseService"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_margin="15dp"
+                        android:background="@drawable/bg_edittext"
+                >
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/layout_dates"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginBottom="@dimen/_5sdp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            tools:ignore="MissingClass">
+
+                        <TextView
+                                android:id="@+id/tv_date"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="15dp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                android:text="@string/date"
+                                android:textColor="@color/black"
+                                android:gravity="center"
+                        />
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/iv_previous"
+                                android:layout_width="34dp"
+                                android:layout_height="34dp"
+                                android:layout_marginStart="15dp"
+                                android:adjustViewBounds="true"
+                                android:enabled="true"
+                                android:src="@drawable/iv_previous"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"/>
+                        <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/iv_next"
+                                android:layout_width="34dp"
+                                android:layout_height="34dp"
+                                android:layout_marginEnd="15dp"
+                                android:adjustViewBounds="true"
+                                android:src="@drawable/iv_next"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"/>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rv_searchServices"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginEnd="15dp"
+                                android:layout_marginTop="8dp"
+                                android:orientation="horizontal"
+                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                app:layout_constraintHorizontal_bias="0.41"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintRight_toRightOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/iv_next"
+                                app:layout_constraintBottom_toTopOf="@+id/tv_avilabledates"
+                                tools:listitem="@layout/item_layoutcalendardate"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tv_avilabledates"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:fontFamily="@font/avenirltstd_roman"
+                                android:gravity="center_horizontal"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                android:layout_marginTop="5dp"
+                                android:padding="2dp"
+                                android:text="@string/avilableapapointemnts"
+                                android:textColor="@color/black"
+                                android:textSize="18sp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/rv_searchServices"/>
+                        <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/firstreseved"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_marginStart="15dp"
+                                android:layout_marginEnd="15dp"
+                                android:fontFamily="@font/avenirltstd_roman"
+                                android:gravity="center"
+                                android:background="@drawable/bg_help"
+                                android:layout_marginTop="5dp"
+                                android:padding="3dp"
+                                android:text="@string/reservation_required_first_come_first_served"
+                                android:textColor="@color/blue"
+                                android:textSize="14sp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/tv_avilabledates"/>
+
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_appointments_available"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_180sdp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="15dp"
+                            android:padding="3dp"
+                            android:visibility="gone"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:scrollbars="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/layout_dates"
+                    />
+                    <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/iv_calenderviw"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/image_calender"
+                            android:adjustViewBounds="true"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/layout_dates"/>
+                    <ProgressBar
+                            android:id="@+id/progress_bar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintEnd_toEndOf="@+id/rv_appointments_available"
+                            app:layout_constraintStart_toStartOf="@+id/rv_appointments_available"
+                            app:layout_constraintBottom_toBottomOf="@+id/rv_appointments_available"
+                            app:layout_constraintTop_toTopOf="@+id/rv_appointments_available"
+                            android:visibility="gone"
+                    />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_btnDone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="3dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nested"
+        >
+
+            <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_confirm"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_chooselang_button"
+                    android:fontFamily="@font/avenirltstd_black"
+                    android:text="@string/book_now"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent=".85"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <ProgressBar
+                android:id="@+id/progressbar1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@+id/layout_btnDone"
+                app:layout_constraintStart_toStartOf="@+id/layout_btnDone"
+                app:layout_constraintBottom_toBottomOf="@+id/layout_btnDone"
+                app:layout_constraintTop_toTopOf="@+id/layout_btnDone"
+                android:visibility="gone"
+        />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <include
+            android:id="@+id/layoutBottomsheetpersistant"
+            layout="@layout/layout_bottomsheet_clinks"
+            android:visibility="visible"
+    />
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

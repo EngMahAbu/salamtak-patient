@@ -17,6 +17,8 @@ import com.korashiGroup.salamtakPatient.model.healthy.GetHealthEntityResponse
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCardResponse
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCompanyResponse
 import com.korashiGroup.salamtakPatient.model.insurance.SendInsuranceCardResponce
+import com.korashiGroup.salamtakPatient.model.offers.ActiveOffersResponse
+import com.korashiGroup.salamtakPatient.model.offers.OffersDetailsResponse
 import com.korashiGroup.salamtakPatient.model.populardoctors.GetDoctorHealthTopicsResponse
 import com.korashiGroup.salamtakPatient.model.populardoctors.GetDoctorSpotLightResponse
 import com.korashiGroup.salamtakPatient.model.populardoctors.PopularDoctorsResponseItem
@@ -307,7 +309,6 @@ interface ApiService {
     suspend fun getPatient(
         @Path("culture") culture: String,
     ):Response<GetPatientProfileResponse>
-
     @DELETE("{culture}/User/DeleteUser")
     suspend fun deleteUser(
         @Path("culture") culture: String,
@@ -322,5 +323,14 @@ interface ApiService {
     suspend fun getPatientFawry(
         @Path("culture") culture: String,
     ):Response<FawryResponse>
+    @GET("{culture}/Offers/GetActiveOffers")
+    suspend fun getActiveOffers(
+        @Path("culture") culture: String,
+    ):Response<ActiveOffersResponse>
+    @GET("{culture}/Offers/GetActiveOffersDetails")
+    suspend fun Offers(
+        @Path("culture") culture: String,
+        @Query("OfferCategoryID") OfferCategoryID :Int,
+    ):Response<OffersDetailsResponse>
 
 }

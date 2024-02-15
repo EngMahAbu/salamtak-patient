@@ -31,7 +31,6 @@ class MedicalStateFragment : Fragment() {
     private var bloodTypeId=0
     private var medicineAllergyListId = mutableListOf<Int>()
     private var foodAllergyListId = mutableListOf<Int>()
-    var data: Map<String, Any> = HashMap()
     private var partMap: Map<String, Any> = mutableMapOf()
     private var status=false
     override fun onCreateView(

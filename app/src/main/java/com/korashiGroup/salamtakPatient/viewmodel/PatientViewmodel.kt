@@ -31,6 +31,8 @@ import com.korashiGroup.salamtakPatient.model.fawry.FawryResponse
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCardResponse
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCompanyResponse
 import com.korashiGroup.salamtakPatient.model.insurance.SendInsuranceCardResponce
+import com.korashiGroup.salamtakPatient.model.offers.ActiveOffersResponse
+import com.korashiGroup.salamtakPatient.model.offers.OffersDetailsResponse
 import com.korashiGroup.salamtakPatient.model.rating.RatingResponse
 import com.korashiGroup.salamtakPatient.model.reviews.ReviewsResponse
 import com.korashiGroup.salamtakPatient.model.salamtakgate.BlogsResponse
@@ -58,6 +60,8 @@ class PatientViewmodel @Inject constructor(private val repositry: RegisterReposi
     val deleteUserResponse=MutableLiveData<Resource<DeleteUserResponse>>()
     val reviewsResponse=MutableLiveData<Resource<ReviewsResponse>>()
     val fawryResponse=MutableLiveData<Resource<FawryResponse>>()
+    val activeOfferResponse=MutableLiveData<Resource<ActiveOffersResponse>>()
+    val offerResponse=MutableLiveData<Resource<OffersDetailsResponse>>()
 
     fun createDoctorRate(doctorRateRequest: HashMap<String, String> )=viewModelScope.launch(Dispatchers.IO+handler) {
         doctorRateResponse.postValue(Resource.Loading())
@@ -228,9 +232,42 @@ class PatientViewmodel @Inject constructor(private val repositry: RegisterReposi
         return error.message?.let { Resource.Error(it) }
     }
 
+    fun getActiveOffers()=viewModelScope.launch(Dispatchers.IO+handler) {
+        activeOfferResponse.postValue(Resource.Loading())
+        val response=repositry.getActiveOffers()
+        activeOfferResponse.postValue(response?.let { handleGetActiveOffers(it) })
+    }
+
+    private fun handleGetActiveOffers(response: Response<ActiveOffersResponse>): Resource<ActiveOffersResponse>? {
+        if (response.isSuccessful){
+            response.body()?.let {
+                return Resource.sucess(it)
+            }
+        }
+        val error = Gson().fromJson<ActiveOffersResponse>(response.errorBody()!!.string(), ActiveOffersResponse::class.java)
+        return error.message?.let { Resource.Error(it) }
+    }
+
+    fun getOffers(OfferCategoryID :Int)=viewModelScope.launch(Dispatchers.IO+handler) {
+       offerResponse.postValue(Resource.Loading())
+        val response=repositry.getActiveOffers(OfferCategoryID)
+        offerResponse.postValue(response?.let { handleGetOffers(it) })
+    }
+
+    private fun handleGetOffers(response: Response<OffersDetailsResponse>): Resource<OffersDetailsResponse>? {
+        if (response.isSuccessful){
+            response.body()?.let {
+                return Resource.sucess(it)
+            }
+        }
+        val error = Gson().fromJson<OffersDetailsResponse>(response.errorBody()!!.string(), OffersDetailsResponse::class.java)
+        return error.message?.let { Resource.Error(it) }
+    }
+
+
 
 
     val handler = CoroutineExceptionHandler { _, exception ->
-        Log.e("exception","osama${exception.message.toString()}")
+        Log.e("exception","exception${exception.message.toString()}")
     }
 }

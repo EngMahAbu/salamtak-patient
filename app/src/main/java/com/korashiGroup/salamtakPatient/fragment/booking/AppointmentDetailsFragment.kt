@@ -1,6 +1,6 @@
 package com.korashiGroup.salamtakPatient.fragment.booking
 
-import android.net.Uri
+
 import android.os.Build
 import android.os.Bundle
 import android.util.Log

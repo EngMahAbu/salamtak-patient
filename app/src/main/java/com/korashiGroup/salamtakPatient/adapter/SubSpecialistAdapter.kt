@@ -23,10 +23,8 @@ class SubSpecialistAdapter(private val selectsubSpecialist:SelectSubSpecialist):
           holder.binding.radioSpecialist.setOnCheckedChangeListener { buttonView, isChecked ->
               if (isChecked) {
                   subSpeciaListData.add(sp)
-                  buttonView.isChecked = true
               } else {
                   subSpeciaListData.remove(sp)
-                  buttonView.isChecked = false
               }
               selectsubSpecialist.onSelectSubcialist(subSpeciaListData)
           }

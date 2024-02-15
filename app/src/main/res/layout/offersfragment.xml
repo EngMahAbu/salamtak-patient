@@ -4,51 +4,127 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:background="@color/bg_color_gray"
-        android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         tools:context=".fragment.offers.OffersFragment">
 
-    <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/iv_confirm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:adjustViewBounds="true"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="100dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:src="@drawable/ic_offers_logo"/>
 
     <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_confirm"
+            android:id="@+id/tv_Filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/avenirltstd_black"
-            android:gravity="start"
-            android:padding="3dp"
-            android:layout_marginTop="15dp"
-            android:text="@string/offers_not_available_at_the_moment"
-            android:textColor="@color/green"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/offercategories"
+            android:textColor="@color/black"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_confirm"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_thanks"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/avenirltstd_roman"
-            android:gravity="start|center_horizontal"
-            android:padding="3dp"
-            android:layout_marginTop="5dp"
-            android:text="@string/we_are_working_on_delivering_the_best_offers_to_you_please_come_back_and_check_later"
-            android:textColor="@color/black"
-            android:textSize="14sp"
-            app:layout_constraintWidth_percent=".70"
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_Catagory"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_100sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_confirm"/>
+            android:layout_marginBottom="5dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_layout_category_offers"
+            app:layout_constraintTop_toBottomOf="@+id/tv_Filter"
+            />
+    <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/rv_Catagory"
+            app:layout_constraintStart_toStartOf="@+id/rv_Catagory"
+            app:layout_constraintBottom_toBottomOf="@+id/rv_Catagory"
+            app:layout_constraintTop_toTopOf="@+id/rv_Catagory"
+            />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/rv_Catagory"
+            >
+        <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/iv_confirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:adjustViewBounds="true"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="80dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:src="@drawable/ic_offers_logo"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_confirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/avenirltstd_black"
+                android:gravity="start"
+                android:padding="3dp"
+                android:layout_marginTop="15dp"
+                android:text="@string/offers_not_available_at_the_moment"
+                android:textColor="@color/green"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_confirm"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_thanks"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/avenirltstd_roman"
+                android:gravity="start|center_horizontal"
+                android:padding="3dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/we_are_working_on_delivering_the_best_offers_to_you_please_come_back_and_check_later"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintWidth_percent=".70"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_confirm"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_offers"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_layout_offers"
+            app:layout_constraintTop_toBottomOf="@+id/rv_Catagory"
+            />
+
+    <ProgressBar
+            android:id="@+id/offer_progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/rv_offers"
+            app:layout_constraintStart_toStartOf="@+id/rv_offers"
+            app:layout_constraintBottom_toBottomOf="@+id/rv_offers"
+            app:layout_constraintTop_toTopOf="@+id/rv_offers"
+            />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
