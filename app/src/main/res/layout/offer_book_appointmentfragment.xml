@@ -140,178 +140,12 @@
             >
 
 
-                <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_AboutDoctor"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:fontFamily="@font/avenirltstd_roman"
-                        android:gravity="start"
-                        android:layout_marginTop="5dp"
-                        android:padding="2dp"
-                        android:text="@string/clinicservices"
-                        android:textColor="@color/black"
-                        android:textSize="18sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
-
-                <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/AboutDoctor"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginEnd="15dp"
-                        android:fontFamily="@font/avenirltstd_roman"
-                        android:gravity="start"
-                        android:background="@drawable/bg_help"
-                        android:layout_marginTop="5dp"
-                        android:padding="3dp"
-                        android:text="ffdfdfddffdfd"
-                        android:textColor="@color/blue"
-                        android:textSize="14sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_AboutDoctor"/>
-
-
-                <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btn_layout_ChooseClinic"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:background="@android:color/transparent"
-                        app:layout_constraintEnd_toEndOf="@+id/layout_ChooseClinic"
-                        app:layout_constraintStart_toStartOf="@+id/layout_ChooseClinic"
-                        app:layout_constraintTop_toTopOf="@+id/layout_ChooseClinic"
-                        app:layout_constraintBottom_toBottomOf="@+id/layout_ChooseClinic"
-                />
-                <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/layout_ChooseClinic"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginEnd="15dp"
-                        android:background="@drawable/bg_edittext"
-                        android:elevation="1dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/AboutDoctor">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                            android:id="@+id/iv_arrowdown"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginEnd="12dp"
-                            android:layout_marginBottom="12dp"
-                            android:gravity="start"
-                            android:src="@drawable/ic_arrowdwon"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"/>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/textinput_ChooseClinic"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="match_parent"
-                            android:layout_height="55dp"
-                            android:layout_marginEnd="25dp"
-                            android:layout_marginBottom="5dp"
-                            android:hint="@string/choose_clinic"
-                            android:paddingTop="2dp"
-                            app:boxBackgroundColor="@color/white"
-                            app:boxBackgroundMode="none"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/et_ChooseClinic"
-                                android:layout_width="match_parent"
-                                android:layout_height="55dp"
-                                android:layout_gravity="center_horizontal"
-                                android:fontFamily="@font/avenirltstd_roman"
-                                android:inputType="text"
-                                android:enabled="false"
-                                android:textColorHint="@color/gray"
-                                android:textColor="@color/black"
-                                android:textSize="12sp"/>
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-                <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btn_layout_ChooseService"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:background="@android:color/transparent"
-                        app:layout_constraintEnd_toEndOf="@+id/layout_ChooseService"
-                        app:layout_constraintStart_toStartOf="@+id/layout_ChooseService"
-                        app:layout_constraintTop_toTopOf="@+id/layout_ChooseService"
-                        app:layout_constraintBottom_toBottomOf="@+id/layout_ChooseService"
-                />
-                <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/layout_ChooseService"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginEnd="15dp"
-                        android:background="@drawable/bg_edittext"
-                        android:elevation="1dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/layout_ChooseClinic">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                            android:id="@+id/iv_arrowdownService"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginEnd="12dp"
-                            android:layout_marginBottom="12dp"
-                            android:gravity="start"
-                            android:src="@drawable/ic_arrowdwon"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"/>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/textinput_ChooseService"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="match_parent"
-                            android:layout_height="55dp"
-                            android:layout_marginEnd="25dp"
-                            android:layout_marginBottom="5dp"
-                            android:hint="@string/choose_service"
-                            android:paddingTop="2dp"
-                            app:boxBackgroundColor="@color/white"
-                            app:boxBackgroundMode="none"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/et_ChooseService"
-                                android:layout_width="match_parent"
-                                android:layout_height="55dp"
-                                android:layout_gravity="center_horizontal"
-                                android:fontFamily="@font/avenirltstd_roman"
-                                android:inputType="text"
-                                android:enabled="false"
-                                android:textColorHint="@color/gray"
-                                android:textColor="@color/black"
-                                android:textSize="12sp"/>
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/layout_combinedateandtime"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        app:layout_constraintTop_toBottomOf="@+id/layout_ChooseService"
+                        app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:layout_margin="15dp"
@@ -497,11 +331,7 @@
         />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-    <include
-            android:id="@+id/layoutBottomsheetpersistant"
-            layout="@layout/layout_bottomsheet_clinks"
-            android:visibility="visible"
-    />
+
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
