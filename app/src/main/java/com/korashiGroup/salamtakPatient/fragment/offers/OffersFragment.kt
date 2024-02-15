@@ -8,11 +8,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.korashiGroup.salamtakPatient.adapter.CategoryAdapter
 import com.korashiGroup.salamtakPatient.adapter.OffersAdapter
 import com.korashiGroup.salamtakPatient.databinding.OffersfragmentBinding
 import com.korashiGroup.salamtakPatient.model.offers.OfferDetails
+import com.korashiGroup.salamtakPatient.model.offers.OfferDoctor
 import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.viewmodel.PatientViewmodel
 import dagger.hilt.android.AndroidEntryPoint
@@ -108,8 +110,9 @@ class OffersFragment : Fragment(),CategoryAdapter.Action,OffersAdapter.Action{
         patientViewmodel.getOffers(Id)
     }
 
-    override fun onItemBooked(servicesId: Int) {
-        Toast.makeText(requireContext(),"",Toast.LENGTH_SHORT).show()
+    override fun onItemBooked(offerDoctor: OfferDoctor) {
+       val action=OffersFragmentDirections.actionOffersFragmentToOfferBookAppointmentFragment(offerDoctor)
+        findNavController().navigate(action)
     }
     private fun bindViews(list:List<OfferDetails>){
         if (!list.isNullOrEmpty()){

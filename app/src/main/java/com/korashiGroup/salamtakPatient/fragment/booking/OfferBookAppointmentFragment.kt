@@ -2,30 +2,25 @@ package com.korashiGroup.salamtakPatient.fragment.booking
 
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import coil.transform.CircleCropTransformation
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.snackbar.Snackbar
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.adapter.AppointmentsAvailableAdapter
 import com.korashiGroup.salamtakPatient.adapter.CalenderAdapter
 import com.korashiGroup.salamtakPatient.adapter.ChooseClinksDoctorsAdapter
-import com.korashiGroup.salamtakPatient.databinding.BookAppointmentfragmentBinding
 import com.korashiGroup.salamtakPatient.databinding.OfferBookAppointmentfragmentBinding
 import com.korashiGroup.salamtakPatient.model.CalendarDateModel
 import com.korashiGroup.salamtakPatient.model.booking.AppointmentBooking
@@ -53,7 +48,7 @@ class OfferBookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Ac
     private lateinit var binding: OfferBookAppointmentfragmentBinding
     private lateinit var searchServicesAdapter: CalenderAdapter
     private lateinit var appointmentsAvailableAdapter: AppointmentsAvailableAdapter
-    private val args: BookAppointmentFragmentArgs by navArgs()
+    private val args: OfferBookAppointmentFragmentArgs by navArgs()
     private val sdf = SimpleDateFormat("MMMM yyyy", Locale.ENGLISH)
     private val cal = Calendar.getInstance(Locale.ENGLISH)
     private val dates = ArrayList<Date>()
@@ -93,7 +88,6 @@ class OfferBookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Ac
         setUpCalendar()
         getClinicSchedualByClinicDayId()
         callBack()
-        callBackEditAppontiemnt()
         callBackGetClinicSchedualByClinicDayId()
         appointmentsAvailableRecylerview()
         getmedicalExaminationTypeId()
@@ -118,6 +112,11 @@ class OfferBookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Ac
         }
 
         binding.btnConfirm.setOnClickListener {
+            args.clinkDto?.let { it1 -> it1?.offerId?.let { it2 ->
+                sharedDataViewmodel.getOfferId(
+                    it2
+                )
+            } }
             if (time.isNullOrEmpty()) {
                 Toast.makeText(
                     requireContext(),
@@ -137,11 +136,13 @@ class OfferBookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Ac
                 val requiredDate = dateFormat.parse(dateTime)
                 formattedDate = formatter.format(requiredDate)
                 val patientAppointmentRequest = PatientAppointmentRequest(
-                    args.doctorclinks.data?.id,
+                    args.clinkDto?.doctorId,
                     doctorWorkingDayTimeId,
                     formattedDate,
-                    false
-                ,"")
+                    false,
+                    "",
+                    0,
+                    "","",args.clinkDto?.offerId)
 
 //                val editPatientAppointmentRequest=EditPatientAppointmentRequest(args.doctorclinks.data?.id,
 //                    doctorWorkingDayTimeId,
@@ -244,36 +245,27 @@ class OfferBookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Ac
 
                 is Resource.sucess -> {
                     binding.progressbar1.visibility = View.GONE
-                    val appointmentDetailBooking = args.doctorclinks.data?.let { it1 ->
-                        it1.id?.let { it2 ->
+                    val appointmentDetailBooking = args.clinkDto.let { it1 ->
+                        it1?.doctorId?.let { it2 ->
                             AppointmentDetailBooking(
                                name,
                                 it2,
                                 formattedDate,
                                 intervalTime,
                                 doctorWorkingDayTimeId,
-                                fees,
+                                args.clinkDto?.fess?.toInt(),
                                 medicalExaminationTypeName,
                                 it.data?.data?.doctorDto?.specialistName,
-                                args.doctorclinks.data!!.image,
-                                medicalExaminationId
+                                args.clinkDto?.image,
+                                1
                             )
                         }
                     }
-
-                    if (args.status == "Book Appointment") {
                         val action =
-                            BookAppointmentFragmentDirections.actionBookAppointmentFragmentToAppointmentDetailsFragment(
-                                appointmentDetailBooking, true
-                            )
-                        findNavController().navigate(action)
-                    } else {
-                        val action =
-                            BookAppointmentFragmentDirections.actionBookAppointmentFragmentToAppointmentDetailsFragment(
+                            OfferBookAppointmentFragmentDirections.actionOfferBookAppointmentFragmentToAppointmentDetailsFragment(
                                 appointmentDetailBooking, false
                             )
                         findNavController().navigate(action)
-                    }
 
                 }
 
@@ -286,58 +278,6 @@ class OfferBookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Ac
         }
     }
 
-    private fun callBackEditAppontiemnt() {
-        patientviewmodel.editAppointmentResponse.observe(viewLifecycleOwner) {
-
-            when (it) {
-
-                is Resource.Loading -> {
-                    binding.progressbar1.visibility = View.VISIBLE
-                }
-
-                is Resource.sucess -> {
-                    binding.progressbar1.visibility = View.GONE
-                    val appointmentDetailBooking = args.doctorclinks.data?.let { it1 ->
-                        it1.id?.let { it2 ->
-                            AppointmentDetailBooking(
-                                name,
-                                it2,
-                                formattedDate,
-                                intervalTime,
-                                doctorWorkingDayTimeId,
-                                fees,
-                                medicalExaminationTypeName,
-                                it.data?.data?.doctorDto?.specialistName,
-                                args.doctorclinks.data!!.image,
-                                medicalExaminationId
-                            )
-                        }
-                    }
-
-                    if (args.status == "Book Appointment") {
-                        val action =
-                            BookAppointmentFragmentDirections.actionBookAppointmentFragmentToAppointmentDetailsFragment(
-                                appointmentDetailBooking, true
-                            )
-                        findNavController().navigate(action)
-                    } else {
-                        val action =
-                            BookAppointmentFragmentDirections.actionBookAppointmentFragmentToAppointmentDetailsFragment(
-                                appointmentDetailBooking, false
-                            )
-                        findNavController().navigate(action)
-                    }
-
-                }
-
-                is Resource.Error -> {
-                    binding.progressbar1.visibility = View.GONE
-                    Snackbar.make(requireView(), "${it.message}", Snackbar.LENGTH_SHORT).show()
-
-                }
-            }
-        }
-    }
 
 
     private fun getClinicSchedualByClinicDayId() {
@@ -350,8 +290,8 @@ class OfferBookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Ac
                     it.medicalExaminationId,
                     it.formattedDate
                 )
-                this.clinicId = it.clinicId
-                this.medicalExaminationId = this.medicalExaminationId
+                this.clinicId = args.clinkDto?.clinkId!!
+                this.medicalExaminationId = 1
                 this.formattedDate = it.formattedDate
             })
     }
@@ -502,12 +442,14 @@ class OfferBookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Ac
         formattedDate = formatter.format(date)
         this.formattedDate = formattedDate
         getDayId()
-        viewmodel.getClinicSchedualByClinicDayId(
-            clinicId,
-            dayId,
-            medicalExaminationId,
-            formattedDate
-        )
+        args.clinkDto?.clinkId?.let {
+            viewmodel.getClinicSchedualByClinicDayId(
+                it,
+                dayId,
+                1,
+                formattedDate
+            )
+        }
     }
 
     private fun getDayId() {
@@ -546,7 +488,7 @@ class OfferBookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Ac
         sharedDataViewmodel.ExaminationTypeId.observe(
             viewLifecycleOwner,
             androidx.lifecycle.Observer {
-                this.medicalExaminationId = it.Id!!
+                this.medicalExaminationId = 1
             })
     }
 
@@ -554,22 +496,18 @@ class OfferBookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Ac
     private fun bindDataToViews(){
 
         name =if (DateUtils.getLanguage()=="en"){
-            "Dr.${args.doctorclinks.data?.firstName} ${args.doctorclinks.data?.middelName} ${args.doctorclinks.data?.lastName}"
+            "Dr.${args.clinkDto?.name}"
 
         }else{
-            "دكتور.${args.doctorclinks.data?.firstNameAr} ${args.doctorclinks.data?.middelNameAr} ${args.doctorclinks.data?.lastNameAr}"
+            "دكتور.${args.clinkDto?.name}"
         }
-        val clincServices=args.doctorclinks?.data?.clinicDtos?.get(0)?.services
-        if (clincServices != null) {
-        }
+
         binding.tvDoctorName.text = name
         var subspecialist: String? = ""
-        args.doctorclinks.data?.subSpecialistName?.forEach {
-            subspecialist = "$subspecialist $it,"
-        }
-        binding.tvSpecialization.text = "${args.doctorclinks.data?.seniorityLevelName} ${subspecialist}"
 
-        binding.ivDoctorProfile.load("https://salamtechapi.azurewebsites.net/${args.doctorclinks.data?.image}") {
+        binding.tvSpecialization.text = "${args.clinkDto?.specialist}"
+
+        binding.ivDoctorProfile.load("https://salamtechapi.azurewebsites.net/${args.clinkDto?.image}") {
             crossfade(true)
             crossfade(1000)
             transformations(CircleCropTransformation())

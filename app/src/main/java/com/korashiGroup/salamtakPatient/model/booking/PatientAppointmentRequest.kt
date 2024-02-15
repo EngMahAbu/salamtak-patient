@@ -11,6 +11,7 @@ data class PatientAppointmentRequest(
     var PaymentMethodID:Int=0,
     var Fawryrefnum:String="",
     var FawrySign:String="",
-    var Patient_InsuranceID:Int?=null
+    var Patient_InsuranceID:Int?=null,
+    var HealthEntity_OffersID:Int?=null
 
 ): Serializable

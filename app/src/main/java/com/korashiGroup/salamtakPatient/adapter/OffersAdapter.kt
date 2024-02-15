@@ -12,14 +12,14 @@ import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.databinding.ItemLayoutOffersBinding
 import com.korashiGroup.salamtakPatient.model.offers.OfferDetails
+import com.korashiGroup.salamtakPatient.model.offers.OfferDoctor
 import com.korashiGroup.salamtakPatient.utils.localization.DefaultLocaleHelper
 import java.text.NumberFormat
 import java.util.Locale
 
 
 class OffersAdapter(private val onServicesClick:Action):ListAdapter<OfferDetails,OffersAdapter.ViewHolder>(DiffCallback()) {
-    private var selectedItemPosition: Int = -1
-
+      private var name=""
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
         val view= ItemLayoutOffersBinding.inflate(LayoutInflater.from(parent.context),parent,false)
@@ -38,7 +38,7 @@ class OffersAdapter(private val onServicesClick:Action):ListAdapter<OfferDetails
             transformations(CircleCropTransformation())
         }
         if (DefaultLocaleHelper.getInstance(holder.binding.tvDoctorName.context).getCurrentLocale()=="ar"){
-            holder.binding.tvDoctorName.text="Dr.${services.doctorDto.fullNameAr}"
+            holder.binding.tvDoctorName.text="دكتور.${services.doctorDto.fullNameAr}"
         }else{
             holder.binding.tvDoctorName.text="Dr.${services.doctorDto.fullName}"
         }
@@ -48,11 +48,15 @@ class OffersAdapter(private val onServicesClick:Action):ListAdapter<OfferDetails
         holder.binding.tvPriceBefore.text="${NumberFormat.getNumberInstance(Locale.US).format(services.priceBefore)}"
         holder.binding.tvPriceAfter.text="${NumberFormat.getNumberInstance(Locale.US).format(services.priceAfter)} ${holder.binding.tvPriceAfter.context.getString(R.string.egp)}"
 
-//        holder.binding.cardview.setOnClickListener {
-//            selectedItemPosition = holder.bindingAdapterPosition
-//            onServicesClick.onItemClick(services.id)
-//            notifyDataSetChanged()
-//        }
+        holder.binding.tvBook.setOnClickListener {
+            name = if (DefaultLocaleHelper.getInstance(holder.binding.tvDoctorName.context).getCurrentLocale()=="ar"){
+                services.doctorDto.fullNameAr
+            }else{
+                services.doctorDto.fullName
+            }
+            val offerDoctor=OfferDoctor(services.doctorDto.id,services.healthEntityId,services.priceAfter.toString(),name,services.doctorDto.image,services.id,services.doctorDto.specialistName)
+            onServicesClick.onItemBooked(offerDoctor)
+        }
 
 
 
@@ -77,7 +81,7 @@ class OffersAdapter(private val onServicesClick:Action):ListAdapter<OfferDetails
     }
 
     interface Action{
-        fun onItemBooked(servicesId: Int)
+        fun onItemBooked(offerDoctor: OfferDoctor)
     }
 
 

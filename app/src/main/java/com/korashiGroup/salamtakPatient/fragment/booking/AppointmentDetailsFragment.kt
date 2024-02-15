@@ -50,6 +50,7 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
     private lateinit var bottomsheetbeahavoir: BottomSheetBehavior<ConstraintLayout>
     val sharedDataViewmodel: SharedDataViewmodel by activityViewModels()
     private lateinit var insuranceCardAdapter: InsuranceCardAdapter
+    private var offerid=0
 
     //Replace this with Testing/Staging/Production URL
     var baseUrl = "https://atfawry.fawrystaging.com/"
@@ -87,6 +88,7 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
         bottomsheetbeahavoir =
             BottomSheetBehavior.from(binding.layoutBottomsheetpersistant.bookwithinsurance)
         bottomsheetbeahavoir.state = BottomSheetBehavior.STATE_HIDDEN
+        getOfferId()
         bindDataToViews()
         insuranceCardRecylerview()
         initButton()
@@ -134,7 +136,7 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
                         1,
                         "",
                         "",
-                        it1
+                        it1,offerid
                     )
                 }?.let { it2 ->
                     viewmodel.createPatientAppointment(
@@ -432,6 +434,11 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
 //                    ).show()
                 }
             })
+    }
+    private fun getOfferId(){
+        sharedDataViewmodel.offerId.observe(viewLifecycleOwner, Observer {
+            offerid=it
+        })
     }
 
 

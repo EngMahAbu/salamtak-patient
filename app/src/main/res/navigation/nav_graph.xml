@@ -446,7 +446,11 @@
     <fragment android:id="@+id/offersFragment"
               android:name="com.korashiGroup.salamtakPatient.fragment.offers.OffersFragment"
               android:label="offersfragment"
-              tools:layout="@layout/offersfragment"/>
+              tools:layout="@layout/offersfragment">
+        <action
+                android:id="@+id/action_offersFragment_to_offerBookAppointmentFragment"
+                app:destination="@id/offerBookAppointmentFragment" />
+    </fragment>
     <fragment android:id="@+id/notificationListFragment"
               android:name="com.korashiGroup.salamtakPatient.notification.NotificationListFragment"
               android:label="notification_listfragment" tools:layout="@layout/notification_listfragment"/>
@@ -472,6 +476,18 @@
               android:name="com.korashiGroup.salamtakPatient.fragment.webView.ReferenceFragment"
               android:label="referencefragmen" tools:layout="@layout/referencefragmen">
         <argument android:name="link" app:argType="string" app:nullable="true"/>
+    </fragment>
+    <fragment
+            android:id="@+id/offerBookAppointmentFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.booking.OfferBookAppointmentFragment"
+            android:label="OfferBookAppointmentFragment" >
+        <argument
+                android:name="clinkDto"
+                app:argType="com.korashiGroup.salamtakPatient.model.offers.OfferDoctor"
+                app:nullable="true" />
+        <action
+                android:id="@+id/action_offerBookAppointmentFragment_to_appointmentDetailsFragment"
+                app:destination="@id/appointmentDetailsFragment" />
     </fragment>
 
 </navigation>

@@ -36,6 +36,7 @@ class SharedDataViewmodel:ViewModel() {
     val medicalInfoStatus=MutableLiveData<Boolean>()
     val skipLoginStatus=MutableLiveData<String>()
     val patientType=MutableLiveData<ChoosePatient>()
+    val offerId=MutableLiveData<Int>()
 
 
 
@@ -82,6 +83,9 @@ class SharedDataViewmodel:ViewModel() {
 
     fun getDocotorId(doctorid: Int){
         doctorId.postValue(doctorid)
+    }
+    fun getOfferId(offerid: Int){
+        offerId.postValue(offerid)
     }
 
     fun getProfileStatus(profilestatus: Int){
