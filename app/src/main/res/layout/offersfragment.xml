@@ -24,7 +24,7 @@
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_Catagory"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_100sdp"
+            android:layout_height="@dimen/_110sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginBottom="5dp"
@@ -51,6 +51,7 @@
             android:id="@+id/layout_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@+id/rv_Catagory"
             >
         <com.google.android.material.imageview.ShapeableImageView
@@ -97,6 +98,17 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_confirm"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_recentOffers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/recentoffers"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rv_Catagory" />
 
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_offers"
@@ -111,7 +123,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_layout_offers"
-            app:layout_constraintTop_toBottomOf="@+id/rv_Catagory"
+            app:layout_constraintTop_toBottomOf="@+id/tv_recentOffers"
             />
 
     <ProgressBar

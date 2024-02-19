@@ -50,7 +50,7 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
     private lateinit var bottomsheetbeahavoir: BottomSheetBehavior<ConstraintLayout>
     val sharedDataViewmodel: SharedDataViewmodel by activityViewModels()
     private lateinit var insuranceCardAdapter: InsuranceCardAdapter
-    private var offerid=0
+    private var offerid:Int?=null
 
     //Replace this with Testing/Staging/Production URL
     var baseUrl = "https://atfawry.fawrystaging.com/"
@@ -115,7 +115,9 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
         binding.ivArrow.setOnClickListener {
             if (args.status == true) {
                 findNavController().navigate(R.id.searchFragment)
-            } else {
+            } else if (offerid!=null){
+                findNavController().navigate(R.id.offersFragment)
+            }else{
                 findNavController().navigate(R.id.myScheduleFragment)
             }
         }
@@ -439,6 +441,7 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
         sharedDataViewmodel.offerId.observe(viewLifecycleOwner, Observer {
             offerid=it
         })
+
     }
 
 

@@ -112,10 +112,12 @@ class OfferBookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Ac
         }
 
         binding.btnConfirm.setOnClickListener {
-            args.clinkDto?.let { it1 -> it1?.offerId?.let { it2 ->
-                sharedDataViewmodel.getOfferId(
-                    it2
-                )
+            args.clinkDto?.let { it1 -> it1?.offerId?.toInt().let { it2 ->
+                if (it2 != null) {
+                    sharedDataViewmodel.getOfferId(
+                        it2
+                    )
+                }
             } }
             if (time.isNullOrEmpty()) {
                 Toast.makeText(
@@ -142,7 +144,7 @@ class OfferBookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Ac
                     false,
                     "",
                     0,
-                    "","",args.clinkDto?.offerId)
+                    "","",args.clinkDto?.offerId?.toInt())
 
 //                val editPatientAppointmentRequest=EditPatientAppointmentRequest(args.doctorclinks.data?.id,
 //                    doctorWorkingDayTimeId,

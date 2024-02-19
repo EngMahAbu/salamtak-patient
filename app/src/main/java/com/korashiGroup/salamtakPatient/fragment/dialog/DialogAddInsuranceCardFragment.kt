@@ -110,7 +110,7 @@ class DialogAddInsuranceCardFragment : BottomSheetDialogFragment(){
 
     fun setupSpinner(list: List<InsuranceCompany>) {
         val insuranceCompanyList = ArrayList<String>()
-        insuranceCompanyList.add("Select")
+        insuranceCompanyList.add(getString(R.string.select))
         list.forEach {
             insuranceCompanyList.add(it.name)
         }

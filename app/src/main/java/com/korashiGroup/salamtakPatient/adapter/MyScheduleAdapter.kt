@@ -12,6 +12,7 @@ import coil.load
 import coil.transform.CircleCropTransformation
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.databinding.ItemLayoutScheduleBinding
+import com.korashiGroup.salamtakPatient.model.offers.OfferDoctor
 import com.korashiGroup.salamtakPatient.model.scheduling.DataAppointment
 import com.korashiGroup.salamtakPatient.utils.localization.DefaultLocaleHelper
 import java.text.SimpleDateFormat
@@ -44,17 +45,30 @@ class MyScheduleAdapter(private val schedule: ActionSchedule) :
         }
 
         holder.binding.btnMoreAction.setOnClickListener {
-
             services.appointmentDate?.let { it1 ->
                 services.doctorId?.let { it2 ->
                     services.clinicId?.let { it3 ->
                         services.clinicName?.let { it4 ->
                             services.medicalExaminationTypeId?.let { it5 ->
                                 services.appointmentId?.let { it6 ->
-                                    schedule.onItemClick(
-                                        it3, it2, it4,
-                                        it1, it5, it6
-                                    )
+
+                                    services.doctorName?.let { it7 ->
+                                        services.fees?.let { it8 ->
+                                            services.doctorImage?.let { it9 ->
+                                                services.specialistName?.let { it10 ->
+                                                    schedule.onItemClick(
+                                                        it3, it2, it4,
+                                                        it1, it5, it6,
+                                                        it7,
+                                                        it8,
+                                                        it9,services.HealthEntity_OffersID.toString(),
+                                                        it10
+                                                    )
+                                                }
+                                            }
+                                        }
+                                    }
+
                                 }
                             }
                         }
@@ -99,7 +113,8 @@ class MyScheduleAdapter(private val schedule: ActionSchedule) :
     }
 
     interface ActionSchedule {
-        fun onItemClick(clinicId: Int, doctorId: Int,clinkname:String,formaterDate:String,medicalExaminationTypeId:Int,AppointmentId:Int)
+        fun onItemClick(clinicId: Int, doctorId: Int,clinkname:String,formaterDate:String,medicalExaminationTypeId:Int,AppointmentId:Int,
+                        doctorname:String,fess:Int,image:String,offerId:String,specialistname:String)
         fun onLocationClicked(lat:String,long:String)
     }
 

@@ -25,6 +25,7 @@ import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.korashiGroup.salamtakPatient.model.offers.OfferDoctor
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
@@ -247,7 +248,7 @@ class MyScheduleFragment : Fragment(), MyScheduleAdapter.ActionSchedule,
         clinkname: String,
         formaterdate: String,
         medicalExaminationTypeId:Int,
-        AppointmentId:Int
+        AppointmentId:Int,doctorname:String,fess:Int,image:String,offerId:String,specialistname:String
     ) {
         val clinicSchedualByClinicDayId = ClinicSchedualByClinicDayId(
             clinicId,
@@ -258,7 +259,9 @@ class MyScheduleFragment : Fragment(), MyScheduleAdapter.ActionSchedule,
         )
         sharedDataViewmodel.getClinicSchedualByClinicDayId(clinicSchedualByClinicDayId)
         sharedDataViewmodel.getDocotorId(doctorId)
-        val action=MyScheduleFragmentDirections.actionMyScheduleFragmentToDialogSchduleFragment(sechdule,AppointmentId)
+        val action=MyScheduleFragmentDirections.actionMyScheduleFragmentToDialogSchduleFragment(sechdule,AppointmentId,
+            OfferDoctor(doctorId,clinicId,fess,doctorname,image,offerId,specialistname)
+        )
         findNavController().navigate(action)
     }
 
@@ -271,7 +274,7 @@ class MyScheduleFragment : Fragment(), MyScheduleAdapter.ActionSchedule,
             }
     }
 
-    override fun onItemClick( medicalExamination: MedicalExamination) {
+    override fun onItemClickExamination( medicalExamination: MedicalExamination) {
         this.examinationtypeId = medicalExamination.id
     }
 

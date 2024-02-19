@@ -341,6 +341,13 @@
                 app:destination="@id/medicalHistoryFragment" />
         <action android:id="@+id/action_dialogSchduleFragment_to_dialogRatingDoctorFragment"
                 app:destination="@id/dialogRatingDoctorFragment"/>
+        <argument
+                android:name="offerDoctor"
+                app:argType="com.korashiGroup.salamtakPatient.model.offers.OfferDoctor"
+                app:nullable="true" />
+        <action
+                android:id="@+id/action_dialogSchduleFragment_to_offerBookAppointmentFragment"
+                app:destination="@id/offerBookAppointmentFragment" />
     </dialog>
     <fragment
             android:id="@+id/healthEntityFragment"

@@ -54,7 +54,7 @@ class OffersAdapter(private val onServicesClick:Action):ListAdapter<OfferDetails
             }else{
                 services.doctorDto.fullName
             }
-            val offerDoctor=OfferDoctor(services.doctorDto.id,services.healthEntityId,services.priceAfter.toString(),name,services.doctorDto.image,services.id,services.doctorDto.specialistName)
+            val offerDoctor=OfferDoctor(services.doctorDto.id,services.healthEntityId,services.priceAfter,name,services.doctorDto.image,services.id.toString(),services.doctorDto.specialistName)
             onServicesClick.onItemBooked(offerDoctor)
         }
 

@@ -189,7 +189,7 @@
     <string name="remove_from_favorite">حذف من المضلة</string>
     <string name="about_doctor">معلومات عن الطبيب</string>
     <string name="doctor_s_clinics">عيادات الطبيب</string>
-    <string name="book_appointment">ميعاد الحجز</string>
+    <string name="book_appointment">حجز موعد</string>
     <string name="choose_clinic">اختر العيادة</string>
     <string name="choose_service">اختر الخدمة</string>
     <string name="examination_type">الخدمة</string>
@@ -298,10 +298,11 @@
     <string name="addresss">العنوان</string>
     <string name="clinicservices">Clinic Services</string>
     <string name="avilableappointemnts">"Available "</string>
-    <string name="avilableapapointemnts">Available Appointments</string>
-    <string name="reservation_required_first_come_first_served">Reservation Required,first-come,first-served</string>
+    <string name="avilableapapointemnts">المواعيد المتاحة</string>
+    <string name="reservation_required_first_come_first_served">الدخول بأسبقية الحضور</string>
     <string name="offercategories">Offer Categories:</string>
     <string name="session">Session</string>
+    <string name="recentoffers">Recent Offers:</string>
 
 
     <array name="choose">

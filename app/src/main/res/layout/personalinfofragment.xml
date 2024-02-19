@@ -142,7 +142,7 @@
                     android:fontFamily="@font/avenirltstd_roman"
                     android:gravity="start"
                     android:inputType="text"
-                    android:digits="غظضذخثتشرقصفعسنملكيطحزوهدبا !@#$%^*?"
+                    android:digits="غظضذخثتشرقصفعسنملكيطحزوهدباءجةىؤئ !@#$%^*?"
                     android:imeOptions="actionNext"
                     android:importantForAutofill="no"
                     android:textColor="@color/black"

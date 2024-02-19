@@ -18,7 +18,6 @@ import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.google.android.material.snackbar.Snackbar
 import com.korashiGroup.salamtakPatient.model.booking.clink.Data
 import com.korashiGroup.salamtakPatient.model.rating.DotorDetails
 import dagger.hilt.android.AndroidEntryPoint
@@ -199,11 +198,19 @@ class DialogSchduleFragment : BottomSheetDialogFragment() {
                 is Resource.sucess -> {
                     binding.progressBar.visibility = View.GONE
                     Toast.makeText(requireContext(), "Appointment Canceled Successfully", Toast.LENGTH_SHORT).show()
-                    val action = DialogSchduleFragmentDirections.actionDialogSchduleFragmentToBookAppointmentFragment(
-                        getDoctorClinksResponse,
-                        "Edit Appointment"
-                    )
-                    findNavController().navigate(action)
+                    val offer=args.offerDoctor?.offerId
+                    if (offer=="null" || offer.isNullOrEmpty()){
+                        val action =
+                            DialogSchduleFragmentDirections.actionDialogSchduleFragmentToBookAppointmentFragment(
+                                getDoctorClinksResponse,
+                                "Edit Appointment"
+                            )
+                        findNavController().navigate(action)
+
+                    }else {
+                        val action=DialogSchduleFragmentDirections.actionDialogSchduleFragmentToOfferBookAppointmentFragment(args.offerDoctor)
+                        findNavController().navigate(action)
+                    }
                     dismiss()
                 }
 
