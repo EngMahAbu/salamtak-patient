@@ -80,6 +80,7 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setImage()
         binding.ivDoctorProfile.load("https://salamtechapi.azurewebsites.net/${args.confirmappointments?.image}") {
             crossfade(true)
             crossfade(1000)
@@ -232,11 +233,13 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
                             " booking Successfully",
                             Toast.LENGTH_SHORT
                         ).show()
+                        sharedDataViewmodel.getOfferId(null)
                         val action =
                             AppointmentDetailsFragmentDirections.actionAppointmentDetailsFragmentToConfirmedFragment(
                                 binding.tvDate.text.toString()
                             )
                         findNavController().navigate(action)
+
                     }
 
                     is Resource.Error -> {
@@ -442,6 +445,19 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
             offerid=it
         })
 
+    }
+
+    private fun setImage(){
+        val mediaclName = args.confirmappointments?.MedicalExaminationTypeName
+        if (mediaclName == "Call" ||   mediaclName == "مكالمة صوتية") {
+             binding.ivService.setImageResource(R.drawable.calling)
+        }else if ( mediaclName == "Video Call" ||  mediaclName == "مكالمة فيديو"){
+            binding.ivService.setImageResource(R.drawable.video)
+        }else if (  mediaclName == "In-Clinic Booking" || mediaclName == "كشف بالعيادة"){
+            binding.ivService.setImageResource(R.drawable.ic_inclink_book)
+        }else{
+            binding.ivService.setImageResource(R.drawable.ic_homevisit)
+        }
     }
 
 

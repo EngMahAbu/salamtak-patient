@@ -84,7 +84,7 @@ class SharedDataViewmodel:ViewModel() {
     fun getDocotorId(doctorid: Int){
         doctorId.postValue(doctorid)
     }
-    fun getOfferId(offerid: Int){
+    fun getOfferId(offerid: Int?){
         offerId.postValue(offerid)
     }
 

@@ -484,9 +484,6 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
         private fun skipLogin(){
             sharedDataViewmodel.skipLoginStatus.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
                 skip=it
-
-
-
             })
         }
 

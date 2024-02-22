@@ -3,6 +3,7 @@ package com.korashiGroup.salamtakPatient.adapter
 
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
@@ -42,6 +43,11 @@ class MyScheduleAdapter(private val schedule: ActionSchedule) :
             location.text = "${services.clinicAddress}عمارة رقم ${services.BlockNo}الدور رقم ${services.FloorNo} شقة رقم${services.ApartmentNo}"
             waitingTime.text = " ${DateParsing(services.appointmentDate.toString())}"
             Feesresult.text = services.fees.toString()
+        }
+        if (services.HealthEntity_OffersID==null || services.HealthEntity_OffersID.toString()=="null"){
+            holder.binding.ivOffer.visibility=View.GONE
+        }else{
+            holder.binding.ivOffer.visibility=View.VISIBLE
         }
 
         holder.binding.btnMoreAction.setOnClickListener {
