@@ -190,7 +190,7 @@ class PersonalInfoFragment : Fragment() {
         dateOfBirth: String,
         nationality: String
     ): Boolean {
-
+        var value = false
 
         if (fullNameEn.trim().isNullOrEmpty()) {
             binding.etFullNameEn.setCompoundDrawablesWithIntrinsicBounds(
@@ -199,7 +199,7 @@ class PersonalInfoFragment : Fragment() {
                 R.drawable.ic_error,
                 0
             )
-            binding.tvFullNameError.text = getString(R.string.required)
+            binding.tvFullNameError.text = getString(R.string.required_name_english)
             binding.tvFullNameError.visibility = View.VISIBLE
             binding.textinputFullNameEn.setBackgroundResource(R.drawable.bg_edittext_error)
             return false
@@ -229,7 +229,7 @@ class PersonalInfoFragment : Fragment() {
                 R.drawable.ic_error,
                 0
             )
-            binding.tvFullNameARError.text = getString(R.string.required)
+            binding.tvFullNameARError.text = getString(R.string.required_name_arabic)
             binding.tvFullNameARError.visibility = View.VISIBLE
             binding.textinputFullNameAr.setBackgroundResource(R.drawable.bg_edittext_error)
 
@@ -252,18 +252,18 @@ class PersonalInfoFragment : Fragment() {
             binding.etFullNameAR.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
         }
         if (gender.trim().isEmpty()) {
-            binding.tvGenderError.text = getString(R.string.required)
+            binding.tvGenderError.text = getString(R.string.requiredgender)
             binding.tvGenderError.visibility = View.VISIBLE
             binding.layoutGender.setBackgroundResource(R.drawable.bg_edittext_error)
             binding.etGender.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
-            return false
+           
         } else {
             binding.tvGenderError.visibility = View.GONE
             binding.layoutGender.setBackgroundResource(R.drawable.bg_edittext)
             binding.etGender.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
         }
         if (dateOfBirth.trim().isEmpty()) {
-            binding.tvDateOfBirthError.text = getString(R.string.required)
+            binding.tvDateOfBirthError.text = getString(R.string.requiredbirthdate)
             binding.tvDateOfBirthError.visibility = View.VISIBLE
             binding.layoutDateOfbirth.setBackgroundResource(R.drawable.bg_edittext_error)
             binding.etDateOfbirth.setCompoundDrawablesWithIntrinsicBounds(
@@ -272,7 +272,7 @@ class PersonalInfoFragment : Fragment() {
                 R.drawable.ic_error,
                 0
             )
-            return false
+
         } else {
             binding.tvDateOfBirthError.visibility = View.GONE
             binding.layoutDateOfbirth.setBackgroundResource(R.drawable.bg_edittext)
@@ -281,7 +281,7 @@ class PersonalInfoFragment : Fragment() {
         }
 
         if (nationality.trim().isEmpty()) {
-            binding.tvNationaltyError.text = getString(R.string.required)
+            binding.tvNationaltyError.text = getString(R.string.requiredcountry)
             binding.tvNationaltyError.visibility = View.VISIBLE
             binding.layoutNationality.setBackgroundResource(R.drawable.bg_edittext_error)
             binding.etNationality.setCompoundDrawablesWithIntrinsicBounds(
@@ -290,14 +290,15 @@ class PersonalInfoFragment : Fragment() {
                 R.drawable.ic_error,
                 0
             )
-            return false
+
         } else {
             binding.tvNationaltyError.visibility = View.GONE
             binding.layoutNationality.setBackgroundResource(R.drawable.bg_edittext)
             binding.etNationality.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
         }
 
-        return true
+        value = true
+        return value
 
     }
 

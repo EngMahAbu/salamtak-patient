@@ -349,7 +349,7 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/avenirltstd_black"
-        android:text="@string/sign_up"
+        android:text="@string/sign_ups"
         android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/layout_help"
@@ -507,6 +507,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginTop="22dp"
+             android:textSize="11sp"
             android:text="@string/agree_to"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/layout_confirmpassword" />
@@ -520,7 +521,7 @@
             android:fontFamily="@font/avenirltstd_roman"
            android:text="@string/terms_conditions"
             android:textColor="@color/blue"
-            android:textSize="11sp"
+            android:textSize="9sp"
             app:layout_constraintStart_toEndOf="@+id/ch_terms"
             app:layout_constraintTop_toBottomOf="@+id/layout_confirmpassword"
             app:layout_constraintBottom_toBottomOf="@+id/ch_terms"
@@ -552,7 +553,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

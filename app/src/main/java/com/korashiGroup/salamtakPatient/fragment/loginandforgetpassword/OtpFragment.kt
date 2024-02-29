@@ -3,6 +3,7 @@ package com.korashiGroup.salamtakPatient.fragment.loginandforgetpassword
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.text.Editable
+import android.text.Html
 import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -62,12 +63,13 @@ class OtpFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+     //   val text2 ="${getString(R.string.thanks)} <font color=#00D2CB>${getString(R.string.dr)} $nameDr</font> ${getString(R.string.completeing)}"
         if (args.responsemodel?.code.toString().isNullOrEmpty()) {
-            binding.tvVerification.text =
-                format(getString(R.string.verification_code) + args.userforgetpassword?.phone)
+            binding.tvVerification.text =Html.fromHtml("${getString(R.string.verification_code)} <font color=#00D2CB> ${args.userforgetpassword?.phone}</font>")
+                //format(getString(R.string.verification_code) + args.userforgetpassword?.phone)
         } else {
-            binding.tvVerification.text =
-                format(getString(R.string.verification_code) + args.user?.phone)
+            binding.tvVerification.text =Html.fromHtml("${getString(R.string.verification_code)} <font color=#00D2CB> ${args.user?.phone}</font>")
+               // format(getString(R.string.verification_code) + args.user?.phone)
         }
         initButton()
         setupFocusEdittext()
@@ -341,7 +343,8 @@ class OtpFragment : Fragment() {
             binding.etOtpthird.toString().trim().isEmpty() || binding.etOtpforth.toString().trim()
                 .isEmpty()
         ) {
-            Toast.makeText(requireContext(), "please enter valid code", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(),
+                getString(R.string.please_enter_valid_code), Toast.LENGTH_SHORT).show()
         }
 
         val etOtpCode = binding.etOtpFirst.text.toString() + binding.etOtpsecond.text.toString() +
@@ -360,12 +363,12 @@ class OtpFragment : Fragment() {
         object : CountDownTimer(120000, 1000) {
 
             override fun onTick(millisUntilFinished: Long) {
-                binding.tvCounter.setText("(${millisUntilFinished / 1000})")
+                binding.tvCounter.text= Html.fromHtml(("${getString(R.string.verification_code_will_be_sent_within_1_30)} <font color=#00D2CB>(${millisUntilFinished / 1000})</font>"))
 
             }
 
             override fun onFinish() {
-                binding.tvCounter.setText("(0)")
+                binding.tvCounter.text= Html.fromHtml(("${getString(R.string.verification_code_will_be_sent_within_1_30)} <font color=#00D2CB>(0)</font>"))
                 binding.tvResendCode.visibility = View.VISIBLE
             }
         }.start()

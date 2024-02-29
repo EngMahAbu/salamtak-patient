@@ -216,6 +216,24 @@
             android:textSize="12sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_streatError"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginStart="15dp"
+                    android:fontFamily="@font/avenirltstd_roman"
+                    android:gravity="center"
+                    android:padding="3dp"
+                    android:text=""
+                    android:visibility="visible"
+                    android:textColor="@color/red"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textinput_Street"
+                    app:layout_constraintBottom_toTopOf="@+id/textinput_BuildingNumber"
+                    />
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textinput_BuildingNumber"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"

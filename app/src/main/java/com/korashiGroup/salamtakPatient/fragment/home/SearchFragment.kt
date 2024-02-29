@@ -39,6 +39,7 @@ import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCompany
 import com.korashiGroup.salamtakPatient.model.register.ChooseGender
 import com.korashiGroup.salamtakPatient.utils.Constans.Query_Page_Size
 import com.korashiGroup.salamtakPatient.utils.DateUtils
+import com.korashiGroup.salamtakPatient.utils.localization.DefaultLocaleHelper
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
@@ -441,8 +442,14 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
 
         }
         sharedDataViewmodel.getCity.observe(viewLifecycleOwner) {
-            binding.layoutBottomsheetpersistant.etChooseCity.setText(it.name)
-            binding.tvCity.text=it.name
+            if (DefaultLocaleHelper.getInstance(requireContext()).getCurrentLocale()=="ar"){
+                binding.layoutBottomsheetpersistant.etChooseCity.setText(it.nameAr)
+                binding.tvCity.text=it.nameAr
+            }else{
+                binding.layoutBottomsheetpersistant.etChooseCity.setText(it.name)
+                binding.tvCity.text=it.name
+
+            }
         val doctorssearchRequset = DoctorSearchRequest(
             0,
             formattedDate,
@@ -855,8 +862,8 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
 
     private fun getCity(){
         sharedDataViewmodel.getCity.observe(viewLifecycleOwner) {
-            binding.layoutBottomsheetpersistant.etChooseCity.setText(it.name)
-            binding.tvCity.text=it.name
+                binding.layoutBottomsheetpersistant.etChooseCity.setText(it.name)
+                binding.tvCity.text=it.name
             if (!binding.layoutBottomsheetpersistant.etChooseCity.toString().isEmpty()) {
                 cityId = it.id
             } else cityId = 0

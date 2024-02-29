@@ -115,7 +115,7 @@ class LocationFragment : Fragment() {
                 R.drawable.ic_error,
                 0
             )
-            binding.tvCityError.text = getString(R.string.required)
+            binding.tvCityError.text = getString(R.string.requiredcity)
             binding.tvCityError.visibility = View.VISIBLE
             binding.layoutChooseCity.setBackgroundResource(R.drawable.bg_edittext_error)
             isValid = false
@@ -127,7 +127,7 @@ class LocationFragment : Fragment() {
         }
 
         if (area.trim().isEmpty()) {
-            binding.tvAreaError.text = getString(R.string.required)
+            binding.tvAreaError.text = getString(R.string.requiredarea)
             binding.tvAreaError.visibility = View.VISIBLE
             binding.layoutChooseArea.setBackgroundResource(R.drawable.bg_edittext_error)
             binding.etChooseArea.setCompoundDrawablesWithIntrinsicBounds(
@@ -141,6 +141,24 @@ class LocationFragment : Fragment() {
             binding.tvAreaError.visibility = View.GONE
             binding.layoutChooseArea.setBackgroundResource(R.drawable.bg_edittext)
             binding.etChooseArea.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
+
+            isValid = true
+        }
+        if (binding.etStreet.text?.trim()!!.isEmpty()) {
+            binding.tvStreatError.text = getString(R.string.requiredstreat)
+            binding.tvStreatError.visibility = View.VISIBLE
+            binding.textinputStreet.setBackgroundResource(R.drawable.bg_edittext_error)
+            binding.etStreet.setCompoundDrawablesWithIntrinsicBounds(
+                0,
+                0,
+                R.drawable.ic_error,
+                0
+            )
+            isValid = false
+        } else {
+            binding.tvStreatError.visibility = View.GONE
+            binding.textinputStreet.setBackgroundResource(R.drawable.bg_edittext)
+            binding.etStreet.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
 
             isValid = true
         }

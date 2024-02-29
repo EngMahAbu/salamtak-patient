@@ -15,39 +15,40 @@
     <string name="salamtakhomebooking">Salamtak Home Visit</string>
     <string name="salamtakconnect">Salamtak Connect</string>
     <string name="choose">Confirm</string>
-    <string name="login">Log in</string>
+    <string name="login">Log In</string>
     <string name="help">Help</string>
     <string name="next">Next</string>
     <string name="lets_start">Get Started</string>
-    <string name="mobile_number">Phone Number</string>
+    <string name="mobile_number">Mobile Number</string>
     <string name="password">Password</string>
-    <string name="forgetpasword">Forget password?</string>
+    <string name="forgetpasword">Forget Password?</string>
     <string name="egypt">Egypt</string>
-    <string name="doyothaveacount">Don\'t have an acount?</string>
-    <string name="signup">Signup</string>
+    <string name="doyothaveacount">Don\'t Have An Account?</string>
+    <string name="signup">Creat New Account</string>
     <string name="forsupportcallus">For support call us</string>
     <string name="callnumber">17143</string>
     <string name="mobile_number_email">Phone Number or Email</string>
     <string name="send">Send</string>
+    <string name="verify">Verify</string>
     <string name="resetpasword">Forget Password</string>
-    <string name="verification_code">Please enter the verification code you received from</string>
+    <string name="verification_code">Verification Code Is Sent To</string>
     <string name="resend_verification_code">Resend verification code</string>
     <string name="change_password">Change password</string>
     <string name="new_password">New Password</string>
     <string name="confirm_new_password">Confirm Password</string>
     <string name="save">Save</string>
-    <string name="sign_up">Signup</string>
+    <string name="sign_up">Sign Up</string>
     <string name="upload_your_photo">Upload your photo</string>
-    <string name="full_name_in_english_first_middle_last">Full Name in English (first - middle - last)</string>
-    <string name="full_name_in_arabic_first_middle_last">Full Name in Arabic (first - middle - last)</string>
-    <string name="e_mail">Email</string>
+    <string name="full_name_in_english_first_middle_last">Full Name In English (First - Middle - Last)</string>
+    <string name="full_name_in_arabic_first_middle_last">Full Name In Arabic (First - Middle - Last)</string>
+    <string name="e_mail">Email Address</string>
     <string name="have_an_account">Have an account?</string>
     <string name="the_terms_and_conditions">the terms and conditions</string>
     <string name="doctor_profile">Patient profile</string>
-    <string name="gender">Gender</string>
-    <string name="date_of_birth">Date of birth</string>
+    <string name="gender">Choose Gender</string>
+    <string name="date_of_birth">Birth Date</string>
     <string name="national_id">National ID</string>
-    <string name="nationality">Country</string>
+    <string name="nationality">Choose Country</string>
     <string name="syndicate_id">Syndicate ID</string>
     <string name="choose_your_specialty">Choose_your_Specialty</string>
     <string name="seniority_level">Seniority level</string>
@@ -79,12 +80,24 @@
     <string name="upload_front_syndicate_card_image">Upload front Syndicate Card image</string>
     <string name="upload_back_syndicate_card_image">Upload back Syndicate Card image</string>
     <string name="required">" required *"</string>
-    <string name="phonedigits">.The phone number consist of 11 digits only.</string>
-    <string name="Enter_fullName_english">.Name must be consist of at least three English words</string>
-    <string name="Enter_fullName_Arabic">.Name must be consist of at least three Arabic words</string>
-    <string name="match_email">.Invalid Email Address</string>
-    <string name="lesstthan6number">.Password consists of min 6 characters (Numbers &amp; letters)</string>
-    <string name="doesnotmatch">.Password is not identical</string>
+    <string name="requiredbirthdate">Birth Date Is Required</string>
+    <string name="requiredcountry">Country Is Required</string>
+    <string name="requiredgender">Gender Is Required</string>
+    <string name="requiredcity">City Is Required</string>
+    <string name="requiredarea">Area Is Required</string>
+    <string name="requiredstreat">Street Is Required</string>
+    <string name="required_name_english">Full Name in English Is Required</string>
+    <string name="required_name_arabic">Full Name in Arabic Is Required</string>
+    <string name="required_name_email">Email Address Is Required</string>
+    <string name="required_mobile">Mobile Number Is Required</string>
+    <string name="required_password">Password Is Required</string>
+    <string name="required_confirm_password">Conirm Password Is Required</string>
+    <string name="phonedigits">Mobile Must Be 11 Numbers</string>
+    <string name="Enter_fullName_english">Full Name (First-Middle-Least) In English Is Required</string>
+    <string name="Enter_fullName_Arabic">Full Name (First-Middle-Least) In Arabic Is Required</string>
+    <string name="match_email">Email Address Is Invalid Format Please Check It </string>
+    <string name="lesstthan6number">Password Must consists of min.. 6 Digits (Numbers &amp; Characters)</string>
+    <string name="doesnotmatch">Password And Confirm Password Don\'t Match</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
     <string name="choose_your_nationality">Choose your nationality</string>
@@ -103,7 +116,7 @@
         Third Visit (follow up consultation) by using Salamtak Connect.
     </string>
 
-    <string name="verification_code_will_be_sent_within_1_30">Activation code will be sent within</string>
+    <string name="verification_code_will_be_sent_within_1_30">Please Enter The Verification Code That Has Been Sent To Your Mobile Phone</string>
     <string name="conter">1:30</string>
     <string name="complete_your_profile">Complete your profile</string>
     <string name="you_must_complete_your_profile_to_can_book_your_doctor">You must complete your profile to can book
@@ -128,7 +141,7 @@
     <string name="doctors_found">Doctors Found</string>
     <string name="all">All</string>
     <string name="home">Home</string>
-    <string name="my_schedule">My Schedule</string>
+    <string name="my_schedule">My Appointments</string>
     <string name="more">More</string>
     <string name="reviews">Reviews</string>
     <string name="next_available_booking_at_08_nov_from_06_30_pm">Next Available Booking at 08 Nov. from 06:30 PM
@@ -163,7 +176,7 @@
     <string name="occupation">Occupation</string>
     <string name="about_app">About App</string>
     <string name="call_us">Call Us</string>
-    <string name="terms_conditions"> <![CDATA[Terms & Conditions]]></string>
+    <string name="terms_conditions"> <![CDATA[Terms And  Conditions & Privacy Policy]]></string>
     <string name="language">Language</string>
     <string name="sign_out">Sign out</string>
     <string name="old_password">Old Password</string>
@@ -179,13 +192,13 @@
     <string name="building_number">Building Number</string>
     <string name="floor_number">Floor Number</string>
     <string name="apartment_number">Apartment Number</string>
-    <string name="hight">Hight</string>
-    <string name="weight">Weight</string>
-    <string name="blood_group">Blood Type</string>
+    <string name="hight">Height ( CM )</string>
+    <string name="weight">Weight ( KG )</string>
+    <string name="blood_group">Choose Blood Group</string>
     <string name="pressure_mm_gg">Pressure ( MM/GG )</string>
     <string name="sugar_level_mg_dl">Sugar Level ( MG/DL )</string>
-    <string name="medical_allergies">Medical Allergies</string>
-    <string name="food_allergies">Food Allergies</string>
+    <string name="medical_allergies">Choose Medical Allergies</string>
+    <string name="food_allergies">Choose Food Allergies</string>
     <string name="other_allergies">Other Allergies</string>
     <string name="prescriptions">Prescriptions</string>
     <string name="current_medication">Current Medication</string>
@@ -198,7 +211,7 @@
     <string name="summary">Summary</string>
     <string name="appointment_details">Appointment Details</string>
     <string name="booking_date_time"><![CDATA[Booking Date & Time]]></string>
-    <string name="service">Service</string>
+    <string name="service">Booking Type</string>
     <string name="total_fees">Total Fees</string>
     <string name="confirm">Confirm</string>
     <string name="sharelink">Sharelink</string>
@@ -232,13 +245,13 @@
     <string name="good_evening">Good Evening</string>
     <string name="afternoon">Good Afternoon</string>
     <string name="verified">Verified</string>
-    <string name="invalid_code">Invalid Code</string>
+    <string name="invalid_code">Invalid Verification Code</string>
     <string name="le">LE</string>
     <string name="choose_appointment">Choose Appointment Time First</string>
     <string name="there_is_no_appointment_available">There Is No Appointment Available</string>
     <string name="login_success">you Are login Successfully</string>
     <string name="choose_language">Choose language</string>
-    <string name="agree_to">By signing up you agree to Salamtak\'s</string>
+    <string name="agree_to">By Signing Up You Agree To Salamtak\'s</string>
     <string name="Enter_mobile_or_email">Enter mobile or email</string>
     <string name="enter_your_email_we_will_send_you_code_to_reset_the_password">and we will send you a code
         to reset the password
@@ -256,7 +269,7 @@
     <string name="skip_login_explore_our_features">Skip Login,Explore our features</string>
     <string name="you_must_sign_up_to_book_your_doctor">Please Sign up to book your doctor</string>
     <string name="no_data_to_show">No data to show</string>
-    <string name="have_amedicalquestion">Salamtak Help</string>
+    <string name="have_amedicalquestion">Salamtak Ask</string>
     <string name="ask_a_doctor_for_free_and_get_response_in_24_hours">Get professional medical answers to all your
         questions
     </string>
@@ -274,8 +287,7 @@
     <string name="enterreleasedate">Enter Release Date</string>
     <string name="enterenddate">Enter End date</string>
     <string name="your_appointment_is">Your Appointment is</string>
-    <string name="thank_you_for_using_your_salamtak_app_we_wish_you_good_health">Thank you for using your salamtak app.
-        We wish you good health
+    <string name="thank_you_for_using_your_salamtak_app_we_wish_you_good_health">Thank You. Your Booking Has Been Confirmed Successfully
     </string>
     <string name="addcard">+Add Card</string>
     <string name="rate_doctor">Rate Doctor</string>
@@ -315,7 +327,7 @@
     <string name="salamtaktrueorfalse">Salamtak True Or False</string>
     <string name="salamtak_care">Salamtak Care</string>
     <string name="salamatak_scoope">Salamatak Scope</string>
-    <string name="salamatk_cap">Salamatk Cap</string>
+    <string name="salamatk_cap">Salamatk Capsule</string>
     <string name="salamtak_promotions">Salamtak Promotions</string>
     <string name="salamtak_angle">Salamtak Angle</string>
     <string name="enter_your_registered">Enter your registered</string>
@@ -328,6 +340,8 @@
     <string name="offercategories">Offer Categories:</string>
     <string name="session">Session</string>
     <string name="recentoffers">Recent Offers:</string>
+    <string name="please_enter_valid_code">please enter valid code</string>
+    <string name="sign_ups">"Signup "</string>
 
     <array name="choose">
         <item>Select</item>

@@ -28,9 +28,9 @@ class SubSpecialistAdapter(private val selectsubSpecialist:SelectSubSpecialist):
               }
               selectsubSpecialist.onSelectSubcialist(subSpeciaListData)
           }
-        holder.binding.radioSpecialist.setOnClickListener { view ->
-            notifyDataSetChanged()
-        }
+//        holder.binding.radioSpecialist.setOnClickListener { view ->
+//            notifyDataSetChanged()
+//        }
     }
     class ViewHolder(itemBinding: ItemLayoutSubspecialistBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {

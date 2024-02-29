@@ -11,8 +11,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import coil.load
-import coil.transform.CircleCropTransformation
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.databinding.MedicalStatefragmentBinding
 import com.korashiGroup.salamtakPatient.model.profile.*
@@ -116,6 +114,16 @@ class MedicalStateFragment : Fragment() {
         if (!medicineAllergyListId.isNullOrEmpty()){
             partMap = partMap + mapOf("PatientMedicineAllergiesDto" to medicineAllergyListId)
         }
+        if (!binding.etCurrentMedication.text.toString().trim().isNullOrEmpty()){
+            partMap = partMap + mapOf("CurrentMedication" to binding.etCurrentMedication.text.toString())
+        }
+        if (!binding.etPastMedication.text.toString().trim().isNullOrEmpty()){
+            partMap = partMap + mapOf("PastMedication" to binding.etPastMedication.text.toString())
+        }
+        if (!binding.etSurgeries.text.toString().trim().isNullOrEmpty()){
+            partMap = partMap + mapOf("Surgeries" to binding.etSurgeries.text.toString())
+        }
+
 
         viewmodel.createPatientMedicalInfo(partMap as HashMap<String, String>)
         viewmodel.patientMedicalInfoResponse.observe(viewLifecycleOwner, Observer {response->

@@ -212,7 +212,7 @@ class LoginFragment : Fragment() {
                     loginresponse.data!!?.data?.let { DateUtils.setToken(it.token) }
                     DateUtils.setCurrentTime(DataBinding.getCurrentDateTime())
                     sharedDataViewmodel.getProfileStatus( loginresponse.data?.data?.profileStatus!!)
-                     if (loginresponse.data?.data?.profileStatus!!<2) {
+                     if (loginresponse.data?.data?.profileStatus!!<3) {
                           findNavController().navigate(R.id.docotorProfileFragment)
 
                      }else{
