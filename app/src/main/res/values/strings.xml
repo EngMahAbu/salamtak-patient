@@ -7,9 +7,7 @@
     <string name="english">English</string>
     <string name="arabic">Arabic</string>
     <string name="salamtakbooking">Salamtak Booking</string>
-    <string name="screen_booking_text">Salamtak Booking provides an easy way for patient to book an appointment with a
-        doctor who meets patients\' needs. The possibility of following up on the latest offers of doctors in all
-        specialties is an added value provided by Salamtak application.
+    <string name="screen_booking_text">Salamtak Booking provides an easy way for patient to book an appointment with a doctor who meets Patients\' needs. The possibility of following up on the latest offers of doctors in all specialties is an added value provided by Salamtak application.
     </string>
     <string name="skip">Skip</string>
     <string name="salamtakhomebooking">Salamtak Home Visit</string>
@@ -105,15 +103,10 @@
     <string name="powered_by">Powered By</string>
     <string name="salamtak_booking">Salamtak Booking</string>
     <string name="home_visit">Home Visit</string>
-    <string name="home_visitdesc">Salamtak Home Visit provides the proper solution for booking a Home Visit. Home Visit
-        better services and more choices, are now available by Salamtak application more than ever.The good days of the
-        “Family doctor” is back.
+    <string name="home_visitdesc">Salamtak Home Visit provides the proper solution for booking a Home Visit. Home Visit better services and more choices, are now available by Salamtak application more than ever.The good days of the “Family doctor” is back.
     </string>
     <string name="live_chat">Salamtak Connect</string>
-    <string name="live_chatdesc">Salamtak Connect enables patient, with a click of a finger tip, to enjoy full medical
-        diagnosis “in simple medical cases“ by using call or video call services. it is a valuable tool that provides,
-        at least, professional medical guidance. Now you can save the First Visit (identify scans and lab analysis) and
-        Third Visit (follow up consultation) by using Salamtak Connect.
+    <string name="live_chatdesc">Salamtak Connect enables patient to enjoy full medical diagnosis “in simple medical cases“ by using call or video call services. it is a valuable tool that provides, at least, professional medical guidance. Save the First Visit (identify scans and lab analysis) and Third Visit (follow up consultation) by using Salamtak Connect.
     </string>
 
     <string name="verification_code_will_be_sent_within_1_30">Please Enter The Verification Code That Has Been Sent To Your Mobile Phone</string>

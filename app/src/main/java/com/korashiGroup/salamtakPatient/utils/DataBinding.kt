@@ -30,11 +30,9 @@ object DataBinding {
         Toast.makeText(this,txt, Toast.LENGTH_SHORT).show()
     }
 
-    fun getCurrentDateTime():String{
+    fun getCurrentDateTime(): String {
         val time = Calendar.getInstance().time
         val formatter = SimpleDateFormat("yyyy-MM-dd")
-        val current = formatter.format(time)
-
-        return current
+        return formatter.format(time)
     }
 }

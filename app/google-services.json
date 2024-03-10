@@ -20,6 +20,9 @@
       ],
       "api_key": [
         {
+          "current_key": "AIzaSyAyqfBGsIx9wvD2HBpdgb4Z0ak-HMQTyz8"
+        },
+        {
           "current_key": "AIzaSyB77__pnxFdG2uLQWsyROYSAE2TVmLVz8A"
         }
       ],
@@ -51,19 +54,14 @@
       },
       "oauth_client": [
         {
-          "client_id": "842967379495-0jgo4k8gfcjnkpmgleaduaqa9jlsh25n.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.salamtak.salamtakdoctor",
-            "certificate_hash": "39e0fcfe1a8c3675ed2838fa6e63f501c33f400c"
-          }
-        },
-        {
           "client_id": "842967379495-8uh14coq1o2ob6nv7smscs4s5l1f036l.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
+        {
+          "current_key": "AIzaSyAyqfBGsIx9wvD2HBpdgb4Z0ak-HMQTyz8"
+        },
         {
           "current_key": "AIzaSyB77__pnxFdG2uLQWsyROYSAE2TVmLVz8A"
         }
@@ -109,6 +107,9 @@
         }
       ],
       "api_key": [
+        {
+          "current_key": "AIzaSyAyqfBGsIx9wvD2HBpdgb4Z0ak-HMQTyz8"
+        },
         {
           "current_key": "AIzaSyB77__pnxFdG2uLQWsyROYSAE2TVmLVz8A"
         }

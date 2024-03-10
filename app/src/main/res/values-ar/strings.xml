@@ -5,7 +5,7 @@
     <string name="arabic">اللغة العربية</string>
     <string name="app_name">Salamtak|سلامتك</string>
     <string name="salamtakbooking">الحجوزات</string>
-    <string name="screen_booking_text">Salamtak Booking يوفر آلية تنفيذ الحجوزات بسلاسة شديدة وما يتبع الحجز من خطوات سواء لتأكيد الحجز وكذلك توضيح كافة البيانات ذات الاهمية سوا للطبيب او المريض وتوضيح الخدمات المقدمة من العيادة للمريض</string>
+    <string name="screen_booking_text">صُمم تطبيق سلامتك لمساعدتك علي البحث عن مواصفات كل من الطبيب و العيادة التي تتفق تماماً مع احتياجاتك ، و ذلك من حيث التخصص الطبي ، سعر الكشف ، موقع العيادة .وأخيراً و ليس آخراً تقييم المرضي لمستوي الخدمة الطبية.</string>
     <string name="skip">تخطى</string>
     <string name="salamtakhomebooking">Salamtak Home Visit</string>
     <string name="salamtakconnect">Salamtak Connect</string>
@@ -97,9 +97,11 @@
     <string name="powered_by">برعاية</string>
     <string name="salamtak_booking">الحجوزات</string>
     <string name="home_visit">الزيارة المنزلية</string>
-    <string name="home_visitdesc">Salamtak Home  يمكن الطبيب من تنسيق مواعيد وحجوزات العيادة بالمرونة التي تتيح له ايضا تخصيص الوقت اللازم لحجوزات الزيارات المنزلية</string>
+    <string name="home_visitdesc">يٌوفر تطبيق سلامتك خدمة الزيارة المنزلية. لتصلك بأقرب طبيب إليك لعمل زيارة منزلية عن طريق اختيار المنطقة و التخصص من نخبة أطباء سلامتك.
+لقد عادت الأيام الجميلة لطبيب الأسرة</string>
     <string name="live_chat">التواصل مع الطبيب</string>
-    <string name="live_chatdesc">خدمة سلامتك كونكت تسمح بالتواصل بين الطبيب والمريض لتبادل المعلومات اللي تتيح بنسبة كبيرة جدا الغاء كل من الزيارة الأولي والثالثة</string>
+    <string name="live_chatdesc">يتيح تطبيق سلامتك للمريض بنقرة بأطراف أصابعه الاستمتاع بالتشخيص الطبي الكامل في الحالات الطبية البسيطة ، للحصول على إرشادات طبية من خلال التواصل مع أطباء سلامتك ،باستخدام خدمات المكالمة الصوتية و المكالمة عبر الفيديو.
+احفظ الزيارة الأولى (الأشعات والتحاليل) والزيارة الثالثة (الاستشارة) باستخدام سلامتك كونكت.</string>
 
 
     <string name="verification_code_will_be_sent_within_1_30">الرجاء ادخال رمز التحقق الذى قد تم ارسالة الى هاتفك المحمول</string>

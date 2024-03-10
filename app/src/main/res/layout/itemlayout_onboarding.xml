@@ -64,7 +64,7 @@
             android:padding="3dp"
             android:maxLines="9"
             android:gravity="center_horizontal"
-            android:textSize="@dimen/_13ssp"
+            android:textSize="@dimen/_12ssp"
             android:textColor="@color/black"
             android:text="jhjhjhkhjbjjkljljjljlkjkljkljkljkl"
             app:layout_constraintTop_toBottomOf="@+id/tv_title"

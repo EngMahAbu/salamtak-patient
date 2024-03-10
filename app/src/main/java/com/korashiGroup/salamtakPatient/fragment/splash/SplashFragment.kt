@@ -50,7 +50,6 @@ class SplashFragment : Fragment() {
                         DateUtils.setLanguageFromMore("")
                     }
 
-
             }else if(!DateUtils.getToken().isNullOrEmpty()){
                 Log.e("lang",DateUtils.getLanguage().toString())
                 if (DateUtils.getCurrentTime()==DataBinding.getCurrentDateTime()){
@@ -60,7 +59,7 @@ class SplashFragment : Fragment() {
                 }
 
             }else{
-                findNavController().navigate(R.id.onboardingFragment)
+                findNavController().navigate(R.id.loginFragment)
             }
         }, 2000)
 

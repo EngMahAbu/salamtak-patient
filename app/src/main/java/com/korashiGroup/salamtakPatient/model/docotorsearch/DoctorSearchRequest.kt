@@ -19,7 +19,7 @@ data class DoctorSearchRequest(
     @SerializedName("GenderId")
     val genderId: Int=0,
     @SerializedName("MaxResultCount")
-    val maxResultCount: Int=10,
+    val maxResultCount: Int=0,
     @SerializedName("MedicalExaminationTypeId")
     val medicalExaminationTypeId: Int=0,
     @SerializedName("SeniortyLevelId")

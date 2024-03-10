@@ -258,7 +258,7 @@ class SignupFragment : Fragment() {
 //            }
             else if (binding.confirmEtPassword.text?.toString() != binding.etPassword.text?.toString()) {
                 binding.tvConfirmpasswordError.text = getString(R.string.doesnotmatch)
-                binding.tvPasswordError.text = getString(R.string.doesnotmatch)
+              //  binding.tvPasswordError.text = getString(R.string.doesnotmatch)
                 binding.tvConfirmpasswordError.visibility = View.VISIBLE
                 binding.layoutConfirmpassword.setBackgroundResource(R.drawable.bg_edittext_error)
                 binding.confirmEtPassword.setCompoundDrawablesWithIntrinsicBounds(
@@ -543,7 +543,6 @@ class SignupFragment : Fragment() {
 
         } else if (password != confirmPassword) {
             binding.tvConfirmpasswordError.text = getString(R.string.doesnotmatch)
-            binding.tvPasswordError.text = getString(R.string.doesnotmatch)
             binding.tvConfirmpasswordError.visibility = View.VISIBLE
             binding.layoutConfirmpassword.setBackgroundResource(R.drawable.bg_edittext_error)
             binding.confirmEtPassword.setCompoundDrawablesWithIntrinsicBounds(

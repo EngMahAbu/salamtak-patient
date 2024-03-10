@@ -124,7 +124,7 @@ class MedicalHistoryFragment : Fragment() {
 
             })
 
-            viewModel.getPatientDetails(1631)
+            viewModel.getPatientDetails(args.appointmentId)
         }
 
     private fun showprogtessbar() {

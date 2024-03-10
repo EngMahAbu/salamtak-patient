@@ -94,7 +94,7 @@ class VideoCallFragment : Fragment() {
             placeholder(R.drawable.ic_profile)
             transformations(CircleCropTransformation())
         }
-
+        joinCall()
 
     }
 
