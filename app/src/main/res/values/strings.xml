@@ -335,7 +335,9 @@
     <string name="recentoffers">Recent Offers:</string>
     <string name="please_enter_valid_code">please enter valid code</string>
     <string name="sign_ups">"Signup "</string>
-
+    <string name="force_update_title">Update the app!</string>
+    <string name="force_update_description">We recommend that you update the app to the latest version. After updating, you can continue using the app normally.</string>
+    <string name="btn_update">UPDATE</string>
     <array name="choose">
         <item>Select</item>
     </array>

@@ -21,6 +21,7 @@ object Constans {
     const val SalamtakGatePromotions=5
     const val SalamtakGateAngleICO=6
 
-
+    const val KEY_CURRENT_VERSION = "android_Patient_force_update_current_version"
+    const val KEY_FORCE_UPDATE_REQUIRED = "android_Patient_force_update_required"
 
 }

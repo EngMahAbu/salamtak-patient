@@ -320,7 +320,9 @@
     <string name="recentoffers">العروض الأخيرة:</string>
     <string name="please_enter_valid_code">الرجاء إدخال رمز صالح</string>
     <string name="sign_ups">انشاء حساب جديد</string>
-
+    <string name="force_update_title">حدث التطبيق!</string>
+    <string name="force_update_description">ننصحك بتحديث التطبيق إلى الإصدار الأحدث. بعد التحديث، يمكنك الاستمرار في استخدام التطبيق بشكل طبيعي.</string>
+    <string name="btn_update">تحديث</string>
 
     <array name="choose">
         <item>اختار</item>

@@ -1,13 +1,9 @@
 package com.korashiGroup.salamtakPatient.di
-import android.content.SharedPreferences
 import android.util.Log
 import com.korashiGroup.salamtakPatient.BuildConfig
 import com.korashiGroup.salamtakPatient.api.ApiService
-import com.korashiGroup.salamtakPatient.fragment.loginandforgetpassword.LoginFragment
 import com.korashiGroup.salamtakPatient.utils.Constans.BASE_URL
-import com.korashiGroup.salamtakPatient.utils.Constans.TOKEN
 import com.korashiGroup.salamtakPatient.utils.DateUtils
-import com.korashiGroup.salamtakPatient.utils.SpUtil
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -16,14 +12,12 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.Protocol
 import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.net.SocketTimeoutException
 import java.util.concurrent.TimeUnit
-import javax.inject.Inject
 import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
@@ -84,9 +78,9 @@ object AppModule {
 //        val logging = HttpLoggingInterceptor().setLevel(levelType)
         val httpBuilder = OkHttpClient.Builder()
             .addInterceptor(interceptor)
-            .connectTimeout(30, TimeUnit.SECONDS)
-            .readTimeout(30, TimeUnit.SECONDS)
-            .writeTimeout(50, TimeUnit.SECONDS)
+            .connectTimeout(5, TimeUnit.MINUTES)
+            .readTimeout(5, TimeUnit.MINUTES)
+            .writeTimeout(5, TimeUnit.MINUTES)
 
         return httpBuilder
             .addInterceptor(logging)
@@ -125,6 +119,9 @@ object AppModule {
 
             okHttpClientBuilder
                 .addInterceptor(logging)
+                .connectTimeout(2, TimeUnit.MINUTES)
+                .readTimeout(2, TimeUnit.MINUTES)
+                .writeTimeout(2, TimeUnit.MINUTES)
 
         }
 

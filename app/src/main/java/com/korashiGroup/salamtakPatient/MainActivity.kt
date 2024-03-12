@@ -6,12 +6,17 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import com.korashiGroup.salamtakPatient.databinding.ActivityMainBinding
+import com.korashiGroup.salamtakPatient.fragment.dialog.Dialog
 import com.korashiGroup.salamtakPatient.fragment.loginandforgetpassword.LoginFragment
+import com.korashiGroup.salamtakPatient.utils.Constans.KEY_CURRENT_VERSION
+import com.korashiGroup.salamtakPatient.utils.Constans.KEY_FORCE_UPDATE_REQUIRED
+import com.korashiGroup.salamtakPatient.utils.ForceUpdateUtils
 import com.korashiGroup.salamtakPatient.utils.localization.DefaultLocaleHelper
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,7 +25,13 @@ class MainActivity : AppCompatActivity(), LoginFragment.onSomeEventListener {
 
     private lateinit var navController: NavController
     private lateinit var binding: ActivityMainBinding
-
+    private val firebaseRemoteConfig by lazy { FirebaseRemoteConfig.getInstance() }
+    private val dialog = Dialog()
+    private val configSettings by lazy {
+        FirebaseRemoteConfigSettings.Builder()
+            .setMinimumFetchIntervalInSeconds((if (BuildConfig.DEBUG) 0 else 3600))
+            .build()
+    }
 
     companion object {
         var instance: MainActivity? = null
@@ -31,7 +42,14 @@ class MainActivity : AppCompatActivity(), LoginFragment.onSomeEventListener {
         super.attachBaseContext(DefaultLocaleHelper.getInstance(newBase!!).onAttach())
     }
 
+    override fun onResume() {
+        super.onResume()
+        check()
+    }
 
+    init {
+        firebaseRemoteConfig.setConfigSettingsAsync(configSettings)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -87,6 +105,23 @@ class MainActivity : AppCompatActivity(), LoginFragment.onSomeEventListener {
             binding.bottomViewNav.getMenu().getItem(1).setEnabled(true)
            // binding.bottomViewNav.getMenu().getItem(2).setEnabled(true)
         }
+    }
+    private fun check() {
+        val appVersion = ForceUpdateUtils.getAppVersion(this)
+        firebaseRemoteConfig.fetchAndActivate().addOnCompleteListener(this) {
+            if (it.isSuccessful) {
+                val forceUpdate = firebaseRemoteConfig.getBoolean(KEY_FORCE_UPDATE_REQUIRED)
+                val currentVersion = firebaseRemoteConfig.getString(KEY_CURRENT_VERSION)
+                if (forceUpdate) {
+                    if (currentVersion > appVersion) {
+                        showDialog()
+                    }
+                }
+            }
+        }
+    }
+    private fun showDialog() {
+        dialog.show(supportFragmentManager, "Exit Dialog")
     }
 
 
