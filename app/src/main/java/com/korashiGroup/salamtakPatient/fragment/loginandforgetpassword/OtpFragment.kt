@@ -363,12 +363,12 @@ class OtpFragment : Fragment() {
         object : CountDownTimer(120000, 1000) {
 
             override fun onTick(millisUntilFinished: Long) {
-                binding.tvCounter.text= Html.fromHtml(("${getString(R.string.verification_code_will_be_sent_within_1_30)} <font color=#00D2CB>(${millisUntilFinished / 1000})</font>"))
+                binding.tvCounter.text= Html.fromHtml(("${getString(R.string.verification_code_will_be_sent_within_1_30)} <font color=#00D2CB>( ${millisUntilFinished / 1000} )</font>"))
 
             }
 
             override fun onFinish() {
-                binding.tvCounter.text= Html.fromHtml(("${getString(R.string.verification_code_will_be_sent_within_1_30)} <font color=#00D2CB>(0)</font>"))
+                binding.tvCounter.text= Html.fromHtml(("${getString(R.string.verification_code_will_be_sent_within_1_30)} <font color=#00D2CB>( 0 )</font>"))
                 binding.tvResendCode.visibility = View.VISIBLE
             }
         }.start()

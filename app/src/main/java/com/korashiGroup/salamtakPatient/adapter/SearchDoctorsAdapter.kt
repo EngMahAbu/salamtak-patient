@@ -1,6 +1,7 @@
 package com.korashiGroup.salamtakPatient.adapter
 
 
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -32,11 +33,16 @@ class SearchDoctorsAdapter(private val booking: Booking) :
         val services = getItem(position)
 
         holder.binding.apply {
-            if (DefaultLocaleHelper.getInstance(this.tvDoctorName.context).getCurrentLocale()=="en"){
-                tvDoctorName.text = "Dr.${services.doctorName}"
+            if (services.NickName==null || services.NickName=="null"){
+                if (DefaultLocaleHelper.getInstance(this.tvDoctorName.context).getCurrentLocale()=="en"){
+                    tvDoctorName.text = "${services.doctorName}"
+                }else{
+                    tvDoctorName.text = "${services.doctorName}"
+                }
             }else{
-                tvDoctorName.text = "دكتور.${services.doctorName}"
+                tvDoctorName.text = "${services.NickName}"
             }
+
 
             tvSpecialization.text = "${services.specialistName} - ${services.seniortyLevelName}"
 

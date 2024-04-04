@@ -34,9 +34,9 @@ class MyScheduleAdapter(private val schedule: ActionSchedule) :
 
         holder.binding.apply {
             if (DefaultLocaleHelper.getInstance(this.tvDoctorName.context).getCurrentLocale()=="en"){
-                tvDoctorName.text = "Dr.${services.doctorName}"
+                tvDoctorName.text = "${services.doctorName}"
             }else{
-                tvDoctorName.text = "دكتور.${services.doctorName}"
+                tvDoctorName.text = "${services.doctorName}"
             }
             tvSpecialization.text = "${services.specialistName} - ${services.seniorityLevelName}"
             Service.text=services.medicalExaminationTypeName

@@ -7,17 +7,14 @@ import android.text.method.PasswordTransformationMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.fawry.fawrypay.models.City
 import com.google.android.material.snackbar.Snackbar
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.databinding.LoginfragmentBinding
-import com.korashiGroup.salamtakPatient.model.CityData
 import com.korashiGroup.salamtakPatient.model.register.DataLogin
 import com.korashiGroup.salamtakPatient.model.register.LoginUser
 import com.korashiGroup.salamtakPatient.utils.Constans.Language
@@ -27,7 +24,6 @@ import com.korashiGroup.salamtakPatient.utils.DataBinding
 import com.korashiGroup.salamtakPatient.utils.DateUtils
 import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.utils.SpUtil
-import com.korashiGroup.salamtakPatient.viewmodel.PatientViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.RegisterViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import dagger.hilt.android.AndroidEntryPoint

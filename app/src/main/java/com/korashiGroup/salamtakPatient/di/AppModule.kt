@@ -78,9 +78,9 @@ object AppModule {
 //        val logging = HttpLoggingInterceptor().setLevel(levelType)
         val httpBuilder = OkHttpClient.Builder()
             .addInterceptor(interceptor)
-            .connectTimeout(5, TimeUnit.MINUTES)
-            .readTimeout(5, TimeUnit.MINUTES)
-            .writeTimeout(5, TimeUnit.MINUTES)
+            .connectTimeout(1, TimeUnit.MINUTES)
+            .readTimeout(1, TimeUnit.MINUTES)
+            .writeTimeout(1, TimeUnit.MINUTES)
 
         return httpBuilder
             .addInterceptor(logging)
@@ -119,9 +119,9 @@ object AppModule {
 
             okHttpClientBuilder
                 .addInterceptor(logging)
-                .connectTimeout(2, TimeUnit.MINUTES)
-                .readTimeout(2, TimeUnit.MINUTES)
-                .writeTimeout(2, TimeUnit.MINUTES)
+                .connectTimeout(1, TimeUnit.MINUTES)
+                .readTimeout(1, TimeUnit.MINUTES)
+                .writeTimeout(1, TimeUnit.MINUTES)
 
         }
 

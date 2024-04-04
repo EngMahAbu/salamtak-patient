@@ -1,57 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/filter_bottomsheet"
-    app:behavior_hideable="true"
-    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-    android:background="@color/bg_color_gray"
-    tools:context=".fragment.home.FilterFragment">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        >
+        android:id="@+id/filter_bottomsheet"
+        app:behavior_hideable="true"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        android:background="@color/bg_color_gray"
+        tools:context=".fragment.home.FilterFragment">
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/iv_arrow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:adjustViewBounds="true"
-        android:src="@drawable/ic_arrowleft"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_Filter"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_Filter" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_Filter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/avenirltstd_black"
-        android:text="@string/filter"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/iv_arrow"
-        app:layout_constraintTop_toTopOf="parent" />
+        <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/iv_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_arrowleft"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_Filter"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_Filter" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_RESET"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="15dp"
-        android:fontFamily="@font/avenirltstd_roman"
-        android:text="@string/reset"
-        android:textColor="@color/green"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/avenirltstd_black"
+                android:text="@string/filter"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/iv_arrow"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_RESET"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="15dp"
+                android:fontFamily="@font/avenirltstd_roman"
+                android:text="@string/reset"
+                android:textColor="@color/green"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -71,8 +69,8 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginBottom="15dp"
-            >
+                    android:layout_marginBottom="15dp">
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
@@ -105,7 +103,7 @@
                                     android:src="@drawable/ic_arrowup"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"/>
+                                    app:layout_constraintTop_toTopOf="parent" />
 
                             <androidx.constraintlayout.widget.ConstraintLayout
                                     android:id="@+id/layout_ivCollabsarrowdownExaminationtype"
@@ -127,7 +125,7 @@
                                         app:layout_constraintBottom_toBottomOf="parent"
                                         app:layout_constraintEnd_toEndOf="parent"
                                         app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toTopOf="parent"/>
+                                        app:layout_constraintTop_toTopOf="parent" />
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -142,7 +140,7 @@
                                     android:textSize="16sp"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"/>
+                                    app:layout_constraintTop_toTopOf="parent" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <androidx.constraintlayout.widget.ConstraintLayout
@@ -172,7 +170,7 @@
                                     app:layout_constraintHorizontal_bias="1.0"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent"
-                                    app:layout_constraintVertical_bias="0.6"/>
+                                    app:layout_constraintVertical_bias="0.6" />
 
                             <androidx.appcompat.widget.AppCompatImageView
                                     android:id="@+id/iv_sparrowdown"
@@ -184,7 +182,7 @@
                                     android:gravity="start"
                                     android:src="@drawable/ic_arrowdwon"
                                     app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"/>
+                                    app:layout_constraintEnd_toEndOf="parent" />
 
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -219,7 +217,7 @@
                                     android:src="@drawable/ic_arrowup"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"/>
+                                    app:layout_constraintTop_toTopOf="parent" />
 
                             <androidx.constraintlayout.widget.ConstraintLayout
                                     android:id="@+id/layout_ivCollabsarrowdown"
@@ -241,7 +239,7 @@
                                         app:layout_constraintBottom_toBottomOf="parent"
                                         app:layout_constraintEnd_toEndOf="parent"
                                         app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toTopOf="parent"/>
+                                        app:layout_constraintTop_toTopOf="parent" />
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -256,7 +254,7 @@
                                     android:textSize="16sp"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"/>
+                                    app:layout_constraintTop_toTopOf="parent" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <androidx.constraintlayout.widget.ConstraintLayout
@@ -281,8 +279,7 @@
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent"
-                                    app:layout_constraintBottom_toTopOf="@+id/layout_Choose_Sub_Specialization"
-                            >
+                                    app:layout_constraintBottom_toTopOf="@+id/layout_Choose_Sub_Specialization">
 
                                 <androidx.appcompat.widget.AppCompatImageView
                                         android:id="@+id/iv_arrowdown"
@@ -294,7 +291,7 @@
                                         android:gravity="start"
                                         android:src="@drawable/ic_arrowdwon"
                                         app:layout_constraintBottom_toBottomOf="parent"
-                                        app:layout_constraintEnd_toEndOf="parent"/>
+                                        app:layout_constraintEnd_toEndOf="parent" />
 
                                 <com.google.android.material.textfield.TextInputLayout
                                         android:id="@+id/textinput_Specialization"
@@ -321,11 +318,12 @@
                                             android:inputType="text"
                                             android:enabled="false"
                                             android:textColor="@color/black"
-                                            android:textSize="12sp"/>
+                                            android:textSize="12sp" />
 
                                 </com.google.android.material.textfield.TextInputLayout>
 
                             </androidx.constraintlayout.widget.ConstraintLayout>
+
                             <androidx.appcompat.widget.AppCompatButton
                                     android:id="@+id/btn_layout_Choose_Specialization"
                                     android:layout_width="0dp"
@@ -334,8 +332,8 @@
                                     app:layout_constraintEnd_toEndOf="@+id/layout_Choose_Specialization"
                                     app:layout_constraintStart_toStartOf="@+id/layout_Choose_Specialization"
                                     app:layout_constraintTop_toTopOf="@+id/layout_Choose_Specialization"
-                                    app:layout_constraintBottom_toBottomOf="@+id/layout_Choose_Specialization"
-                            />
+                                    app:layout_constraintBottom_toBottomOf="@+id/layout_Choose_Specialization" />
+
                             <androidx.appcompat.widget.AppCompatButton
                                     android:id="@+id/btn_layout_Choose_Sub_Specialization"
                                     android:layout_width="0dp"
@@ -344,8 +342,8 @@
                                     app:layout_constraintEnd_toEndOf="@+id/layout_Choose_Sub_Specialization"
                                     app:layout_constraintStart_toStartOf="@+id/layout_Choose_Sub_Specialization"
                                     app:layout_constraintTop_toTopOf="@+id/layout_Choose_Sub_Specialization"
-                                    app:layout_constraintBottom_toBottomOf="@+id/layout_Choose_Sub_Specialization"
-                            />
+                                    app:layout_constraintBottom_toBottomOf="@+id/layout_Choose_Sub_Specialization" />
+
                             <androidx.constraintlayout.widget.ConstraintLayout
                                     android:id="@+id/layout_Choose_Sub_Specialization"
                                     android:layout_width="match_parent"
@@ -369,7 +367,7 @@
                                         android:gravity="start"
                                         android:src="@drawable/ic_arrowdwon"
                                         app:layout_constraintBottom_toBottomOf="parent"
-                                        app:layout_constraintEnd_toEndOf="parent"/>
+                                        app:layout_constraintEnd_toEndOf="parent" />
 
                                 <com.google.android.material.textfield.TextInputLayout
                                         android:id="@+id/textinput_Sub_Specialization"
@@ -396,7 +394,7 @@
                                             android:inputType="text"
                                             android:enabled="false"
                                             android:textColor="@color/black"
-                                            android:textSize="12sp"/>
+                                            android:textSize="12sp" />
 
                                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -411,8 +409,7 @@
                                     app:layout_constraintEnd_toEndOf="@+id/layout_Choose_Seniority_Level"
                                     app:layout_constraintStart_toStartOf="@+id/layout_Choose_Seniority_Level"
                                     app:layout_constraintTop_toTopOf="@+id/layout_Choose_Seniority_Level"
-                                    app:layout_constraintBottom_toBottomOf="@+id/layout_Choose_Seniority_Level"
-                            />
+                                    app:layout_constraintBottom_toBottomOf="@+id/layout_Choose_Seniority_Level" />
 
                             <androidx.constraintlayout.widget.ConstraintLayout
                                     android:id="@+id/layout_Choose_Seniority_Level"
@@ -439,7 +436,7 @@
                                         android:gravity="start"
                                         android:src="@drawable/ic_arrowdwon"
                                         app:layout_constraintBottom_toBottomOf="parent"
-                                        app:layout_constraintEnd_toEndOf="parent"/>
+                                        app:layout_constraintEnd_toEndOf="parent" />
 
                                 <com.google.android.material.textfield.TextInputLayout
                                         android:id="@+id/textinput_Seniority"
@@ -466,7 +463,7 @@
                                             android:inputType="text"
                                             android:enabled="false"
                                             android:textColor="@color/black"
-                                            android:textSize="12sp"/>
+                                            android:textSize="12sp" />
 
                                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -505,7 +502,7 @@
                                     android:src="@drawable/ic_arrowup"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"/>
+                                    app:layout_constraintTop_toTopOf="parent" />
 
                             <androidx.constraintlayout.widget.ConstraintLayout
                                     android:id="@+id/layout_ivinsuranceCompany"
@@ -527,7 +524,7 @@
                                         app:layout_constraintBottom_toBottomOf="parent"
                                         app:layout_constraintEnd_toEndOf="parent"
                                         app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toTopOf="parent"/>
+                                        app:layout_constraintTop_toTopOf="parent" />
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -542,7 +539,7 @@
                                     android:textSize="16sp"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"/>
+                                    app:layout_constraintTop_toTopOf="parent" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <androidx.constraintlayout.widget.ConstraintLayout
@@ -572,7 +569,7 @@
                                     app:layout_constraintHorizontal_bias="1.0"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent"
-                                    app:layout_constraintVertical_bias="0.6"/>
+                                    app:layout_constraintVertical_bias="0.6" />
 
                             <androidx.appcompat.widget.AppCompatImageView
                                     android:id="@+id/iv_sparrowdowninsuranceCompany"
@@ -584,7 +581,7 @@
                                     android:gravity="start"
                                     android:src="@drawable/ic_arrowdwon"
                                     app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"/>
+                                    app:layout_constraintEnd_toEndOf="parent" />
 
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -620,7 +617,7 @@
                                     android:src="@drawable/ic_arrowup"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"/>
+                                    app:layout_constraintTop_toTopOf="parent" />
 
                             <androidx.constraintlayout.widget.ConstraintLayout
                                     android:id="@+id/layout_ivHideLocationarrowRight"
@@ -642,7 +639,7 @@
                                         app:layout_constraintBottom_toBottomOf="parent"
                                         app:layout_constraintEnd_toEndOf="parent"
                                         app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toTopOf="parent"/>
+                                        app:layout_constraintTop_toTopOf="parent" />
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -657,7 +654,7 @@
                                     android:textSize="16sp"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"/>
+                                    app:layout_constraintTop_toTopOf="parent" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <androidx.constraintlayout.widget.ConstraintLayout
@@ -678,8 +675,8 @@
                                     app:layout_constraintEnd_toEndOf="@+id/layout_Choose_City"
                                     app:layout_constraintStart_toStartOf="@+id/layout_Choose_City"
                                     app:layout_constraintTop_toTopOf="@+id/layout_Choose_City"
-                                    app:layout_constraintBottom_toBottomOf="@+id/layout_Choose_City"
-                            />
+                                    app:layout_constraintBottom_toBottomOf="@+id/layout_Choose_City" />
+
                             <androidx.appcompat.widget.AppCompatButton
                                     android:id="@+id/btn_layout_Choose_Area"
                                     android:layout_width="0dp"
@@ -688,8 +685,7 @@
                                     app:layout_constraintEnd_toEndOf="@+id/layout_Choose_Area"
                                     app:layout_constraintStart_toStartOf="@+id/layout_Choose_Area"
                                     app:layout_constraintTop_toTopOf="@+id/layout_Choose_Area"
-                                    app:layout_constraintBottom_toBottomOf="@+id/layout_Choose_Area"
-                            />
+                                    app:layout_constraintBottom_toBottomOf="@+id/layout_Choose_Area" />
 
                             <androidx.constraintlayout.widget.ConstraintLayout
                                     android:id="@+id/layout_Choose_City"
@@ -714,7 +710,7 @@
                                         android:gravity="start"
                                         android:src="@drawable/ic_arrowdwon"
                                         app:layout_constraintBottom_toBottomOf="parent"
-                                        app:layout_constraintEnd_toEndOf="parent"/>
+                                        app:layout_constraintEnd_toEndOf="parent" />
 
                                 <com.google.android.material.textfield.TextInputLayout
                                         android:id="@+id/textinput_Choose_City"
@@ -741,7 +737,7 @@
                                             android:inputType="text"
                                             android:enabled="false"
                                             android:textColor="@color/black"
-                                            android:textSize="12sp"/>
+                                            android:textSize="12sp" />
 
                                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -772,7 +768,7 @@
                                         android:gravity="start"
                                         android:src="@drawable/ic_arrowdwon"
                                         app:layout_constraintBottom_toBottomOf="parent"
-                                        app:layout_constraintEnd_toEndOf="parent"/>
+                                        app:layout_constraintEnd_toEndOf="parent" />
 
                                 <com.google.android.material.textfield.TextInputLayout
                                         android:id="@+id/textinput_Choose_Area"
@@ -799,7 +795,7 @@
                                             android:inputType="text"
                                             android:enabled="false"
                                             android:textColor="@color/black"
-                                            android:textSize="12sp"/>
+                                            android:textSize="12sp" />
 
                                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -836,7 +832,7 @@
                                     android:src="@drawable/ic_arrowup"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"/>
+                                    app:layout_constraintTop_toTopOf="parent" />
 
                             <androidx.constraintlayout.widget.ConstraintLayout
                                     android:id="@+id/layout_ivHideFeesarrowRight"
@@ -858,7 +854,7 @@
                                         app:layout_constraintBottom_toBottomOf="parent"
                                         app:layout_constraintEnd_toEndOf="parent"
                                         app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toTopOf="parent"/>
+                                        app:layout_constraintTop_toTopOf="parent" />
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -873,7 +869,7 @@
                                     android:textSize="16sp"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"/>
+                                    app:layout_constraintTop_toTopOf="parent" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <androidx.constraintlayout.widget.ConstraintLayout
@@ -911,7 +907,7 @@
                                         android:textColor="@color/black"
                                         app:layout_constraintBottom_toBottomOf="parent"
                                         app:layout_constraintEnd_toEndOf="parent"
-                                        app:layout_constraintStart_toEndOf="@+id/textinput_Fees_from"/>
+                                        app:layout_constraintStart_toEndOf="@+id/textinput_Fees_from" />
 
                                 <com.google.android.material.textfield.TextInputLayout
                                         android:id="@+id/textinput_Fees_from"
@@ -937,7 +933,7 @@
                                             android:fontFamily="@font/avenirltstd_roman"
                                             android:inputType="number"
                                             android:textColor="@color/black"
-                                            android:textSize="12sp"/>
+                                            android:textSize="12sp" />
 
                                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -970,7 +966,7 @@
                                         android:textColor="@color/black"
                                         app:layout_constraintBottom_toBottomOf="parent"
                                         app:layout_constraintEnd_toEndOf="parent"
-                                        app:layout_constraintStart_toEndOf="@+id/textinput_Fees_to"/>
+                                        app:layout_constraintStart_toEndOf="@+id/textinput_Fees_to" />
 
                                 <com.google.android.material.textfield.TextInputLayout
                                         android:id="@+id/textinput_Fees_to"
@@ -996,7 +992,7 @@
                                             android:fontFamily="@font/avenirltstd_roman"
                                             android:inputType="number"
                                             android:textColor="@color/black"
-                                            android:textSize="12sp"/>
+                                            android:textSize="12sp" />
 
                                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -1033,7 +1029,7 @@
                                     android:src="@drawable/ic_arrowup"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"/>
+                                    app:layout_constraintTop_toTopOf="parent" />
 
                             <androidx.constraintlayout.widget.ConstraintLayout
                                     android:id="@+id/layout_ivHideGenderarrowRight"
@@ -1055,7 +1051,7 @@
                                         app:layout_constraintBottom_toBottomOf="parent"
                                         app:layout_constraintEnd_toEndOf="parent"
                                         app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toTopOf="parent"/>
+                                        app:layout_constraintTop_toTopOf="parent" />
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -1070,7 +1066,7 @@
                                     android:textSize="16sp"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"/>
+                                    app:layout_constraintTop_toTopOf="parent" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <androidx.constraintlayout.widget.ConstraintLayout
@@ -1091,7 +1087,8 @@
                                     app:layout_constraintEnd_toEndOf="@+id/layout_Choose_Gender"
                                     app:layout_constraintStart_toStartOf="@+id/layout_Choose_Gender"
                                     app:layout_constraintTop_toTopOf="@+id/layout_Choose_Gender"
-                                    app:layout_constraintBottom_toBottomOf="@+id/layout_Choose_Gender"/>
+                                    app:layout_constraintBottom_toBottomOf="@+id/layout_Choose_Gender" />
+
                             <androidx.constraintlayout.widget.ConstraintLayout
                                     android:id="@+id/layout_Choose_Gender"
                                     android:layout_width="match_parent"
@@ -1117,7 +1114,7 @@
                                         android:gravity="start"
                                         android:src="@drawable/ic_arrowdwon"
                                         app:layout_constraintBottom_toBottomOf="parent"
-                                        app:layout_constraintEnd_toEndOf="parent"/>
+                                        app:layout_constraintEnd_toEndOf="parent" />
 
                                 <com.google.android.material.textfield.TextInputLayout
                                         android:id="@+id/textinput_Choose_Gender"
@@ -1144,7 +1141,7 @@
                                             android:inputType="text"
                                             android:enabled="false"
                                             android:textColor="@color/black"
-                                            android:textSize="12sp"/>
+                                            android:textSize="12sp" />
 
                                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -1161,45 +1158,46 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_Apply"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/bg_chooselang_button"
-        android:fontFamily="@font/avenirltstd_black"
-        android:padding="5dp"
-        android:text="@string/apply"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout"
-        app:layout_constraintWidth_percent=".9" />
-        <ProgressBar
-            android:id="@+id/progress_bar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@+id/btn_Apply"
-            app:layout_constraintStart_toStartOf="@+id/btn_Apply"
-            app:layout_constraintBottom_toBottomOf="@+id/btn_Apply"
-            app:layout_constraintTop_toTopOf="@+id/btn_Apply"
-            android:visibility="gone"
-            />
+        <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_Apply"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/bg_chooselang_button"
+                android:fontFamily="@font/avenirltstd_black"
+                android:padding="5dp"
+                android:text="@string/apply"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textAllCaps="false"
+                app:layout_constraintBottom_toTopOf="@+id/imageView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layout"
+                app:layout_constraintWidth_percent=".9" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="100dp"
-        android:layout_height="4dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="5dp"
-        android:adjustViewBounds="true"
-        android:background="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@+id/btn_Apply"
+                app:layout_constraintStart_toStartOf="@+id/btn_Apply"
+                app:layout_constraintBottom_toBottomOf="@+id/btn_Apply"
+                app:layout_constraintTop_toTopOf="@+id/btn_Apply"
+                android:visibility="gone" />
+
+        <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="100dp"
+                android:layout_height="4dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="5dp"
+                android:adjustViewBounds="true"
+                android:background="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

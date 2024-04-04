@@ -126,7 +126,7 @@
             android:layout_marginTop="20dp"
             android:fontFamily="@font/avenirltstd_black"
             android:gravity="center"
-            android:padding="3dp"
+            android:padding="3dp" android:visibility="visible"
             android:text="@string/are_you_sure_you_want_to_cancel_this_appointment"
             android:textColor="@color/black"
             android:textSize="18sp"

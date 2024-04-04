@@ -289,6 +289,36 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textinput_OtherAllergies"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_margin="15dp"
+                    android:background="@drawable/bg_edittext"
+                    android:elevation="1dp"
+                    android:hint="@string/other_allergies"
+                    android:paddingTop="2dp"
+                    app:boxBackgroundMode="none"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_FoodAllergies">
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_OtherAllergies"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center_horizontal"
+                        android:fontFamily="@font/avenirltstd_roman"
+                        android:gravity="start"
+                        android:padding="5dp"
+                        android:imeOptions="actionNext"
+                        android:importantForAutofill="no"
+                        android:inputType="text"
+                        android:textColor="@color/gray"
+                        android:textSize="12sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
 
             <com.google.android.material.textfield.TextInputLayout
@@ -304,7 +334,7 @@
                 app:boxBackgroundMode="none"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/layout_FoodAllergies">
+                app:layout_constraintTop_toBottomOf="@+id/textinput_OtherAllergies">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_PressureMMGG"
@@ -349,37 +379,6 @@
                     android:textSize="12sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textinput_OtherAllergies"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_margin="15dp"
-                android:background="@drawable/bg_edittext"
-                android:elevation="1dp"
-                android:hint="@string/other_allergies"
-                android:paddingTop="2dp"
-                app:boxBackgroundMode="none"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textinput_SugarLevelMGDL">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_OtherAllergies"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center_horizontal"
-                    android:fontFamily="@font/avenirltstd_roman"
-                    android:gravity="start"
-                    android:padding="5dp"
-                    android:imeOptions="actionNext"
-                    android:importantForAutofill="no"
-                    android:inputType="text"
-                    android:textColor="@color/gray"
-                    android:textSize="12sp" />
-
-            </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textinput_Prescriptions"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -393,7 +392,7 @@
                 app:boxBackgroundMode="none"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textinput_OtherAllergies">
+                app:layout_constraintTop_toBottomOf="@+id/textinput_SugarLevelMGDL">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_Prescriptions"
@@ -531,6 +530,36 @@
 
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textinput_ChronicDiseases1"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_margin="15dp"
+                android:background="@drawable/bg_edittext"
+                android:elevation="1dp"
+                android:hint="@string/chronic_diseases"
+                android:paddingTop="2dp"
+                    android:visibility="gone"
+                app:boxBackgroundMode="none"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textinput_ChronicDiseases">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_ChronicDiseases1"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/avenirltstd_roman"
+                    android:gravity="start"
+                    android:inputType="text"
+                    android:importantForAutofill="no"
+                    android:imeOptions="actionDone"
+                    android:textColor="@color/gray"
+                    android:textSize="12sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textinput_Surgeries"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
@@ -544,7 +573,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textinput_Injuries">
+                app:layout_constraintTop_toBottomOf="@+id/textinput_ChronicDiseases1">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_Surgeries"

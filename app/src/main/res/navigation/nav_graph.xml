@@ -496,5 +496,9 @@
                 android:id="@+id/action_offerBookAppointmentFragment_to_appointmentDetailsFragment"
                 app:destination="@id/appointmentDetailsFragment" />
     </fragment>
+    <fragment
+            android:id="@+id/privacyPolicyFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.webView.PrivacyPolicyFragment"
+            android:label="PrivacyPolicyFragment" />
 
 </navigation>

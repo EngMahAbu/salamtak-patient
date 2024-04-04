@@ -22,6 +22,7 @@ import com.korashiGroup.salamtakPatient.utils.Resource
 import com.google.gson.Gson
 import com.korashiGroup.salamtakPatient.model.askandanswer.QuestionAndAnswerResponse
 import com.korashiGroup.salamtakPatient.model.askandanswer.QuestionRequest
+import com.korashiGroup.salamtakPatient.model.docotorsearch.NewDoctorSearchRequest
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCardResponse
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCompanyResponse
 import com.korashiGroup.salamtakPatient.model.insurance.SendInsuranceCardResponce
@@ -215,10 +216,18 @@ class DialogBottomSheetViewmodel @Inject constructor(private val repositry: Regi
         return Resource.Error(response.message())
     }
 
-     fun searchDoctors(doctorSearchRequest: DoctorSearchRequest)=viewModelScope.launch(Dispatchers.IO+handler) {
-        docorsResponse.postValue(Resource.Loading())
-        val response=repositry.searchDoctors(doctorSearchRequest)
-        docorsResponse.postValue(response?.let { handlingSearchDoctors(it) })
+     fun searchDoctors(doctorSearchRequest: DoctorSearchRequest, new:String )=viewModelScope.launch(Dispatchers.IO+handler) {
+       if (new=="new"){
+           val newDoctorSearchRequest=NewDoctorSearchRequest(doctorSearchRequest.cityId,doctorSearchRequest.maxResultCount,
+               doctorSearchRequest.medicalExaminationTypeId,doctorSearchRequest.skipCount,doctorSearchRequest.specialistId)
+           docorsResponse.postValue(Resource.Loading())
+           val response=repositry.doctorSearch3(newDoctorSearchRequest)
+           docorsResponse.postValue(response?.let { handlingSearchDoctors(it) })
+       }else{
+           docorsResponse.postValue(Resource.Loading())
+           val response=repositry.searchDoctors(doctorSearchRequest)
+           docorsResponse.postValue(response?.let { handlingSearchDoctors(it) })
+       }
     }
 
     private fun handlingSearchDoctors(response: Response<DoctorsearchItemResponse>): Resource<DoctorsearchItemResponse>? {

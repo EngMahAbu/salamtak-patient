@@ -59,7 +59,7 @@ class SplashFragment : Fragment() {
                 }
 
             }else{
-                findNavController().navigate(R.id.loginFragment)
+                findNavController().navigate(R.id.onboardingFragment)
             }
         }, 2000)
 

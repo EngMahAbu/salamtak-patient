@@ -11,7 +11,7 @@
     <string name="salamtakconnect">Salamtak Connect</string>
     <string name="choose">تأكيد</string>
     <string name="login">تسجيل الدخول</string>
-    <string name="help">المساعده</string>
+    <string name="help">للمساعدة 17143</string>
     <string name="next">التالى</string>
     <string name="mobile_number">رقم الموبايل </string>
     <string name="password">كلمة المرور</string>
@@ -34,13 +34,13 @@
     <string name="sign_up">انضم الأن</string>
     <string name="lets_start">ابدأ التطبيق</string>
     <string name="upload_your_photo">ارفع صورتك</string>
-    <string name="full_name_in_english_first_middle_last">الاسم الكامل باللغة الانجليزية (الاول - الأوسط - الاخير)</string>
+    <string name="full_name_in_english_first_middle_last">الاسم الكامل باللغة الانجليزية (الأول - الأوسط - الأخير)</string>
     <string name="full_name_in_arabic_first_middle_last">الاسم الكامل باللغة العربية (الأول - الأوسط - الأخير)</string>
     <string name="e_mail">عنوان البريد الإلكتروني</string>
     <string name="have_an_account">هل لديك حساب؟</string>
     <string name="the_terms_and_conditions">الشروط والأحكام</string>
-    <string name="doctor_profile">الملف الشخصي للطبيب</string>
-    <string name="gender">اختر الجنس</string>
+    <string name="doctor_profile">الملف الشخصي </string>
+    <string name="gender"> الجنس</string>
     <string name="date_of_birth">تاريخ الميلاد</string>
     <string name="national_id">الرقم القومى</string>
     <string name="nationality">اختر الدولة</string>
@@ -72,24 +72,24 @@
     <string name="upload_front_syndicate_card_image">Upload front Syndicate Card image</string>
     <string name="upload_back_syndicate_card_image">Upload back Syndicate Card image</string>
     <string name="required">" مطلوب *"</string>
-    <string name="requiredbirthdate">تاريخ الميلاد مطلوب</string>
-    <string name="requiredcountry">الدولة مطلوبة </string>
-    <string name="requiredgender">الجنس مطلوب</string>
-    <string name="requiredcity">المدينة مطلوبة</string>
-    <string name="requiredarea">المنطقة مطلوبة </string>
-    <string name="requiredstreat">الشارع مطلوب</string>
-    <string name="required_name_english">الاسم بالكامل باللغة الانجليزية مطلوب</string>
-    <string name="required_name_arabic">الاسم بالكامل باللغة العربية مطلوب</string>
-    <string name="required_name_email">البريد الالكترونى مطلوب</string>
-    <string name="required_mobile">رقم الموبايل مطلوب</string>
-    <string name="required_password">كلمة المرور مطلوبة</string>
-    <string name="required_confirm_password">تاكيد كلمة المرور مطلوبة</string>
-    <string name="phonedigits">يجب الا يقل رقم الهاتف عن 11 رقم </string>
-    <string name="Enter_fullName_english">الاسم الكامل ( الاول - الاوسط - الاخير ) باللغة الانجليزية مطلوب</string>
-    <string name="Enter_fullName_Arabic">الاسم الكامل ( الاول - الاوسط - الاخير ) باللغة العربية مطلوب</string>
-    <string name="match_email"> البريد الالكترونى غير صحيح يرجى التحقق منها</string>
-    <string name="lesstthan6number">كلمة المرور تتكون من 6 حروف وارقام على الاقل</string>
-    <string name="doesnotmatch">كلمة المرور وتاكيد كلمة المرور غير متطابقين</string>
+    <string name="requiredbirthdate">.تاريخ الميلاد مطلوب</string>
+    <string name="requiredcountry">.الدولة مطلوبة </string>
+    <string name="requiredgender">.الجنس مطلوب</string>
+    <string name="requiredcity">.المدينة مطلوبة</string>
+    <string name="requiredarea">.المنطقة مطلوبة </string>
+    <string name="requiredstreat">.الشارع مطلوب</string>
+    <string name="required_name_english">.الاسم بالكامل باللغة الانجليزية مطلوب</string>
+    <string name="required_name_arabic">.الاسم بالكامل باللغة العربية مطلوب</string>
+    <string name="required_name_email">.البريد الالكترونى مطلوب</string>
+    <string name="required_mobile">.رقم الموبايل مطلوب</string>
+    <string name="required_password">.كلمة المرور مطلوبة</string>
+    <string name="required_confirm_password">.تاكيد كلمة المرور مطلوبة</string>
+    <string name="phonedigits">.يجب الا يقل رقم الهاتف عن 11 رقم </string>
+    <string name="Enter_fullName_english">.الاسم الكامل ( الأول - الأوسط - الأخير ) باللغة الانجليزية مطلوب</string>
+    <string name="Enter_fullName_Arabic">.الاسم الكامل ( الأول - الأوسط - الأخير ) باللغة العربية مطلوب</string>
+    <string name="match_email"> .البريد الالكترونى غير صحيح يرجى التحقق </string>
+    <string name="lesstthan6number">.كلمة المرور تتكون من 6 حروف وارقام على الاقل</string>
+    <string name="doesnotmatch">.كلمة المرور وتاكيد كلمة المرور غير متطابقين</string>
     <string name="male">ذكر</string>
     <string name="female">أنثى</string>
     <string name="choose_your_nationality">اختر دولتك</string>
@@ -97,11 +97,10 @@
     <string name="powered_by">برعاية</string>
     <string name="salamtak_booking">الحجوزات</string>
     <string name="home_visit">الزيارة المنزلية</string>
-    <string name="home_visitdesc">يٌوفر تطبيق سلامتك خدمة الزيارة المنزلية. لتصلك بأقرب طبيب إليك لعمل زيارة منزلية عن طريق اختيار المنطقة و التخصص من نخبة أطباء سلامتك.
-لقد عادت الأيام الجميلة لطبيب الأسرة</string>
-    <string name="live_chat">التواصل مع الطبيب</string>
-    <string name="live_chatdesc">يتيح تطبيق سلامتك للمريض بنقرة بأطراف أصابعه الاستمتاع بالتشخيص الطبي الكامل في الحالات الطبية البسيطة ، للحصول على إرشادات طبية من خلال التواصل مع أطباء سلامتك ،باستخدام خدمات المكالمة الصوتية و المكالمة عبر الفيديو.
-احفظ الزيارة الأولى (الأشعات والتحاليل) والزيارة الثالثة (الاستشارة) باستخدام سلامتك كونكت.</string>
+    <string name="home_visitdesc">يٌوفر تطبيق سلامتك خدمة الزيارة المنزلية حيث يمكنك حجز زيارة منزلية بسهولة عن طريق اختيار المنطقة و التخصص من نخبة اطباء سلامتك وتحديد كل الاحتياجات التى من شأنها توفير الرعاية الطبية الكاملة للزيارة المنزلية.
+</string>
+    <string name="live_chat">Salmatak Connect / سلامتك كونكت</string>
+    <string name="live_chatdesc">يتيح تطبيق سلامتك للمريض بضغطة واحدة من الهاتف المحمول عمل تشخيص طبى كامل فى الحالات المرضية البسيطة كما تساعد خدمة سلامتك كونكت المريض فى الحصول عى كافة الاستشارات الطبية من خلال التواصل المباشر مع نخبة اطباء سلامتك باستخدام تقنية المكالمة الصوتية ( Call ) او المكالمة عبر الفديو ( Video Call ) واخير وليس اخرا تمكن هذة الخدمة كل من المريض والطبيب من توفير كل من الزيارة الاولى ( تحديد الاشاعات والتحاليل اللازمة للكشف الطبى ) وكذلك الزيارة الثالثة ( الاستشارة) والاكتفاء بالزيارة الثانية ( كشف بالعيادة ) مما يوفر الوقت والمجهود والتكلفة على كل من الطرفين. </string>
 
 
     <string name="verification_code_will_be_sent_within_1_30">الرجاء ادخال رمز التحقق الذى قد تم ارسالة الى هاتفك المحمول</string>
@@ -121,13 +120,13 @@
     <string name="pharmacies">الصيدليات</string>
     <string name="laboratories">المختبرات</string>
     <string name="radiologycenter">مراكز الاشعة</string>
-    <string name="engile"> سلامتك انجل</string>
+    <string name="engile"> سلامتك Angel</string>
     <string name="search">بحث</string>
     <string name="search_by_doctor_name">البحث باسم الطبيب ...</string>
-    <string name="doctors_found">العثور على الأطباء</string>
+    <string name="doctors_found">نتيجة البحث</string>
     <string name="all">الجميع</string>
     <string name="home">الرئيسية</string>
-    <string name="my_schedule">المواعيد الخاصة بى</string>
+    <string name="my_schedule">الحجوزات </string>
     <string name="more">المزيد</string>
     <string name="reviews">المراجعات</string>
     <string name="next_available_booking_at_08_nov_from_06_30_pm">Next Available Booking at 08 Nov. from 06:30 PM</string>
@@ -171,7 +170,7 @@
     <string name="are_you_sure_you_want_to_sign_out">هل أنت متأكد أنك تريد الخروج؟</string>
     <string name="save_edit">حفظ التعدبلات</string>
     <string name="edit_profile">تعديل الملف الشخصي</string>
-    <string name="profile_info">معلومات الشخصي.</string>
+    <string name="profile_info">البيانات الشخصية</string>
     <string name="medical_state">الحالة الطبية</string>
     <string name="street">الشارع</string>
     <string name="building_number">رقم المبنى</string>
@@ -181,11 +180,11 @@
     <string name="weight">الوزن( كجم )</string>
     <string name="blood_group">اختر فصيلة الدم</string>
     <string name="pressure_mm_gg">قياس ضغط الدم (مم / جيغاغرام)</string>
-    <string name="sugar_level_mg_dl">قياس مستوى السكر (MG/DL)</string>
-    <string name="medical_allergies">اختر الحساسية الطبية</string>
-    <string name="food_allergies">اختر حساسية الطعام</string>
-    <string name="other_allergies">الحساسية الأخرى</string>
-    <string name="prescriptions">الوصفات الطبية</string>
+    <string name="sugar_level_mg_dl">قياس مستوى السكر (ملغم/دل)</string>
+    <string name="medical_allergies">اختر حساسية الادوية (ان وجدت)</string>
+    <string name="food_allergies">اختر حساسية الطعام (ان وجدت)</string>
+    <string name="other_allergies"> اذكر حساسيةأخرى (ان وجدت)</string>
+    <string name="prescriptions">تشخيصات طبية السابقة</string>
     <string name="current_medication">الدواء الحالي</string>
     <string name="past_medication">الأدوية السابقة</string>
     <string name="injuries">إصابات</string>
@@ -194,10 +193,10 @@
     <string name="date">تاريخ</string>
     <string name="appointments_available">المواعيد المتاحة</string>
     <string name="summary">ملخص</string>
-    <string name="appointment_details">تفاصيل الموعد</string>
+    <string name="appointment_details">تفاصيل الحجز</string>
     <string name="booking_date_time">تاريخ ووقت الحجز</string>
-    <string name="service">خدمة</string>
-    <string name="total_fees">الرسوم الكلية</string>
+    <string name="service">نوع الحجز</string>
+    <string name="total_fees">اجمالى الرسوم </string>
     <string name="confirm">تأكيد</string>
     <string name="sharelink">شارلينك</string>
     <string name="add_to_favorite">أضف إلى المفضلة</string>
@@ -207,17 +206,18 @@
     <string name="book_appointment">حجز موعد</string>
     <string name="choose_clinic">اختر العيادة</string>
     <string name="choose_service">اختر الخدمة</string>
-    <string name="examination_type">الخدمة</string>
+    <string name="examination_type">نوع الحجز</string>
     <string name="date_time">التاريخ / الوقت</string>
     <string name="more_actions">المزيد من الإجراءات</string>
-    <string name="edit_appointment">تعديل الموعد</string>
-    <string name="cancelappointment">إلغاء الموعد</string>
-    <string name="are_you_sure_you_want_to_cancel_this_appointment">هل أنت متأكد أنك تريد إلغاء هذا الموعد؟</string>
+    <string name="edit_appointment">تعديل الحجز</string>
+    <string name="cancelappointment">إلغاء الحجز</string>
+    <string name="are_you_sure_you_want_to_cancel_this_appointment">هل أنت متأكد أنك تريد إلغاء هذا الحجز؟</string>
+    <string name="are_you_sure_you_want_to_edit_this_appointment">لتعديل موعدك عليك إلغاء هذا الموعد</string>
     <string name="reschedule">لا</string>
-    <string name="re_booking_appointment">إعادة حجز موعد</string>
+    <string name="re_booking_appointment">تعديل الحجز</string>
     <string name="medical_history">الروشتة</string>
-    <string name="rate">معدل</string>
-    <string name="personal_info">معلومات شخصية.</string>
+    <string name="rate">التقييم</string>
+    <string name="personal_info">البيانات الشخصية.</string>
     <string name="popular_doctors">أشهر الأطباء</string>
     <string name="diagnosis">تشخيص</string>
     <string name="pursed_lip_breathing">Pursed lip breathing</string>
@@ -243,15 +243,15 @@
     <string name="datasentupdatedsuccessfully">تم تحديث البيانات بنجاح</string>
     <string name="Notification_channel_Id">Notification_channel_Id</string>
     <string name="Notification_channel_Name">Notification_channel_Name</string>
-    <string name="book_with_insurance">احجز مع التأمين</string>
+    <string name="book_with_insurance">استخدم التأمين الخاص بك</string>
     <string name="release_date">تاريخ الافراج عنه</string>
     <string name="update">تحديث</string>
     <string name="salamtak_gates">بوابة سلامتك</string>
-    <string name="skip_login_explore_our_features">تخطي تسجيل الدخول،استكشف ميزاتنا.</string>
+    <string name="skip_login_explore_our_features"> يمكنك تخطي تسجيل الدخول للإطلاع فقط على خدمات سلامتك.</string>
     <string name="you_must_sign_up_to_book_your_doctor">يجب عليك التسجيل لحجز طبيبك</string>
     <string name="no_data_to_show">لا يوجد بيانات </string>
     <string name="have_amedicalquestion">هل لديك سؤال طبى؟</string>
-    <string name="ask_a_doctor_for_free_and_get_response_in_24_hours">احصل على اجابات طبية احترافية لجميع اسئلتك
+    <string name="ask_a_doctor_for_free_and_get_response_in_24_hours">احصل على اجابات طبية دقيقة لجميع اسئلتك
     </string>
     <string name="ask_now">أسأل الأن </string>
     <string name="your_question">سؤالك</string>
@@ -265,9 +265,9 @@
     <string name="end_date">تاريخ الانتهاء</string>
     <string name="enterreleasedate">أدخل تاريخ الإصدار</string>
     <string name="enterenddate">أدخل تاريخ الانتهاء</string>
-    <string name="your_appointment_is">الموعد الخاص بك</string>
+    <string name="your_appointment_is">تاريخ / وقت الحجز</string>
     <string name="thank_you_for_using_your_salamtak_app_we_wish_you_good_health">شكرًا لك على استخدام تطبيق سلامتك.
-        نتمنى لكم صحة جيدة
+        تم تأكيد حجزك بنجاح
     </string>
     <string name="addcard">+إضافة بطاقة</string>
     <string name="rate_doctor">قيم الطبيب</string>
@@ -283,12 +283,13 @@
     <string name="anotherpatient">لمريض آخــــر</string>
     <string name="qanda">بنك الاسئلة</string>
     <string name="emergencies">دليل الطوارئ</string>
-    <string name="select">اختر</string>
+    <string name="select">إختر شركة التأمين</string>
+    <string name="select_bookingtype">إختر نوع الخدمة</string>
     <string name="favorite_doctor">الدكتور المفضل</string>
     <string name="confirmed">تـأكـيد </string>
     <string name="offers">العروض</string>
     <string name="offers_not_available_at_the_moment">لا يوجد عروض متاحة فى الوقت الحالى </string>
-    <string name="promotion_not_available_at_the_moment">Promotion not available at the moment.</string>
+    <string name="promotion_not_available_at_the_moment">لا يوجد عروض متاحة فى الوقت الحالى</string>
     <string name="we_are_working_on_delivering_the_best_offers_to_you_please_come_back_and_check_later">نحن نعمل على تقديم أفضل العروض لك.يرجى العودة والتحقق لاحقا.
     </string>
     <string name="notifications">الاشعارات </string>
@@ -299,13 +300,13 @@
     <string name="are_you_sure_you_want_to_delete_your_account">هل انت متأكد أنك تريد خذف حسابك؟</string>
     <string name="all_reviews">المراجعات</string>
     <string name="lang">Arabic</string>
-    <string name="schedule">الجدول</string>
+    <string name="schedule">الحجوزات</string>
     <string name="questionanswer">السؤال المطروح؟</string>
     <string name="insurance_company_required">مطلوب شركة تأمين</string>
     <string name="referencelinks">Reference Links</string>
     <string name="salamtak_care">Salamtak Care</string>
-    <string name="salamatak_scoope">Salamatak Scoope</string>
-    <string name="salamatk_cap">Salamatk Capsule</string>
+    <string name="salamatak_scoope">Salamtak Scope</string>
+    <string name="salamatk_cap">Salamtak Capsule</string>
     <string name="salamtak_promotions">Salamtak Promotions</string>
     <string name="salamtak_angle">Salamtak Angle</string>
     <string name="enter_your_registered">Enter your registered</string>
@@ -314,7 +315,7 @@
     <string name="clinicservices">Clinic Services</string>
     <string name="avilableappointemnts">"Available "</string>
     <string name="avilableapapointemnts">المواعيد المتاحة</string>
-    <string name="reservation_required_first_come_first_served">الدخول بأسبقية الحضور</string>
+    <string name="reservation_required_first_come_first_served">الكشف بأسبقية الحضور</string>
     <string name="offercategories">فئات العرض:</string>
     <string name="session">حصة</string>
     <string name="recentoffers">العروض الأخيرة:</string>
@@ -323,6 +324,8 @@
     <string name="force_update_title">حدث التطبيق!</string>
     <string name="force_update_description">ننصحك بتحديث التطبيق إلى الإصدار الأحدث. بعد التحديث، يمكنك الاستمرار في استخدام التطبيق بشكل طبيعي.</string>
     <string name="btn_update">تحديث</string>
+    <string name="privacy_policy">سياسة الخصوصية</string>
+    <string name="dr">دكتور.</string>
 
     <array name="choose">
         <item>اختار</item>

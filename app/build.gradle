@@ -15,8 +15,8 @@ android {
         applicationId "com.korashiGroup.salamtakPatient"
         minSdk 26
         targetSdk 33
-        versionCode 8
-        versionName "1.0"
+        versionCode 11
+        versionName "1.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
@@ -128,5 +128,8 @@ dependencies {
 
     def lottieVersion = "3.4.0"
     implementation "com.airbnb.android:lottie:$lottieVersion"
+
+    // facebook
+    implementation 'com.facebook.android:facebook-android-sdk:13.2.0'
 
 }

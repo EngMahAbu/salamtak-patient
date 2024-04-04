@@ -8,6 +8,7 @@ import com.korashiGroup.salamtakPatient.model.booking.clink.GetDoctorClinksRespo
 import com.korashiGroup.salamtakPatient.model.deleteuser.DeleteUserResponse
 import com.korashiGroup.salamtakPatient.model.docotorsearch.DoctorSearchRequest
 import com.korashiGroup.salamtakPatient.model.docotorsearch.DoctorsearchItemResponse
+import com.korashiGroup.salamtakPatient.model.docotorsearch.NewDoctorSearchRequest
 import com.korashiGroup.salamtakPatient.model.emr.EmrPatientResponse
 import com.korashiGroup.salamtakPatient.model.favorite.AddToFavoriteResponse
 import com.korashiGroup.salamtakPatient.model.favorite.FavoriteDoctorResponse
@@ -116,6 +117,12 @@ interface ApiService {
     suspend fun searchDoctors(
         @Path("culture") culture: String,
         @Body doctorSearchRequest:DoctorSearchRequest
+    ): Response<DoctorsearchItemResponse>
+
+    @POST("{culture}/DoctorSearch/DoctorSearch3")
+    suspend fun doctorSearch3(
+        @Path("culture") culture: String,
+        @Body doctorSearchRequest: NewDoctorSearchRequest
     ): Response<DoctorsearchItemResponse>
 
     @GET("{culture}/DoctorClinic/GetClinicSchedualByClinicDayId")

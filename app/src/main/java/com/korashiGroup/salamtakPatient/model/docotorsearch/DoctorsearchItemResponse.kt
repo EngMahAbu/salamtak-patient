@@ -86,6 +86,7 @@ data class Item(
     @SerializedName("clinicDto")
     val clinicDto: ClinicDto?,
     val RateCount: Int?,
+    val NickName: String?,
 )
 
 data class ClinicDto(

@@ -248,6 +248,7 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
         binding.itemDelete.btnYes.setOnClickListener {
 
             deleteUserCallback()
+            findNavController().navigate(R.id.loginFragment)
             dismiss()
         }
 
@@ -868,7 +869,7 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
                 }
 
                 is Resource.sucess -> {
-            findNavController().navigate(R.id.loginFragment)
+               findNavController().navigate(R.id.loginFragment)
 
                 }
 

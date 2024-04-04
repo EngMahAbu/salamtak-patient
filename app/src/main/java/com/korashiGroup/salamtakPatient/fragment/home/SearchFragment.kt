@@ -81,6 +81,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
     var totalsDoctors=0
     private var feesFrom:Int? = 1
     private var feesTo:Int? = 6000
+    private var doctorSearchState="new"
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -228,7 +229,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         }
 
         binding.layoutBottomsheetpersistant.btnApply.setOnClickListener {
-
+            doctorSearchState="old"
             if (binding.layoutBottomsheetpersistant.etFeesFrom.text.toString().isNullOrEmpty() ||
                 binding.layoutBottomsheetpersistant.etFeesTo.text.toString().isNullOrEmpty()
             ) {
@@ -258,7 +259,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                 }
             }
             if (doctorssearchRequset != null) {
-                viewmodel.searchDoctors(doctorssearchRequset)
+                viewmodel.searchDoctors(doctorssearchRequset,doctorSearchState)
             }
             bottomsheetbeahavoir.state=BottomSheetBehavior.STATE_HIDDEN
         }
@@ -432,7 +433,12 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                             binding.rvDoctors.setPadding(0,0,0,0)
                         }
                         totalsDoctors= it.data?.data?.totalCount!!
-                        binding.tvCountofDoctors.text="${totalsDoctors} ${getString(R.string.doctors_found)}"
+                        if (DefaultLocaleHelper.getInstance(requireContext()).getCurrentLocale()=="en"){
+                            binding.tvCountofDoctors.text="${totalsDoctors}   ${getString(R.string.doctors_found)} "
+                        }else{
+                            binding.tvCountofDoctors.text=" ${getString(R.string.doctors_found)} ${totalsDoctors}  طبيب "
+                        }
+
                     }
 
                 }
@@ -475,7 +481,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             }
         }
             if (doctorssearchRequset != null) {
-                viewmodel.searchDoctors(doctorssearchRequset)
+                viewmodel.searchDoctors(doctorssearchRequset,doctorSearchState)
             }
         }
     }
@@ -553,6 +559,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
     }
 
     override fun onItemClick(date: Date) {
+        doctorSearchState="old"
         val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US)
         formattedDate = formatter.format(date)
         val doctorssearchRequset = feesFrom?.let {
@@ -574,7 +581,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             }
         }
         if (doctorssearchRequset != null) {
-            viewmodel.searchDoctors(doctorssearchRequset)
+            viewmodel.searchDoctors(doctorssearchRequset,doctorSearchState)
         }
 
     }
@@ -650,7 +657,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
 
     fun setupSpinner() {
         val typelist = arrayOf(
-            getString(R.string.select),
+            getString(R.string.select_bookingtype),
             getString(R.string.Clinic_Booking),
             getString(R.string.Home_Visit),
             getString(R.string.Video_Call),
@@ -754,9 +761,9 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
 
 
     private fun getSearchDoctors() {
-
         var job: Job? = null
         binding.etSearch.addTextChangedListener {
+            doctorSearchState="old"
             job?.cancel()
             job = MainScope().launch {
                 delay(500L)
@@ -781,7 +788,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                             }
                         }
                         if (doctorssearchRequset != null) {
-                            viewmodel.searchDoctors(doctorssearchRequset)
+                            viewmodel.searchDoctors(doctorssearchRequset,doctorSearchState)
                         }
                     }else{
                         val doctorssearchRequset = feesFrom?.let { it1 ->
@@ -803,7 +810,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                             }
                         }
                         if (doctorssearchRequset != null) {
-                            viewmodel.searchDoctors(doctorssearchRequset)
+                            viewmodel.searchDoctors(doctorssearchRequset,doctorSearchState)
                         }
                     }
 
@@ -886,7 +893,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                     }
                 }
                 if (doctorssearchRequset != null) {
-                    viewmodel.searchDoctors(doctorssearchRequset)
+                    viewmodel.searchDoctors(doctorssearchRequset,doctorSearchState)
                 }
                 isScrolling=false
 

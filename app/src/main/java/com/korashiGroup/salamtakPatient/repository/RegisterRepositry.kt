@@ -5,6 +5,7 @@ import com.korashiGroup.salamtakPatient.model.askandanswer.QuestionRequest
 import com.korashiGroup.salamtakPatient.model.booking.EditPatientAppointmentRequest
 import com.korashiGroup.salamtakPatient.model.booking.PatientAppointmentRequest
 import com.korashiGroup.salamtakPatient.model.docotorsearch.DoctorSearchRequest
+import com.korashiGroup.salamtakPatient.model.docotorsearch.NewDoctorSearchRequest
 import com.korashiGroup.salamtakPatient.model.favorite.FavoriteRequest
 import com.korashiGroup.salamtakPatient.model.profile.LocationRequest
 import com.korashiGroup.salamtakPatient.model.register.*
@@ -76,6 +77,8 @@ class RegisterRepositry @Inject constructor(private val apiService: ApiService) 
     suspend fun searchDoctors(doctorSearchRequest: DoctorSearchRequest) =
         sp.getUserLang(Constans.Language)?.let { apiService.searchDoctors(it, doctorSearchRequest) }
 
+    suspend fun doctorSearch3(doctorSearchRequest: NewDoctorSearchRequest) =
+        sp.getUserLang(Constans.Language)?.let { apiService.doctorSearch3(it, doctorSearchRequest) }
     suspend fun getClinicSchedualByClinicDayId(
         ClinicId: Int, DayId: Int,
         MedicalExaminationTypeId: Int,

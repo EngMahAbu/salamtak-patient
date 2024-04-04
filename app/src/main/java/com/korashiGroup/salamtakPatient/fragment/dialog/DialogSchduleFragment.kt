@@ -59,7 +59,7 @@ class DialogSchduleFragment : BottomSheetDialogFragment() {
 
             binding.layoutCanceled.visibility = View.GONE
             binding.layoutCancelAppointments.visibility = View.VISIBLE
-
+            binding.tvCancelAppointments.text=getString(R.string.are_you_sure_you_want_to_cancel_this_appointment)
         }
 
         binding.tvEdit.setOnClickListener {
@@ -70,6 +70,7 @@ class DialogSchduleFragment : BottomSheetDialogFragment() {
 //            }
             binding.layoutCanceled.visibility = View.GONE
             binding.layoutCancelAppointments.visibility = View.VISIBLE
+            binding.tvCancelAppointments.text=getString(R.string.are_you_sure_you_want_to_edit_this_appointment)
 
         }
 

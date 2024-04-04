@@ -9,6 +9,8 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
+import com.facebook.appevents.AppEventsLogger
+import com.google.firebase.remoteconfig.BuildConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import com.korashiGroup.salamtakPatient.databinding.ActivityMainBinding
@@ -19,6 +21,7 @@ import com.korashiGroup.salamtakPatient.utils.Constans.KEY_FORCE_UPDATE_REQUIRED
 import com.korashiGroup.salamtakPatient.utils.ForceUpdateUtils
 import com.korashiGroup.salamtakPatient.utils.localization.DefaultLocaleHelper
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), LoginFragment.onSomeEventListener {
@@ -56,7 +59,7 @@ class MainActivity : AppCompatActivity(), LoginFragment.onSomeEventListener {
         setContentView(binding.root)
         binding.bottomViewNav.selectedItemId=R.id.homeFragment
         instance = this
-
+        logSentFriendRequestEvent()
         setupNavigationBottom()
         navController.addOnDestinationChangedListener { _, destination, _ ->
 
@@ -123,6 +126,8 @@ class MainActivity : AppCompatActivity(), LoginFragment.onSomeEventListener {
     private fun showDialog() {
         dialog.show(supportFragmentManager, "Exit Dialog")
     }
-
+    fun logSentFriendRequestEvent(){
+       AppEventsLogger.newLogger(this).logEvent("sentFriendRequest")
+    }
 
 }

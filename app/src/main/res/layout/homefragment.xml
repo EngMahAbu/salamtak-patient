@@ -80,12 +80,12 @@
 
         <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/iv_notification"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
                 android:adjustViewBounds="true"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="15dp"
-                android:src="@drawable/ic_notification"
+                android:src="@drawable/ic_notify"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 

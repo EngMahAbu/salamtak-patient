@@ -105,6 +105,9 @@ class MoreFragment : Fragment() {
         binding.layoutTermsConditions.setOnClickListener {
             findNavController().navigate(R.id.webViewFragment)
         }
+        binding.layoutPrivacy.setOnClickListener {
+            findNavController().navigate(R.id.privacyPolicyFragment)
+        }
       binding.layoutNextAvailableBooking.setOnClickListener {
 //                if (skipStatus=="skip"){
 //                    return@setOnClickListener
