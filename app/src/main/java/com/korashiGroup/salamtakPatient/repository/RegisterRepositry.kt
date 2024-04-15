@@ -12,10 +12,6 @@ import com.korashiGroup.salamtakPatient.model.register.*
 import com.korashiGroup.salamtakPatient.utils.Constans
 import com.korashiGroup.salamtakPatient.utils.SpUtil
 import okhttp3.MultipartBody
-import retrofit2.http.Body
-import retrofit2.http.Multipart
-import retrofit2.http.PartMap
-import retrofit2.http.Query
 import javax.inject.Inject
 
 class RegisterRepositry @Inject constructor(private val apiService: ApiService) {

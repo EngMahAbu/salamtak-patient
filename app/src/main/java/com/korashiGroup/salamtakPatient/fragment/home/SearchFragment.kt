@@ -94,6 +94,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
     @SuppressLint("SimpleDateFormat")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        bindFields()
         binding.ivPrevious.isEnabled = step != 1
         examinationtypeid = HomeFragment.instance?.let {
             it.medicalExaminatioId
@@ -110,7 +111,6 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             this.timeZone = TimeZone.getTimeZone("CST")
         }
         formattedDate = formatter.format(now.time)
-        bindFields()
         doctorsSearch()
         callBackGetClinicSchedualByClinicDayId()
         getDayId()
@@ -229,6 +229,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         }
 
         binding.layoutBottomsheetpersistant.btnApply.setOnClickListener {
+           // viewmodel.doctorSearchPage=1
             doctorSearchState="old"
             if (binding.layoutBottomsheetpersistant.etFeesFrom.text.toString().isNullOrEmpty() ||
                 binding.layoutBottomsheetpersistant.etFeesTo.text.toString().isNullOrEmpty()
@@ -465,7 +466,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         val doctorssearchRequset = feesFrom?.let { it1 ->
             feesTo?.let { it2 ->
                 DoctorSearchRequest(
-                    0,
+                    areaId,
                     formattedDate,
                     it.id,
                     "",

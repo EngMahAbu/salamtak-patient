@@ -16,6 +16,7 @@ import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.adapter.*
 import com.korashiGroup.salamtakPatient.databinding.HomefragmentBinding
 import com.korashiGroup.salamtakPatient.fragment.loginandforgetpassword.LoginFragment
+import com.korashiGroup.salamtakPatient.model.AreaData
 import com.korashiGroup.salamtakPatient.model.CityData
 import com.korashiGroup.salamtakPatient.model.ImageServices
 import com.korashiGroup.salamtakPatient.model.register.ChooseGender
@@ -500,6 +501,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
                 is Resource.sucess -> {
 
                     sharedDataViewmodel.getCity(CityData(it.data!!.data.cityId,"",it.data!!.data.cityId,false,it.data.data.cityName,it.data.data.cityName))
+                    sharedDataViewmodel.getArea(AreaData(it.data.data.areaId,it.data.data.areaName))
                 }
 
                 is Resource.Error -> {

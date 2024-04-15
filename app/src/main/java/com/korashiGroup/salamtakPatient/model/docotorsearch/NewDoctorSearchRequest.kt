@@ -6,6 +6,8 @@ import com.google.gson.annotations.SerializedName
 data class NewDoctorSearchRequest(
     @SerializedName("CityId")
     val cityId: Int=0,
+    @SerializedName("AreaId")
+    val AreaId: Int=0,
     @SerializedName("MaxResultCount")
     val maxResultCount: Int=0,
     @SerializedName("MedicalExaminationTypeId")

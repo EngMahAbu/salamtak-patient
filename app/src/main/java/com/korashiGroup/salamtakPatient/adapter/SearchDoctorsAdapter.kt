@@ -1,7 +1,6 @@
 package com.korashiGroup.salamtakPatient.adapter
 
 
-import android.text.Html
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -9,13 +8,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.CircleCropTransformation
-import com.dro.doctoronline_doctorapp.localDataBase.SharedPreferencesTool.getString
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.databinding.ItemLayoutDoctorsBinding
 import com.korashiGroup.salamtakPatient.model.docotorsearch.Item
 import com.korashiGroup.salamtakPatient.utils.localization.DefaultLocaleHelper
-import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
-import okhttp3.internal.format
 import kotlin.math.roundToInt
 
 

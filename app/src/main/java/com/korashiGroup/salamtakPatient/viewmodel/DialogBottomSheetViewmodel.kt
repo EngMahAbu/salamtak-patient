@@ -21,7 +21,6 @@ import com.korashiGroup.salamtakPatient.repository.RegisterRepositry
 import com.korashiGroup.salamtakPatient.utils.Resource
 import com.google.gson.Gson
 import com.korashiGroup.salamtakPatient.model.askandanswer.QuestionAndAnswerResponse
-import com.korashiGroup.salamtakPatient.model.askandanswer.QuestionRequest
 import com.korashiGroup.salamtakPatient.model.docotorsearch.NewDoctorSearchRequest
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCardResponse
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCompanyResponse
@@ -218,7 +217,7 @@ class DialogBottomSheetViewmodel @Inject constructor(private val repositry: Regi
 
      fun searchDoctors(doctorSearchRequest: DoctorSearchRequest, new:String )=viewModelScope.launch(Dispatchers.IO+handler) {
        if (new=="new"){
-           val newDoctorSearchRequest=NewDoctorSearchRequest(doctorSearchRequest.cityId,doctorSearchRequest.maxResultCount,
+           val newDoctorSearchRequest=NewDoctorSearchRequest(doctorSearchRequest.cityId,doctorSearchRequest.areaId,doctorSearchRequest.maxResultCount,
                doctorSearchRequest.medicalExaminationTypeId,doctorSearchRequest.skipCount,doctorSearchRequest.specialistId)
            docorsResponse.postValue(Resource.Loading())
            val response=repositry.doctorSearch3(newDoctorSearchRequest)
