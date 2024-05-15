@@ -1,8 +1,9 @@
 package com.korashiGroup.salamtakPatient.api
 
+import com.korashiGroup.salamtakPatient.fragment.polyclinic.model.PolyClinicResponse
+import com.korashiGroup.salamtakPatient.fragment.polyclinic.model.PolyClinicsDoctorsResponse
 import com.korashiGroup.salamtakPatient.model.*
 import com.korashiGroup.salamtakPatient.model.askandanswer.QuestionAndAnswerResponse
-import com.korashiGroup.salamtakPatient.model.askandanswer.QuestionRequest
 import com.korashiGroup.salamtakPatient.model.booking.*
 import com.korashiGroup.salamtakPatient.model.booking.clink.GetDoctorClinksResponse
 import com.korashiGroup.salamtakPatient.model.deleteuser.DeleteUserResponse
@@ -140,9 +141,10 @@ interface ApiService {
         @Body appointmentRequest: PatientAppointmentRequest
     ): Response<CreatepatientAppointementsResponse>
 
-    @GET("{culture}/Doctor/GetDoctorProfileByDoctorId")
+    @GET("{culture}/Doctor/GetDoctorProfileByDoctorIdAndClinicID")
     suspend fun getDoctorProfileByDoctorId(
         @Path("culture") culture: String,
+        @Query("ClinicId") ClinicId :Int,
         @Query("DoctorId") DoctorId :Int,
     ): Response<GetDoctorClinksResponse>
 
@@ -339,5 +341,17 @@ interface ApiService {
         @Path("culture") culture: String,
         @Query("OfferCategoryID") OfferCategoryID :Int,
     ):Response<OffersDetailsResponse>
+
+    @POST("{culture}/HealthEntity/GetFilteredPolyClinics")
+    suspend fun getFilteredHealthEntity(
+        @Path("culture") culture: String,
+        @Body polyclinicRequest: Map<String, String>,
+    ): Response<PolyClinicResponse>
+    @GET("{culture}/Doctor/GetDoctorByClinicId")
+    suspend fun getDoctorByClinicId(
+        @Path("culture") culture: String,
+        @Query("ClinicId") ClinicId :Int,
+        @Query("SpecID") SpecID :Int,
+    ): Response<PolyClinicsDoctorsResponse>
 
 }

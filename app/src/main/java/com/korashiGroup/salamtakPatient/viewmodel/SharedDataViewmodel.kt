@@ -2,16 +2,17 @@ package com.korashiGroup.salamtakPatient.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.korashiGroup.salamtakPatient.adapter.GetAllAreaAdapter
 import com.korashiGroup.salamtakPatient.model.*
 import com.korashiGroup.salamtakPatient.model.booking.ClinicSchedualByClinicDayId
+import com.korashiGroup.salamtakPatient.model.booking.clink.ClinicData
+import com.korashiGroup.salamtakPatient.model.booking.clink.PolyClinicData
 import com.korashiGroup.salamtakPatient.model.profile.DataBloodType
 import com.korashiGroup.salamtakPatient.model.profile.DataFoodAllergy
 import com.korashiGroup.salamtakPatient.model.profile.DataMedicineAllergy
 import com.korashiGroup.salamtakPatient.model.register.ChooseGender
 import com.korashiGroup.salamtakPatient.model.register.ChoosePatient
 import com.korashiGroup.salamtakPatient.model.register.DataCountry
-import dagger.hilt.android.lifecycle.HiltViewModel
+import com.korashiGroup.salamtakPatient.model.register.RatingDoctors
 
 class SharedDataViewmodel:ViewModel() {
 
@@ -19,6 +20,7 @@ class SharedDataViewmodel:ViewModel() {
     val subSpecialication=MutableLiveData<List<SubSpecialistData>>()
     val seniorityLevelData=MutableLiveData<SeniorityLevelData>()
     val getCity=MutableLiveData<CityData>()
+    val clinicIdAndDoctorId=MutableLiveData<ClinicData>()
     val getArea=MutableLiveData<AreaData>()
     val doctorId=MutableLiveData<Int>()
     val profileStatus=MutableLiveData<Int>()
@@ -37,6 +39,8 @@ class SharedDataViewmodel:ViewModel() {
     val skipLoginStatus=MutableLiveData<String>()
     val patientType=MutableLiveData<ChoosePatient>()
     val offerId=MutableLiveData<Int>()
+    val rating=MutableLiveData<RatingDoctors>()
+    val polyClinicResponse=MutableLiveData<PolyClinicData>()
 
 
 
@@ -84,8 +88,12 @@ class SharedDataViewmodel:ViewModel() {
     fun getDocotorId(doctorid: Int){
         doctorId.postValue(doctorid)
     }
+    fun getClinicIdAndDoctorId(clinicData: ClinicData){
+        clinicIdAndDoctorId.postValue(clinicData)
+    }
+
     fun getOfferId(offerid: Int?){
-        offerId.postValue(offerid)
+        offerId.postValue(offerid!!)
     }
 
     fun getProfileStatus(profilestatus: Int){
@@ -120,4 +128,11 @@ class SharedDataViewmodel:ViewModel() {
     fun getSkipLoginStatus(skip:String){
         skipLoginStatus.postValue(skip)
     }
+    fun getRating(ratingDoctors: RatingDoctors){
+        rating.postValue(ratingDoctors)
+    }
+    fun getPolyClinicsData(polyClinicData: PolyClinicData){
+        polyClinicResponse.postValue(polyClinicData)
+    }
+
 }

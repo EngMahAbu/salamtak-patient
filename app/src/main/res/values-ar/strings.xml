@@ -92,7 +92,7 @@
     <string name="doesnotmatch">.كلمة المرور وتاكيد كلمة المرور غير متطابقين</string>
     <string name="male">ذكر</string>
     <string name="female">أنثى</string>
-    <string name="choose_your_nationality">اختر دولتك</string>
+    <string name="choose_your_nationality">الدولة</string>
     <string name="search_by_name_of_country">البحث عن طريق اسم الدولة</string>
     <string name="powered_by">برعاية</string>
     <string name="salamtak_booking">الحجوزات</string>
@@ -116,7 +116,7 @@
     <string name="medical_services_directory">Guide سلامتك</string>
     <string name="see_all">مشاهدةالكل</string>
     <string name="hospitals">المستشفيات</string>
-    <string name="polyclinics">العيادات</string>
+    <string name="polyclinics">مراكز طبية</string>
     <string name="pharmacies">الصيدليات</string>
     <string name="laboratories">المختبرات</string>
     <string name="radiologycenter">مراكز الاشعة</string>
@@ -124,11 +124,12 @@
     <string name="search">بحث</string>
     <string name="search_by_doctor_name">البحث باسم الطبيب ...</string>
     <string name="doctors_found">نتيجة البحث</string>
+    <string name="polyclinic_found">نتيجة البحث</string>
     <string name="all">الجميع</string>
     <string name="home">الرئيسية</string>
     <string name="my_schedule">الحجوزات </string>
-    <string name="more">المزيد</string>
-    <string name="reviews">المراجعات</string>
+    <string name="more">المزيد...</string>
+    <string name="reviews">التعليقات</string>
     <string name="next_available_booking_at_08_nov_from_06_30_pm">Next Available Booking at 08 Nov. from 06:30 PM</string>
     <string name="sub_specialization">التخصص الفرعي</string>
     <string name="book_now">احجز الآن</string>
@@ -260,7 +261,7 @@
     <string name="age">كم عمرك (بالسنوات)</string>
     <string name="askdoctor">اسأل طبيب</string>
     <string name="fillallfields">املأ جميع الحقول</string>
-    <string name="insurance_company">شركة التأمين</string>
+    <string name="insurance_company">شركات التأمين</string>
     <string name="notnow">ليس الآن</string>
     <string name="end_date">تاريخ الانتهاء</string>
     <string name="enterreleasedate">أدخل تاريخ الإصدار</string>
@@ -312,7 +313,7 @@
     <string name="enter_your_registered">Enter your registered</string>
     <string name="or">or</string>
     <string name="addresss">العنوان</string>
-    <string name="clinicservices">Clinic Services</string>
+    <string name="clinicservices">خدمات العيادة</string>
     <string name="avilableappointemnts">"Available "</string>
     <string name="avilableapapointemnts">المواعيد المتاحة</string>
     <string name="reservation_required_first_come_first_served">الكشف بأسبقية الحضور</string>
@@ -326,6 +327,16 @@
     <string name="btn_update">تحديث</string>
     <string name="privacy_policy">سياسة الخصوصية</string>
     <string name="dr">دكتور.</string>
+    <string name="there_is_no_appointments_available">لا يوجد حجوزات متاحة</string>
+    <string name="features"> مميزات العيادة</string>
+    <string name="wifiandtv">نت - تليفزيون</string>
+    <string name="photos">صور العيادة</string>
+    <string name="otherclinics">عيادات اخرى</string>
+    <string name="about_polyclinic">معلومات عن العيادة</string>
+    <string name="polyclinicservices">خدمات المركز الطبى</string>
+    <string name="polyinsurance_company">شركات تامين المركز الطبى</string>
+    <string name="polyfeatures">مميزات المركز الطبى</string>
+    <string name="polyphotos">صور المركز الطبى</string>
 
     <array name="choose">
         <item>اختار</item>

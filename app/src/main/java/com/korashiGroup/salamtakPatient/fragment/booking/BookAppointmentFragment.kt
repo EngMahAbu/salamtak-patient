@@ -43,6 +43,7 @@ import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 import java.util.*
+import kotlin.math.roundToInt
 
 @AndroidEntryPoint
 class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
@@ -86,6 +87,7 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        bindViews()
         binding.ivPrevious.isEnabled = step != 1
         bottomsheetbeahavoir =
             BottomSheetBehavior.from(binding.layoutBottomsheetpersistant.clinksBottomsheet)
@@ -181,7 +183,7 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
                 val requiredDate = dateFormat.parse(dateTime)
                 formattedDate = formatter.format(requiredDate)
                 val patientAppointmentRequest = PatientAppointmentRequest(
-                    args.doctorclinks.data?.id,
+                    args.doctorclinks?.data?.id,
                     doctorWorkingDayTimeId,
                     formattedDate,
                     false
@@ -207,7 +209,7 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
             adapter = chooseClinksDoctorsAdapter
             layoutManager = LinearLayoutManager(requireContext())
             setHasFixedSize(true)
-            chooseClinksDoctorsAdapter.submitList(args.doctorclinks.data?.clinicDtos)
+            chooseClinksDoctorsAdapter.submitList(args.doctorclinks?.data?.clinicDtos)
             chooseClinksDoctorsAdapter.notifyDataSetChanged()
         }
     }
@@ -303,7 +305,7 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
                     val appointmentDetailBooking = args.doctorclinks.data?.let { it1 ->
                         it1.id?.let { it2 ->
                             AppointmentDetailBooking(
-                               name,
+                                name,
                                 it2,
                                 formattedDate,
                                 intervalTime,
@@ -311,7 +313,7 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
                                 fees,
                                 medicalExaminationTypeName,
                                 it.data?.data?.doctorDto?.specialistName,
-                                args.doctorclinks.data!!.image,
+                                args.doctorclinks?.data?.image,
                                 medicalExaminationId
                             )
                         }
@@ -353,8 +355,8 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
 
                 is Resource.sucess -> {
                     binding.progressbar1.visibility = View.GONE
-                    val appointmentDetailBooking = args.doctorclinks.data?.let { it1 ->
-                        it1.id?.let { it2 ->
+                    val appointmentDetailBooking = args.doctorclinks.let { it1 ->
+                        it1.data?.id?.let { it2 ->
                             AppointmentDetailBooking(
                                 name,
                                 it2,
@@ -364,7 +366,7 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
                                 fees,
                                 medicalExaminationTypeName,
                                 it.data?.data?.doctorDto?.specialistName,
-                                args.doctorclinks.data!!.image,
+                                args.doctorclinks.data?.image,
                                 medicalExaminationId
                             )
                         }
@@ -633,9 +635,11 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
         }else{
             "دكتور.${args.doctorclinks.data?.firstNameAr} ${args.doctorclinks.data?.middelNameAr} ${args.doctorclinks.data?.lastNameAr}"
         }
-        val clincServices=args.doctorclinks?.data?.clinicDtos?.get(0)?.services
-        if (clincServices != null) {
-            initClinkservices(clincServices)
+        if (!args.doctorclinks.data?.clinicDtos.isNullOrEmpty()) {
+            val clincServices = args.doctorclinks?.data?.clinicDtos?.get(0)?.services
+            if (clincServices != null) {
+                initClinkservices(clincServices)
+            }
         }
         binding.tvDoctorName.text = name
         var subspecialist: String? = ""
@@ -659,5 +663,12 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
             }
         }
         binding.AboutDoctor.text=str
+    }
+    private fun bindViews(){
+        sharedDataViewmodel.rating.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            binding.ratingBar.rating= it.rate?.toFloat()?: 1.0f
+            binding.Reviewss.text="${it.rate?.roundToInt()?.toDouble()}"
+            binding.Ratecount.text="${it.rateCount?.toInt()}"
+        })
     }
 }

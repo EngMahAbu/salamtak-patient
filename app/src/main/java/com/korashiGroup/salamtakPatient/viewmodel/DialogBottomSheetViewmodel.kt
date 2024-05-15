@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.korashiGroup.salamtakPatient.model.*
 import com.korashiGroup.salamtakPatient.model.booking.*
-import com.korashiGroup.salamtakPatient.model.booking.clink.GetDoctorClinksResponse
 import com.korashiGroup.salamtakPatient.model.docotorsearch.DoctorSearchRequest
 import com.korashiGroup.salamtakPatient.model.docotorsearch.DoctorsearchItemResponse
 import com.korashiGroup.salamtakPatient.model.healthy.GetHealthEntityResponse
@@ -21,6 +20,7 @@ import com.korashiGroup.salamtakPatient.repository.RegisterRepositry
 import com.korashiGroup.salamtakPatient.utils.Resource
 import com.google.gson.Gson
 import com.korashiGroup.salamtakPatient.model.askandanswer.QuestionAndAnswerResponse
+import com.korashiGroup.salamtakPatient.model.booking.clink.GetDoctorClinksResponse
 import com.korashiGroup.salamtakPatient.model.docotorsearch.NewDoctorSearchRequest
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCardResponse
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCompanyResponse
@@ -300,9 +300,9 @@ class DialogBottomSheetViewmodel @Inject constructor(private val repositry: Regi
         return Resource.Error(error.message)
     }
 
-    fun getDoctorProfileByDoctorId(DoctorId :Int)=viewModelScope.launch(Dispatchers.IO+handler) {
+    fun getDoctorProfileByDoctorId(DoctorId :Int,clinicId:Int)=viewModelScope.launch(Dispatchers.IO+handler) {
         doctorClinkResponse.postValue(Resource.Loading())
-        val response=repositry.getDoctorProfileByDoctorId(DoctorId)
+        val response=repositry.getDoctorProfileByDoctorId(clinicId,DoctorId)
         doctorClinkResponse.postValue(response?.let { handleGetDoctorProfileByDoctorId(it) })
     }
 

@@ -14,9 +14,7 @@ import coil.load
 import coil.transform.CircleCropTransformation
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.adapter.EmrPatientAdapter
-import com.korashiGroup.salamtakPatient.adapter.SearchDoctorsAdapter
 import com.korashiGroup.salamtakPatient.databinding.MedicalHistoryfragmentBinding
-import com.korashiGroup.salamtakPatient.model.booking.clink.GetDoctorClinksResponse
 import com.korashiGroup.salamtakPatient.model.emr.Emr
 import com.korashiGroup.salamtakPatient.utils.DateUtils
 import com.korashiGroup.salamtakPatient.utils.Resource

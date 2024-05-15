@@ -535,15 +535,16 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
             when (response) {
 
                 is Resource.Loading -> {
-                    showprogtessbar()
+                 //  showprogtessbar()
                 }
 
                 is Resource.sucess -> {
-                    hideprogressbar()
+
                     response.data?.data.let {
                         getAllAreaAdapter.submitList(it)
                         getAllAreaAdapter.notifyDataSetChanged()
                     }
+                    binding.itemAllArea.progressBar.visibility = View.GONE
                 }
 
                 is Resource.Error -> {

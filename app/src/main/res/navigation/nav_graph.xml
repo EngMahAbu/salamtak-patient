@@ -200,6 +200,9 @@
                 android:id="@+id/action_searchFragment_to_bookingAppointmentFragment"
                 app:destination="@id/bookingAppointmentFragment"
         />
+        <action
+                android:id="@+id/action_searchFragment_to_polyClinicInfoFragment"
+                app:destination="@id/polyClinicInfoFragment" />
     </fragment>
     <fragment
             android:id="@+id/myScheduleFragment"
@@ -288,9 +291,6 @@
             android:label="BookingAppointmentFragment"
             tools:layout="@layout/booking_appointmentfragment">
         <action
-                android:id="@+id/action_bookingAppointmentFragment_to_bookAppointmentFragment"
-                app:destination="@id/bookAppointmentFragment" />
-        <action
                 android:id="@+id/action_bookingAppointmentFragment_to_searchFragment"
                 app:destination="@id/searchFragment"
                 app:popUpTo="@id/searchFragment" />
@@ -298,25 +298,27 @@
                 app:destination="@id/dialogAddInsuranceCardFragment"/>
         <action android:id="@+id/action_bookingAppointmentFragment_to_allReviewsFragment"
                 app:destination="@id/allReviewsFragment"/>
+        <action
+                android:id="@+id/action_bookingAppointmentFragment_to_bookAppointmentFragment"
+                app:destination="@id/bookAppointmentFragment" />
     </fragment>
     <fragment
             android:id="@+id/bookAppointmentFragment"
             android:name="com.korashiGroup.salamtakPatient.fragment.booking.BookAppointmentFragment"
             android:label="book_appointmentfragment"
             tools:layout="@layout/book_appointmentfragment">
-        <argument
-                android:name="doctorclinks"
-                app:argType="com.korashiGroup.salamtakPatient.model.booking.clink.GetDoctorClinksResponse" />
         <action
                 android:id="@+id/action_bookAppointmentFragment_to_appointmentDetailsFragment"
                 app:destination="@id/appointmentDetailsFragment" />
-        <argument
-                android:name="status"
-                app:argType="string"
-                app:nullable="true" />
         <action
                 android:id="@+id/action_bookAppointmentFragment_to_dialogBottomSheetFragment"
                 app:destination="@id/dialogBottomSheetFragment" />
+        <argument
+                android:name="doctorclinks"
+                app:argType="com.korashiGroup.salamtakPatient.model.booking.clink.GetDoctorClinksResponse" />
+        <argument
+                android:name="status"
+                app:argType="string" />
     </fragment>
     <dialog
             android:id="@+id/dialogSchduleFragment"
@@ -500,5 +502,14 @@
             android:id="@+id/privacyPolicyFragment"
             android:name="com.korashiGroup.salamtakPatient.fragment.webView.PrivacyPolicyFragment"
             android:label="PrivacyPolicyFragment" />
+    <fragment
+            android:id="@+id/polyClinicInfoFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.polyclinic.PolyClinicInfoFragment"
+            android:label="poly_clinic_infofragment"
+            tools:layout="@layout/poly_clinic_infofragment" >
+        <argument
+                android:name="polyclinicitems"
+                app:argType="com.korashiGroup.salamtakPatient.fragment.polyclinic.model.PolyClinicsItem" />
+    </fragment>
 
 </navigation>

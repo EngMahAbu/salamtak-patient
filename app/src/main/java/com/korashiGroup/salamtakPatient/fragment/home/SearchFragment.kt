@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,12 +35,19 @@ import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.snackbar.Snackbar
+import com.korashiGroup.salamtakPatient.adapter.PolyClinicsAdapter
+import com.korashiGroup.salamtakPatient.adapter.PolyClinicsDoctorsAdapter
+import com.korashiGroup.salamtakPatient.fragment.polyclinic.model.PolyClinicsItem
 import com.korashiGroup.salamtakPatient.model.*
+import com.korashiGroup.salamtakPatient.model.booking.clink.ClinicData
+import com.korashiGroup.salamtakPatient.model.booking.clink.PolyClinicData
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCompany
 import com.korashiGroup.salamtakPatient.model.register.ChooseGender
+import com.korashiGroup.salamtakPatient.model.register.RatingDoctors
 import com.korashiGroup.salamtakPatient.utils.Constans.Query_Page_Size
 import com.korashiGroup.salamtakPatient.utils.DateUtils
 import com.korashiGroup.salamtakPatient.utils.localization.DefaultLocaleHelper
+import com.korashiGroup.salamtakPatient.viewmodel.PolyClinicsViewmodel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
@@ -48,16 +56,21 @@ import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 @AndroidEntryPoint
-class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.Booking {
+class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.Booking,
+    PolyClinicsAdapter.Booking, PolyClinicsDoctorsAdapter.IPolyClinicsBooking {
 
     private lateinit var binding: SearchfragmentBinding
     private lateinit var searchServicesAdapter: CalenderAdapter
     private lateinit var searchDoctorsAdapter: SearchDoctorsAdapter
+    private lateinit var polyClinicsAdapter: PolyClinicsAdapter
+    private lateinit var polyClinicsDoctorsAdapter: PolyClinicsDoctorsAdapter
+    private var partMap: Map<String, Any> = mutableMapOf()
     private lateinit var bottomsheetbeahavoir: BottomSheetBehavior<ConstraintLayout>
-    private val list=ArrayList<InsuranceCompany>()
-    private var insuranceId=""
+    private val list = ArrayList<InsuranceCompany>()
+    private var insuranceId = ""
 
     private val sdf = SimpleDateFormat("MMMM yyyy", Locale.getDefault())
     private val cal = Calendar.getInstance(Locale.US)
@@ -65,6 +78,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
     val now = Calendar.getInstance(TimeZone.getTimeZone("CST"))
     var specialistId = 0
     var doctorId = 0
+    var polyclinicId = 0
     var dayId = 0
     var seniortyLevelId = 0
     var examinationtypeid = 0
@@ -72,16 +86,18 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
     var areaId = 0
     var genderId = 0
     var formattedDate = ""
-    var image=""
+    var image = ""
     var step = 1
-    var skip=""
+    var skip = ""
+    var type = 0
     var sub_SpecialistId = mutableListOf<Int>()
     val sharedDataViewmodel: SharedDataViewmodel by activityViewModels()
     val viewmodel: DialogBottomSheetViewmodel by viewModels()
-    var totalsDoctors=0
-    private var feesFrom:Int? = 1
-    private var feesTo:Int? = 6000
-    private var doctorSearchState="new"
+    val polyClinicsViewmodel: PolyClinicsViewmodel by viewModels()
+    var totalsDoctors = 0
+    private var feesFrom: Int? = 1
+    private var feesTo: Int? = 6000
+    private var doctorSearchState = "new"
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -98,7 +114,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         binding.ivPrevious.isEnabled = step != 1
         examinationtypeid = HomeFragment.instance?.let {
             it.medicalExaminatioId
-        }?:0
+        } ?: 0
         bottomsheetbeahavoir =
             BottomSheetBehavior.from(binding.layoutBottomsheetpersistant.filterBottomsheet)
         bottomsheetbeahavoir.state = BottomSheetBehavior.STATE_HIDDEN
@@ -106,19 +122,35 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         skipLogin()
         servicesRecylerview()
         doctorsRecylerview()
+        polyClinicDoctorsRecylerview()
         initButtonCollabsedFiller()
         val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH).apply {
             this.timeZone = TimeZone.getTimeZone("CST")
         }
         formattedDate = formatter.format(now.time)
-        doctorsSearch()
         callBackGetClinicSchedualByClinicDayId()
         getDayId()
         setUpCalendar()
         initButton()
         setupSpinner()
+        if (examinationtypeid == 6) {
+            if (DateUtils.getstatus() == "true") {
+                sharedDataViewmodel.polyClinicResponse.observe(viewLifecycleOwner,
+                    androidx.lifecycle.Observer {
+                        polyClinicsViewmodel.getDoctorByClinicId(it.clinicId, specialistId)
+                    })
+
+            } else {
+                polyClinicRecylerview()
+                polyClinicSearch()
+            }
+        } else {
+            doctorsSearch()
+        }
+
         getSearchDoctors()
         callBackInsuranceCompany()
+        polyClinicDoctors()
     }
 
     private fun initButton() {
@@ -129,7 +161,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
 
         binding.layoutBottomsheetpersistant.tvRESET.setOnClickListener {
             reset()
-            binding.tvSearch.text=getString(R.string.search)
+            binding.tvSearch.text = getString(R.string.search)
         }
 
         binding.ivNext.setOnClickListener {
@@ -146,7 +178,13 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         }
 
         binding.ivArrow.setOnClickListener {
-            findNavController().navigate(R.id.homeFragment)
+           if (type==0){
+               DateUtils.setstatus("")
+               findNavController().navigate(R.id.homeFragment)
+           }else{
+               polyClinicRecylerview()
+               polyClinicSearch()
+           }
         }
 
         binding.layoutFilter.setOnClickListener {
@@ -159,9 +197,9 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             val action =
                 SearchFragmentDirections.actionSearchFragmentToDialogBottomSheetFragment("Specialist")
             findNavController().navigate(action)
-            it.isEnabled=false
+            it.isEnabled = false
             Handler().postDelayed({
-                it.isEnabled=true
+                it.isEnabled = true
             }, 1000)
 
         }
@@ -178,9 +216,9 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                     SearchFragmentDirections.actionSearchFragmentToDialogBottomSheetFragment("SubSpecialist")
                 findNavController().navigate(action)
             }
-            it.isEnabled=false
+            it.isEnabled = false
             Handler().postDelayed({
-                it.isEnabled=true
+                it.isEnabled = true
             }, 1000)
         }
 
@@ -189,9 +227,9 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             val action =
                 SearchFragmentDirections.actionSearchFragmentToDialogBottomSheetFragment("SeniorityLevel")
             findNavController().navigate(action)
-            it.isEnabled=false
+            it.isEnabled = false
             Handler().postDelayed({
-                it.isEnabled=true
+                it.isEnabled = true
             }, 1000)
         }
         binding.layoutBottomsheetpersistant.btnLayoutChooseCity.setOnClickListener {
@@ -199,9 +237,9 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             val action =
                 SearchFragmentDirections.actionSearchFragmentToDialogBottomSheetFragment("AllCity")
             findNavController().navigate(action)
-            it.isEnabled=false
+            it.isEnabled = false
             Handler().postDelayed({
-                it.isEnabled=true
+                it.isEnabled = true
             }, 1000)
         }
         binding.layoutBottomsheetpersistant.btnLayoutChooseArea.setOnClickListener {
@@ -212,9 +250,9 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                     SearchFragmentDirections.actionSearchFragmentToDialogBottomSheetFragment("AllArea")
                 findNavController().navigate(action)
             }
-            it.isEnabled=false
+            it.isEnabled = false
             Handler().postDelayed({
-                it.isEnabled=true
+                it.isEnabled = true
             }, 1000)
         }
         binding.layoutBottomsheetpersistant.btnLayoutChooseGender.setOnClickListener {
@@ -222,15 +260,15 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             val action =
                 SearchFragmentDirections.actionSearchFragmentToDialogBottomSheetFragment("gender")
             findNavController().navigate(action)
-            it.isEnabled=false
+            it.isEnabled = false
             Handler().postDelayed({
-                it.isEnabled=true
+                it.isEnabled = true
             }, 1000)
         }
 
         binding.layoutBottomsheetpersistant.btnApply.setOnClickListener {
-           // viewmodel.doctorSearchPage=1
-            doctorSearchState="old"
+            // viewmodel.doctorSearchPage=1
+            doctorSearchState = "old"
             if (binding.layoutBottomsheetpersistant.etFeesFrom.text.toString().isNullOrEmpty() ||
                 binding.layoutBottomsheetpersistant.etFeesTo.text.toString().isNullOrEmpty()
             ) {
@@ -255,14 +293,14 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                         seniortyLevelId,
                         0,
                         specialistId,
-                        sub_SpecialistId,insuranceId
+                        sub_SpecialistId, insuranceId
                     )
                 }
             }
             if (doctorssearchRequset != null) {
-                viewmodel.searchDoctors(doctorssearchRequset,doctorSearchState)
+                viewmodel.searchDoctors(doctorssearchRequset, doctorSearchState)
             }
-            bottomsheetbeahavoir.state=BottomSheetBehavior.STATE_HIDDEN
+            bottomsheetbeahavoir.state = BottomSheetBehavior.STATE_HIDDEN
         }
 
     }
@@ -281,6 +319,22 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             adapter = searchDoctorsAdapter
             layoutManager = LinearLayoutManager(requireContext())
             addOnScrollListener(this@SearchFragment.scrollListener)
+        }
+    }
+
+    private fun polyClinicRecylerview() {
+        polyClinicsAdapter = PolyClinicsAdapter(this)
+        binding.rvPolyclinic.apply {
+            adapter = polyClinicsAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+        }
+    }
+
+    private fun polyClinicDoctorsRecylerview() {
+        polyClinicsDoctorsAdapter = PolyClinicsDoctorsAdapter(this)
+        binding.rvPolyclinicDoctors.apply {
+            adapter = polyClinicsDoctorsAdapter
+            layoutManager = LinearLayoutManager(requireContext())
         }
     }
 
@@ -359,9 +413,9 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         getCity()
         sharedDataViewmodel.specialication.observe(viewLifecycleOwner) {
             binding.layoutBottomsheetpersistant.etSpecialization.setText(it.name)
-            if (it.name.isNullOrEmpty()){
+            if (it.name.isNullOrEmpty()) {
                 binding.tvSearch.setText(getString(R.string.search))
-            }else{
+            } else {
                 binding.tvSearch.setText(it.name)
             }
 
@@ -404,13 +458,65 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             if (!binding.layoutBottomsheetpersistant.etChooseGender.toString().isEmpty()) {
                 genderId = it.id
             } else genderId = 0
-
         }
-
-
     }
 
-    @SuppressLint("NotifyDataSetChanged")
+    private fun polyClinicSearch() {
+        sharedDataViewmodel.getCity.observe(viewLifecycleOwner) {
+            if (DefaultLocaleHelper.getInstance(requireContext()).getCurrentLocale() == "ar") {
+                binding.layoutBottomsheetpersistant.etChooseCity.setText(it.nameAr)
+                binding.tvCity.text = it.nameAr
+            } else {
+                binding.layoutBottomsheetpersistant.etChooseCity.setText(it.name)
+                binding.tvCity.text = it.name
+            }
+            partMap = partMap + mapOf("CityId" to it.id)
+            partMap = partMap + mapOf("SpecID" to specialistId)
+            partMap = partMap + mapOf("HealthEntityTypeId" to 6)
+            partMap = partMap + mapOf("MaxResultCount" to 30)
+            partMap = partMap + mapOf("SkipCount" to 0)
+            polyClinicsViewmodel.getFilteredHealthEntity(partMap as HashMap<String, String>)
+        }
+        polyClinicsViewmodel.polyClinicsResponse.observe(viewLifecycleOwner) {
+
+            when (it) {
+
+                is Resource.Loading -> {
+                    showprogtessbar()
+                }
+
+                is Resource.sucess -> {
+                    hideprogressbar()
+                    type=0
+                    if (!it.data?.data.isNullOrEmpty()) {
+                        totalsDoctors = it.data?.data?.size!!
+                    }
+                    it.let {
+                        binding.rvPolyclinicDoctors.visibility=View.GONE
+                        binding.rvPolyclinic.visibility = View.VISIBLE
+                        if (DefaultLocaleHelper.getInstance(requireContext())
+                                .getCurrentLocale() == "en"
+                        ) {
+                            binding.tvCountofDoctors.text =
+                                "${totalsDoctors}   ${getString(R.string.polyclinic_found)} "
+                        } else {
+                            binding.tvCountofDoctors.text =
+                                " ${getString(R.string.polyclinic_found)} ${totalsDoctors}  مركز "
+                        }
+                        polyClinicsAdapter.submitList(it.data?.data)
+                        polyClinicsAdapter.notifyDataSetChanged()
+                    }
+
+                }
+
+                is Resource.Error -> {
+                    hideprogressbar()
+                }
+            }
+
+        }
+    }
+
     private fun doctorsSearch() {
 
         viewmodel.docorsResponse.observe(viewLifecycleOwner) {
@@ -424,20 +530,24 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                 is Resource.sucess -> {
                     hideprogressbar()
                     it.let {
-                    //    bottomsheetbeahavoir.state = BottomSheetBehavior.STATE_HIDDEN
+                        //    bottomsheetbeahavoir.state = BottomSheetBehavior.STATE_HIDDEN
                         searchDoctorsAdapter.submitList(it.data?.data?.items?.toList())
                         searchDoctorsAdapter.notifyDataSetChanged()
-        //                updateUi(it.data?.data?.items as List<Item>)
-                        val totalresult= (it.data?.data?.totalCount)?.div((10+2))
+                        //                updateUi(it.data?.data?.items as List<Item>)
+                        val totalresult = (it.data?.data?.totalCount)?.div((10 + 2))
                         isLastPage = viewmodel.doctorSearchPage == totalresult
-                        if (isLastPage){
-                            binding.rvDoctors.setPadding(0,0,0,0)
+                        if (isLastPage) {
+                            binding.rvDoctors.setPadding(0, 0, 0, 0)
                         }
-                        totalsDoctors= it.data?.data?.totalCount!!
-                        if (DefaultLocaleHelper.getInstance(requireContext()).getCurrentLocale()=="en"){
-                            binding.tvCountofDoctors.text="${totalsDoctors}   ${getString(R.string.doctors_found)} "
-                        }else{
-                            binding.tvCountofDoctors.text=" ${getString(R.string.doctors_found)} ${totalsDoctors}  طبيب "
+                        totalsDoctors = it.data?.data?.totalCount!!
+                        if (DefaultLocaleHelper.getInstance(requireContext())
+                                .getCurrentLocale() == "en"
+                        ) {
+                            binding.tvCountofDoctors.text =
+                                "${totalsDoctors}   ${getString(R.string.doctors_found)} "
+                        } else {
+                            binding.tvCountofDoctors.text =
+                                " ${getString(R.string.doctors_found)} ${totalsDoctors}  طبيب "
                         }
 
                     }
@@ -455,34 +565,34 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
 
         }
         sharedDataViewmodel.getCity.observe(viewLifecycleOwner) {
-            if (DefaultLocaleHelper.getInstance(requireContext()).getCurrentLocale()=="ar"){
+            if (DefaultLocaleHelper.getInstance(requireContext()).getCurrentLocale() == "ar") {
                 binding.layoutBottomsheetpersistant.etChooseCity.setText(it.nameAr)
-                binding.tvCity.text=it.nameAr
-            }else{
+                binding.tvCity.text = it.nameAr
+            } else {
                 binding.layoutBottomsheetpersistant.etChooseCity.setText(it.name)
-                binding.tvCity.text=it.name
+                binding.tvCity.text = it.name
 
             }
-        val doctorssearchRequset = feesFrom?.let { it1 ->
-            feesTo?.let { it2 ->
-                DoctorSearchRequest(
-                    areaId,
-                    formattedDate,
-                    it.id,
-                    "",
-                    it1,
-                    it2,
-                    genderId,
-                    10,
-                    examinationtypeid,
-                    seniortyLevelId,
-                    0,
-                    specialistId
-                )
+            val doctorssearchRequset = feesFrom?.let { it1 ->
+                feesTo?.let { it2 ->
+                    DoctorSearchRequest(
+                        areaId,
+                        formattedDate,
+                        it.id,
+                        "",
+                        it1,
+                        it2,
+                        genderId,
+                        10,
+                        examinationtypeid,
+                        seniortyLevelId,
+                        0,
+                        specialistId
+                    )
+                }
             }
-        }
             if (doctorssearchRequset != null) {
-                viewmodel.searchDoctors(doctorssearchRequset,doctorSearchState)
+                viewmodel.searchDoctors(doctorssearchRequset, doctorSearchState)
             }
         }
     }
@@ -494,6 +604,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                 is Resource.Loading -> {
                     showprogtessbar()
                 }
+
                 is Resource.sucess -> {
                     hideprogressbar()
                     it.let {
@@ -501,7 +612,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                         if (time != null) {
 
                             val patientAppointmentRequest =
-                                PatientAppointmentRequest(doctorId, 0, formattedDate, false,image)
+                                PatientAppointmentRequest(doctorId, 0, formattedDate, false, image)
                             val action =
                                 SearchFragmentDirections.actionSearchFragmentToDialogClinkBookingFragment(
                                     patientAppointmentRequest, it.data
@@ -513,6 +624,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                     }
 
                 }
+
                 is Resource.Error -> {
                     hideprogressbar()
 //                   loginresponse.data?.let {
@@ -528,19 +640,18 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
     private fun showprogtessbar() {
         binding.progressBar.visibility = View.VISIBLE
         binding.layoutBottomsheetpersistant.progressBar.visibility = View.VISIBLE
-        isloading=true
+        isloading = true
     }
 
     private fun hideprogressbar() {
         binding.progressBar.visibility = View.GONE
         binding.layoutBottomsheetpersistant.progressBar.visibility = View.GONE
-        isloading=false
-
+        isloading = false
     }
 
     private fun setUpCalendar() {
         val calendarList = ArrayList<CalendarDateModel>()
-        val formatter = SimpleDateFormat("yyyy-MM-dd",Locale.getDefault()).apply {
+        val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).apply {
             this.timeZone = TimeZone.getTimeZone("CST")
         }
         binding.tvDate.text = sdf.format(cal.time)
@@ -549,18 +660,18 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         dates.clear()
         monthCalendar.set(Calendar.DAY_OF_MONTH, 1)
         while (dates.size < maxDaysInMonth) {
-            if (formatter.format(monthCalendar.time)>=formatter.format(now.time)) {
+            if (formatter.format(monthCalendar.time) >= formatter.format(now.time)) {
                 calendarList.add(CalendarDateModel(monthCalendar.time))
             }
-                dates.add(monthCalendar.time)
-                monthCalendar.add(Calendar.DAY_OF_MONTH, 1)
+            dates.add(monthCalendar.time)
+            monthCalendar.add(Calendar.DAY_OF_MONTH, 1)
 
         }
         searchServicesAdapter.submitList(calendarList)
     }
 
     override fun onItemClick(date: Date) {
-        doctorSearchState="old"
+        doctorSearchState = "old"
         val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US)
         formattedDate = formatter.format(date)
         val doctorssearchRequset = feesFrom?.let {
@@ -582,35 +693,39 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             }
         }
         if (doctorssearchRequset != null) {
-            viewmodel.searchDoctors(doctorssearchRequset,doctorSearchState)
+            viewmodel.searchDoctors(doctorssearchRequset, doctorSearchState)
         }
-
     }
 
-    override fun onItemClick(clinicId: Int, doctorId: Int, fessTo: Int,image:String) {
+    override fun onItemClick(clinicId: Int, doctorId: Int, fessTo: Int, image: String) {
 
-              if (DateUtils.getToken().isNullOrEmpty()){
-                 findNavController().navigate(R.id.dialogSignUp)
-              }else{
-                  this.doctorId = doctorId
-                  this.feesTo = feesTo
-                  this.image=image
-                  getDayId()
-                  viewmodel.getClinicSchedualByClinicDayId(
-                      clinicId,
-                      dayId,
-                      examinationtypeid,
-                      formattedDate
-                  )
-              }
-
-
-    }
-
-    override fun onItemClick(clinicId: Int, doctorId: Int, clinkname: String) {
-        if (DateUtils.getToken().isNullOrEmpty()){
+        if (DateUtils.getToken().isNullOrEmpty()) {
             findNavController().navigate(R.id.dialogSignUp)
-        }else {
+        } else {
+            this.doctorId = doctorId
+            this.feesTo = feesTo
+            this.image = image
+            getDayId()
+            viewmodel.getClinicSchedualByClinicDayId(
+                clinicId,
+                dayId,
+                examinationtypeid,
+                formattedDate
+            )
+        }
+    }
+
+    override fun onItemClick(
+        clinicId: Int,
+        doctorId: Int,
+        clinkname: String,
+        rate: Double,
+        rateCount: Int
+    ) {
+        sharedDataViewmodel.getRating(RatingDoctors(rate, rateCount))
+        if (DateUtils.getToken().isNullOrEmpty()) {
+            findNavController().navigate(R.id.dialogSignUp)
+        } else {
             val clinicSchedualByClinicDayId = ClinicSchedualByClinicDayId(
                 clinicId,
                 dayId,
@@ -620,8 +735,9 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             )
             sharedDataViewmodel.getClinicSchedualByClinicDayId(clinicSchedualByClinicDayId)
             sharedDataViewmodel.getDocotorId(doctorId)
+            sharedDataViewmodel.getClinicIdAndDoctorId(ClinicData(doctorId, clinicId))
             findNavController().navigate(R.id.bookingAppointmentFragment)
-       }
+        }
     }
 
     private fun getDayId() {
@@ -634,21 +750,27 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             "Sun" -> {
                 dayId = 1
             }
+
             "Mon" -> {
                 dayId = 2
             }
+
             "Tue" -> {
                 dayId = 3
             }
+
             "Wed" -> {
                 dayId = 4
             }
+
             "Thu" -> {
                 dayId = 5
             }
+
             "Fri" -> {
                 dayId = 6
             }
+
             "Sat" -> {
                 dayId = 7
             }
@@ -676,10 +798,10 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                 parent: AdapterView<*>,
                 view: View?, position: Int, id: Long
             ) {
-                if (position==0){
+                if (position == 0) {
                     examinationtypeid = examinationtypeid
-                }else{
-                    examinationtypeid=position
+                } else {
+                    examinationtypeid = position
                 }
 
             }
@@ -694,7 +816,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
 
     fun setupInsuranceSpinner(list: List<InsuranceCompany>) {
 
-        val insuranceCompanyList=ArrayList<String>()
+        val insuranceCompanyList = ArrayList<String>()
         insuranceCompanyList.add(getString(R.string.select))
         list.forEach {
             insuranceCompanyList.add(it.name)
@@ -702,7 +824,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
 
         val typeadapter = ArrayAdapter(
             requireActivity(),
-            androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,insuranceCompanyList
+            androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, insuranceCompanyList
         )
         binding.layoutBottomsheetpersistant.spInsuranceCompany.adapter = typeadapter
         binding.layoutBottomsheetpersistant.spInsuranceCompany.onItemSelectedListener = object :
@@ -711,10 +833,10 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                 parent: AdapterView<*>,
                 view: View?, position: Int, id: Long
             ) {
-                if (position==0){
-                    insuranceId=""
-                }else{
-                    insuranceId=list[position-1].iD
+                if (position == 0) {
+                    insuranceId = ""
+                } else {
+                    insuranceId = list[position - 1].iD
                 }
 
             }
@@ -726,7 +848,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         }
     }
 
-    private fun callBackInsuranceCompany(){
+    private fun callBackInsuranceCompany() {
 
         viewmodel.InsuranceCompany?.observe(viewLifecycleOwner,
             androidx.lifecycle.Observer {
@@ -758,13 +880,10 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
 
     }
 
-
-
-
     private fun getSearchDoctors() {
         var job: Job? = null
         binding.etSearch.addTextChangedListener {
-            doctorSearchState="old"
+            doctorSearchState = "old"
             job?.cancel()
             job = MainScope().launch {
                 delay(500L)
@@ -789,9 +908,9 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                             }
                         }
                         if (doctorssearchRequset != null) {
-                            viewmodel.searchDoctors(doctorssearchRequset,doctorSearchState)
+                            viewmodel.searchDoctors(doctorssearchRequset, doctorSearchState)
                         }
-                    }else{
+                    } else {
                         val doctorssearchRequset = feesFrom?.let { it1 ->
                             feesTo?.let { it2 ->
                                 DoctorSearchRequest(
@@ -811,11 +930,11 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                             }
                         }
                         if (doctorssearchRequset != null) {
-                            viewmodel.searchDoctors(doctorssearchRequset,doctorSearchState)
+                            viewmodel.searchDoctors(doctorssearchRequset, doctorSearchState)
                         }
                     }
 
-                    }
+                }
 
             }
         }
@@ -829,51 +948,52 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         }
     }
 
-    private fun skipLogin(){
-        if (DateUtils.getToken().isNullOrEmpty()){
-                binding.layoutCity.visibility=View.GONE
-        }else{
-            binding.layoutCity.visibility=View.VISIBLE
+    private fun skipLogin() {
+        if (DateUtils.getToken().isNullOrEmpty()) {
+            binding.layoutCity.visibility = View.GONE
+        } else {
+            binding.layoutCity.visibility = View.VISIBLE
         }
     }
 
-    private fun reset(){
+    private fun reset() {
 
-        val subSpecialistData=SubSpecialistData(0,"",false,"")
-        val list=ArrayList<SubSpecialistData>()
+        val subSpecialistData = SubSpecialistData(0, "", false, "")
+        val list = ArrayList<SubSpecialistData>()
         list.add(subSpecialistData)
-        sharedDataViewmodel.getCity(CityData(0,"",0,false,"",""))
-        sharedDataViewmodel.getArea(AreaData(0,""))
-        sharedDataViewmodel.getGender(ChooseGender("",0))
-        sharedDataViewmodel.getspecialication(SpecialistData(0,"",false,""))
-        sharedDataViewmodel.getSeniorityLevelData(SeniorityLevelData(0,""))
+        sharedDataViewmodel.getCity(CityData(0, "", 0, false, "", ""))
+        sharedDataViewmodel.getArea(AreaData(0, ""))
+        sharedDataViewmodel.getGender(ChooseGender("", 0))
+        sharedDataViewmodel.getspecialication(SpecialistData(0, "", false, ""))
+        sharedDataViewmodel.getSeniorityLevelData(SeniorityLevelData(0, ""))
         sharedDataViewmodel.getSubSpecialication(list)
     }
 
-    var isloading=false
-    var isLastPage=false
-    var isScrolling=false
-    val scrollListener=object :RecyclerView.OnScrollListener(){
+    var isloading = false
+    var isLastPage = false
+    var isScrolling = false
+    val scrollListener = object : RecyclerView.OnScrollListener() {
         override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
             super.onScrollStateChanged(recyclerView, newState)
-            if (newState==AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL){
-                isScrolling=true
+            if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+                isScrolling = true
             }
         }
 
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
             super.onScrolled(recyclerView, dx, dy)
 
-            val layoutmanger=recyclerView.layoutManager as LinearLayoutManager
-            val firstVisibleItemPosition=layoutmanger.findFirstVisibleItemPosition()
-            val visibleItemCount=layoutmanger.childCount
-            val totalItemCount=layoutmanger.itemCount
+            val layoutmanger = recyclerView.layoutManager as LinearLayoutManager
+            val firstVisibleItemPosition = layoutmanger.findFirstVisibleItemPosition()
+            val visibleItemCount = layoutmanger.childCount
+            val totalItemCount = layoutmanger.itemCount
             val isNotLoadingAndIsNotLastPage = !isloading && !isLastPage
-            val isAtLastItem=firstVisibleItemPosition + visibleItemCount >= totalItemCount
-            val isNotAtBeginning= firstVisibleItemPosition>=0
-            val isTotalMoreThanvisible=totalItemCount>=Query_Page_Size
-            val shouldPaginate=isNotLoadingAndIsNotLastPage && isAtLastItem && isNotAtBeginning && isTotalMoreThanvisible && isScrolling
-            if (shouldPaginate){
+            val isAtLastItem = firstVisibleItemPosition + visibleItemCount >= totalItemCount
+            val isNotAtBeginning = firstVisibleItemPosition >= 0
+            val isTotalMoreThanvisible = totalItemCount >= Query_Page_Size
+            val shouldPaginate =
+                isNotLoadingAndIsNotLastPage && isAtLastItem && isNotAtBeginning && isTotalMoreThanvisible && isScrolling
+            if (shouldPaginate) {
 
                 val doctorssearchRequset = feesFrom?.let {
                     feesTo?.let { it1 ->
@@ -894,26 +1014,99 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                     }
                 }
                 if (doctorssearchRequset != null) {
-                    viewmodel.searchDoctors(doctorssearchRequset,doctorSearchState)
+                    viewmodel.searchDoctors(doctorssearchRequset, doctorSearchState)
                 }
-                isScrolling=false
+                isScrolling = false
 
             }
 
         }
     }
 
-
-
-    private fun getCity(){
+    private fun getCity() {
         sharedDataViewmodel.getCity.observe(viewLifecycleOwner) {
-                binding.layoutBottomsheetpersistant.etChooseCity.setText(it.name)
-                binding.tvCity.text=it.name
+            binding.layoutBottomsheetpersistant.etChooseCity.setText(it.name)
+            binding.tvCity.text = it.name
             if (!binding.layoutBottomsheetpersistant.etChooseCity.toString().isEmpty()) {
                 cityId = it.id
             } else cityId = 0
         }
     }
 
+    override fun onPolyClinicsItemClick(
+        clinicId: Int
+    ) {
+        binding.rvPolyclinic.visibility = View.GONE
+        polyclinicId = clinicId
+        polyClinicsViewmodel.getDoctorByClinicId(clinicId, specialistId)
+    }
+
+    override fun onMoreItemClick(polyClinicsItem: PolyClinicsItem) {
+        polyClinicsItem.clinicId?.let { PolyClinicData(it, true) }
+            ?.let { sharedDataViewmodel.getPolyClinicsData(it) }
+        polyclinicId = polyClinicsItem.clinicId!!
+        val action =
+            SearchFragmentDirections.actionSearchFragmentToPolyClinicInfoFragment(polyClinicsItem)
+        findNavController().navigate(action)
+    }
+
+    private fun polyClinicDoctors() {
+        polyClinicsViewmodel.polyClinicsDoctorsResponse.observe(viewLifecycleOwner) {
+
+            when (it) {
+
+                is Resource.Loading -> {
+                    showprogtessbar()
+                }
+
+                is Resource.sucess -> {
+                    type = 1
+                    hideprogressbar()
+                    if (!it.data?.data.isNullOrEmpty()) {
+                        totalsDoctors = it.data?.data?.size!!
+                    }
+                    it.let {
+                        binding.rvPolyclinicDoctors.visibility = View.VISIBLE
+                        if (DefaultLocaleHelper.getInstance(requireContext())
+                                .getCurrentLocale() == "en"
+                        ) {
+                            binding.tvCountofDoctors.text =
+                                "${totalsDoctors}   ${getString(R.string.doctors_found)} "
+                        } else {
+                            binding.tvCountofDoctors.text =
+                                " ${getString(R.string.doctors_found)} ${totalsDoctors}  مركز "
+                        }
+                        polyClinicsDoctorsAdapter.submitList(it.data?.data)
+                        polyClinicsDoctorsAdapter.notifyDataSetChanged()
+                    }
+
+                }
+
+                is Resource.Error -> {
+                    hideprogressbar()
+                }
+            }
+
+        }
+    }
+
+    override fun onPolyClinicsDoctorItemClick(
+        doctorId: Int, fess: Int, image: String, clinicId: Int
+    ) {
+        if (DateUtils.getToken().isNullOrEmpty()) {
+            findNavController().navigate(R.id.dialogSignUp)
+        } else {
+            this.doctorId = doctorId
+            this.feesTo = feesTo
+            this.image = image
+            getDayId()
+            viewmodel.getClinicSchedualByClinicDayId(
+                clinicId,
+                dayId,
+                examinationtypeid,
+                formattedDate
+            )
+        }
+    }
 
 }

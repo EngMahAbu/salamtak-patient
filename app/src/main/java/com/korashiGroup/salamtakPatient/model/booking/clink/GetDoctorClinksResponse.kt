@@ -17,6 +17,8 @@ data class Data(
     val birthdayStr: String?,
     @SerializedName("clinicDtos")
     val clinicDtos: List<ClinicDto?>?,
+    @SerializedName("CurrentClinicDtos")
+    val currentClinicDtos: CurrentClinicDtos?,
     @SerializedName("Code")
     val code: String?,
     @SerializedName("DoctorInfo")
@@ -84,7 +86,7 @@ data class Data(
     @SerializedName("IsFavoiritDoctor")
     val isFavoiritDoctor: Boolean?,
 
-): Serializable
+    ): Serializable
 data class ClinicDto(
     @SerializedName("Address")
     val address: String?,
@@ -116,4 +118,34 @@ data class ClinicDto(
     val phone: String?,
     @SerializedName("Services")
     val services: List<String>
+): Serializable
+data class CurrentClinicDtos(
+    @SerializedName("Address")
+    val address: String?,
+    @SerializedName("AreaName")
+    val areaName: String?,
+    @SerializedName("CityName")
+    val cityName: String?,
+    @SerializedName("ClinicId")
+    val clinicId: Int?,
+    @SerializedName("Email")
+    val email: String?,
+    @SerializedName("Features")
+    val features: List<Any>?,
+    @SerializedName("FixedFee")
+    val fixedFee: Int?,
+    @SerializedName("Gallary")
+    val gallary: List<Any>?,
+    @SerializedName("Insurance")
+    val insurance: List<Any>?,
+    @SerializedName("Logo")
+    val logo: String?,
+    @SerializedName("Name")
+    val name: String?,
+    @SerializedName("Phone")
+    val phone: String?,
+    @SerializedName("Services")
+    val services: List<Any>?,
+    @SerializedName("SubAreaName")
+    val subAreaName: String?
 ): Serializable

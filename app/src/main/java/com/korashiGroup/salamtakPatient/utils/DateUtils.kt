@@ -70,4 +70,11 @@ object DateUtils {
     fun setFcmToken(token: String) {
         SharedPreferencesTool.setString(context, SharedPreferencesKeys.PREF_USER_FCM_TOKEN.name, token)
     }
+
+    fun setstatus(status: String) {
+        SharedPreferencesTool.setString(context, SharedPreferencesKeys.Status.name, status)
+    }
+    fun getstatus(): String? {
+        return SharedPreferencesTool.getString(context,SharedPreferencesKeys.Status.name)
+    }
 }

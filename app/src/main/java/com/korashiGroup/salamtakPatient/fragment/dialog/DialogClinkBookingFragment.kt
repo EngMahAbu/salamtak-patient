@@ -22,6 +22,7 @@ import com.korashiGroup.salamtakPatient.model.booking.PatientAppointmentRequest
 import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.korashiGroup.salamtakPatient.model.docotorsearch.Item
 import com.korashiGroup.salamtakPatient.utils.DateUtils.convertLongToDate
 import com.korashiGroup.salamtakPatient.utils.localization.DefaultLocaleHelper
 import dagger.hilt.android.AndroidEntryPoint
@@ -121,6 +122,7 @@ class DialogClinkBookingFragment : BottomSheetDialogFragment(),
             adapter = appointmentsAvailableAdapter
             setHasFixedSize(true)
             appointmentsAvailableAdapter.submitList(appointmentBookingList)
+            updateUi(appointmentBookingList as List<Item>)
         }
 
     }
@@ -221,11 +223,11 @@ class DialogClinkBookingFragment : BottomSheetDialogFragment(),
                             intervaltime=1
                         }
                     }else{
-                        Toast.makeText(
-                            requireContext(),
-                            "there is no Appointments available",
-                            Toast.LENGTH_SHORT
-                        ).show()
+//                        Toast.makeText(
+//                            requireContext(),
+//                            getString(R.string.there_is_no_appointments_available),
+//                            Toast.LENGTH_LONG
+//                        ).show()
                     }
                     appointmentBookingList.add(
                         AppointmentBooking(
@@ -263,11 +265,11 @@ class DialogClinkBookingFragment : BottomSheetDialogFragment(),
                     )
 
                 } else {
-                    Toast.makeText(
-                        requireContext(),
-                        "there is no Appointments available",
-                        Toast.LENGTH_SHORT
-                    ).show()
+//                    Toast.makeText(
+//                        requireContext(),
+//                        getString(R.string.there_is_no_appointments_available),
+//                        Toast.LENGTH_LONG
+//                    ).show()
                     Log.e("timeFrom is empty ", timeFrom.toString())
                 }
 
@@ -275,11 +277,18 @@ class DialogClinkBookingFragment : BottomSheetDialogFragment(),
             }
 
         } else {
-            Toast.makeText(
-                requireContext(),
-                "there is no Appointments available",
-                Toast.LENGTH_SHORT
-            ).show()
+//            Toast.makeText(
+//                requireContext(),
+//                getString(R.string.there_is_no_appointments_available),
+//                Toast.LENGTH_LONG
+//            ).show()
     }}
+    private fun updateUi(it: List<Item>) {
+        if (it.isNullOrEmpty()) {
+            binding.crdView.visibility = View.VISIBLE
+        } else {
+            binding.crdView.visibility = View.GONE
+        }
+    }
 
 }

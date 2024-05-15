@@ -233,7 +233,7 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
                             " booking Successfully",
                             Toast.LENGTH_SHORT
                         ).show()
-                        sharedDataViewmodel.getOfferId(null)
+                        sharedDataViewmodel.getOfferId(0)
                         val action =
                             AppointmentDetailsFragmentDirections.actionAppointmentDetailsFragmentToConfirmedFragment(
                                 binding.tvDate.text.toString()

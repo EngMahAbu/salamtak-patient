@@ -10,10 +10,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.CircleCropTransformation
-import com.korashiGroup.salamtakPatient.R
-import com.korashiGroup.salamtakPatient.databinding.ItemLayoutChooseclinksBinding
 import com.korashiGroup.salamtakPatient.databinding.ItemLayoutFavoritedoctorBinding
-import com.korashiGroup.salamtakPatient.model.booking.clink.ClinicDto
 import com.korashiGroup.salamtakPatient.model.favorite.FavoriteDoctor
 
 

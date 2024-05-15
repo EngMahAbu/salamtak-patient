@@ -207,6 +207,15 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
                 Id = 4
             )
         )
+
+        list.add(
+            ImageServices(
+                R.drawable.poly,
+                getString(R.string.polyclinics),
+                R.color.color_2, 6
+            )
+        )
+
         imageServicesAdapter.submitList(list)
     }
 
@@ -223,13 +232,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
             )
         )
 
-        list.add(
-            ImageServices(
-                R.drawable.ic_polyclinics,
-                getString(R.string.polyclinics),
-                R.color.color_2, 6
-            )
-        )
+
         list.add(
             ImageServices(
                 R.drawable.ic_pharmacies,

@@ -132,10 +132,11 @@
     <string name="search">Search</string>
     <string name="search_by_doctor_name">Search by doctor name...</string>
     <string name="doctors_found">Doctors Found</string>
+    <string name="polyclinic_found">PolyClinics Found</string>
     <string name="all">All</string>
     <string name="home">Home</string>
     <string name="my_schedule">My Bookings</string>
-    <string name="more">More</string>
+    <string name="more">More...</string>
     <string name="reviews">Reviews</string>
     <string name="next_available_booking_at_08_nov_from_06_30_pm">Next Available Booking at 08 Nov. from 06:30 PM
     </string>
@@ -344,6 +345,16 @@
     <string name="facebook_client_token">2f7fe69ec45a396f36c95634b84b499f</string>
     <string name="privacy_policy">"Privacy Policy "</string>
     <string name="dr">Dr.</string>
+    <string name="there_is_no_appointments_available"> No Appointments available Today</string>
+    <string name="features">Features</string>
+    <string name="wifiandtv">wifi,tv</string>
+    <string name="photos">Clinics Gallary</string>
+    <string name="otherclinics">Other Clinics</string>
+    <string name="about_polyclinic">About PolyClinic</string>
+    <string name="polyclinicservices">Poly Clinics Services</string>
+    <string name="polyinsurance_company">PolyClinic Insurance Company</string>
+    <string name="polyfeatures">PolyClinic Features</string>
+    <string name="polyphotos">PolyClinics Gallary</string>
     <array name="choose">
         <item>Select</item>
     </array>

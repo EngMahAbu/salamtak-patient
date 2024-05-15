@@ -1,21 +1,14 @@
 package com.korashiGroup.salamtakPatient.adapter
 
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
-import coil.transform.CircleCropTransformation
 import com.korashiGroup.salamtakPatient.R
-import com.korashiGroup.salamtakPatient.databinding.ItemLayoutChooseclinksBinding
-import com.korashiGroup.salamtakPatient.databinding.ItemLayoutFavoritedoctorBinding
 import com.korashiGroup.salamtakPatient.databinding.ItemLayoutNotificationsBinding
-import com.korashiGroup.salamtakPatient.model.booking.clink.ClinicDto
-import com.korashiGroup.salamtakPatient.model.favorite.FavoriteDoctor
 import com.korashiGroup.salamtakPatient.notification.NotificationList
 
 

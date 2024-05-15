@@ -86,9 +86,9 @@ class RegisterRepositry @Inject constructor(private val apiService: ApiService) 
         sp.getUserLang(Constans.Language)
             ?.let { apiService.createPatientAppointment(it, appointmentRequest) }
 
-    suspend fun getDoctorProfileByDoctorId(DoctorId: Int) =
+    suspend fun getDoctorProfileByDoctorId(DoctorId: Int,clinicId: Int) =
         sp.getUserLang(Constans.Language)
-            ?.let { apiService.getDoctorProfileByDoctorId(it, DoctorId) }
+            ?.let { apiService.getDoctorProfileByDoctorId(it, clinicId,DoctorId) }
 
     suspend fun getPatientAppointmentes(medicalExaminationTypeId: Int?) =
         sp.getUserLang(Constans.Language)
@@ -204,5 +204,10 @@ class RegisterRepositry @Inject constructor(private val apiService: ApiService) 
     suspend fun getActiveOffers(OfferCategoryID :Int) =
         sp.getUserLang(Constans.Language)
             ?.let { apiService.Offers(it,OfferCategoryID) }
+
+    suspend fun getFilteredHealthEntity(polyclinicRequest: HashMap<String, String>) = sp.getUserLang(Constans.Language)
+        ?.let { apiService.getFilteredHealthEntity(it,polyclinicRequest) }
+    suspend fun getDoctorByClinicId(ClinicId :Int,SpecID :Int) = sp.getUserLang(Constans.Language)
+        ?.let { apiService.getDoctorByClinicId(it,ClinicId,SpecID) }
 
 }

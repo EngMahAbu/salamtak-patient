@@ -9,26 +9,27 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import coil.transform.CircleCropTransformation
+import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.adapter.ClinksDoctorsAdapter
 import com.korashiGroup.salamtakPatient.adapter.ReveiwsAdapter
-import com.korashiGroup.salamtakPatient.adapter.ServicesAdapter
 import com.korashiGroup.salamtakPatient.databinding.BookingAppointmentfragmentBinding
+import com.korashiGroup.salamtakPatient.model.booking.clink.CurrentClinicDtos
 import com.korashiGroup.salamtakPatient.model.booking.clink.GetDoctorClinksResponse
 import com.korashiGroup.salamtakPatient.model.favorite.FavoriteRequest
-import com.korashiGroup.salamtakPatient.model.reviews.ReviewsData
 import com.korashiGroup.salamtakPatient.model.reviews.ReviewsResponse
 import com.korashiGroup.salamtakPatient.utils.DateUtils
 import com.korashiGroup.salamtakPatient.utils.Resource
+import com.korashiGroup.salamtakPatient.utils.localization.DefaultLocaleHelper
 import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.PatientViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.math.roundToInt
 
 @AndroidEntryPoint
 class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
@@ -39,7 +40,7 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
     val sharedDataViewmodel: SharedDataViewmodel by activityViewModels()
     private lateinit var clinksDoctorsAdapter: ClinksDoctorsAdapter
     private lateinit var reveiwsAdapter: ReveiwsAdapter
-    private lateinit var getDoctorClinksResponse: GetDoctorClinksResponse
+    private lateinit var getDoctorAndPolyClinksResponse: GetDoctorClinksResponse
     private lateinit var reviewsData:ReviewsResponse
     private var doctorId: Int? = null
     private var isFavorite: Boolean? = null
@@ -55,7 +56,7 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        bindViews()
         callBack()
         clinksRecylerview()
         reviewsRecylerview()
@@ -68,6 +69,10 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
     private fun initButton() {
         binding.ivArrow.setOnClickListener {
             findNavController().navigate(R.id.searchFragment)
+        }
+        binding.layoutCurrent.setOnClickListener {
+            val send=BookingAppointmentFragmentDirections.actionBookingAppointmentFragmentToBookAppointmentFragment(getDoctorAndPolyClinksResponse,"booking appointment")
+            findNavController().navigate(send)
         }
 
         binding.layoutAddtofavorite.setOnClickListener {
@@ -119,14 +124,19 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
                         transformations(CircleCropTransformation())
                     }
 
-                    getDoctorClinksResponse = GetDoctorClinksResponse(it.data?.data, it.message)
-                    binding.AboutDoctor.text = it.data?.data?.doctorInfo
+                    getDoctorAndPolyClinksResponse = GetDoctorClinksResponse(it.data?.data,it.message)
+                    it.data?.data?.currentClinicDtos?.let { it1 -> bindFeatures(it1) }
+                    if (DefaultLocaleHelper.getInstance(requireContext()).getCurrentLocale()=="en"){
+                        binding.AboutDoctor.text = it.data?.data?.doctorInfo
+                    }else{
+                        binding.AboutDoctor.text = it.data?.data?.doctorInfoAr.toString()
+                    }
                     val name = if (DateUtils.getLanguage() == "en") {
                         "${it.data?.data?.firstName} ${it.data?.data?.middelName} ${it.data?.data?.lastName}"
                     } else {
                         "${it.data?.data?.firstNameAr} ${it.data?.data?.middelNameAr} ${it.data?.data?.lastNameAr}"
-
                     }
+
                     if (it.data?.data?.isFavoiritDoctor==false){
                         isFavorite = true
                         binding.tvAddtofavorite.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_heart,0,0,0)
@@ -157,9 +167,9 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
             }
 
         })
-        sharedDataViewmodel.doctorId.observe(viewLifecycleOwner, Observer {
-            viewmodel.getDoctorProfileByDoctorId(it)
-            doctorId = it
+        sharedDataViewmodel.clinicIdAndDoctorId.observe(viewLifecycleOwner, Observer {
+            viewmodel.getDoctorProfileByDoctorId(it.ClinicId,it.doctorId)
+            doctorId = it.doctorId
         })
 
     }
@@ -237,12 +247,43 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
     }
 
     override fun onItemClick() {
-        val action =
-            BookingAppointmentFragmentDirections.actionBookingAppointmentFragmentToBookAppointmentFragment(
-                getDoctorClinksResponse,
-                "Book Appointment"
-            )
-        findNavController().navigate(action)
+
+       val send=BookingAppointmentFragmentDirections.actionBookingAppointmentFragmentToBookAppointmentFragment(getDoctorAndPolyClinksResponse,"b")
+        findNavController().navigate(send)
+    }
+
+    private fun bindViews(){
+        sharedDataViewmodel.rating.observe(viewLifecycleOwner, Observer {
+            binding.ratingBar.rating= it.rate?.toFloat()?: 1.0f
+            binding.Reviewss.text="${it.rate?.roundToInt()?.toDouble()}"
+            binding.Ratecount.text="${it.rateCount?.toInt()}"
+        })
+    }
+
+    private fun bindFeatures(currentDtos:CurrentClinicDtos){
+
+
+        if (!currentDtos.services.isNullOrEmpty()) {
+            binding.clinicservices.setText(currentDtos.services?.first().toString())
+        }
+        if (!currentDtos.features.isNullOrEmpty()) {
+            binding.features.setText(currentDtos.services?.first().toString())
+        }
+        if (!currentDtos.insurance.isNullOrEmpty()) {
+            binding.insurance.setText(currentDtos.services?.first().toString())
+        }
+        if (!currentDtos.gallary.isNullOrEmpty()) {
+            Glide.with(binding.ivGallary.context)
+                .load("https://salamtechapi.azurewebsites.net/${currentDtos.gallary?.first()}")
+                .into(binding.ivGallary)
+        }
+        binding.ivCurrentProfile.load("https://salamtechapi.azurewebsites.net/${currentDtos.logo}") {
+            crossfade(true)
+            crossfade(1000)
+            transformations(CircleCropTransformation())
+        }
+        binding.tvCurrentdoctorName.text=currentDtos.name
+        binding.tvCurrentSpecialization.text=currentDtos.address
     }
 
 

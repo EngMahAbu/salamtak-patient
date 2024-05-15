@@ -28,7 +28,6 @@ class ClinksDoctorsAdapter(private val book:Booking) :
         holder.binding.location.text=services.areaName
         holder.binding.tvDoctorName.text=services.name
         holder.binding.tvTitle.text="You can book now at ${services.name}"
-
         holder.binding.ivDoctorProfile.load("https://salamtechapi.azurewebsites.net/${services.logo}") {
             crossfade(true)
             crossfade(1000)

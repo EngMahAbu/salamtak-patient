@@ -141,7 +141,7 @@ class PersonalInfoFragment : Fragment() {
         }
 
         binding.layoutUploadImage.setOnClickListener {
-            selectPic(it)
+            seleectPic(it)
         }
 
 
@@ -295,9 +295,8 @@ class PersonalInfoFragment : Fragment() {
             binding.tvNationaltyError.visibility = View.GONE
             binding.layoutNationality.setBackgroundResource(R.drawable.bg_edittext)
             binding.etNationality.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
+            value = true
         }
-
-        value = true
         return value
 
     }
@@ -307,7 +306,7 @@ class PersonalInfoFragment : Fragment() {
         !TextUtils.isEmpty(this) && Patterns.EMAIL_ADDRESS.matcher(this).matches()
 
 
-    private fun selectPic(view: View) {
+    private fun seleectPic(view: View) {
         val pictureImageDialog = AlertDialog.Builder(requireContext())
         if (view.id == binding.layoutUploadImage.id) {
             pictureImageDialog.setTitle("Select Action")

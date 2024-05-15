@@ -57,7 +57,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         >
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_appointments_available"
             android:layout_width="match_parent"
@@ -114,5 +113,18 @@
         android:visibility="gone"
         android:indeterminateTint="@color/blue"
         />
+    <TextView android:id="@+id/crd_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/there_is_no_appointments_available"
+            android:textColor="@color/red"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:textSize="20sp"
+            />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

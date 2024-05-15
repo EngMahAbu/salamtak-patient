@@ -13,12 +13,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.databinding.DialogSchdulefragmentBinding
-import com.korashiGroup.salamtakPatient.model.booking.clink.GetDoctorClinksResponse
 import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.korashiGroup.salamtakPatient.model.booking.clink.Data
+import com.korashiGroup.salamtakPatient.model.booking.clink.GetDoctorClinksResponse
 import com.korashiGroup.salamtakPatient.model.rating.DotorDetails
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,7 +29,7 @@ class DialogSchduleFragment : BottomSheetDialogFragment() {
     private val viewmodel: DialogBottomSheetViewmodel by viewModels()
     val sharedDataViewmodel: SharedDataViewmodel by activityViewModels()
     private val args: DialogSchduleFragmentArgs by navArgs()
-    private lateinit var getDoctorClinksResponse: GetDoctorClinksResponse
+    private lateinit var getDoctorAndPolyClinksResponse: GetDoctorClinksResponse
     private lateinit var doctorclinks: Data
     override fun getTheme(): Int {
         return R.style.AppBottomSheetDialogTheme
@@ -83,9 +83,9 @@ class DialogSchduleFragment : BottomSheetDialogFragment() {
             dismiss()
         }
         binding.tvReBookingAppointment.setOnClickListener {
-            if (this::getDoctorClinksResponse.isInitialized) {
+            if (this::getDoctorAndPolyClinksResponse.isInitialized) {
                 val action = DialogSchduleFragmentDirections.actionDialogSchduleFragmentToBookAppointmentFragment(
-                    getDoctorClinksResponse,
+                    getDoctorAndPolyClinksResponse,
                     "Re-Booking Appointment"
                 )
                 findNavController().navigate(action)
@@ -108,9 +108,9 @@ class DialogSchduleFragment : BottomSheetDialogFragment() {
         }
 
         binding.tvMedicalHistory.setOnClickListener {
-            if (this::getDoctorClinksResponse.isInitialized) {
+            if (this::getDoctorAndPolyClinksResponse.isInitialized) {
                 val action = DialogSchduleFragmentDirections.actionDialogSchduleFragmentToMedicalHistoryFragment(
-                    getDoctorClinksResponse,
+                    getDoctorAndPolyClinksResponse,
                     args.appointmentId
                 )
                 findNavController().navigate(action)
@@ -120,17 +120,17 @@ class DialogSchduleFragment : BottomSheetDialogFragment() {
         }
 
         binding.tvRate.setOnClickListener {
-            if (this::getDoctorClinksResponse.isInitialized) {
+            if (this::getDoctorAndPolyClinksResponse.isInitialized) {
                 val action = DialogSchduleFragmentDirections.actionDialogSchduleFragmentToDialogRatingDoctorFragment(
-                    getDoctorClinksResponse.data?.firstName?.let { it1 ->
-                        getDoctorClinksResponse.data!!.firstNameAr?.let { it2 ->
-                            getDoctorClinksResponse.data!!.middelName?.let { it3 ->
-                                getDoctorClinksResponse.data!!.middelNameAr?.let { it4 ->
-                                    getDoctorClinksResponse.data!!.lastName?.let { it5 ->
-                                        getDoctorClinksResponse.data!!.lastNameAr?.let { it6 ->
-                                            getDoctorClinksResponse.data!!.id?.let { it7 ->
-                                                getDoctorClinksResponse.data!!.image?.let { it8 ->
-                                                    getDoctorClinksResponse.data!!.specialistName?.let { it9 ->
+                    getDoctorAndPolyClinksResponse.data?.firstName?.let { it1 ->
+                        getDoctorAndPolyClinksResponse.data!!.firstNameAr?.let { it2 ->
+                            getDoctorAndPolyClinksResponse.data!!.middelName?.let { it3 ->
+                                getDoctorAndPolyClinksResponse.data!!.middelNameAr?.let { it4 ->
+                                    getDoctorAndPolyClinksResponse.data!!.lastName?.let { it5 ->
+                                        getDoctorAndPolyClinksResponse.data!!.lastNameAr?.let { it6 ->
+                                            getDoctorAndPolyClinksResponse.data!!.id?.let { it7 ->
+                                                getDoctorAndPolyClinksResponse.data!!.image?.let { it8 ->
+                                                    getDoctorAndPolyClinksResponse.data!!.specialistName?.let { it9 ->
                                                         DotorDetails(
                                                             it1,
                                                             it2,
@@ -171,7 +171,7 @@ class DialogSchduleFragment : BottomSheetDialogFragment() {
 
                 is Resource.sucess -> {
                     doctorclinks = it.data?.data!!
-                    getDoctorClinksResponse = GetDoctorClinksResponse(it.data?.data, it.message)
+                    getDoctorAndPolyClinksResponse = GetDoctorClinksResponse(it.data?.data,it.message)
                 }
 
                 is Resource.Error -> {
@@ -182,8 +182,8 @@ class DialogSchduleFragment : BottomSheetDialogFragment() {
             }
 
         })
-        sharedDataViewmodel.doctorId.observe(viewLifecycleOwner, Observer {
-            viewmodel.getDoctorProfileByDoctorId(it)
+        sharedDataViewmodel.clinicIdAndDoctorId.observe(viewLifecycleOwner, Observer {
+            viewmodel.getDoctorProfileByDoctorId(it.doctorId,it.ClinicId)
         })
 
     }
@@ -203,7 +203,7 @@ class DialogSchduleFragment : BottomSheetDialogFragment() {
                     if (offer=="null" || offer.isNullOrEmpty()){
                         val action =
                             DialogSchduleFragmentDirections.actionDialogSchduleFragmentToBookAppointmentFragment(
-                                getDoctorClinksResponse,
+                                getDoctorAndPolyClinksResponse,
                                 "Edit Appointment"
                             )
                         findNavController().navigate(action)
