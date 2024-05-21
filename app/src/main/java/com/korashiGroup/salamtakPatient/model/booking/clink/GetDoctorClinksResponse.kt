@@ -147,5 +147,6 @@ data class CurrentClinicDtos(
     @SerializedName("Services")
     val services: List<Any>?,
     @SerializedName("SubAreaName")
-    val subAreaName: String?
+    val subAreaName: String?,
+    val Videos: List<String>?
 ): Serializable

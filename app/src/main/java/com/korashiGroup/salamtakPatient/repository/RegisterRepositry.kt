@@ -81,6 +81,13 @@ class RegisterRepositry @Inject constructor(private val apiService: ApiService) 
         BookDate: String
     ) = sp.getUserLang(Constans.Language)
         ?.let { apiService.getClinicSchedualByClinicDayId(it, ClinicId, DayId, MedicalExaminationTypeId, BookDate) }
+    suspend fun getPolyClinicSchedualByClinicDayId(
+        ClinicId: Int,
+        doctorId: Int,
+        dayId: Int,
+        MedicalExaminationTypeId :Int
+    ) = sp.getUserLang(Constans.Language)
+        ?.let { apiService.getPolyClinicSchedualByClinicDayId(it, ClinicId,doctorId,dayId,MedicalExaminationTypeId) }
 
     suspend fun createPatientAppointment(appointmentRequest: PatientAppointmentRequest) =
         sp.getUserLang(Constans.Language)

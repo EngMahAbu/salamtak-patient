@@ -332,11 +332,12 @@
     <string name="wifiandtv">نت - تليفزيون</string>
     <string name="photos">صور العيادة</string>
     <string name="otherclinics">عيادات اخرى</string>
-    <string name="about_polyclinic">معلومات عن العيادة</string>
+    <string name="about_polyclinic">بيانات المركز الطبى</string>
     <string name="polyclinicservices">خدمات المركز الطبى</string>
     <string name="polyinsurance_company">شركات تامين المركز الطبى</string>
     <string name="polyfeatures">مميزات المركز الطبى</string>
     <string name="polyphotos">صور المركز الطبى</string>
+    <string name="showDoctorvideos">عرض فيديوهات المركز الطبى</string>
 
     <array name="choose">
         <item>اختار</item>

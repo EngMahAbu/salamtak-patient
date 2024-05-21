@@ -710,7 +710,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                 clinicId,
                 dayId,
                 examinationtypeid,
-                formattedDate
+                formattedDate,0
             )
         }
     }
@@ -1103,10 +1103,24 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             viewmodel.getClinicSchedualByClinicDayId(
                 clinicId,
                 dayId,
-                examinationtypeid,
-                formattedDate
+                1,
+                formattedDate,doctorId
             )
         }
     }
+
+    override fun onTvBookItemClinic(doctorId: Int, ClinicID: Int) {
+        val clinicSchedualByClinicDayId = ClinicSchedualByClinicDayId(
+            doctorId,
+            dayId,
+            examinationtypeid,
+            formattedDate,
+            ""
+        )
+        sharedDataViewmodel.getClinicSchedualByClinicDayId(clinicSchedualByClinicDayId)
+        sharedDataViewmodel.getClinicIdAndDoctorId(ClinicData(ClinicID, doctorId))
+        findNavController().navigate(R.id.bookingAppointmentFragment)
+    }
+
 
 }

@@ -15,13 +15,17 @@ import coil.transform.CircleCropTransformation
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import com.korashiGroup.salamtakPatient.R
+import com.korashiGroup.salamtakPatient.adapter.CapVideoAdapter
 import com.korashiGroup.salamtakPatient.adapter.ClinksDoctorsAdapter
+import com.korashiGroup.salamtakPatient.adapter.ImageVideoAdapter
 import com.korashiGroup.salamtakPatient.adapter.ReveiwsAdapter
 import com.korashiGroup.salamtakPatient.databinding.BookingAppointmentfragmentBinding
+import com.korashiGroup.salamtakPatient.model.HomeAdsData
 import com.korashiGroup.salamtakPatient.model.booking.clink.CurrentClinicDtos
 import com.korashiGroup.salamtakPatient.model.booking.clink.GetDoctorClinksResponse
 import com.korashiGroup.salamtakPatient.model.favorite.FavoriteRequest
 import com.korashiGroup.salamtakPatient.model.reviews.ReviewsResponse
+import com.korashiGroup.salamtakPatient.model.salamtakgate.Blogs
 import com.korashiGroup.salamtakPatient.utils.DateUtils
 import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.utils.localization.DefaultLocaleHelper
@@ -38,6 +42,7 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
     private val viewmodel: DialogBottomSheetViewmodel by viewModels()
     private val patientViewModel: PatientViewmodel by viewModels()
     val sharedDataViewmodel: SharedDataViewmodel by activityViewModels()
+    private lateinit var imageVideoAdapter: ImageVideoAdapter
     private lateinit var clinksDoctorsAdapter: ClinksDoctorsAdapter
     private lateinit var reveiwsAdapter: ReveiwsAdapter
     private lateinit var getDoctorAndPolyClinksResponse: GetDoctorClinksResponse
@@ -57,12 +62,13 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bindViews()
-        callBack()
+        capsVideoRecylerview()
         clinksRecylerview()
         reviewsRecylerview()
         initButton()
         addFavoriteDoctor()
         reviewsFavoriteDoctor()
+        callBack()
     }
 
 
@@ -93,6 +99,15 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
         clinksDoctorsAdapter = ClinksDoctorsAdapter(this)
         binding.rvClinkDoctors.apply {
             adapter = clinksDoctorsAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+            setHasFixedSize(true)
+        }
+    }
+
+    private fun capsVideoRecylerview() {
+        imageVideoAdapter = ImageVideoAdapter()
+        binding.viewPager.apply {
+            adapter = imageVideoAdapter
             layoutManager = LinearLayoutManager(requireContext())
             setHasFixedSize(true)
         }
@@ -259,18 +274,21 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
             binding.Ratecount.text="${it.rateCount?.toInt()}"
         })
     }
-
     private fun bindFeatures(currentDtos:CurrentClinicDtos){
-
-
+        val listBlogs= mutableListOf<HomeAdsData>()
+        val blogs= currentDtos.Videos?.let { HomeAdsData(true,it[0].toString()) }
+        if (blogs != null) {
+            listBlogs.add(blogs)
+        }
+        imageVideoAdapter.submitList(listBlogs)
         if (!currentDtos.services.isNullOrEmpty()) {
-            binding.clinicservices.setText(currentDtos.services?.first().toString())
+            binding.clinicservices.setText(currentDtos.services?.toString()?.removePrefix("[")?.removeSuffix("]"))
         }
         if (!currentDtos.features.isNullOrEmpty()) {
-            binding.features.setText(currentDtos.services?.first().toString())
+            binding.features.setText(currentDtos.features?.toString()?.removePrefix("[")?.removeSuffix("]"))
         }
         if (!currentDtos.insurance.isNullOrEmpty()) {
-            binding.insurance.setText(currentDtos.services?.first().toString())
+            binding.insurance.setText(currentDtos.insurance?.toString()?.removePrefix("[")?.removeSuffix("]"))
         }
         if (!currentDtos.gallary.isNullOrEmpty()) {
             Glide.with(binding.ivGallary.context)
@@ -285,7 +303,5 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
         binding.tvCurrentdoctorName.text=currentDtos.name
         binding.tvCurrentSpecialization.text=currentDtos.address
     }
-
-
 
 }

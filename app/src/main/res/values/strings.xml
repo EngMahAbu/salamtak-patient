@@ -355,6 +355,7 @@
     <string name="polyinsurance_company">PolyClinic Insurance Company</string>
     <string name="polyfeatures">PolyClinic Features</string>
     <string name="polyphotos">PolyClinics Gallary</string>
+    <string name="showDoctorvideos">Show Doctor Videos</string>
     <array name="choose">
         <item>Select</item>
     </array>

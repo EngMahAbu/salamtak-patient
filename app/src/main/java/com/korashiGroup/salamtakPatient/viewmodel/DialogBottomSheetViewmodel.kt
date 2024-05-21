@@ -268,9 +268,13 @@ class DialogBottomSheetViewmodel @Inject constructor(private val repositry: Regi
 
     fun getClinicSchedualByClinicDayId(ClinicId: Int,DayId:Int,
                                        MedicalExaminationTypeId:Int,
-                                       BookDate:String)=viewModelScope.launch(Dispatchers.IO+handler) {
+                                       BookDate:String,doctorid:Int)=viewModelScope.launch(Dispatchers.IO+handler) {
         bookingResponse.postValue(Resource.Loading())
-        val response=repositry.getClinicSchedualByClinicDayId(ClinicId,DayId,MedicalExaminationTypeId,BookDate)
+        val response =if (doctorid==0){
+             repositry.getClinicSchedualByClinicDayId(ClinicId,DayId,MedicalExaminationTypeId,BookDate)
+        }else{
+            repositry.getPolyClinicSchedualByClinicDayId(ClinicId,doctorid,DayId,MedicalExaminationTypeId )
+        }
         bookingResponse.postValue(response?.let { handleGetClinicSchedualByClinicDayId(it) })
     }
 

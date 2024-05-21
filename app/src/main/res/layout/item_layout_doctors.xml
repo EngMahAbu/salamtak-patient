@@ -82,7 +82,6 @@
                             android:textColor="@color/black"
                             android:textSize="12sp"
                             app:layout_constraintStart_toEndOf="@+id/iv_doctorProfile"
-                            app:layout_constraintEnd_toEndOf="parent"
                             android:layout_marginEnd="@dimen/_10sdp"
                             app:layout_constraintTop_toBottomOf="@+id/tv_doctorName" />
 

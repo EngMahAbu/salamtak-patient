@@ -452,7 +452,52 @@
                         app:layout_constraintTop_toTopOf="parent"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/videos"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/avenirltstd_black"
+                    android:gravity="start"
+                    android:padding="2dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="15dp"
+                    android:text="@string/showDoctorvideos"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_photo"
+                    />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_showDoctorVideos"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:padding="8dp"
+                    android:background="@drawable/bg_edittext"
+                    app:layout_constraintWidth_percent=".75"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/videos">
 
+                <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/view_pager"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="10dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        />
+                />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/Reviews"
@@ -467,7 +512,7 @@
                     android:textColor="@color/black"
                     android:textSize="15sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/layout_photo"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_showDoctorVideos"
             />
             <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/see_All"
@@ -482,7 +527,7 @@
                     android:textColor="@color/green"
                     android:textSize="15sp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/layout_photo"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_showDoctorVideos"
             />
 
             <androidx.recyclerview.widget.RecyclerView

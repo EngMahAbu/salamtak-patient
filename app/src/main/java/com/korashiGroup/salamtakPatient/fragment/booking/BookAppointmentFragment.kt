@@ -402,12 +402,14 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
         sharedDataViewmodel.ClinicSchedualByClinicDayId.observe(
             viewLifecycleOwner,
             androidx.lifecycle.Observer {
-                viewmodel.getClinicSchedualByClinicDayId(
-                    it.clinicId,
-                    it.dayId,
-                    it.medicalExaminationId,
-                    it.formattedDate
-                )
+                args.doctorclinks.data?.id?.let { it1 ->
+                    viewmodel.getClinicSchedualByClinicDayId(
+                        it.clinicId,
+                        it.dayId,
+                        medicalExaminationId,
+                        it.formattedDate, it1
+                    )
+                }
                 binding.etChooseClinic.setText(it.clinicName)
                 this.clinicId = it.clinicId
                 this.medicalExaminationId = this.medicalExaminationId
@@ -562,12 +564,14 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
         formattedDate = formatter.format(date)
         this.formattedDate = formattedDate
         getDayId()
-        viewmodel.getClinicSchedualByClinicDayId(
-            clinicId,
-            dayId,
-            medicalExaminationId,
-            formattedDate
-        )
+        args.doctorclinks.data?.id?.let {
+            viewmodel.getClinicSchedualByClinicDayId(
+                clinicId,
+                dayId,
+                medicalExaminationId,
+                formattedDate, it
+            )
+        }
     }
 
     private fun getDayId() {

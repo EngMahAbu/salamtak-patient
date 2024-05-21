@@ -40,7 +40,6 @@ class PolyClinicsDoctorsAdapter(private val booking: IPolyClinicsBooking) :
             }else{
                 tvDoctorName.text = "${services.nickName}"
             }
-           tvBook.visibility= View.GONE
 
             tvSpecialization.text = "${services.specialistName} - ${services.seniorityLevelName}"
 
@@ -58,7 +57,16 @@ class PolyClinicsDoctorsAdapter(private val booking: IPolyClinicsBooking) :
         }
         holder.binding.btnBooking.setOnClickListener {
             services.id?.let { it1 -> services.ClinicID?.let { it2 ->
-                booking.onPolyClinicsDoctorItemClick(it1,0,"",
+                services.image?.let { it3 ->
+                    booking.onPolyClinicsDoctorItemClick(it1,0, it3,
+                        it2
+                    )
+                }
+            } }
+        }
+        holder.binding.tvBook.setOnClickListener {
+            services.ClinicID?.let { it1 -> services.id?.let { it2 ->
+                booking.onTvBookItemClinic(it1,
                     it2
                 )
             } }
@@ -89,9 +97,8 @@ class PolyClinicsDoctorsAdapter(private val booking: IPolyClinicsBooking) :
             return true
         }
     }
-
     interface IPolyClinicsBooking {
-
         fun onPolyClinicsDoctorItemClick(doctorId: Int, fess: Int,image:String,ClinicID:Int)
+        fun onTvBookItemClinic(doctorId: Int, ClinicID:Int)
     }
 }

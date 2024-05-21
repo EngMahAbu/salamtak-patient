@@ -131,10 +131,20 @@ interface ApiService {
         @Path("culture") culture: String,
         @Query("ClinicId") ClinicId :Int,
         @Query("DayId") DayId  :Int,
-        @Query("MedicalExaminationTypeId") MedicalExaminationTypeId :Int,
+        @Query("MedicalExaminationTypeId")
+        MedicalExaminationTypeId :Int,
         @Query("BookDate") BookDate :String,
     ): Response<BookingResponse>
 
+    @GET("{culture}/DoctorClinic/GetPolyClinicSchedualByClinicDayId")
+    suspend fun getPolyClinicSchedualByClinicDayId(
+        @Path("culture") culture: String,
+        @Query("ClinicId") ClinicId :Int,
+        @Query("DoctorID") DoctorID :Int,
+        @Query("DayId") DayId  :Int,
+        @Query("MedicalExaminationTypeId")
+        MedicalExaminationTypeId :Int,
+    ): Response<BookingResponse>
     @POST("{culture}/Patient/CreatePatientAppointment")
     suspend fun createPatientAppointment(
         @Path("culture") culture: String,

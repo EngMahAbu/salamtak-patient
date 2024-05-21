@@ -33,7 +33,6 @@ class MedicalServicesAdapter(val onclick:Action):ListAdapter<ImageServices,Medic
         holder.binding.tvServiceName.text=services.textService
         holder.binding.layputServices.setBackgroundResource(services.color)
 
-
         holder.itemView.setOnClickListener {
 
             services.Id?.let { it1 -> onclick.onItemClick(it1,services.textService) }
