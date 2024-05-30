@@ -328,7 +328,7 @@
     <string name="enter_your_registered">Enter your registered</string>
     <string name="or">or</string>
     <string name="addresss">Address</string>
-    <string name="clinicservices">Clinic Services</string>
+    <string name="clinicservices">Clinic Service</string>
     <string name="avilableappointemnts">"Available "</string>
     <string name="avilableapapointemnts">Available Appointments</string>
     <string name="reservation_required_first_come_first_served">Reservation Required,( First-in,First-Served )</string>
@@ -345,7 +345,7 @@
     <string name="facebook_client_token">2f7fe69ec45a396f36c95634b84b499f</string>
     <string name="privacy_policy">"Privacy Policy "</string>
     <string name="dr">Dr.</string>
-    <string name="there_is_no_appointments_available"> No Appointments available Today</string>
+    <string name="there_is_no_appointments_available"> There Is No available Bookings in the Date For The Doctor Please Choose Another Date</string>
     <string name="features">Features</string>
     <string name="wifiandtv">wifi,tv</string>
     <string name="photos">Clinics Gallary</string>
@@ -355,7 +355,13 @@
     <string name="polyinsurance_company">PolyClinic Insurance Company</string>
     <string name="polyfeatures">PolyClinic Features</string>
     <string name="polyphotos">PolyClinics Gallary</string>
+    <string name="showpolyclinicsvideos">Show PolyClinics Videos</string>
     <string name="showDoctorvideos">Show Doctor Videos</string>
+    <string name="showclinicvideos">Show Clinic Videos</string>
+    <string name="reviewspolyclinics">comment For Clinic\n</string>
+    <string name="clinic_commit">Clinic Commit</string>
+    <string name="btnmore">More Information</string>
+    <string name="clinicphone">Clinic Phone</string>
     <array name="choose">
         <item>Select</item>
     </array>

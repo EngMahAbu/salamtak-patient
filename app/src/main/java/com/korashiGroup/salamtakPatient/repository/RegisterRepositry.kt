@@ -215,6 +215,9 @@ class RegisterRepositry @Inject constructor(private val apiService: ApiService) 
     suspend fun getFilteredHealthEntity(polyclinicRequest: HashMap<String, String>) = sp.getUserLang(Constans.Language)
         ?.let { apiService.getFilteredHealthEntity(it,polyclinicRequest) }
     suspend fun getDoctorByClinicId(ClinicId :Int,SpecID :Int) = sp.getUserLang(Constans.Language)
-        ?.let { apiService.getDoctorByClinicId(it,ClinicId,SpecID) }
+        ?.let { apiService.getDoctorByClinicId(it,ClinicId,true,SpecID) }
+
+    suspend fun getDoctorVideos(doctorId :Int) = sp.getUserLang(Constans.Language)
+        ?.let { apiService.getDoctorVideos(it,doctorId) }
 
 }

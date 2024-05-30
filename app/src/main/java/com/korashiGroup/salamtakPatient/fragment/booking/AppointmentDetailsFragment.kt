@@ -116,7 +116,7 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
         binding.ivArrow.setOnClickListener {
             if (args.status == true) {
                 findNavController().navigate(R.id.searchFragment)
-            } else if (offerid!=null){
+            } else if (offerid!=0){
                 findNavController().navigate(R.id.offersFragment)
             }else{
                 findNavController().navigate(R.id.myScheduleFragment)
@@ -442,7 +442,11 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
     }
     private fun getOfferId(){
         sharedDataViewmodel.offerId.observe(viewLifecycleOwner, Observer {
-            offerid=it
+            offerid = if (it==0){
+                null
+            }else{
+                it
+            }
         })
 
     }

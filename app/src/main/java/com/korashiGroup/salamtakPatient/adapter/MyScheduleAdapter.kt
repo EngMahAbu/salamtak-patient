@@ -39,10 +39,11 @@ class MyScheduleAdapter(private val schedule: ActionSchedule) :
                 tvDoctorName.text = "${services.doctorName}"
             }
             tvSpecialization.text = "${services.specialistName} - ${services.seniorityLevelName}"
-            Service.text=services.medicalExaminationTypeName
-            location.text = "${services.clinicAddress}عمارة رقم ${services.BlockNo}الدور رقم ${services.FloorNo} شقة رقم${services.ApartmentNo}"
+            Service.text=services.subSpecialistName.toString().removePrefix("[").removePrefix("]")
+            location.text ="${services.clinicAddress?:""}-${services.BlockNo?:""}-${services.FloorNo?:""}-${services.areaName?:""}"
             waitingTime.text = " ${DateParsing(services.appointmentDate.toString())}"
             Feesresult.text = services.fees.toString()
+           phones.text = services.ClinicPhone.toString()
         }
         if (services.HealthEntity_OffersID==null || services.HealthEntity_OffersID.toString()=="null"){
             holder.binding.ivOffer.visibility=View.GONE

@@ -183,7 +183,7 @@ class DialogSchduleFragment : BottomSheetDialogFragment() {
 
         })
         sharedDataViewmodel.clinicIdAndDoctorId.observe(viewLifecycleOwner, Observer {
-            viewmodel.getDoctorProfileByDoctorId(it.doctorId,it.ClinicId)
+            viewmodel.getDoctorProfileByDoctorId(it.ClinicId,it.doctorId)
         })
 
     }

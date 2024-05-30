@@ -36,6 +36,7 @@ class ReveiwsAdapter( ):ListAdapter<ReviewsData,ReveiwsAdapter.ViewHolder>(DiffC
             tvDoctorName.text=services.patientName
             ratingBar.rating=services.rate.toFloat()
             tvReviewsDetails.text=services.comment
+            tvReviewsClinics.text=services.Clinic_Comment
         }
 
     }

@@ -8,11 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
+import coil.load
+import coil.transform.CircleCropTransformation
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.adapter.AppointmentsAvailableAdapter
 import com.korashiGroup.salamtakPatient.databinding.DialogClinkBookingfragmentBinding
@@ -22,9 +25,12 @@ import com.korashiGroup.salamtakPatient.model.booking.PatientAppointmentRequest
 import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.korashiGroup.salamtakPatient.model.booking.clink.GetDoctorClinksResponse
 import com.korashiGroup.salamtakPatient.model.docotorsearch.Item
+import com.korashiGroup.salamtakPatient.utils.DateUtils
 import com.korashiGroup.salamtakPatient.utils.DateUtils.convertLongToDate
 import com.korashiGroup.salamtakPatient.utils.localization.DefaultLocaleHelper
+import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.time.Duration
@@ -37,11 +43,12 @@ import kotlin.time.Duration.Companion.hours
 @AndroidEntryPoint
 class DialogClinkBookingFragment : BottomSheetDialogFragment(),
     AppointmentsAvailableAdapter.Action {
-
+    val sharedDataViewmodel: SharedDataViewmodel by activityViewModels()
     private lateinit var binding: DialogClinkBookingfragmentBinding
     private lateinit var appointmentsAvailableAdapter: AppointmentsAvailableAdapter
     private val args: DialogClinkBookingFragmentArgs by navArgs()
     private val viewmodel: DialogBottomSheetViewmodel by viewModels()
+    private lateinit var getDoctorAndPolyClinksResponse: GetDoctorClinksResponse
     var time: String? = null
     private var doctorWorkingDayTimeId: Int? = null
     private var fees: Int? = null
@@ -112,6 +119,11 @@ class DialogClinkBookingFragment : BottomSheetDialogFragment(),
                 viewmodel.createPatientAppointment(patientAppointmentRequest)
             }
         }
+        binding.tvOk.setOnClickListener {
+            val action=DialogClinkBookingFragmentDirections.actionDialogClinkBookingFragmentToBookAppointmentFragment(getDoctorAndPolyClinksResponse,"booking appointment")
+            findNavController().navigate(action)
+        }
+
 
     }
 
@@ -286,9 +298,40 @@ class DialogClinkBookingFragment : BottomSheetDialogFragment(),
     private fun updateUi(it: List<Item>) {
         if (it.isNullOrEmpty()) {
             binding.crdView.visibility = View.VISIBLE
+            binding.tvOk.visibility = View.VISIBLE
+            callBackDoctorProfile()
         } else {
             binding.crdView.visibility = View.GONE
+            binding.tvOk.visibility = View.GONE
         }
+    }
+
+    private fun callBackDoctorProfile() {
+
+        viewmodel.doctorClinkResponse.observe(viewLifecycleOwner, Observer {
+            when (it) {
+
+                is Resource.Loading -> {
+                    showprogtessbar()
+                }
+
+                is Resource.sucess -> {
+                    hideprogressbar()
+                    getDoctorAndPolyClinksResponse = GetDoctorClinksResponse(it.data?.data,it.message)
+                }
+
+                is Resource.Error -> {
+                    hideprogressbar()
+
+                }
+
+            }
+
+        })
+        sharedDataViewmodel.clinicIdAndDoctorId.observe(viewLifecycleOwner, Observer {
+            viewmodel.getDoctorProfileByDoctorId(it.ClinicId,it.doctorId)
+        })
+
     }
 
 }

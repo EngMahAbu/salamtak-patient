@@ -13,6 +13,7 @@ import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.databinding.ItemLayoutOffersBinding
 import com.korashiGroup.salamtakPatient.model.offers.OfferDetails
 import com.korashiGroup.salamtakPatient.model.offers.OfferDoctor
+import com.korashiGroup.salamtakPatient.utils.DataBinding.convertDateFormat
 import com.korashiGroup.salamtakPatient.utils.localization.DefaultLocaleHelper
 import java.text.NumberFormat
 import java.util.Locale
@@ -43,6 +44,7 @@ class OffersAdapter(private val onServicesClick:Action):ListAdapter<OfferDetails
             holder.binding.tvDoctorName.text="Dr.${services.doctorDto.fullName}"
         }
         holder.binding.tvService.text="${services.l1name} - ${services.l2Name} - ${services.l3name}"
+        holder.binding.tvDate.text="${convertDateFormat(services.startDate,"yyyy-MM-dd'T'HH:mm:ss","MMM dd, yyyy")} - ${convertDateFormat(services.endDate,"yyyy-MM-dd'T'HH:mm:ss","MMM dd, yyyy")}"
         holder.binding.tvSessionCount.text="${services.sessionCount} ${holder.binding.tvSessionCount.context.getString(R.string.session)} ${services.l2Name}"
         holder.binding.tvCategoryname.text="${services.discountPerc} % Off"
         holder.binding.tvPriceBefore.text="${NumberFormat.getNumberInstance(Locale.US).format(services.priceBefore)}"

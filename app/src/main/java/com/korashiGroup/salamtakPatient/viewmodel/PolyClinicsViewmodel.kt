@@ -22,6 +22,7 @@ class PolyClinicsViewmodel @Inject constructor(private val repositry: RegisterRe
 
     val polyClinicsResponse=MutableLiveData<Resource<PolyClinicResponse>>()
     val polyClinicsDoctorsResponse=MutableLiveData<Resource<PolyClinicsDoctorsResponse>>()
+    val videosDoctorsResponse=MutableLiveData<Resource<PolyClinicsDoctorsResponse>>()
 
 
     fun getFilteredHealthEntity(polyclinicRequest: HashMap<String, String> )=viewModelScope.launch(Dispatchers.IO+handler) {
@@ -47,6 +48,23 @@ class PolyClinicsViewmodel @Inject constructor(private val repositry: RegisterRe
     }
 
     private fun handlegetDoctorByClinicId(response: Response<PolyClinicsDoctorsResponse>): Resource<PolyClinicsDoctorsResponse>? {
+        if (response.isSuccessful){
+            response.body()?.let {
+                return Resource.sucess(it)
+            }
+        }
+        val error = Gson().fromJson<PolyClinicsDoctorsResponse>(response.errorBody()!!.string(), PolyClinicsDoctorsResponse::class.java)
+        return error.message?.let { Resource.Error(it) }
+    }
+
+
+    fun getDoctorVideos(doctorId :Int)=viewModelScope.launch(Dispatchers.IO+handler) {
+        videosDoctorsResponse.postValue(Resource.Loading())
+        val response=repositry.getDoctorVideos(doctorId)
+        videosDoctorsResponse.postValue(response?.let { handlegetDoctorVideos(it) })
+    }
+
+    private fun handlegetDoctorVideos(response: Response<PolyClinicsDoctorsResponse>): Resource<PolyClinicsDoctorsResponse>? {
         if (response.isSuccessful){
             response.body()?.let {
                 return Resource.sucess(it)

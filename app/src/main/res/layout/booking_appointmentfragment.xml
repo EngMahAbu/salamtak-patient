@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,6 +8,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.booking.AppointmentDetailsFragment">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/iv_arrow"
         android:layout_width="wrap_content"
@@ -27,7 +30,7 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/avenirltstd_black"
-        android:text="Dr.Mohamed Farag"
+        android:text=""
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/iv_arrow"
@@ -62,7 +65,7 @@
                     android:fontFamily="@font/avenirltstd_roman"
                     android:gravity="start"
                     android:padding="3dp"
-                    android:text="Dr. Mohamed Farag Abdullatif"
+                    android:text=""
                     android:textColor="@color/black"
                     android:textSize="15sp"
                     app:layout_constraintStart_toEndOf="@+id/iv_doctorProfile"
@@ -78,7 +81,7 @@
                     android:fontFamily="@font/avenirltstd_roman"
                     android:gravity="start"
                     android:padding="2dp"
-                    android:text="Genecology and Infertility"
+                    android:text=""
                     android:textColor="@color/gray"
                     android:textSize="15sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -262,7 +265,7 @@
                         android:fontFamily="@font/avenirltstd_black"
                         android:gravity="start"
                         android:padding="3dp"
-                        android:text="Dr. Mohamed Farag Abdullatif"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="15sp"
                         app:layout_constraintStart_toEndOf="@+id/iv_currentProfile"
@@ -278,7 +281,7 @@
                         android:fontFamily="@font/avenirltstd_roman"
                         android:gravity="start"
                         android:padding="2dp"
-                        android:text="Genecology and Infertility"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="15sp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -312,7 +315,7 @@
                     android:gravity="center_vertical"
                     android:background="@drawable/bg_edittext"
                     android:layout_marginTop="5dp"
-                    android:padding="2dp"
+                    android:padding="3dp"
                     android:text=""
                     android:textColor="@color/black"
                     android:textSize="14sp"
@@ -343,7 +346,7 @@
                     android:gravity="center_vertical"
                     android:background="@drawable/bg_edittext"
                     android:layout_marginTop="5dp"
-                    android:padding="2dp"
+                    android:padding="3dp"
                     android:text=""
                     android:textColor="@color/black"
                     android:textSize="14sp"
@@ -375,7 +378,7 @@
                     android:gravity="center_vertical"
                     android:background="@drawable/bg_edittext"
                     android:layout_marginTop="5dp"
-                    android:padding="2dp"
+                    android:padding="3dp"
                     android:text=""
                     android:textColor="@color/black"
                     android:textSize="14sp"
@@ -408,7 +411,7 @@
                     android:background="@drawable/bg_edittext"
                     android:layout_marginTop="5dp"
                     android:paddingStart="10dp"
-                    android:padding="2dp"
+                    android:padding="3dp"
                     android:text=""
                     android:textColor="@color/black"
                     android:textSize="14sp"
@@ -442,14 +445,20 @@
                     app:layout_constraintStart_toStartOf="parent"
                    app:layout_constraintTop_toBottomOf="@id/photo">
 
-                <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/iv_gallary"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:adjustViewBounds="true"
-                        android:layout_margin="@dimen/_5sdp"
+                <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_gallry"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:layout_margin="10dp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:paddingBottom="10dp"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:listitem="@layout/item_layout_images"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
             <androidx.appcompat.widget.AppCompatTextView
@@ -500,6 +509,53 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/doctorvideos"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/avenirltstd_black"
+                    android:gravity="start"
+                    android:padding="2dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="15dp"
+                    android:text="@string/showclinicvideos"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_showDoctorVideos"
+                    />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_showclinicVideos"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:padding="8dp"
+                    android:background="@drawable/bg_edittext"
+                    app:layout_constraintWidth_percent=".75"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/doctorvideos">
+
+                <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/view_pagerclinic"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="10dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        />
+                />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/Reviews"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -512,7 +568,7 @@
                     android:textColor="@color/black"
                     android:textSize="15sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/layout_showDoctorVideos"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_showclinicVideos"
             />
             <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/see_All"
@@ -527,13 +583,13 @@
                     android:textColor="@color/green"
                     android:textSize="15sp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/layout_showDoctorVideos"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_showclinicVideos"
             />
 
             <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_Reviews"
                     android:layout_width="match_parent"
-                    android:layout_height="110dp"
+                    android:layout_height="220dp"
                     android:layout_margin="10dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -543,7 +599,6 @@
                     tools:listitem="@layout/item_layout_reviews"
                     app:layout_constraintTop_toBottomOf="@+id/Reviews"
             />
-
 
             <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_DoctorsClinics"
@@ -570,8 +625,7 @@
                     android:paddingBottom="10dp"
                     tools:listitem="@layout/item_layout_clinks"
                     app:layout_constraintTop_toBottomOf="@+id/tv_DoctorsClinics"
-                   app:layout_constraintBottom_toBottomOf="parent"
-
+                   app:layout_constraintBottom_toTopOf="@+id/btn_booking"
                     />
 
             <ProgressBar
@@ -584,11 +638,32 @@
                     app:layout_constraintTop_toTopOf="@+id/rv_clinkDoctors"
                     android:visibility="gone"
             />
+            <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_booking"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_chooselang_button"
+                    android:fontFamily="@font/avenirltstd_roman"
+                    android:text="@string/book_now"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
+                    android:textAllCaps="false"
+                    app:layout_constraintWidth_percent=".90"
+                    app:layout_constraintTop_toBottomOf="@+id/rv_clinkDoctors"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include
+            android:id="@+id/layoutBottomsheetpersistant"
+            layout="@layout/item_layout_mainpage"
+            android:visibility="visible"
+            />
 
 
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

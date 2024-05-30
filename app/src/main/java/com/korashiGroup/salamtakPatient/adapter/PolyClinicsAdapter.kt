@@ -33,11 +33,11 @@ class PolyClinicsAdapter(private val booking: Booking) :
 
                 if (DefaultLocaleHelper.getInstance(this.tvDoctorName.context).getCurrentLocale()=="en"){
                     tvDoctorName.text = "${services.name}"
-                    tvCity.text=services.cityName
+                    tvCity.text="Address : ${services.cityName} - ${services.areaName}"
                     tvArea.text=services.areaName
                 }else{
-                    tvDoctorName.text = "${services.name}}"
-                    tvCity.text=services.cityName
+                    tvDoctorName.text = "${services.name}"
+                    tvCity.text="العنوان : ${services.cityName} - ${services.areaName} "
                     tvArea.text=services.areaName
                 }
         }
@@ -45,7 +45,7 @@ class PolyClinicsAdapter(private val booking: Booking) :
         holder.binding.btnBooking.setOnClickListener {
             services.clinicId?.let { it1 -> booking.onPolyClinicsItemClick(it1) }
         }
-        holder.binding.tvBook.setOnClickListener {
+        holder.binding.btnMore.setOnClickListener {
             booking.onMoreItemClick(services)
         }
 

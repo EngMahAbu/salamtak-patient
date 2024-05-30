@@ -275,7 +275,7 @@
     <string name="write_a_comment">أكتب تعليقا...</string>
     <string name="weneedpermissiontoaccesslocation">نحن بحاجة إلى إذنك للوصول إلى الموقع</string>
     <string name="worning">تحذير</string>
-    <string name="ok">تم</string>
+    <string name="ok">تـم</string>
     <string name="thereisnolocatio">لا يوجد موقع</string>
     <string name="description">الوصف : </string>
     <string name="title">العنوان :</string>
@@ -327,7 +327,7 @@
     <string name="btn_update">تحديث</string>
     <string name="privacy_policy">سياسة الخصوصية</string>
     <string name="dr">دكتور.</string>
-    <string name="there_is_no_appointments_available">لا يوجد حجوزات متاحة</string>
+    <string name="there_is_no_appointments_available">لا يوجد حجوزات متاحة في هذا التاريخ للطبيب يرجى اختيار تاريخ آخر</string>
     <string name="features"> مميزات العيادة</string>
     <string name="wifiandtv">نت - تليفزيون</string>
     <string name="photos">صور العيادة</string>
@@ -338,6 +338,12 @@
     <string name="polyfeatures">مميزات المركز الطبى</string>
     <string name="polyphotos">صور المركز الطبى</string>
     <string name="showDoctorvideos">عرض فيديوهات المركز الطبى</string>
+    <string name="showclinicvideos">عرض فيديوهات الاطباء</string>
+    <string name="showpolyclinicsvideos">عرض فيديوهات المركز الطبى</string>
+    <string name="reviewspolyclinics">تعليقات المركز الطبى</string>
+    <string name="clinic_commit">تعلقات المركز الطبى</string>
+    <string name="btnmore">مزيد من المعلومات</string>
+    <string name="clinicphone">رقم العيادة</string>
 
     <array name="choose">
         <item>اختار</item>

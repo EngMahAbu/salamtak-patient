@@ -44,6 +44,8 @@ data class PolyClinicsItem(
     val floorNo: Int?,
     @SerializedName("Gallary")
     val gallary: List<String>?,
+    @SerializedName("Videos")
+    val videos: List<String>?,
     @SerializedName("Insurance")
     val insurance: Any?,
     @SerializedName("Logo")
@@ -55,5 +57,7 @@ data class PolyClinicsItem(
     @SerializedName("Services")
     val services: List<Any>?,
     @SerializedName("SubAreaName")
-    val subAreaName: String?
+    val subAreaName: String?,
+    @SerializedName("ClinicBio")
+    val ClinicBio: String?
 ):Serializable

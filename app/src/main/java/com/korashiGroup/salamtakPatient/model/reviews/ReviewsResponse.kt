@@ -18,6 +18,8 @@ data class ReviewsResponse(
 data class ReviewsData(
     @SerializedName("Comment")
     val comment: String,
+    @SerializedName("Clinic_Comment")
+    val Clinic_Comment: String,
     @SerializedName("PatientImage")
     val patientImage: Any,
     @SerializedName("PatientName")

@@ -48,7 +48,7 @@ class PolyClinicsDoctorsAdapter(private val booking: IPolyClinicsBooking) :
             }
             subSpecialization.text = services.specialistName
             subspecialist=""
-           // location.text = services.?.AreaName
+          location.text="${services.CityName} - ${services.AreaName}"
           //  waitingTime.text = "${services.waitingTime}"
            Feesresult.text = "${services.Fees.toString()} ${holder.binding.Feesresult.context.getString(R.string.le)}"
            holder.binding.ratingBar.rating= services.rate?.toFloat()?: 1.0f
@@ -64,11 +64,15 @@ class PolyClinicsDoctorsAdapter(private val booking: IPolyClinicsBooking) :
                 }
             } }
         }
-        holder.binding.tvBook.setOnClickListener {
+        holder.binding.btnMore.setOnClickListener {
             services.ClinicID?.let { it1 -> services.id?.let { it2 ->
-                booking.onTvBookItemClinic(it1,
-                    it2
-                )
+                services.rate?.let { it3 ->
+                    services.RateCount?.let { it4 ->
+                        booking.onTvBookItemClinic(it1,
+                            it2, it3, it4
+                        )
+                    }
+                }
             } }
         }
 
@@ -99,6 +103,6 @@ class PolyClinicsDoctorsAdapter(private val booking: IPolyClinicsBooking) :
     }
     interface IPolyClinicsBooking {
         fun onPolyClinicsDoctorItemClick(doctorId: Int, fess: Int,image:String,ClinicID:Int)
-        fun onTvBookItemClinic(doctorId: Int, ClinicID:Int)
+        fun onTvBookItemClinic(doctorId: Int, ClinicID:Int,rate:Double,rateCount:Int)
     }
 }

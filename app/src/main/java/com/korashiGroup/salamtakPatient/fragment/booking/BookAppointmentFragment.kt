@@ -31,6 +31,7 @@ import com.korashiGroup.salamtakPatient.model.booking.AppointmentBooking
 import com.korashiGroup.salamtakPatient.model.booking.AppointmentDetailBooking
 import com.korashiGroup.salamtakPatient.model.booking.BookingData
 import com.korashiGroup.salamtakPatient.model.booking.PatientAppointmentRequest
+import com.korashiGroup.salamtakPatient.model.booking.clink.ClinicDto
 import com.korashiGroup.salamtakPatient.utils.DateUtils
 import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
@@ -209,6 +210,20 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
             adapter = chooseClinksDoctorsAdapter
             layoutManager = LinearLayoutManager(requireContext())
             setHasFixedSize(true)
+
+            val list=args.doctorclinks.data?.clinicDtos as MutableList
+            list.add(
+                args.doctorclinks.data!!.currentClinicDtos?.services?.let {
+                    ClinicDto(
+                        args.doctorclinks.data!!.currentClinicDtos?.address,null,null,null,
+                        args.doctorclinks.data!!.currentClinicDtos?.cityName,
+                        args.doctorclinks.data!!.currentClinicDtos?.clinicId,null,null,null,null,null,
+                        args.doctorclinks.data!!.currentClinicDtos?.logo,
+                        args.doctorclinks.data!!.currentClinicDtos?.name,null,
+                        it
+                    )
+                }
+            )
             chooseClinksDoctorsAdapter.submitList(args.doctorclinks?.data?.clinicDtos)
             chooseClinksDoctorsAdapter.notifyDataSetChanged()
         }

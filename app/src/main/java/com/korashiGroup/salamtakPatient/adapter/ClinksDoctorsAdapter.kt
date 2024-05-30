@@ -34,7 +34,7 @@ class ClinksDoctorsAdapter(private val book:Booking) :
             transformations(CircleCropTransformation())
         }
         holder.itemView.setOnClickListener {
-            book.onItemClick()
+            services.clinicId?.let { it1 -> book.onItemClick(it1) }
         }
 
     }
@@ -57,6 +57,6 @@ class ClinksDoctorsAdapter(private val book:Booking) :
     }
 
     interface Booking {
-        fun onItemClick()
+        fun onItemClick(clinicId:Int)
     }
 }

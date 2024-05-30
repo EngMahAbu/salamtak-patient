@@ -433,6 +433,7 @@
                         android:textSize="17sp"
                         android:layout_marginTop="@dimen/_3sdp"
                         android:text="@string/more"
+                        android:visibility="gone"
                         android:textColor="@color/blue"
                         app:layout_constraintTop_toBottomOf="@+id/Fees"
                         app:layout_constraintStart_toStartOf="parent"
@@ -440,15 +441,13 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/layout"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tv_Book"
                         app:layout_constraintBottom_toBottomOf="parent"
                         android:layout_marginBottom="5dp"
-                        app:layout_constraintWidth_percent=".95"
-                        android:layout_marginTop="5dp">
+                        android:layout_marginTop="10dp">
 
                     <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/btn_booking"
@@ -459,9 +458,33 @@
                             android:text="@string/book_now"
                             android:textColor="@color/white"
                             android:textSize="13sp"
-                            app:layout_constraintEnd_toEndOf="parent"
+                            android:textAllCaps="false"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            app:layout_constraintWidth_percent=".60"
+                            app:layout_constraintEnd_toStartOf="@+id/btn_more"
                             app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintHorizontal_chainStyle="spread_inside" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btn_more"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_chooselang_button"
+                            android:fontFamily="@font/avenirltstd_roman"
+                            android:text="@string/btnmore"
+                            android:drawableEnd="@drawable/ic_arrow_right"
+                            android:layout_marginStart="@dimen/_3sdp"
+                            android:textColor="@color/white"
+                            android:textSize="12sp"
+                            android:padding="3dp"
+                            android:layout_marginEnd="10dp"
+                            android:textAllCaps="false"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/btn_booking"
                             app:layout_constraintTop_toTopOf="parent" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 

@@ -4,6 +4,7 @@ package com.korashiGroup.salamtakPatient.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebChromeClient
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -30,37 +31,41 @@ class ImageVideoAdapter : ListAdapter<HomeAdsData, ImageVideoAdapter.ViewHolder>
         val model = getItem(position)
 
 
-        if (model.IsVideo) {
-            val videoid = model.VideoLink.split("=").toTypedArray()
-            holder.binding.youtubePlayerView.visibility = View.VISIBLE
-            holder.binding.ivHome.visibility = View.GONE
-            holder.binding.youtubePlayerView.apply {
-                this.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
-                    override fun onReady(youTubePlayer: com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer) {
-                        val videoId = videoid[1]
-                        youTubePlayer.cueVideo(videoId,0f)
-                        youTubePlayer.loadVideo(videoId, 0f)
-                        youTubePlayer.pause()
-
-                    }
-
-
-                })
+        val videoid=if (model.VideoLink.contains("v=") ) {
+            model.VideoLink.split("=").toTypedArray()[1].substringBefore("&")
+        } else{
+            if (model.VideoLink.contains("youtu.be/")){
+                model.VideoLink.substringAfter("youtu.be/")+model.VideoLink.substringBefore("?")
+            }else{
+                model.VideoLink.substringAfter("shorts/")+model.VideoLink.substringBefore("?")
             }
-            holder.binding.youtubePlayerView.apply {
+        }
+        holder.binding.youtubePlayerView.visibility = View.VISIBLE
+        //           holder.binding.ivHome.visibility = View.GONE
+//                holder.binding.youtubePlayerView.apply {
+//                    this.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+//                        override fun onReady(youTubePlayer: com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer) {
+//                            val videoId =if(videoid.size==3){
+//                                "${videoid[1]}=${videoid[2]}"
+//                            }else{
+//                                "${videoid[1]}"
+//                            }
+//                            youTubePlayer.cueVideo(videoId, 0f)
+//                            youTubePlayer.loadVideo(videoId, 0f)
+//                            youTubePlayer.pause()
+//                        }
+//
+//
+//                    })
+//                }
 
-            }
-
-        } else {
-            holder.binding.ivHome.visibility = View.VISIBLE
-            holder.binding.youtubePlayerView.visibility = View.GONE
-            holder.binding.ivHome.apply {
-                Glide
-                    .with(this.context)
-                    .load("https://salamtechapi.azurewebsites.net/${model.VideoLink}")
-                    .into(this)
-            }
-
+//
+        holder.binding.youtubePlayerView.apply {
+            //  val videoId =videoid[1].substringBefore("&")
+            this.loadData("<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/${videoid}\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+                "text/html","utf-8")
+            settings.javaScriptEnabled=true
+            webChromeClient= WebChromeClient()
         }
 
 

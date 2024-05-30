@@ -3,12 +3,12 @@ package com.korashiGroup.salamtakPatient.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebChromeClient
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.korashiGroup.salamtakPatient.databinding.ItemLayoutCapsBinding
 import com.korashiGroup.salamtakPatient.model.salamtakgate.Blogs
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 
 class CapVideoAdapter: ListAdapter<Blogs, CapVideoAdapter.ViewHolder>(CapVideoAdapter.DiffCallback()) {
 
@@ -20,18 +20,42 @@ class CapVideoAdapter: ListAdapter<Blogs, CapVideoAdapter.ViewHolder>(CapVideoAd
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val model = getItem(position)
-        val videoid = model.image.split("=").toTypedArray()
-            holder.binding.youtubePlayerView.visibility = View.VISIBLE
-            holder.binding.youtubePlayerView.apply {
-                this.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
-                    override fun onReady(youTubePlayer: com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer) {
-                        val videoId = videoid[1]
-                        youTubePlayer.cueVideo(videoId,0f)
-                        youTubePlayer.loadVideo(videoId, 0f)
-                        youTubePlayer.pause()
 
-                    }
-                })
+            val videoid=if (model.image.contains("v=") ) {
+                model.image.split("=").toTypedArray()[1]
+            } else{
+                if (model.image.contains("youtu.be/")){
+                    model.image.substringAfter("youtu.be/")+model.image.substringBefore("?")
+                }else{
+                    model.image.substringAfter("shorts/")+model.image.substringBefore("?")
+                }
+            }
+            holder.binding.youtubePlayerView.visibility = View.VISIBLE
+ //           holder.binding.ivHome.visibility = View.GONE
+//                holder.binding.youtubePlayerView.apply {
+//                    this.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+//                        override fun onReady(youTubePlayer: com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer) {
+//                            val videoId =if(videoid.size==3){
+//                                "${videoid[1]}=${videoid[2]}"
+//                            }else{
+//                                "${videoid[1]}"
+//                            }
+//                            youTubePlayer.cueVideo(videoId, 0f)
+//                            youTubePlayer.loadVideo(videoId, 0f)
+//                            youTubePlayer.pause()
+//                        }
+//
+//
+//                    })
+//                }
+
+//
+            holder.binding.youtubePlayerView.apply {
+                //  val videoId =videoid[1].substringBefore("&")
+                this.loadData("<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/${videoid}\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+                    "text/html","utf-8")
+                settings.javaScriptEnabled=true
+                webChromeClient= WebChromeClient()
             }
 
 

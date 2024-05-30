@@ -7,17 +7,24 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import coil.transform.CircleCropTransformation
 import com.bumptech.glide.Glide
 import com.korashiGroup.salamtakPatient.R
+import com.korashiGroup.salamtakPatient.adapter.ImageVideoAdapter
+import com.korashiGroup.salamtakPatient.adapter.ImagesAdapter
 import com.korashiGroup.salamtakPatient.databinding.PolyClinicInfofragmentBinding
+import com.korashiGroup.salamtakPatient.model.HomeAdsData
+import com.korashiGroup.salamtakPatient.model.salamtakgate.Gates
 import com.korashiGroup.salamtakPatient.utils.DateUtils
 
 class PolyClinicInfoFragment : Fragment() {
 
     private lateinit var binding:PolyClinicInfofragmentBinding
     private val args:PolyClinicInfoFragmentArgs by navArgs()
+    private lateinit var imageVideoAdapter: ImageVideoAdapter
+    private lateinit var imagesAdapter: ImagesAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -29,6 +36,8 @@ class PolyClinicInfoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        capsVideoRecylerview()
+        gallaryRecylerview()
         bindFeatures()
         initButton()
     }
@@ -42,6 +51,22 @@ class PolyClinicInfoFragment : Fragment() {
             findNavController().navigate(R.id.searchFragment)
         }
     }
+    private fun capsVideoRecylerview() {
+        imageVideoAdapter = ImageVideoAdapter()
+        binding.viewPager.apply {
+            adapter = imageVideoAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+            setHasFixedSize(true)
+        }
+    }
+    private fun gallaryRecylerview() {
+        imagesAdapter = ImagesAdapter()
+        binding.rvGallry.apply {
+            adapter = imagesAdapter
+            setHasFixedSize(true)
+        }
+
+    }
 
     private fun bindFeatures(){
 
@@ -53,20 +78,45 @@ class PolyClinicInfoFragment : Fragment() {
                 transformations(CircleCropTransformation())
             }
         }
+        if (!args.polyclinicitems.ClinicBio.toString().isNullOrEmpty()) {
+            binding.AboutDoctor.setText(args.polyclinicitems.ClinicBio.toString().removePrefix("[")?.removeSuffix("]"))
+        }
         if (!args.polyclinicitems.features.toString().isNullOrEmpty()) {
-            binding.features.setText(args.polyclinicitems.features.toString())
+            binding.features.setText(args.polyclinicitems.features.toString().removePrefix("[")?.removeSuffix("]"))
         }
         if (!args.polyclinicitems.insurance.toString().isNullOrEmpty()) {
-            binding.insurance.setText(args.polyclinicitems.insurance.toString())
+            binding.insurance.setText(args.polyclinicitems.insurance.toString().removePrefix("[")?.removeSuffix("]"))
+        }
+        if (!args.polyclinicitems.services.toString().isNullOrEmpty()) {
+            binding.clinicservices.setText(args.polyclinicitems.services.toString().removePrefix("[")?.removeSuffix("]"))
         }
         if (!args.polyclinicitems.gallary.isNullOrEmpty()) {
-            Glide.with(binding.ivGallary.context)
-                .load("https://salamtechapi.azurewebsites.net/${args.polyclinicitems.gallary!!.first()}")
-                .into(binding.ivGallary)
+            val listBlogs= mutableListOf<Gates>()
+            for (i in args.polyclinicitems.gallary!!.indices!!){
+                val gates= Gates(0, args.polyclinicitems.gallary!![i].toString())
+                listBlogs.add(gates)
+            }
+            imagesAdapter.submitList(listBlogs)
         }
 
+        if (!args.polyclinicitems.videos.isNullOrEmpty()) {
+            val listBlogs= mutableListOf<HomeAdsData>()
+            for (i in args.polyclinicitems.videos!!.indices!!){
+                val homeAdsData= args.polyclinicitems.videos!![i]?.let { it1 ->
+                    args.polyclinicitems.videos!![i]?.let { it2 ->
+                        HomeAdsData(true,
+                            it1
+                        )
+                    }
+                }
+                if (homeAdsData != null) {
+                    listBlogs.add(homeAdsData)
+                }
+            }
+            imageVideoAdapter.submitList(listBlogs)
+        }
         binding.tvDoctorName.text=args.polyclinicitems.name
-        binding.tvSpecialization.text=args.polyclinicitems.address
+        binding.tvSpecialization.text="${args.polyclinicitems.cityName} - ${args.polyclinicitems.areaName}"
     }
 
 

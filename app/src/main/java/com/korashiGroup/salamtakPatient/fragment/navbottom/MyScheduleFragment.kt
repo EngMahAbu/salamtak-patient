@@ -25,6 +25,7 @@ import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.korashiGroup.salamtakPatient.model.booking.clink.ClinicData
 import com.korashiGroup.salamtakPatient.model.offers.OfferDoctor
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
@@ -259,6 +260,7 @@ class MyScheduleFragment : Fragment(), MyScheduleAdapter.ActionSchedule,
         )
         sharedDataViewmodel.getClinicSchedualByClinicDayId(clinicSchedualByClinicDayId)
         sharedDataViewmodel.getDocotorId(doctorId)
+        sharedDataViewmodel.getClinicIdAndDoctorId(ClinicData(doctorId, clinicId))
         val action=MyScheduleFragmentDirections.actionMyScheduleFragmentToDialogSchduleFragment(sechdule,AppointmentId,
             OfferDoctor(doctorId,clinicId,fess,doctorname,image,offerId,specialistname)
         )

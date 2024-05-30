@@ -1,7 +1,6 @@
 package com.korashiGroup.salamtakPatient.fragment.dialog
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +16,6 @@ import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.databinding.FragmentDailogRatingDoctorBinding
 import com.korashiGroup.salamtakPatient.utils.DateUtils
 import com.korashiGroup.salamtakPatient.utils.Resource
-import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.PatientViewmodel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -63,6 +61,9 @@ class DialogRatingDoctorFragment : BottomSheetDialogFragment() {
 
         if (binding.textinputComment.text.toString()!=null ){
             partMap = partMap + mapOf("Comment" to binding.textinputComment.text.toString())
+        }
+        if (binding.textinputCommentPolyclinics.text.toString()!=null ){
+            partMap = partMap + mapOf("Clinic_Comment" to binding.textinputCommentPolyclinics.text.toString())
         }
         partMap = partMap + mapOf("Rate" to rating)
 

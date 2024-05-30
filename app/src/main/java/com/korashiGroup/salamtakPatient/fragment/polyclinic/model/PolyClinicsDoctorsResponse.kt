@@ -59,4 +59,8 @@ data class PolyClinicsDoctorsList(
     @SerializedName("Rate")
     val rate: Double?,
     val ClinicID: Int?,
+    @SerializedName("CityName")
+    val CityName: String?,
+    @SerializedName("AreaName")
+    val AreaName: String?,
 )

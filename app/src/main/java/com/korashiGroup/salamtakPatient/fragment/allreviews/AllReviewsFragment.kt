@@ -80,8 +80,8 @@ class AllReviewsFragment : Fragment() {
             }
 
         })
-        sharedDataViewmodel.doctorId.observe(viewLifecycleOwner, Observer {
-            patientViewModel.getDoctorReviews(it)
+        sharedDataViewmodel.clinicIdAndDoctorId.observe(viewLifecycleOwner, Observer {
+            patientViewModel.getDoctorReviews(it.doctorId)
         })
 
 

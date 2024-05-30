@@ -61,6 +61,7 @@ data class DataAppointment(
     val ApartmentNo: String?,
     @SerializedName("HealthEntity_OffersID")
     val HealthEntity_OffersID: Int?,
+    val ClinicPhone: String?,
 
 
 )

@@ -361,7 +361,13 @@ interface ApiService {
     suspend fun getDoctorByClinicId(
         @Path("culture") culture: String,
         @Query("ClinicId") ClinicId :Int,
+        @Query("IsApproved") IsApproved :Boolean=true,
         @Query("SpecID") SpecID :Int,
+    ): Response<PolyClinicsDoctorsResponse>
+    @GET("{culture}/Doctor/GetDoctorVideos")
+    suspend fun getDoctorVideos(
+        @Path("culture") culture: String,
+        @Query("DoctorID") doctorID :Int,
     ): Response<PolyClinicsDoctorsResponse>
 
 }

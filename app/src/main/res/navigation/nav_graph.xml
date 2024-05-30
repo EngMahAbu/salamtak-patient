@@ -203,6 +203,9 @@
         <action
                 android:id="@+id/action_searchFragment_to_polyClinicInfoFragment"
                 app:destination="@id/polyClinicInfoFragment" />
+        <action
+                android:id="@+id/action_searchFragment_to_bookAppointmentFragment"
+                app:destination="@id/bookAppointmentFragment" />
     </fragment>
     <fragment
             android:id="@+id/myScheduleFragment"
@@ -262,6 +265,9 @@
                 android:name="appointments"
                 app:argType="com.korashiGroup.salamtakPatient.model.booking.BookingResponse"
                 app:nullable="true" />
+        <action
+                android:id="@+id/action_dialogClinkBookingFragment_to_bookAppointmentFragment"
+                app:destination="@id/bookAppointmentFragment" />
     </dialog>
     <fragment
             android:id="@+id/appointmentDetailsFragment"

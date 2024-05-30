@@ -60,16 +60,18 @@ class SearchDoctorsAdapter(private val booking: Booking) :
                 services.doctorId?.let { it2 ->
                     services.feesTo?.let { it3 ->
                         services.image?.let { it4 ->
-                            booking.onItemClick(
-                                it1,
-                                it2, it3, it4
-                            )
+                            services.clinicDto?.Name?.let { it5 ->
+                                booking.onItemClick(
+                                    it1,
+                                    it2, it3, it4, it5
+                                )
+                            }
                         }
                     }
                 }
             }
         }
-        holder.itemView.setOnClickListener {
+        holder.binding.btnMore.setOnClickListener {
 //            val action= services.doctorId?.let { it1 ->
 //                SearchFragmentDirections.actionSearchFragmentToBookingAppointmentFragment(
 //                    it1
@@ -120,7 +122,7 @@ class SearchDoctorsAdapter(private val booking: Booking) :
 
     interface Booking {
 
-        fun onItemClick(clinicId: Int, doctorId: Int, fess: Int,image:String)
+        fun onItemClick(clinicId: Int, doctorId: Int, fess: Int,image:String,clinicName:String)
         fun onItemClick(clinicId: Int, doctorId: Int,clinkname:String,rate:Double,rateCount:Int)
     }
 }

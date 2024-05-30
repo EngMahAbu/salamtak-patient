@@ -35,4 +35,11 @@ object DataBinding {
         val formatter = SimpleDateFormat("yyyy-MM-dd")
         return formatter.format(time)
     }
+
+    fun convertDateFormat(date1: String?,format:String,formatParsing:String):String{
+        val sdf = SimpleDateFormat(format, Locale.getDefault())
+        val date = sdf.parse(date1)
+        val dateForm = SimpleDateFormat(formatParsing, Locale.getDefault())
+        return dateForm.format(date)
+    }
 }

@@ -40,7 +40,6 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
     private lateinit var imageServicesAdapter: ServicesAdapter
     private lateinit var imageMedicalServicesAdapter: MedicalServicesAdapter
         private lateinit var imageVideoAdapter: ImageVideoAdapter
-    private val jsonObject:JsonObject?=null
     private val patientviewmodel: PatientViewmodel by viewModels()
     var someEventListener: LoginFragment.onSomeEventListener? = null
     //    private lateinit var popularDoctorsAdapter: PopularDoctorsAdapter
@@ -58,7 +57,6 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
 
     companion object {
         var instance: HomeFragment? = null
-
     }
 
     override fun onAttach(activity: Activity) {
@@ -183,7 +181,6 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
             ImageServices(
                 R.drawable.ic_inclink_book,
                 getString(R.string.Clinic_Booking),
-                R.color.color_5,
                 Id = 1
             )
         )
@@ -192,7 +189,6 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
             ImageServices(
                 R.drawable.ic_homevisit,
                 getString(R.string.Home_Visit),
-                R.color.color_1,
                 Id = 2
 
             )
@@ -202,7 +198,6 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
             ImageServices(
                 R.drawable.video,
                 getString(R.string.Video_Call),
-                R.color.color_2,
                 Id = 3
             )
         )
@@ -210,7 +205,6 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
             ImageServices(
                 R.drawable.calling,
                 getString(R.string.Call),
-                R.color.color_3,
                 Id = 4
             )
         )
@@ -219,7 +213,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
             ImageServices(
                 R.drawable.poly,
                 getString(R.string.polyclinics),
-                R.color.color_4, 6
+                Id = 6
             )
         )
 
@@ -234,7 +228,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
             ImageServices(
                 R.drawable.ic_hospitals,
                 getString(R.string.hospitals),
-                R.color.color_3,
+                R.color.color_1,
                 2
             )
         )
@@ -251,21 +245,21 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
             ImageServices(
                 R.drawable.ic_laboratories,
                 getString(R.string.laboratories),
-                R.color.color_3, 3
+                R.color.color_4, 3
             )
         )
         list.add(
             ImageServices(
                 R.drawable.ic_radiologycenter,
                 getString(R.string.radiologycenter),
-                R.color.color_3, 4
+                R.color.color_5, 4
             )
         )
         list.add(
             ImageServices(
                 R.drawable.ic_angle,
                 getString(R.string.engile),
-                R.color.color_3, 7
+                R.color.white, 7
             )
         )
         imageMedicalServicesAdapter.submitList(list)
