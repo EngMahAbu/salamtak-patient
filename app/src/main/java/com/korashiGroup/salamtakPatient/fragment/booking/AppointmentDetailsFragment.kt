@@ -116,10 +116,10 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
         binding.ivArrow.setOnClickListener {
             if (args.status == true) {
                 findNavController().navigate(R.id.searchFragment)
-            } else if (offerid!=0){
+            } else if (offerid!=null){
                 findNavController().navigate(R.id.offersFragment)
             }else{
-                findNavController().navigate(R.id.myScheduleFragment)
+                findNavController().navigate(R.id.searchFragment)
             }
         }
 

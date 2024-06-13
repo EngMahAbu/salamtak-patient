@@ -42,12 +42,7 @@ class PolyClinicsDoctorsAdapter(private val booking: IPolyClinicsBooking) :
             }
 
             tvSpecialization.text = "${services.specialistName} - ${services.seniorityLevelName}"
-
-            services.subSpecialistName?.forEach {
-                subspecialist= "$subspecialist $it,"
-            }
-            subSpecialization.text = services.specialistName
-            subspecialist=""
+            subSpecialization.text = services.subSpecialistName.toString().removePrefix("[").removeSuffix("]")
           location.text="${services.CityName} - ${services.AreaName}"
           //  waitingTime.text = "${services.waitingTime}"
            Feesresult.text = "${services.Fees.toString()} ${holder.binding.Feesresult.context.getString(R.string.le)}"

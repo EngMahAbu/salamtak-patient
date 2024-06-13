@@ -517,5 +517,10 @@
                 android:name="polyclinicitems"
                 app:argType="com.korashiGroup.salamtakPatient.fragment.polyclinic.model.PolyClinicsItem" />
     </fragment>
+    <fragment
+            android:id="@+id/specialistDoctorsFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.home.SpecialistDoctorsFragment"
+            android:label="specialist_doctorsfragment"
+            tools:layout="@layout/specialist_doctorsfragment" />
 
 </navigation>

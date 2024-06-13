@@ -26,7 +26,7 @@ class ServicesAdapter(private val onServicesClick:Action ):ListAdapter<ImageServ
         Glide.with(holder.binding.ivServices)
             .load(services.image_onboarding)
             .into(holder.binding.ivServices)
-        holder.binding.layputServices.setBackgroundResource(services.color)
+       // holder.binding.layputServices.setBackgroundResource(services.color)
         holder.binding.tvServiceName.text=services.textService
         holder.binding.cardview.setOnClickListener {
 

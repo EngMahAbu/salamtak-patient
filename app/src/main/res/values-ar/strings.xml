@@ -344,6 +344,8 @@
     <string name="clinic_commit">تعلقات المركز الطبى</string>
     <string name="btnmore">مزيد من المعلومات</string>
     <string name="clinicphone">رقم العيادة</string>
+    <string name="rateapp">تقييم التطبيق</string>
+    <string name="myquestions">أسئلتى</string>
 
     <array name="choose">
         <item>اختار</item>

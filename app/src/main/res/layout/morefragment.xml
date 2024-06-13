@@ -229,6 +229,62 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_RatingApp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="10dp"
+            android:elevation="1dp"
+            android:background="@drawable/more_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_favoriteDoctor">
+
+        <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/iv_RatingApp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:adjustViewBounds="true"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/ic_star"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+                android:id="@+id/tv_RatingApp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:fontFamily="@font/avenirltstd_book"
+                android:gravity="start"
+                android:text="@string/rateapp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/iv_RatingApp"
+                app:layout_constraintTop_toTopOf="@+id/iv_RatingApp"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_RatingApp"
+        />
+
+        <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/iv_RatingApps"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="10dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_arrow_purple"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_AboutApp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -239,7 +295,7 @@
         android:background="@drawable/more_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout_favoriteDoctor">
+        app:layout_constraintTop_toBottomOf="@+id/layout_RatingApp">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iv_AboutApp"
@@ -445,6 +501,60 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_my_Questions"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
+        android:elevation="1dp"
+        android:background="@drawable/more_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_privacy">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_my_Questions"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:adjustViewBounds="true"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/ic_question_mark"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_my_Questions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:fontFamily="@font/avenirltstd_book"
+            android:gravity="start"
+            android:text="@string/myquestions"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/iv_my_Questions"
+            app:layout_constraintTop_toTopOf="@+id/iv_my_Questions"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_my_Questions"
+            />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_iv_myQuestions"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="10dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_arrow_purple"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
@@ -460,7 +570,7 @@
         android:background="@drawable/more_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout_privacy">
+        app:layout_constraintTop_toBottomOf="@+id/layout_my_Questions">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iv_Language"

@@ -39,6 +39,10 @@ import com.korashiGroup.salamtakPatient.viewmodel.PatientViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.PolyClinicsViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
+import java.util.TimeZone
 import kotlin.math.roundToInt
 
 @AndroidEntryPoint
@@ -57,6 +61,10 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
     private lateinit var imagesAdapter: ImagesAdapter
     private lateinit var getDoctorAndPolyClinksResponse: GetDoctorClinksResponse
     private lateinit var reviewsData:ReviewsResponse
+    val now = Calendar.getInstance(TimeZone.getTimeZone("CST"))
+    val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH).apply {
+        this.timeZone = TimeZone.getTimeZone("CST")
+    }
     private var doctorId: Int? = null
     private var isFavorite: Boolean? = null
     private var type=0
@@ -75,9 +83,7 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        formattedDate = SearchFragment.instance?.let {
-            it.formattedDate
-        }.toString()
+        formattedDate = formatter.format(now.time)
         dayId = SearchFragment.instance?.let {
             it.dayId
         }?:1
@@ -104,9 +110,7 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
 
 
     private fun initButton() {
-        binding.layoutBottomsheetpersistant.mainPageBottomsheet.setOnClickListener {
-            return@setOnClickListener
-        }
+
         binding.ivArrow.setOnClickListener {
             findNavController().navigate(R.id.searchFragment)
         }

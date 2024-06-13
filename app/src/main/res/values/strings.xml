@@ -362,6 +362,8 @@
     <string name="clinic_commit">Clinic Commit</string>
     <string name="btnmore">More Information</string>
     <string name="clinicphone">Clinic Phone</string>
+    <string name="rateapp">Rate App</string>
+    <string name="myquestions">My Questions</string>
     <array name="choose">
         <item>Select</item>
     </array>

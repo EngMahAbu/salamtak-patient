@@ -53,11 +53,12 @@ class MainActivity : AppCompatActivity(), LoginFragment.onSomeEventListener {
     init {
         firebaseRemoteConfig.setConfigSettingsAsync(configSettings)
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.bottomViewNav.selectedItemId=R.id.homeFragment
+        binding.bottomViewNav.selectedItemId = R.id.homeFragment
         instance = this
         logSentFriendRequestEvent()
         setupNavigationBottom()
@@ -67,6 +68,7 @@ class MainActivity : AppCompatActivity(), LoginFragment.onSomeEventListener {
                 R.id.homeFragment,
                 R.id.moreFragment,
                 R.id.offersFragment,
+                R.id.searchFragment,
                 R.id.myScheduleFragment -> {
                     binding.bottomViewNav.visibility = View.VISIBLE
 
@@ -103,12 +105,13 @@ class MainActivity : AppCompatActivity(), LoginFragment.onSomeEventListener {
     override fun someEvent(skipLogin: String?) {
         if (skipLogin == "skip") {
             binding.bottomViewNav.getMenu().getItem(1).setEnabled(false)
-         //   binding.bottomViewNav.getMenu().getItem(2).setEnabled(false)
+            //   binding.bottomViewNav.getMenu().getItem(2).setEnabled(false)
         } else {
             binding.bottomViewNav.getMenu().getItem(1).setEnabled(true)
-           // binding.bottomViewNav.getMenu().getItem(2).setEnabled(true)
+            // binding.bottomViewNav.getMenu().getItem(2).setEnabled(true)
         }
     }
+
     private fun check() {
         val appVersion = ForceUpdateUtils.getAppVersion(this)
         firebaseRemoteConfig.fetchAndActivate().addOnCompleteListener(this) {
@@ -123,11 +126,13 @@ class MainActivity : AppCompatActivity(), LoginFragment.onSomeEventListener {
             }
         }
     }
+
     private fun showDialog() {
         dialog.show(supportFragmentManager, "Exit Dialog")
     }
-    fun logSentFriendRequestEvent(){
-       AppEventsLogger.newLogger(this).logEvent("sentFriendRequest")
+
+    fun logSentFriendRequestEvent() {
+        AppEventsLogger.newLogger(this).logEvent("sentFriendRequest")
     }
 
 }

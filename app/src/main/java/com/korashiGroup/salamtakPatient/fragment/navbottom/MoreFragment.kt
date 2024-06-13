@@ -1,5 +1,8 @@
 package com.korashiGroup.salamtakPatient.fragment.navbottom
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import androidx.fragment.app.Fragment
@@ -57,6 +60,20 @@ class MoreFragment : Fragment() {
 
 
     private fun initButton() {
+
+        binding.layoutRatingApp.setOnClickListener {
+            val appPackageName = "com.korashiGroup.salamtakPatient"
+            try {
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$appPackageName")))
+            } catch (e: ActivityNotFoundException) {
+                // If the Play Store app is not installed, open the Play Store website
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=$appPackageName")))
+            }
+            it.isEnabled=false
+            Handler().postDelayed({
+                it.isEnabled=true
+            }, 1000)
+        }
 
         binding.layoutLanguage.setOnClickListener {
             val action =

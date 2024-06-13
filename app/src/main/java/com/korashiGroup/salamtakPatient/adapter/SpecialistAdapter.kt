@@ -56,9 +56,6 @@ class SpecialistAdapter(private val select:SelectSpecialist):ListAdapter<Special
 
         holder.binding.chExaminationtype.isChecked = selectedPosition == position
 
-        if (selectedPosition == position) {
-        } else {
-        }
 
     }
 

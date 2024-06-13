@@ -12,7 +12,6 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
-import com.google.gson.JsonObject
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.adapter.*
 import com.korashiGroup.salamtakPatient.databinding.HomefragmentBinding
@@ -21,17 +20,17 @@ import com.korashiGroup.salamtakPatient.model.AreaData
 import com.korashiGroup.salamtakPatient.model.CityData
 import com.korashiGroup.salamtakPatient.model.ImageServices
 import com.korashiGroup.salamtakPatient.model.register.ChooseGender
+import com.korashiGroup.salamtakPatient.utils.DateUtils
 import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.utils.SpUtil
 import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
+import com.korashiGroup.salamtakPatient.viewmodel.PatientViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.RegisterViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
-import com.korashiGroup.salamtakPatient.utils.DateUtils
-import com.korashiGroup.salamtakPatient.viewmodel.PatientViewmodel
 import dagger.hilt.android.AndroidEntryPoint
-import okhttp3.WebSocket
 import java.util.*
 import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.Action, GatesAdapter.Action,MedicalServicesAdapter.Action {
@@ -174,12 +173,11 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
 //    }
 
     private fun imageServices() {
-
         val list = mutableListOf<ImageServices>()
 
         list.add(
             ImageServices(
-                R.drawable.ic_inclink_book,
+                R.drawable.m_book,
                 getString(R.string.Clinic_Booking),
                 Id = 1
             )
@@ -187,7 +185,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
 
         list.add(
             ImageServices(
-                R.drawable.ic_homevisit,
+                R.drawable.m_home,
                 getString(R.string.Home_Visit),
                 Id = 2
 
@@ -211,7 +209,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
 
         list.add(
             ImageServices(
-                R.drawable.poly,
+                R.drawable.m_poly,
                 getString(R.string.polyclinics),
                 Id = 6
             )
@@ -271,11 +269,11 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
             when (response) {
 
                 is Resource.Loading -> {
-                    showprogtessbar()
+              //      showprogtessbar()
                 }
 
                 is Resource.sucess -> {
-                    hideprogressbar()
+              //      hideprogressbar()
                     response.let {
                         imageVideoAdapter.submitList(it.data?.Data)
                         binding.viewPager.adapter = imageVideoAdapter
@@ -332,7 +330,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
             when (response) {
 
                 is Resource.Loading -> {
-                    showprogtessbar()
+                   showprogtessbar()
                 }
 
                 is Resource.sucess -> {
@@ -413,7 +411,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
 //    }
 
     private fun showprogtessbar() {
-        binding.progressBar.visibility = View.VISIBLE
+       // binding.progressBar.visibility = View.VISIBLE
     }
 
     private fun hideprogressbar() {
@@ -423,9 +421,10 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
     override fun onItemClick(servicesID: Int) {
         medicalExaminatioId = servicesID
         sharedDataViewmodel.getGender(ChooseGender("",0))
-        val action =
-            HomeFragmentDirections.actionHomeFragmentToDialogBottomSheetFragment("services")
-        findNavController().navigate(action)
+//        val action =
+//            HomeFragmentDirections.actionHomeFragmentToDialogBottomSheetFragment("services")
+//        findNavController().navigate(action)
+        findNavController().navigate(R.id.specialistDoctorsFragment)
     }
 
 

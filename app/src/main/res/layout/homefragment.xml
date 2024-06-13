@@ -360,6 +360,20 @@
                         app:layout_constraintTop_toBottomOf="@+id/tv_Medical_ServicesDirectory"
                 />
 
+                <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_specilaist"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_margin="15dp"
+                        android:paddingBottom="5dp"
+                        android:orientation="horizontal"
+                        tools:listitem="@layout/item_layout_new_specialicty"
+                        app:layout_constraintTop_toBottomOf="@+id/rv_SalamtakmedicalServices"
+                        />
+
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/layout_doctorsDetail"
                         android:layout_width="match_parent"
@@ -371,7 +385,7 @@
                         android:background="@drawable/bg_edittext"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/rv_SalamtakmedicalServices">
+                        app:layout_constraintTop_toBottomOf="@+id/rv_specilaist">
 
                     <com.google.android.material.imageview.ShapeableImageView
                             android:id="@+id/iv_doctorProfile"
