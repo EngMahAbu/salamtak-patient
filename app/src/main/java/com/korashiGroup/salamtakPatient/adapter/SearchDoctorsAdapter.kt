@@ -2,6 +2,7 @@ package com.korashiGroup.salamtakPatient.adapter
 
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -54,6 +55,11 @@ class SearchDoctorsAdapter(private val booking: Booking) :
             holder.binding.Reviews.text="${services.rate?.roundToInt()?.toDouble()}"
             holder.binding.Ratecount.text="${services.RateCount?.toInt()}"
         }
+//        if (services.==null || services.HealthEntity_OffersID.toString()=="null"){
+//            holder.binding.ivOffer.visibility= View.GONE
+//        }else{
+//            holder.binding.ivOffer.visibility= View.VISIBLE
+//        }
         holder.binding.btnBooking.setOnClickListener {
 
             services.clinicId?.let { it1 ->

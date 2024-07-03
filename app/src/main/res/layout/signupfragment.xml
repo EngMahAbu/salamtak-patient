@@ -323,7 +323,6 @@
                             android:textColor="@color/black"
                             android:fontFamily="@font/avenirltstd_roman"
                             android:textSize="12sp"
-                            android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890!@#$%^*?&amp;"
                             android:layout_marginTop="5dp"
                             android:imeOptions="actionNext"
                             android:layout_gravity="center_horizontal"
@@ -483,7 +482,6 @@
                             android:layout_marginTop="5dp"
                             android:fontFamily="@font/avenirltstd_roman"
                             android:textSize="12sp"
-                            android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890!@#$%^*?&amp;"
                             android:imeOptions="actionDone"
                             android:layout_gravity="center_horizontal"
                             android:inputType="text" />

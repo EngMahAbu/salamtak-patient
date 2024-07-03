@@ -158,14 +158,14 @@ class AskDoctorFragment : Fragment() {
 
         }
 
-        if (binding.textinputQuestionDetails.text?.trim().isNullOrEmpty()) {
-            binding.tvQuestionDetailsError.visibility = View.VISIBLE
-
-
-        } else {
-            binding.tvQuestionDetailsError.visibility = View.GONE
-            partMap = partMap + mapOf("QDetails" to binding.textinputQuestionDetails.text.toString())
-        }
+//        if (binding.textinputQuestionDetails.text?.trim().isNullOrEmpty()) {
+//            binding.tvQuestionDetailsError.visibility = View.VISIBLE
+//
+//
+//        } else {
+//            binding.tvQuestionDetailsError.visibility = View.GONE
+//            partMap = partMap + mapOf("QDetails" to binding.textinputQuestionDetails.text.toString())
+//        }
 
         if (binding.etAge.text?.trim().isNullOrEmpty()) {
             binding.tvGenderError.visibility = View.VISIBLE
@@ -227,16 +227,16 @@ class AskDoctorFragment : Fragment() {
             }
         }
 
-        binding.textinputQuestionDetails.doOnTextChanged { text, start, before, count ->
-            if (binding.textinputQuestionDetails.text?.trim().isNullOrEmpty()) {
-                binding.tvQuestionDetailsError.visibility = View.VISIBLE
-
-
-            } else {
-                binding.tvQuestionDetailsError.visibility = View.GONE
-                partMap = partMap + mapOf("QDetails" to binding.textinputQuestionDetails.text.toString())
-            }
-        }
+//        binding.textinputQuestionDetails.doOnTextChanged { text, start, before, count ->
+//            if (binding.textinputQuestionDetails.text?.trim().isNullOrEmpty()) {
+//                binding.tvQuestionDetailsError.visibility = View.VISIBLE
+//
+//
+//            } else {
+//                binding.tvQuestionDetailsError.visibility = View.GONE
+//                partMap = partMap + mapOf("QDetails" to binding.textinputQuestionDetails.text.toString())
+//            }
+//        }
 
         binding.etAge.doOnTextChanged { text, start, before, count ->
             if (binding.etAge.text?.trim().isNullOrEmpty()) {
@@ -272,6 +272,12 @@ class AskDoctorFragment : Fragment() {
             binding.etChooseMe.setText(it.type)
             isMe=it.status
             partMap = partMap + mapOf("IsForMe" to it.status)
+        }
+        if (!binding.textinputQuestionDetails.text.toString().isNullOrEmpty()){
+            partMap = partMap + mapOf("Chronic_disease" to binding.textinputQuestionDetails.text.toString())
+        }
+        if (!binding.textinputSurgeryOperations.text.toString().isNullOrEmpty()){
+            partMap = partMap + mapOf("PrevSurgery" to binding.textinputSurgeryOperations.text.toString())
         }
 
     }

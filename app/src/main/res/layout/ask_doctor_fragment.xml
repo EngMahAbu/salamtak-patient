@@ -212,13 +212,38 @@
                     android:textSize="16sp"
                     android:importantForAutofill="no"
                     android:imeOptions="actionNext"
-                    android:hint="@string/question_descreption_explanation_of_your_medical_symotoms"
-                    android:gravity="start|top"
+                    android:hint="@string/chronic_diseases"
+                    android:gravity="start|center_vertical"
                     android:inputType="textMultiLine"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textinput_Question"
             />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/textinput_surgeryOperations"
+                    android:padding="8dp"
+                    android:minLines="5"
+                    android:singleLine="false"
+                    android:lines="6"
+                    android:scrollbars="vertical"
+                    android:background="@drawable/bg_edittext"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:autofillHints=""
+                    android:elevation="1dp"
+                    android:textSize="16sp"
+                    android:importantForAutofill="no"
+                    android:imeOptions="actionNext"
+                    android:hint="@string/prevSurgery"
+                    android:gravity="start|center_vertical"
+                    android:inputType="textMultiLine"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textinput_QuestionDetails"
+                    />
+
             <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_questionDetailsError"
                     android:layout_width="wrap_content"
@@ -320,7 +345,7 @@
                     android:elevation="1dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textinput_QuestionDetails">
+                    app:layout_constraintTop_toBottomOf="@+id/textinput_surgeryOperations">
 
                 <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/iv_arrowdownChoose_Gender"

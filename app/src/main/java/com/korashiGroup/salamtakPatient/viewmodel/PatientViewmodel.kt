@@ -36,6 +36,7 @@ class PatientViewmodel @Inject constructor(private val repositry: RegisterReposi
     val editAppointmentResponse=MutableLiveData<Resource<CreatepatientAppointementsResponse>>()
     val favoriteDoctorResponse=MutableLiveData<Resource<FavoriteDoctorResponse>>()
     val notificationResponse=MutableLiveData<Resource<NotificationListResponse>>()
+    val updateNotificationResponse=MutableLiveData<Resource<NotificationListResponse>>()
     val favoriteResponse=MutableLiveData<Resource<AddToFavoriteResponse>>()
     val profileResponse=MutableLiveData<Resource<GetPatientProfileResponse>>()
     val deleteUserResponse=MutableLiveData<Resource<DeleteUserResponse>>()
@@ -119,6 +120,22 @@ class PatientViewmodel @Inject constructor(private val repositry: RegisterReposi
     }
 
     private fun handlegetUserNotifications(response: Response<NotificationListResponse>): Resource<NotificationListResponse>? {
+        if (response.isSuccessful){
+            response.body()?.let {
+                return Resource.sucess(it)
+            }
+        }
+        val error = Gson().fromJson<NotificationListResponse>(response.errorBody()!!.string(), NotificationListResponse::class.java)
+        return error.message?.let { Resource.Error(it) }
+    }
+
+    fun updateNotification()=viewModelScope.launch(Dispatchers.IO+handler) {
+        updateNotificationResponse.postValue(Resource.Loading())
+        val response=repositry.updateNotification()
+        updateNotificationResponse.postValue(response?.let { handleUpdateNotification(it) })
+    }
+
+    private fun handleUpdateNotification(response: Response<NotificationListResponse>): Resource<NotificationListResponse>? {
         if (response.isSuccessful){
             response.body()?.let {
                 return Resource.sucess(it)

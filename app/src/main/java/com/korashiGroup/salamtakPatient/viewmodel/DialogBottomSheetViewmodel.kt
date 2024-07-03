@@ -44,6 +44,7 @@ class DialogBottomSheetViewmodel @Inject constructor(private val repositry: Regi
     var healthEntityResponse:GetHealthEntityResponse?=null
     val nationalityResponse=MutableLiveData<Resource<GetCountry>>()
     val specialistResponse=MutableLiveData<Resource<GetSpecialistResponse>>()
+    val top10SpecialistResponse=MutableLiveData<Resource<GetSpecialistResponse>>()
     val subSpecialistResponse=MutableLiveData<Resource<GetSubSpecilistResponse>>()
     val seniorityLevelResponse=MutableLiveData<Resource<GetSeniorityLevelResponse>>()
     val allCitiesResponse=MutableLiveData<Resource<GetAllCitiesResponse>>()
@@ -91,6 +92,21 @@ class DialogBottomSheetViewmodel @Inject constructor(private val repositry: Regi
             }
         }
         return Resource.Error(response.message())    }
+
+    fun getTop10Specialist()=viewModelScope.launch(Dispatchers.IO+handler) {
+        top10SpecialistResponse.postValue(Resource.Loading())
+        val response=repositry.getTop10Specialist()
+        top10SpecialistResponse.postValue(response?.let { handlegetTop10Specialist(it) })
+    }
+
+    private fun handlegetTop10Specialist(response: Response<GetSpecialistResponse>): Resource<GetSpecialistResponse>? {
+        if (response.isSuccessful){
+            response.body()?.let {
+                return Resource.sucess(it)
+            }
+        }
+        return Resource.Error(response.message())    }
+
 
     fun getCountries()=viewModelScope.launch(Dispatchers.IO+handler) {
         nationalityResponse.postValue(Resource.Loading())
@@ -217,10 +233,13 @@ class DialogBottomSheetViewmodel @Inject constructor(private val repositry: Regi
 
      fun searchDoctors(doctorSearchRequest: DoctorSearchRequest, new:String )=viewModelScope.launch(Dispatchers.IO+handler) {
        if (new=="new"){
-           val newDoctorSearchRequest=NewDoctorSearchRequest(doctorSearchRequest.cityId,doctorSearchRequest.areaId,doctorSearchRequest.maxResultCount,
-               doctorSearchRequest.medicalExaminationTypeId,doctorSearchRequest.skipCount,doctorSearchRequest.specialistId)
+           val newDoctorSearchRequest= doctorSearchRequest.areaId?.let {
+               NewDoctorSearchRequest(doctorSearchRequest.CityId,
+                   it,doctorSearchRequest.maxResultCount,
+                   doctorSearchRequest.medicalExaminationTypeId,doctorSearchRequest.skipCount,doctorSearchRequest.specialistId)
+           }
            docorsResponse.postValue(Resource.Loading())
-           val response=repositry.doctorSearch3(newDoctorSearchRequest)
+           val response= newDoctorSearchRequest?.let { repositry.doctorSearch3(it) }
            docorsResponse.postValue(response?.let { handlingSearchDoctors(it) })
        }else{
            docorsResponse.postValue(Resource.Loading())

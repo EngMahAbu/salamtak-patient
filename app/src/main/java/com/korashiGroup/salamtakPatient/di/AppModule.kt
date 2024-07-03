@@ -2,7 +2,6 @@ package com.korashiGroup.salamtakPatient.di
 import android.util.Log
 import com.korashiGroup.salamtakPatient.BuildConfig
 import com.korashiGroup.salamtakPatient.api.ApiService
-import com.korashiGroup.salamtakPatient.utils.Constans.BASE_URL
 import com.korashiGroup.salamtakPatient.utils.DateUtils
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -152,7 +151,7 @@ object AppModule {
         // Potential dependencies of this type
     ): ApiService {
         return Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(BuildConfig.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(getOkHttpClient())
             .build()

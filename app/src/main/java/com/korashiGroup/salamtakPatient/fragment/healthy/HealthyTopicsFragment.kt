@@ -20,22 +20,28 @@ import com.google.android.material.snackbar.Snackbar
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.adapter.*
 import com.korashiGroup.salamtakPatient.databinding.HealthyTopicsfragmentBinding
+import com.korashiGroup.salamtakPatient.fragment.askdoctor.MyQuestionsFragmentDirections
 import com.korashiGroup.salamtakPatient.model.AreaData
 import com.korashiGroup.salamtakPatient.model.CityData
+import com.korashiGroup.salamtakPatient.model.askandanswer.questions.Questions
+import com.korashiGroup.salamtakPatient.model.booking.clink.ClinicData
 import com.korashiGroup.salamtakPatient.model.salamtakgate.Blogs
 import com.korashiGroup.salamtakPatient.model.salamtakgate.GatesDetails
 import com.korashiGroup.salamtakPatient.utils.Constans
 import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
+import com.korashiGroup.salamtakPatient.viewmodel.PolyClinicsViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HealthyTopicsFragment : Fragment(), BlogsGatesAdapter.Action, MedicalHealthAdapter.Action {
+class HealthyTopicsFragment : Fragment(), BlogsGatesAdapter.Action, MedicalHealthAdapter.Action,QuestionsAdapter.IBook{
 
     private lateinit var binding: HealthyTopicsfragmentBinding
     private val args: HealthyTopicsFragmentArgs by navArgs()
     private val viewmodel: DialogBottomSheetViewmodel by viewModels()
+    private val polyClinicsViewModel: PolyClinicsViewmodel by viewModels()
+    private lateinit var questionsAdapter: QuestionsAdapter
     private lateinit var bottomsheetbeahavoir: BottomSheetBehavior<ConstraintLayout>
     val sharedDataViewmodel: SharedDataViewmodel by activityViewModels()
     private lateinit var capsVideoAdapter: CapVideoAdapter
@@ -60,6 +66,7 @@ class HealthyTopicsFragment : Fragment(), BlogsGatesAdapter.Action, MedicalHealt
         bindDataToUi()
         blogsGateRecylerview()
         capsVideoRecylerview()
+        questionscRecylerview()
         medicalServicesRecylerview()
         initButton()
         callBack()
@@ -94,6 +101,8 @@ class HealthyTopicsFragment : Fragment(), BlogsGatesAdapter.Action, MedicalHealt
             binding.btnQandA.setBackgroundResource(R.drawable.bg_help)
             binding.btnQandA.setTextColor(Color.parseColor("#262D70"))
             binding.layoutFilter.visibility = View.VISIBLE
+            binding.rvQuestions.visibility=View.GONE
+            binding.rvAngles.visibility=View.VISIBLE
             viewmodel.getHealthEntityPagedList(cityId, areaId, 7, 100, 0)
         }
 
@@ -103,7 +112,9 @@ class HealthyTopicsFragment : Fragment(), BlogsGatesAdapter.Action, MedicalHealt
             binding.btnEmergencies.setBackgroundResource(R.drawable.bg_help)
             binding.btnEmergencies.setTextColor(Color.parseColor("#262D70"))
             binding.layoutFilter.visibility = View.GONE
-            viewmodel.getHealthEntityPagedList(cityId, areaId, 0, 100, 0)
+            binding.rvAngles.visibility=View.GONE
+            binding.rvQuestions.visibility=View.VISIBLE
+            callGetQuestions()
         }
 
         binding.layoutBottomsheetpersistant.btnApply.setOnClickListener {
@@ -299,6 +310,41 @@ class HealthyTopicsFragment : Fragment(), BlogsGatesAdapter.Action, MedicalHealt
             val intent = Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", it, null))
             this.startActivity(intent)
         }
+    }
+
+    private fun questionscRecylerview() {
+        questionsAdapter = QuestionsAdapter(this,false)
+        binding.rvQuestions.apply {
+            adapter = questionsAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+        }
+    }
+
+    private fun callGetQuestions(){
+
+        polyClinicsViewModel.questionsResponse.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            when (it) {
+
+                is Resource.Loading -> {
+                    binding.progressBar.visibility=View.VISIBLE
+                }
+                is Resource.sucess -> {
+                    binding.progressBar.visibility=View.GONE
+                    questionsAdapter.submitList(it.data?.data)
+                    questionsAdapter.notifyDataSetChanged()
+                }
+                is Resource.Error -> {
+                    binding.progressBar.visibility=View.GONE
+                }
+
+            }
+        })
+        polyClinicsViewModel.getAllQandAByDoctorId()
+    }
+
+    override fun onItemClick(questions: Questions) {
+        val action= HealthyTopicsFragmentDirections.actionHealthyTopicsFragmentToAnswersFragment(questions)
+        findNavController().navigate(action)
     }
 
 }

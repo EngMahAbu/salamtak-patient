@@ -160,7 +160,6 @@
                         android:id="@+id/et_password"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
-                        android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890!@#$%^*?"
                         android:layout_gravity="center_horizontal"
                         android:inputType="text" />
 

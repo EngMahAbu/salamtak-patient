@@ -105,12 +105,14 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
         reviewsFavoriteDoctor()
         callBack()
         callDoctorVideos()
-
     }
 
 
     private fun initButton() {
 
+        binding.layoutSharelink.setOnClickListener {
+            findNavController().navigate(R.id.myQuestionsFragment)
+        }
         binding.ivArrow.setOnClickListener {
             findNavController().navigate(R.id.searchFragment)
         }

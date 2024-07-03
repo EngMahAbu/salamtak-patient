@@ -4,7 +4,6 @@ package com.korashiGroup.salamtakPatient.utils
 
 object Constans {
 
-    const val BASE_URL = "https://salamtechapi.azurewebsites.net/api/"
     const val NameAR = "NameAR"
     const val NameEN = "NameEN"
     const val UserLOGIN = "UserLOGIN"

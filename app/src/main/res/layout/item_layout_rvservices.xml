@@ -21,14 +21,14 @@
                 android:id="@+id/layput_services"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/new_color"
+                android:background="@color/move"
                 android:padding="5dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layout_uploadImage"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
-                    android:background="@drawable/bg_circle_white"
+                    android:background="@drawable/bg_circle"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent">
@@ -39,6 +39,7 @@
                         android:layout_height="42dp"
                         android:adjustViewBounds="true"
                         android:src="@drawable/ic_chat"
+                        app:tint="@color/white"
                         android:scaleType="center"
                         android:maxWidth="@dimen/_5sdp"
                         android:fitsSystemWindows="true"
@@ -57,8 +58,8 @@
                     android:text="55555555"
                     android:gravity="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                    android:textColor="@color/white"
-                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/layout_uploadImage" />

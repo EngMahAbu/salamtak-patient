@@ -145,6 +145,7 @@
     <string name="fees">رسوم الكشف</string>
     <string name="reset">مسح</string>
     <string name="specialization">التخصص</string>
+    <string name="patientName">اسم المريض : </string>
     <string name="choose_specialization">اختر التخصص</string>
     <string name="choose_sub_specialization">اختر التخصص الفرعي</string>
     <string name="choose_Seniority_Level">اختر الدرجة العلمية</string>
@@ -259,6 +260,7 @@
     <string name="question_descreption_explanation_of_your_medical_symotoms">وصف السؤال *(شرح الاعراض الطبية لديك)
     </string>
     <string name="age">كم عمرك (بالسنوات)</string>
+    <string name="patientage">العمر</string>
     <string name="askdoctor">اسأل طبيب</string>
     <string name="fillallfields">املأ جميع الحقول</string>
     <string name="insurance_company">شركات التأمين</string>
@@ -303,6 +305,8 @@
     <string name="lang">Arabic</string>
     <string name="schedule">الحجوزات</string>
     <string name="questionanswer">السؤال المطروح؟</string>
+    <string name="questionanswered">اجابة سؤالك</string>
+    <string name="doctorname">اسم الطبيب</string>
     <string name="insurance_company_required">مطلوب شركة تأمين</string>
     <string name="referencelinks">Reference Links</string>
     <string name="salamtak_care">Salamtak Care</string>
@@ -346,7 +350,11 @@
     <string name="clinicphone">رقم العيادة</string>
     <string name="rateapp">تقييم التطبيق</string>
     <string name="myquestions">أسئلتى</string>
-
+    <string name="addquestions">إضافة سؤال</string>
+    <string name="showanswers">عرض الاجابات</string>
+    <string name="myanswers">Questions Answer</string>
+    <string name="chronicdisease">الامراض المزمنة</string>
+    <string name="prevSurgery">عمليات جراحية سابقة</string>
     <array name="choose">
         <item>اختار</item>
     </array>

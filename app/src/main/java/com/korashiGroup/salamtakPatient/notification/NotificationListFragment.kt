@@ -64,7 +64,7 @@ class NotificationListFragment : Fragment() {
 
                     notificationsAdapter.submitList(response.data?.data)
                     notificationsAdapter.notifyDataSetChanged()
-
+                    callBackUpdateNotificatio()
                 }
 
                 is Resource.Error -> {
@@ -76,6 +76,29 @@ class NotificationListFragment : Fragment() {
         })
 
         viewModel.getUserNotifications()
+    }
+
+    private fun callBackUpdateNotificatio() {
+        viewModel.updateNotificationResponse.observe(viewLifecycleOwner, Observer { response ->
+            when (response) {
+
+                is Resource.Loading -> {
+
+                }
+
+                is Resource.sucess -> {
+
+                }
+
+                is Resource.Error -> {
+                    Snackbar.make(requireView(), "${response.message}", Snackbar.LENGTH_SHORT)
+                        .show()
+                }
+            }
+
+        })
+
+        viewModel.updateNotification()
     }
 
 }

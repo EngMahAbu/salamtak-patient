@@ -21,6 +21,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:padding="5dp">
+                <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/iv_offer"
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:src="@drawable/iv_offer"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/layout_doctorsDetail"
@@ -107,7 +116,6 @@
                             android:gravity="start"
                             android:layout_marginTop="@dimen/_5sdp"
                             android:text="0"
-                            android:visibility="gone"
                             android:textColor="@color/black"
                             android:textSize="14sp"
                             app:layout_constraintStart_toEndOf="@+id/ratingBar"

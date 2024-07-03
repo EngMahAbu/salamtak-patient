@@ -4,6 +4,7 @@ import com.korashiGroup.salamtakPatient.fragment.polyclinic.model.PolyClinicResp
 import com.korashiGroup.salamtakPatient.fragment.polyclinic.model.PolyClinicsDoctorsResponse
 import com.korashiGroup.salamtakPatient.model.*
 import com.korashiGroup.salamtakPatient.model.askandanswer.QuestionAndAnswerResponse
+import com.korashiGroup.salamtakPatient.model.askandanswer.questions.QuestionsResponse
 import com.korashiGroup.salamtakPatient.model.booking.*
 import com.korashiGroup.salamtakPatient.model.booking.clink.GetDoctorClinksResponse
 import com.korashiGroup.salamtakPatient.model.deleteuser.DeleteUserResponse
@@ -68,6 +69,10 @@ interface ApiService {
 
     @GET("{culture}/Specialist/GetSpecialist")
     suspend fun getSpecialist(
+        @Path("culture") culture: String,
+    ): Response<GetSpecialistResponse>
+    @GET("{culture}/Specialist/GetTop10Specialist")
+    suspend fun getTop10Specialist(
         @Path("culture") culture: String,
     ): Response<GetSpecialistResponse>
 
@@ -316,6 +321,10 @@ interface ApiService {
     suspend fun getUserNotifications(
         @Path("culture") culture: String,
     ):Response<NotificationListResponse>
+    @POST("{culture}/User/UpdateNotification")
+    suspend fun updateNotification(
+        @Path("culture") culture: String,
+    ): Response<NotificationListResponse>
 
     @POST("{culture}/Patient/CreatePatientFavoritDoctor")
     suspend fun createPatientFavoritDoctor(
@@ -369,5 +378,9 @@ interface ApiService {
         @Path("culture") culture: String,
         @Query("DoctorID") doctorID :Int,
     ): Response<PolyClinicsDoctorsResponse>
+    @GET("{culture}/Patient/GetAllQandAByPatientId")
+    suspend fun getAllQandAByDoctorId(
+        @Path("culture") culture: String,
+    ): Response<QuestionsResponse>
 
 }

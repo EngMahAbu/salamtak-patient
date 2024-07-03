@@ -45,6 +45,8 @@ class RegisterRepositry @Inject constructor(private val apiService: ApiService) 
 
     suspend fun getSpecialist() = sp.getUserLang(Constans.Language)
         ?.let { apiService.getSpecialist(it) }
+    suspend fun getTop10Specialist() = sp.getUserLang(Constans.Language)
+        ?.let { apiService.getTop10Specialist(it) }
 
     suspend fun getMedicalExamination() = sp.getUserLang(Constans.Language)
         ?.let { apiService.getMedicalExamination(it) }
@@ -186,6 +188,9 @@ class RegisterRepositry @Inject constructor(private val apiService: ApiService) 
     suspend fun getUserNotifications() =
         sp.getUserLang(Constans.Language)
             ?.let { apiService.getUserNotifications(it) }
+    suspend fun updateNotification() =
+        sp.getUserLang(Constans.Language)
+            ?.let { apiService.updateNotification(it) }
     suspend fun createPatientFavoritDoctor(favoriteRequest: FavoriteRequest) =
         sp.getUserLang(Constans.Language)
             ?.let { apiService.createPatientFavoritDoctor(it,favoriteRequest) }
@@ -219,5 +224,7 @@ class RegisterRepositry @Inject constructor(private val apiService: ApiService) 
 
     suspend fun getDoctorVideos(doctorId :Int) = sp.getUserLang(Constans.Language)
         ?.let { apiService.getDoctorVideos(it,doctorId) }
+    suspend fun getAllQandAByDoctorId() = sp.getUserLang(Constans.Language)
+        ?.let { apiService.getAllQandAByDoctorId(it) }
 
 }

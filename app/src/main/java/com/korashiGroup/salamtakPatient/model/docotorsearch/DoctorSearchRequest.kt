@@ -5,11 +5,11 @@ import com.google.gson.annotations.SerializedName
 
 data class DoctorSearchRequest(
     @SerializedName("AreaId")
-    val areaId: Int=0,
+    val areaId: Int?=null,
     @SerializedName("AvalibleDate")
     val avalibleDate: Any?=null,
     @SerializedName("CityId")
-    val cityId: Int=0,
+    val CityId: Int=0,
     @SerializedName("DoctorName")
     val doctorName: String?,
     @SerializedName("FeesFrom")
@@ -31,5 +31,14 @@ data class DoctorSearchRequest(
     @SerializedName("SubSpecialistId")
     val subSpecialistId: List<Int?>?=null,
     @SerializedName("InsuranceID")
-    val insuranceID: String="",
-)
+    val insuranceID: String?=null,
+){
+    constructor(
+        CityId: Int,
+        DoctorName: String,
+        MaxResultCount: Int,
+        MedicalExaminationTypeId: Int,
+        SkipCount: Int,
+        SpecialistId: Int,
+    ) : this(0,null,CityId,"",0,0,0,0,0,0,0,0,null,null)
+}

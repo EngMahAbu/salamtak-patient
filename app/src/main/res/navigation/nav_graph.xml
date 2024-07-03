@@ -398,6 +398,9 @@
                 app:destination="@id/gatesDetailsFragment"/>
         <action android:id="@+id/action_healthyTopicsFragment_to_dialogBottomSheetFragment"
                 app:destination="@id/dialogBottomSheetFragment"/>
+        <action
+                android:id="@+id/action_healthyTopicsFragment_to_answersFragment"
+                app:destination="@id/answersFragment" />
     </fragment>
     <fragment
             android:id="@+id/videoCallFragment"
@@ -522,5 +525,27 @@
             android:name="com.korashiGroup.salamtakPatient.fragment.home.SpecialistDoctorsFragment"
             android:label="specialist_doctorsfragment"
             tools:layout="@layout/specialist_doctorsfragment" />
+    <fragment
+            android:id="@+id/myQuestionsFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.askdoctor.MyQuestionsFragment"
+            android:label="my_questionsfragment"
+            tools:layout="@layout/my_questionsfragment" >
+        <action
+                android:id="@+id/action_myQuestionsFragment_to_bookingAppointmentFragment"
+                app:destination="@id/bookingAppointmentFragment" />
+        <action
+                android:id="@+id/action_myQuestionsFragment_to_answersFragment"
+                app:destination="@id/answersFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/answersFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.askdoctor.AnswersFragment"
+            android:label="answersfragment"
+            tools:layout="@layout/answersfragment" >
+        <argument
+                android:name="Answers"
+                app:argType="com.korashiGroup.salamtakPatient.model.askandanswer.questions.Questions"
+                app:nullable="true" />
+    </fragment>
 
 </navigation>

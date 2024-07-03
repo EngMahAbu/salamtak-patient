@@ -143,6 +143,9 @@ class MoreFragment : Fragment() {
         binding.layoutAboutApp.setOnClickListener {
             findNavController().navigate(R.id.aboutAppFragment)
         }
+        binding.layoutMyQuestions.setOnClickListener {
+            findNavController().navigate(R.id.myQuestionsFragment)
+        }
 
 
 

@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.adapter.SpecialictyAdapter
-import com.korashiGroup.salamtakPatient.adapter.SpecialistAdapter
 import com.korashiGroup.salamtakPatient.databinding.SpecialistDoctorsfragmentBinding
 import com.korashiGroup.salamtakPatient.model.SpecialistData
 import com.korashiGroup.salamtakPatient.utils.Resource

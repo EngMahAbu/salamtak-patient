@@ -85,7 +85,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
     var seniortyLevelId = 0
     var examinationtypeid = 0
     var cityId = 0
-    var areaId = 0
+    var areaId :Int?= null
     var genderId = 0
     var formattedDate = ""
     var image = ""
@@ -118,7 +118,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         binding.ivPrevious.isEnabled = step != 1
         examinationtypeid = HomeFragment.instance?.let {
             it.medicalExaminatioId
-        } ?: 0
+        } ?: 1
         bottomsheetbeahavoir =
             BottomSheetBehavior.from(binding.layoutBottomsheetpersistant.filterBottomsheet)
         bottomsheetbeahavoir.state = BottomSheetBehavior.STATE_HIDDEN
@@ -185,7 +185,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         binding.ivArrow.setOnClickListener {
            if (type==0){
                DateUtils.setstatus("")
-               findNavController().navigate(R.id.homeFragment)
+               findNavController().navigate(R.id.specialistDoctorsFragment)
            }else{
                polyClinicRecylerview()
                polyClinicSearch()

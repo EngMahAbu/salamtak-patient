@@ -360,10 +360,10 @@ class OtpFragment : Fragment() {
     }
 
     fun timer() {
-        object : CountDownTimer(120000, 1000) {
+        object : CountDownTimer(920000, 1000) {
 
             override fun onTick(millisUntilFinished: Long) {
-                binding.tvCounter.text= Html.fromHtml(("${getString(R.string.verification_code_will_be_sent_within_1_30)} <font color=#00D2CB>( ${millisUntilFinished / 1000} )</font>"))
+                binding.tvCounter.text= Html.fromHtml(("${getString(R.string.verification_code_will_be_sent_within_1_30)} <font color=#00D2CB>( ${(millisUntilFinished) / (1000*60)} min )</font>"))
 
             }
 

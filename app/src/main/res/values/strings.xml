@@ -136,7 +136,7 @@
     <string name="all">All</string>
     <string name="home">Home</string>
     <string name="my_schedule">My Bookings</string>
-    <string name="more">More...</string>
+    <string name="more">More</string>
     <string name="reviews">Reviews</string>
     <string name="next_available_booking_at_08_nov_from_06_30_pm">Next Available Booking at 08 Nov. from 06:30 PM
     </string>
@@ -154,6 +154,7 @@
     <string name="fees">Fees</string>
     <string name="reset">Reset</string>
     <string name="specialization">Speciality</string>
+    <string name="patientName">Patient Name:</string>
     <string name="choose_specialization">Choose Speciality</string>
     <string name="choose_sub_specialization">Choose sub Speciality</string>
     <string name="choose_Seniority_Level">Choose Seniority Level</string>
@@ -273,6 +274,7 @@
         medical symotoms)
     </string>
     <string name="age">How old are you?(years)</string>
+    <string name="patientage">Age</string>
     <string name="askdoctor">Ask a Doctor</string>
     <string name="fillallfields">Complete All Fields</string>
     <string name="insurance_company">Insurance Company (ies)</string>
@@ -317,6 +319,8 @@
     <string name="lang">English</string>
     <string name="schedule">Schedule</string>
     <string name="questionanswer">Question Asked for?</string>
+    <string name="questionanswered">Your Question Answer</string>
+    <string name="doctorname">Doctor Name</string>
     <string name="insurance_company_required">Insurance company required</string>
     <string name="referencelinks">Reference Links</string>
     <string name="salamtaktrueorfalse">Salamtak True Or False</string>
@@ -364,6 +368,11 @@
     <string name="clinicphone">Clinic Phone</string>
     <string name="rateapp">Rate App</string>
     <string name="myquestions">My Questions</string>
+    <string name="addquestions">Add Questions</string>
+    <string name="showanswers">Show Answers</string>
+    <string name="myanswers">Questions Answer</string>
+    <string name="chronicdisease">Chronic Disease</string>
+    <string name="prevSurgery">Previous Surgery</string>
     <array name="choose">
         <item>Select</item>
     </array>

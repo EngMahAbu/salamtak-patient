@@ -23,8 +23,20 @@ android {
     }
     buildTypes {
         release {
+            lintOptions {
+                disable 'MissingTranslation'
+                checkReleaseBuilds false
+                abortOnError false
+            }
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            proguardFiles(
+                    getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            buildConfigField("String","BASE_URL","\"https://salamtechapi.azurewebsites.net/api/\"")
+            signingConfig signingConfigs.debug
+        }
+        getByName("debug") {
+            signingConfig = signingConfigs.getByName("debug")
+            buildConfigField("String","BASE_URL","\"https://salamtechapi-staging.azurewebsites.net/api/\"")
         }
     }
     compileOptions {

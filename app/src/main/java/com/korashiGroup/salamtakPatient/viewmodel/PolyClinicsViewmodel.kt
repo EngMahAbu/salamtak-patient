@@ -9,6 +9,7 @@ import com.korashiGroup.salamtakPatient.utils.Resource
 import com.google.gson.Gson
 import com.korashiGroup.salamtakPatient.fragment.polyclinic.model.PolyClinicResponse
 import com.korashiGroup.salamtakPatient.fragment.polyclinic.model.PolyClinicsDoctorsResponse
+import com.korashiGroup.salamtakPatient.model.askandanswer.questions.QuestionsResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
@@ -23,6 +24,7 @@ class PolyClinicsViewmodel @Inject constructor(private val repositry: RegisterRe
     val polyClinicsResponse=MutableLiveData<Resource<PolyClinicResponse>>()
     val polyClinicsDoctorsResponse=MutableLiveData<Resource<PolyClinicsDoctorsResponse>>()
     val videosDoctorsResponse=MutableLiveData<Resource<PolyClinicsDoctorsResponse>>()
+    val questionsResponse=MutableLiveData<Resource<QuestionsResponse>>()
 
 
     fun getFilteredHealthEntity(polyclinicRequest: HashMap<String, String> )=viewModelScope.launch(Dispatchers.IO+handler) {
@@ -71,6 +73,22 @@ class PolyClinicsViewmodel @Inject constructor(private val repositry: RegisterRe
             }
         }
         val error = Gson().fromJson<PolyClinicsDoctorsResponse>(response.errorBody()!!.string(), PolyClinicsDoctorsResponse::class.java)
+        return error.message?.let { Resource.Error(it) }
+    }
+
+    fun getAllQandAByDoctorId()=viewModelScope.launch(Dispatchers.IO+handler) {
+        questionsResponse.postValue(Resource.Loading())
+        val response=repositry.getAllQandAByDoctorId()
+        questionsResponse.postValue(response?.let { handleGetAllQandAByDoctorId(it) })
+    }
+
+    private fun handleGetAllQandAByDoctorId(response: Response<QuestionsResponse>): Resource<QuestionsResponse>? {
+        if (response.isSuccessful){
+            response.body()?.let {
+                return Resource.sucess(it)
+            }
+        }
+        val error = Gson().fromJson<QuestionsResponse>(response.errorBody()!!.string(), QuestionsResponse::class.java)
         return error.message?.let { Resource.Error(it) }
     }
 

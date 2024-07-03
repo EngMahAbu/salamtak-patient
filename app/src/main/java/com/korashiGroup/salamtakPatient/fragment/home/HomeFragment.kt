@@ -1,16 +1,22 @@
 package com.korashiGroup.salamtakPatient.fragment.home
 
 import android.app.Activity
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.adapter.*
@@ -19,6 +25,7 @@ import com.korashiGroup.salamtakPatient.fragment.loginandforgetpassword.LoginFra
 import com.korashiGroup.salamtakPatient.model.AreaData
 import com.korashiGroup.salamtakPatient.model.CityData
 import com.korashiGroup.salamtakPatient.model.ImageServices
+import com.korashiGroup.salamtakPatient.model.SpecialistData
 import com.korashiGroup.salamtakPatient.model.register.ChooseGender
 import com.korashiGroup.salamtakPatient.utils.DateUtils
 import com.korashiGroup.salamtakPatient.utils.Resource
@@ -28,16 +35,19 @@ import com.korashiGroup.salamtakPatient.viewmodel.PatientViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.RegisterViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import dagger.hilt.android.AndroidEntryPoint
+import java.io.ByteArrayOutputStream
 import java.util.*
 import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.Action, GatesAdapter.Action,MedicalServicesAdapter.Action {
+class HomeFragment : Fragment(), ServicesAdapter.Action,
+    PopularDoctorsAdapter.Action, GatesAdapter.Action,MedicalServicesAdapter.Action,TopSpecialictyAdapter.ISelectSpecialist {
 
     private lateinit var binding: HomefragmentBinding
     private lateinit var imageServicesAdapter: ServicesAdapter
     private lateinit var imageMedicalServicesAdapter: MedicalServicesAdapter
+    private lateinit var topSpecialictyAdapter: TopSpecialictyAdapter
         private lateinit var imageVideoAdapter: ImageVideoAdapter
     private val patientviewmodel: PatientViewmodel by viewModels()
     var someEventListener: LoginFragment.onSomeEventListener? = null
@@ -92,24 +102,23 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
             someEventListener?.someEvent("")
             profileCallBack()
         }
+
         imageVideoAdapter = ImageVideoAdapter()
         servicesRecylerview()
         medicalServicesRecylerview()
         callBackSalamtakGates()
         healthTopicsRecylerview()
+        callBackGetTop10Specialist()
+        callBackNotifications()
+        setupresyclerviewSpecialist()
         imageServices()
         medicalServices()
        // callBack()
         initButton()
-
     }
 
     private fun initButton() {
-//        binding.ivCam.setOnClickListener {
-//            val action = HomeFragmentDirections.actionHomeFragmentToVideoCallFragment("voice")
-//            findNavController().navigate(action)
-//        }
-//
+
         binding.ivNotification.setOnClickListener {
             findNavController().navigate(R.id.notificationListFragment)
         }
@@ -124,9 +133,14 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
         binding.layoutSignup.setOnClickListener {
             findNavController().navigate(R.id.signupFragment)
         }
-
     }
-
+    fun setupresyclerviewSpecialist() {
+        topSpecialictyAdapter = TopSpecialictyAdapter(this)
+        binding.rvTopSpecilaist.apply {
+            adapter = topSpecialictyAdapter
+            setHasFixedSize(true)
+        }
+    }
     private fun servicesRecylerview() {
         imageServicesAdapter = ServicesAdapter(this)
         binding.rvSalamtakServices.apply {
@@ -330,7 +344,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
             when (response) {
 
                 is Resource.Loading -> {
-                   showprogtessbar()
+                //   showprogtessbar()
                 }
 
                 is Resource.sucess -> {
@@ -411,7 +425,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
 //    }
 
     private fun showprogtessbar() {
-       // binding.progressBar.visibility = View.VISIBLE
+       binding.progressBar.visibility = View.VISIBLE
     }
 
     private fun hideprogressbar() {
@@ -528,6 +542,109 @@ class HomeFragment : Fragment(), ServicesAdapter.Action, PopularDoctorsAdapter.A
             hour in 12 until 18 -> getString(R.string.afternoon)
             else -> getString(R.string.good_evening)
         }
+    }
+
+    private fun callBackNotifications() {
+        patientviewmodel.notificationResponse.observe(viewLifecycleOwner, Observer { response ->
+            when (response) {
+
+                is Resource.Loading -> {
+
+                }
+
+                is Resource.sucess -> {
+
+                    val listIsSeen= response.data?.data?.filter {
+                        it.isSeen==false
+                    }
+                    if (listIsSeen.isNullOrEmpty()){
+                        binding.tvNumberOfNotification.visibility=View.GONE
+                        binding.ivRoundbg.visibility=View.GONE
+                    }else{
+                        binding.tvNumberOfNotification.text= listIsSeen.size.toString()
+                    }
+                    callBackGetTop10Specialist()
+                }
+
+                is Resource.Error -> {
+                    Snackbar.make(requireView(), "${response.message}", Snackbar.LENGTH_SHORT)
+                        .show()
+                }
+            }
+
+        })
+
+        patientviewmodel.getUserNotifications()
+    }
+    private fun callBackSpecialist() {
+        viewmodel.specialistResponse.observe(viewLifecycleOwner) { response ->
+            when (response) {
+
+                is Resource.Loading -> {
+                    showprogtessbar()
+                }
+
+                is Resource.sucess -> {
+                    hideprogressbar()
+                    response.data?.data.let {
+                        topSpecialictyAdapter.submitList(it)
+                        topSpecialictyAdapter.notifyDataSetChanged()
+                    }
+
+                }
+
+                is Resource.Error -> {
+                    hideprogressbar()
+                    response.data?.let {
+                        Toast.makeText(requireContext(), it.data.toString(), Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                }
+            }
+
+        }
+        viewmodel.getSpecialist()
+    }
+    private fun callBackGetTop10Specialist() {
+        viewmodel.top10SpecialistResponse.observe(viewLifecycleOwner) { response ->
+            when (response) {
+
+                is Resource.Loading -> {
+                    showprogtessbar()
+                }
+
+                is Resource.sucess -> {
+                    hideprogressbar()
+
+                    response.data?.data.let {
+                        topSpecialictyAdapter.submitList(it)
+                        topSpecialictyAdapter.notifyDataSetChanged()
+                    }
+
+
+                }
+
+                is Resource.Error -> {
+                    hideprogressbar()
+                    response.data?.let {
+                        Toast.makeText(requireContext(), it.data.toString(), Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                }
+            }
+
+        }
+        viewmodel.getTop10Specialist()
+    }
+
+    override fun onItemSelected(specialist: SpecialistData) {
+        if (specialist.id==-1){
+            callBackSpecialist()
+        }else{
+            sharedDataViewmodel.getspecialication(specialist)
+            findNavController().navigate(R.id.searchFragment)
+        }
+
     }
 
 
