@@ -40,7 +40,7 @@ class AnswersFragment : Fragment(),AnswersAdapter.IBook{
 
     private fun initButton(){
         binding.ivArrow.setOnClickListener {
-            findNavController().navigate(R.id.myQuestionsFragment)
+            findNavController().navigateUp()
         }
     }
 

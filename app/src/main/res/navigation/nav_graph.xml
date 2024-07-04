@@ -307,6 +307,9 @@
         <action
                 android:id="@+id/action_bookingAppointmentFragment_to_bookAppointmentFragment"
                 app:destination="@id/bookAppointmentFragment" />
+        <action
+                android:id="@+id/action_bookingAppointmentFragment_to_specialDoctorAnswersFragment"
+                app:destination="@id/specialDoctorAnswersFragment" />
     </fragment>
     <fragment
             android:id="@+id/bookAppointmentFragment"
@@ -547,5 +550,16 @@
                 app:argType="com.korashiGroup.salamtakPatient.model.askandanswer.questions.Questions"
                 app:nullable="true" />
     </fragment>
+    <fragment
+            android:id="@+id/specialDoctorAnswersFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.askdoctor.SpecialDoctorAnswersFragment"
+            android:label="SpecialDoctorAnswersFragment"
+            tools:layout="@layout/specialdoctoranswersfragment"
+            >
+        <argument
+                android:name="doctorId"
+                app:argType="integer" />
+    </fragment>
+
 
 </navigation>

@@ -32,6 +32,7 @@ import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.utils.SpUtil
 import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.PatientViewmodel
+import com.korashiGroup.salamtakPatient.viewmodel.PolyClinicsViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.RegisterViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import dagger.hilt.android.AndroidEntryPoint
@@ -50,6 +51,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
     private lateinit var topSpecialictyAdapter: TopSpecialictyAdapter
         private lateinit var imageVideoAdapter: ImageVideoAdapter
     private val patientviewmodel: PatientViewmodel by viewModels()
+    private val polyClinicsViewmodel: PolyClinicsViewmodel by viewModels()
     var someEventListener: LoginFragment.onSomeEventListener? = null
     //    private lateinit var popularDoctorsAdapter: PopularDoctorsAdapter
 //    private lateinit var healthTopicsAdapter: HealthTopicsAdapter
@@ -90,6 +92,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
         super.onViewCreated(view, savedInstanceState)
         instance = this
         bindDataToViews()
+        callCheckUser()
         if (DateUtils.getToken().isNullOrEmpty()){
             binding.layoutSignup.visibility=View.VISIBLE
             binding.ivNotification.visibility=View.GONE
@@ -477,23 +480,26 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
     }
 
     override fun onItemGatesClick(gateId: Int) {
-//        if (skip=="skip"){
-//            return
-//        }else {
+        if (DateUtils.getToken().isNullOrEmpty() && gateId==6){
+            findNavController().navigate(R.id.dialogSignUp)
+        }else {
             val action = HomeFragmentDirections.actionHomeFragmentToHealthyTopicsFragment(gateId)
             findNavController().navigate(action)
-      //  }
+        }
     }
 
     override fun onItemClick(healthEntityTypeId: Int, healthName: String) {
         if (DateUtils.getToken().isNullOrEmpty()){
             findNavController().navigate(R.id.dialogSignUp)
-        }else {
+        }else if (healthEntityTypeId!=7){
             val action =
                 HomeFragmentDirections.actionHomeFragmentToHealthEntityFragment(
                     healthName,
                     healthEntityTypeId
                 )
+            findNavController().navigate(action)
+        }else{
+            val action = HomeFragmentDirections.actionHomeFragmentToHealthyTopicsFragment(6)
             findNavController().navigate(action)
         }
 
@@ -644,6 +650,28 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
             sharedDataViewmodel.getspecialication(specialist)
             findNavController().navigate(R.id.searchFragment)
         }
+
+    }
+
+    private fun callCheckUser() {
+
+        polyClinicsViewmodel.checkTokenResponse.observe(viewLifecycleOwner) { response ->
+            when (response) {
+
+                is Resource.Loading -> {
+                }
+
+                is Resource.sucess -> {
+
+                }
+
+                is Resource.Error -> {
+                 //  findNavController().navigate(R.id.loginFragment)
+                }
+            }
+
+        }
+        polyClinicsViewmodel.checkUser()
 
     }
 

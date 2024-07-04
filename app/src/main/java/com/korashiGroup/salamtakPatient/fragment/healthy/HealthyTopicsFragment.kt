@@ -83,6 +83,9 @@ class HealthyTopicsFragment : Fragment(), BlogsGatesAdapter.Action, MedicalHealt
     }
 
     private fun initButton() {
+        binding.layoutBottomsheetpersistant.MedicalServices.setOnClickListener {
+            return@setOnClickListener
+        }
         binding.ivArrow.setOnClickListener {
             findNavController().navigate(R.id.homeFragment)
         }
@@ -339,12 +342,17 @@ class HealthyTopicsFragment : Fragment(), BlogsGatesAdapter.Action, MedicalHealt
 
             }
         })
-        polyClinicsViewModel.getAllQandAByDoctorId()
+        polyClinicsViewModel.getAllQandAByDoctorId(false)
     }
 
     override fun onItemClick(questions: Questions) {
-        val action= HealthyTopicsFragmentDirections.actionHealthyTopicsFragmentToAnswersFragment(questions)
-        findNavController().navigate(action)
+        if (!questions.answers.isNullOrEmpty()) {
+            val action= HealthyTopicsFragmentDirections.actionHealthyTopicsFragmentToAnswersFragment(questions)
+            findNavController().navigate(action)
+        }else{
+            Snackbar.make(requireView(),"No answers",Snackbar.LENGTH_SHORT).show()
+        }
+
     }
 
 }

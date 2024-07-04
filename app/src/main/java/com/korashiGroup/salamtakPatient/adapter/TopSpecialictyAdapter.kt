@@ -26,7 +26,7 @@ class TopSpecialictyAdapter(val iSelectSep:ISelectSpecialist):ListAdapter<Specia
         val sp=getItem(position)
 
         holder.binding.tvServiceName.text=sp.name
-            holder.binding.ivServices.load("https://salamtechapi-staging.azurewebsites.net/${sp.image}") {
+            holder.binding.ivServices.load("https://salamtechapi.azurewebsites.net/${sp.image}") {
                 crossfade(true)
                 crossfade(1000)
                 transformations(CircleCropTransformation())

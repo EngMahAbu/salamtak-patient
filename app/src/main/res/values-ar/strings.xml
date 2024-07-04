@@ -352,7 +352,7 @@
     <string name="myquestions">أسئلتى</string>
     <string name="addquestions">إضافة سؤال</string>
     <string name="showanswers">عرض الاجابات</string>
-    <string name="myanswers">Questions Answer</string>
+    <string name="myanswers">إجابة السؤال</string>
     <string name="chronicdisease">الامراض المزمنة</string>
     <string name="prevSurgery">عمليات جراحية سابقة</string>
     <array name="choose">

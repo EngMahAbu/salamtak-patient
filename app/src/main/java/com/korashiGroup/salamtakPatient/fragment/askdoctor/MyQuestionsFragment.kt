@@ -77,7 +77,7 @@ class MyQuestionsFragment : Fragment(),QuestionsAdapter.IBook{
 
             }
         })
-            polyClinicsViewModel.getAllQandAByDoctorId()
+            polyClinicsViewModel.getAllQandAByDoctorId(true)
     }
 
     override fun onItemClick(questions: Questions) {

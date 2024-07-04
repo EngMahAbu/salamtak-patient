@@ -85,7 +85,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
     var seniortyLevelId = 0
     var examinationtypeid = 0
     var cityId = 0
-    var areaId :Int?= null
+    var areaId :Int?= 0
     var genderId = 0
     var formattedDate = ""
     var image = ""
@@ -592,7 +592,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                         examinationtypeid,
                         seniortyLevelId,
                         0,
-                        specialistId
+                        specialistId ,sub_SpecialistId, insuranceId
                     )
                 }
             }

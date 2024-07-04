@@ -12,6 +12,7 @@ import com.korashiGroup.salamtakPatient.model.register.*
 import com.korashiGroup.salamtakPatient.utils.Constans
 import com.korashiGroup.salamtakPatient.utils.SpUtil
 import okhttp3.MultipartBody
+import retrofit2.http.Query
 import javax.inject.Inject
 
 class RegisterRepositry @Inject constructor(private val apiService: ApiService) {
@@ -226,5 +227,11 @@ class RegisterRepositry @Inject constructor(private val apiService: ApiService) 
         ?.let { apiService.getDoctorVideos(it,doctorId) }
     suspend fun getAllQandAByDoctorId() = sp.getUserLang(Constans.Language)
         ?.let { apiService.getAllQandAByDoctorId(it) }
+    suspend fun getAllQandA() = sp.getUserLang(Constans.Language)
+        ?.let { apiService.getAllQandA(it) }
+    suspend fun getAnswersByDoctorId( doctorID :Int) = sp.getUserLang(Constans.Language)
+        ?.let { apiService.getAnswersByDoctorId(it,doctorID) }
+    suspend fun checkUser() = sp.getUserLang(Constans.Language)
+        ?.let { apiService.checkUser(it) }
 
 }

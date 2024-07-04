@@ -224,12 +224,13 @@ class SignupFragment : Fragment() {
                 binding.layoutPassword.setBackgroundResource(R.drawable.bg_edittext_error)
                 binding.etPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
 
-            } else if (!checkPassw(binding.etPassword.text.toString())){
-                binding.tvPasswordError.text = getString(R.string.lesstthan6number)
-                binding.tvPasswordError.visibility = View.VISIBLE
-                binding.layoutPassword.setBackgroundResource(R.drawable.bg_edittext_error)
-                binding.etPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
             }
+//            else if (checkPassw(binding.etPassword.text.toString())){
+//                binding.tvPasswordError.text = getString(R.string.lesstthan6number)
+//                binding.tvPasswordError.visibility = View.VISIBLE
+//                binding.layoutPassword.setBackgroundResource(R.drawable.bg_edittext_error)
+//                binding.etPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
+//            }
             else {
                 binding.tvPasswordError.visibility = View.GONE
                 binding.layoutPassword.setBackgroundResource(R.drawable.bg_edittext)
@@ -250,12 +251,13 @@ class SignupFragment : Fragment() {
                     0
                 )
 
-            } else if (!checkPassw(binding.confirmEtPassword.text.toString())){
-                binding.tvConfirmpasswordError.text = getString(R.string.lesstthan6number)
-                binding.tvConfirmpasswordError.visibility = View.VISIBLE
-                binding.layoutConfirmpassword.setBackgroundResource(R.drawable.bg_edittext_error)
-                binding.confirmEtPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
             }
+//            else if (checkPassw(binding.confirmEtPassword.text.toString())){
+//                binding.tvConfirmpasswordError.text = getString(R.string.lesstthan6number)
+//                binding.tvConfirmpasswordError.visibility = View.VISIBLE
+//                binding.layoutConfirmpassword.setBackgroundResource(R.drawable.bg_edittext_error)
+//                binding.confirmEtPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
+//            }
             else if (binding.confirmEtPassword.text?.toString() != binding.etPassword.text?.toString()) {
                 binding.tvConfirmpasswordError.text = getString(R.string.doesnotmatch)
                 binding.tvConfirmpasswordError.visibility = View.VISIBLE
@@ -311,13 +313,14 @@ class SignupFragment : Fragment() {
                     confirmPassword
                 )
             ) {
-                if (!checkPassw(binding.etPassword.text.toString())){
+                if (binding.etPassword.text.toString().isNullOrEmpty()){
                     binding.tvPasswordError.text = getString(R.string.lesstthan6number)
                     binding.tvPasswordError.visibility = View.VISIBLE
                     binding.layoutPassword.setBackgroundResource(R.drawable.bg_edittext_error)
                     binding.etPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
 
-                } else {
+                }
+                else {
                     binding.tvPasswordError.visibility = View.GONE
                     binding.layoutPassword.setBackgroundResource(R.drawable.bg_edittext)
                     binding.etPassword.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
@@ -522,12 +525,13 @@ class SignupFragment : Fragment() {
             binding.layoutPassword.setBackgroundResource(R.drawable.bg_edittext_error)
             binding.etPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
 
-        } else if (!checkPassw(binding.etPassword.text.toString())){
-            binding.tvPasswordError.text = getString(R.string.lesstthan6number)
-            binding.tvPasswordError.visibility = View.VISIBLE
-            binding.layoutPassword.setBackgroundResource(R.drawable.bg_edittext_error)
-            binding.etPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
         }
+//        else if (checkPassw(binding.etPassword.text.toString())){
+//            binding.tvPasswordError.text = getString(R.string.lesstthan6number)
+//            binding.tvPasswordError.visibility = View.VISIBLE
+//            binding.layoutPassword.setBackgroundResource(R.drawable.bg_edittext_error)
+//            binding.etPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
+//        }
         else {
             binding.tvPasswordError.visibility = View.GONE
             binding.layoutPassword.setBackgroundResource(R.drawable.bg_edittext)
@@ -574,12 +578,13 @@ class SignupFragment : Fragment() {
                 0
             )
 
-        }else if (!checkPassw(binding.confirmEtPassword.text.toString())){
-            binding.tvConfirmpasswordError.text = getString(R.string.lesstthan6number)
-            binding.tvConfirmpasswordError.visibility = View.VISIBLE
-            binding.layoutConfirmpassword.setBackgroundResource(R.drawable.bg_edittext_error)
-            binding.confirmEtPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
         }
+//        else if (checkPassw(binding.confirmEtPassword.text.toString())){
+//            binding.tvConfirmpasswordError.text = getString(R.string.lesstthan6number)
+//            binding.tvConfirmpasswordError.visibility = View.VISIBLE
+//            binding.layoutConfirmpassword.setBackgroundResource(R.drawable.bg_edittext_error)
+//            binding.confirmEtPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
+//        }
 
         else {
             binding.tvConfirmpasswordError.visibility = View.GONE

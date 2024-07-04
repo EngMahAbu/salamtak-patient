@@ -144,6 +144,19 @@
                             app:layout_constraintStart_toStartOf="parent"
                             android:layout_marginEnd="@dimen/_10sdp"
                             app:layout_constraintTop_toBottomOf="@+id/tv_Chronic_disease" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_date"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="5dp"
+                            android:gravity="start"
+                            android:padding="1dp"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_PrevSurgery" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <TextView

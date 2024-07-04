@@ -9,7 +9,9 @@ import com.korashiGroup.salamtakPatient.utils.Resource
 import com.google.gson.Gson
 import com.korashiGroup.salamtakPatient.fragment.polyclinic.model.PolyClinicResponse
 import com.korashiGroup.salamtakPatient.fragment.polyclinic.model.PolyClinicsDoctorsResponse
+import com.korashiGroup.salamtakPatient.model.askandanswer.questions.AnswersDoctorResponse
 import com.korashiGroup.salamtakPatient.model.askandanswer.questions.QuestionsResponse
+import com.korashiGroup.salamtakPatient.model.checktoken.CheckTokenResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
@@ -25,6 +27,8 @@ class PolyClinicsViewmodel @Inject constructor(private val repositry: RegisterRe
     val polyClinicsDoctorsResponse=MutableLiveData<Resource<PolyClinicsDoctorsResponse>>()
     val videosDoctorsResponse=MutableLiveData<Resource<PolyClinicsDoctorsResponse>>()
     val questionsResponse=MutableLiveData<Resource<QuestionsResponse>>()
+    val checkTokenResponse=MutableLiveData<Resource<CheckTokenResponse>>()
+    val doctorAnswerResponse=MutableLiveData<Resource<AnswersDoctorResponse>>()
 
 
     fun getFilteredHealthEntity(polyclinicRequest: HashMap<String, String> )=viewModelScope.launch(Dispatchers.IO+handler) {
@@ -76,9 +80,13 @@ class PolyClinicsViewmodel @Inject constructor(private val repositry: RegisterRe
         return error.message?.let { Resource.Error(it) }
     }
 
-    fun getAllQandAByDoctorId()=viewModelScope.launch(Dispatchers.IO+handler) {
+    fun getAllQandAByDoctorId(isQuetionType:Boolean)=viewModelScope.launch(Dispatchers.IO+handler) {
         questionsResponse.postValue(Resource.Loading())
-        val response=repositry.getAllQandAByDoctorId()
+      val response=  if (isQuetionType==true){
+          repositry.getAllQandAByDoctorId()
+        }else{
+          repositry.getAllQandA()
+        }
         questionsResponse.postValue(response?.let { handleGetAllQandAByDoctorId(it) })
     }
 
@@ -90,6 +98,38 @@ class PolyClinicsViewmodel @Inject constructor(private val repositry: RegisterRe
         }
         val error = Gson().fromJson<QuestionsResponse>(response.errorBody()!!.string(), QuestionsResponse::class.java)
         return error.message?.let { Resource.Error(it) }
+    }
+
+    fun getAnswersByDoctorId(doctorID :Int)=viewModelScope.launch(Dispatchers.IO+handler) {
+        doctorAnswerResponse.postValue(Resource.Loading())
+        val response= repositry.getAnswersByDoctorId(doctorID)
+        doctorAnswerResponse.postValue(response?.let { handleGetAnswersByDoctorId(it) })
+    }
+
+    private fun handleGetAnswersByDoctorId(response: Response<AnswersDoctorResponse>): Resource<AnswersDoctorResponse>? {
+        if (response.isSuccessful){
+            response.body()?.let {
+                return Resource.sucess(it)
+            }
+        }
+        val error = Gson().fromJson<AnswersDoctorResponse>(response.errorBody()!!.string(), AnswersDoctorResponse::class.java)
+        return error.message?.let { Resource.Error(it) }
+    }
+
+    fun checkUser()=viewModelScope.launch(Dispatchers.IO+handler) {
+        checkTokenResponse.postValue(Resource.Loading())
+        val response=repositry.checkUser()
+        checkTokenResponse.postValue(response?.let { handleCheckUser(it) })
+    }
+
+    private fun handleCheckUser(response: Response<CheckTokenResponse>): Resource<CheckTokenResponse>? {
+        if (response.isSuccessful){
+            response.body()?.let {
+                return Resource.sucess(it)
+            }
+        }
+        val error = Gson().fromJson<CheckTokenResponse>(response.errorBody()!!.string(), CheckTokenResponse::class.java)
+        return error.let { Resource.Error("") }
     }
 
 

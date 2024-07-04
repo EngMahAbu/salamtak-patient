@@ -111,7 +111,12 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
     private fun initButton() {
 
         binding.layoutSharelink.setOnClickListener {
-            findNavController().navigate(R.id.myQuestionsFragment)
+            val action= doctorId?.let { it1 ->
+                BookingAppointmentFragmentDirections.actionBookingAppointmentFragmentToSpecialDoctorAnswersFragment(
+                    it1
+                )
+            }
+            action?.let { it1 -> findNavController().navigate(it1) }
         }
         binding.ivArrow.setOnClickListener {
             findNavController().navigate(R.id.searchFragment)

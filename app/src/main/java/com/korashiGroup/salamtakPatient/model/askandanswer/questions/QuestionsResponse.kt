@@ -41,6 +41,8 @@ data class Questions(
     val chronic_disease: String?,
     @SerializedName("PrevSurgery")
     val prevSurgery: String?,
+    @SerializedName("QDate")
+    val qDate: String?,
     @SerializedName("getAnswers")
     val answers: List<GetAnswers?>?,
 ):Serializable

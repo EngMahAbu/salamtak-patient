@@ -4,9 +4,11 @@ import com.korashiGroup.salamtakPatient.fragment.polyclinic.model.PolyClinicResp
 import com.korashiGroup.salamtakPatient.fragment.polyclinic.model.PolyClinicsDoctorsResponse
 import com.korashiGroup.salamtakPatient.model.*
 import com.korashiGroup.salamtakPatient.model.askandanswer.QuestionAndAnswerResponse
+import com.korashiGroup.salamtakPatient.model.askandanswer.questions.AnswersDoctorResponse
 import com.korashiGroup.salamtakPatient.model.askandanswer.questions.QuestionsResponse
 import com.korashiGroup.salamtakPatient.model.booking.*
 import com.korashiGroup.salamtakPatient.model.booking.clink.GetDoctorClinksResponse
+import com.korashiGroup.salamtakPatient.model.checktoken.CheckTokenResponse
 import com.korashiGroup.salamtakPatient.model.deleteuser.DeleteUserResponse
 import com.korashiGroup.salamtakPatient.model.docotorsearch.DoctorSearchRequest
 import com.korashiGroup.salamtakPatient.model.docotorsearch.DoctorsearchItemResponse
@@ -382,5 +384,18 @@ interface ApiService {
     suspend fun getAllQandAByDoctorId(
         @Path("culture") culture: String,
     ): Response<QuestionsResponse>
+    @GET("{culture}/LookUp/GetAllQandA")
+    suspend fun getAllQandA(
+        @Path("culture") culture: String,
+    ): Response<QuestionsResponse>
+    @GET("{culture}/Doctor/GetAllQandAByDoctorId")
+    suspend fun getAnswersByDoctorId(
+        @Path("culture") culture: String,
+        @Query("DoctorID") doctorID :Int,
+    ): Response<AnswersDoctorResponse>
+    @GET("{culture}/User/CheckToken")
+    suspend fun checkUser(
+        @Path("culture") culture: String,
+    ): Response<CheckTokenResponse>
 
 }

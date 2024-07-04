@@ -40,6 +40,7 @@ class AskDoctorFragment : Fragment() {
     private var specilaistId = 0
     private var genderId = 0
     private var isShoww = true
+    val type=0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -138,20 +139,26 @@ class AskDoctorFragment : Fragment() {
 
     private fun validateQuestionInput(): Boolean {
        validateTextError()
-
         var value = false
+        if (binding.etSpecialization.text?.trim().isNullOrEmpty() && binding.etQuestion.text?.trim().isNullOrEmpty()
+            && binding.etAge.text?.trim().isNullOrEmpty()&& binding.etChooseMe.text?.trim().isNullOrEmpty()&& binding.etChooseGender.text?.trim().isNullOrEmpty()) {
+            binding.tvSpecError.visibility = View.VISIBLE
+            binding.tvQuestionError.visibility = View.VISIBLE
+            binding.tvGenderError.visibility = View.VISIBLE
+            binding.tvAgeError.visibility = View.VISIBLE
+            binding.tvPatientError.visibility = View.VISIBLE
+            return false
+        }
         if (binding.etSpecialization.text?.trim().isNullOrEmpty()) {
             binding.tvSpecError.visibility = View.VISIBLE
-
+            return false
         } else {
             binding.tvSpecError.visibility = View.GONE
-
         }
 
         if (binding.etQuestion.text?.trim().isNullOrEmpty()) {
             binding.tvQuestionError.visibility = View.VISIBLE
-
-
+            return false
         } else {
             binding.tvQuestionError.visibility = View.GONE
             partMap = partMap + mapOf("Question" to binding.etQuestion.text.toString())
@@ -166,10 +173,16 @@ class AskDoctorFragment : Fragment() {
 //            binding.tvQuestionDetailsError.visibility = View.GONE
 //            partMap = partMap + mapOf("QDetails" to binding.textinputQuestionDetails.text.toString())
 //        }
+        if (!binding.textinputQuestionDetails.text.toString().isNullOrEmpty()){
+            partMap = partMap + mapOf("Chronic_disease" to binding.textinputQuestionDetails.text.toString())
+        }
+        if (!binding.textinputSurgeryOperations.text.toString().isNullOrEmpty()){
+            partMap = partMap + mapOf("PrevSurgery" to binding.textinputSurgeryOperations.text.toString())
+        }
 
         if (binding.etAge.text?.trim().isNullOrEmpty()) {
             binding.tvGenderError.visibility = View.VISIBLE
-
+            return false
         } else {
             binding.tvGenderError.visibility = View.GONE
             partMap = partMap + mapOf("Age" to binding.etAge.text.toString().toInt())
@@ -177,21 +190,21 @@ class AskDoctorFragment : Fragment() {
 
         if (binding.etChooseGender.text?.trim().isNullOrEmpty()) {
             binding.tvAgeError.visibility = View.VISIBLE
+            return false
         } else {
             binding.tvAgeError.visibility = View.GONE
         }
 
         if (binding.etChooseMe.text?.trim().isNullOrEmpty()) {
             binding.tvPatientError.visibility = View.VISIBLE
-            return value
-
+            return false
         } else {
-            value=true
+           value=true
             binding.tvPatientError.visibility = View.GONE
             partMap = (partMap + mapOf("IsForMe" to isMe!!))
         }
 
-        return value
+       return value
     }
 
 
@@ -202,12 +215,11 @@ class AskDoctorFragment : Fragment() {
 
             } else {
                 binding.tvSpecError.visibility = View.GONE
-
             }
-
+        }
+        binding.etQuestion.doOnTextChanged { text, start, before, count ->
             if (binding.etQuestion.text?.trim().isNullOrEmpty()) {
                 binding.tvQuestionError.visibility = View.VISIBLE
-
 
             } else {
                 binding.tvQuestionError.visibility = View.GONE
@@ -215,14 +227,13 @@ class AskDoctorFragment : Fragment() {
 
             }
         }
-        binding.etQuestion.doOnTextChanged { text, start, before, count ->
-            if (binding.etQuestion.text?.trim().isNullOrEmpty()) {
-                binding.tvQuestionError.visibility = View.VISIBLE
 
+        binding.etChooseMe.doOnTextChanged { text, start, before, count ->
+            if (binding.etChooseMe.text?.trim().isNullOrEmpty()) {
+                binding.tvPatientError.visibility = View.VISIBLE
 
             } else {
-                binding.tvQuestionError.visibility = View.GONE
-                partMap = partMap + mapOf("Question" to binding.etQuestion.text.toString())
+                binding.tvPatientError.visibility = View.GONE
 
             }
         }
@@ -240,9 +251,9 @@ class AskDoctorFragment : Fragment() {
 
         binding.etAge.doOnTextChanged { text, start, before, count ->
             if (binding.etAge.text?.trim().isNullOrEmpty()) {
-                binding.tvAgeError.visibility = View.VISIBLE
+                binding.tvGenderError.visibility = View.VISIBLE
             } else {
-                binding.tvAgeError.visibility = View.GONE
+                binding.tvGenderError.visibility = View.GONE
                 partMap = partMap + mapOf("Age" to binding.etAge.text.toString().toInt())
             }
 
@@ -250,9 +261,9 @@ class AskDoctorFragment : Fragment() {
 
         binding.etChooseGender.doOnTextChanged { text, start, before, count ->
             if (binding.etChooseGender.text?.trim().isNullOrEmpty()) {
-                binding.tvGenderError.visibility = View.VISIBLE
+                binding.tvAgeError.visibility = View.VISIBLE
             } else {
-                binding.tvGenderError.visibility = View.GONE
+                binding.tvAgeError.visibility = View.GONE
             }
         }
     }
@@ -273,12 +284,7 @@ class AskDoctorFragment : Fragment() {
             isMe=it.status
             partMap = partMap + mapOf("IsForMe" to it.status)
         }
-        if (!binding.textinputQuestionDetails.text.toString().isNullOrEmpty()){
-            partMap = partMap + mapOf("Chronic_disease" to binding.textinputQuestionDetails.text.toString())
-        }
-        if (!binding.textinputSurgeryOperations.text.toString().isNullOrEmpty()){
-            partMap = partMap + mapOf("PrevSurgery" to binding.textinputSurgeryOperations.text.toString())
-        }
+
 
     }
 

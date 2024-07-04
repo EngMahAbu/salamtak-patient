@@ -2,6 +2,7 @@ package com.korashiGroup.salamtakPatient.adapter
 
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.databinding.ItemLayoutQandaBinding
 import com.korashiGroup.salamtakPatient.model.askandanswer.questions.Questions
+import com.korashiGroup.salamtakPatient.utils.DataBinding
 import com.korashiGroup.salamtakPatient.utils.localization.DefaultLocaleHelper
 
 
@@ -26,8 +28,16 @@ class QuestionsAdapter(val book:IBook,val isFullName:Boolean):ListAdapter<Questi
          holder.binding.apply {
              tvSpecialistName.text="${tvSpecialistName.context.getString(R.string.specialization)} : ${services.specialityName}"
              tvAge.text="${tvSpecialistName.context.getString(R.string.patientage)} : ${services.age}"
-             tvChronicDisease.text="${tvSpecialistName.context.getString(R.string.chronicdisease)} : ${services.chronic_disease}"
-             tvPrevSurgery.text="${tvSpecialistName.context.getString(R.string.prevSurgery)} : ${services.prevSurgery}"
+             if (!services.chronic_disease.isNullOrEmpty()){
+                 tvChronicDisease.text="${tvSpecialistName.context.getString(R.string.chronicdisease)} : ${services.chronic_disease}"
+             }else{
+                 holder.binding.tvChronicDisease.visibility=View.GONE
+             }
+             if (!services.prevSurgery.isNullOrEmpty()){
+                 tvPrevSurgery.text="${tvSpecialistName.context.getString(R.string.prevSurgery)} : ${services.prevSurgery}"
+             }else{
+                 holder.binding.tvPrevSurgery.visibility=View.GONE
+             }
              if (isFullName){
                  tvPatientname.text="${tvSpecialistName.context.getString(R.string.patientName)} : ${services.patientFulltname}"
              }else{
@@ -38,8 +48,23 @@ class QuestionsAdapter(val book:IBook,val isFullName:Boolean):ListAdapter<Questi
              }else{
                  tvQuestions.text="${tvSpecialistName.context.getString(R.string.your_question)} : ${services.question}؟ "
              }
+             if (!services.qDate.isNullOrEmpty() || services.qDate!=null) {
+                 tvDate.text = "${tvSpecialistName.context.getString(R.string.date)} : ${
+                     DataBinding.convertDateFormat(
+                         services.qDate,
+                         "yyyy-MM-dd'T'HH:mm:ss",
+                         "MMM dd, yyyy"
+                     )
+                 }"
+             }else{
+                 tvDate.visibility=View.GONE
+             }
          }
-
+        if (services.answers.isNullOrEmpty()){
+            holder.binding.tvBook.visibility=View.GONE
+        }else{
+            holder.binding.tvBook.visibility=View.VISIBLE
+        }
         holder.binding.tvBook.setOnClickListener {
             book.onItemClick(services)
         }
