@@ -52,7 +52,7 @@ class DialogRatingDoctorFragment : BottomSheetDialogFragment() {
             sendPatientDoctorRate()
         }
         binding.ratingBar.setOnRatingBarChangeListener { ratingBar, rating, fromUser ->
-            this.rating=rating.toInt()*2
+            this.rating=(rating.toDouble()*2).toInt()
         }
     }
 

@@ -290,7 +290,7 @@ class OfferBookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Ac
                     it.clinicId,
                     it.dayId,
                     it.medicalExaminationId,
-                    it.formattedDate,0
+                    it.formattedDate,0,false
                 )
                 this.clinicId = args.clinkDto?.clinkId!!
                 this.medicalExaminationId = 1
@@ -449,7 +449,7 @@ class OfferBookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Ac
                 it,
                 dayId,
                 1,
-                formattedDate,0
+                formattedDate,0,false
             )
         }
     }

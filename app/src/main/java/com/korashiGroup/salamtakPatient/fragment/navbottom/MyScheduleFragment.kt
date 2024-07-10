@@ -260,7 +260,7 @@ class MyScheduleFragment : Fragment(), MyScheduleAdapter.ActionSchedule,
         )
         sharedDataViewmodel.getClinicSchedualByClinicDayId(clinicSchedualByClinicDayId)
         sharedDataViewmodel.getDocotorId(doctorId)
-        sharedDataViewmodel.getClinicIdAndDoctorId(ClinicData(doctorId, clinicId))
+        sharedDataViewmodel.getClinicIdAndDoctorId(ClinicData(doctorId, clinicId,true))
         val action=MyScheduleFragmentDirections.actionMyScheduleFragmentToDialogSchduleFragment(sechdule,AppointmentId,
             OfferDoctor(doctorId,clinicId,fess,doctorname,image,offerId,specialistname)
         )

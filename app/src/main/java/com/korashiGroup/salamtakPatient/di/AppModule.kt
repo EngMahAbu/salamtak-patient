@@ -105,7 +105,7 @@ object AppModule {
 
 
 
-    private val logging: HttpLoggingInterceptor =
+        private val logging: HttpLoggingInterceptor =
         HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
 
 

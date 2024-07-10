@@ -265,7 +265,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_counter"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:layout_marginStart="12dp"
@@ -273,9 +273,9 @@
             android:fontFamily="@font/avenirltstd_roman"
             android:gravity="center"
             android:lines="2"
-            android:padding="3dp"
+            android:padding="4dp"
             android:text="@string/conter"
-            android:textSize="14sp"
+            android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/layout_otp" />

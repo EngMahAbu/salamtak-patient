@@ -26,6 +26,8 @@ import com.korashiGroup.salamtakPatient.adapter.AppointmentsAvailableAdapter
 import com.korashiGroup.salamtakPatient.adapter.CalenderAdapter
 import com.korashiGroup.salamtakPatient.adapter.ChooseClinksDoctorsAdapter
 import com.korashiGroup.salamtakPatient.databinding.BookAppointmentfragmentBinding
+import com.korashiGroup.salamtakPatient.fragment.home.HomeFragment
+import com.korashiGroup.salamtakPatient.fragment.home.SearchFragment
 import com.korashiGroup.salamtakPatient.model.CalendarDateModel
 import com.korashiGroup.salamtakPatient.model.booking.AppointmentBooking
 import com.korashiGroup.salamtakPatient.model.booking.AppointmentDetailBooking
@@ -70,6 +72,7 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
     private var clinicId = 0
     var dayId = 0
     var step = 1
+    private var isPolyClinic:Boolean?=null
     private var medicalExaminationId = 0
     var time: String? = null
     private var doctorWorkingDayTimeId: Int? = null
@@ -126,16 +129,19 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
         }
 
         binding.btnLayoutChooseService.setOnClickListener {
-
-            val action =
-                BookAppointmentFragmentDirections.actionBookAppointmentFragmentToDialogBottomSheetFragment(
-                    "examinationtype"
-                )
-            findNavController().navigate(action)
-            it.isEnabled=false
-            Handler().postDelayed({
-                it.isEnabled=true
-            }, 1000)
+//          if (medicalExaminationId==6){
+//              return@setOnClickListener
+//          }else {
+              val action =
+                  BookAppointmentFragmentDirections.actionBookAppointmentFragmentToDialogBottomSheetFragment(
+                      "examinationtype"
+                  )
+              findNavController().navigate(action)
+              it.isEnabled = false
+              Handler().postDelayed({
+                  it.isEnabled = true
+              }, 1000)
+        //  }
         }
 
 
@@ -417,18 +423,18 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
         sharedDataViewmodel.ClinicSchedualByClinicDayId.observe(
             viewLifecycleOwner,
             androidx.lifecycle.Observer {
+                this.clinicId = it.clinicId
                 args.doctorclinks.data?.id?.let { it1 ->
-                    viewmodel.getClinicSchedualByClinicDayId(
-                        it.clinicId,
-                        it.dayId,
-                        medicalExaminationId,
-                        it.formattedDate, it1
-                    )
+                    isPolyClinic?.let { it2 ->
+                        viewmodel.getClinicSchedualByClinicDayId(
+                            it.clinicId,
+                            it.dayId,
+                            it.medicalExaminationId,
+                            it.formattedDate, it1, it2
+                        )
+                    }
                 }
                 binding.etChooseClinic.setText(it.clinicName)
-                this.clinicId = it.clinicId
-                this.medicalExaminationId = this.medicalExaminationId
-                this.formattedDate = it.formattedDate
             })
     }
 
@@ -571,6 +577,7 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
     override fun onItemClick(clinkid: Int, clinkname: String,list: List<String>) {
         this.clinicId = clinkid
         this.clinkname = clinkname
+       getClinicSchedualByClinicOrServices()
         initClinkservices(list)
     }
 
@@ -580,12 +587,14 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
         this.formattedDate = formattedDate
         getDayId()
         args.doctorclinks.data?.id?.let {
-            viewmodel.getClinicSchedualByClinicDayId(
-                clinicId,
-                dayId,
-                medicalExaminationId,
-                formattedDate, it
-            )
+            isPolyClinic?.let { it1 ->
+                viewmodel.getClinicSchedualByClinicDayId(
+                    clinicId,
+                    dayId,
+                    this.medicalExaminationId,
+                    this.formattedDate, it, it1
+                )
+            }
         }
     }
 
@@ -627,7 +636,21 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
             androidx.lifecycle.Observer {
                 this.medicalExaminationId = it.Id!!
                 binding.etChooseService.setText(it.textService)
+                getClinicSchedualByClinicOrServices()
             })
+    }
+
+    private fun getClinicSchedualByClinicOrServices(){
+        args.doctorclinks.data?.id?.let { it1 ->
+            isPolyClinic?.let { it2 ->
+                viewmodel.getClinicSchedualByClinicDayId(
+                    this.clinicId,
+                    this.dayId,
+                   this.medicalExaminationId,
+                    this.formattedDate, it1, it2
+                )
+            }
+        }
     }
 
 
@@ -684,10 +707,20 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
         binding.AboutDoctor.text=str
     }
     private fun bindViews(){
+        medicalExaminationId = HomeFragment.instance?.let {
+            it.medicalExaminatioId
+        } ?: 0
+        dayId=SearchFragment.instance?.let {
+            it.dayId
+        }?:0
+        formattedDate=SearchFragment.instance?.let {
+            it.formattedDate
+        }?:""
+        isPolyClinic = medicalExaminationId==6
         sharedDataViewmodel.rating.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             binding.ratingBar.rating= it.rate?.toFloat()?: 1.0f
             binding.Reviewss.text="${it.rate?.roundToInt()?.toDouble()}"
-            binding.Ratecount.text="${it.rateCount?.toInt()}"
+            binding.Ratecount.text="${it.rateCount}"
         })
     }
 }

@@ -15,8 +15,8 @@ android {
         applicationId "com.korashiGroup.salamtakPatient"
         minSdk 26
         targetSdk 33
-        versionCode 16
-        versionName "1.7"
+        versionCode 17
+        versionName "1.8"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true

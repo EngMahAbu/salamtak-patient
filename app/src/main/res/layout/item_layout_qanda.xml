@@ -64,7 +64,7 @@
                             android:layout_marginStart="10dp"
                             android:fontFamily="@font/avenirltstd_roman"
                             android:gravity="start"
-                            android:text="D"
+                            android:text=""
                             android:visibility="gone"
                             android:textColor="@color/black"
                             android:textSize="15sp"
@@ -154,6 +154,7 @@
                             android:padding="1dp"
                             android:textColor="@color/black"
                             android:textSize="15sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             android:layout_marginEnd="@dimen/_10sdp"
                             app:layout_constraintTop_toBottomOf="@+id/tv_PrevSurgery" />

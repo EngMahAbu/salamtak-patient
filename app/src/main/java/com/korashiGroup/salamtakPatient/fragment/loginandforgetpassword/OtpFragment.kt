@@ -39,6 +39,7 @@ import kotlinx.coroutines.launch
 import okhttp3.internal.format
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -49,6 +50,7 @@ class OtpFragment : Fragment() {
     private val viewmodel: RegisterViewmodel by viewModels()
     val sharedDataViewmodel: SharedDataViewmodel by activityViewModels()
     private var otpCode: String? = null
+    private val FORMAT = "%02d:%02d"
     @Inject
     lateinit var sp: SpUtil
     private val currentTime = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
@@ -74,7 +76,7 @@ class OtpFragment : Fragment() {
         initButton()
         setupFocusEdittext()
         otpCallBack()
-        timer()
+        timer.start()
         otpCallBackForgetPassword()
     }
 
@@ -244,7 +246,7 @@ class OtpFragment : Fragment() {
 
                 is Resource.sucess -> {
                     hideprogressbar()
-                    timer()
+                    timer.start()
                     it.data?.let { response ->
 
                         args.userforgetpassword?.code = response.data?.code!!
@@ -272,7 +274,7 @@ class OtpFragment : Fragment() {
 
                 is Resource.sucess -> {
                     hideprogressbar()
-                    timer()
+                    timer.start()
                     it?.data?.let { response ->
                         otpCode = response.data.code.toString()
 
@@ -359,19 +361,26 @@ class OtpFragment : Fragment() {
 
     }
 
-    fun timer() {
-        object : CountDownTimer(920000, 1000) {
+    val timer = object : CountDownTimer(900000, 1000) {
 
-            override fun onTick(millisUntilFinished: Long) {
-                binding.tvCounter.text= Html.fromHtml(("${getString(R.string.verification_code_will_be_sent_within_1_30)} <font color=#00D2CB>( ${(millisUntilFinished) / (1000*60)} min )</font>"))
+        override fun onTick(millisUntilFinished: Long) {
+            binding.tvCounter.text= Html.fromHtml(("${getString(R.string.verification_code_will_be_sent_within_1_30)} <font color=#00D2CB>( ${String.format(FORMAT,
+                TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) - TimeUnit.HOURS.toMinutes(
+                    TimeUnit.MILLISECONDS.toHours(millisUntilFinished)),
+                TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
+                    TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished)))}  )</font>"))
 
-            }
+        }
 
-            override fun onFinish() {
-                binding.tvCounter.text= Html.fromHtml(("${getString(R.string.verification_code_will_be_sent_within_1_30)} <font color=#00D2CB>( 0 )</font>"))
-                binding.tvResendCode.visibility = View.VISIBLE
-            }
-        }.start()
+        override fun onFinish() {
+            binding.tvCounter.text= Html.fromHtml(("${getString(R.string.verification_code_will_be_sent_within_1_30)} <font color=#00D2CB>( 0 )</font>"))
+            binding.tvResendCode.visibility = View.VISIBLE
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        timer.cancel()
     }
 
 }

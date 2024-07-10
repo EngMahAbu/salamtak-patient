@@ -85,7 +85,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
     var seniortyLevelId = 0
     var examinationtypeid = 0
     var cityId = 0
-    var areaId :Int?= 0
+    var areaId :Int?= 1
     var genderId = 0
     var formattedDate = ""
     var image = ""
@@ -114,6 +114,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
     @SuppressLint("SimpleDateFormat")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        instance = this
         bindFields()
         binding.ivPrevious.isEnabled = step != 1
         examinationtypeid = HomeFragment.instance?.let {
@@ -455,7 +456,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             binding.layoutBottomsheetpersistant.etChooseArea.setText(it.name)
             if (!binding.layoutBottomsheetpersistant.etChooseArea.toString().isEmpty()) {
                 areaId = it.id
-            } else areaId = 0
+            } else areaId = 1
         }
 
         sharedDataViewmodel.chooseGender.observe(viewLifecycleOwner) {
@@ -707,7 +708,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         if (DateUtils.getToken().isNullOrEmpty()) {
             findNavController().navigate(R.id.dialogSignUp)
         } else {
-            sharedDataViewmodel.getClinicIdAndDoctorId(ClinicData(doctorId, clinicId))
+            sharedDataViewmodel.getClinicIdAndDoctorId(ClinicData(doctorId, clinicId,true))
             val clinicSchedualByClinicDayId = ClinicSchedualByClinicDayId(
                 clinicId,
                 dayId,
@@ -753,7 +754,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             sharedDataViewmodel.getMedicalExaminationTypeId(ImageServices(0,"",0,examinationtypeid))
             sharedDataViewmodel.getClinicSchedualByClinicDayId(clinicSchedualByClinicDayId)
             sharedDataViewmodel.getDocotorId(doctorId)
-            sharedDataViewmodel.getClinicIdAndDoctorId(ClinicData(doctorId, clinicId))
+            sharedDataViewmodel.getClinicIdAndDoctorId(ClinicData(doctorId, clinicId,true))
             findNavController().navigate(R.id.bookingAppointmentFragment)
         }
     }
@@ -1118,7 +1119,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             this.feesTo = feesTo
             this.image = image
             getDayId()
-            sharedDataViewmodel.getClinicIdAndDoctorId(ClinicData(doctorId, clinicId))
+            sharedDataViewmodel.getClinicIdAndDoctorId(ClinicData(doctorId, clinicId,false))
             sharedDataViewmodel.getMedicalExaminationTypeId(ImageServices(0,"",0,examinationtypeid))
 //            viewmodel.getClinicSchedualByClinicDayId(
 //                clinicId,
@@ -1141,7 +1142,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         sharedDataViewmodel.getMedicalExaminationTypeId(ImageServices(0,"",0,examinationtypeid))
         sharedDataViewmodel.getRating(RatingDoctors(rate, rateCount))
         sharedDataViewmodel.getClinicSchedualByClinicDayId(clinicSchedualByClinicDayId)
-        sharedDataViewmodel.getClinicIdAndDoctorId(ClinicData(ClinicID, doctorId))
+        sharedDataViewmodel.getClinicIdAndDoctorId(ClinicData(ClinicID, doctorId,false))
         findNavController().navigate(R.id.bookingAppointmentFragment)
     }
 

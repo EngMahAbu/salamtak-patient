@@ -55,7 +55,7 @@ class AnswersFragment : Fragment(),AnswersAdapter.IBook{
     }
 
     override fun onItemClick(doctorId: Int,clinicId: Int) {
-        sharedDataViewmodel.getClinicIdAndDoctorId(ClinicData(doctorId, clinicId))
+        sharedDataViewmodel.getClinicIdAndDoctorId(ClinicData(doctorId, clinicId,true))
         findNavController().navigate(R.id.bookingAppointmentFragment)
     }
 

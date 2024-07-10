@@ -11,11 +11,11 @@ data class GetAllCitiesResponse(
 
 data class CityData(
     @SerializedName("CountryId")
-    val countryId: Int,
+    val countryId: Int=1,
     @SerializedName("CountryName")
     val countryName: String,
     @SerializedName("Id")
-    val id: Int,
+    val id: Int=1,
     @SerializedName("Inactive")
     val inactive: Boolean,
     @SerializedName("Name")

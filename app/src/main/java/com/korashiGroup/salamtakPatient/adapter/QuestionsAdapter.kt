@@ -29,11 +29,13 @@ class QuestionsAdapter(val book:IBook,val isFullName:Boolean):ListAdapter<Questi
              tvSpecialistName.text="${tvSpecialistName.context.getString(R.string.specialization)} : ${services.specialityName}"
              tvAge.text="${tvSpecialistName.context.getString(R.string.patientage)} : ${services.age}"
              if (!services.chronic_disease.isNullOrEmpty()){
+                 holder.binding.tvChronicDisease.visibility=View.VISIBLE
                  tvChronicDisease.text="${tvSpecialistName.context.getString(R.string.chronicdisease)} : ${services.chronic_disease}"
              }else{
                  holder.binding.tvChronicDisease.visibility=View.GONE
              }
              if (!services.prevSurgery.isNullOrEmpty()){
+                 holder.binding.tvPrevSurgery.visibility=View.VISIBLE
                  tvPrevSurgery.text="${tvSpecialistName.context.getString(R.string.prevSurgery)} : ${services.prevSurgery}"
              }else{
                  holder.binding.tvPrevSurgery.visibility=View.GONE
@@ -49,6 +51,7 @@ class QuestionsAdapter(val book:IBook,val isFullName:Boolean):ListAdapter<Questi
                  tvQuestions.text="${tvSpecialistName.context.getString(R.string.your_question)} : ${services.question}؟ "
              }
              if (!services.qDate.isNullOrEmpty() || services.qDate!=null) {
+                 tvDate.visibility=View.VISIBLE
                  tvDate.text = "${tvSpecialistName.context.getString(R.string.date)} : ${
                      DataBinding.convertDateFormat(
                          services.qDate,

@@ -181,6 +181,7 @@ class MoreFragment : Fragment() {
             binding.layoutSignOut.visibility=View.GONE
             binding.layoutFavoriteDoctor.visibility=View.GONE
             binding.layoutDelete.visibility=View.GONE
+            binding.layoutMyQuestions.visibility=View.GONE
         }else{
             binding.layoutNextAvailableBooking.visibility=View.VISIBLE
             binding.layoutChangePassword.visibility=View.VISIBLE
@@ -190,6 +191,7 @@ class MoreFragment : Fragment() {
             binding.layoutSignOut.visibility=View.VISIBLE
             binding.layoutFavoriteDoctor.visibility=View.VISIBLE
             binding.layoutDelete.visibility=View.VISIBLE
+            binding.layoutMyQuestions.visibility=View.VISIBLE
         }
     }
 
