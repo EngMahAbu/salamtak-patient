@@ -38,6 +38,7 @@ import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
@@ -51,7 +52,8 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
     val sharedDataViewmodel: SharedDataViewmodel by activityViewModels()
     private lateinit var insuranceCardAdapter: InsuranceCardAdapter
     private var offerid:Int?=null
-
+    @Inject
+    lateinit var sp: SpUtil
     //Replace this with Testing/Staging/Production URL
     var baseUrl = "https://atfawry.fawrystaging.com/"
 
@@ -230,16 +232,27 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
                         binding.progressBar.visibility = View.GONE
                         Toast.makeText(
                             requireContext(),
-                            " booking Successfully",
+                            getString(R.string.booking_successfully),
                             Toast.LENGTH_SHORT
                         ).show()
                         sharedDataViewmodel.getOfferId(0)
-                        val action =
-                            AppointmentDetailsFragmentDirections.actionAppointmentDetailsFragmentToConfirmedFragment(
-                                binding.tvDate.text.toString()
-                            )
-                        findNavController().navigate(action)
-
+                        if (sp.getUser()?.name.isNullOrEmpty()){
+                            sp.saveUserToken(Constans.TOKEN, "")
+                            DateUtils.setToken("")
+                            findNavController().navigate(R.id.homeFragment)
+                        }else {
+                            val action =
+                                it.data?.data?.appointmentId?.let { it1 ->
+                                    it.data.data.doctorDto?.id?.let { it2 ->
+                                        AppointmentDetailsFragmentDirections.actionAppointmentDetailsFragmentToConfirmedFragment(
+                                            binding.tvDate.text.toString(), it1, it2
+                                        )
+                                    }
+                                }
+                            if (action != null) {
+                                findNavController().navigate(action)
+                            }
+                        }
                     }
 
                     is Resource.Error -> {

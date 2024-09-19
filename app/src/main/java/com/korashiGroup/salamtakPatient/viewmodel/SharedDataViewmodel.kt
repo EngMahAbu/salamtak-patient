@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.korashiGroup.salamtakPatient.model.*
 import com.korashiGroup.salamtakPatient.model.booking.ClinicSchedualByClinicDayId
 import com.korashiGroup.salamtakPatient.model.booking.clink.ClinicData
+import com.korashiGroup.salamtakPatient.model.booking.clink.GetDoctorClinksResponse
 import com.korashiGroup.salamtakPatient.model.booking.clink.PolyClinicData
 import com.korashiGroup.salamtakPatient.model.profile.DataBloodType
 import com.korashiGroup.salamtakPatient.model.profile.DataFoodAllergy
@@ -41,6 +42,7 @@ class SharedDataViewmodel:ViewModel() {
     val offerId=MutableLiveData<Int>()
     val rating=MutableLiveData<RatingDoctors>()
     val polyClinicResponse=MutableLiveData<PolyClinicData>()
+    val doctorClinksResponseResponse=MutableLiveData<GetDoctorClinksResponse>()
 
 
 
@@ -133,6 +135,9 @@ class SharedDataViewmodel:ViewModel() {
     }
     fun getPolyClinicsData(polyClinicData: PolyClinicData){
         polyClinicResponse.postValue(polyClinicData)
+    }
+    fun getDoctorClinksResponseResponse(doctorClinksResponse: GetDoctorClinksResponse){
+        doctorClinksResponseResponse.postValue(doctorClinksResponse)
     }
 
 }

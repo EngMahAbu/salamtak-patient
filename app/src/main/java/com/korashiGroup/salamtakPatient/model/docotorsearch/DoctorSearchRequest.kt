@@ -4,20 +4,20 @@ package com.korashiGroup.salamtakPatient.model.docotorsearch
 import com.google.gson.annotations.SerializedName
 
 data class DoctorSearchRequest(
-    @SerializedName("AreaId")
-    val areaId: Int?=null,
     @SerializedName("AvalibleDate")
     val avalibleDate: Any?="",
     @SerializedName("CityId")
     val CityId: Int?=null,
+    @SerializedName("AreaId")
+    val AreaId: Int?=null,
     @SerializedName("DoctorName")
     val doctorName: String?,
     @SerializedName("FeesFrom")
-    val feesFrom: Int=0,
+    val feesFrom: Int?=null,
     @SerializedName("FeesTo")
-    val feesTo: Int=0,
+    val feesTo: Int?=null,
     @SerializedName("GenderId")
-    val genderId: Int=0,
+    val genderId: Int?=null,
     @SerializedName("MaxResultCount")
     val maxResultCount: Int=0,
     @SerializedName("MedicalExaminationTypeId")
@@ -27,18 +27,9 @@ data class DoctorSearchRequest(
     @SerializedName("SkipCount")
     val skipCount: Int=0,
     @SerializedName("SpecialistId")
-    val specialistId: Int=0,
+    val specialistId: Int?=null,
     @SerializedName("SubSpecialistId")
     val subSpecialistId: List<Int?>?=null,
     @SerializedName("InsuranceID")
     val insuranceID: String?=null,
-){
-    constructor(
-        CityId: Int,
-        DoctorName: String,
-        MaxResultCount: Int,
-        MedicalExaminationTypeId: Int,
-        SkipCount: Int,
-        SpecialistId: Int,
-    ) : this(0,null,CityId,"",0,0,0,0,0,0,0,0,null,null)
-}
+)

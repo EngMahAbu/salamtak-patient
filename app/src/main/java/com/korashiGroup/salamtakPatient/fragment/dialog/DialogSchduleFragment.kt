@@ -207,6 +207,7 @@ class DialogSchduleFragment : BottomSheetDialogFragment() {
                                 "Edit Appointment"
                             )
                         findNavController().navigate(action)
+                        dismiss()
 
                     }else {
                         val action=DialogSchduleFragmentDirections.actionDialogSchduleFragmentToOfferBookAppointmentFragment(args.offerDoctor)

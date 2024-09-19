@@ -15,8 +15,8 @@ android {
         applicationId "com.korashiGroup.salamtakPatient"
         minSdk 26
         targetSdk 33
-        versionCode 17
-        versionName "1.8"
+        versionCode 20
+        versionName "2.1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
@@ -143,5 +143,12 @@ dependencies {
 
     // facebook
     implementation 'com.facebook.android:facebook-android-sdk:13.2.0'
+
+    def paging_version = "3.0.0"
+
+    implementation("androidx.paging:paging-runtime:$paging_version")
+
+    // alternatively - without Android dependencies for tests
+    testImplementation("androidx.paging:paging-common:$paging_version")
 
 }

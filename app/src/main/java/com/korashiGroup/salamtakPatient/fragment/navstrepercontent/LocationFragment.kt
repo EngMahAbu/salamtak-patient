@@ -98,6 +98,10 @@ class LocationFragment : Fragment() {
             }, 1000)
 
         }
+
+        binding.btnSkip.setOnClickListener {
+            findNavController().navigate(R.id.medicalStateFragment2)
+        }
     }
 
 
@@ -177,7 +181,9 @@ class LocationFragment : Fragment() {
 
         sharedDataViewmodel.getArea.observe(viewLifecycleOwner, Observer {
             binding.etChooseArea.setText(it.name)
-            areaId = it.id
+            if (it.id!=null) {
+                areaId = it.id
+            }
         })
 
         sharedDataViewmodel.updateProfileStatus.observe(viewLifecycleOwner, Observer {
@@ -186,6 +192,7 @@ class LocationFragment : Fragment() {
                     binding.btnNext.text=getString(com.korashiGroup.salamtakPatient.R.string.next)
                 }else{
                 binding.btnNext.text=getString(com.korashiGroup.salamtakPatient.R.string.update)
+                binding.btnSkip.visibility=View.GONE
                 viewmodel.getPatientInfo()
             }
         })

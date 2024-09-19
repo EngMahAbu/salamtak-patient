@@ -66,13 +66,12 @@ class OtpFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
      //   val text2 ="${getString(R.string.thanks)} <font color=#00D2CB>${getString(R.string.dr)} $nameDr</font> ${getString(R.string.completeing)}"
-        if (!args.userforgetpassword?.code.toString().isNullOrEmpty()) {
-            binding.tvVerification.text =Html.fromHtml("${getString(R.string.verification_code)} <font color=#00D2CB> ${args.userforgetpassword?.phone}</font>")
-                //format(getString(R.string.verification_code) + args.userforgetpassword?.phone)
-        } else {
+        if (args.userforgetpassword?.code.toString().isNullOrEmpty() || args.userforgetpassword?.code.toString()=="null") {             //format(getString(R.string.verification_code) + args.userforgetpassword?.phone)
             binding.tvVerification.text =Html.fromHtml("${getString(R.string.verification_code)} <font color=#00D2CB> ${args.user?.phone}</font>")
-               // format(getString(R.string.verification_code) + args.user?.phone)
+    }else{
+            binding.tvVerification.text =Html.fromHtml("${getString(R.string.verification_code)} <font color=#00D2CB> ${args.userforgetpassword?.phone}</font>")
         }
+               // format(getString(R.string.verification_code) + args.user?.phone)
         initButton()
         setupFocusEdittext()
         otpCallBack()

@@ -7,7 +7,7 @@ data class NewDoctorSearchRequest(
     @SerializedName("CityId")
     val cityId: Int?=1,
     @SerializedName("AreaId")
-    val AreaId: Int?=1,
+    val AreaId: Int?=null,
     @SerializedName("MaxResultCount")
     val maxResultCount: Int=0,
     @SerializedName("MedicalExaminationTypeId")

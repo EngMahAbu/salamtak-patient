@@ -119,6 +119,10 @@ class OfferBookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Ac
                     )
                 }
             } }
+            if (DateUtils.getToken().isNullOrEmpty()) {
+                val action=OfferBookAppointmentFragmentDirections.actionOfferBookAppointmentFragmentToDialogSignUp(false)
+                findNavController().navigate(action)
+            }else {
             if (time.isNullOrEmpty()) {
                 Toast.makeText(
                     requireContext(),
@@ -126,6 +130,8 @@ class OfferBookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Ac
                     Toast.LENGTH_SHORT
                 ).show()
             } else {
+
+            }
                 val date: Date =
                     SimpleDateFormat("yyyy-MM-dd").parse(formattedDate)
                 Log.d("day",date.toString())

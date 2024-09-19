@@ -7,6 +7,7 @@ object Constans {
     const val NameAR = "NameAR"
     const val NameEN = "NameEN"
     const val UserLOGIN = "UserLOGIN"
+    const val PatientId = "PatientId"
     const val UserSIGNUP = "UserSIGNUP"
     const val Language = "LANg"
     const val PROFILE_STATUS = "ProfileStatus"

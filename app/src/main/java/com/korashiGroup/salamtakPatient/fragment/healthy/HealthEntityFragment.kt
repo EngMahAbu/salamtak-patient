@@ -12,11 +12,14 @@ import android.view.ViewGroup
 import android.widget.AbsListView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -35,7 +38,9 @@ import com.korashiGroup.salamtakPatient.model.*
 import com.korashiGroup.salamtakPatient.model.docotorsearch.DoctorSearchRequest
 import com.korashiGroup.salamtakPatient.model.healthy.ItemHealth
 import com.korashiGroup.salamtakPatient.model.salamtakgate.Blogs
+import com.korashiGroup.salamtakPatient.viewmodel.PagingViewmodel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class HealthEntityFragment : Fragment(),MedicalHealthAdapter.Action {
@@ -43,6 +48,7 @@ class HealthEntityFragment : Fragment(),MedicalHealthAdapter.Action {
    private lateinit var binding:HealthEntityfragmentBinding
     private lateinit var bottomsheetbeahavoir: BottomSheetBehavior<ConstraintLayout>
     private val viewmodel: DialogBottomSheetViewmodel by viewModels()
+    private val pagingViewmodel: PagingViewmodel by viewModels()
     val sharedDataViewmodel: SharedDataViewmodel by activityViewModels()
     private val args:HealthEntityFragmentArgs by navArgs()
     private lateinit var healthAdapter: MedicalHealthAdapter
@@ -71,19 +77,20 @@ class HealthEntityFragment : Fragment(),MedicalHealthAdapter.Action {
         bottomsheetbeahavoir =
             BottomSheetBehavior.from(binding.layoutBottomsheetpersistant.MedicalServices)
         bottomsheetbeahavoir.state = BottomSheetBehavior.STATE_HIDDEN
-        callBack()
+     //  callBack()
         medicalServicesRecylerview()
         bindDataToUi()
         initButton()
+        pagingcallBack()
     }
 
     private fun medicalServicesRecylerview(){
         healthAdapter = MedicalHealthAdapter(this)
-        binding.rvHelthEntity.apply {
-            adapter = healthAdapter
-            layoutManager = LinearLayoutManager(requireContext())
-          //  addOnScrollListener(this@HealthEntityFragment.scrollListener)
-        }
+//        binding.rvHelthEntity.apply {
+//            adapter = healthAdapter
+//            layoutManager = LinearLayoutManager(requireContext())
+//          //  addOnScrollListener(this@HealthEntityFragment.scrollListener)
+//        }
     }
 
     private fun initButton(){
@@ -105,7 +112,8 @@ class HealthEntityFragment : Fragment(),MedicalHealthAdapter.Action {
             binding.btnQandA.setBackgroundResource(R.drawable.bg_help)
             binding.btnQandA.setTextColor(Color.parseColor("#262D70"))
             binding.layoutFilter.visibility=View.VISIBLE
-            viewmodel.getHealthEntityPagedList(cityId,areaId,args.healthtype,100,0)
+          //  viewmodel.getHealthEntityPagedList(cityId,areaId,args.healthtype,100,0)
+            pagingcallBack()
         }
 
         binding.btnQandA.setOnClickListener {
@@ -114,14 +122,16 @@ class HealthEntityFragment : Fragment(),MedicalHealthAdapter.Action {
             binding.btnEmergencies.setBackgroundResource(R.drawable.bg_help)
             binding.btnEmergencies.setTextColor(Color.parseColor("#262D70"))
             binding.layoutFilter.visibility=View.GONE
-            viewmodel.getHealthEntityPagedList(cityId,areaId,0,100,0)
+          //  viewmodel.getHealthEntityPagedList(cityId,areaId,0,100,0)
+            pagingcallBack()
 
         }
 
         binding.layoutBottomsheetpersistant.btnApply.setOnClickListener {
             viewmodel.healthEntityPage=0
-            viewmodel.getHealthEntityPagedList(cityId,areaId,args.healthtype,100,0)
+          //  viewmodel.getHealthEntityPagedList(cityId,areaId,args.healthtype,100,0)
             bottomsheetbeahavoir.state = BottomSheetBehavior.STATE_HIDDEN
+            pagingcallBack()
         }
 
         binding.layoutFilter.setOnClickListener {
@@ -165,7 +175,7 @@ class HealthEntityFragment : Fragment(),MedicalHealthAdapter.Action {
                     list?.forEach {
                         it?.let { it1 -> allHealthItem.add(it1) }
                     }
-                        healthAdapter.submitList(list?.toList())
+
 
 //                    val totalresult= (response.data?.data?.totalCount)?.div((10+2))
 //                    isLastPage = viewmodel.healthEntityPage == totalresult
@@ -184,7 +194,7 @@ class HealthEntityFragment : Fragment(),MedicalHealthAdapter.Action {
 
         })
         sharedDataViewmodel.getCity.observe(viewLifecycleOwner) {
-            viewmodel.getHealthEntityPagedList(it.id, areaId, args.healthtype, 100, 0)
+            viewmodel.getHealthEntityPagedList(it.id, areaId, args.healthtype, 10, 0)
         }
     }
 
@@ -197,7 +207,9 @@ class HealthEntityFragment : Fragment(),MedicalHealthAdapter.Action {
 
         sharedDataViewmodel.getArea.observe(viewLifecycleOwner, Observer {
             binding.layoutBottomsheetpersistant.etChooseArea.setText(it.name)
-            areaId=it.id
+            if (it.id!=null) {
+                areaId = it.id
+            }
         })
 
     }
@@ -254,6 +266,31 @@ class HealthEntityFragment : Fragment(),MedicalHealthAdapter.Action {
     private fun reset(){
         sharedDataViewmodel.getCity(CityData(0,"",0,false,"",""))
         sharedDataViewmodel.getArea(AreaData(0,""))
+    }
+
+    private fun pagingcallBack(){
+        binding.apply {
+            lifecycleScope.launchWhenStarted {
+                pagingViewmodel.getDoctorsPagingData(cityId,areaId,args.healthtype).collect{
+                    healthAdapter.submitData(it)
+                }
+            }
+
+            rvHelthEntity.apply {
+                layoutManager=LinearLayoutManager(requireContext())
+                adapter=healthAdapter
+            }
+
+            lifecycleScope.launchWhenStarted {
+               healthAdapter.loadStateFlow.collect{
+                   val state=it.refresh
+                   progressBar.isVisible=state is LoadState.Loading
+               }
+            }
+
+        }
+
+
     }
 
 

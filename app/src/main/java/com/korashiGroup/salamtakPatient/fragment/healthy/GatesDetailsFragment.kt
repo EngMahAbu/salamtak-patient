@@ -56,12 +56,12 @@ class GatesDetailsFragment : Fragment() {
             }
         }
 
-        binding.tvRefrence.setOnClickListener {
-            if (!args.gatesdetails?.links.isNullOrEmpty()){
-                val action=GatesDetailsFragmentDirections.actionGatesDetailsFragmentToReferenceFragment( args.gatesdetails?.links?.first())
-                findNavController().navigate(action)
-            }
-        }
+//        binding.tvRefrence.setOnClickListener {
+//            if (!args.gatesdetails?.links.isNullOrEmpty()){
+//                val action=GatesDetailsFragmentDirections.actionGatesDetailsFragmentToReferenceFragment( args.gatesdetails?.links?.first())
+//                findNavController().navigate(action)
+//            }
+//        }
     }
 
 }

@@ -260,6 +260,7 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
                     }
                     it.data?.let { it1 -> bindAnthorMainPage(it1) }
                     getDoctorAndPolyClinksResponse = GetDoctorClinksResponse(it.data?.data,it.message)
+                    sharedDataViewmodel.getDoctorClinksResponseResponse(getDoctorAndPolyClinksResponse)
                     it.data?.data?.currentClinicDtos?.let { it1 -> bindFeatures(it1) }
                     if (DefaultLocaleHelper.getInstance(requireContext()).getCurrentLocale()=="en"){
                         binding.AboutDoctor.text = it.data?.data?.doctorInfo

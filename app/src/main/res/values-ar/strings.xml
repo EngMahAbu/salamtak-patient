@@ -19,7 +19,7 @@
     <string name="egypt">مصر</string>
     <string name="doyothaveacount">ليس لديك حساب؟</string>
     <string name="signup">انشاء حساب جديد</string>
-    <string name="forsupportcallus">للحصول على الدعم اتصل بنا</string>
+    <string name="forsupportcallus">للدعم اتصل بنا</string>
     <string name="callnumber">17143</string>
     <string name="mobile_number_email">رقم الهاتف أو البريد الإلكتروني</string>
     <string name="send">ارسال</string>
@@ -133,6 +133,7 @@
     <string name="next_available_booking_at_08_nov_from_06_30_pm">Next Available Booking at 08 Nov. from 06:30 PM</string>
     <string name="sub_specialization">التخصص الفرعي</string>
     <string name="book_now">احجز الآن</string>
+    <string name="book_at_theclinic">احجز كشف في العيادة</string>
     <string name="osama">Osama</string>
     <string name="said">Said</string>
     <string name="click_here_to_edit_your_profile">اضغط هنا لتعديل ملفك الشخصي</string>
@@ -140,6 +141,7 @@
     <string name="upcoming">القادمة</string>
     <string name="canceled">ألغيت</string>
     <string name="finished">منتهية</string>
+    <string name="finish">انهاء</string>
     <string name="address">العنوان</string>
     <string name="waiting_time">وقت الانتظار</string>
     <string name="fees">رسوم الكشف</string>
@@ -249,17 +251,17 @@
     <string name="release_date">تاريخ الافراج عنه</string>
     <string name="update">تحديث</string>
     <string name="salamtak_gates">بوابة سلامتك</string>
-    <string name="skip_login_explore_our_features"> يمكنك تخطي تسجيل الدخول للإطلاع فقط على خدمات سلامتك.</string>
-    <string name="you_must_sign_up_to_book_your_doctor">يجب عليك التسجيل لحجز طبيبك</string>
+    <string name="skip_login_explore_our_features"> يمكنك تخطي تسجيل الدخول للإطلاع على خدمات سلامتك.</string>
+    <string name="you_must_sign_up_to_book_your_doctor">لاستكمال خطوات الحجز</string>
     <string name="no_data_to_show">لا يوجد بيانات </string>
     <string name="have_amedicalquestion">هل لديك سؤال طبى؟</string>
-    <string name="ask_a_doctor_for_free_and_get_response_in_24_hours">احصل على اجابات طبية دقيقة لجميع اسئلتك
+    <string name="ask_a_doctor_for_free_and_get_response_in_24_hours">  احصل على اجابات لجميع اسئلتك الطبية من الأطباء المتخصصين
     </string>
     <string name="ask_now">أسأل الأن </string>
-    <string name="your_question">سؤالك</string>
+    <string name="your_question">ما هو سؤالك؟</string>
     <string name="question_descreption_explanation_of_your_medical_symotoms">وصف السؤال *(شرح الاعراض الطبية لديك)
     </string>
-    <string name="age">كم عمرك (بالسنوات)</string>
+    <string name="age">السن</string>
     <string name="patientage">العمر</string>
     <string name="askdoctor">اسأل طبيب</string>
     <string name="fillallfields">املأ جميع الحقول</string>
@@ -304,7 +306,7 @@
     <string name="all_reviews">المراجعات</string>
     <string name="lang">Arabic</string>
     <string name="schedule">الحجوزات</string>
-    <string name="questionanswer">السؤال المطروح؟</string>
+    <string name="questionanswer">السؤال؟</string>
     <string name="questionanswered">اجابة سؤالك</string>
     <string name="doctorname">اسم الطبيب</string>
     <string name="insurance_company_required">مطلوب شركة تأمين</string>
@@ -315,7 +317,7 @@
     <string name="salamtak_promotions">Salamtak Promotions</string>
     <string name="salamtak_angle">Salamtak Angle</string>
     <string name="enter_your_registered">Enter your registered</string>
-    <string name="or">or</string>
+    <string name="or">أو</string>
     <string name="addresss">العنوان</string>
     <string name="clinicservices">خدمات العيادة</string>
     <string name="avilableappointemnts">"Available "</string>
@@ -355,6 +357,24 @@
     <string name="myanswers">إجابة السؤال</string>
     <string name="chronicdisease">الامراض المزمنة</string>
     <string name="prevSurgery">عمليات جراحية سابقة</string>
+    <string name="chooses">اختر</string>
+    <string name="book_as_visitor">احجز كزائر</string>
+    <string name="create_visitor">انشاء مريض</string>
+    <string name="yor_question_your_identity_will_be_anonymous">سؤالك(هويتك ستكون مجهولة)</string>
+    <string name="account">حسابى</string>
+    <string name="datess">التاريخ</string>
+    <string name="servicess">الخدمة</string>
+    <string name="fee">التكلفة</string>
+    <string name="paids">المدفوع</string>
+    <string name="balance">اجمالى رصيد الحساب</string>
+    <string name="bills">حساباتى</string>
+    <string name="we_will_answer_your_question_in_3_days">سوف يتم الاجابة على سؤالك عن طريق أحد أطباء سلامتك خلال ثلاث أيام عمل.</string>
+    <string name="ages">السن</string>
+    <string name="choose_symptoms">اختر الاعراض</string>
+    <string name="detailsaccount">تفاصيل الحساب</string>
+    <string name="booking_successfully">تم الحجز بنجاح</string>
+    <string name="medicine">الأدوية</string>
+    <string name="adds">الاعلان</string>
     <array name="choose">
         <item>اختار</item>
     </array>

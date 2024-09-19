@@ -165,7 +165,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="25dp"
                         android:gravity="center"
-                        android:padding="2dp"
+                        android:padding="3dp"
                         android:layout_marginEnd="@dimen/_5sdp"
                         android:layout_marginBottom="@dimen/_5sdp"
                         android:background="@drawable/bg_button_green"

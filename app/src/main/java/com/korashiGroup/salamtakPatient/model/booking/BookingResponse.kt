@@ -6,7 +6,10 @@ import java.io.Serializable
 
 data class BookingResponse(
     @SerializedName("Data")
-    val data: List<BookingData?>?
+    val data: List<BookingData?>?,
+    @SerializedName("MessageCode")
+    val messageCode: String?,
+
 ): Serializable
 
 data class BookingData(

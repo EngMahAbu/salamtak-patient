@@ -17,7 +17,6 @@ class SamlamtakApp : Application(){
     lateinit var notificationApp: NotificationApp
     companion object {
         var instance: SamlamtakApp? = null
-
     }
 
 
@@ -32,7 +31,6 @@ class SamlamtakApp : Application(){
         )
         onTokenRefresh()
     }
-
 
 
     fun onTokenRefresh(){

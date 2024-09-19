@@ -31,7 +31,7 @@
                 android:fontFamily="@font/avenirltstd_roman"
                 android:gravity="start"
                 android:padding="3dp"
-                android:text="@string/title"
+                android:text="@string/medicine"
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"

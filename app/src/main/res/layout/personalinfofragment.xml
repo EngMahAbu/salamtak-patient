@@ -545,6 +545,142 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_Choose_City"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/bg_edittext"
+                    android:elevation="1dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_Nationality">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_arrowdownChoose_City"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginEnd="12dp"
+                        android:layout_marginBottom="12dp"
+                        android:gravity="start"
+                        android:src="@drawable/ic_arrowdwon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/textinput_Choose_City"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_marginEnd="25dp"
+                        android:layout_marginBottom="5dp"
+                        android:hint="@string/choose_city"
+                        android:paddingTop="2dp"
+                        app:boxBackgroundColor="@color/white"
+                        app:boxBackgroundMode="none"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_Choose_City"
+                            android:layout_width="match_parent"
+                            android:layout_height="55dp"
+                            android:layout_gravity="center_horizontal"
+                            android:fontFamily="@font/avenirltstd_roman"
+                            android:inputType="text"
+                            android:enabled="false"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_Choose_Area"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:animateLayoutChanges="true"
+                    android:clickable="true"
+                    android:background="@drawable/bg_edittext"
+                    android:elevation="1dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_Choose_City">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_arrowdownArea"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginEnd="12dp"
+                        android:layout_marginBottom="12dp"
+                        android:gravity="start"
+                        android:src="@drawable/ic_arrowdwon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/textinput_Choose_Area"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_marginEnd="25dp"
+                        android:layout_marginBottom="5dp"
+                        android:hint="@string/choose_area"
+                        android:paddingTop="2dp"
+                        app:boxBackgroundColor="@color/white"
+                        app:boxBackgroundMode="none"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_Choose_Area"
+                            android:layout_width="match_parent"
+                            android:layout_height="55dp"
+                            android:layout_gravity="center_horizontal"
+                            android:fontFamily="@font/avenirltstd_roman"
+                            android:inputType="text"
+                            android:enabled="false"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_layout_Choose_City"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@android:color/transparent"
+                    app:layout_constraintEnd_toEndOf="@+id/layout_Choose_City"
+                    app:layout_constraintStart_toStartOf="@+id/layout_Choose_City"
+                    app:layout_constraintTop_toTopOf="@+id/layout_Choose_City"
+                    app:layout_constraintBottom_toBottomOf="@+id/layout_Choose_City"
+                    />
+            <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_layout_Choose_Area"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@android:color/transparent"
+                    app:layout_constraintEnd_toEndOf="@+id/layout_Choose_Area"
+                    app:layout_constraintStart_toStartOf="@+id/layout_Choose_Area"
+                    app:layout_constraintTop_toTopOf="@+id/layout_Choose_Area"
+                    app:layout_constraintBottom_toBottomOf="@+id/layout_Choose_Area"
+                    />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 

@@ -232,20 +232,24 @@ class DialogBottomSheetViewmodel @Inject constructor(private val repositry: Regi
     }
 
      fun searchDoctors(doctorSearchRequest: DoctorSearchRequest, new:String )=viewModelScope.launch(Dispatchers.IO+handler) {
-       if (new=="new"){
-           val newDoctorSearchRequest= doctorSearchRequest.areaId?.let {
-               NewDoctorSearchRequest(doctorSearchRequest.CityId,
-                   it,doctorSearchRequest.maxResultCount,
-                   doctorSearchRequest.medicalExaminationTypeId,doctorSearchRequest.skipCount,doctorSearchRequest.specialistId)
-           }
-           docorsResponse.postValue(Resource.Loading())
-           val response= newDoctorSearchRequest?.let { repositry.doctorSearch3(it) }
-           docorsResponse.postValue(response?.let { handlingSearchDoctors(it) })
-       }else{
+//       if (new=="new"){
+//           val newDoctorSearchRequest= doctorSearchRequest.let {
+//               doctorSearchRequest.specialistId?.let { it1 ->
+//                   NewDoctorSearchRequest(doctorSearchRequest.CityId,
+//                       null,doctorSearchRequest.maxResultCount,
+//                       doctorSearchRequest.medicalExaminationTypeId,doctorSearchRequest.skipCount,
+//                       it1
+//                   )
+//               }
+//           }
+//           docorsResponse.postValue(Resource.Loading())
+//           val response= newDoctorSearchRequest?.let { repositry.doctorSearch3(it) }
+//           docorsResponse.postValue(response?.let { handlingSearchDoctors(it) })
+//       }else{
            docorsResponse.postValue(Resource.Loading())
            val response=repositry.searchDoctors(doctorSearchRequest)
            docorsResponse.postValue(response?.let { handlingSearchDoctors(it) })
-       }
+     //  }
     }
 
     private fun handlingSearchDoctors(response: Response<DoctorsearchItemResponse>): Resource<DoctorsearchItemResponse>? {
@@ -323,7 +327,7 @@ class DialogBottomSheetViewmodel @Inject constructor(private val repositry: Regi
         return Resource.Error(error.message)
     }
 
-    fun getDoctorProfileByDoctorId(DoctorId :Int,clinicId:Int)=viewModelScope.launch(Dispatchers.IO+handler) {
+    fun getDoctorProfileByDoctorId(clinicId :Int,DoctorId:Int)=viewModelScope.launch(Dispatchers.IO+handler) {
         doctorClinkResponse.postValue(Resource.Loading())
         val response=repositry.getDoctorProfileByDoctorId(clinicId,DoctorId)
         doctorClinkResponse.postValue(response?.let { handleGetDoctorProfileByDoctorId(it) })
@@ -653,4 +657,5 @@ class DialogBottomSheetViewmodel @Inject constructor(private val repositry: Regi
     val handler = CoroutineExceptionHandler { _, exception ->
         Log.e("exception","osama${exception.message.toString()}")
     }
+
 }

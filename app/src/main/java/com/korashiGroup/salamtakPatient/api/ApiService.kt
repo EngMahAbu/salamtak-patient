@@ -22,6 +22,8 @@ import com.korashiGroup.salamtakPatient.model.healthy.GetHealthEntityResponse
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCardResponse
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCompanyResponse
 import com.korashiGroup.salamtakPatient.model.insurance.SendInsuranceCardResponce
+import com.korashiGroup.salamtakPatient.model.invoice.DoctorInvoiceResponse
+import com.korashiGroup.salamtakPatient.model.notification.DoctorNotificationResponse
 import com.korashiGroup.salamtakPatient.model.offers.ActiveOffersResponse
 import com.korashiGroup.salamtakPatient.model.offers.OffersDetailsResponse
 import com.korashiGroup.salamtakPatient.model.populardoctors.GetDoctorHealthTopicsResponse
@@ -35,6 +37,8 @@ import com.korashiGroup.salamtakPatient.model.salamtakgate.BlogsResponse
 import com.korashiGroup.salamtakPatient.model.salamtakgate.SalamtakGateResponse
 import com.korashiGroup.salamtakPatient.model.scheduling.CancelPatientAppointmentResponse
 import com.korashiGroup.salamtakPatient.model.scheduling.GetPatientAppointmentesResponse
+import com.korashiGroup.salamtakPatient.model.syemtoms.Syemtoms
+import com.korashiGroup.salamtakPatient.model.syemtoms.SymetomsResponse
 import com.korashiGroup.salamtakPatient.notification.NotificationListResponse
 import okhttp3.RequestBody
 import retrofit2.Response
@@ -56,6 +60,9 @@ interface ApiService {
     @POST("{culture}/User/CreateUser")
     suspend fun createUser(@Path("culture") culture: String,
                              @Body createUser: CreateUser):Response<UserResponse>
+    @POST("{culture}/User/CreateAnonymosPatient")
+    suspend fun createAnonymosPatient(@Path("culture") culture: String,
+                           @Body createUser: CreateUser):Response<UserResponse>
 
     @GET("{culture}/LookUp/GetCountries")
     suspend fun getCountries(
@@ -87,6 +94,7 @@ interface ApiService {
     suspend fun getSubSpecialist(
         @Path("culture") culture: String,
         @Query("specialListId") specialListId:Int,
+        @Query("UsertypeID") userTypeID:Int=3,
     ): Response<GetSubSpecilistResponse>
 
     @GET("{culture}/PatientLookUp/GetBloodTypes")
@@ -397,5 +405,28 @@ interface ApiService {
     suspend fun checkUser(
         @Path("culture") culture: String,
     ): Response<CheckTokenResponse>
+    @GET("{culture}/Patient/GetAllInvoicesForPatient")
+    suspend fun getAllInvoicesForPatient(
+        @Path("culture") culture: String,
+    ): Response<DoctorInvoiceResponse>
+    @GET("{culture}/Patient/GetSymptomsBySpecialityId")
+    suspend fun getSymptomsBySpecialityId(
+        @Path("culture") culture: String,
+        @Query("specialityId") specialityId :Int,
+    ): Response<SymetomsResponse>
+    @POST("{culture}/Patient/CreatePatientSymptoms")
+    suspend fun createPatientSymptoms(
+        @Path("culture") culture: String,
+        @Body medicalInfoRequest: Map<String, String>,
+    ): Response<Syemtoms>
+    @POST("{culture}/Patient/MarkAllDoctorResponses")
+    suspend fun markAllDoctorResponses(
+        @Path("culture") culture: String,
+    ): Response<DoctorNotificationResponse>
+
+    @GET("{culture}/Patient/GetUnreadDoctorResponses")
+    suspend fun getUnreadDoctorResponses(
+        @Path("culture") culture: String,
+    ): Response<DoctorNotificationResponse>
 
 }

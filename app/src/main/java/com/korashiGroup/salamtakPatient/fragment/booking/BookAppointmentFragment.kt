@@ -29,6 +29,8 @@ import com.korashiGroup.salamtakPatient.databinding.BookAppointmentfragmentBindi
 import com.korashiGroup.salamtakPatient.fragment.home.HomeFragment
 import com.korashiGroup.salamtakPatient.fragment.home.SearchFragment
 import com.korashiGroup.salamtakPatient.model.CalendarDateModel
+import com.korashiGroup.salamtakPatient.model.SpecialistData
+import com.korashiGroup.salamtakPatient.model.SubSpecialistData
 import com.korashiGroup.salamtakPatient.model.booking.AppointmentBooking
 import com.korashiGroup.salamtakPatient.model.booking.AppointmentDetailBooking
 import com.korashiGroup.salamtakPatient.model.booking.BookingData
@@ -38,6 +40,7 @@ import com.korashiGroup.salamtakPatient.utils.DateUtils
 import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.PatientViewmodel
+import com.korashiGroup.salamtakPatient.viewmodel.PolyClinicsViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
@@ -66,6 +69,7 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
     val now = Calendar.getInstance(TimeZone.getTimeZone("CST"))
     val viewmodel: DialogBottomSheetViewmodel by viewModels()
     val patientviewmodel :PatientViewmodel by viewModels()
+    private val polyClinicsViewmodel: PolyClinicsViewmodel by viewModels()
     val sharedDataViewmodel: SharedDataViewmodel by activityViewModels()
     private var formattedDate = ""
     private var clinkname = ""
@@ -91,6 +95,8 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        sharedDataViewmodel.getMedicalInfoStatus(true)
+        sharedDataViewmodel.getDoctorClinksResponseResponse(args.doctorclinks)
         bindViews()
         binding.ivPrevious.isEnabled = step != 1
         bottomsheetbeahavoir =
@@ -171,30 +177,34 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
         }
 
         binding.btnConfirm.setOnClickListener {
-            if (time.isNullOrEmpty()) {
-                Toast.makeText(
-                    requireContext(),
-                    getString(R.string.choose_appointment),
-                    Toast.LENGTH_SHORT
-                ).show()
-            } else {
-                val date: Date =
-                    SimpleDateFormat("yyyy-MM-dd").parse(formattedDate)
-                Log.d("day",date.toString())
-               // val startHour: Date = time?.let { it1 -> SimpleDateFormat("hh:mm").parse(it1) }!!
-                val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US)
-               // val total = date.time + startHour.time
-                val dateFormat = SimpleDateFormat("dd-MMM-yyyy HH:mm", Locale.US)
-                val sdf1 = SimpleDateFormat("dd-MMM-yyyy", Locale.US)
-                val dateTime = sdf1.format(date) + " " + time
-                val requiredDate = dateFormat.parse(dateTime)
-                formattedDate = formatter.format(requiredDate)
-                val patientAppointmentRequest = PatientAppointmentRequest(
-                    args.doctorclinks?.data?.id,
-                    doctorWorkingDayTimeId,
-                    formattedDate,
-                    false
-                ,"")
+            if (DateUtils.getToken().isNullOrEmpty()) {
+                val action=BookAppointmentFragmentDirections.actionBookAppointmentFragmentToDialogSignUp(true)
+                findNavController().navigate(action)
+            }else {
+                if (time.isNullOrEmpty()) {
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.choose_appointment),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else {
+                    val date: Date =
+                        SimpleDateFormat("yyyy-MM-dd").parse(formattedDate)
+                    Log.d("day", date.toString())
+                    // val startHour: Date = time?.let { it1 -> SimpleDateFormat("hh:mm").parse(it1) }!!
+                    val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US)
+                    // val total = date.time + startHour.time
+                    val dateFormat = SimpleDateFormat("dd-MMM-yyyy HH:mm", Locale.US)
+                    val sdf1 = SimpleDateFormat("dd-MMM-yyyy", Locale.US)
+                    val dateTime = sdf1.format(date) + " " + time
+                    val requiredDate = dateFormat.parse(dateTime)
+                    formattedDate = formatter.format(requiredDate)
+                    val patientAppointmentRequest = PatientAppointmentRequest(
+                        args.doctorclinks?.data?.id,
+                        doctorWorkingDayTimeId,
+                        formattedDate,
+                        false, ""
+                    )
 
 //                val editPatientAppointmentRequest=EditPatientAppointmentRequest(args.doctorclinks.data?.id,
 //                    doctorWorkingDayTimeId,
@@ -203,7 +213,8 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
 //                    patientviewmodel.getEditPatientAppointment(editPatientAppointmentRequest)
 //                }else{
                     viewmodel.createPatientAppointment(patientAppointmentRequest)
-                //}
+                    //}
+                }
             }
         }
 
@@ -303,7 +314,6 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
                 is Resource.Error -> {
                     hideprogressbar()
 
-
                 }
 
             }
@@ -319,6 +329,7 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
 
                 is Resource.Loading -> {
                     binding.progressbar1.visibility = View.VISIBLE
+                    callCheckUser()
                 }
 
                 is Resource.sucess -> {
@@ -670,7 +681,10 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
                 binding.tvName.text = getString(R.string.book_appointment)
             }
         }
-
+        args.doctorclinks.data?.specialistId?.let {
+            SpecialistData(
+                it,"",false,"")
+        }?.let { sharedDataViewmodel.getspecialication(it) }
         name =if (DateUtils.getLanguage()=="en"){
             "Dr.${args.doctorclinks.data?.firstName} ${args.doctorclinks.data?.middelName} ${args.doctorclinks.data?.lastName}"
 
@@ -709,7 +723,7 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
     private fun bindViews(){
         medicalExaminationId = HomeFragment.instance?.let {
             it.medicalExaminatioId
-        } ?: 0
+        } ?: 1
         dayId=SearchFragment.instance?.let {
             it.dayId
         }?:0
@@ -722,5 +736,28 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
             binding.Reviewss.text="${it.rate?.roundToInt()?.toDouble()}"
             binding.Ratecount.text="${it.rateCount}"
         })
+    }
+
+    private fun callCheckUser() {
+
+        polyClinicsViewmodel.checkTokenResponse.observe(viewLifecycleOwner) { response ->
+            when (response) {
+
+                is Resource.Loading -> {
+                }
+
+                is Resource.sucess -> {
+
+                }
+
+                is Resource.Error -> {
+                    binding.progressbar1.visibility = View.GONE
+                   findNavController().navigate(R.id.dialogSignUp)
+                }
+            }
+
+        }
+        polyClinicsViewmodel.checkUser()
+
     }
 }

@@ -130,9 +130,9 @@ object AppModule {
                 val originalRequest = chain.request()
                 val requestBuilder =
                     originalRequest.newBuilder()
-
-                requestBuilder.addHeader("Authorization", "Bearer ${DateUtils.getToken()}")
-
+                if (!DateUtils.getToken().isNullOrEmpty()) {
+                   requestBuilder.addHeader("Authorization", "Bearer ${DateUtils.getToken()}")
+                }
                 chain.proceed(requestBuilder.build())
             } catch (exception: SocketTimeoutException) {
                 exception.printStackTrace()

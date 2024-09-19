@@ -1,14 +1,18 @@
 package com.korashiGroup.salamtakPatient.fragment.askdoctor
 
+import android.animation.ObjectAnimator
+import android.graphics.Color
+import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.os.Handler
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -19,8 +23,6 @@ import com.korashiGroup.salamtakPatient.databinding.AskDoctorFragmentBinding
 import com.korashiGroup.salamtakPatient.model.SpecialistData
 import com.korashiGroup.salamtakPatient.model.register.ChooseGender
 import com.korashiGroup.salamtakPatient.model.register.ChoosePatient
-import com.korashiGroup.salamtakPatient.utils.Constans
-import com.korashiGroup.salamtakPatient.utils.DateUtils
 import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
@@ -36,6 +38,7 @@ class AskDoctorFragment : Fragment() {
     private var isMe: Boolean? = null
     val sharedDataViewmodel: SharedDataViewmodel by activityViewModels()
     val viewmodel: DialogBottomSheetViewmodel by viewModels()
+    private var animationDrawable: AnimationDrawable? = null
     private var partMap: Map<String, Any> = mutableMapOf()
     private var specilaistId = 0
     private var genderId = 0
@@ -59,6 +62,8 @@ class AskDoctorFragment : Fragment() {
         initButton()
         getDataFromViews()
         callBack()
+        val animation = AnimationUtils.loadAnimation(requireContext(), R.anim.image_animation)
+        binding.ivAnimatio.startAnimation(animation)
     }
 
     private fun initButton() {
@@ -78,6 +83,9 @@ class AskDoctorFragment : Fragment() {
             } else {
                 Toast.makeText(requireContext(),getString(R.string.fillallfields), Toast.LENGTH_SHORT).show()
             }
+            Toast.makeText(requireContext(),
+                 getString(R.string.we_will_answer_your_question_in_3_days), Toast.LENGTH_SHORT)
+                .show()
         }
 
         binding.btnLayoutChooseSpecialization.setOnClickListener {
@@ -102,6 +110,22 @@ class AskDoctorFragment : Fragment() {
             findNavController().navigate(R.id.homeFragment)
         }
 
+        binding.btnEmergencies.setOnClickListener {
+            binding.btnEmergencies.setBackgroundResource(R.drawable.bg_button_sellector)
+            binding.btnEmergencies.setTextColor(Color.parseColor("#FFFFFFFF"))
+            binding.btnQandA.setBackgroundResource(R.drawable.bg_help)
+            binding.btnQandA.setTextColor(Color.parseColor("#262D70"))
+            isMe=false
+        }
+
+        binding.btnQandA.setOnClickListener {
+            binding.btnQandA.setBackgroundResource(R.drawable.bg_button_sellector)
+            binding.btnQandA.setTextColor(Color.parseColor("#FFFFFFFF"))
+            binding.btnEmergencies.setBackgroundResource(R.drawable.bg_help)
+            binding.btnEmergencies.setTextColor(Color.parseColor("#262D70"))
+            isMe=true
+        }
+
 
     }
 
@@ -116,7 +140,8 @@ class AskDoctorFragment : Fragment() {
 
                 is Resource.sucess -> {
                     hideprogressbar()
-                    Snackbar.make(requireView(), getString(R.string.datasentsuccessfully), Snackbar.LENGTH_SHORT)
+                    Toast.makeText(requireContext(),
+                        getString(R.string.we_will_answer_your_question_in_3_days), Toast.LENGTH_SHORT)
                         .show()
                     sharedDataViewmodel.getspecialication(SpecialistData(0,"",false,""))
                     sharedDataViewmodel.getGender(ChooseGender("",0))
@@ -195,7 +220,7 @@ class AskDoctorFragment : Fragment() {
             binding.tvAgeError.visibility = View.GONE
         }
 
-        if (binding.etChooseMe.text?.trim().isNullOrEmpty()) {
+        if (isMe==null) {
             binding.tvPatientError.visibility = View.VISIBLE
             return false
         } else {

@@ -51,6 +51,9 @@ class MedicalStateFragment : Fragment() {
         binding.btnNext.setOnClickListener {
             sendPatientMedicalInfo()
         }
+        binding.btnSkip.setOnClickListener {
+            sharedDataViewmodel.getProfileStatus(3)
+        }
 
         binding.btnLayoutBloodGroup.setOnClickListener {
             val action=MedicalStateFragmentDirections.actionMedicalStateFragment2ToDialogBottomSheetFragment("bloodTypes")
@@ -138,7 +141,6 @@ class MedicalStateFragment : Fragment() {
                         ).show()
 
                     }
-                sharedDataViewmodel.getMedicalInfoStatus(true)
                 }
                 is Resource.Error -> {
                     binding.progressBar.visibility = View.GONE
@@ -205,9 +207,10 @@ class MedicalStateFragment : Fragment() {
         sharedDataViewmodel.updateProfileStatus.observe(viewLifecycleOwner, Observer {
             status=it
             if (!status){
-                binding.btnNext.text=getString(com.korashiGroup.salamtakPatient.R.string.next)
+                binding.btnNext.text=getString(com.korashiGroup.salamtakPatient.R.string.finish)
             }else{
                 binding.btnNext.text=getString(com.korashiGroup.salamtakPatient.R.string.update)
+                binding.btnSkip.visibility=View.GONE
                 viewmodel.getPatientMedicalInfo()
             }
         })

@@ -1,22 +1,17 @@
 package com.korashiGroup.salamtakPatient.fragment.home
 
 import android.app.Activity
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.adapter.*
@@ -26,17 +21,20 @@ import com.korashiGroup.salamtakPatient.model.AreaData
 import com.korashiGroup.salamtakPatient.model.CityData
 import com.korashiGroup.salamtakPatient.model.ImageServices
 import com.korashiGroup.salamtakPatient.model.SpecialistData
+import com.korashiGroup.salamtakPatient.model.notification.Data
+import com.korashiGroup.salamtakPatient.model.notification.Response
 import com.korashiGroup.salamtakPatient.model.register.ChooseGender
+import com.korashiGroup.salamtakPatient.utils.Constans
 import com.korashiGroup.salamtakPatient.utils.DateUtils
 import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.utils.SpUtil
 import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
+import com.korashiGroup.salamtakPatient.viewmodel.NotificationViewModel
 import com.korashiGroup.salamtakPatient.viewmodel.PatientViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.PolyClinicsViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.RegisterViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import dagger.hilt.android.AndroidEntryPoint
-import java.io.ByteArrayOutputStream
 import java.util.*
 import javax.inject.Inject
 
@@ -51,7 +49,9 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
     private lateinit var topSpecialictyAdapter: TopSpecialictyAdapter
         private lateinit var imageVideoAdapter: ImageVideoAdapter
     private val patientviewmodel: PatientViewmodel by viewModels()
+    private val notificationViewModel: NotificationViewModel by viewModels()
     private val polyClinicsViewmodel: PolyClinicsViewmodel by viewModels()
+    private var data: Data?=null
     var someEventListener: LoginFragment.onSomeEventListener? = null
     //    private lateinit var popularDoctorsAdapter: PopularDoctorsAdapter
 //    private lateinit var healthTopicsAdapter: HealthTopicsAdapter
@@ -91,13 +91,14 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         instance = this
+        sharedDataViewmodel.getMedicalInfoStatus(false)
         bindDataToViews()
         callCheckUser()
         if (DateUtils.getToken().isNullOrEmpty()){
             binding.layoutSignup.visibility=View.VISIBLE
             binding.ivNotification.visibility=View.GONE
             someEventListener?.someEvent("skip")
-            sharedDataViewmodel.getCity(CityData(1,"",1,false,"",""))
+        //    sharedDataViewmodel.getCity(CityData(1,"",1,false,"",""))
 
         }else {
             binding.layoutSignup.visibility=View.GONE
@@ -116,7 +117,8 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
         setupresyclerviewSpecialist()
         imageServices()
         medicalServices()
-       // callBack()
+        //callBack()
+        callBackGetDoctorFeedBakNotification()
         initButton()
     }
 
@@ -125,10 +127,15 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
         binding.ivNotification.setOnClickListener {
             findNavController().navigate(R.id.notificationListFragment)
         }
+        binding.ivMessage.setOnClickListener {
+            val action=HomeFragmentDirections.actionHomeFragmentToDoctorNotificationFragment(data)
+            findNavController().navigate(action)
+        }
 
         binding.askQuestion.setOnClickListener {
             if (DateUtils.getToken().isNullOrEmpty()){
-                findNavController().navigate(R.id.dialogSignUp)
+                val action=HomeFragmentDirections.actionHomeFragmentToDialogSignUp(false)
+                findNavController().navigate(action)
             }else {
                 findNavController().navigate(R.id.askDoctorFragment)
           }
@@ -229,6 +236,13 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
                 R.drawable.m_poly,
                 getString(R.string.polyclinics),
                 Id = 6
+            )
+        )
+        list.add(
+            ImageServices(
+                R.drawable.ic_offer,
+                getString(R.string.offers),
+                Id = 7
             )
         )
 
@@ -441,7 +455,10 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
 //        val action =
 //            HomeFragmentDirections.actionHomeFragmentToDialogBottomSheetFragment("services")
 //        findNavController().navigate(action)
-        findNavController().navigate(R.id.specialistDoctorsFragment)
+        if (servicesID==7){
+            findNavController().navigate(R.id.offersFragment)
+        }else{
+        findNavController().navigate(R.id.specialistDoctorsFragment)}
     }
 
 
@@ -481,7 +498,8 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
 
     override fun onItemGatesClick(gateId: Int) {
         if (DateUtils.getToken().isNullOrEmpty() && gateId==6){
-            findNavController().navigate(R.id.dialogSignUp)
+            val action=HomeFragmentDirections.actionHomeFragmentToDialogSignUp(false)
+            findNavController().navigate(action)
         }else {
             val action = HomeFragmentDirections.actionHomeFragmentToHealthyTopicsFragment(gateId)
             findNavController().navigate(action)
@@ -490,7 +508,8 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
 
     override fun onItemClick(healthEntityTypeId: Int, healthName: String) {
         if (DateUtils.getToken().isNullOrEmpty()){
-            findNavController().navigate(R.id.dialogSignUp)
+            val action=HomeFragmentDirections.actionHomeFragmentToDialogSignUp(false)
+            findNavController().navigate(action)
         }else if (healthEntityTypeId!=7){
             val action =
                 HomeFragmentDirections.actionHomeFragmentToHealthEntityFragment(
@@ -522,7 +541,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
                 }
 
                 is Resource.sucess -> {
-
+                    it.data?.data?.let { it1 -> sp.savePatientId(Constans.PatientId, it1.id) }
                     sharedDataViewmodel.getCity(CityData(it.data!!.data.cityId,"",it.data!!.data.cityId,false,it.data.data.cityName,it.data.data.cityName))
                     sharedDataViewmodel.getArea(AreaData(it.data.data.areaId,it.data.data.areaName))
                 }
@@ -648,7 +667,11 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
             callBackSpecialist()
         }else{
             sharedDataViewmodel.getspecialication(specialist)
-            findNavController().navigate(R.id.searchFragment)
+            if (DateUtils.getToken().isNullOrEmpty()){
+                findNavController().navigate(R.id.specialistDoctorsFragment)
+            }else {
+                findNavController().navigate(R.id.searchFragment)
+            }
         }
 
     }
@@ -666,12 +689,47 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
                 }
 
                 is Resource.Error -> {
-                 //  findNavController().navigate(R.id.loginFragment)
+                    //  findNavController().navigate(R.id.loginFragment)
                 }
             }
 
         }
         polyClinicsViewmodel.checkUser()
+
+    }
+
+    private fun callBackGetDoctorFeedBakNotification() {
+
+        notificationViewModel.doctorResponse.observe(viewLifecycleOwner) { response ->
+            when (response) {
+
+                is Resource.Loading -> {
+                }
+
+                is Resource.sucess -> {
+                    data = response.data?.data
+                    val listIsNotSeen = response.data?.data?.responses?.filter {
+                        it?.isNotified==true
+                    }
+                    if (listIsNotSeen != null) {
+                        if (listIsNotSeen.isEmpty()){
+                            binding.ivMessageroundbg.visibility=View.GONE
+                            binding.ivMessage.cancelAnimation()
+                        }else{
+                            binding.ivMessage.playAnimation()
+                            //binding.ivMessageroundbg.visibility=View.VISIBLE
+                          //  binding.tvNumberOfDoctorNotification.text= response.data.data.unreadCount.toString()
+                        }
+                    }
+                }
+
+                is Resource.Error -> {
+
+                }
+            }
+
+        }
+        notificationViewModel.getUnreadDoctorResponses()
 
     }
 

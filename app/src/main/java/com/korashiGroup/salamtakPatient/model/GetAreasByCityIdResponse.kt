@@ -11,7 +11,7 @@ data class GetAreasByCityIdResponse(
 
 data class AreaData(
     @SerializedName("Id")
-    val id: Int=1,
+    val id: Int?=1,
     @SerializedName("Name")
     val name: String
 ):Serializable

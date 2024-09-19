@@ -49,7 +49,6 @@ class MainActivity : AppCompatActivity(), LoginFragment.onSomeEventListener {
         super.onResume()
         check()
     }
-
     init {
         firebaseRemoteConfig.setConfigSettingsAsync(configSettings)
     }

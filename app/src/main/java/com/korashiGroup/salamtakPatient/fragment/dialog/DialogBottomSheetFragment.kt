@@ -33,8 +33,9 @@ import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.snackbar.Snackbar
-import com.korashiGroup.salamtakPatient.fragment.loginandforgetpassword.LoginFragment
 import com.korashiGroup.salamtakPatient.model.register.ChoosePatient
+import com.korashiGroup.salamtakPatient.model.register.DataLogin
+import com.korashiGroup.salamtakPatient.utils.Constans.UserLOGIN
 import com.korashiGroup.salamtakPatient.viewmodel.PatientViewmodel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -71,7 +72,6 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
 
     override fun getTheme(): Int {
         return R.style.AppBottomSheetDialogTheme
-
     }
 
     override fun onCreateView(
@@ -192,8 +192,6 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
             setHasFixedSize(true)
         }
     }
-
-
     private fun initButton() {
         binding.itemLanguage.btnSave.setOnClickListener {
             if (lang == null) {
@@ -208,7 +206,6 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
                 requireActivity().finish()
                 startActivity(requireActivity().intent)
             }
-
         }
         binding.btnCalling.setOnClickListener {
             call()
@@ -234,8 +231,9 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
         }
 
         binding.itemSignOut.btnYes.setOnClickListener {
-
+            sharedDataViewmodel.getMedicalInfoStatus(false)
             sp.saveUserToken(Constans.TOKEN, "")
+            sp.save(UserLOGIN, DataLogin(0,"","","","",0,0,""))
             DateUtils.setToken("")
             findNavController().navigate(R.id.loginFragment)
             dismiss()
@@ -246,15 +244,12 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
         }
 
         binding.itemDelete.btnYes.setOnClickListener {
-
             deleteUserCallback()
             findNavController().navigate(R.id.loginFragment)
             dismiss()
         }
 
     }
-
-
     private fun changeViews(selectviews: String) {
 
         when (selectviews) {
@@ -263,13 +258,11 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
                 binding.btnDone.visibility = View.GONE
                 binding.tvAllSpecial.visibility = View.GONE
             }
-
             "endDate" -> {
                 binding.layoutDateOfbirth.visibility = View.VISIBLE
                 binding.btnDone.visibility = View.GONE
                 binding.tvAllSpecial.visibility = View.GONE
             }
-
             "help" -> {
                 binding.tvCallus.visibility = View.VISIBLE
                 binding.ivCall.visibility = View.VISIBLE
@@ -277,7 +270,6 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
                 binding.btnDone.visibility = View.GONE
                 binding.tvAllSpecial.visibility = View.GONE
             }
-
             "gender" -> {
                 binding.layoutGender.visibility = View.VISIBLE
                 binding.btnDone.visibility = View.GONE
@@ -288,13 +280,11 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
                 binding.btnDone.visibility = View.GONE
                 binding.tvAllSpecial.visibility = View.GONE
             }
-
             "lang" -> {
                 binding.layoutLanguage.visibility = View.VISIBLE
                 binding.btnDone.visibility = View.GONE
                 binding.tvAllSpecial.visibility = View.GONE
             }
-
             "signout" -> {
                 binding.layoutSignOut.visibility = View.VISIBLE
                 binding.btnDone.visibility = View.GONE
@@ -316,67 +306,53 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
                 binding.layoutSpecialist.visibility = View.VISIBLE
                 binding.tvAllSpecial.text = getString(R.string.choose_specialization)
                 callBackSpecialist()
-
             }
-
             "services" -> {
                 binding.layoutSpecialist.visibility = View.VISIBLE
                 binding.tvAllSpecial.text = getString(R.string.choose_specialization)
                 binding.btnDone.visibility = View.GONE
                 callBackSpecialist()
-
             }
-
             "SubSpecialist" -> {
                 binding.layoutSubSpecialist.visibility = View.VISIBLE
                 binding.tvAllSpecial.text = getString(R.string.choose_sub_specialization)
                 callBackSubSpecialist()
             }
-
             "SeniorityLevel" -> {
                 binding.layoutSeniorityLevel.visibility = View.VISIBLE
                 binding.tvAllSpecial.text = getString(R.string.choose_seniority_level)
                 callBackSeniorityLevel()
             }
-
             "AllCity" -> {
                 binding.layoutAllCities.visibility = View.VISIBLE
                 binding.tvAllSpecial.text = getString(R.string.choose_city)
                 callBackGetAllCities()
             }
-
             "AllArea" -> {
                 binding.layoutAllArea.visibility = View.VISIBLE
                 binding.tvAllSpecial.text = getString(R.string.choose_area)
                 callBackGetAllArea()
             }
-
             "examinationtype" -> {
                 binding.layoutExaminationtype.visibility = View.VISIBLE
                 binding.tvAllSpecial.text = getString(R.string.examination_type)
-
-
             }
-
             "bloodTypes" -> {
                 binding.layoutBloodtypes.visibility = View.VISIBLE
                 binding.tvAllSpecial.text = getString(R.string.blood_group)
                 callBackGetBloodTypes()
             }
-
             "medicineAllergy" -> {
                 binding.layoutMedicineAllergy.visibility = View.VISIBLE
                 binding.tvAllSpecial.text = getString(R.string.medical_allergies)
                 callBackGetMedicineAllergy()
             }
-
             "FoodAllergy" -> {
                 binding.layoutFoodAllergy.visibility = View.VISIBLE
                 binding.tvAllSpecial.text = getString(R.string.food_allergies)
                 callBackGetFoodAllergy()
             }
         }
-
     }
 
     private fun callBack() {
@@ -386,16 +362,13 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
                 is Resource.Loading -> {
                     showprogtessbar()
                 }
-
                 is Resource.sucess -> {
                     hideprogressbar()
                     response.data?.data.let {
                         counteriesAdapter.submitList(it)
                         counteriesAdapter.notifyDataSetChanged()
                     }
-
                 }
-
                 is Resource.Error -> {
                     hideprogressbar()
                     response.data?.let {
@@ -404,28 +377,22 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
                     }
                 }
             }
-
         }
         viewmodel.getCountries()
     }
-
     private fun callBackSpecialist() {
         viewmodel.specialistResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
-
                 is Resource.Loading -> {
                     showprogtessbar()
                 }
-
                 is Resource.sucess -> {
                     hideprogressbar()
                     response.data?.data.let {
                         specialistAdapter.submitList(it)
                         specialistAdapter.notifyDataSetChanged()
                     }
-
                 }
-
                 is Resource.Error -> {
                     hideprogressbar()
                     response.data?.let {
@@ -434,7 +401,6 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
                     }
                 }
             }
-
         }
         viewmodel.getSpecialist()
     }
@@ -442,18 +408,15 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
     private fun callBackSubSpecialist() {
         viewmodel.subSpecialistResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
-
                 is Resource.Loading -> {
                     showprogtessbar()
                 }
-
                 is Resource.sucess -> {
                     hideprogressbar()
                     response.data?.data.let {
                         subSpecialistAdapter.submitList(it)
                         subSpecialistAdapter.notifyDataSetChanged()
                     }
-
                 }
 
                 is Resource.Error -> {
@@ -464,22 +427,18 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
                     }
                 }
             }
-
         }
         sharedDataViewmodel.specialication.observe(viewLifecycleOwner) {
             viewmodel.getSubSpecialist(it.id)
         }
-
     }
 
     private fun callBackSeniorityLevel() {
         viewmodel.seniorityLevelResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
-
                 is Resource.Loading -> {
                     showprogtessbar()
                 }
-
                 is Resource.sucess -> {
                     hideprogressbar()
                     response.data?.data.let {
@@ -496,7 +455,6 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
                     }
                 }
             }
-
         }
         viewmodel.getSeniorityLevel()
     }
@@ -525,11 +483,9 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
                     }
                 }
             }
-
         }
         viewmodel.getAllCities()
     }
-
     private fun callBackGetAllArea() {
         viewmodel.allAreasByCityIdResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
@@ -555,12 +511,10 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
                     }
                 }
             }
-
         }
         sharedDataViewmodel.getCity.observe(viewLifecycleOwner) {
-            viewmodel.getAreasByCityId(it.id)
+            it.id?.let { it1 -> viewmodel.getAreasByCityId(it1) }
         }
-
     }
 
     private fun callBackGetBloodTypes() {
@@ -595,11 +549,9 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
     private fun callBackGetMedicineAllergy() {
         viewmodel.medicineAllergyResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
-
                 is Resource.Loading -> {
                     showprogtessbar()
                 }
-
                 is Resource.sucess -> {
                     hideprogressbar()
                     response.data?.data.let {
@@ -686,28 +638,23 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
             sharedDataViewmodel.getspecialication(specialist)
         }
     }
-
-
     override fun onSelectSubcialist(listofsubSpecialist: MutableList<SubSpecialistData>) {
         sharedDataViewmodel.getSubSpecialication(listofsubSpecialist)
     }
-
     override fun onItemSelectSeniorityLevel(SeniorityLevel: SeniorityLevelData) {
         sharedDataViewmodel.getSeniorityLevelData(SeniorityLevel)
     }
-
     override fun onItemSelected(city: CityData) {
+        sharedDataViewmodel.getArea(AreaData(null,""))
         sharedDataViewmodel.getCity(city)
     }
 
     override fun onSelectArea(Area: AreaData) {
         sharedDataViewmodel.getArea(Area)
     }
-
     override fun onItemSelectSeniorityLevel(selectCountry: DataCountry) {
         sharedDataViewmodel.getCountry(selectCountry)
     }
-
     override fun onItemClick(medicalExamination: ImageServices) {
         sharedDataViewmodel.getMedicalExaminationTypeId(medicalExamination)
     }
@@ -715,52 +662,40 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
     override fun onSelectBloodType(listOfBloodType: DataBloodType) {
         sharedDataViewmodel.getBloodTypes(listOfBloodType)
     }
-
     override fun onSelectMedicineAllergy(listofMedicineAllergy: MutableList<DataMedicineAllergy>) {
         sharedDataViewmodel.getMedicineAllergy(listofMedicineAllergy)
     }
-
     override fun onSelectFoodAllergy(listofFoodAllergy: MutableList<DataFoodAllergy>) {
         sharedDataViewmodel.getFoodAllergy(listofFoodAllergy)
     }
-
     private fun chooseGender() {
-
         binding.itemGender.radio.setOnCheckedChangeListener { group, checkedId ->
             when (checkedId) {
                 R.id.radio_male -> {
                     val chooseGender = ChooseGender(getString(R.string.male), 1)
                     sharedDataViewmodel.getGender(chooseGender)
                 }
-
                 R.id.radio_female -> {
                     val chooseGender = ChooseGender(getString(R.string.female), 2)
                     sharedDataViewmodel.getGender(chooseGender)
                 }
             }
         }
-
     }
-
     private fun choosePatient() {
-
         binding.itemQuestionAnswer.radio.setOnCheckedChangeListener { group, checkedId ->
             when (checkedId) {
                 R.id.radio_isMe -> {
                     val choosePatientType = ChoosePatient(true,getString(R.string.me) )
                     sharedDataViewmodel.getPatientType(choosePatientType)
                 }
-
                 R.id.radio_someOne-> {
                     val choosePatientType = ChoosePatient(false,getString(R.string.anotherpatient) )
                     sharedDataViewmodel.getPatientType(choosePatientType)
                 }
             }
         }
-
     }
-
-
     private fun call() {
 
         val intent = Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", "17143", null))
@@ -776,8 +711,6 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
         }else if (date=="endDate"){
             sharedDataViewmodel.getEdndDate(dateResult)
         }
-
-
     }
 
     private fun imageServices() {
@@ -820,9 +753,7 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
     }
 
     private fun chooseLanuage() {
-
         binding.itemLanguage.radio.setOnCheckedChangeListener { group, checkedId ->
-
             when (checkedId) {
                 binding.itemLanguage.radioEnglish.id -> {
                     lang = "en"
@@ -831,7 +762,6 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
                     DateUtils.setLanguage(lang!!)
                     skipLogin()
                 }
-
                 binding.itemLanguage.radioArabic.id -> {
                     lang = "ar"
                     sp.saveUserLang(Constans.Language, lang!!)
@@ -839,48 +769,34 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
                     DateUtils.setLanguage(lang!!)
                     skipLogin()
                 }
-
             }
-
         }
-
     }
-
     private fun skipLogin(){
         sharedDataViewmodel.skipLoginStatus.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-
-
             if (it=="skip"){
                 DateUtils.setLanguageSkip("skip")
             }else {
                 DateUtils.setLanguageSkip("")
             }
-
         })
     }
 
     private fun deleteUserCallback(){
-
         patientviewmodel.deleteUserResponse.observe(viewLifecycleOwner, Observer {
-
             when (it) {
-
                 is Resource.Loading -> {
 
                 }
-
                 is Resource.sucess -> {
                findNavController().navigate(R.id.loginFragment)
-
                 }
-
                 is Resource.Error -> {
 
                     Snackbar.make(requireView(), "${it.message}", Snackbar.LENGTH_SHORT)
                         .show()
                 }
             }
-
         })
         patientviewmodel.deleteUser()
     }

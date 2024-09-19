@@ -15,7 +15,7 @@ data class CityData(
     @SerializedName("CountryName")
     val countryName: String,
     @SerializedName("Id")
-    val id: Int=1,
+    val id: Int,
     @SerializedName("Inactive")
     val inactive: Boolean,
     @SerializedName("Name")

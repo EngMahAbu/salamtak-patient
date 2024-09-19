@@ -62,10 +62,25 @@
                         android:textColor="@color/black"
                         android:textSize="14sp"
                         android:layout_marginBottom="@dimen/_5sdp"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_date"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:fontFamily="@font/avenirltstd_roman"
+                            android:gravity="start"
+                            android:padding="2dp"
+                            android:text="ااااااااللللللللللعاااااااااااا"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:layout_marginBottom="@dimen/_5sdp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_specialistName" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

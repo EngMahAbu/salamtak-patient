@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Salamtak|سلامتك</string>
     <!-- TODO: Remove or change this placeholder text -->
@@ -13,7 +14,7 @@
     <string name="salamtakhomebooking">Salamtak Home Visit</string>
     <string name="salamtakconnect">Salamtak Connect</string>
     <string name="choose">Confirm</string>
-    <string name="login">Log In</string>
+    <string name="login">Log in</string>
     <string name="help">Help</string>
     <string name="next">Next</string>
     <string name="lets_start">Get Started</string>
@@ -142,6 +143,7 @@
     </string>
     <string name="sub_specialization">Sub speciality</string>
     <string name="book_now">Book Now</string>
+    <string name="book_at_theclinic">Book Now</string>
     <string name="osama">Osama</string>
     <string name="said">Said</string>
     <string name="click_here_to_edit_your_profile">Click here to edit your profile</string>
@@ -149,6 +151,7 @@
     <string name="upcoming">Upcoming</string>
     <string name="canceled">Canceled</string>
     <string name="finished">Completed</string>
+    <string name="finish">Finish</string>
     <string name="address">Location</string>
     <string name="waiting_time">Waiting Time</string>
     <string name="fees">Fees</string>
@@ -262,7 +265,7 @@
     <string name="update">Update</string>
     <string name="salamtak_gates">Salamtak Gate</string>
     <string name="skip_login_explore_our_features">Skip Login, Explore Salamtak Services</string>
-    <string name="you_must_sign_up_to_book_your_doctor">Please Sign up to book your doctor</string>
+    <string name="you_must_sign_up_to_book_your_doctor">To complete your booking steps</string>
     <string name="no_data_to_show">No data to show</string>
     <string name="have_amedicalquestion">Salamtak Ask</string>
     <string name="ask_a_doctor_for_free_and_get_response_in_24_hours">Get professional medical answers to all your
@@ -317,7 +320,7 @@
     <string name="are_you_sure_you_want_to_delete_your_account">Are you sure you want to delete your Account</string>
     <string name="all_reviews">All Reviews</string>
     <string name="lang">English</string>
-    <string name="schedule">Schedule</string>
+    <string name="schedule">Appointments</string>
     <string name="questionanswer">Question Asked for?</string>
     <string name="questionanswered">Your Question Answer</string>
     <string name="doctorname">Doctor Name</string>
@@ -330,7 +333,7 @@
     <string name="salamtak_promotions">Salamtak Promotions</string>
     <string name="salamtak_angle">Salamtak Angle</string>
     <string name="enter_your_registered">Enter your registered</string>
-    <string name="or">or</string>
+    <string name="or">OR</string>
     <string name="addresss">Address</string>
     <string name="clinicservices">Clinic Service</string>
     <string name="avilableappointemnts">"Available "</string>
@@ -373,6 +376,24 @@
     <string name="myanswers">Questions Answer</string>
     <string name="chronicdisease">Chronic Disease</string>
     <string name="prevSurgery">Previous Surgery</string>
+    <string name="chooses">Choose</string>
+    <string name="book_as_visitor">Book As Visitor</string>
+    <string name="create_visitor">"Create Patient "</string>
+    <string name="yor_question_your_identity_will_be_anonymous">Yor Question (Your identity will be anonymous)</string>
+    <string name="account">My Account</string>
+    <string name="datess">Date</string>
+    <string name="servicess">Service</string>
+    <string name="fee">Tota Service Fees</string>
+    <string name="paids">Total Paid</string>
+    <string name="balance">Grand Total</string>
+    <string name="bills">My Account</string>
+    <string name="we_will_answer_your_question_in_3_days"> Your question will be answered by Salamatak Doctors within 3 working days.</string>
+    <string name="ages">Age</string>
+    <string name="choose_symptoms">Choose Symptoms</string>
+    <string name="detailsaccount">Details account</string>
+    <string name="booking_successfully">" booking Successfully"</string>
+    <string name="medicine">Medicine</string>
+    <string name="adds">Adds</string>
     <array name="choose">
         <item>Select</item>
     </array>

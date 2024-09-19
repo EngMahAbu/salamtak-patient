@@ -1,4 +1,4 @@
-package com.korashiGroup.salamtakPatient.fragment.navbottom
+package com.korashiGroup.salamtakPatient.fragment.more
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
@@ -10,10 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import coil.load
-import coil.transform.CircleCropTransformation
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.databinding.MorefragmentBinding
 import com.korashiGroup.salamtakPatient.utils.DateUtils
@@ -76,8 +73,9 @@ class MoreFragment : Fragment() {
         }
 
         binding.layoutLanguage.setOnClickListener {
-            val action =
-                MoreFragmentDirections.actionMoreFragmentToDialogBottomSheetFragment("lang")
+            val action = MoreFragmentDirections.actionMoreFragmentToDialogBottomSheetFragment(
+                    "lang"
+                )
             findNavController().navigate(action)
             it.isEnabled=false
             Handler().postDelayed({
@@ -86,8 +84,9 @@ class MoreFragment : Fragment() {
         }
 
         binding.layoutCallUs.setOnClickListener {
-            val action =
-                MoreFragmentDirections.actionMoreFragmentToDialogBottomSheetFragment("help")
+            val action = MoreFragmentDirections.actionMoreFragmentToDialogBottomSheetFragment(
+                    "help"
+                )
             findNavController().navigate(action)
             it.isEnabled=false
             Handler().postDelayed({
@@ -96,8 +95,9 @@ class MoreFragment : Fragment() {
         }
 
         binding.layoutSignOut.setOnClickListener {
-            val action =
-                MoreFragmentDirections.actionMoreFragmentToDialogBottomSheetFragment("signout")
+            val action = MoreFragmentDirections.actionMoreFragmentToDialogBottomSheetFragment(
+                    "signout"
+                )
             findNavController().navigate(action)
             it.isEnabled=false
             Handler().postDelayed({
@@ -106,8 +106,9 @@ class MoreFragment : Fragment() {
         }
 
         binding.layoutDelete.setOnClickListener {
-            val action =
-                MoreFragmentDirections.actionMoreFragmentToDialogBottomSheetFragment("delete")
+            val action = MoreFragmentDirections.actionMoreFragmentToDialogBottomSheetFragment(
+                    "delete"
+                )
             findNavController().navigate(action)
             it.isEnabled=false
             Handler().postDelayed({
@@ -116,7 +117,9 @@ class MoreFragment : Fragment() {
         }
 
         binding.layoutChangePassword.setOnClickListener {
-            val action = MoreFragmentDirections.actionMoreFragmentToChangepasswordFragment(0)
+            val action = MoreFragmentDirections.actionMoreFragmentToChangepasswordFragment(
+                    0
+                )
             findNavController().navigate(action)
         }
         binding.layoutTermsConditions.setOnClickListener {
@@ -124,6 +127,9 @@ class MoreFragment : Fragment() {
         }
         binding.layoutPrivacy.setOnClickListener {
             findNavController().navigate(R.id.privacyPolicyFragment)
+        }
+        binding.layoutBillsDoctor.setOnClickListener {
+            findNavController().navigate(R.id.patientAccountFragment)
         }
       binding.layoutNextAvailableBooking.setOnClickListener {
 //                if (skipStatus=="skip"){

@@ -7,11 +7,8 @@ import android.widget.CompoundButton
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.korashiGroup.salamtakPatient.databinding.ItemLayoutSpecialistBinding
 import com.korashiGroup.salamtakPatient.databinding.ItemLayoutSubspecialistBinding
 import com.korashiGroup.salamtakPatient.model.AreaData
-import com.korashiGroup.salamtakPatient.model.CityData
-import com.korashiGroup.salamtakPatient.model.SubSpecialistData
 
 
 class GetAllAreaAdapter(private val selectarea:SelectArea):ListAdapter<AreaData,GetAllAreaAdapter.ViewHolder>(DiffCallback()) {

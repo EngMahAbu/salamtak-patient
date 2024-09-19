@@ -10,10 +10,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.snackbar.Snackbar
@@ -30,6 +33,7 @@ import com.korashiGroup.salamtakPatient.model.salamtakgate.GatesDetails
 import com.korashiGroup.salamtakPatient.utils.Constans
 import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
+import com.korashiGroup.salamtakPatient.viewmodel.PagingViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.PolyClinicsViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,6 +45,7 @@ class HealthyTopicsFragment : Fragment(), BlogsGatesAdapter.Action, MedicalHealt
     private val args: HealthyTopicsFragmentArgs by navArgs()
     private val viewmodel: DialogBottomSheetViewmodel by viewModels()
     private val polyClinicsViewModel: PolyClinicsViewmodel by viewModels()
+    private val pagingViewmodel: PagingViewmodel by viewModels()
     private lateinit var questionsAdapter: QuestionsAdapter
     private lateinit var bottomsheetbeahavoir: BottomSheetBehavior<ConstraintLayout>
     val sharedDataViewmodel: SharedDataViewmodel by activityViewModels()
@@ -71,6 +76,9 @@ class HealthyTopicsFragment : Fragment(), BlogsGatesAdapter.Action, MedicalHealt
         initButton()
         callBack()
         callBackSalamtakAngel()
+        if (args.gatesId>=6) {
+            pagingcallBack()
+        }
     }
 
     private fun medicalServicesRecylerview() {
@@ -106,7 +114,8 @@ class HealthyTopicsFragment : Fragment(), BlogsGatesAdapter.Action, MedicalHealt
             binding.layoutFilter.visibility = View.VISIBLE
             binding.rvQuestions.visibility=View.GONE
             binding.rvAngles.visibility=View.VISIBLE
-            viewmodel.getHealthEntityPagedList(cityId, areaId, 7, 100, 0)
+            //viewmodel.getHealthEntityPagedList(cityId, areaId, 7, 100, 0)
+            pagingcallBack()
         }
 
         binding.btnQandA.setOnClickListener {
@@ -122,7 +131,8 @@ class HealthyTopicsFragment : Fragment(), BlogsGatesAdapter.Action, MedicalHealt
 
         binding.layoutBottomsheetpersistant.btnApply.setOnClickListener {
             viewmodel.healthEntityPage = 0
-            viewmodel.getHealthEntityPagedList(cityId, areaId, 7, 100, 0)
+           // viewmodel.getHealthEntityPagedList(cityId, areaId, 7, 100, 0)
+            pagingcallBack()
             bottomsheetbeahavoir.state = BottomSheetBehavior.STATE_HIDDEN
         }
         binding.layoutBottomsheetpersistant.btnLayoutChooseCity.setOnClickListener {
@@ -206,7 +216,7 @@ class HealthyTopicsFragment : Fragment(), BlogsGatesAdapter.Action, MedicalHealt
                     binding.progressBar.visibility = View.GONE
 
                     val list = response.data?.data?.items
-                    healthAdapter.submitList(list?.toList())
+             //       healthAdapter.submitList(list?.toList())
 
 //                    val totalresult= (response.data?.data?.totalCount)?.div((10+2))
 //                    isLastPage = viewmodel.healthEntityPage == totalresult
@@ -225,7 +235,7 @@ class HealthyTopicsFragment : Fragment(), BlogsGatesAdapter.Action, MedicalHealt
 
         })
         sharedDataViewmodel.getCity.observe(viewLifecycleOwner) {
-            viewmodel.getHealthEntityPagedList(it.id, areaId, 7, 100, 0)
+           pagingcallBack()
         }
     }
 
@@ -304,7 +314,9 @@ class HealthyTopicsFragment : Fragment(), BlogsGatesAdapter.Action, MedicalHealt
         })
         sharedDataViewmodel.getArea.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             binding.layoutBottomsheetpersistant.etChooseArea.setText(it.name)
-            areaId = it.id
+            if (it.id!=null) {
+                areaId = it.id
+            }
         })
     }
 
@@ -352,6 +364,30 @@ class HealthyTopicsFragment : Fragment(), BlogsGatesAdapter.Action, MedicalHealt
         }else{
             Snackbar.make(requireView(),"No answers",Snackbar.LENGTH_SHORT).show()
         }
+
+    }
+    private fun pagingcallBack(){
+        binding.apply {
+            lifecycleScope.launchWhenStarted {
+                pagingViewmodel.getDoctorsPagingData(cityId,areaId,7).collect{
+                    healthAdapter.submitData(it)
+                }
+            }
+
+            rvAngles.apply {
+                layoutManager=LinearLayoutManager(requireContext())
+                adapter=healthAdapter
+            }
+
+            lifecycleScope.launchWhenStarted {
+                healthAdapter.loadStateFlow.collect{
+                    val state=it.refresh
+                    progressBar.isVisible=state is LoadState.Loading
+                }
+            }
+
+        }
+
 
     }
 

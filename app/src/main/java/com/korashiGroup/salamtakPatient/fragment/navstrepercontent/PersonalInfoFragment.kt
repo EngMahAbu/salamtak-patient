@@ -46,6 +46,8 @@ import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.karumi.dexter.listener.single.PermissionListener
+import com.korashiGroup.salamtakPatient.model.CityData
+import com.korashiGroup.salamtakPatient.model.register.DataLogin
 import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -67,7 +69,8 @@ class PersonalInfoFragment : Fragment() {
     private var partMap: Map<String, Any> = mutableMapOf()
     private lateinit var updateProfileInfo: UpdateProfileInfo
     private var status = false
-
+    private var cityId = 0
+    private var areaId = 0
     @Inject
     lateinit var sp: SpUtil
     var genderID = 0
@@ -93,6 +96,32 @@ class PersonalInfoFragment : Fragment() {
 
     private fun initbutton() {
 
+
+        binding.btnLayoutChooseCity.setOnClickListener {
+
+            val action =
+                PersonalInfoFragmentDirections.actionPersonalInfoFragment2ToDialogBottomSheetFragment("AllCity")
+            findNavController().navigate(action)
+            it.isEnabled=false
+            Handler().postDelayed({
+                it.isEnabled=true
+            }, 1000)
+        }
+
+        binding.btnLayoutChooseArea.setOnClickListener {
+            if (!binding.etChooseCity.text.toString().isNullOrEmpty()) {
+                val action =
+                    PersonalInfoFragmentDirections.actionPersonalInfoFragment2ToDialogBottomSheetFragment("AllArea")
+                findNavController().navigate(action)
+            } else {
+                Toast.makeText(requireContext(), "choose city first", Toast.LENGTH_SHORT).show()
+            }
+            it.isEnabled=false
+            Handler().postDelayed({
+                it.isEnabled=true
+            }, 1000)
+
+        }
 
         binding.etFullNameEn.setText(sp.getUserNameInEnglish(NameEN))
         binding.etFullNameAR.setText(sp.getUserNameInArabic(NameAR))
@@ -453,6 +482,7 @@ class PersonalInfoFragment : Fragment() {
 
 
     private fun sendData(FullName: String, FullNameAr: String, Birthdate: String) {
+        sp.save(Constans.UserLOGIN, DataLogin(0,"",FullName,FullNameAr,"",0,0,""))
 
         imageFile?.let { it ->
 
@@ -464,7 +494,9 @@ class PersonalInfoFragment : Fragment() {
         partMap = partMap + mapOf("NationalityId" to nationalityId)
         partMap = partMap + mapOf("Birthdate" to Birthdate)
         partMap = partMap + mapOf("GenderId" to genderID)
-        partMap = partMap + mapOf("OccupationId" to "ok")
+        partMap = partMap + mapOf("OccupationId" to binding.etOccuption.text.toString())
+        partMap = partMap + mapOf("CityId" to cityId)
+        partMap = partMap + mapOf("AreaId" to areaId)
         val builder = MultipartBody.Builder().setType(MultipartBody.FORM)
         for (item in partMap) {
             val key = item.key
@@ -640,6 +672,19 @@ class PersonalInfoFragment : Fragment() {
             if (it) {
                 viewmodel.getPatientInfo()
                 binding.btnNext.text = getString(R.string.update)
+            }
+        })
+
+        sharedDataViewmodel.getCity.observe(viewLifecycleOwner, Observer {
+            cityId = it.id
+            binding.etChooseCity.setText(it.name)
+            sharedDataViewmodel.getCity(CityData(0,"",it.id,false,it.name,""))
+        })
+
+        sharedDataViewmodel.getArea.observe(viewLifecycleOwner, Observer {
+            binding.etChooseArea.setText(it.name)
+            if (it.id!=null) {
+                areaId = it.id
             }
         })
 

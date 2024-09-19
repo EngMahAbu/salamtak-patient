@@ -41,7 +41,8 @@ class QuestionsAdapter(val book:IBook,val isFullName:Boolean):ListAdapter<Questi
                  holder.binding.tvPrevSurgery.visibility=View.GONE
              }
              if (isFullName){
-                 tvPatientname.text="${tvSpecialistName.context.getString(R.string.patientName)} : ${services.patientFulltname}"
+                // tvPatientname.text="${tvSpecialistName.context.getString(R.string.patientName)} : ${services.patientFulltname}"
+                 tvPatientname.visibility=View.GONE
              }else{
                  tvPatientname.text="${tvSpecialistName.context.getString(R.string.patientName)} : ${services.patientFirstname}"
              }

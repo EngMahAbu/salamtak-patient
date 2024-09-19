@@ -7,6 +7,8 @@ data class CreatepatientAppointementsResponse(
     val data: Data?,
     @SerializedName("Message")
     val message: String,
+    @SerializedName("MessageCode")
+    var messageCode: String?,
 )
 data class Data(
     @SerializedName("AppointmentDate")
@@ -38,7 +40,9 @@ data class Data(
     @SerializedName("PatientNumber")
     val patientNumber: String?,
     @SerializedName("TimeInterval")
-    val timeInterval: Any?
+    val timeInterval: Any?,
+    @SerializedName("AppointmentId")
+    val appointmentId: Int?
 )
 data class AppointementDoctorDto(
     @SerializedName("Birthday")

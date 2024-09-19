@@ -36,10 +36,16 @@ object DataBinding {
         return formatter.format(time)
     }
 
-    fun convertDateFormat(date1: String?,format:String,formatParsing:String):String{
-        val sdf = SimpleDateFormat(format, Locale.getDefault())
+    fun convertDateFormat(date1: String?,formatIn:String,formatOutParsing:String):String{
+        val sdf = SimpleDateFormat(formatIn, Locale.getDefault())
         val date = sdf.parse(date1)
-        val dateForm = SimpleDateFormat(formatParsing, Locale.getDefault())
+        val dateForm = SimpleDateFormat(formatOutParsing, Locale.getDefault())
+        return dateForm.format(date)
+    }
+    fun convertDateFormat(date1: String?,formatIn:String,formatOutParsing:String,locale: Locale):String{
+        val sdf = SimpleDateFormat(formatIn, locale)
+        val date = sdf.parse(date1)
+        val dateForm = SimpleDateFormat(formatOutParsing, locale)
         return dateForm.format(date)
     }
 }

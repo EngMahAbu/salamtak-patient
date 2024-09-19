@@ -23,7 +23,6 @@ class EditProfileFragment : Fragment() {
     private lateinit var binding: EditProfilefragmentBinding
     val sharedDataViewmodel: SharedDataViewmodel by activityViewModels()
     private lateinit var navController: NavController
-    val location = LocationFragment()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

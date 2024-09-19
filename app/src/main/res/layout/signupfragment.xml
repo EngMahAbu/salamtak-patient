@@ -92,7 +92,7 @@
                         android:layout_marginTop="5dp"
                         android:imeOptions="actionNext"
                         android:foregroundTint="@color/gray"
-                        android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ "
+                        android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ-_/\"
                         android:hint="@string/full_name_in_english_first_middle_last"
                         android:textColor="@color/black"
                         android:fontFamily="@font/avenirltstd_roman"

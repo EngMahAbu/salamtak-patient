@@ -58,6 +58,9 @@
         <action
                 android:id="@+id/action_loginFragment_to_homeFragment"
                 app:destination="@id/homeFragment" />
+        <action
+                android:id="@+id/action_loginFragment_to_bookAppointmentFragment"
+                app:destination="@id/bookAppointmentFragment" />
     </fragment>
     <dialog
             android:id="@+id/dialogBottomSheetFragment"
@@ -149,6 +152,9 @@
         <action
                 android:id="@+id/action_docotorProfileFragment_to_dialogBottomSheetFragment"
                 app:destination="@id/dialogBottomSheetFragment" />
+        <action
+                android:id="@+id/action_docotorProfileFragment_to_bookAppointmentFragment"
+                app:destination="@id/bookAppointmentFragment" />
     </fragment>
     <fragment
             android:id="@+id/homeFragment"
@@ -175,6 +181,12 @@
                 app:destination="@id/videoCallFragment" />
         <action android:id="@+id/action_homeFragment_to_dialogSpecificationFragment"
                 app:destination="@id/dialogSpecificationFragment"/>
+        <action
+                android:id="@+id/action_homeFragment_to_dialogSignUp"
+                app:destination="@id/dialogSignUp" />
+        <action
+                android:id="@+id/action_homeFragment_to_doctorNotificationFragment"
+                app:destination="@id/doctorNotificationFragment" />
 
 
     </fragment>
@@ -220,7 +232,7 @@
     </fragment>
     <fragment
             android:id="@+id/moreFragment"
-            android:name="com.korashiGroup.salamtakPatient.fragment.navbottom.MoreFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.more.MoreFragment"
             android:label="morefragment"
             tools:layout="@layout/morefragment">
         <action
@@ -328,6 +340,9 @@
         <argument
                 android:name="status"
                 app:argType="string" />
+        <action
+                android:id="@+id/action_bookAppointmentFragment_to_dialogSignUp"
+                app:destination="@id/dialogSignUp" />
     </fragment>
     <dialog
             android:id="@+id/dialogSchduleFragment"
@@ -424,7 +439,11 @@
               android:name="com.korashiGroup.salamtakPatient.fragment.navstrepercontent.PersonalInfoFragment"
               android:label="personalinfofragment" tools:layout="@layout/personalinfofragment"/>
     <dialog android:id="@+id/dialogSignUp" android:name="com.korashiGroup.salamtakPatient.fragment.dialog.DialogSignUp"
-            android:label="fragment_dialog_sign_up" tools:layout="@layout/fragment_dialog_sign_up"/>
+            android:label="fragment_dialog_sign_up" tools:layout="@layout/fragment_dialog_sign_up">
+        <argument
+                android:name="status"
+                app:argType="boolean" />
+    </dialog>
     <fragment android:id="@+id/askDoctorFragment"
               android:name="com.korashiGroup.salamtakPatient.fragment.askdoctor.AskDoctorFragment"
               android:label="ask_doctor_fragment" tools:layout="@layout/ask_doctor_fragment">
@@ -438,6 +457,12 @@
               android:name="com.korashiGroup.salamtakPatient.fragment.booking.ConfirmedFragment"
               android:label="confirmedfragment" tools:layout="@layout/confirmedfragment">
         <argument android:name="date" app:argType="string" app:nullable="true"/>
+        <argument
+                android:name="doctorId"
+                app:argType="integer" />
+        <argument
+                android:name="appointementId"
+                app:argType="integer" />
     </fragment>
     <dialog android:id="@+id/dialogAddInsuranceCardFragment"
             android:name="com.korashiGroup.salamtakPatient.fragment.dialog.DialogAddInsuranceCardFragment"
@@ -509,6 +534,9 @@
         <action
                 android:id="@+id/action_offerBookAppointmentFragment_to_appointmentDetailsFragment"
                 app:destination="@id/appointmentDetailsFragment" />
+        <action
+                android:id="@+id/action_offerBookAppointmentFragment_to_dialogSignUp"
+                app:destination="@id/dialogSignUp" />
     </fragment>
     <fragment
             android:id="@+id/privacyPolicyFragment"
@@ -527,7 +555,11 @@
             android:id="@+id/specialistDoctorsFragment"
             android:name="com.korashiGroup.salamtakPatient.fragment.home.SpecialistDoctorsFragment"
             android:label="specialist_doctorsfragment"
-            tools:layout="@layout/specialist_doctorsfragment" />
+            tools:layout="@layout/specialist_doctorsfragment" >
+        <action
+                android:id="@+id/action_specialistDoctorsFragment_to_dialogBottomSheetFragment"
+                app:destination="@id/dialogBottomSheetFragment" />
+    </fragment>
     <fragment
             android:id="@+id/myQuestionsFragment"
             android:name="com.korashiGroup.salamtakPatient.fragment.askdoctor.MyQuestionsFragment"
@@ -559,6 +591,24 @@
         <argument
                 android:name="doctorId"
                 app:argType="integer" />
+    </fragment>
+    <dialog
+            android:id="@+id/anonymousPatientFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.annmouspatient.AnonymousPatientFragment"
+            android:label="anonymous_patientfragment"
+            tools:layout="@layout/anonymous_patientfragment" />
+    <fragment
+            android:id="@+id/patientAccountFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.more.PatientAccountFragment"
+            android:label="PatientAccountFragment" />
+    <fragment
+            android:id="@+id/doctorNotificationFragment"
+            android:name="com.korashiGroup.salamtakPatient.notification.DoctorNotificationFragment"
+            android:label="DoctorNotificationFragment" >
+        <argument
+                android:name="notificationRespnse"
+                app:argType="com.korashiGroup.salamtakPatient.model.notification.Data"
+                app:nullable="true" />
     </fragment>
 
 

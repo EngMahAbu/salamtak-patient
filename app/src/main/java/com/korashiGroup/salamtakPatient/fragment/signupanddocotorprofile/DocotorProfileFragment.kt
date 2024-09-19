@@ -46,13 +46,6 @@ class DocotorProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        sharedDataViewmodel.medicalInfoStatus.observe(viewLifecycleOwner, Observer {
-            if (it!=null){
-                findNavController().navigate(R.id.homeFragment)
-            }
-        })
-
         navController = Navigation.findNavController(view)
         initButton()
         setupNavigationBottom()
@@ -118,7 +111,7 @@ class DocotorProfileFragment : Fragment() {
                 binding.layoutStep2.visibility = View.VISIBLE
                 binding.imageViewstep3.visibility = View.VISIBLE
                 binding.imageViewstep2.visibility = View.GONE
-
+               // binding.tvSkip.visibility = View.VISIBLE
             }
             2 -> {
 
@@ -132,7 +125,7 @@ class DocotorProfileFragment : Fragment() {
                 binding.ivGraystep3.visibility = View.GONE
                 binding.layoutStep2.visibility = View.VISIBLE
                 binding.layoutStep3.visibility = View.VISIBLE
-                binding.tvSkip.visibility = View.VISIBLE
+              //  binding.tvSkip.visibility = View.VISIBLE
 
             }
             3 -> {
@@ -149,13 +142,33 @@ class DocotorProfileFragment : Fragment() {
                 binding.layoutStep3.visibility = View.VISIBLE
              //   binding.btnNext.visibility=View.VISIBLE
                 binding.imageView.visibility=View.VISIBLE
-
+                gotToHomeOrBookFragment()
             }
 
         }
 
 
     }
+
+    private fun gotToHomeOrBookFragment(){
+        sharedDataViewmodel.medicalInfoStatus.observe(viewLifecycleOwner, Observer {
+            if (it==false){
+                findNavController().navigate(R.id.homeFragment)
+            }else{
+                sharedDataViewmodel.doctorClinksResponseResponse.observe(viewLifecycleOwner,
+                    Observer {
+                        val action =
+                            DocotorProfileFragmentDirections.actionDocotorProfileFragmentToBookAppointmentFragment(
+                                it,
+                                "booking appointment"
+                            )
+                        findNavController().navigate(action)
+                    })
+
+            }
+        })
+    }
+
 
 
 }

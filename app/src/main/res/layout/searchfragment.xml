@@ -84,8 +84,7 @@
             android:id="@+id/layout_searchByServices"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp"
-                android:visibility="gone"
+            android:padding="5dp" android:visibility="gone"
             android:layout_marginTop="5dp"
             app:layout_constraintTop_toBottomOf="@+id/et_search"
             app:layout_constraintStart_toStartOf="parent"
@@ -271,7 +270,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_margin="15dp"
-            android:paddingBottom="30dp"
             tools:listitem="@layout/item_layout_doctors"
             app:layout_constraintTop_toBottomOf="@+id/tv_countofDoctors"
             />
@@ -313,6 +311,19 @@
             android:visibility="gone"
             />
 
+        <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/iv_message"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:layout_marginEnd="8dp"
+                app:lottie_rawRes="@raw/animatiom"
+                app:lottie_autoPlay="false"
+                app:lottie_loop="true"
+                app:layout_constraintEnd_toEndOf="@+id/rv_Doctors"
+                app:layout_constraintStart_toStartOf="@+id/rv_Doctors"
+                app:layout_constraintBottom_toBottomOf="@+id/rv_Doctors"
+                app:layout_constraintTop_toTopOf="@+id/rv_Doctors"
+                />
 
             <TextView android:id="@+id/crd_view"
                       android:layout_width="wrap_content"

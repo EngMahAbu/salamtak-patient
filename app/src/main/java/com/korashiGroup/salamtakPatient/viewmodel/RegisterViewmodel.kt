@@ -79,6 +79,25 @@ class RegisterViewmodel @Inject constructor(private val repositry: RegisterRepos
 
     }
 
+    fun createAnonymosPatient(createUser: CreateUser)=viewModelScope.launch(Dispatchers.IO+handler)  {
+
+        createResponse.postValue(Resource.Loading())
+        val response=repositry.createAnonymosPatient(createUser)
+        createResponse.postValue(response?.let { handleCreateAnonymosPatient(it) })
+    }
+
+    private fun handleCreateAnonymosPatient(response: Response<UserResponse>): Resource<UserResponse>? {
+        if (response.isSuccessful){
+            response.body()?.let { registerResponse->
+                return Resource.sucess(registerResponse)
+            }
+
+        }
+        val error = Gson().fromJson<UserResponse>(response.errorBody()!!.string(), UserResponse::class.java)
+        return Resource.Error(error.message)
+
+    }
+
     private fun handleRegister(response: Response<RegisterReponse>): Resource<RegisterReponse>?{
 
         if (response.isSuccessful){

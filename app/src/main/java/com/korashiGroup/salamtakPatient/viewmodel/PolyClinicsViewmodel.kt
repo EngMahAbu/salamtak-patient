@@ -12,6 +12,9 @@ import com.korashiGroup.salamtakPatient.fragment.polyclinic.model.PolyClinicsDoc
 import com.korashiGroup.salamtakPatient.model.askandanswer.questions.AnswersDoctorResponse
 import com.korashiGroup.salamtakPatient.model.askandanswer.questions.QuestionsResponse
 import com.korashiGroup.salamtakPatient.model.checktoken.CheckTokenResponse
+import com.korashiGroup.salamtakPatient.model.invoice.DoctorInvoiceResponse
+import com.korashiGroup.salamtakPatient.model.syemtoms.Syemtoms
+import com.korashiGroup.salamtakPatient.model.syemtoms.SymetomsResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
@@ -29,6 +32,9 @@ class PolyClinicsViewmodel @Inject constructor(private val repositry: RegisterRe
     val questionsResponse=MutableLiveData<Resource<QuestionsResponse>>()
     val checkTokenResponse=MutableLiveData<Resource<CheckTokenResponse>>()
     val doctorAnswerResponse=MutableLiveData<Resource<AnswersDoctorResponse>>()
+    val invoiceResponse=MutableLiveData<Resource<DoctorInvoiceResponse>>()
+    val symptomsResponse=MutableLiveData<Resource<SymetomsResponse>>()
+    val sendSymptomsResponse=MutableLiveData<Resource<Syemtoms>>()
 
 
     fun getFilteredHealthEntity(polyclinicRequest: HashMap<String, String> )=viewModelScope.launch(Dispatchers.IO+handler) {
@@ -129,6 +135,54 @@ class PolyClinicsViewmodel @Inject constructor(private val repositry: RegisterRe
             }
         }
         val error = Gson().fromJson<CheckTokenResponse>(response.errorBody()!!.string(), CheckTokenResponse::class.java)
+        return error.let { Resource.Error("") }
+    }
+
+    fun getAllInvoicesForPatient()=viewModelScope.launch(Dispatchers.IO+handler) {
+        invoiceResponse.postValue(Resource.Loading())
+        val response=repositry.getAllInvoicesForPatient()
+        invoiceResponse.postValue(response?.let { handleGetAllInvoicesForPatient(it) })
+    }
+
+    private fun handleGetAllInvoicesForPatient(response: Response<DoctorInvoiceResponse>): Resource<DoctorInvoiceResponse>? {
+        if (response.isSuccessful){
+            response.body()?.let {
+                return Resource.sucess(it)
+            }
+        }
+        val error = Gson().fromJson<DoctorInvoiceResponse>(response.errorBody()!!.string(), DoctorInvoiceResponse::class.java)
+        return error.let { Resource.Error("") }
+    }
+
+    fun getSymptomsBySpecialityId(specialityId :Int)=viewModelScope.launch(Dispatchers.IO+handler) {
+        symptomsResponse.postValue(Resource.Loading())
+        val response=repositry.getSymptomsBySpecialityId(specialityId)
+        symptomsResponse.postValue(response?.let { handleGetSymptomsBySpecialityId(it) })
+    }
+
+    private fun handleGetSymptomsBySpecialityId(response: Response<SymetomsResponse>): Resource<SymetomsResponse>? {
+        if (response.isSuccessful){
+            response.body()?.let {
+                return Resource.sucess(it)
+            }
+        }
+        val error = Gson().fromJson<SymetomsResponse>(response.errorBody()!!.string(), SymetomsResponse::class.java)
+        return error.let { Resource.Error("") }
+    }
+
+    fun createPatientSymptoms(Request: HashMap<String, String>)=viewModelScope.launch(Dispatchers.IO+handler) {
+        sendSymptomsResponse.postValue(Resource.Loading())
+        val response=repositry.createPatientSymptoms(Request)
+        sendSymptomsResponse.postValue(response?.let { handleCreatePatientSymptoms(it) })
+    }
+
+    private fun handleCreatePatientSymptoms(response: Response<Syemtoms>): Resource<Syemtoms>? {
+        if (response.isSuccessful){
+            response.body()?.let {
+                return Resource.sucess(it)
+            }
+        }
+        val error = Gson().fromJson<Syemtoms>(response.errorBody()!!.string(), Syemtoms::class.java)
         return error.let { Resource.Error("") }
     }
 

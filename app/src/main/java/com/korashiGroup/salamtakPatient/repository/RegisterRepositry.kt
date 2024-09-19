@@ -27,6 +27,8 @@ class RegisterRepositry @Inject constructor(private val apiService: ApiService) 
 
     suspend fun createUser(createUser: CreateUser) =
         sp.getUserLang(Constans.Language)?.let { apiService.createUser(it, createUser) }
+    suspend fun createAnonymosPatient(createUser: CreateUser) =
+        sp.getUserLang(Constans.Language)?.let { apiService.createAnonymosPatient(it, createUser) }
 
     suspend fun resetPassword(resetRequest: ResetRequest) =
         sp.getUserLang(Constans.Language)?.let { apiService.resetPassword(it, resetRequest) }
@@ -96,7 +98,7 @@ class RegisterRepositry @Inject constructor(private val apiService: ApiService) 
         sp.getUserLang(Constans.Language)
             ?.let { apiService.createPatientAppointment(it, appointmentRequest) }
 
-    suspend fun getDoctorProfileByDoctorId(DoctorId: Int,clinicId: Int) =
+    suspend fun getDoctorProfileByDoctorId(clinicId: Int,DoctorId: Int) =
         sp.getUserLang(Constans.Language)
             ?.let { apiService.getDoctorProfileByDoctorId(it, clinicId,DoctorId) }
 
@@ -233,5 +235,15 @@ class RegisterRepositry @Inject constructor(private val apiService: ApiService) 
         ?.let { apiService.getAnswersByDoctorId(it,doctorID) }
     suspend fun checkUser() = sp.getUserLang(Constans.Language)
         ?.let { apiService.checkUser(it) }
+    suspend fun getAllInvoicesForPatient() = sp.getUserLang(Constans.Language)
+        ?.let { apiService.getAllInvoicesForPatient(it) }
+    suspend fun getSymptomsBySpecialityId(specialityId :Int) = sp.getUserLang(Constans.Language)
+        ?.let { apiService.getSymptomsBySpecialityId(it,specialityId) }
+    suspend fun createPatientSymptoms(Request: HashMap<String, String>) = sp.getUserLang(Constans.Language)
+        ?.let { apiService.createPatientSymptoms(it,Request) }
+    suspend fun getUnreadDoctorResponses() = sp.getUserLang(Constans.Language)
+        ?.let { apiService.getUnreadDoctorResponses(it) }
+    suspend fun markAllDoctorResponses() = sp.getUserLang(Constans.Language)
+        ?.let { apiService.markAllDoctorResponses(it) }
 
 }

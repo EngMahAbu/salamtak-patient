@@ -53,6 +53,16 @@ class SpUtil @Inject constructor(private val sharedpref:SharedPreferences){
         return sharedpref.getString(Key_Name,"")
     }
 
+    fun savePatientId(Key_Name:String,text:Int){
+        val editor:SharedPreferences.Editor=sharedpref.edit()
+        editor.putInt(Key_Name,text)
+        editor.apply()
+    }
+    // to retrieve nameArabic
+    fun getPatientId(Key_Name: String):Int{
+        return sharedpref.getInt(Key_Name,0)
+    }
+
     // to store user
 
     fun save(Key_Name: String,user:DataLogin){

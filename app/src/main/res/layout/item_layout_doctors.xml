@@ -429,6 +429,70 @@
                             app:layout_constraintBottom_toBottomOf="@+id/tv_Fees"
                             app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/Call"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="@dimen/_5sdp"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:paddingBottom="2dp"
+                        app:layout_constraintTop_toBottomOf="@+id/Fees">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/layout_Call"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginStart="10dp"
+                            android:background="@drawable/bg_image_circle"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/iv_Call"
+                                android:layout_width="18dp"
+                                android:layout_height="18dp"
+                                android:adjustViewBounds="true"
+                                android:src="@drawable/ic_help"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_Call"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:fontFamily="@font/avenirltstd_black"
+                            android:gravity="start"
+                            android:padding="2dp"
+                            android:text="@string/forsupportcallus"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            app:layout_constraintStart_toEndOf="@+id/layout_Call"
+                            app:layout_constraintBottom_toBottomOf="@+id/layout_Call"
+                            app:layout_constraintTop_toTopOf="@id/layout_Call" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/Callresult"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/avenirltstd_roman"
+                            android:gravity="end"
+                            android:padding="2dp"
+                            android:text="17143"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/tv_Call"
+                            app:layout_constraintBottom_toBottomOf="@+id/tv_Call"
+                            app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
                 <TextView
                         android:id="@+id/tv_Book"
                         android:layout_width="75dp"
@@ -443,7 +507,7 @@
                         android:text="@string/more"
                         android:visibility="gone"
                         android:textColor="@color/blue"
-                        app:layout_constraintTop_toBottomOf="@+id/Fees"
+                        app:layout_constraintTop_toBottomOf="@+id/Call"
                         app:layout_constraintStart_toStartOf="parent"
                         />
 

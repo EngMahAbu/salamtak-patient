@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -15,10 +14,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.databinding.ChangepasswordfragmentBinding
-import com.korashiGroup.salamtakPatient.databinding.ChooseLanguagefragmentBinding
 import com.korashiGroup.salamtakPatient.model.register.ChangePasswordRequest
 import com.korashiGroup.salamtakPatient.model.register.ResetChangePassword
-import com.korashiGroup.salamtakPatient.model.register.UserForgetInfo
 import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.utils.SpUtil
 import com.korashiGroup.salamtakPatient.viewmodel.RegisterViewmodel

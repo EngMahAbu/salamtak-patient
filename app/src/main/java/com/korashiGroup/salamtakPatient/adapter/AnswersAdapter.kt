@@ -33,10 +33,12 @@ class AnswersAdapter(val book:IBook):ListAdapter<GetAnswers,AnswersAdapter.ViewH
              }"
              tvSpecialistName.text="${tvSpecialistName.context.getString(R.string.doctorname)} : ${services.doctorName}"
              tvQuestions.text="${tvSpecialistName.context.getString(R.string.questionanswered)} : ${services.answer}"
-             tvBook.text="${tvSpecialistName.context.getString(R.string.book_now)}"
+             tvBook.text="${tvSpecialistName.context.getString(R.string.book_at_theclinic)}"
              tvAge.visibility=View.GONE
              tvPrevSurgery.visibility=View.GONE
-             tvPrevSurgery.visibility=View.GONE
+             tvDoctorName.visibility=View.GONE
+             tvChronicDisease.visibility=View.GONE
+             tvDate.visibility=View.GONE
          }
 
         holder.binding.tvBook.setOnClickListener {

@@ -15,6 +15,8 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.databinding.LoginfragmentBinding
+import com.korashiGroup.salamtakPatient.fragment.signupanddocotorprofile.DocotorProfileFragmentDirections
+import com.korashiGroup.salamtakPatient.model.booking.clink.GetDoctorClinksResponse
 import com.korashiGroup.salamtakPatient.model.register.DataLogin
 import com.korashiGroup.salamtakPatient.model.register.LoginUser
 import com.korashiGroup.salamtakPatient.utils.Constans.Language
@@ -27,8 +29,6 @@ import com.korashiGroup.salamtakPatient.utils.SpUtil
 import com.korashiGroup.salamtakPatient.viewmodel.RegisterViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.SimpleDateFormat
-import java.util.*
 import javax.inject.Inject
 
 
@@ -40,7 +40,7 @@ class LoginFragment : Fragment() {
     val viewmodel: RegisterViewmodel by viewModels()
     val sharedDataViewmodel: SharedDataViewmodel by activityViewModels()
     var someEventListener: onSomeEventListener? = null
-    private val currentTime = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
+    private lateinit var getDoctorAndPolyClinksResponse: GetDoctorClinksResponse
     @Inject
     lateinit var sp: SpUtil
 
@@ -65,6 +65,7 @@ class LoginFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = LoginfragmentBinding.inflate(layoutInflater, container, false)
+        getDoctorClinksResponseResponse()
         return binding.root
     }
 
@@ -124,11 +125,13 @@ class LoginFragment : Fragment() {
             findNavController().navigate(R.id.forgetPasswordFragment)
         }
         binding.tvSignup.setOnClickListener {
+            sharedDataViewmodel.getMedicalInfoStatus(false)
             findNavController().navigate(R.id.signupFragment)
         }
 
         binding.tvSkipLogin.setOnClickListener {
             sharedDataViewmodel.getSkipLoginStatus("skip")
+            DateUtils.setToken("")
             someEventListener?.someEvent("skip")
             sp.save(UserLOGIN, DataLogin(0,"","","","",0,0,""))
             findNavController().navigate(R.id.homeFragment)
@@ -208,12 +211,27 @@ class LoginFragment : Fragment() {
                     loginresponse.data!!?.data?.let { DateUtils.setToken(it.token) }
                     DateUtils.setCurrentTime(DataBinding.getCurrentDateTime())
                     sharedDataViewmodel.getProfileStatus( loginresponse.data?.data?.profileStatus!!)
-                     if (loginresponse.data?.data?.profileStatus!!<2) {
+                     if (loginresponse.data?.data?.profileStatus!!<1) {
                           findNavController().navigate(R.id.docotorProfileFragment)
 
                      }else{
-                         val action=LoginFragmentDirections.actionLoginFragmentToHomeFragment()
-                        findNavController().navigate(action)
+                                 sharedDataViewmodel.medicalInfoStatus.observe(
+                                     viewLifecycleOwner,
+                                     Observer {
+                                         if (it == true) {
+                                             val action =
+                                                 LoginFragmentDirections.actionLoginFragmentToBookAppointmentFragment(
+                                                     getDoctorAndPolyClinksResponse,
+                                                     "booking appointment"
+                                                 )
+                                             findNavController().navigate(action)
+                                         } else {
+                                             val action =
+                                                 LoginFragmentDirections.actionLoginFragmentToHomeFragment()
+                                             findNavController().navigate(action)
+                                         }
+                                     })
+
                      }
 
 //                    Toast.makeText(
@@ -242,7 +260,6 @@ class LoginFragment : Fragment() {
         binding.progressBar.visibility = View.GONE
     }
 
-
     private fun bindDataToviews() {
 
         if (sp.getUser() != null) {
@@ -251,13 +268,14 @@ class LoginFragment : Fragment() {
 
     }
 
-
-
-
-
     interface onSomeEventListener {
         fun someEvent(s: String?)
     }
-
+    private fun getDoctorClinksResponseResponse() {
+        sharedDataViewmodel.doctorClinksResponseResponse.observe(viewLifecycleOwner,
+            Observer {
+                getDoctorAndPolyClinksResponse=it
+            })
+    }
 
 }

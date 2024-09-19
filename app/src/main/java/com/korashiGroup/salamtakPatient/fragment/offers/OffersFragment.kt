@@ -113,15 +113,11 @@ class OffersFragment : Fragment(),CategoryAdapter.Action,OffersAdapter.Action{
     }
 
     override fun onItemBooked(offerDoctor: OfferDoctor) {
-        if (DateUtils.getToken().isNullOrEmpty()){
-            findNavController().navigate(R.id.dialogSignUp)
-        }else {
             val action =
                 OffersFragmentDirections.actionOffersFragmentToOfferBookAppointmentFragment(
                     offerDoctor
                 )
             findNavController().navigate(action)
-        }
     }
     private fun bindViews(list:List<OfferDetails>){
         if (!list.isNullOrEmpty()){
