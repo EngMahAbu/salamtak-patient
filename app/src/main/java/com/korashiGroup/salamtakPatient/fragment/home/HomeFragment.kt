@@ -245,6 +245,20 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
                 Id = 7
             )
         )
+        list.add(
+            ImageServices(
+                R.drawable.research,
+                getString(R.string.labs),
+                Id = 8
+            )
+        )
+        list.add(
+            ImageServices(
+                R.drawable.medicalscan,
+                getString(R.string.medicalscan),
+                Id = 9
+            )
+        )
 
         imageServicesAdapter.submitList(list)
     }
@@ -458,7 +472,9 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
         if (servicesID==7){
             findNavController().navigate(R.id.offersFragment)
         }else{
-        findNavController().navigate(R.id.specialistDoctorsFragment)}
+            val action =HomeFragmentDirections.actionHomeFragmentToSpecialistDoctorsFragment()
+                        findNavController().navigate(action)
+        }
     }
 
 

@@ -187,6 +187,9 @@
         <action
                 android:id="@+id/action_homeFragment_to_doctorNotificationFragment"
                 app:destination="@id/doctorNotificationFragment" />
+        <action
+                android:id="@+id/action_homeFragment_to_specialistDoctorsFragment"
+                app:destination="@id/specialistDoctorsFragment" />
 
 
     </fragment>
@@ -609,6 +612,27 @@
                 android:name="notificationRespnse"
                 app:argType="com.korashiGroup.salamtakPatient.model.notification.Data"
                 app:nullable="true" />
+    </fragment>
+    <fragment
+            android:id="@+id/labsAndScannerFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.labsandscanner.LabsAndScannerFragment"
+            android:label="labs_and_scannerfragment"
+            tools:layout="@layout/labs_and_scannerfragment" >
+        <action
+                android:id="@+id/action_labsAndScannerFragment_to_analysisFragment"
+                app:destination="@id/analysisFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/analysisFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.labsandscanner.AnalysisFragment"
+            android:label="analysisfragment"
+            tools:layout="@layout/analysisfragment" >
+        <argument
+                android:name="imageId"
+                app:argType="integer" />
+        <argument
+                android:name="labName"
+                app:argType="string" />
     </fragment>
 
 

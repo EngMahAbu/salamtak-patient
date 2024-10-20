@@ -1,6 +1,7 @@
 package com.korashiGroup.salamtakPatient.adapter
 
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,11 +15,12 @@ import com.korashiGroup.salamtakPatient.databinding.ItemLayoutEmrBinding
 import com.korashiGroup.salamtakPatient.databinding.ItemLayoutGatesBinding
 import com.korashiGroup.salamtakPatient.databinding.ItemLayoutRvservicesBinding
 import com.korashiGroup.salamtakPatient.model.ImageServices
+import com.korashiGroup.salamtakPatient.model.emr.DataEmr
 import com.korashiGroup.salamtakPatient.model.emr.Emr
 import com.korashiGroup.salamtakPatient.model.salamtakgate.Gates
 
 
-class EmrPatientAdapter():ListAdapter<Emr,EmrPatientAdapter.ViewHolder>(DiffCallback()) {
+class EmrPatientAdapter():ListAdapter<DataEmr,EmrPatientAdapter.ViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
@@ -28,23 +30,28 @@ class EmrPatientAdapter():ListAdapter<Emr,EmrPatientAdapter.ViewHolder>(DiffCall
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val services=getItem(position)
+        Log.e("TAG", "onBindViewHolder: $position" )
 
-
-        if (services.title.isNullOrEmpty() || services.description.isNullOrEmpty()){
-            holder.binding.tvTitle.visibility=View.GONE
-            holder.binding.title.visibility=View.GONE
-            holder.binding.tvDescription.visibility=View.GONE
-            holder.binding.description.visibility=View.GONE
-            Glide.with(holder.binding.ivDocumentUrl.context)
-                .load("https://salamtechapi.azurewebsites.net/${services.image}")
-                .into(holder.binding.ivDocumentUrl)
+        if (services.instructions.isNullOrEmpty()){
+            holder.binding.tvTitle.visibility=View.VISIBLE
+            holder.binding.title.visibility=View.VISIBLE
+            holder.binding.tvDescription.visibility=View.VISIBLE
+            holder.binding.description.visibility=View.VISIBLE
 
         }else {
             holder.binding.ivDocumentUrl.visibility=View.GONE
-            holder.binding.apply {
-                title.text=services.title
-                description.text=services.description
+            try {
+//                Glide.with(holder.binding.ivDocumentUrl.context)
+//                    .load("https://salamtechapi.azurewebsites.net/${services.patientEmrdocuments[0].documentUrl}")
+//                    .into(holder.binding.ivDocumentUrl)
+                holder.binding.apply {
+                    title.text=services.patientEmrdetails.get(0).title
+                    description.text=services.patientEmrdetails[0].description
+                }
+            }catch (e:Exception){
+                Log.e("Exception", e.toString())
             }
+
         }
 
 
@@ -58,12 +65,12 @@ class EmrPatientAdapter():ListAdapter<Emr,EmrPatientAdapter.ViewHolder>(DiffCall
     }
 
 
-    private class DiffCallback : DiffUtil.ItemCallback<Emr>() {
-        override fun areItemsTheSame(oldItem: Emr, newItem: Emr): Boolean {
+    private class DiffCallback : DiffUtil.ItemCallback<DataEmr>() {
+        override fun areItemsTheSame(oldItem: DataEmr, newItem: DataEmr): Boolean {
             return oldItem==newItem
         }
 
-        override fun areContentsTheSame(oldItem: Emr, newItem: Emr): Boolean {
+        override fun areContentsTheSame(oldItem: DataEmr, newItem: DataEmr): Boolean {
             return true
         }
     }

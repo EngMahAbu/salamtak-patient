@@ -78,7 +78,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
     private val cal = Calendar.getInstance(Locale.US)
     private val dates = ArrayList<Date>()
     val now = Calendar.getInstance(TimeZone.getTimeZone("CST"))
-    var specialistId:Int? =null
+    var specialistId:Int? =1
     var doctorId = 0
     var polyclinicId = 0
     var dayId = 0
@@ -497,9 +497,9 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             }
             partMap = partMap + mapOf("CityId" to it.id)
             partMap = (partMap + mapOf("SpecID" to specialistId!!))
-            partMap = partMap + mapOf("HealthEntityTypeId" to 6)
-            partMap = partMap + mapOf("MaxResultCount" to 30)
-            partMap = partMap + mapOf("SkipCount" to 0)
+            //partMap = partMap + mapOf("HealthEntityTypeId" to 6)
+           // partMap = partMap + mapOf("MaxResultCount" to 30)
+         //   partMap = partMap + mapOf("SkipCount" to 0)
             polyClinicsViewmodel.getFilteredHealthEntity(partMap as HashMap<String, String>)
         }
         polyClinicsViewmodel.polyClinicsResponse.observe(viewLifecycleOwner) {

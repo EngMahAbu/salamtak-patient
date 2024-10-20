@@ -375,6 +375,9 @@
     <string name="booking_successfully">تم الحجز بنجاح</string>
     <string name="medicine">الأدوية</string>
     <string name="adds">الاعلان</string>
+    <string name="labs">تحاليل</string>
+    <string name="medicalscan">أشعة</string>
+    <string name="searchbylabname" >ابحث باسم المعمل ...</string>
     <array name="choose">
         <item>اختار</item>
     </array>

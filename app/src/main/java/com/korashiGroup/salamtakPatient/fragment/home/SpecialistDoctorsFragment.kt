@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.korashiGroup.salamtakPatient.R
@@ -28,11 +29,12 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SpecialistDoctorsFragment : Fragment(),SpecialictyAdapter.SelectSpecialist {
 
-   private lateinit var binding:SpecialistDoctorsfragmentBinding
+    private lateinit var binding:SpecialistDoctorsfragmentBinding
     private lateinit var specialistAdapter: SpecialictyAdapter
     private val viewmodel: DialogBottomSheetViewmodel by viewModels()
     val sharedDataViewmodel: SharedDataViewmodel by activityViewModels()
     var doctorName=""
+    var examinationtypeid = 0
     companion object {
         var instance: SpecialistDoctorsFragment? = null
     }
@@ -47,6 +49,10 @@ class SpecialistDoctorsFragment : Fragment(),SpecialictyAdapter.SelectSpecialist
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         instance=this
+        examinationtypeid = HomeFragment.instance?.let {
+            it.medicalExaminatioId
+        } ?: 1
+        bindViews()
         setupresyclerviewSpecialist()
         //callBackSpecialist()
         initButton()
@@ -98,6 +104,13 @@ class SpecialistDoctorsFragment : Fragment(),SpecialictyAdapter.SelectSpecialist
                     findNavController().navigate(R.id.searchFragment)
                // }
         //    }
+
+            when(examinationtypeid){
+                8,9->{findNavController().navigate(R.id.labsAndScannerFragment)}
+                else->{
+                    findNavController().navigate(R.id.searchFragment)
+                }
+            }
         }
     }
 
@@ -227,6 +240,16 @@ class SpecialistDoctorsFragment : Fragment(),SpecialictyAdapter.SelectSpecialist
         }
         }
         return value
+
+    }
+
+    private fun bindViews(){
+        when(examinationtypeid){
+            8,9->{
+                binding.layoutChooseSpecialization.visibility=View.GONE
+                binding.etSearch.hint=getString(R.string.searchbylabname)
+            }
+        }
 
     }
 

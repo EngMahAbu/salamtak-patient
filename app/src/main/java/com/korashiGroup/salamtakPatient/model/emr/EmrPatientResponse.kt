@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class EmrPatientResponse(
     @SerializedName("Data")
-    val data: DataEmr,
+    val data: List<DataEmr>,
     @SerializedName("Message")
     val message: String,
     @SerializedName("MessageCode")

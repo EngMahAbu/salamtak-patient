@@ -394,6 +394,9 @@
     <string name="booking_successfully">" booking Successfully"</string>
     <string name="medicine">Medicine</string>
     <string name="adds">Adds</string>
+    <string name="labs">Labs</string>
+    <string name="medicalscan">Medical Scanner</string>
+    <string name="searchbylabname">Search by lab name...</string>
     <array name="choose">
         <item>Select</item>
     </array>

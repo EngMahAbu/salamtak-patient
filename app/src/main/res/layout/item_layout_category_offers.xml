@@ -50,6 +50,7 @@
                     android:layout_height="18dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="2dp"
+                    android:visibility="gone"
                     android:background="@drawable/bg_image_circle_red"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toBottomOf="@+id/layout_uploadImage">

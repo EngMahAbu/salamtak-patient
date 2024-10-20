@@ -23,6 +23,7 @@ class ServicesAdapter(private val onServicesClick:Action ):ListAdapter<ImageServ
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val services=getItem(position)
+
         Glide.with(holder.binding.ivServices)
             .load(services.image_onboarding)
             .into(holder.binding.ivServices)

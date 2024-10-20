@@ -98,19 +98,19 @@ class MedicalHistoryFragment : Fragment() {
                         hideprogressbar()
 
                         response.let {
-                            binding.Diagnosis.text=it.data?.data?.instructions
-                            it.data?.data?.patientEmrdetails?.forEach {
-                                val emr=Emr(it.title,it.description)
-                                emrList.add(emr)
-                            }
-                            it.data?.data?.patientEmrdocuments?.forEach {
-                                val emr=Emr("","",it.documentUrl)
-                                emrList.add(emr)
-                            }
+//                            it.data?.data?.patientEmrdetails?.forEach {
+//                                val emr=Emr(it.title,it.description)
+//                                emrList.add(emr)
+//                            }
+//                            it.data?.data?.patientEmrdocuments?.forEach {
+//                                val emr=Emr("","",it.documentUrl)
+//                                emrList.add(emr)
+//                            }
+                            emrPatientAdapter.submitList(it.data?.data)
+                            emrPatientAdapter.notifyDataSetChanged()
                         }
 
-                        emrPatientAdapter.submitList(emrList)
-                        emrPatientAdapter.notifyDataSetChanged()
+
 
                     }
 
