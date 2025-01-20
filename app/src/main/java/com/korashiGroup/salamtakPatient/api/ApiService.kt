@@ -23,6 +23,12 @@ import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCardResponse
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCompanyResponse
 import com.korashiGroup.salamtakPatient.model.insurance.SendInsuranceCardResponce
 import com.korashiGroup.salamtakPatient.model.invoice.DoctorInvoiceResponse
+import com.korashiGroup.salamtakPatient.model.labsandscanner.AnalysisResponse
+import com.korashiGroup.salamtakPatient.model.labsandscanner.CalenderResponse
+import com.korashiGroup.salamtakPatient.model.labsandscanner.LabAppointementResponse
+import com.korashiGroup.salamtakPatient.model.labsandscanner.LabReservationResponse
+import com.korashiGroup.salamtakPatient.model.labsandscanner.LabsBranchesResponse
+import com.korashiGroup.salamtakPatient.model.labsandscanner.LabsResponse
 import com.korashiGroup.salamtakPatient.model.notification.DoctorNotificationResponse
 import com.korashiGroup.salamtakPatient.model.offers.ActiveOffersResponse
 import com.korashiGroup.salamtakPatient.model.offers.OffersDetailsResponse
@@ -428,5 +434,42 @@ interface ApiService {
     suspend fun getUnreadDoctorResponses(
         @Path("culture") culture: String,
     ): Response<DoctorNotificationResponse>
+    @GET("{culture}/HealthEntity/GetServicesByType")
+    suspend fun getServicesByType(
+        @Path("culture") culture: String,
+        @Query("typeId") typeId :Int,
+    ): Response<AnalysisResponse>
+    @GET("{culture}/HealthEntity/GetLabsByTypeId")
+    suspend fun getLabsByTypeId(
+        @Path("culture") culture: String,
+        @Query("typeId") typeId :Int,
+        @Query("labName") labName :String?=null,
+    ): Response<LabsResponse>
+    @GET("{culture}/HealthEntity/GetLabAvailabilityByLabId")
+    suspend fun getLabAvailabilityByLabId(
+        @Path("culture") culture: String,
+        @Query("labId") labId :Int,
+    ): Response<CalenderResponse>
+    @POST("{culture}/HealthEntity/GetLabsByFilters")
+    suspend fun getLabsByFilters(
+        @Path("culture") culture: String,
+        @Body labsRequest: Map<String, String>,
+    ): Response<LabsBranchesResponse>
+
+    @POST("{culture}/HealthEntity/GetLabBranches")
+    suspend fun getLabBranches(
+        @Path("culture") culture: String,
+        @Body labsRequest: Map<String, String>,
+    ): Response<LabsBranchesResponse>
+    @POST("{culture}/HealthEntity/CreateLaboratoryReservation")
+    suspend fun createLaboratoryReservation(
+        @Path("culture") culture: String,
+        @Body analysisLabRequest: Map<String, String>,
+    ): Response<LabReservationResponse>
+
+    @GET("{culture}/HealthEntity/GetPatientAppointments")
+    suspend fun getPatientAppointments(
+        @Path("culture") culture: String,
+    ): Response<LabAppointementResponse>
 
 }

@@ -245,5 +245,19 @@ class RegisterRepositry @Inject constructor(private val apiService: ApiService) 
         ?.let { apiService.getUnreadDoctorResponses(it) }
     suspend fun markAllDoctorResponses() = sp.getUserLang(Constans.Language)
         ?.let { apiService.markAllDoctorResponses(it) }
+    suspend fun getServicesByType(typeId :Int) = sp.getUserLang(Constans.Language)
+        ?.let { apiService.getServicesByType(it,typeId) }
+    suspend fun getLabsByTypeId(typeId :Int,labName :String?=null) = sp.getUserLang(Constans.Language)
+        ?.let { apiService.getLabsByTypeId(it,typeId,labName) }
+    suspend fun getLabAvailabilityByLabId(labId :Int) = sp.getUserLang(Constans.Language)
+        ?.let { apiService.getLabAvailabilityByLabId(it,labId) }
+    suspend fun getLabsByFilters(Request: HashMap<String, String>) = sp.getUserLang(Constans.Language)
+        ?.let { apiService.getLabsByFilters(it,Request) }
+    suspend fun getLabBranches(Request: HashMap<String, String>) = sp.getUserLang(Constans.Language)
+        ?.let { apiService.getLabBranches(it,Request) }
+    suspend fun createLaboratoryReservation(Request: HashMap<String, String>) = sp.getUserLang(Constans.Language)
+        ?.let { apiService.createLaboratoryReservation(it,Request) }
+suspend fun getPatientAppointments() = sp.getUserLang(Constans.Language)
+        ?.let { apiService.getPatientAppointments(it) }
 
 }

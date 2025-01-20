@@ -145,7 +145,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
         }
     }
     fun setupresyclerviewSpecialist() {
-        topSpecialictyAdapter = TopSpecialictyAdapter(this)
+        topSpecialictyAdapter = TopSpecialictyAdapter(this,true)
         binding.rvTopSpecilaist.apply {
             adapter = topSpecialictyAdapter
             setHasFixedSize(true)
@@ -247,16 +247,23 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
         )
         list.add(
             ImageServices(
-                R.drawable.research,
+                R.drawable.icon_lab,
                 getString(R.string.labs),
                 Id = 8
             )
         )
         list.add(
             ImageServices(
-                R.drawable.medicalscan,
+                R.drawable.ic_radiologycenter,
                 getString(R.string.medicalscan),
                 Id = 9
+            )
+        )
+        list.add(
+            ImageServices(
+                R.drawable.ic_radiologycenter,
+                getString(R.string.home_care),
+                Id = 10
             )
         )
 

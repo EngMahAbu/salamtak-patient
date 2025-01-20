@@ -2,6 +2,7 @@ package com.korashiGroup.salamtakPatient.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.korashiGroup.salamtakPatient.fragment.labsandscanner.model.LabsInfo
 import com.korashiGroup.salamtakPatient.model.*
 import com.korashiGroup.salamtakPatient.model.booking.ClinicSchedualByClinicDayId
 import com.korashiGroup.salamtakPatient.model.booking.clink.ClinicData
@@ -43,6 +44,7 @@ class SharedDataViewmodel:ViewModel() {
     val rating=MutableLiveData<RatingDoctors>()
     val polyClinicResponse=MutableLiveData<PolyClinicData>()
     val doctorClinksResponseResponse=MutableLiveData<GetDoctorClinksResponse>()
+    val labsResponse=MutableLiveData<LabsInfo>()
 
 
 
@@ -138,6 +140,9 @@ class SharedDataViewmodel:ViewModel() {
     }
     fun getDoctorClinksResponseResponse(doctorClinksResponse: GetDoctorClinksResponse){
         doctorClinksResponseResponse.postValue(doctorClinksResponse)
+    }
+    fun getLabsInfoResponse(labsInfo: LabsInfo){
+        labsResponse.postValue(labsInfo)
     }
 
 }

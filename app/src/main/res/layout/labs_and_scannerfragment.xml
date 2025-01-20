@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_color_gray"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".fragment.labsandscanner.LabsAndScannerFragment">
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/iv_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:adjustViewBounds="true"
+                android:padding="10dp"
+                android:src="@drawable/ic_arrowleft"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_search"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_search" />
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/avenirltstd_black"
+                android:text="@string/lab"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/iv_arrow"
+                app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="25dp"
+            android:background="@drawable/bg_help"
+            app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintTop_toBottomOf="@+id/tv_search">
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/avenirltstd_roman"
+                android:text=""
+                android:textColor="@color/blue"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <EditText
+            android:id="@+id/et_search"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="25dp"
+            android:padding="5dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:drawableStart="@drawable/icon_search"
+            android:drawableTint="@color/blue"
+            android:drawablePadding="5dp"
+            android:imeOptions="actionDone"
+            android:hint="@string/searchbylabname"
+            android:inputType="text"
+            android:visibility="gone"
+            android:background="@drawable/bg_edittext"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_city"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+    <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_layout_ChooseClinic"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintEnd_toEndOf="@+id/layout_Choose_analysis"
+            app:layout_constraintStart_toStartOf="@+id/layout_Choose_analysis"
+            app:layout_constraintTop_toTopOf="@+id/layout_Choose_analysis"
+            app:layout_constraintBottom_toBottomOf="@+id/layout_Choose_analysis"
+            />
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_Choose_analysis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/bg_edittext"
+            android:elevation="1dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_city">
+
+        <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_arrowdownChoose_Clinic"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="12dp"
+                android:padding="2dp"
+                android:gravity="start"
+                android:src="@drawable/ic_arrowdwon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textinput_Choose_Clinic"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginBottom="5dp"
+                android:hint="@string/selectanalysis"
+                android:paddingTop="2dp"
+                android:gravity="center"
+                app:boxBackgroundColor="@color/white"
+                app:boxBackgroundMode="none"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_Choose_Clinic"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_gravity="center_horizontal"
+                    android:enabled="false"
+                    android:inputType="text"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_SalamtakServices"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="15dp"
+            android:paddingBottom="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_Choose_analysis"
+            tools:listitem="@layout/item_layout_category_offers"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_Labs"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_margin="15dp"
+                android:paddingBottom="20dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:listitem="@layout/item_layout_doctors"
+                app:layout_constraintTop_toBottomOf="@+id/layout_Choose_analysis"
+                />
+        <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:visibility="gone"
+                />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <include
+            android:id="@+id/layoutBottomsheetpersistant"
+            layout="@layout/layout_bottomsheet_analysis"
+            android:visibility="visible"
+            />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

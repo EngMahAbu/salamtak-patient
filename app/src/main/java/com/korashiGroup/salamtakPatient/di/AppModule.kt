@@ -152,7 +152,7 @@ object AppModule {
     ): ApiService {
         return Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create ())
             .client(getOkHttpClient())
             .build()
             .create(ApiService::class.java)

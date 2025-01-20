@@ -78,7 +78,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
     private val cal = Calendar.getInstance(Locale.US)
     private val dates = ArrayList<Date>()
     val now = Calendar.getInstance(TimeZone.getTimeZone("CST"))
-    var specialistId:Int? =1
+    var specialistId:Int? =null
     var doctorId = 0
     var polyclinicId = 0
     var dayId = 0
@@ -159,19 +159,28 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                 polyClinicSearch()
             }
         } else {
-            if (!binding.etSearch.text.toString().isNullOrEmpty() || cityId==null){
-                doctorsSearch()
-            }else {
-                sharedDataViewmodel.specialication.observe(viewLifecycleOwner) {
-                    binding.layoutBottomsheetpersistant.etSpecialization.setText(it.name)
-                    if (it.name.isNullOrEmpty()) {
-                        binding.tvSearch.setText(getString(R.string.search))
-                    } else {
-                        binding.tvSearch.setText(it.name)
-                    }
-                    specialistId = it.id
+            if (!binding.etSearch.text.toString().isNullOrEmpty()){
+                sharedDataViewmodel.getCity.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+                    cityId=it.id
                     doctorsSearch()
+                })
+            }else {
+                if (specialistId!=null){
+                    sharedDataViewmodel.specialication.observe(viewLifecycleOwner) {
+                        binding.layoutBottomsheetpersistant.etSpecialization.setText(it.name)
+                        if (it.name.isNullOrEmpty()) {
+                            binding.tvSearch.setText(getString(R.string.search))
+                        } else {
+                            binding.tvSearch.setText(it.name)
+                        }
+                        specialistId = it.id
+                        doctorsSearch()
+                    }
                 }
+                sharedDataViewmodel.getCity.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+                    cityId=it.id
+                    doctorsSearch()
+                })
             }
         }
 
@@ -473,9 +482,10 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         sharedDataViewmodel.getArea.observe(viewLifecycleOwner) {
             binding.layoutBottomsheetpersistant.etChooseArea.setText(it.name)
             areaName=it.name
-            if (!binding.layoutBottomsheetpersistant.etChooseArea.toString().isEmpty()) {
-                areaId = it.id
-            } else areaId = null
+            areaId = it.id
+//            if (!binding.layoutBottomsheetpersistant.etChooseArea.toString().isEmpty()) {
+//                areaId = it.id
+//            } else areaId = null
         }
 
         sharedDataViewmodel.chooseGender.observe(viewLifecycleOwner) {
@@ -496,7 +506,10 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                 binding.tvCity.setText(it.name)
             }
             partMap = partMap + mapOf("CityId" to it.id)
-            partMap = (partMap + mapOf("SpecID" to specialistId!!))
+            specialistId?.let {
+                partMap = (partMap + mapOf("SpecID" to it))
+            }
+
             //partMap = partMap + mapOf("HealthEntityTypeId" to 6)
            // partMap = partMap + mapOf("MaxResultCount" to 30)
          //   partMap = partMap + mapOf("SkipCount" to 0)
@@ -1061,13 +1074,16 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             if (DefaultLocaleHelper.getInstance(requireContext()).getCurrentLocale() == "ar") {
                 binding.layoutBottomsheetpersistant.etChooseCity.setText(it.nameAr)
                 cityName=it.nameAr
+                cityId = it.id
             } else {
                 binding.layoutBottomsheetpersistant.etChooseCity.setText(it.name)
                 cityName=it.name
-            }
-            if (!binding.layoutBottomsheetpersistant.etChooseCity.text.toString().isEmpty()) {
                 cityId = it.id
-            } else cityId = null
+            }
+//            if (!binding.layoutBottomsheetpersistant.etChooseCity.text.toString().isEmpty()) {
+//                cityId = it.id
+//            } else cityId = null
+          //  cityId = it.id
         }
     }
 

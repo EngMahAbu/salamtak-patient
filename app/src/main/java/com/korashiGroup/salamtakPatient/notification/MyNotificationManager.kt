@@ -1,6 +1,5 @@
 package com.korashiGroup.salamtakPatient.notification
 
-import android.R.id
 import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -12,7 +11,6 @@ import android.os.Bundle
 import androidx.core.app.NotificationCompat
 import androidx.navigation.NavDeepLinkBuilder
 import com.korashiGroup.salamtakPatient.R
-import com.korashiGroup.salamtakPatient.fragment.addagora.VideoCallFragmentArgs
 import java.util.*
 import javax.inject.Inject
 

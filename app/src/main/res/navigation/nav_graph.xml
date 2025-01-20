@@ -628,12 +628,21 @@
             android:label="analysisfragment"
             tools:layout="@layout/analysisfragment" >
         <argument
-                android:name="imageId"
-                app:argType="integer" />
+                android:name="dataBranches"
+                app:argType="com.korashiGroup.salamtakPatient.model.labsandscanner.DataBranches" />
+        <action
+                android:id="@+id/action_analysisFragment_to_dialogBottomSheetFragment"
+                app:destination="@id/dialogBottomSheetFragment" />
         <argument
-                android:name="labName"
-                app:argType="string" />
+                android:name="listOfAvailableServices"
+                app:argType="com.korashiGroup.salamtakPatient.model.labsandscanner.AvailableService[]" />
+
     </fragment>
+    <fragment
+            android:id="@+id/lapAppointementFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.labsandscanner.LapAppointementFragment"
+            android:label="appointementfragment_lap"
+            tools:layout="@layout/appointementfragment_lap" />
 
 
 </navigation>

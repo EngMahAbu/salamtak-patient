@@ -11,7 +11,7 @@
     <string name="salamtakconnect">Salamtak Connect</string>
     <string name="choose">تأكيد</string>
     <string name="login">تسجيل الدخول</string>
-    <string name="help">للمساعدة 17143</string>
+    <string name="help">للمساعدة</string>
     <string name="next">التالى</string>
     <string name="mobile_number">رقم الموبايل </string>
     <string name="password">كلمة المرور</string>
@@ -114,7 +114,7 @@
     <string name="Call">مكالمة صوتية</string>
     <string name="Video_Call">مكالمة فيديو</string>
     <string name="medical_services_directory">Guide سلامتك</string>
-    <string name="see_all">مشاهدةالكل</string>
+    <string name="see_all">المزيد</string>
     <string name="hospitals">المستشفيات</string>
     <string name="polyclinics">مراكز طبية</string>
     <string name="pharmacies">الصيدليات</string>
@@ -154,7 +154,7 @@
     <string name="choose_city">اختر المدينة</string>
     <string name="choose_area">اختر المنطقة</string>
     <string name="to">الى</string>
-    <string name="egp">جنيه</string>
+    <string name="egp">ج م</string>
     <string name="from">من</string>
     <string name="choose_seniority_level">اختر الدرجة العلمية</string>
     <string name="choose_gender">اختر الجنس</string>
@@ -289,6 +289,7 @@
     <string name="qanda">بنك الاسئلة</string>
     <string name="emergencies">دليل الطوارئ</string>
     <string name="select">إختر شركة التأمين</string>
+    <string name="selectanalysis">ابحث باسم التحليل أو التحاليل</string>
     <string name="select_bookingtype">إختر نوع الخدمة</string>
     <string name="favorite_doctor">الدكتور المفضل</string>
     <string name="confirmed">تـأكـيد </string>
@@ -375,9 +376,27 @@
     <string name="booking_successfully">تم الحجز بنجاح</string>
     <string name="medicine">الأدوية</string>
     <string name="adds">الاعلان</string>
-    <string name="labs">تحاليل</string>
-    <string name="medicalscan">أشعة</string>
+    <string name="labs">التحاليل</string>
+    <string name="medicalscan">الأشعة</string>
     <string name="searchbylabname" >ابحث باسم المعمل ...</string>
+    <string name="searchbyRadiologyname">ابحث باسم مركز الاشعة ...</string>
+    <string name="analysis">التحاليل</string>
+    <string name="analysisname">ابحث باسم التحليل</string>
+    <string name="popularlabs">الاكثر اختيارا</string>
+    <string name="selectradialogy">ابحث باسم الاشعة</string>
+    <string name="radiologypoular"> الاكثر اختيارا</string>
+    <string name="radiology">الاشعة</string>
+    <string name="radiologyname">ابحث باسم الاشعة</string>
+    <string name="labscenter">المعامل</string>
+    <string name="choose_your_analysis_item_first"> اختر اليوم و تحاليلك أولا</string>
+    <string name="totatalcoast">الاجمالى: </string>
+    <string name="bookinglist">قائمة التحاليل المطلوبة</string>
+    <string name="lab">المعال</string>
+    <string name="please_choose_analysis_first">الرجاء اختيار التحليل أولا</string>
+    <string name="no_availability_found_for_the_given_labid">لا يوجد مواعيد متاحة الان</string>
+    <string name="os">os</string>
+    <string name="laboratory_reservations">حجوزات المعامل</string>
+    <string name="home_care">الرعاية المنزلية</string>
     <array name="choose">
         <item>اختار</item>
     </array>

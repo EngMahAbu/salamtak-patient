@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -62,7 +63,7 @@
                             android:layout_marginTop="10dp"
                             android:fontFamily="@font/avenirltstd_roman"
                             android:gravity="start"
-                            android:padding="1dp"
+                            android:drawablePadding="@dimen/_5sdp"
                             android:drawableStart="@drawable/ic_location"
                             android:text=""
                             android:textColor="@color/black"
@@ -71,25 +72,51 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             android:layout_marginEnd="@dimen/_10sdp"
                             app:layout_constraintTop_toBottomOf="@+id/tv_doctorName" />
+                    <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/iv_avilabilty"
+                            android:layout_width="20dp"
+                            android:layout_height="15dp"
+                            android:src="@drawable/ic_about_app"
+                            app:tint="@color/blue"
+                            android:visibility="gone"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginStart="6dp"
+                            app:layout_constraintStart_toEndOf="@+id/iv_doctorProfile"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_city" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/tv_area"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
                             android:layout_marginTop="5dp"
                             android:fontFamily="@font/avenirltstd_roman"
+                            app:drawableTint="@color/blue"
+                            android:drawablePadding="@dimen/_1sdp"
                             android:gravity="start"
-                            android:padding="1dp"
+                            android:paddingBottom="1dp"
                             android:text=""
                             android:visibility="gone"
-                            android:drawableStart="@drawable/ic_location"
                             android:textColor="@color/black"
                             android:textSize="12sp"
-                            app:layout_constraintStart_toEndOf="@+id/iv_doctorProfile"
+                            app:layout_constraintStart_toEndOf="@+id/iv_avilabilty"
                             app:layout_constraintEnd_toEndOf="parent"
                             android:layout_marginEnd="@dimen/_10sdp"
                             app:layout_constraintTop_toBottomOf="@+id/tv_city" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvSubItem"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="5dp"
+                            tools:itemCount="3"
+                            android:visibility="visible"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            app:layout_constraintTop_toBottomOf="@id/tv_area"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            tools:listitem="@layout/item_layout_analysis_price" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <TextView
@@ -129,7 +156,7 @@
                             android:fontFamily="@font/avenirltstd_roman"
                             android:text="@string/book_now"
                             android:textColor="@color/white"
-                            android:textSize="13sp"
+                            android:textSize="12sp"
                             android:textAllCaps="false"
                             android:layout_marginStart="@dimen/_10sdp"
                             app:layout_constraintWidth_percent=".60"
@@ -148,7 +175,7 @@
                             android:layout_marginStart="@dimen/_3sdp"
                             android:textColor="@color/white"
                             android:layout_marginEnd="10dp"
-                            android:textSize="12sp"
+                            android:textSize="13sp"
                             android:padding="1dp"
                             android:textAllCaps="false"
                             android:drawableEnd="@drawable/ic_arrow_right"

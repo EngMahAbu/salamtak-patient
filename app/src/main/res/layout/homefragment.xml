@@ -406,6 +406,22 @@
                         app:layout_constraintTop_toBottomOf="@+id/tv_SalamtakServices"
 
                 />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_chooseSpecility"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/avenirltstd_black"
+                        android:gravity="start"
+                        android:padding="2dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="15dp"
+                        android:text="@string/choose_specialization"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/rv_SalamtakServices"
+                        />
                 <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_top_Specilaist"
                         android:layout_width="0dp"
@@ -416,7 +432,7 @@
                         android:orientation="horizontal"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         tools:listitem="@layout/item_layout_top_speciality"
-                        app:layout_constraintTop_toBottomOf="@+id/rv_SalamtakServices"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_chooseSpecility"
                         app:layout_constraintEnd_toEndOf="parent"
                         />
 

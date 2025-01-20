@@ -12,7 +12,7 @@ import com.korashiGroup.salamtakPatient.databinding.ItemLayoutTopSpecialityBindi
 import com.korashiGroup.salamtakPatient.model.SpecialistData
 
 
-class TopSpecialictyAdapter(val iSelectSep:ISelectSpecialist):ListAdapter<SpecialistData,TopSpecialictyAdapter.ViewHolder>(DiffCallback()) {
+class TopSpecialictyAdapter(val iSelectSep:ISelectSpecialist,val status:Boolean):ListAdapter<SpecialistData,TopSpecialictyAdapter.ViewHolder>(DiffCallback()) {
 
     var selectedPosition=-1
 
@@ -24,8 +24,12 @@ class TopSpecialictyAdapter(val iSelectSep:ISelectSpecialist):ListAdapter<Specia
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val sp=getItem(position)
+        if (status){
+            holder.binding.tvServiceName.text="${sp.name}"
+        }else{
+            holder.binding.tvServiceName.text="${position+1} - ${sp.name}"
+        }
 
-        holder.binding.tvServiceName.text=sp.name
             holder.binding.ivServices.load("https://salamtechapi.azurewebsites.net/${sp.image}") {
                 crossfade(true)
                 crossfade(1000)

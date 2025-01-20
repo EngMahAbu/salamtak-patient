@@ -12,10 +12,11 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.databinding.ItemLayoutCategoryOffersBinding
+import com.korashiGroup.salamtakPatient.model.labsandscanner.DataLabs
 import com.korashiGroup.salamtakPatient.model.offers.ActiveOffers
 
 
-class LabsAdapter(private val onServicesClick:Action):ListAdapter<ActiveOffers,LabsAdapter.ViewHolder>(DiffCallback()) {
+class LabsAdapter(private val onServicesClick:Action):ListAdapter<DataLabs,LabsAdapter.ViewHolder>(DiffCallback()) {
     private var selectedItemPosition: Int = -1
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -27,26 +28,28 @@ class LabsAdapter(private val onServicesClick:Action):ListAdapter<ActiveOffers,L
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val services=getItem(position)
         Glide.with(holder.binding.ivServices)
-            .load(services.id)
+            .load("https://salamtechapi.azurewebsites.net/${services.image}")
             .transform( GranularRoundedCorners(25F, 25F, 0F, 0F))
             .into(holder.binding.ivServices)
 
-        holder.binding.tvServiceName.text=services.image
+        holder.binding.tvServiceName.text=services.name
         holder.binding.cardview.setOnClickListener {
             selectedItemPosition = holder.bindingAdapterPosition
-            onServicesClick.onItemClick(services.id,services.image)
+            services.id?.let { it1 -> services.name?.let { it2 ->
+                onServicesClick.onItemClick(it1,
+                    it2
+                )
+            } }
             notifyDataSetChanged()
         }
-        if (selectedItemPosition == position) {
-            holder.binding.cardview.background=ContextCompat.getDrawable(holder.itemView.context, R.color.move)
-            holder.binding.tvServiceName.setTextColor(Color.BLACK)
-        } else {
-            holder.binding.cardview.background =
-                ContextCompat.getDrawable(holder.itemView.context, R.drawable.bg_category_white)
-            holder.binding.tvServiceName.setTextColor(Color.BLACK)
-        }
-
-
+//        if (selectedItemPosition == position) {
+//            holder.binding.cardview.background=ContextCompat.getDrawable(holder.itemView.context, R.color.move)
+//            holder.binding.tvServiceName.setTextColor(Color.BLACK)
+//        } else {
+//            holder.binding.cardview.background =
+//                ContextCompat.getDrawable(holder.itemView.context, R.drawable.bg_category_white)
+//            holder.binding.tvServiceName.setTextColor(Color.BLACK)
+//        }
 
     }
 
@@ -57,18 +60,18 @@ class LabsAdapter(private val onServicesClick:Action):ListAdapter<ActiveOffers,L
     }
 
 
-    private class DiffCallback : DiffUtil.ItemCallback<ActiveOffers>() {
-        override fun areItemsTheSame(oldItem: ActiveOffers, newItem: ActiveOffers): Boolean {
+    private class DiffCallback : DiffUtil.ItemCallback<DataLabs>() {
+        override fun areItemsTheSame(oldItem: DataLabs, newItem: DataLabs): Boolean {
             return oldItem==newItem
         }
 
-        override fun areContentsTheSame(oldItem: ActiveOffers, newItem: ActiveOffers): Boolean {
+        override fun areContentsTheSame(oldItem: DataLabs, newItem: DataLabs): Boolean {
             return true
         }
     }
 
     interface Action{
-        fun onItemClick(servicesId: Int,labname:String)
+        fun onItemClick(labId: Int,labname:String)
     }
 
 

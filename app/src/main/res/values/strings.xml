@@ -123,7 +123,7 @@
     <string name="Call">Call</string>
     <string name="Video_Call">Video Call</string>
     <string name="medical_services_directory">Salamtak Guide</string>
-    <string name="see_all">See All</string>
+    <string name="see_all">More</string>
     <string name="hospitals">Hospitals</string>
     <string name="polyclinics">Polyclinics</string>
     <string name="pharmacies">Pharmacies</string>
@@ -303,6 +303,7 @@
     <string name="qanda"><![CDATA[Q&A]]></string>
     <string name="emergencies">Emergencies</string>
     <string name="select">Choose Your Insurance Company</string>
+    <string name="selectanalysis">Choose Your Analysis(S)</string>
     <string name="select_bookingtype">Choose Your Type Of Booking</string>
     <string name="favorite_doctor">Favorite Doctor</string>
     <string name="confirmed">Confirmed</string>
@@ -394,9 +395,27 @@
     <string name="booking_successfully">" booking Successfully"</string>
     <string name="medicine">Medicine</string>
     <string name="adds">Adds</string>
-    <string name="labs">Labs</string>
-    <string name="medicalscan">Medical Scanner</string>
-    <string name="searchbylabname">Search by lab name...</string>
+    <string name="labs">Lab Test</string>
+    <string name="medicalscan">Radiology</string>
+    <string name="searchbylabname">Search By Lab Name...</string>
+    <string name="searchbyRadiologyname">Search By Radiology Name...</string>
+    <string name="analysis">Lab Test</string>
+    <string name="analysisname">Search By Analysis Name...</string>
+    <string name="popularlabs">Most Popular</string>
+    <string name="selectradialogy">Select the name of the rays</string>
+    <string name="radiologypoular">Most Popular</string>
+    <string name="radiology">Radiology List</string>
+    <string name="radiologyname">Search by name of rays</string>
+    <string name="labscenter">Labs </string>
+    <string name="choose_your_analysis_item_first">cheek your analysis Item Or Day choose</string>
+    <string name="totatalcoast">Total:</string>
+    <string name="bookinglist">Booking List</string>
+    <string name="lab">Labs</string>
+    <string name="please_choose_analysis_first">Please Choose Analysis First</string>
+    <string name="no_availability_found_for_the_given_labid">No availability found for the given LabId</string>
+    <string name="os">os</string>
+    <string name="laboratory_reservations">Laboratory reservations</string>
+    <string name="home_care">Home Care</string>
     <array name="choose">
         <item>Select</item>
     </array>
