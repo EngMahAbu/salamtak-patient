@@ -41,18 +41,20 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(), ServicesAdapter.Action,
-    PopularDoctorsAdapter.Action, GatesAdapter.Action,MedicalServicesAdapter.Action,TopSpecialictyAdapter.ISelectSpecialist {
+    PopularDoctorsAdapter.Action, GatesAdapter.Action, MedicalServicesAdapter.Action,
+    TopSpecialictyAdapter.ISelectSpecialist {
 
     private lateinit var binding: HomefragmentBinding
     private lateinit var imageServicesAdapter: ServicesAdapter
     private lateinit var imageMedicalServicesAdapter: MedicalServicesAdapter
     private lateinit var topSpecialictyAdapter: TopSpecialictyAdapter
-        private lateinit var imageVideoAdapter: ImageVideoAdapter
+    private lateinit var imageVideoAdapter: ImageVideoAdapter
     private val patientviewmodel: PatientViewmodel by viewModels()
     private val notificationViewModel: NotificationViewModel by viewModels()
     private val polyClinicsViewmodel: PolyClinicsViewmodel by viewModels()
-    private var data: Data?=null
+    private var data: Data? = null
     var someEventListener: LoginFragment.onSomeEventListener? = null
+
     //    private lateinit var popularDoctorsAdapter: PopularDoctorsAdapter
 //    private lateinit var healthTopicsAdapter: HealthTopicsAdapter
 //    private lateinit var spotlightAdapter: SpotlightAdapter
@@ -64,7 +66,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
     var medicalExaminatioId: Int? = null
     val regviewmodel: RegisterViewmodel by viewModels()
     val viewmodel: DialogBottomSheetViewmodel by viewModels()
-    var skip=""
+    var skip = ""
 
     companion object {
         var instance: HomeFragment? = null
@@ -94,15 +96,15 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
         sharedDataViewmodel.getMedicalInfoStatus(false)
         bindDataToViews()
         callCheckUser()
-        if (DateUtils.getToken().isNullOrEmpty()){
-            binding.layoutSignup.visibility=View.VISIBLE
-            binding.ivNotification.visibility=View.GONE
+        if (DateUtils.getToken().isNullOrEmpty()) {
+            binding.layoutSignup.visibility = View.VISIBLE
+            binding.ivNotification.visibility = View.GONE
             someEventListener?.someEvent("skip")
-        //    sharedDataViewmodel.getCity(CityData(1,"",1,false,"",""))
+            //    sharedDataViewmodel.getCity(CityData(1,"",1,false,"",""))
 
-        }else {
-            binding.layoutSignup.visibility=View.GONE
-            binding.ivNotification.visibility=View.VISIBLE
+        } else {
+            binding.layoutSignup.visibility = View.GONE
+            binding.ivNotification.visibility = View.VISIBLE
             someEventListener?.someEvent("")
             profileCallBack()
         }
@@ -128,29 +130,31 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
             findNavController().navigate(R.id.notificationListFragment)
         }
         binding.ivMessage.setOnClickListener {
-            val action=HomeFragmentDirections.actionHomeFragmentToDoctorNotificationFragment(data)
+            val action = HomeFragmentDirections.actionHomeFragmentToDoctorNotificationFragment(data)
             findNavController().navigate(action)
         }
 
         binding.askQuestion.setOnClickListener {
-            if (DateUtils.getToken().isNullOrEmpty()){
-                val action=HomeFragmentDirections.actionHomeFragmentToDialogSignUp(false)
+            if (DateUtils.getToken().isNullOrEmpty()) {
+                val action = HomeFragmentDirections.actionHomeFragmentToDialogSignUp(false)
                 findNavController().navigate(action)
-            }else {
+            } else {
                 findNavController().navigate(R.id.askDoctorFragment)
-          }
+            }
         }
         binding.layoutSignup.setOnClickListener {
             findNavController().navigate(R.id.signupFragment)
         }
     }
+
     fun setupresyclerviewSpecialist() {
-        topSpecialictyAdapter = TopSpecialictyAdapter(this,true)
+        topSpecialictyAdapter = TopSpecialictyAdapter(this, true)
         binding.rvTopSpecilaist.apply {
             adapter = topSpecialictyAdapter
             setHasFixedSize(true)
         }
     }
+
     private fun servicesRecylerview() {
         imageServicesAdapter = ServicesAdapter(this)
         binding.rvSalamtakServices.apply {
@@ -261,7 +265,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
         )
         list.add(
             ImageServices(
-                R.drawable.ic_radiologycenter,
+                R.drawable.m_home,
                 getString(R.string.home_care),
                 Id = 10
             )
@@ -321,11 +325,11 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
             when (response) {
 
                 is Resource.Loading -> {
-              //      showprogtessbar()
+                         //showprogtessbar()
                 }
 
                 is Resource.sucess -> {
-              //      hideprogressbar()
+                    //      hideprogressbar()
                     response.let {
                         imageVideoAdapter.submitList(it.data?.Data)
                         binding.viewPager.adapter = imageVideoAdapter
@@ -382,7 +386,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
             when (response) {
 
                 is Resource.Loading -> {
-                //   showprogtessbar()
+                    //   showprogtessbar()
                 }
 
                 is Resource.sucess -> {
@@ -463,7 +467,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
 //    }
 
     private fun showprogtessbar() {
-       binding.progressBar.visibility = View.VISIBLE
+        binding.progressBar.visibility = View.VISIBLE
     }
 
     private fun hideprogressbar() {
@@ -472,24 +476,32 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
 
     override fun onItemClick(servicesID: Int) {
         medicalExaminatioId = servicesID
-        sharedDataViewmodel.getGender(ChooseGender("",0))
+        sharedDataViewmodel.getGender(ChooseGender("", 0))
 //        val action =
 //            HomeFragmentDirections.actionHomeFragmentToDialogBottomSheetFragment("services")
 //        findNavController().navigate(action)
-        if (servicesID==7){
-            findNavController().navigate(R.id.offersFragment)
-        }else{
-            val action =HomeFragmentDirections.actionHomeFragmentToSpecialistDoctorsFragment()
-                        findNavController().navigate(action)
+        when (servicesID) {
+            7 -> {
+                findNavController().navigate(R.id.offersFragment)
+            }
+
+            10 -> {
+                findNavController().navigate(R.id.homeCareFragment)
+            }
+
+            else -> {
+                val action = HomeFragmentDirections.actionHomeFragmentToSpecialistDoctorsFragment()
+                findNavController().navigate(action)
+            }
         }
     }
 
 
     private fun bindDataToViews() {
-        binding.tvWelcome.text =getTimeOfDayDescription()
-     //   val currentTime = SimpleDateFormat("HH:mm:ss a", Locale.getDefault()).format(Date())
+        binding.tvWelcome.text = getTimeOfDayDescription()
+        //   val currentTime = SimpleDateFormat("HH:mm:ss a", Locale.getDefault()).format(Date())
 
-        if (DateUtils.getLanguage()=="en") {
+        if (DateUtils.getLanguage() == "en") {
 //            if (currentTime.contains("pm") || currentTime.contains("PM")|| currentTime.contains("م")) {
 //                binding.tvWelcome.text = getString(R.string.good_evening)
 //            } else {
@@ -520,40 +532,42 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
     }
 
     override fun onItemGatesClick(gateId: Int) {
-        if (DateUtils.getToken().isNullOrEmpty() && gateId==6){
-            val action=HomeFragmentDirections.actionHomeFragmentToDialogSignUp(false)
+        if (DateUtils.getToken().isNullOrEmpty() && gateId == 6) {
+            val action = HomeFragmentDirections.actionHomeFragmentToDialogSignUp(false)
             findNavController().navigate(action)
-        }else {
+        } else {
             val action = HomeFragmentDirections.actionHomeFragmentToHealthyTopicsFragment(gateId)
             findNavController().navigate(action)
         }
     }
 
     override fun onItemClick(healthEntityTypeId: Int, healthName: String) {
-        if (DateUtils.getToken().isNullOrEmpty()){
-            val action=HomeFragmentDirections.actionHomeFragmentToDialogSignUp(false)
+        if (DateUtils.getToken().isNullOrEmpty()) {
+            val action = HomeFragmentDirections.actionHomeFragmentToDialogSignUp(false)
             findNavController().navigate(action)
-        }else if (healthEntityTypeId!=7){
+        } else if (healthEntityTypeId != 7) {
             val action =
                 HomeFragmentDirections.actionHomeFragmentToHealthEntityFragment(
                     healthName,
                     healthEntityTypeId
                 )
             findNavController().navigate(action)
-        }else{
+        } else {
             val action = HomeFragmentDirections.actionHomeFragmentToHealthyTopicsFragment(6)
             findNavController().navigate(action)
         }
 
     }
 
-        private fun skipLogin(){
-            sharedDataViewmodel.skipLoginStatus.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-                skip=it
+    private fun skipLogin() {
+        sharedDataViewmodel.skipLoginStatus.observe(
+            viewLifecycleOwner,
+            androidx.lifecycle.Observer {
+                skip = it
             })
-        }
+    }
 
-    private fun profileCallBack(){
+    private fun profileCallBack() {
 
         patientviewmodel.profileResponse.observe(viewLifecycleOwner, Observer {
 
@@ -565,8 +579,22 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
 
                 is Resource.sucess -> {
                     it.data?.data?.let { it1 -> sp.savePatientId(Constans.PatientId, it1.id) }
-                    sharedDataViewmodel.getCity(CityData(it.data!!.data.cityId,"",it.data!!.data.cityId,false,it.data.data.cityName,it.data.data.cityName))
-                    sharedDataViewmodel.getArea(AreaData(it.data.data.areaId,it.data.data.areaName))
+                    sharedDataViewmodel.getCity(
+                        CityData(
+                            it.data!!.data.cityId,
+                            "",
+                            it.data!!.data.cityId,
+                            false,
+                            it.data.data.cityName,
+                            it.data.data.cityName
+                        )
+                    )
+                    sharedDataViewmodel.getArea(
+                        AreaData(
+                            it.data.data.areaId,
+                            it.data.data.areaName
+                        )
+                    )
                 }
 
                 is Resource.Error -> {
@@ -577,7 +605,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
             }
 
         })
-            patientviewmodel.getPatientProfileByPateintId()
+        patientviewmodel.getPatientProfileByPateintId()
     }
 
 
@@ -586,7 +614,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
         val hour = calendar.get(Calendar.HOUR_OF_DAY)
 
         return when {
-            hour in 6 until 12 ->  getString(R.string.good_morning)
+            hour in 6 until 12 -> getString(R.string.good_morning)
             hour in 12 until 18 -> getString(R.string.afternoon)
             else -> getString(R.string.good_evening)
         }
@@ -602,14 +630,14 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
 
                 is Resource.sucess -> {
 
-                    val listIsSeen= response.data?.data?.filter {
-                        it.isSeen==false
+                    val listIsSeen = response.data?.data?.filter {
+                        it.isSeen == false
                     }
-                    if (listIsSeen.isNullOrEmpty()){
-                        binding.tvNumberOfNotification.visibility=View.GONE
-                        binding.ivRoundbg.visibility=View.GONE
-                    }else{
-                        binding.tvNumberOfNotification.text= listIsSeen.size.toString()
+                    if (listIsSeen.isNullOrEmpty()) {
+                        binding.tvNumberOfNotification.visibility = View.GONE
+                        binding.ivRoundbg.visibility = View.GONE
+                    } else {
+                        binding.tvNumberOfNotification.text = listIsSeen.size.toString()
                     }
                     callBackGetTop10Specialist()
                 }
@@ -624,6 +652,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
 
         patientviewmodel.getUserNotifications()
     }
+
     private fun callBackSpecialist() {
         viewmodel.specialistResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
@@ -653,6 +682,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
         }
         viewmodel.getSpecialist()
     }
+
     private fun callBackGetTop10Specialist() {
         viewmodel.top10SpecialistResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
@@ -686,13 +716,13 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
     }
 
     override fun onItemSelected(specialist: SpecialistData) {
-        if (specialist.id==-1){
+        if (specialist.id == -1) {
             callBackSpecialist()
-        }else{
+        } else {
             sharedDataViewmodel.getspecialication(specialist)
-            if (DateUtils.getToken().isNullOrEmpty()){
+            if (DateUtils.getToken().isNullOrEmpty()) {
                 findNavController().navigate(R.id.specialistDoctorsFragment)
-            }else {
+            } else {
                 findNavController().navigate(R.id.searchFragment)
             }
         }
@@ -732,16 +762,16 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
                 is Resource.sucess -> {
                     data = response.data?.data
                     val listIsNotSeen = response.data?.data?.responses?.filter {
-                        it?.isNotified==true
+                        it?.isNotified == true
                     }
                     if (listIsNotSeen != null) {
-                        if (listIsNotSeen.isEmpty()){
-                            binding.ivMessageroundbg.visibility=View.GONE
+                        if (listIsNotSeen.isEmpty()) {
+                            binding.ivMessageroundbg.visibility = View.GONE
                             binding.ivMessage.cancelAnimation()
-                        }else{
+                        } else {
                             binding.ivMessage.playAnimation()
                             //binding.ivMessageroundbg.visibility=View.VISIBLE
-                          //  binding.tvNumberOfDoctorNotification.text= response.data.data.unreadCount.toString()
+                            //  binding.tvNumberOfDoctorNotification.text= response.data.data.unreadCount.toString()
                         }
                     }
                 }

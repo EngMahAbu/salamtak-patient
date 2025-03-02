@@ -397,7 +397,24 @@
     <string name="os">os</string>
     <string name="laboratory_reservations">حجوزات المعامل</string>
     <string name="home_care">الرعاية المنزلية</string>
+    <string name="nursing">التمريض</string>
+    <string name="physical_therapy">علاج طبيعى</string>
+    <string name="psychotherapy">علاج نفسى</string>
+    <string name="life_coach">Life coach</string>
+    <string name="therapeutic_nutrition">تغذية علاجية</string>
     <array name="choose">
         <item>اختار</item>
     </array>
+
+    <string-array name="work_hours_array">
+        <item>8 ساعات</item>
+        <item>12 ساعة</item>
+        <item>24 ساعة</item>
+    </string-array>
+
+    <string-array name="service_level_array">
+        <item>ممرض عام</item>
+        <item>ممرض متخصص</item>
+        <item>ممرض رعاية مركزة</item>
+    </string-array>
 </resources>

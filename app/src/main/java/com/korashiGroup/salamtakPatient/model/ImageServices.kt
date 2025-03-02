@@ -4,5 +4,6 @@ data class ImageServices(
     val image_onboarding:Int,
     val textService:String,
     val color:Int=0,
-    val Id:Int?
+    val Id:Int?,
+    val image:String?=null
 )

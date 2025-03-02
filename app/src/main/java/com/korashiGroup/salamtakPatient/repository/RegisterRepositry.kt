@@ -27,6 +27,7 @@ class RegisterRepositry @Inject constructor(private val apiService: ApiService) 
 
     suspend fun createUser(createUser: CreateUser) =
         sp.getUserLang(Constans.Language)?.let { apiService.createUser(it, createUser) }
+
     suspend fun createAnonymosPatient(createUser: CreateUser) =
         sp.getUserLang(Constans.Language)?.let { apiService.createAnonymosPatient(it, createUser) }
 
@@ -34,7 +35,8 @@ class RegisterRepositry @Inject constructor(private val apiService: ApiService) 
         sp.getUserLang(Constans.Language)?.let { apiService.resetPassword(it, resetRequest) }
 
     suspend fun updatePassword(resetChangePassword: ResetChangePassword) =
-        sp.getUserLang(Constans.Language)?.let { apiService.updatePassword(it, resetChangePassword) }
+        sp.getUserLang(Constans.Language)
+            ?.let { apiService.updatePassword(it, resetChangePassword) }
 
     suspend fun changePassword(changePasswordRequest: ChangePasswordRequest) =
         sp.getUserLang(Constans.Language)
@@ -48,6 +50,7 @@ class RegisterRepositry @Inject constructor(private val apiService: ApiService) 
 
     suspend fun getSpecialist() = sp.getUserLang(Constans.Language)
         ?.let { apiService.getSpecialist(it) }
+
     suspend fun getTop10Specialist() = sp.getUserLang(Constans.Language)
         ?.let { apiService.getTop10Specialist(it) }
 
@@ -80,27 +83,45 @@ class RegisterRepositry @Inject constructor(private val apiService: ApiService) 
 
     suspend fun doctorSearch3(doctorSearchRequest: NewDoctorSearchRequest) =
         sp.getUserLang(Constans.Language)?.let { apiService.doctorSearch3(it, doctorSearchRequest) }
+
     suspend fun getClinicSchedualByClinicDayId(
         ClinicId: Int, DayId: Int,
         MedicalExaminationTypeId: Int,
         BookDate: String
     ) = sp.getUserLang(Constans.Language)
-        ?.let { apiService.getClinicSchedualByClinicDayId(it, ClinicId, DayId, MedicalExaminationTypeId, BookDate) }
+        ?.let {
+            apiService.getClinicSchedualByClinicDayId(
+                it,
+                ClinicId,
+                DayId,
+                MedicalExaminationTypeId,
+                BookDate
+            )
+        }
+
     suspend fun getPolyClinicSchedualByClinicDayId(
         ClinicId: Int,
         doctorId: Int,
         dayId: Int,
-        MedicalExaminationTypeId :Int
+        MedicalExaminationTypeId: Int
     ) = sp.getUserLang(Constans.Language)
-        ?.let { apiService.getPolyClinicSchedualByClinicDayId(it, ClinicId,doctorId,dayId,MedicalExaminationTypeId) }
+        ?.let {
+            apiService.getPolyClinicSchedualByClinicDayId(
+                it,
+                ClinicId,
+                doctorId,
+                dayId,
+                MedicalExaminationTypeId
+            )
+        }
 
     suspend fun createPatientAppointment(appointmentRequest: PatientAppointmentRequest) =
         sp.getUserLang(Constans.Language)
             ?.let { apiService.createPatientAppointment(it, appointmentRequest) }
 
-    suspend fun getDoctorProfileByDoctorId(clinicId: Int,DoctorId: Int) =
+    suspend fun getDoctorProfileByDoctorId(clinicId: Int, DoctorId: Int) =
         sp.getUserLang(Constans.Language)
-            ?.let { apiService.getDoctorProfileByDoctorId(it, clinicId,DoctorId) }
+            ?.let { apiService.getDoctorProfileByDoctorId(it, clinicId, DoctorId) }
 
     suspend fun getPatientAppointmentes(medicalExaminationTypeId: Int?) =
         sp.getUserLang(Constans.Language)
@@ -175,15 +196,18 @@ class RegisterRepositry @Inject constructor(private val apiService: ApiService) 
     suspend fun getPatient_Insurance(
     ) = sp.getUserLang(Constans.Language)
         ?.let { apiService.getPatient_Insurance(it) }
-    suspend fun createDoctorRate(doctorRateRequest: HashMap<String, String>) = sp.getUserLang(Constans.Language)
-        ?.let { apiService.createDoctorRate(it,doctorRateRequest) }
 
-    suspend fun getPatientDetails(appointmentId :Int) = sp.getUserLang(Constans.Language)
+    suspend fun createDoctorRate(doctorRateRequest: HashMap<String, String>) =
+        sp.getUserLang(Constans.Language)
+            ?.let { apiService.createDoctorRate(it, doctorRateRequest) }
+
+    suspend fun getPatientDetails(appointmentId: Int) = sp.getUserLang(Constans.Language)
         ?.let { apiService.getPatientDetails(it, appointmentId) }
 
     suspend fun editPatientAppointment(appointmentRequest: EditPatientAppointmentRequest) =
         sp.getUserLang(Constans.Language)
             ?.let { apiService.editPatientAppointment(it, appointmentRequest) }
+
     suspend fun getPatientFavoritDoctor() =
         sp.getUserLang(Constans.Language)
             ?.let { apiService.getPatientFavoritDoctor(it) }
@@ -191,12 +215,14 @@ class RegisterRepositry @Inject constructor(private val apiService: ApiService) 
     suspend fun getUserNotifications() =
         sp.getUserLang(Constans.Language)
             ?.let { apiService.getUserNotifications(it) }
+
     suspend fun updateNotification() =
         sp.getUserLang(Constans.Language)
             ?.let { apiService.updateNotification(it) }
+
     suspend fun createPatientFavoritDoctor(favoriteRequest: FavoriteRequest) =
         sp.getUserLang(Constans.Language)
-            ?.let { apiService.createPatientFavoritDoctor(it,favoriteRequest) }
+            ?.let { apiService.createPatientFavoritDoctor(it, favoriteRequest) }
 
     suspend fun getPatient() =
         sp.getUserLang(Constans.Language)
@@ -206,58 +232,84 @@ class RegisterRepositry @Inject constructor(private val apiService: ApiService) 
         sp.getUserLang(Constans.Language)
             ?.let { apiService.deleteUser(it) }
 
-    suspend fun getDoctorReviews(doctorId :Int) =
+    suspend fun getDoctorReviews(doctorId: Int) =
         sp.getUserLang(Constans.Language)
-            ?.let { apiService.getDoctorReviews(it,doctorId) }
+            ?.let { apiService.getDoctorReviews(it, doctorId) }
+
     suspend fun getPatientFawry() =
         sp.getUserLang(Constans.Language)
             ?.let { apiService.getPatientFawry(it) }
+
     suspend fun getActiveOffers() =
         sp.getUserLang(Constans.Language)
             ?.let { apiService.getActiveOffers(it) }
 
-    suspend fun getActiveOffers(OfferCategoryID :Int) =
+    suspend fun getActiveOffers(OfferCategoryID: Int) =
         sp.getUserLang(Constans.Language)
-            ?.let { apiService.Offers(it,OfferCategoryID) }
+            ?.let { apiService.Offers(it, OfferCategoryID) }
 
-    suspend fun getFilteredHealthEntity(polyclinicRequest: HashMap<String, String>) = sp.getUserLang(Constans.Language)
-        ?.let { apiService.getFilteredHealthEntity(it,polyclinicRequest) }
-    suspend fun getDoctorByClinicId(ClinicId :Int,SpecID :Int) = sp.getUserLang(Constans.Language)
-        ?.let { apiService.getDoctorByClinicId(it,ClinicId,true,SpecID) }
+    suspend fun getFilteredHealthEntity(polyclinicRequest: HashMap<String, String>) =
+        sp.getUserLang(Constans.Language)
+            ?.let { apiService.getFilteredHealthEntity(it, polyclinicRequest) }
 
-    suspend fun getDoctorVideos(doctorId :Int) = sp.getUserLang(Constans.Language)
-        ?.let { apiService.getDoctorVideos(it,doctorId) }
+    suspend fun getDoctorByClinicId(ClinicId: Int, SpecID: Int) = sp.getUserLang(Constans.Language)
+        ?.let { apiService.getDoctorByClinicId(it, ClinicId, true, SpecID) }
+
+    suspend fun getDoctorVideos(doctorId: Int) = sp.getUserLang(Constans.Language)
+        ?.let { apiService.getDoctorVideos(it, doctorId) }
+
     suspend fun getAllQandAByDoctorId() = sp.getUserLang(Constans.Language)
         ?.let { apiService.getAllQandAByDoctorId(it) }
+
     suspend fun getAllQandA() = sp.getUserLang(Constans.Language)
         ?.let { apiService.getAllQandA(it) }
-    suspend fun getAnswersByDoctorId( doctorID :Int) = sp.getUserLang(Constans.Language)
-        ?.let { apiService.getAnswersByDoctorId(it,doctorID) }
+
+    suspend fun getAnswersByDoctorId(doctorID: Int) = sp.getUserLang(Constans.Language)
+        ?.let { apiService.getAnswersByDoctorId(it, doctorID) }
+
     suspend fun checkUser() = sp.getUserLang(Constans.Language)
         ?.let { apiService.checkUser(it) }
+
     suspend fun getAllInvoicesForPatient() = sp.getUserLang(Constans.Language)
         ?.let { apiService.getAllInvoicesForPatient(it) }
-    suspend fun getSymptomsBySpecialityId(specialityId :Int) = sp.getUserLang(Constans.Language)
-        ?.let { apiService.getSymptomsBySpecialityId(it,specialityId) }
-    suspend fun createPatientSymptoms(Request: HashMap<String, String>) = sp.getUserLang(Constans.Language)
-        ?.let { apiService.createPatientSymptoms(it,Request) }
+
+    suspend fun getSymptomsBySpecialityId(specialityId: Int) = sp.getUserLang(Constans.Language)
+        ?.let { apiService.getSymptomsBySpecialityId(it, specialityId) }
+
+    suspend fun createPatientSymptoms(Request: HashMap<String, String>) =
+        sp.getUserLang(Constans.Language)
+            ?.let { apiService.createPatientSymptoms(it, Request) }
+
     suspend fun getUnreadDoctorResponses() = sp.getUserLang(Constans.Language)
         ?.let { apiService.getUnreadDoctorResponses(it) }
+
     suspend fun markAllDoctorResponses() = sp.getUserLang(Constans.Language)
         ?.let { apiService.markAllDoctorResponses(it) }
-    suspend fun getServicesByType(typeId :Int) = sp.getUserLang(Constans.Language)
-        ?.let { apiService.getServicesByType(it,typeId) }
-    suspend fun getLabsByTypeId(typeId :Int,labName :String?=null) = sp.getUserLang(Constans.Language)
-        ?.let { apiService.getLabsByTypeId(it,typeId,labName) }
-    suspend fun getLabAvailabilityByLabId(labId :Int) = sp.getUserLang(Constans.Language)
-        ?.let { apiService.getLabAvailabilityByLabId(it,labId) }
-    suspend fun getLabsByFilters(Request: HashMap<String, String>) = sp.getUserLang(Constans.Language)
-        ?.let { apiService.getLabsByFilters(it,Request) }
+
+    suspend fun getServicesByType(typeId: Int) = sp.getUserLang(Constans.Language)
+        ?.let { apiService.getServicesByType(it, typeId) }
+
+    suspend fun getLabsByTypeId(typeId: Int, labName: String? = null) =
+        sp.getUserLang(Constans.Language)
+            ?.let { apiService.getLabsByTypeId(it, typeId, labName) }
+
+    suspend fun getLabAvailabilityByLabId(labId: Int) = sp.getUserLang(Constans.Language)
+        ?.let { apiService.getLabAvailabilityByLabId(it, labId) }
+
+    suspend fun getLabsByFilters(Request: HashMap<String, String>) =
+        sp.getUserLang(Constans.Language)
+            ?.let { apiService.getLabsByFilters(it, Request) }
+
     suspend fun getLabBranches(Request: HashMap<String, String>) = sp.getUserLang(Constans.Language)
-        ?.let { apiService.getLabBranches(it,Request) }
-    suspend fun createLaboratoryReservation(Request: HashMap<String, String>) = sp.getUserLang(Constans.Language)
-        ?.let { apiService.createLaboratoryReservation(it,Request) }
-suspend fun getPatientAppointments() = sp.getUserLang(Constans.Language)
+        ?.let { apiService.getLabBranches(it, Request) }
+
+    suspend fun createLaboratoryReservation(Request: HashMap<String, String>) =
+        sp.getUserLang(Constans.Language)
+            ?.let { apiService.createLaboratoryReservation(it, Request) }
+
+    suspend fun getPatientAppointments() = sp.getUserLang(Constans.Language)
         ?.let { apiService.getPatientAppointments(it) }
+    suspend fun getHomeCareService() = sp.getUserLang(Constans.Language)
+        ?.let { apiService.getHomeCareService(it) }
 
 }

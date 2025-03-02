@@ -16,7 +16,7 @@ import com.korashiGroup.salamtakPatient.utils.localization.DefaultLocaleHelper
 import kotlin.math.roundToInt
 
 
-class SearchDoctorsAdapter(private val booking: Booking) :
+class SearchDoctorsAdapter(private val booking: Booking,private val isHomeVisit:Boolean) :
     ListAdapter<Item, SearchDoctorsAdapter.ViewHolder>(DiffCallback()) {
     var subspecialist:String?=""
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -54,6 +54,9 @@ class SearchDoctorsAdapter(private val booking: Booking) :
             holder.binding.ratingBar.rating= services.rate?.toFloat()?: 1.0f
             holder.binding.Reviews.text="${services.rate?.roundToInt()?.toDouble()}"
             holder.binding.Ratecount.text="${services.RateCount?.toInt()}"
+        }
+        if (isHomeVisit){
+            holder.binding.layoutIsHomeVisit.visibility=View.VISIBLE
         }
 //        if (services.==null || services.HealthEntity_OffersID.toString()=="null"){
 //            holder.binding.ivOffer.visibility= View.GONE

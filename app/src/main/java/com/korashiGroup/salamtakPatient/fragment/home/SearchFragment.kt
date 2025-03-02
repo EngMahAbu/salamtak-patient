@@ -102,6 +102,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
     private var feesFrom: Int? = 1
     private var feesTo: Int? = 10000
     private var doctorSearchState = "new"
+    private var isHomeVisit=false
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -122,6 +123,10 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         examinationtypeid = HomeFragment.instance?.let {
             it.medicalExaminatioId
         } ?: 1
+        if (examinationtypeid==10){
+            examinationtypeid=2
+            isHomeVisit=true
+        }
        binding.etSearch.setText( SpecialistDoctorsFragment.instance?.let {
             it.doctorName
         } ?: "")
@@ -350,7 +355,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
     }
 
     private fun doctorsRecylerview() {
-        searchDoctorsAdapter = SearchDoctorsAdapter(this)
+        searchDoctorsAdapter = SearchDoctorsAdapter(this,isHomeVisit)
         binding.rvDoctors.apply {
             adapter = searchDoctorsAdapter
             layoutManager = LinearLayoutManager(requireContext())

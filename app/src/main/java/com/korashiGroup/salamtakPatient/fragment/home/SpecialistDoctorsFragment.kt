@@ -85,7 +85,11 @@ class SpecialistDoctorsFragment : Fragment(),SpecialictyAdapter.SelectSpecialist
 
     private fun initButton(){
         binding.ivArrow.setOnClickListener {
-            findNavController().navigate(R.id.homeFragment)
+            if (examinationtypeid==10){
+                findNavController().navigate(R.id.homeCareFragment)
+            }else {
+                findNavController().navigate(R.id.homeFragment)
+            }
         }
         binding.seeAll.setOnClickListener {
             sharedDataViewmodel.getLabsInfoResponse(LabsInfo(typeId,this.LabId,binding.etSearch.text.toString(),list,false))
@@ -338,6 +342,11 @@ class SpecialistDoctorsFragment : Fragment(),SpecialictyAdapter.SelectSpecialist
 
     private fun bindViews(){
         when(examinationtypeid){
+            10->{
+                binding.layoutChooseSpecialization.visibility=View.GONE
+                binding.btnLayoutChooseSpecialization.visibility=View.GONE
+                binding.layoutChooseAnalysis.visibility=View.GONE
+            }
             8->{
                 typeId=1
                 binding.layoutChooseSpecialization.visibility=View.GONE

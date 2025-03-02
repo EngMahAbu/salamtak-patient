@@ -38,11 +38,11 @@ class AskDoctorFragment : Fragment() {
     private var isMe: Boolean? = null
     val sharedDataViewmodel: SharedDataViewmodel by activityViewModels()
     val viewmodel: DialogBottomSheetViewmodel by viewModels()
-    private var animationDrawable: AnimationDrawable? = null
+//    private var animationDrawable: AnimationDrawable? = null
     private var partMap: Map<String, Any> = mutableMapOf()
-    private var specilaistId = 0
-    private var genderId = 0
-    private var isShoww = true
+//    private var specilaistId = 0
+//    private var genderId = 0
+//    private var isShoww = true
     val type=0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

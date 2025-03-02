@@ -39,7 +39,7 @@ class MyScheduleAdapter(private val schedule: ActionSchedule) :
                 tvDoctorName.text = "${services.doctorName}"
             }
             tvSpecialization.text = "${services.specialistName} - ${services.seniorityLevelName}"
-            Service.text=services.subSpecialistName.toString().removePrefix("[").removePrefix("]")
+            Service.text=services.medicalExaminationTypeName
             location.text ="${services.clinicAddress?:""}-${services.BlockNo?:""}-${services.FloorNo?:""}-${services.areaName?:""}"
             waitingTime.text = " ${DateParsing(services.appointmentDate.toString())}"
             Feesresult.text = services.fees.toString()

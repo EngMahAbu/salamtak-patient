@@ -643,6 +643,15 @@
             android:name="com.korashiGroup.salamtakPatient.fragment.labsandscanner.LapAppointementFragment"
             android:label="appointementfragment_lap"
             tools:layout="@layout/appointementfragment_lap" />
+    <fragment
+            android:id="@+id/homeCareFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.homeCare.HomeCareFragment"
+            android:label="home_carefragment"
+            tools:layout="@layout/home_carefragment" />
+    <fragment
+            android:id="@+id/askingFoNurssingFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.askfornurssie.AskingFoNurssingFragment"
+            android:label="AskingFoNurssingFragment" />
 
 
 </navigation>

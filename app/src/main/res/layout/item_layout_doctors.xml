@@ -77,6 +77,29 @@
                             app:layout_constraintStart_toEndOf="@+id/tv_Dr"
                             app:layout_constraintTop_toTopOf="@+id/iv_doctorProfile"
                             app:layout_constraintEnd_toEndOf="parent" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/layout_isHomeVisit"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginStart="10dp"
+                            android:visibility="gone"
+                            android:background="@drawable/bg_image_circle"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/iv_homevisit"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:adjustViewBounds="true"
+                                android:src="@drawable/ic_hom_visit"
+                                app:tint="@color/blue"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/tv_Specialization"

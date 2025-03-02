@@ -4,8 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.databinding.BindingAdapter
+import com.bumptech.glide.Glide
+import com.korashiGroup.salamtakPatient.R
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -47,5 +50,11 @@ object DataBinding {
         val date = sdf.parse(date1)
         val dateForm = SimpleDateFormat(formatOutParsing, locale)
         return dateForm.format(date)
+    }
+
+    @JvmStatic
+    @BindingAdapter("imageUrl")
+    fun loadPicture(imageView: ImageView, url: String?) {
+        Glide.with(imageView.context).load("https://salamtechapi.azurewebsites.net/${url}").fitCenter().into(imageView)
     }
 }

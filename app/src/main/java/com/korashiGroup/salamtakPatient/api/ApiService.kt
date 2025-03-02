@@ -19,6 +19,7 @@ import com.korashiGroup.salamtakPatient.model.favorite.FavoriteDoctorResponse
 import com.korashiGroup.salamtakPatient.model.favorite.FavoriteRequest
 import com.korashiGroup.salamtakPatient.model.fawry.FawryResponse
 import com.korashiGroup.salamtakPatient.model.healthy.GetHealthEntityResponse
+import com.korashiGroup.salamtakPatient.model.homecare.GetHomeCareServicesResponse
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCardResponse
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCompanyResponse
 import com.korashiGroup.salamtakPatient.model.insurance.SendInsuranceCardResponce
@@ -471,5 +472,11 @@ interface ApiService {
     suspend fun getPatientAppointments(
         @Path("culture") culture: String,
     ): Response<LabAppointementResponse>
+
+    // home care apis
+    @GET("{culture}/LookUp/GetHomeService")
+    suspend fun getHomeCareService(
+        @Path("culture") culture: String,
+    ): Response<GetHomeCareServicesResponse>
 
 }
