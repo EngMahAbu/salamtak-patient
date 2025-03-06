@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity(), LoginFragment.onSomeEventListener {
         super.onResume()
         check()
     }
+
     init {
         firebaseRemoteConfig.setConfigSettingsAsync(configSettings)
     }
@@ -67,7 +68,7 @@ class MainActivity : AppCompatActivity(), LoginFragment.onSomeEventListener {
                 R.id.homeFragment,
                 R.id.moreFragment,
                 R.id.offersFragment,
-                R.id.searchFragment,
+                R.id.notificationListFragment,
                 R.id.myScheduleFragment -> {
                     binding.bottomViewNav.visibility = View.VISIBLE
 

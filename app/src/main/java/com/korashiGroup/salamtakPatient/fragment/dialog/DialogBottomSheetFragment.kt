@@ -742,7 +742,7 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
         )
         list.add(
             ImageServices(
-                R.drawable.ic_videocall,
+                R.drawable.ic_vedieocall,
                 getString(R.string.Video_Call),
                 Id = 5
             )

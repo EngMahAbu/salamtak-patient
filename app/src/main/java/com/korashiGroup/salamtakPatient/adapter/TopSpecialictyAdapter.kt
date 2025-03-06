@@ -1,20 +1,21 @@
 package com.korashiGroup.salamtakPatient.adapter
 
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
-import coil.transform.CircleCropTransformation
+import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.databinding.ItemLayoutTopSpecialityBinding
 import com.korashiGroup.salamtakPatient.model.SpecialistData
 
 
 class TopSpecialictyAdapter(val iSelectSep:ISelectSpecialist,val status:Boolean):ListAdapter<SpecialistData,TopSpecialictyAdapter.ViewHolder>(DiffCallback()) {
 
-    var selectedPosition=-1
+    var selectedPosition=0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
@@ -25,18 +26,34 @@ class TopSpecialictyAdapter(val iSelectSep:ISelectSpecialist,val status:Boolean)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val sp=getItem(position)
         if (status){
-            holder.binding.tvServiceName.text="${sp.name}"
+            holder.binding.tvSpeciality.text="${sp.name}"
         }else{
-            holder.binding.tvServiceName.text="${position+1} - ${sp.name}"
+            holder.binding.tvSpeciality.text="${position+1} - ${sp.name}"
         }
 
-            holder.binding.ivServices.load("https://salamtechapi.azurewebsites.net/${sp.image}") {
-                crossfade(true)
-                crossfade(1000)
-                transformations(CircleCropTransformation())
-            }
-        holder.binding.layoutUploadImage.setOnClickListener {
+//            holder.binding.ivServices.load("https://salamtechapi.azurewebsites.net/${sp.image}") {
+//                crossfade(true)
+//                crossfade(1000)
+//                transformations(CircleCropTransformation())
+//            }
+//        holder.binding.cardview.setOnClickListener {
+//
+//        }
+
+        holder.itemView.setOnClickListener {
+            selectedPosition = holder.bindingAdapterPosition
             iSelectSep.onItemSelected(sp)
+            notifyDataSetChanged()
+        }
+        if (sp.id==-1) {
+            holder.binding.tvSpeciality.background =
+                ContextCompat.getDrawable(holder.itemView.context, R.drawable.bg_chooselang_button)
+            holder.binding.tvSpeciality.setTextColor(Color.WHITE)
+            holder.binding.tvSpeciality.text="All"
+        } else {
+            holder.binding.tvSpeciality.background =
+                ContextCompat.getDrawable(holder.itemView.context, R.drawable.bg_popular_specialties)
+            holder.binding.tvSpeciality.setTextColor(holder.itemView.context.getColor(R.color.new_dark_grey_color))
         }
     }
 

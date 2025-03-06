@@ -2,6 +2,7 @@ package com.korashiGroup.salamtakPatient.fragment.home
 
 import android.app.Activity
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
@@ -19,22 +21,23 @@ import com.korashiGroup.salamtakPatient.databinding.HomefragmentBinding
 import com.korashiGroup.salamtakPatient.fragment.loginandforgetpassword.LoginFragment
 import com.korashiGroup.salamtakPatient.model.AreaData
 import com.korashiGroup.salamtakPatient.model.CityData
-import com.korashiGroup.salamtakPatient.model.ImageServices
 import com.korashiGroup.salamtakPatient.model.SpecialistData
 import com.korashiGroup.salamtakPatient.model.notification.Data
-import com.korashiGroup.salamtakPatient.model.notification.Response
 import com.korashiGroup.salamtakPatient.model.register.ChooseGender
 import com.korashiGroup.salamtakPatient.utils.Constans
 import com.korashiGroup.salamtakPatient.utils.DateUtils
 import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.utils.SpUtil
 import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
+import com.korashiGroup.salamtakPatient.viewmodel.ImageServicesViewModel
 import com.korashiGroup.salamtakPatient.viewmodel.NotificationViewModel
 import com.korashiGroup.salamtakPatient.viewmodel.PatientViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.PolyClinicsViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.RegisterViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
@@ -50,12 +53,13 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
     private lateinit var topSpecialictyAdapter: TopSpecialictyAdapter
     private lateinit var imageVideoAdapter: ImageVideoAdapter
     private val patientviewmodel: PatientViewmodel by viewModels()
+    private val imageServicesViewModel: ImageServicesViewModel by viewModels()
     private val notificationViewModel: NotificationViewModel by viewModels()
     private val polyClinicsViewmodel: PolyClinicsViewmodel by viewModels()
     private var data: Data? = null
     var someEventListener: LoginFragment.onSomeEventListener? = null
 
-    //    private lateinit var popularDoctorsAdapter: PopularDoctorsAdapter
+       private lateinit var popularDoctorsAdapter: PopularDoctorsAdapter
 //    private lateinit var healthTopicsAdapter: HealthTopicsAdapter
 //    private lateinit var spotlightAdapter: SpotlightAdapter
     private lateinit var gatesAdapter: GatesAdapter
@@ -98,13 +102,13 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
         callCheckUser()
         if (DateUtils.getToken().isNullOrEmpty()) {
             binding.layoutSignup.visibility = View.VISIBLE
-            binding.ivNotification.visibility = View.GONE
+         //   binding.ivNotification.visibility = View.GONE
             someEventListener?.someEvent("skip")
             //    sharedDataViewmodel.getCity(CityData(1,"",1,false,"",""))
 
         } else {
             binding.layoutSignup.visibility = View.GONE
-            binding.ivNotification.visibility = View.VISIBLE
+         //   binding.ivNotification.visibility = View.VISIBLE
             someEventListener?.someEvent("")
             profileCallBack()
         }
@@ -117,14 +121,28 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
         callBackGetTop10Specialist()
         callBackNotifications()
         setupresyclerviewSpecialist()
+        popularDoctorsRecylerview()
         imageServices()
         medicalServices()
         //callBack()
         callBackGetDoctorFeedBakNotification()
         initButton()
+        setUP()
     }
-
+ private fun setUP(){
+     if (resources.configuration.layoutDirection == View.LAYOUT_DIRECTION_RTL) {
+         binding.ivImageSalamtakDoctor.scaleX = -1f // Flip the image for RTL
+     } else {
+         binding.ivImageSalamtakDoctor.scaleX = 1f
+     }
+ }
     private fun initButton() {
+        binding.ivSelectCity.setOnClickListener {
+
+            val action =
+                HomeFragmentDirections.actionHomeFragmentToDialogBottomSheetFragment("AllCity")
+            findNavController().navigate(action)
+        }
 
         binding.ivNotification.setOnClickListener {
             findNavController().navigate(R.id.notificationListFragment)
@@ -158,7 +176,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
     private fun servicesRecylerview() {
         imageServicesAdapter = ServicesAdapter(this)
         binding.rvSalamtakServices.apply {
-            layoutManager = GridLayoutManager(requireContext(), 2)
+            layoutManager = GridLayoutManager(requireContext(), 3)
             adapter = imageServicesAdapter
             setHasFixedSize(true)
         }
@@ -174,14 +192,14 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
         }
     }
 
-//    private fun popularDoctorsRecylerview() {
-//        popularDoctorsAdapter = PopularDoctorsAdapter(this)
-//        binding.rvPopularDoctors.apply {
-//            adapter = popularDoctorsAdapter
-//
-//            setHasFixedSize(true)
-//        }
-//    }
+    private fun popularDoctorsRecylerview() {
+        popularDoctorsAdapter = PopularDoctorsAdapter(this)
+        binding.rvPopularDoctors.apply {
+            adapter = popularDoctorsAdapter
+            layoutManager = GridLayoutManager(requireContext(), 2)
+            setHasFixedSize(true)
+        }
+    }
 
     private fun healthTopicsRecylerview() {
         gatesAdapter = GatesAdapter(this)
@@ -201,122 +219,18 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
 //    }
 
     private fun imageServices() {
-        val list = mutableListOf<ImageServices>()
-
-        list.add(
-            ImageServices(
-                R.drawable.m_book,
-                getString(R.string.Clinic_Booking),
-                Id = 1
-            )
-        )
-
-        list.add(
-            ImageServices(
-                R.drawable.m_home,
-                getString(R.string.Home_Visit),
-                Id = 2
-
-            )
-        )
-
-        list.add(
-            ImageServices(
-                R.drawable.video,
-                getString(R.string.Video_Call),
-                Id = 3
-            )
-        )
-        list.add(
-            ImageServices(
-                R.drawable.calling,
-                getString(R.string.Call),
-                Id = 4
-            )
-        )
-
-        list.add(
-            ImageServices(
-                R.drawable.m_poly,
-                getString(R.string.polyclinics),
-                Id = 6
-            )
-        )
-        list.add(
-            ImageServices(
-                R.drawable.ic_offer,
-                getString(R.string.offers),
-                Id = 7
-            )
-        )
-        list.add(
-            ImageServices(
-                R.drawable.icon_lab,
-                getString(R.string.labs),
-                Id = 8
-            )
-        )
-        list.add(
-            ImageServices(
-                R.drawable.ic_radiologycenter,
-                getString(R.string.medicalscan),
-                Id = 9
-            )
-        )
-        list.add(
-            ImageServices(
-                R.drawable.m_home,
-                getString(R.string.home_care),
-                Id = 10
-            )
-        )
-
-        imageServicesAdapter.submitList(list)
+        lifecycleScope.launch {
+            imageServicesViewModel.imageServicesList.collectLatest { list ->
+                imageServicesAdapter.submitList(list)
+            }
+        }
     }
-
     private fun medicalServices() {
-
-        val list = mutableListOf<ImageServices>()
-
-        list.add(
-            ImageServices(
-                R.drawable.ic_hospitals,
-                getString(R.string.hospitals),
-                R.color.color_1,
-                2
-            )
-        )
-
-
-        list.add(
-            ImageServices(
-                R.drawable.ic_pharmacies,
-                getString(R.string.pharmacies),
-                R.color.color_3, 5
-            )
-        )
-        list.add(
-            ImageServices(
-                R.drawable.ic_laboratories,
-                getString(R.string.laboratories),
-                R.color.color_4, 3
-            )
-        )
-        list.add(
-            ImageServices(
-                R.drawable.ic_radiologycenter,
-                getString(R.string.radiologycenter),
-                R.color.color_5, 4
-            )
-        )
-        list.add(
-            ImageServices(
-                R.drawable.ic_angle,
-                getString(R.string.engile),
-                R.color.white, 7
-            )
-        )
-        imageMedicalServicesAdapter.submitList(list)
+        lifecycleScope.launch {
+            imageServicesViewModel.imageMedicalServicesList.collectLatest { list ->
+                imageMedicalServicesAdapter.submitList(list)
+            }
+        }
     }
 
     private fun callBack() {
@@ -351,33 +265,33 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
         regviewmodel.getHomeAdds()
     }
 
-//    private fun callBackPopularDoctors() {
-//        viewmodel.popularResponse.observe(viewLifecycleOwner, Observer { response ->
-//
-//            when (response) {
-//
-//                is Resource.Loading -> {
-//                    showprogtessbar()
-//                }
-//
-//                is Resource.sucess -> {
-//                    hideprogressbar()
-//                    response.let {
-//                        popularDoctorsAdapter.submitList(it.data)
-//                        popularDoctorsAdapter.notifyDataSetChanged()
-//                    }
-//
-//                }
-//
-//                is Resource.Error -> {
-//                    hideprogressbar()
-//                }
-//            }
-//
-//        })
-//
-//        viewmodel.getPopularDoctors()
-//    }
+    private fun callBackPopularDoctors() {
+        viewmodel.popularResponse.observe(viewLifecycleOwner, Observer { response ->
+
+            when (response) {
+
+                is Resource.Loading -> {
+                    showprogtessbar()
+                }
+
+                is Resource.sucess -> {
+                    hideprogressbar()
+                    response.let {
+                        popularDoctorsAdapter.submitList(it.data?.take(4))
+                        popularDoctorsAdapter.notifyDataSetChanged()
+                    }
+
+                }
+
+                is Resource.Error -> {
+                    hideprogressbar()
+                }
+            }
+
+        })
+
+        viewmodel.getPopularDoctors()
+    }
 
 
     private fun callBackSalamtakGates() {
@@ -695,10 +609,9 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
                     hideprogressbar()
 
                     response.data?.data.let {
-                        topSpecialictyAdapter.submitList(it)
-                        topSpecialictyAdapter.notifyDataSetChanged()
+                        topSpecialictyAdapter.submitList(it?.reversed())
                     }
-
+                    callBackPopularDoctors()
 
                 }
 

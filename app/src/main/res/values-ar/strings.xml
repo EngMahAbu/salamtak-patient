@@ -402,6 +402,12 @@
     <string name="psychotherapy">علاج نفسى</string>
     <string name="life_coach">Life coach</string>
     <string name="therapeutic_nutrition">تغذية علاجية</string>
+    <string name="seeall">مشاهدة المزيد</string>
+    <string name="accountsettings">AccountSettings</string>
+    <string name="medical_record">Medical Record</string>
+    <string name="support_amp_help">Support &amp; Help</string>
+    <string name="settings_amp_amp_preferences">Settings &amp; Preferences</string>
+    <string name="security_amp_logout">Security &amp; Logout</string>
     <array name="choose">
         <item>اختار</item>
     </array>

@@ -1,48 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="4dp"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+        android:padding="5dp">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/layout_uploadImage"
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
-                    android:background="@drawable/bg_circlemove"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent">
-
-                <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/iv_services"
-                        android:layout_width="90dp"
-                        android:layout_height="90dp"
-                        android:src="@drawable/ic_chat"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <TextView
-            android:id="@+id/tv_serviceName"
-            android:layout_width="0dp"
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvSpeciality"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="lkjkjkjljljkljljjlkjkljklkjjkkljjkjklkjlkkljkljkkljkjkjljkljlkkjlkl"
-            android:ellipsize="end"
-            android:justificationMode="inter_word"
-            android:inputType="textMultiLine"
-            android:maxLines="3"
-            android:gravity="center"
-            app:layout_constrainedWidth="true"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-            android:textColor="@color/color_primary"
-            android:textSize="13sp"
-            app:layout_constraintStart_toStartOf="@+id/layout_uploadImage"
-            app:layout_constraintEnd_toEndOf="@+id/layout_uploadImage"
-            app:layout_constraintTop_toBottomOf="@+id/layout_uploadImage"/>
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+            android:fontFamily="@font/sf_pro_display_semibold"
+            android:padding="15dp"
+            android:textSize="14sp"
+            android:text=""
+            android:textColor="#A5ABBF"
+            android:background="@drawable/bg_popular_specialties" />
+</LinearLayout>

@@ -116,8 +116,8 @@
     <string name="you_must_complete_your_profile_to_can_book_your_doctor">You must complete your profile to can book
         your doctor
     </string>
-    <string name="salamtak_services">Salamtak Services</string>
-    <string name="Clinic_Booking">In-Clinic Booking</string>
+    <string name="salamtak_services">Our Services</string>
+    <string name="Clinic_Booking">Clinic Visit</string>
     <string name="Home_Visit">Home Visit</string>
     <string name="Chat">Chat</string>
     <string name="Call">Call</string>
@@ -158,7 +158,7 @@
     <string name="reset">Reset</string>
     <string name="specialization">Speciality</string>
     <string name="patientName">Patient Name:</string>
-    <string name="choose_specialization">Choose Speciality</string>
+    <string name="choose_specialization">Popular Specialties</string>
     <string name="choose_sub_specialization">Choose sub Speciality</string>
     <string name="choose_Seniority_Level">Choose Seniority Level</string>
     <string name="choose_city">Choose City</string>
@@ -267,7 +267,7 @@
     <string name="skip_login_explore_our_features">Skip Login, Explore Salamtak Services</string>
     <string name="you_must_sign_up_to_book_your_doctor">To complete your booking steps</string>
     <string name="no_data_to_show">No data to show</string>
-    <string name="have_amedicalquestion">Salamtak Ask</string>
+    <string name="have_amedicalquestion">Get professional medical answer to all your questions</string>
     <string name="ask_a_doctor_for_free_and_get_response_in_24_hours">Get professional medical answers to all your
         questions
     </string>
@@ -321,7 +321,7 @@
     <string name="are_you_sure_you_want_to_delete_your_account">Are you sure you want to delete your Account</string>
     <string name="all_reviews">All Reviews</string>
     <string name="lang">English</string>
-    <string name="schedule">Appointments</string>
+    <string name="schedule">My Booking</string>
     <string name="questionanswer">Question Asked for?</string>
     <string name="questionanswered">Your Question Answer</string>
     <string name="doctorname">Doctor Name</string>
@@ -387,7 +387,7 @@
     <string name="fee">Tota Service Fees</string>
     <string name="paids">Total Paid</string>
     <string name="balance">Grand Total</string>
-    <string name="bills">My Account</string>
+    <string name="bills">Invoices</string>
     <string name="we_will_answer_your_question_in_3_days"> Your question will be answered by Salamatak Doctors within 3 working days.</string>
     <string name="ages">Age</string>
     <string name="choose_symptoms">Choose Symptoms</string>
@@ -421,6 +421,12 @@
     <string name="psychotherapy">Psychotherapy</string>
     <string name="life_coach">Life coach</string>
     <string name="therapeutic_nutrition">Therapeutic nutrition</string>
+    <string name="seeall">See All</string>
+    <string name="accountsettings">AccountSettings</string>
+    <string name="medical_record">Medical Record</string>
+    <string name="support_amp_help">Support &amp; Help</string>
+    <string name="settings_amp_amp_preferences">Settings &amp; Preferences</string>
+    <string name="security_amp_logout">Security &amp; Logout</string>
     <array name="choose">
         <item>Select</item>
     </array>

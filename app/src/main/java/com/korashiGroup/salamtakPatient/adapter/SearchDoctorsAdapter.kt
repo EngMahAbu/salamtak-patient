@@ -51,7 +51,7 @@ class SearchDoctorsAdapter(private val booking: Booking,private val isHomeVisit:
             location.text = services.clinicDto?.AreaName
             waitingTime.text = "${services.waitingTime}"
             Feesresult.text = "${services.feesTo.toString()} ${holder.binding.Feesresult.context.getString(R.string.le)}"
-            holder.binding.ratingBar.rating= services.rate?.toFloat()?: 1.0f
+           // holder.binding.ratingBar.rating= services.rate?.toFloat()?: 1.0f
             holder.binding.Reviews.text="${services.rate?.roundToInt()?.toDouble()}"
             holder.binding.Ratecount.text="${services.RateCount?.toInt()}"
         }

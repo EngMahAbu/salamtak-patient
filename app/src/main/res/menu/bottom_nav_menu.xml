@@ -3,20 +3,21 @@
 
     <item android:id="@+id/homeFragment"
         android:title="@string/home"
-        android:icon="@drawable/ic_home"/>
+        android:icon="@drawable/new_home"/>
 
     <item android:id="@+id/myScheduleFragment"
         android:title="@string/schedule"
-        android:icon="@drawable/schedule"/>
+        android:icon="@drawable/new_calendar"/>
 
     <item android:id="@+id/offersFragment"
           android:title="@string/offers"
-          android:icon="@drawable/ic_offer"/>
+          android:icon="@drawable/discount_shape"/>
+    <item android:id="@+id/notificationListFragment"
+            android:title="@string/notifications"
+            android:icon="@drawable/new_notification"/>
 
     <item android:id="@+id/moreFragment"
         android:title="@string/more"
-        android:icon="@drawable/ic_more"/>
-
-
+        android:icon="@drawable/new_category"/>
 
 </menu>

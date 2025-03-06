@@ -6,6 +6,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import coil.size.Size
+import coil.transform.CircleCropTransformation
 import com.bumptech.glide.Glide
 import com.korashiGroup.salamtakPatient.databinding.ItemLayoutPoulardoctorsBinding
 import com.korashiGroup.salamtakPatient.databinding.ItemLayoutRvservicesBinding
@@ -16,6 +19,7 @@ import com.korashiGroup.salamtakPatient.utils.DateUtils
 import com.korashiGroup.salamtakPatient.utils.SpUtil
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+import kotlin.math.roundToInt
 
 class PopularDoctorsAdapter(val onitemclick:Action):ListAdapter<PopularDoctorsResponseItem,PopularDoctorsAdapter.ViewHolder>(DiffCallback()) {
 
@@ -28,17 +32,29 @@ class PopularDoctorsAdapter(val onitemclick:Action):ListAdapter<PopularDoctorsRe
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val services=getItem(position)
-        Glide.with(holder.binding.ivDoctorProfile)
-            .load("https://salamtechapi.azurewebsites.net/${services.doctorImage}")
-            .into(holder.binding.ivDoctorProfile)
+//        Glide.with(holder.binding.ivDoctorProfile)
+//            .load("https://salamtechapi.azurewebsites.net/${services.doctorImage}")
+//            .into(holder.binding.ivDoctorProfile)
 
-        if (DateUtils.getLanguage()=="En"){
-            holder.binding.tvDoctorName.text=services.doctorNameEn
-        }else{
-            holder.binding.tvDoctorName.text=services.doctorNameAr
+        holder.binding.ivDoctorProfile.load("https://salamtechapi.azurewebsites.net/${services.doctorImage}") {
+            crossfade(true)
+            crossfade(1000)
+            transformations(CircleCropTransformation())
         }
-        holder.binding.tvSpecialization.text=services.doctorSpec
-        holder.binding.tvReviews.text=services.rate.toString()
+
+
+
+        if (DateUtils.getLanguage()=="en"){
+            holder.binding.tvDoctorName.text="Dr.${services.doctorNameEn}"
+            holder.binding.tvSpecialization.text=services.doctorSpec
+        }else{
+            holder.binding.tvDoctorName.text="د. ${services.doctorNameAr}"
+            holder.binding.tvSpecialization.text=services.DoctorSpeciality
+        }
+
+        holder.binding.tvReviews.text="(reviews)"
+        holder.binding.Ratecount.text="${services.rate.toString()}"
+       // holder.binding.ratingBar.rating= services.rate?.toFloat()?: 1.0f
 
         holder.binding.layoutDoctorsDetail.setOnClickListener {
             services.DoctorId?.let { it1 -> onitemclick.onItemClickDoctorsDetails(it1) }

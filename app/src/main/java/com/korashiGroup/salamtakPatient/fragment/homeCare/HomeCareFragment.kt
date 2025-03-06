@@ -68,7 +68,7 @@ class HomeCareFragment : Fragment(),ServicesAdapter.Action {
                                     it.specialityId?.let { it3 ->
                                         ImageServices(
                                             it1,
-                                            it2,
+                                            it2,"",
                                             it3,
                                             it3,
                                             it.image

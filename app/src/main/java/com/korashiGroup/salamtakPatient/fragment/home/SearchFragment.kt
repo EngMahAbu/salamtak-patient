@@ -748,7 +748,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                 formattedDate,
                 clinkname
             )
-            sharedDataViewmodel.getMedicalExaminationTypeId(ImageServices(0,"",0,examinationtypeid))
+            sharedDataViewmodel.getMedicalExaminationTypeId(ImageServices(0,"","",0,examinationtypeid))
             sharedDataViewmodel.getClinicSchedualByClinicDayId(clinicSchedualByClinicDayId)
             this.doctorId = doctorId
             this.feesTo = feesTo
@@ -783,7 +783,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                 formattedDate,
                 clinkname
             )
-            sharedDataViewmodel.getMedicalExaminationTypeId(ImageServices(0,"",0,examinationtypeid))
+            sharedDataViewmodel.getMedicalExaminationTypeId(ImageServices(0,"","",0,examinationtypeid))
             sharedDataViewmodel.getClinicSchedualByClinicDayId(clinicSchedualByClinicDayId)
             sharedDataViewmodel.getDocotorId(doctorId)
             sharedDataViewmodel.getClinicIdAndDoctorId(ClinicData(doctorId, clinicId,true))
@@ -1001,9 +1001,9 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
 
     private fun skipLogin() {
         if (DateUtils.getToken().isNullOrEmpty()) {
-            binding.layoutCity.visibility = View.VISIBLE
+           // binding.layoutCity.visibility = View.VISIBLE
         } else {
-            binding.layoutCity.visibility = View.VISIBLE
+           // binding.layoutCity.visibility = View.VISIBLE
         }
     }
 
@@ -1160,7 +1160,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             this.image = image
             getDayId()
             sharedDataViewmodel.getClinicIdAndDoctorId(ClinicData(doctorId, clinicId,false))
-            sharedDataViewmodel.getMedicalExaminationTypeId(ImageServices(0,"",0,examinationtypeid))
+            sharedDataViewmodel.getMedicalExaminationTypeId(ImageServices(0,"","",0,examinationtypeid))
 //            viewmodel.getClinicSchedualByClinicDayId(
 //                clinicId,
 //                dayId,
@@ -1179,7 +1179,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             formattedDate,
             ""
         )
-        sharedDataViewmodel.getMedicalExaminationTypeId(ImageServices(0,"",0,examinationtypeid))
+        sharedDataViewmodel.getMedicalExaminationTypeId(ImageServices(0,"","",0,examinationtypeid))
         sharedDataViewmodel.getRating(RatingDoctors(rate, rateCount))
         sharedDataViewmodel.getClinicSchedualByClinicDayId(clinicSchedualByClinicDayId)
         sharedDataViewmodel.getClinicIdAndDoctorId(ClinicData(ClinicID, doctorId,false))

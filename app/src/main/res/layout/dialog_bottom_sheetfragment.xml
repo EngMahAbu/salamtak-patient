@@ -332,7 +332,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_AllCities"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="480dp"
             android:layout_marginBottom="5dp"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
@@ -349,7 +349,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_AllArea"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="480dp"
             android:layout_marginBottom="5dp"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"

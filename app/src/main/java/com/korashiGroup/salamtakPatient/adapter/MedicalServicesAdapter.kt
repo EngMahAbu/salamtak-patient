@@ -1,20 +1,15 @@
 package com.korashiGroup.salamtakPatient.adapter
 
 
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.korashiGroup.salamtakPatient.databinding.ItemLayoutMedicalrvservicesBinding
-import com.korashiGroup.salamtakPatient.databinding.ItemLayoutRvservicesBinding
-import com.korashiGroup.salamtakPatient.databinding.ItemlayoutOnboardingBinding
-import com.korashiGroup.salamtakPatient.fragment.home.HomeFragmentDirections
 import com.korashiGroup.salamtakPatient.model.ImageServices
-import com.korashiGroup.salamtakPatient.model.Onboarding
+import com.korashiGroup.salamtakPatient.utils.localization.DefaultLocaleHelper
 
 
 class MedicalServicesAdapter(val onclick:Action):ListAdapter<ImageServices,MedicalServicesAdapter.ViewHolder>(DiffCallback()) {
@@ -30,14 +25,15 @@ class MedicalServicesAdapter(val onclick:Action):ListAdapter<ImageServices,Medic
         Glide.with(holder.binding.ivServices)
             .load(services.image_onboarding)
             .into(holder.binding.ivServices)
-        holder.binding.tvServiceName.text=services.textService
-        holder.binding.layputServices.setBackgroundResource(services.color)
+        if (DefaultLocaleHelper.getInstance(holder.binding.tvServiceName.context).getCurrentLocale()=="en"){
+            holder.binding.tvServiceName.text=services.textService
+        }else{
+            holder.binding.tvServiceName.text=services.textServiceArabic
+        }
+        holder.binding.layputServices.setBackgroundColor(services.color)
 
         holder.itemView.setOnClickListener {
-
             services.Id?.let { it1 -> onclick.onItemClick(it1,services.textService) }
-
-
         }
 
     }
