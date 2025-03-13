@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.CircleCropTransformation
+import com.korashiGroup.salamtakPatient.databinding.ItemLayoutChooseSpecialtiesBinding
 import com.korashiGroup.salamtakPatient.databinding.ItemLayoutNewSpecialictyBinding
 import com.korashiGroup.salamtakPatient.model.SpecialistData
 
@@ -19,29 +20,29 @@ class SpecialictyAdapter(private val select:SelectSpecialist):ListAdapter<Specia
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
-        val view=ItemLayoutNewSpecialictyBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val view=ItemLayoutChooseSpecialtiesBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val sp=getItem(position)
 
-        holder.binding.tvExaminationtype.text=sp.name
-        holder.binding.ivExaminationtype.load("https://salamtechapi.azurewebsites.net/${sp.image}") {
-            crossfade(true)
-            crossfade(1000)
-            transformations(CircleCropTransformation())
-        }
-       holder.binding.layout.setOnClickListener {
+        holder.binding.tvSpecilization.text=sp.name
+//        holder.binding.ivSpecilizationLogo.load("https://salamtechapi.azurewebsites.net/${sp.image}") {
+//            crossfade(true)
+//            crossfade(1000)
+//            transformations(CircleCropTransformation())
+//        }
+       holder.binding.layoutChooseSpecialties.setOnClickListener {
            select.onItemSelected(sp)
        }
 
 
     }
 
-    class ViewHolder(itemBinding: ItemLayoutNewSpecialictyBinding) :
+    class ViewHolder(itemBinding: ItemLayoutChooseSpecialtiesBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
-        internal val binding: ItemLayoutNewSpecialictyBinding = itemBinding
+        internal val binding: ItemLayoutChooseSpecialtiesBinding = itemBinding
     }
 
 

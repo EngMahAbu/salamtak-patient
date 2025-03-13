@@ -190,6 +190,9 @@
         <action
                 android:id="@+id/action_homeFragment_to_specialistDoctorsFragment"
                 app:destination="@id/specialistDoctorsFragment" />
+        <action
+                android:id="@+id/action_homeFragment_to_chooseSpecialistFragment"
+                app:destination="@id/chooseSpecialistFragment" />
 
 
     </fragment>
@@ -652,6 +655,11 @@
             android:id="@+id/askingFoNurssingFragment"
             android:name="com.korashiGroup.salamtakPatient.fragment.askfornurssie.AskingFoNurssingFragment"
             android:label="AskingFoNurssingFragment" />
+    <fragment
+            android:id="@+id/chooseSpecialistFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.home.ChooseSpecialistFragment"
+            android:label="choose_specialistfragment"
+            tools:layout="@layout/choose_specialistfragment" />
 
 
 </navigation>

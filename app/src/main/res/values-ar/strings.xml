@@ -123,7 +123,7 @@
     <string name="engile"> سلامتك Angel</string>
     <string name="search">بحث</string>
     <string name="search_by_doctor_name">البحث باسم الطبيب ...</string>
-    <string name="doctors_found">نتيجة البحث</string>
+    <string name="doctors_found">أطباء</string>
     <string name="polyclinic_found">نتيجة البحث</string>
     <string name="all">الجميع</string>
     <string name="home">الرئيسية</string>
@@ -408,6 +408,11 @@
     <string name="support_amp_help">Support &amp; Help</string>
     <string name="settings_amp_amp_preferences">Settings &amp; Preferences</string>
     <string name="security_amp_logout">Security &amp; Logout</string>
+    <string name="choose_specialties">Choose Specialties</string>
+    <string name="most_popular_specialties">Most Popular Specialties</string>
+    <string name="other_specialties">Other Specialties</string>
+    <string name="doctors_profile">الملف الشخى للطبيب</string>
+    <string name="clinics_location">Clinics Location</string>
     <array name="choose">
         <item>اختار</item>
     </array>

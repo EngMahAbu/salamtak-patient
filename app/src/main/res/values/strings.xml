@@ -132,7 +132,7 @@
     <string name="engile">Salamtak ِِAngel</string>
     <string name="search">Search</string>
     <string name="search_by_doctor_name">Search by doctor name...</string>
-    <string name="doctors_found">Doctors Found</string>
+    <string name="doctors_found">Doctors</string>
     <string name="polyclinic_found">PolyClinics Found</string>
     <string name="all">All</string>
     <string name="home">Home</string>
@@ -336,7 +336,7 @@
     <string name="enter_your_registered">Enter your registered</string>
     <string name="or">OR</string>
     <string name="addresss">Address</string>
-    <string name="clinicservices">Clinic Service</string>
+    <string name="clinicservices">Clinic Services</string>
     <string name="avilableappointemnts">"Available "</string>
     <string name="avilableapapointemnts">Available Appointments</string>
     <string name="reservation_required_first_come_first_served">Reservation Required,( First-in,First-Served )</string>
@@ -427,6 +427,11 @@
     <string name="support_amp_help">Support &amp; Help</string>
     <string name="settings_amp_amp_preferences">Settings &amp; Preferences</string>
     <string name="security_amp_logout">Security &amp; Logout</string>
+    <string name="choose_specialties">Choose Specialties</string>
+    <string name="most_popular_specialties">Most Popular Specialties</string>
+    <string name="other_specialties">Other Specialties</string>
+    <string name="doctors_profile">Doctor Profile</string>
+    <string name="clinics_location">Clinics Location</string>
     <array name="choose">
         <item>Select</item>
     </array>

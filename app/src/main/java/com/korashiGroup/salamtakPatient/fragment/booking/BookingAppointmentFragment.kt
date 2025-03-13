@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -263,9 +264,9 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
                     sharedDataViewmodel.getDoctorClinksResponseResponse(getDoctorAndPolyClinksResponse)
                     it.data?.data?.currentClinicDtos?.let { it1 -> bindFeatures(it1) }
                     if (DefaultLocaleHelper.getInstance(requireContext()).getCurrentLocale()=="en"){
-                        binding.AboutDoctor.text = it.data?.data?.doctorInfo
+                        binding.DetailsAboutDoctor.text = it.data?.data?.doctorInfo
                     }else{
-                        binding.AboutDoctor.text = it.data?.data?.doctorInfoAr.toString()
+                        binding.DetailsAboutDoctor.text = it.data?.data?.doctorInfoAr.toString()
                     }
                     val name = if (DateUtils.getLanguage() == "en") {
                         "${it.data?.data?.firstName} ${it.data?.data?.middelName} ${it.data?.data?.lastName}"
@@ -286,11 +287,17 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
                     binding.tvDoctorName.text = name
                     binding.tvName.text = name
                     var subspecialist: String? = ""
-                    it.data?.data?.subSpecialistName?.forEach {
+                    it.data?.data?.specialistName?.forEach {
                         subspecialist = "$subspecialist $it,"
                     }
-                    binding.tvSpecialization.text = "${it.data?.data?.seniorityLevelName} ${subspecialist}"
-                //    clinksDoctorsAdapter.submitList(it.data?.data?.clinicDtos)
+                    binding.tvSpecialization.text = "${it.data?.data?.seniorityLevelName} - ${it.data?.data?.specialistName.toString()?.removePrefix("[")?.removeSuffix("]")}"
+                    binding.subSpecialization.text = " ${it.data?.data?.subSpecialistName.toString()?.removePrefix("[")?.removeSuffix("]")}"
+                   sharedDataViewmodel.feesResponse.observe(viewLifecycleOwner, Observer {
+                       binding.Feesresult.text = "${it}"
+                   })
+
+
+                    //    clinksDoctorsAdapter.submitList(it.data?.data?.clinicDtos)
                  //   clinksDoctorsAdapter.notifyDataSetChanged()
 
                 }
@@ -395,10 +402,69 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
 
     private fun bindViews(){
         sharedDataViewmodel.rating.observe(viewLifecycleOwner, Observer {
-            binding.ratingBar.rating= it.rate?.toFloat()?: 1.0f
+           // binding.ratingBar.rating= it.rate?.toFloat()?: 1.0f
             binding.Reviewss.text="${it.rate?.roundToInt()?.toDouble()}"
-            binding.Ratecount.text="${it.rateCount?.toInt()}"
+            binding.Ratecount.text="${it.rate?.toInt()}"
         })
+
+        binding.layoutClinicsLocation.setOnClickListener {
+            if (binding.layoutCurrent.visibility == View.GONE) {
+                binding.layoutCurrent.visibility = View.VISIBLE
+                binding.ivClinicsLocation.setImageResource(R.drawable.svg_arrow_down)
+                binding.layoutCurrent.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.expand))
+            } else {
+                binding.layoutCurrent.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.collapse))
+                binding.layoutCurrent.visibility = View.GONE
+                binding.ivClinicsLocation.setImageResource(R.drawable.svg_arrow_up)
+            }
+        }
+
+        binding.layoutAboutDoctor.setOnClickListener {
+            if (binding.DetailsAboutDoctor.visibility == View.GONE) {
+                binding.DetailsAboutDoctor.visibility = View.VISIBLE
+                binding.ivAboutDoctor.setImageResource(R.drawable.svg_arrow_down)
+                binding.DetailsAboutDoctor.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.expand))
+            } else {
+                binding.DetailsAboutDoctor.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.collapse))
+                binding.DetailsAboutDoctor.visibility = View.GONE
+                binding.ivAboutDoctor.setImageResource(R.drawable.svg_arrow_up)
+            }
+        }
+
+        binding.layoutClinicServices.setOnClickListener {
+            if (binding.detailsclinicservices.visibility == View.GONE) {
+                binding.detailsclinicservices.visibility = View.VISIBLE
+                binding.ivClinicServices.setImageResource(R.drawable.svg_arrow_down)
+                binding.detailsclinicservices.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.expand))
+            } else {
+                binding.detailsclinicservices.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.collapse))
+                binding.detailsclinicservices.visibility = View.GONE
+                binding.ivClinicServices.setImageResource(R.drawable.svg_arrow_up)
+            }
+        }
+
+        binding.layoutInsuranceCompany.setOnClickListener {
+            if (binding.detailsInsurance.visibility == View.GONE) {
+                binding.detailsInsurance.visibility = View.VISIBLE
+                binding.ivInsuranceCompany.setImageResource(R.drawable.svg_arrow_down)
+                binding.detailsInsurance.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.expand))
+            } else {
+                binding.detailsInsurance.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.collapse))
+                binding.detailsInsurance.visibility = View.GONE
+                binding.ivInsuranceCompany.setImageResource(R.drawable.svg_arrow_up)
+            }
+        }
+        binding.layoutFeatures.setOnClickListener {
+            if (binding.detailsFeatures.visibility == View.GONE) {
+                binding.detailsFeatures.visibility = View.VISIBLE
+                binding.ivFeatures.setImageResource(R.drawable.svg_arrow_down)
+                binding.detailsFeatures.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.expand))
+            } else {
+                binding.detailsFeatures.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.collapse))
+                binding.detailsFeatures.visibility = View.GONE
+                binding.ivFeatures.setImageResource(R.drawable.svg_arrow_up)
+            }
+        }
     }
     private fun bindFeatures(currentDtos:CurrentClinicDtos){
         if (!currentDtos.Videos.isNullOrEmpty()) {
@@ -418,13 +484,13 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
             imageVideoAdapter.submitList(listBlogs)
         }
         if (!currentDtos.services.isNullOrEmpty()) {
-            binding.clinicservices.setText(currentDtos.services?.toString()?.removePrefix("[")?.removeSuffix("]"))
+            binding.detailsclinicservices.setText(currentDtos.services?.toString()?.removePrefix("[")?.removeSuffix("]"))
         }
         if (!currentDtos.features.isNullOrEmpty()) {
-            binding.features.setText(currentDtos.features?.toString()?.removePrefix("[")?.removeSuffix("]"))
+            binding.detailsFeatures.setText(currentDtos.features?.toString()?.removePrefix("[")?.removeSuffix("]"))
         }
         if (!currentDtos.insurance.isNullOrEmpty()) {
-            binding.insurance.setText(currentDtos.insurance?.toString()?.removePrefix("[")?.removeSuffix("]"))
+            binding.detailsInsurance.setText(currentDtos.insurance?.toString()?.removePrefix("[")?.removeSuffix("]"))
         }
         if (!currentDtos.gallary.isNullOrEmpty()) {
             val listBlogs= mutableListOf<Gates>()
@@ -449,10 +515,10 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
             binding.layoutBottomsheetpersistant.clinicservices.setText(getDoctorClinksResponse.data?.currentClinicDtos?.services?.toString()?.removePrefix("[")?.removeSuffix("]"))
         }
         if (!getDoctorClinksResponse.data?.currentClinicDtos?.features.isNullOrEmpty()) {
-            binding.features.setText(getDoctorClinksResponse.data?.currentClinicDtos?.features?.toString()?.removePrefix("[")?.removeSuffix("]"))
+            binding.detailsFeatures.setText(getDoctorClinksResponse.data?.currentClinicDtos?.features?.toString()?.removePrefix("[")?.removeSuffix("]"))
         }
         if (!getDoctorClinksResponse.data?.currentClinicDtos?.insurance.isNullOrEmpty()) {
-            binding.insurance.setText(getDoctorClinksResponse.data?.currentClinicDtos?.insurance?.toString()?.removePrefix("[")?.removeSuffix("]"))
+            binding.detailsInsurance.setText(getDoctorClinksResponse.data?.currentClinicDtos?.insurance?.toString()?.removePrefix("[")?.removeSuffix("]"))
         }
         if (!getDoctorClinksResponse.data?.currentClinicDtos?.gallary.isNullOrEmpty()) {
             val listBlogs= mutableListOf<Gates>()
@@ -504,13 +570,13 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
         } else {
             "${getDoctorClinksResponse.data?.firstNameAr} ${getDoctorClinksResponse.data?.middelNameAr} ${getDoctorClinksResponse.data?.lastNameAr}"
         }
-        binding.layoutBottomsheetpersistant.tvDoctorName.text = name
+        binding.layoutBottomsheetpersistant.tvDoctorName.text = "${getString(R.string.dr)} ${name}"
         binding.layoutBottomsheetpersistant.tvName.text = name
         var subspecialist: String? = ""
-        getDoctorClinksResponse.data?.subSpecialistName?.forEach {
+        getDoctorClinksResponse.data?.specialistName?.forEach {
             subspecialist = "$subspecialist $it,"
         }
-        binding.layoutBottomsheetpersistant.tvSpecialization.text = "${getDoctorClinksResponse.data?.seniorityLevelName} ${subspecialist}"
+        binding.layoutBottomsheetpersistant.tvSpecialization.text = "${getDoctorClinksResponse.data?.seniorityLevelName} ${subspecialist.toString()?.removePrefix("[")?.removeSuffix("]")}"
         clinksDoctorsAdapter.submitList(getDoctorClinksResponse.data?.clinicDtos)
         clinksDoctorsAdapter.notifyDataSetChanged()
     }

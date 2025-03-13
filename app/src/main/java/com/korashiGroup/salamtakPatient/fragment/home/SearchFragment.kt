@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +20,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.adapter.SearchDoctorsAdapter
 import com.korashiGroup.salamtakPatient.adapter.CalenderAdapter
@@ -174,9 +174,9 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                     sharedDataViewmodel.specialication.observe(viewLifecycleOwner) {
                         binding.layoutBottomsheetpersistant.etSpecialization.setText(it.name)
                         if (it.name.isNullOrEmpty()) {
-                            binding.tvSearch.setText(getString(R.string.search))
+                           // binding.tvSearch.setText(getString(R.string.search))
                         } else {
-                            binding.tvSearch.setText(it.name)
+                          //  binding.tvSearch.setText(it.name)
                         }
                         specialistId = it.id
                         doctorsSearch()
@@ -203,7 +203,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
 
         binding.layoutBottomsheetpersistant.tvRESET.setOnClickListener {
             reset()
-            binding.tvSearch.text = getString(R.string.search)
+        //    binding.tvSearch.text = getString(R.string.search)
         }
 
         binding.ivNext.setOnClickListener {
@@ -222,7 +222,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         binding.ivArrow.setOnClickListener {
            if (type==0){
                DateUtils.setstatus("")
-               findNavController().navigate(R.id.specialistDoctorsFragment)
+               findNavController().navigate(R.id.chooseSpecialistFragment)
            }else{
                polyClinicRecylerview()
                polyClinicSearch()
@@ -455,9 +455,9 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         sharedDataViewmodel.specialication.observe(viewLifecycleOwner) {
             binding.layoutBottomsheetpersistant.etSpecialization.setText(it.name)
             if (it.name.isNullOrEmpty()) {
-                binding.tvSearch.setText(getString(R.string.search))
+             //   binding.tvSearch.setText(getString(R.string.search))
             } else {
-                binding.tvSearch.setText(it.name)
+              //  binding.tvSearch.setText(it.name)
             }
             specialistId = it.id
         }
@@ -576,7 +576,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                         binding.tvCity.text="${cityName} - ${areaName}"
                         searchDoctorsAdapter.submitList(it.data?.data?.items?.toList())
                         searchDoctorsAdapter.notifyDataSetChanged()
-                        //                updateUi(it.data?.data?.items as List<Item>)
+                         updateUi(it.data?.data?.items as List<Item>)
                         val totalresult = (it.data?.data?.totalCount)?.div((10 + 2))
                         isLastPage = viewmodel.doctorSearchPage == totalresult
                         if (isLastPage) {
@@ -586,10 +586,10 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                         if (DefaultLocaleHelper.getInstance(requireContext())
                                 .getCurrentLocale() == "en"
                         ) {
-                            binding.tvCountofDoctors.text =
+                            binding.tvSearch.text =
                                 "${totalsDoctors}   ${getString(R.string.doctors_found)} "
                         } else {
-                            binding.tvCountofDoctors.text =
+                            binding.tvSearch.text =
                                 " ${getString(R.string.doctors_found)} ${totalsDoctors} "
                         }
 
@@ -770,7 +770,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         doctorId: Int,
         clinkname: String,
         rate: Double,
-        rateCount: Int
+        rateCount: Int,fess: Int
     ) {
         sharedDataViewmodel.getRating(RatingDoctors(rate, rateCount))
 //        if (DateUtils.getToken().isNullOrEmpty()) {
@@ -787,6 +787,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             sharedDataViewmodel.getClinicSchedualByClinicDayId(clinicSchedualByClinicDayId)
             sharedDataViewmodel.getDocotorId(doctorId)
             sharedDataViewmodel.getClinicIdAndDoctorId(ClinicData(doctorId, clinicId,true))
+           sharedDataViewmodel.getFees(fess)
             findNavController().navigate(R.id.bookingAppointmentFragment)
        // }
     }
@@ -994,8 +995,16 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
     private fun updateUi(it: List<Item>) {
         if (it.isNullOrEmpty()) {
             binding.crdView.visibility = View.VISIBLE
+            binding.textchange.visibility = View.VISIBLE
+            binding.gifImageView.visibility = View.VISIBLE
+            Glide.with(this)
+                .asGif()
+                .load("https://s3-alpha-sig.figma.com/img/97f7/414c/23d5eb0bc35cefa80e43b61f3db180c7?Expires=1742774400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=VaC4Xz7SE7s85RcpIKajJ9os-RRFeb4yDsqHfdGfAo7jbNRMhYKdGrmmtsEoujvHcXlpUR6abb28UuJhNO0bA7cD~eJ0r7J3CRufmH~LrCC0KFi381rO8x~xhYm10-Q3Ags0sbFhC6Zh5iDdF5w45pwPsdz8Q4RKKepwHkCYirURchPXNaaUz1t7rS-7PePnbHbnqL5byWOM4Qk~lWf0plaE0nKrKyla0A293yiZcjx4a0l~ffuDrkJGTnXZmIs0M9JtxWiwWmAT7XAmC0AdvNEaOvo2h~zsfGxpRxkUYb~eHejBYmGBIEb7TpvK4SkmRopZQk4Gc42NXpI97z7HZw__")
+                .into(binding.gifImageView)
         } else {
             binding.crdView.visibility = View.GONE
+            binding.textchange.visibility = View.GONE
+            binding.gifImageView.visibility = View.GONE
         }
     }
 
@@ -1129,10 +1138,10 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                         if (DefaultLocaleHelper.getInstance(requireContext())
                                 .getCurrentLocale() == "en"
                         ) {
-                            binding.tvCountofDoctors.text =
+                            binding.tvSearch.text =
                                 "${totalsDoctors}   ${getString(R.string.doctors_found)} "
                         } else {
-                            binding.tvCountofDoctors.text =
+                            binding.tvSearch.text =
                                 " ${getString(R.string.doctors_found)} ${totalsDoctors} "
                         }
                         polyClinicsDoctorsAdapter.submitList(it.data?.data)

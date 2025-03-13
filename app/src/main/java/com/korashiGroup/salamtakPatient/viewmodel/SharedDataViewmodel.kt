@@ -45,9 +45,12 @@ class SharedDataViewmodel:ViewModel() {
     val polyClinicResponse=MutableLiveData<PolyClinicData>()
     val doctorClinksResponseResponse=MutableLiveData<GetDoctorClinksResponse>()
     val labsResponse=MutableLiveData<LabsInfo>()
+    val feesResponse=MutableLiveData<Int>()
 
 
-
+    fun getFees(fees:Int){
+        feesResponse.postValue(fees)
+    }
     fun getspecialication(specialist:SpecialistData){
         specialication.postValue(specialist)
     }

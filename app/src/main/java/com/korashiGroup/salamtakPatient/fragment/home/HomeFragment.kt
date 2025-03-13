@@ -404,7 +404,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
             }
 
             else -> {
-                val action = HomeFragmentDirections.actionHomeFragmentToSpecialistDoctorsFragment()
+                val action = HomeFragmentDirections.actionHomeFragmentToChooseSpecialistFragment()
                 findNavController().navigate(action)
             }
         }
