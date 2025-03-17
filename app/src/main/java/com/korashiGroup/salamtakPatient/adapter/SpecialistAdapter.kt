@@ -41,6 +41,9 @@ class SpecialistAdapter(private val select:SelectSpecialist):ListAdapter<Special
         holder.binding.chExaminationtype.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 select.onItemSelected(sp)
+                holder.binding.chExaminationtype.setTextColor(Color.parseColor("#00D2CB"))
+            }else{
+                holder.binding.chExaminationtype.setTextColor(Color.parseColor("#2B2979"))
             }
         })
         holder.binding.chExaminationtype.setOnClickListener { view ->

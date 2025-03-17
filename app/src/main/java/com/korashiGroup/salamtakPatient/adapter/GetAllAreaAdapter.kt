@@ -1,12 +1,14 @@
 package com.korashiGroup.salamtakPatient.adapter
 
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.CompoundButton
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.databinding.ItemLayoutSubspecialistBinding
 import com.korashiGroup.salamtakPatient.model.AreaData
 
@@ -27,6 +29,9 @@ class GetAllAreaAdapter(private val selectarea:SelectArea):ListAdapter<AreaData,
         holder.binding.radioSpecialist.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 selectarea.onSelectArea(sp)
+                holder.binding.radioSpecialist.setTextColor(Color.parseColor("#00D2CB"))
+            } else {
+                holder.binding.radioSpecialist.setTextColor(Color.parseColor("#2B2979"))
             }
         })
         holder.binding.radioSpecialist.setOnClickListener { view ->

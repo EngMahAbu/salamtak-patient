@@ -1,6 +1,7 @@
 package com.korashiGroup.salamtakPatient.adapter
 
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.CompoundButton
@@ -30,8 +31,10 @@ class FoodAllergyAdapter(private val selectFoodAllergy:SelectFoodAllergy):ListAd
           holder.binding.radioSpecialist.setOnCheckedChangeListener { buttonView, isChecked ->
               if (isChecked) {
                   foodAllergyList.add(sp)
+                  holder.binding.radioSpecialist.setTextColor(Color.parseColor("#00D2CB"))
               } else {
                   foodAllergyList.remove(sp)
+                holder.binding.radioSpecialist.setTextColor(Color.parseColor("#2B2979"))
               }
               selectFoodAllergy.onSelectFoodAllergy(foodAllergyList)
           }

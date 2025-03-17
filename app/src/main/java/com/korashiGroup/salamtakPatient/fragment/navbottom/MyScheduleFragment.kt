@@ -110,16 +110,16 @@ class MyScheduleFragment : Fragment(), MyScheduleAdapter.ActionSchedule,
             binding.layoutUpcoming.setBackgroundResource(R.drawable.bg_button_sellector)
             binding.tvUpcoming.setTextColor(Color.parseColor("#FFFFFFFF"))
             binding.layoutFinished.setBackgroundResource(R.drawable.more_cards_background)
-            binding.tvFinished.setTextColor(Color.parseColor("##A5ABBF"))
+            binding.tvFinished.setTextColor(Color.parseColor("#A5ABBF"))
             binding.layoutCanceled.setBackgroundResource(R.drawable.more_cards_background)
-            binding.tvCanceled.setTextColor(Color.parseColor("##A5ABBF"))
+            binding.tvCanceled.setTextColor(Color.parseColor("#A5ABBF"))
             sechdule = "Upcoming"
             callback()
 
         }
 
         binding.layoutFinished.setOnClickListener {
-            binding.layoutFinished.setBackgroundResource(R.drawable.more_cards_background)
+            binding.layoutFinished.setBackgroundResource(R.drawable.bg_button_sellector)
             binding.tvFinished.setTextColor(Color.parseColor("#FFFFFFFF"))
             binding.layoutUpcoming.setBackgroundResource(R.drawable.more_cards_background)
             binding.tvUpcoming.setTextColor(Color.parseColor("#A5ABBF"))
@@ -156,7 +156,6 @@ class MyScheduleFragment : Fragment(), MyScheduleAdapter.ActionSchedule,
                             val upcominglist = it.data?.data?.filter {
                                 it?.appointmentDate!! > formattedDate && it.isCancel==false && it.IsCompleted==false
                             }
-                            Log.e("true", upcominglist.toString())
                             myScheduleAdapter.submitList(upcominglist)
                             myScheduleAdapter.notifyDataSetChanged()
                             updateUi(upcominglist as MutableList<DataAppointment>)
@@ -165,9 +164,6 @@ class MyScheduleFragment : Fragment(), MyScheduleAdapter.ActionSchedule,
                             val Canceledlist = it.data?.data?.filter {
                                 it?.isCancel == true
                             }
-
-
-                            Log.e("true", Canceledlist.toString())
                             myScheduleAdapter.submitList(Canceledlist)
                             myScheduleAdapter.notifyDataSetChanged()
                             updateUi(Canceledlist as List<DataAppointment>)
@@ -177,9 +173,6 @@ class MyScheduleFragment : Fragment(), MyScheduleAdapter.ActionSchedule,
                             val Finshedlist = it.data?.data?.filter {
                                 it?.IsCompleted==true
                             }
-
-
-                            Log.e("true", Finshedlist.toString())
                             myScheduleAdapter.submitList(Finshedlist)
                             myScheduleAdapter.notifyDataSetChanged()
                             updateUi(Finshedlist as List<DataAppointment>)

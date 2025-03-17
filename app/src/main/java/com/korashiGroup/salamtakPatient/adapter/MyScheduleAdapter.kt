@@ -39,16 +39,40 @@ class MyScheduleAdapter(private val schedule: ActionSchedule) :
                 tvDoctorName.text = "${services.doctorName}"
             }
             tvSpecialization.text = "${services.specialistName} - ${services.seniorityLevelName}"
-            Service.text=services.medicalExaminationTypeName
-            location.text ="${services.clinicAddress?:""}-${services.BlockNo?:""}-${services.FloorNo?:""}-${services.areaName?:""}"
+            Service.text="${services.medicalExaminationTypeName}(${DateParsing(services.appointmentDate.toString())})"
+            // old
+           // location.text ="${services.clinicAddress?:""}-${services.BlockNo?:""}-${services.FloorNo?:""}-${services.areaName?:""}"
+            // new
+            if (services.IsCompleted==true){
+                location.text="Paid"
+            }else{
+                location.text="Pending Payment"
+            }
+
             waitingTime.text = " ${DateParsing(services.appointmentDate.toString())}"
             Feesresult.text = services.fees.toString()
-           phones.text = services.ClinicPhone.toString()
+         //   phones.text = services.ClinicPhone.toString()
+            phones.text ="${services.fees.toString()} ${phones.context.getString(R.string.egp)}"
         }
         if (services.HealthEntity_OffersID==null || services.HealthEntity_OffersID.toString()=="null"){
             holder.binding.ivOffer.visibility=View.GONE
         }else{
             holder.binding.ivOffer.visibility=View.VISIBLE
+        }
+
+        when(services.medicalExaminationTypeId){
+            1->{
+                holder.binding.ivSubSpecialization.setImageResource(R.drawable.svg_clinic_visit)
+            }
+            2->{
+                holder.binding.ivSubSpecialization.setImageResource(R.drawable.svg_clinic_home)
+            }
+            3->{
+                holder.binding.ivSubSpecialization.setImageResource(R.drawable.svg_video)
+            }
+            4->{
+                holder.binding.ivSubSpecialization.setImageResource(R.drawable.svg_audio)
+            }
         }
 
         holder.binding.layoutActions.setOnClickListener {
@@ -83,7 +107,7 @@ class MyScheduleAdapter(private val schedule: ActionSchedule) :
                 }
             }
         }
-        holder.binding.Address.setOnClickListener {
+        holder.binding.layoutLocation.setOnClickListener {
             if (!services.clinicLatitude.isNullOrEmpty() && !services.clinicLongitude.isNullOrEmpty()){
             services.clinicLatitude?.let { it1 -> services.clinicLongitude?.let { it2 ->
                 schedule.onLocationClicked(it1,

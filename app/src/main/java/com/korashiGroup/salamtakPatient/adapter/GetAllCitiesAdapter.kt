@@ -1,6 +1,7 @@
 package com.korashiGroup.salamtakPatient.adapter
 
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.CompoundButton
@@ -36,6 +37,9 @@ class GetAllCitiesAdapter(private val selectCity: SelectCity):ListAdapter<CityDa
         holder.binding.radioSpecialist.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 selectCity.onItemSelected(sp)
+                holder.binding.radioSpecialist.setTextColor(Color.parseColor("#00D2CB"))
+            }else{
+                holder.binding.radioSpecialist.setTextColor(Color.parseColor("#2B2979"))
             }
         })
         holder.binding.radioSpecialist.setOnClickListener { view ->

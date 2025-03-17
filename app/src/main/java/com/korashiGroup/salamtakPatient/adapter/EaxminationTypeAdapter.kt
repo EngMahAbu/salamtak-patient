@@ -40,9 +40,9 @@ class EaxminationTypeAdapter(private val onServicesClick:Action ):ListAdapter<Me
         holder.binding.chExaminationtype.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 onServicesClick.onItemClickExamination(services)
-                holder.binding.tvExaminationtype.setTextColor(Color.parseColor("#2B2979"))
+                holder.binding.tvExaminationtype.setTextColor(Color.parseColor("#00D2CB"))
             }else{
-                holder.binding.tvExaminationtype.setTextColor(Color.parseColor("#B7B7B7"))
+                holder.binding.tvExaminationtype.setTextColor(Color.parseColor("#2B2979"))
             }
         })
         holder.binding.chExaminationtype.setOnClickListener { view ->

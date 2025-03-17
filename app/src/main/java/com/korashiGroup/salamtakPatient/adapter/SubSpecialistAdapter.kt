@@ -1,6 +1,7 @@
 package com.korashiGroup.salamtakPatient.adapter
 
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -23,8 +24,10 @@ class SubSpecialistAdapter(private val selectsubSpecialist:SelectSubSpecialist):
           holder.binding.radioSpecialist.setOnCheckedChangeListener { buttonView, isChecked ->
               if (isChecked) {
                   subSpeciaListData.add(sp)
+                  holder.binding.radioSpecialist.setTextColor(Color.parseColor("#00D2CB"))
               } else {
                   subSpeciaListData.remove(sp)
+                  holder.binding.radioSpecialist.setTextColor(Color.parseColor("#2B2979"))
               }
               selectsubSpecialist.onSelectSubcialist(subSpeciaListData)
           }
