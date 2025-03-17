@@ -4,7 +4,7 @@ pluginManagement {
         mavenCentral()
         gradlePluginPortal()
         jcenter()
-        maven { url 'https://nexus.mobile.fawry.io/repository/maven-releases/'}
+        maven { url 'https://nexusmobile.fawrystaging.com:2597/repository/maven-public/'}
     }
 }
 dependencyResolutionManagement {
@@ -13,7 +13,7 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         jcenter()
-        maven { url 'https://nexus.mobile.fawry.io/repository/maven-releases/'}
+        maven { url 'https://nexusmobile.fawrystaging.com:2597/repository/maven-public/'}
     }
 }
 rootProject.name = "SalamtakPatient"

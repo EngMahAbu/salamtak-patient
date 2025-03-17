@@ -32,7 +32,7 @@ class MyLapAppointementAdapter() :
         holder.binding.apply {
             layout.visibility=View.GONE
             tvDr.visibility=View.GONE
-            ivMore.visibility=View.GONE
+            //ivMore.visibility=View.GONE
             phone.visibility=View.GONE
             tvSpecialization.visibility=View.GONE
 

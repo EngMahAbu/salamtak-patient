@@ -51,7 +51,7 @@ class MyScheduleAdapter(private val schedule: ActionSchedule) :
             holder.binding.ivOffer.visibility=View.VISIBLE
         }
 
-        holder.binding.btnMoreAction.setOnClickListener {
+        holder.binding.layoutActions.setOnClickListener {
             services.appointmentDate?.let { it1 ->
                 services.doctorId?.let { it2 ->
                     services.clinicId?.let { it3 ->

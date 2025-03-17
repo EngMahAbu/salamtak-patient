@@ -109,22 +109,22 @@ class MyScheduleFragment : Fragment(), MyScheduleAdapter.ActionSchedule,
         binding.layoutUpcoming.setOnClickListener {
             binding.layoutUpcoming.setBackgroundResource(R.drawable.bg_button_sellector)
             binding.tvUpcoming.setTextColor(Color.parseColor("#FFFFFFFF"))
-            binding.layoutFinished.setBackgroundResource(R.drawable.bg_help)
-            binding.tvFinished.setTextColor(Color.parseColor("#262D70"))
-            binding.layoutCanceled.setBackgroundResource(R.drawable.bg_help)
-            binding.tvCanceled.setTextColor(Color.parseColor("#262D70"))
+            binding.layoutFinished.setBackgroundResource(R.drawable.more_cards_background)
+            binding.tvFinished.setTextColor(Color.parseColor("##A5ABBF"))
+            binding.layoutCanceled.setBackgroundResource(R.drawable.more_cards_background)
+            binding.tvCanceled.setTextColor(Color.parseColor("##A5ABBF"))
             sechdule = "Upcoming"
             callback()
 
         }
 
         binding.layoutFinished.setOnClickListener {
-            binding.layoutFinished.setBackgroundResource(R.drawable.bg_button_sellector)
+            binding.layoutFinished.setBackgroundResource(R.drawable.more_cards_background)
             binding.tvFinished.setTextColor(Color.parseColor("#FFFFFFFF"))
-            binding.layoutUpcoming.setBackgroundResource(R.drawable.bg_help)
-            binding.tvUpcoming.setTextColor(Color.parseColor("#262D70"))
-            binding.layoutCanceled.setBackgroundResource(R.drawable.bg_help)
-            binding.tvCanceled.setTextColor(Color.parseColor("#262D70"))
+            binding.layoutUpcoming.setBackgroundResource(R.drawable.more_cards_background)
+            binding.tvUpcoming.setTextColor(Color.parseColor("#A5ABBF"))
+            binding.layoutCanceled.setBackgroundResource(R.drawable.more_cards_background)
+            binding.tvCanceled.setTextColor(Color.parseColor("#A5ABBF"))
             sechdule = "Finished"
             callback()
         }
@@ -132,10 +132,10 @@ class MyScheduleFragment : Fragment(), MyScheduleAdapter.ActionSchedule,
         binding.layoutCanceled.setOnClickListener {
             binding.layoutCanceled.setBackgroundResource(R.drawable.bg_button_sellector)
             binding.tvCanceled.setTextColor(Color.parseColor("#FFFFFFFF"))
-            binding.layoutUpcoming.setBackgroundResource(R.drawable.bg_help)
-            binding.tvUpcoming.setTextColor(Color.parseColor("#262D70"))
-            binding.layoutFinished.setBackgroundResource(R.drawable.bg_help)
-            binding.tvFinished.setTextColor(Color.parseColor("#262D70"))
+            binding.layoutUpcoming.setBackgroundResource(R.drawable.more_cards_background)
+            binding.tvUpcoming.setTextColor(Color.parseColor("#A5ABBF"))
+            binding.layoutFinished.setBackgroundResource(R.drawable.more_cards_background)
+            binding.tvFinished.setTextColor(Color.parseColor("#A5ABBF"))
             sechdule = "Canceled"
             callback()
         }
