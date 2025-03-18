@@ -196,6 +196,11 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
     }
 
     private fun initButton() {
+        binding.ivSelectCity.setOnClickListener {
+            val action =
+                SearchFragmentDirections.actionSearchFragmentToDialogBottomSheetFragment("AllCity")
+            findNavController().navigate(action)
+        }
 
         binding.layoutBottomsheetpersistant.filterBottomsheet.setOnClickListener {
             return@setOnClickListener
@@ -1092,10 +1097,12 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         sharedDataViewmodel.getCity.observe(viewLifecycleOwner) {
             if (DefaultLocaleHelper.getInstance(requireContext()).getCurrentLocale() == "ar") {
                 binding.layoutBottomsheetpersistant.etChooseCity.setText(it.nameAr)
+                binding.tvSelectCity.text=it.nameAr
                 cityName=it.nameAr
                 cityId = it.id
             } else {
                 binding.layoutBottomsheetpersistant.etChooseCity.setText(it.name)
+                binding.tvSelectCity.text=it.name
                 cityName=it.name
                 cityId = it.id
             }
