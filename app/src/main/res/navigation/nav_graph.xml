@@ -235,6 +235,9 @@
                 app:destination="@id/dialogSchduleFragment" />
         <action android:id="@+id/action_myScheduleFragment_to_dailogAddMapFragment"
                 app:destination="@id/dailogAddMapFragment"/>
+        <action
+                android:id="@+id/action_myScheduleFragment_to_dialogBottomSheetFragment"
+                app:destination="@id/dialogBottomSheetFragment" />
     </fragment>
     <fragment
             android:id="@+id/moreFragment"

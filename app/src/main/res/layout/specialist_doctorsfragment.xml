@@ -42,6 +42,7 @@
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="15dp"
                 android:layout_marginTop="15dp"
+                android:visibility="gone"
                 android:background="@drawable/bg_edittext"
                 android:elevation="1dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -108,11 +109,47 @@
             android:imeOptions="actionDone"
             android:hint="@string/search_by_doctor_name"
             android:inputType="text"
-            android:background="@drawable/bg_edittext"
+            android:background="@drawable/more_cards_background"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/layout_Choose_analysis"
             app:layout_constraintEnd_toEndOf="parent"
             />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/et_search"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                >
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_analysis"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_400sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_margin="15dp"
+                    android:paddingBottom="30dp"
+                    tools:listitem="@layout/item_layout_analysis"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+
+                    />
+
+            <ProgressBar
+                    android:id="@+id/analysisprogress_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="@+id/rv_analysis"
+                    app:layout_constraintStart_toStartOf="@+id/rv_analysis"
+                    app:layout_constraintBottom_toBottomOf="@+id/rv_analysis"
+                    app:layout_constraintTop_toTopOf="@+id/rv_analysis"
+                    android:visibility="gone" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_Or"
             android:layout_width="wrap_content"
@@ -121,7 +158,7 @@
             android:layout_marginTop="20dp"
             android:fontFamily="@font/avenirltstd_black"
             android:text="@string/or"
-            android:visibility="visible"
+            android:visibility="gone"
             android:textColor="@color/blue"
             android:textSize="20sp"
             android:padding="@dimen/_5sdp"
@@ -134,7 +171,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:visibility="visible"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/layout_Choose_Specialization">
@@ -342,7 +379,7 @@
             android:layout_marginEnd="15dp"
             android:background="@drawable/bg_edittext"
             android:elevation="1dp"
-            android:visibility="visible"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_Or"
@@ -416,7 +453,7 @@
             android:layout_marginTop="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layout_Location_Details"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintWidth_percent=".9"
             android:padding="8dp"
             >
@@ -427,7 +464,7 @@
                 android:background="@drawable/bg_chooselang_button"
                 android:fontFamily="@font/avenirltstd_black"
                 android:padding="5dp"
-                android:text="@string/search"
+                android:text="@string/chooses"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="14sp"
@@ -446,6 +483,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_margin="5dp"
                 android:padding="2dp"
+                android:visibility="gone"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_layout_top_speciality"
@@ -460,6 +498,7 @@
             android:fontFamily="@font/avenirltstd_black"
             android:gravity="start"
             android:padding="2dp"
+            android:visibility="gone"
             android:layout_marginTop="20dp"
             android:layout_marginStart="15dp"
             android:text="@string/adds"
@@ -493,6 +532,7 @@
             android:layout_marginStart="@dimen/_15sdp"
             android:layout_marginEnd="@dimen/_15sdp"
             android:background="@color/gray"
+                android:visibility="gone"
            app:layout_constraintTop_toBottomOf="@+id/tv_adds"
         />
 
@@ -506,6 +546,7 @@
             android:layout_marginStart="18dp"
             android:layout_marginEnd="18dp"
             android:elevation="@dimen/_5sdp"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view"
@@ -543,7 +584,7 @@
     <include
             android:id="@+id/layoutBottomsheetpersistant"
             layout="@layout/layout_bottomsheet_analysis"
-            android:visibility="visible"
+            android:visibility="gone"
             />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

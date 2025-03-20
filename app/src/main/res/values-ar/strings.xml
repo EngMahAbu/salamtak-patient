@@ -414,6 +414,7 @@
     <string name="doctors_profile">الملف الشخى للطبيب</string>
     <string name="clinics_location">Clinics Location</string>
     <string name="support">الدعم</string>
+    <string name="choose_rays">Choose Rays</string>
     <array name="choose">
         <item>اختار</item>
     </array>

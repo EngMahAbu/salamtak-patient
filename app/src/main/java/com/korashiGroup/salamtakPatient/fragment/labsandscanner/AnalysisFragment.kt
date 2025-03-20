@@ -122,6 +122,7 @@ class AnalysisFragment : Fragment(), ShowAnalysisAdapter.SelectSubSpecialist,
 
     private fun bindViews() {
         binding.tvServiceName.text = args.dataBranches.labName
+        binding.tvCity.text = "${args.dataBranches.cityName} - ${args.dataBranches.branchAddress}"
         binding.tvSearch.text = args.dataBranches.labName
         binding.ivServices.load("https://salamtechapi.azurewebsites.net/${args.dataBranches.labImage}") {
             crossfade(true)

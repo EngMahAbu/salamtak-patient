@@ -81,6 +81,7 @@ class SpecialistDoctorsFragment : Fragment(),SpecialictyAdapter.SelectSpecialist
         //callBackSpecialist()
         initButton()
         getDataFromViews()
+        callBackGetAnalysis()
     }
 
     private fun initButton(){
@@ -196,7 +197,7 @@ class SpecialistDoctorsFragment : Fragment(),SpecialictyAdapter.SelectSpecialist
     }
     private fun clinksRecylerview() {
         analysisAdapter = AnalysisAdapter(this)
-        binding.layoutBottomsheetpersistant.rvAnalysis.apply {
+        binding.rvAnalysis.apply {
             adapter = analysisAdapter
             layoutManager = LinearLayoutManager(requireContext())
             setHasFixedSize(true)
@@ -354,14 +355,15 @@ class SpecialistDoctorsFragment : Fragment(),SpecialictyAdapter.SelectSpecialist
                 binding.tvAdds.text=getString(R.string.popularlabs)
                 binding.view.visibility=View.GONE
                 binding.imageAdds.visibility=View.GONE
-                binding.layoutChooseAnalysis.visibility=View.VISIBLE
+               // binding.layoutChooseAnalysis.visibility=View.VISIBLE
              //   binding.etSearch.visibility=View.GONE
              //   binding.tvOr.visibility=View.GONE
                 binding.etSearch.hint=getString(R.string.searchbylabname)
+
                 binding.textinputChooseAnalysis.hint=getString(R.string.selectanalysis)
                 binding.layoutBottomsheetpersistant.tvFilter.text=getString(R.string.analysis)
                 binding.layoutBottomsheetpersistant.etSearch.setText(getString(R.string.analysisname))
-                callBackGetLabs()
+             //   callBackGetLabs()
             }
             9->{
                typeId=2
@@ -370,14 +372,15 @@ class SpecialistDoctorsFragment : Fragment(),SpecialictyAdapter.SelectSpecialist
                 binding.tvAdds.text=getString(R.string.radiologypoular)
                 binding.view.visibility=View.GONE
                 binding.imageAdds.visibility=View.GONE
-                binding.layoutChooseAnalysis.visibility=View.VISIBLE
+                binding.tvSearch.text= getString(R.string.choose_rays)
+              //  binding.layoutChooseAnalysis.visibility=View.VISIBLE
                 //   binding.etSearch.visibility=View.GONE
                 //   binding.tvOr.visibility=View.GONE
                 binding.etSearch.hint=getString(R.string.searchbyRadiologyname)
                 binding.textinputChooseAnalysis.hint=getString(R.string.selectradialogy)
                 binding.layoutBottomsheetpersistant.tvFilter.text=getString(R.string.radiology)
                 binding.layoutBottomsheetpersistant.etSearch.setText(getString(R.string.radiologyname))
-                callBackGetLabs()
+              //  callBackGetLabs()
             }else->{
             binding.layoutChooseSpecialization.visibility=View.VISIBLE
             binding.btnLayoutChooseSpecialization.visibility=View.VISIBLE
@@ -411,10 +414,11 @@ class SpecialistDoctorsFragment : Fragment(),SpecialictyAdapter.SelectSpecialist
                 when (it) {
 
                     is Resource.Loading -> {
-
+                    binding.analysisprogressBar.visibility=View.VISIBLE
                     }
 
                     is Resource.sucess -> {
+                        binding.analysisprogressBar.visibility=View.GONE
                         listOfDataAnalysis.clear()
                         val data = it.data?.data
                         analysisAdapter.submitList(data)
@@ -426,7 +430,7 @@ class SpecialistDoctorsFragment : Fragment(),SpecialictyAdapter.SelectSpecialist
 
                     }
                     is Resource.Error -> {
-
+                        binding.analysisprogressBar.visibility=View.GONE
                         Snackbar.make(requireView(), "${it.message}", Snackbar.LENGTH_SHORT).show()
                     }
                 }

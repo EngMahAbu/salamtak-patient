@@ -269,6 +269,11 @@ class MyScheduleFragment : Fragment(), MyScheduleAdapter.ActionSchedule,
             }
     }
 
+    override fun onSupportClicked() {
+         val action =MyScheduleFragmentDirections.actionMyScheduleFragmentToDialogBottomSheetFragment("help")
+         findNavController().navigate(action)
+    }
+
     override fun onItemClickExamination( medicalExamination: MedicalExamination) {
         this.examinationtypeId = medicalExamination.id
     }

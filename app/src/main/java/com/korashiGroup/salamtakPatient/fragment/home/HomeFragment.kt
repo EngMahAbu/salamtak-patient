@@ -398,6 +398,9 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
             7 -> {
                 findNavController().navigate(R.id.offersFragment)
             }
+            8 , 9->{
+                findNavController().navigate(R.id.specialistDoctorsFragment)
+            }
 
             10 -> {
                 findNavController().navigate(R.id.homeCareFragment)

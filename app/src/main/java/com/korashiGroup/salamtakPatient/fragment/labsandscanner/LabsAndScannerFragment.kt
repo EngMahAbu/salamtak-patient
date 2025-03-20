@@ -3,7 +3,6 @@ package com.korashiGroup.salamtakPatient.fragment.labsandscanner
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -94,7 +93,8 @@ class LabsAndScannerFragment : Fragment(), LabsAdapter.Action, AnalysisAdapter.S
         }
         binding.layoutBottomsheetpersistant.btnApply.setOnClickListener {
             binding.layoutBottomsheetpersistant.etSearch.setText("")
-            sendLabsDataToGetBranches()
+           // sendLabsDataToGetBranches()
+
             bottomsheetbeahavoir.state = BottomSheetBehavior.STATE_HIDDEN
         }
         binding.layoutBottomsheetpersistant.etSearch.addTextChangedListener(object : TextWatcher {
@@ -323,6 +323,9 @@ class LabsAndScannerFragment : Fragment(), LabsAdapter.Action, AnalysisAdapter.S
     }
 
     override fun onPolyClinicsItemClick(branches: DataBranches,listofsubSpecialist: MutableList<AvailableService>) {
+//        bottomsheetbeahavoir.state =
+//            if (bottomsheetbeahavoir.state == BottomSheetBehavior.STATE_EXPANDED)
+//                BottomSheetBehavior.STATE_HIDDEN else BottomSheetBehavior.STATE_EXPANDED
         if (!listofsubSpecialist.isNullOrEmpty()) {
             val action =
                 LabsAndScannerFragmentDirections.actionLabsAndScannerFragmentToAnalysisFragment(

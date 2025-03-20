@@ -134,6 +134,11 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
 
         }
 
+        binding.calendar.setOnDateChangeListener { _, year, month, dayOfMonth ->
+            val date = (year.toString() + "-" + (month + 1) + "-" + dayOfMonth.toString())
+            formattedDate = date
+        }
+
         binding.btnLayoutChooseService.setOnClickListener {
 //          if (medicalExaminationId==6){
 //              return@setOnClickListener
@@ -249,6 +254,7 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
     private fun CalenderRecylerview() {
         searchServicesAdapter = CalenderAdapter(this)
         binding.rvSearchServices.apply {
+            layoutManager = GridLayoutManager(requireContext(), 7)
             adapter = searchServicesAdapter
             setHasFixedSize(true)
         }
@@ -601,7 +607,7 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
     override fun onItemClick(date: Date) {
         val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US)
         formattedDate = formatter.format(date)
-        this.formattedDate = formattedDate
+        Log.e("TAG", "onItemClick: ${formattedDate}", )
         getDayId()
         args.doctorclinks.data?.id?.let {
             isPolyClinic?.let { it1 ->

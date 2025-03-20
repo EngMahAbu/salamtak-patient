@@ -433,6 +433,7 @@
     <string name="doctors_profile">Doctor Profile</string>
     <string name="clinics_location">Clinics Location</string>
     <string name="support">Support</string>
+    <string name="choose_rays">Choose Rays</string>
     <array name="choose">
         <item>Select</item>
     </array>

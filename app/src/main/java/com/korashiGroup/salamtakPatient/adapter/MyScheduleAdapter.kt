@@ -117,6 +117,9 @@ class MyScheduleAdapter(private val schedule: ActionSchedule) :
                 Toast.makeText(it.context, it.context.getString(R.string.thereisnolocatio) , Toast.LENGTH_LONG).show()
             }
         }
+        holder.binding.layoutSupport.setOnClickListener {
+            schedule.onSupportClicked()
+        }
 
         holder.binding.ivDoctorProfile.load("https://salamtechapi.azurewebsites.net/${services.doctorImage}") {
             crossfade(true)
@@ -147,6 +150,7 @@ class MyScheduleAdapter(private val schedule: ActionSchedule) :
         fun onItemClick(clinicId: Int, doctorId: Int,clinkname:String,formaterDate:String,medicalExaminationTypeId:Int,AppointmentId:Int,
                         doctorname:String,fess:Int,image:String,offerId:String,specialistname:String)
         fun onLocationClicked(lat:String,long:String)
+        fun onSupportClicked()
     }
 
     private fun DateParsing(dateParsing:String):String{
