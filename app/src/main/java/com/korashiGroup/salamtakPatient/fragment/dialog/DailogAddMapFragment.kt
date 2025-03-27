@@ -2,7 +2,9 @@ package com.korashiGroup.salamtakPatient.fragment.dialog
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.pm.PackageManager
+import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
@@ -26,6 +28,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.databinding.DailogAddMapfragmentBinding
 import com.korashiGroup.salamtakPatient.utils.Alert
+import java.io.IOException
+import java.util.Locale
 
 
 class DailogAddMapFragment : BottomSheetDialogFragment(), OnMapReadyCallback,GoogleMap.OnMarkerClickListener {
@@ -126,7 +130,13 @@ class DailogAddMapFragment : BottomSheetDialogFragment(), OnMapReadyCallback,Goo
         if (lastlocaton == null || mMap == null) return
         lastlocaton?.let {
             if (marker == null)
-                marker = lastlocaton?.let { MarkerOptions().position(it).title("iam here") }
+                marker = lastlocaton?.let { MarkerOptions().position(it).title("${latLng?.latitude?.let { it1 ->
+                    latLng?.longitude?.let { it2 ->
+                        getAddressFromLatLng(
+                            it1, it2
+                        )
+                    }
+                }}") }
                     ?.let { mMap.addMarker(it) }
             mMap.setOnMarkerClickListener(this)
             mMap.moveCamera(CameraUpdateFactory.newLatLng(it))
@@ -139,7 +149,7 @@ class DailogAddMapFragment : BottomSheetDialogFragment(), OnMapReadyCallback,Goo
                         LatLng(
                             lastlocaton.latitude,
                             lastlocaton.longitude
-                        ), 15f
+                        ), 12f
                     )
                 )
             }
@@ -232,5 +242,17 @@ class DailogAddMapFragment : BottomSheetDialogFragment(), OnMapReadyCallback,Goo
         return false
     }
 
-
+    fun getAddressFromLatLng( lat: Double, lng: Double): String {
+        val geocoder = Geocoder(requireContext(), Locale.getDefault())
+        return try {
+            val addresses = geocoder.getFromLocation(lat, lng, 1)
+            if (!addresses.isNullOrEmpty()) {
+                addresses[0].getAddressLine(0) // يعيد اسم الموقع الكامل
+            } else {
+                "الموقع غير معروف"
+            }
+        } catch (e: IOException) {
+            "خطأ في جلب العنوان"
+        }
+    }
 }

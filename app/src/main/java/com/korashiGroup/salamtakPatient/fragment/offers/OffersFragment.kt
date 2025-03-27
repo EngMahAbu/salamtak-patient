@@ -1,38 +1,47 @@
 package com.korashiGroup.salamtakPatient.fragment.offers
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.adapter.CategoryAdapter
 import com.korashiGroup.salamtakPatient.adapter.OffersAdapter
 import com.korashiGroup.salamtakPatient.databinding.OffersfragmentBinding
+import com.korashiGroup.salamtakPatient.model.offers.ActiveOffers
 import com.korashiGroup.salamtakPatient.model.offers.OfferDetails
 import com.korashiGroup.salamtakPatient.model.offers.OfferDoctor
 import com.korashiGroup.salamtakPatient.utils.DateUtils
 import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.viewmodel.PatientViewmodel
+import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class OffersFragment : Fragment(),CategoryAdapter.Action,OffersAdapter.Action{
+class OffersFragment : Fragment(),CategoryAdapter.Action,OffersAdapter.Action {
 
-    private lateinit var binding:OffersfragmentBinding
+    private lateinit var binding: OffersfragmentBinding
     private val patientViewmodel: PatientViewmodel by viewModels()
+    private val sharedDataViewmodel: SharedDataViewmodel by activityViewModels()
+    private val args: OffersFragmentArgs by navArgs()
     private lateinit var categoryAdapter: CategoryAdapter
     private lateinit var offersAdapter: OffersAdapter
+    private var offerId = 0
+    private var position = 0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding= OffersfragmentBinding.inflate(layoutInflater,container,false)
+        binding = OffersfragmentBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -40,12 +49,19 @@ class OffersFragment : Fragment(),CategoryAdapter.Action,OffersAdapter.Action{
         super.onViewCreated(view, savedInstanceState)
         categoryRecylerview()
         offersRecylerview()
-        callBackActiveCategory()
-        patientViewmodel.getOffers(0)
         callBackActiveOffers()
+        callBackActiveCategory()
+        patientViewmodel.getOffers(args.offer.id)
+        initButton()
     }
+    private fun initButton(){
+        binding.ivArrow.setOnClickListener {
+            findNavController().navigate(R.id.chooseCategoryOffersFragment)
+        }
+    }
+
     private fun categoryRecylerview() {
-        categoryAdapter = CategoryAdapter(this)
+        categoryAdapter = CategoryAdapter(this,args.offer.position)
         binding.rvCatagory.apply {
             adapter = categoryAdapter
             setHasFixedSize(true)
@@ -70,7 +86,19 @@ class OffersFragment : Fragment(),CategoryAdapter.Action,OffersAdapter.Action{
                     }
                     is Resource.sucess -> {
                         binding.progressBar.visibility = View.GONE
-                       categoryAdapter.submitList(it.data?.data)
+                        val extraItem = ActiveOffers(
+                            id = 0,
+                            imageRes = R.drawable.offer_catg,
+                            name = "All Categories",
+                            offerCount = 0
+                        )
+
+                        // Combine API data with the new item
+                        val updatedList = mutableListOf<ActiveOffers>().apply {
+                            add(extraItem) // Add manual item first (or last)
+                            it.data?.data?.let { apiData -> addAll(apiData) }
+                        }
+                        categoryAdapter.submitList(updatedList)
                         categoryAdapter.notifyDataSetChanged()
                     }
 

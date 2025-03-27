@@ -3,6 +3,7 @@ package com.korashiGroup.salamtakPatient.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.korashiGroup.salamtakPatient.fragment.labsandscanner.model.LabsInfo
+import com.korashiGroup.salamtakPatient.fragment.offers.model.Offer
 import com.korashiGroup.salamtakPatient.model.*
 import com.korashiGroup.salamtakPatient.model.booking.ClinicSchedualByClinicDayId
 import com.korashiGroup.salamtakPatient.model.booking.clink.ClinicData
@@ -46,6 +47,7 @@ class SharedDataViewmodel:ViewModel() {
     val doctorClinksResponseResponse=MutableLiveData<GetDoctorClinksResponse>()
     val labsResponse=MutableLiveData<LabsInfo>()
     val feesResponse=MutableLiveData<Int>()
+    val offerResponse=MutableLiveData<Offer>()
 
 
     fun getFees(fees:Int){
@@ -53,6 +55,9 @@ class SharedDataViewmodel:ViewModel() {
     }
     fun getspecialication(specialist:SpecialistData){
         specialication.postValue(specialist)
+    }
+    fun getOfferInfo(offer: Offer){
+        offerResponse.postValue(offer)
     }
 
     fun getSubSpecialication(subSpecialist:List<SubSpecialistData>){

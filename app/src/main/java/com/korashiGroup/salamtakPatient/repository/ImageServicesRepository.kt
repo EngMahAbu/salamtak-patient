@@ -64,18 +64,18 @@ class ImageServicesRepository @Inject constructor(
                 5,
 
             ),
-            ImageServices(
-                R.drawable.svg_labs,
-                context.getString(R.string.laboratories),"المختبرات",
-                context.getColor(R.color.color_4),
-                3,
-            ),
-            ImageServices(
-                R.drawable.svg_radiology,
-                context.getString(R.string.radiologycenter),"مراكز الاشعة",
-                context.getColor(R.color.color_5),
-                4,
-            ),
+//            ImageServices(
+//                R.drawable.svg_labs,
+//                context.getString(R.string.laboratories),"المختبرات",
+//                context.getColor(R.color.color_4),
+//                3,
+//            ),
+//            ImageServices(
+//                R.drawable.svg_radiology,
+//                context.getString(R.string.radiologycenter),"مراكز الاشعة",
+//                context.getColor(R.color.color_5),
+//                4,
+//            ),
             ImageServices(
                 R.drawable.png_salatakangle,
                 context.getString(R.string.engile),"سلامتك Angel",

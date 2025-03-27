@@ -340,7 +340,7 @@
     <string name="avilableappointemnts">"Available "</string>
     <string name="avilableapapointemnts">Available Appointments</string>
     <string name="reservation_required_first_come_first_served">Reservation Required,( First-in,First-Served )</string>
-    <string name="offercategories">Offer Categories:</string>
+    <string name="offercategories">All Offers</string>
     <string name="session">Session</string>
     <string name="recentoffers">Recent Offers:</string>
     <string name="please_enter_valid_code">please enter valid code</string>
@@ -373,8 +373,8 @@
     <string name="rateapp">Rate App</string>
     <string name="myquestions">My Questions</string>
     <string name="addquestions">Add Questions</string>
-    <string name="showanswers">Show Answers</string>
-    <string name="myanswers">Questions Answer</string>
+    <string name="showanswers">Show </string>
+    <string name="myanswers">Answers</string>
     <string name="chronicdisease">Chronic Disease</string>
     <string name="prevSurgery">Previous Surgery</string>
     <string name="chooses">Choose</string>
@@ -434,6 +434,9 @@
     <string name="clinics_location">Clinics Location</string>
     <string name="support">Support</string>
     <string name="choose_rays">Choose Rays</string>
+    <string name="choose_category">Choose Category</string>
+    <string name="search_by_name_of_category">Search by name of category</string>
+    <string name="category_name">Category Name</string>
     <array name="choose">
         <item>Select</item>
     </array>

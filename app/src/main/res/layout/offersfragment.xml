@@ -8,23 +8,34 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         tools:context=".fragment.offers.OffersFragment">
 
-
+    <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:adjustViewBounds="true"
+            android:padding="10dp"
+            android:src="@drawable/ic_arrowleft"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_Filter"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_Filter" />
     <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_Filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="20dp"
+            android:fontFamily="@font/sf_pro_display_semibold"
             android:text="@string/offercategories"
             android:textColor="@color/black"
             android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_arrow"
             app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_Catagory"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_110sdp"
+            android:layout_height="@dimen/_50sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginBottom="5dp"
@@ -122,7 +133,7 @@
             android:layout_marginTop="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_layout_offers"
+            tools:listitem="@layout/item_layout_doctor_offers"
             app:layout_constraintTop_toBottomOf="@+id/tv_recentOffers"
             />
 

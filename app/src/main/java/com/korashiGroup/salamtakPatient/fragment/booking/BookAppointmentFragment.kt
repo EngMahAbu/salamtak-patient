@@ -36,6 +36,7 @@ import com.korashiGroup.salamtakPatient.model.booking.AppointmentDetailBooking
 import com.korashiGroup.salamtakPatient.model.booking.BookingData
 import com.korashiGroup.salamtakPatient.model.booking.PatientAppointmentRequest
 import com.korashiGroup.salamtakPatient.model.booking.clink.ClinicDto
+import com.korashiGroup.salamtakPatient.utils.DataBinding
 import com.korashiGroup.salamtakPatient.utils.DateUtils
 import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
@@ -135,8 +136,21 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
         }
 
         binding.calendar.setOnDateChangeListener { _, year, month, dayOfMonth ->
-            val date = (year.toString() + "-" + (month + 1) + "-" + dayOfMonth.toString())
-            formattedDate = date
+            val formattedMonth = String.format("%02d", month + 1) // إضافة 1 وجعلها بصيغة رقمين
+            val formattedDay = String.format("%02d", dayOfMonth) // جعل اليوم بصيغة رقمين
+            formattedDate = "$year-$formattedMonth-$formattedDay"
+            val date=DataBinding.convertDateFormat(formattedDate,"yyyy-MM-dd","yyyy-MM-dd'T'HH:mm:ss'Z'")
+            getDayId()
+            args.doctorclinks.data?.id?.let {
+                isPolyClinic?.let { it1 ->
+                    viewmodel.getClinicSchedualByClinicDayId(
+                        clinicId,
+                        dayId,
+                        this.medicalExaminationId,
+                        date, it, it1
+                    )
+                }
+            }
         }
 
         binding.btnLayoutChooseService.setOnClickListener {
@@ -195,7 +209,7 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
                 } else {
                     val date: Date =
                         SimpleDateFormat("yyyy-MM-dd").parse(formattedDate)
-                    Log.d("day", date.toString())
+                    Log.e("day", formattedDate)
                     // val startHour: Date = time?.let { it1 -> SimpleDateFormat("hh:mm").parse(it1) }!!
                     val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US)
                     // val total = date.time + startHour.time
@@ -623,7 +637,7 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
 
     private fun getDayId() {
         val sdf = SimpleDateFormat("EEEE", Locale.ENGLISH)
-        val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.US)
+        val format = SimpleDateFormat("yyyy-MM-dd", Locale.US)
         val date = format.parse(formattedDate)
         val day = sdf.format(date).subSequence(0, 3)
 

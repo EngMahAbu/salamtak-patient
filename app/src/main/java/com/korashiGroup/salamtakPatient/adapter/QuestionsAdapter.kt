@@ -26,17 +26,18 @@ class QuestionsAdapter(val book:IBook,val isFullName:Boolean):ListAdapter<Questi
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val services=getItem(position)
          holder.binding.apply {
-             tvSpecialistName.text="${tvSpecialistName.context.getString(R.string.specialization)} : ${services.specialityName}"
-             tvAge.text="${tvSpecialistName.context.getString(R.string.patientage)} : ${services.age}"
+             btnMore.visibility=View.GONE
+             tvSpecialistName.text=" ${services.specialityName}"
+             //tvAge.text="${tvSpecialistName.context.getString(R.string.patientage)} : ${services.age}"
              if (!services.chronic_disease.isNullOrEmpty()){
                  holder.binding.tvChronicDisease.visibility=View.VISIBLE
-                 tvChronicDisease.text="${tvSpecialistName.context.getString(R.string.chronicdisease)} : ${services.chronic_disease}"
+                // tvChronicDisease.text="${tvSpecialistName.context.getString(R.string.chronicdisease)} : ${services.chronic_disease}"
              }else{
                  holder.binding.tvChronicDisease.visibility=View.GONE
              }
              if (!services.prevSurgery.isNullOrEmpty()){
                  holder.binding.tvPrevSurgery.visibility=View.VISIBLE
-                 tvPrevSurgery.text="${tvSpecialistName.context.getString(R.string.prevSurgery)} : ${services.prevSurgery}"
+                // tvPrevSurgery.text="${tvSpecialistName.context.getString(R.string.prevSurgery)} : ${services.prevSurgery}"
              }else{
                  holder.binding.tvPrevSurgery.visibility=View.GONE
              }
@@ -47,13 +48,13 @@ class QuestionsAdapter(val book:IBook,val isFullName:Boolean):ListAdapter<Questi
                  tvPatientname.text="${tvSpecialistName.context.getString(R.string.patientName)} : ${services.patientFirstname}"
              }
              if (DefaultLocaleHelper.getInstance(tvQuestions.context).getCurrentLocale()=="en"){
-                 tvQuestions.text="${tvSpecialistName.context.getString(R.string.your_question)} : ${services.question} ?"
+                 tvQuestions.text=" ${services.question} ?"
              }else{
-                 tvQuestions.text="${tvSpecialistName.context.getString(R.string.your_question)} : ${services.question}؟ "
+                 tvQuestions.text=" ${services.question}؟ "
              }
              if (!services.qDate.isNullOrEmpty() || services.qDate!=null) {
                  tvDate.visibility=View.VISIBLE
-                 tvDate.text = "${tvSpecialistName.context.getString(R.string.date)} : ${
+                 tvDate.text = " ${
                      DataBinding.convertDateFormat(
                          services.qDate,
                          "yyyy-MM-dd'T'HH:mm:ss",
@@ -68,6 +69,7 @@ class QuestionsAdapter(val book:IBook,val isFullName:Boolean):ListAdapter<Questi
             holder.binding.tvBook.visibility=View.GONE
         }else{
             holder.binding.tvBook.visibility=View.VISIBLE
+            holder.binding.tvBook.text="${holder.binding.tvBook.context.getString(R.string.showanswers)} : (${services.answers.size}) Answers"
         }
         holder.binding.tvBook.setOnClickListener {
             book.onItemClick(services)

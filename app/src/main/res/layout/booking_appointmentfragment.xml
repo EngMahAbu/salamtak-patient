@@ -22,6 +22,17 @@
                 app:layout_constraintBottom_toBottomOf="@+id/tv_name"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/tv_name" />
+        <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/iv_favorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:adjustViewBounds="true"
+                android:padding="10dp"
+                android:src="@drawable/heart"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_name" />
 
         <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_name"
@@ -313,6 +324,7 @@
                 android:layout_height="46dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="10dp"
+                android:visibility="gone"
                 android:background="@drawable/bg_helpgray"
                 android:padding="8dp"
                 android:layout_marginStart="10dp"
@@ -348,6 +360,7 @@
                 android:layout_marginTop="10dp"
                 android:background="@drawable/bg_help"
                 android:padding="8dp"
+                android:visibility="gone"
                 app:layout_constraintEnd_toStartOf="@+id/layout_Sharelink"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintHorizontal_chainStyle="spread_inside"

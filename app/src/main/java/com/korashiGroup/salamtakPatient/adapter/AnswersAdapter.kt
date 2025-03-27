@@ -39,11 +39,19 @@ class AnswersAdapter(val book:IBook):ListAdapter<GetAnswers,AnswersAdapter.ViewH
              tvDoctorName.visibility=View.GONE
              tvChronicDisease.visibility=View.GONE
              tvDate.visibility=View.GONE
+             ivDoctorProfile.setImageResource(R.drawable.iv_doctor_logo)
          }
 
-        holder.binding.tvBook.setOnClickListener {
+        holder.binding.btnMore.setOnClickListener {
             services.doctorID?.let { it1 -> services.clinicID?.let { it2 ->
                 book.onItemClick(it1,
+                    it2
+                )
+            } }
+        }
+        holder.binding.tvBook.setOnClickListener {
+            services.doctorID?.let { it1 -> services.clinicID?.let { it2 ->
+                book.onItemBookClicked(it1,
                     it2
                 )
             } }
@@ -69,6 +77,7 @@ class AnswersAdapter(val book:IBook):ListAdapter<GetAnswers,AnswersAdapter.ViewH
 
     interface IBook{
         fun onItemClick(doctorId:Int,clinicId:Int)
+        fun onItemBookClicked(doctorId:Int,clinicId:Int)
     }
 
 }

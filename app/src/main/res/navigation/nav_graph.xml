@@ -505,6 +505,9 @@
         <action
                 android:id="@+id/action_offersFragment_to_offerBookAppointmentFragment"
                 app:destination="@id/offerBookAppointmentFragment" />
+        <argument
+                android:name="Offer"
+                app:argType="com.korashiGroup.salamtakPatient.fragment.offers.model.Offer" />
     </fragment>
     <fragment android:id="@+id/notificationListFragment"
               android:name="com.korashiGroup.salamtakPatient.notification.NotificationListFragment"
@@ -590,6 +593,9 @@
                 android:name="Answers"
                 app:argType="com.korashiGroup.salamtakPatient.model.askandanswer.questions.Questions"
                 app:nullable="true" />
+        <action
+                android:id="@+id/action_answersFragment_to_bookAppointmentFragment"
+                app:destination="@id/bookAppointmentFragment" />
     </fragment>
     <fragment
             android:id="@+id/specialDoctorAnswersFragment"
@@ -663,6 +669,15 @@
             android:name="com.korashiGroup.salamtakPatient.fragment.home.ChooseSpecialistFragment"
             android:label="choose_specialistfragment"
             tools:layout="@layout/choose_specialistfragment" />
+    <fragment
+            android:id="@+id/chooseCategoryOffersFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.offers.ChooseCategoryOffersFragment"
+            android:label="choose_category_offersfragment"
+            tools:layout="@layout/choose_category_offersfragment" >
+        <action
+                android:id="@+id/action_chooseCategoryOffersFragment_to_offersFragment"
+                app:destination="@id/offersFragment" />
+    </fragment>
 
 
 </navigation>

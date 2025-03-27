@@ -131,7 +131,7 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
             findNavController().navigate(send)
         }
 
-        binding.layoutAddtofavorite.setOnClickListener {
+        binding.ivFavorite.setOnClickListener {
             val favoriteRequest = doctorId?.let { it1 -> isFavorite?.let { it2 -> FavoriteRequest(it1, it2) } }
             if (favoriteRequest != null) {
                 patientViewModel.createPatientFavoriteDoctor(favoriteRequest)
@@ -329,12 +329,14 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
                 is Resource.sucess -> {
                     if (isFavorite==false){
                         isFavorite = true
-                        binding.tvAddtofavorite.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_heart,0,0,0)
-                        binding.tvAddtofavorite.text=getString(R.string.add_to_favorite)
+//                        binding.tvAddtofavorite.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_heart,0,0,0)
+//                        binding.tvAddtofavorite.text=getString(R.string.add_to_favorite)
+                        binding.ivFavorite.setImageResource(R.drawable.heart)
                     }else{
                         isFavorite=false
-                        binding.tvAddtofavorite.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_favoritered,0,0,0)
-                        binding.tvAddtofavorite.text=getString(R.string.remove_from_favorite)
+//                        binding.tvAddtofavorite.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_favoritered,0,0,0)
+//                        binding.tvAddtofavorite.text=getString(R.string.remove_from_favorite)
+                        binding.ivFavorite.setImageResource(R.drawable.svg_favorite)
                     }
                 }
 

@@ -90,7 +90,7 @@ class HomeCareFragment : Fragment(),ServicesAdapter.Action {
     override fun onItemClick(servicesId: Int) {
         sharedDataViewmodel.getspecialication(SpecialistData(servicesId,"",false,""))
         if (servicesId!=0){
-            findNavController().navigate(R.id.specialistDoctorsFragment)
+            findNavController().navigate(R.id.searchFragment)
         }else{
             findNavController().navigate(R.id.askingFoNurssingFragment)
         }

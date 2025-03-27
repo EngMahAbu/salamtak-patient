@@ -14,7 +14,7 @@ import com.korashiGroup.salamtakPatient.model.labsandscanner.DataAnalysis
 
 class ShowAnalysisAdapter(private val selectsubSpecialist:SelectSubSpecialist,private val status:Boolean):ListAdapter<AvailableService,ShowAnalysisAdapter.ViewHolder>(DiffCallback()) {
 
-    val subSpeciaListData= mutableListOf<DataAnalysis>()
+   // val subSpeciaListData= mutableListOf<DataAnalysis>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
         val view=ItemLayoutAnalysisPriceBinding.inflate(LayoutInflater.from(parent.context),parent,false)
@@ -51,7 +51,7 @@ class ShowAnalysisAdapter(private val selectsubSpecialist:SelectSubSpecialist,pr
 //            selectsubSpecialist.onSelectSubcialist(subSpeciaListData)
 //        }
          holder.binding.deleteItem.setOnClickListener {
-             selectsubSpecialist.deleteItemAnalysis(position)
+             sp.serviceName?.let { it1 -> selectsubSpecialist.deleteItemAnalysis(position, it1) }
          }
 
 
@@ -70,7 +70,7 @@ class ShowAnalysisAdapter(private val selectsubSpecialist:SelectSubSpecialist,pr
     }
     interface SelectSubSpecialist{
         fun onSelectSubcialist(listofsubSpecialist:MutableList<DataAnalysis>)
-        fun deleteItemAnalysis(pos:Int)
+        fun deleteItemAnalysis(pos:Int,itemName:String)
     }
 
 }

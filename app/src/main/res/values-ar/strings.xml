@@ -415,6 +415,9 @@
     <string name="clinics_location">Clinics Location</string>
     <string name="support">الدعم</string>
     <string name="choose_rays">Choose Rays</string>
+    <string name="choose_category">Choose Category</string>
+    <string name="search_by_name_of_category">Search by name of category</string>
+    <string name="category_name">Category Name</string>
     <array name="choose">
         <item>اختار</item>
     </array>

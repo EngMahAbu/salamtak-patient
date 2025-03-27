@@ -22,11 +22,11 @@ class MostPopularSpecialtiesAdapter(private val selectsubSpecialist:SelectSubSpe
         val sp=getItem(position)
 
         holder.binding.tvSpecilization.text=sp.name
-//        holder.binding.ivSpecilizationLogo.load("https://salamtechapi.azurewebsites.net/${sp.image}") {
-//            crossfade(true)
-//            crossfade(1000)
-//            transformations(CircleCropTransformation())
-//        }
+        holder.binding.ivSpecilizationLogo.load("https://salamtechapi.azurewebsites.net/${sp.image}") {
+            crossfade(true)
+            crossfade(1000)
+            transformations(CircleCropTransformation())
+        }
 
         holder.binding.layoutChooseSpecialties.setOnClickListener { view ->
           selectsubSpecialist.onItemSelected(sp)

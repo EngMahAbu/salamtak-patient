@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bookingConfirm"
+        app:behavior_hideable="true"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        android:background="@drawable/bg_bottomsheet">
+
+    <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/iv_header"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_4sdp"
+            android:layout_marginTop="15dp"
+            android:background="@color/white_gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+    <ImageView
+            android:id="@+id/gifImageView"
+            android:layout_width="@dimen/_120sdp"
+            android:layout_height="100dp"
+            android:scaleType="fitCenter"
+            android:visibility="visible"
+            android:layout_marginTop="25dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_header"
+            />
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_Booking"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"
+            android:gravity="center"
+            android:fontFamily="@font/sf_pro_display_semibold"
+            android:text="Your Booking is Successful"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/gifImageView"
+            />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_confirm"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="15dp"
+            android:gravity="center_horizontal"
+        android:fontFamily="@font/sf_pro_display_semibold"
+        android:text="Thank you, Your booking has been confirmed successfully"
+        android:textColor="@color/text_doctor_card_color"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/tv_Booking"
+        />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/tv_confirm"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="10dp">
+        <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_booking"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_chooselang_button"
+                android:fontFamily="@font/sf_pro_display_semibold"
+                android:text="@string/ok"
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                android:textAllCaps="false"
+                android:layout_marginStart="@dimen/_10sdp"
+                app:layout_constraintWidth_percent=".80"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintHorizontal_chainStyle="spread_inside" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

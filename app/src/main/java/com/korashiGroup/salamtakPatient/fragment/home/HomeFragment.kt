@@ -3,10 +3,12 @@ package com.korashiGroup.salamtakPatient.fragment.home
 import android.app.Activity
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.location.LocationManagerCompat.getCurrentLocation
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -26,10 +28,12 @@ import com.korashiGroup.salamtakPatient.model.notification.Data
 import com.korashiGroup.salamtakPatient.model.register.ChooseGender
 import com.korashiGroup.salamtakPatient.utils.Constans
 import com.korashiGroup.salamtakPatient.utils.DateUtils
+import com.korashiGroup.salamtakPatient.utils.PermissionManager
 import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.utils.SpUtil
 import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.ImageServicesViewModel
+import com.korashiGroup.salamtakPatient.viewmodel.LocationViewModel
 import com.korashiGroup.salamtakPatient.viewmodel.NotificationViewModel
 import com.korashiGroup.salamtakPatient.viewmodel.PatientViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.PolyClinicsViewmodel
@@ -56,6 +60,8 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
     private val imageServicesViewModel: ImageServicesViewModel by viewModels()
     private val notificationViewModel: NotificationViewModel by viewModels()
     private val polyClinicsViewmodel: PolyClinicsViewmodel by viewModels()
+    private val viewModel: LocationViewModel by viewModels()
+    private lateinit var permissionManager: PermissionManager
     private var data: Data? = null
     var someEventListener: LoginFragment.onSomeEventListener? = null
 
@@ -97,6 +103,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         instance = this
+        permissionManager = PermissionManager(requireActivity())
         sharedDataViewmodel.getMedicalInfoStatus(false)
         bindDataToViews()
         callCheckUser()
@@ -128,6 +135,40 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
         callBackGetDoctorFeedBakNotification()
         initButton()
         setUP()
+        getCurrentLocation()
+        observeLocationUpdates()
+        observePermissionStatus()
+    }
+
+    private fun getCurrentLocation(){
+        if (permissionManager.hasLocationPermission()) {
+            viewModel.getCurrentLocation()
+        } else {
+            permissionManager.requestLocationPermission()
+        }
+    }
+    private fun observePermissionStatus() {
+        viewModel.permissionStatus.observe(viewLifecycleOwner) { hasPermission ->
+            if (!hasPermission) {
+                Toast.makeText(requireContext(), "يجب منح إذن الموقع لاستخدام هذه الميزة", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+    private fun observeLocationUpdates() {
+        viewModel.locationLiveData.observe(viewLifecycleOwner) { latLng ->
+            latLng?.let {
+                Log.e("Location", "observeLocationUpdates:${latLng.latitude}:${latLng.longitude} ", )
+            }
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (permissionManager.handlePermissionResult(requestCode, grantResults)) {
+            viewModel.getCurrentLocation()
+        } else {
+            Toast.makeText(requireContext(), "تم رفض إذن الموقع", Toast.LENGTH_SHORT).show()
+        }
     }
  private fun setUP(){
      if (resources.configuration.layoutDirection == View.LAYOUT_DIRECTION_RTL) {
@@ -396,7 +437,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
 //        findNavController().navigate(action)
         when (servicesID) {
             7 -> {
-                findNavController().navigate(R.id.offersFragment)
+                findNavController().navigate(R.id.chooseCategoryOffersFragment)
             }
             8 , 9->{
                 findNavController().navigate(R.id.specialistDoctorsFragment)

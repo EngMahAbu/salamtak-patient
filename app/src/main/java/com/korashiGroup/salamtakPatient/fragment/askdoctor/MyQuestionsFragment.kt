@@ -46,7 +46,7 @@ class MyQuestionsFragment : Fragment(),QuestionsAdapter.IBook{
         binding.ivArrow.setOnClickListener {
             findNavController().navigate(R.id.moreFragment)
         }
-        binding.btnApply.setOnClickListener {
+        binding.tvAddquestions.setOnClickListener {
             findNavController().navigate(R.id.askDoctorFragment)
         }
     }

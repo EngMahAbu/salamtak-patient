@@ -17,7 +17,8 @@ data class ActiveOffers(
     @SerializedName("id")
     val id: Int,
     @SerializedName("image")
-    val image: String,
+    val image: String?=null,
+    val imageRes: Int? = null,
     @SerializedName("Name")
     val name: String,
     @SerializedName("OfferCount")

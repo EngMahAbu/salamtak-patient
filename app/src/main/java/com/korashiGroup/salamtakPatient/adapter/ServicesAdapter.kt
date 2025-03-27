@@ -2,6 +2,7 @@ package com.korashiGroup.salamtakPatient.adapter
 
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -33,8 +34,10 @@ class ServicesAdapter(private val onServicesClick:Action):ListAdapter<ImageServi
                 .load(services.image_onboarding)
                 .into(holder.binding.ivServices)
         }else{
-            DataBinding.loadPicture(holder.binding.ivServices,services.image)
+            holder.binding.ivServices.visibility=View.GONE
+            DataBinding.loadPicture(holder.binding.ivHomecare,services.image)
         }
+
         if (DefaultLocaleHelper.getInstance(holder.binding.tvServiceName.context).getCurrentLocale()=="en"){
             holder.binding.tvServiceName.text=services.textService
         }else{

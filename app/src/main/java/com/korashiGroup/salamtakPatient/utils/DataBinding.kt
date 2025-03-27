@@ -57,4 +57,9 @@ object DataBinding {
     fun loadPicture(imageView: ImageView, url: String?) {
         Glide.with(imageView.context).load("https://salamtechapi.azurewebsites.net/${url}").fitCenter().into(imageView)
     }
+    @JvmStatic
+    @BindingAdapter("imageUrl")
+    fun loadPictureWithoutUrl(imageView: ImageView, url: String?) {
+        Glide.with(imageView.context).load("${url}").fitCenter().into(imageView)
+    }
 }
