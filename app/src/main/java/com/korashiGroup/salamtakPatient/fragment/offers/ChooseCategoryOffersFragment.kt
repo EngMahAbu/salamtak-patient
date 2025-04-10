@@ -70,7 +70,7 @@ class ChooseCategoryOffersFragment : Fragment(),OffersCategoryAdapter.Action{
                         val extraItem = ActiveOffers(
                                 id = 0,
                                 imageRes = R.drawable.offer_catg,
-                                name = "All Categories",
+                                name = "All Offers",
                                 offerCount = totalOfferCount
                             )
 
@@ -105,9 +105,9 @@ class ChooseCategoryOffersFragment : Fragment(),OffersCategoryAdapter.Action{
         binding.ivMessage.visibility=View.GONE
     }
 
-    override fun onItemClick(position: Int,offerId:Int) {
-        sharedDataViewmodel.getOfferInfo(Offer(offerId,position))
-        val action =ChooseCategoryOffersFragmentDirections.actionChooseCategoryOffersFragmentToOffersFragment(Offer(offerId,position))
+    override fun onItemClick(position: Int,offerId:Int,offerName:String) {
+        sharedDataViewmodel.getOfferInfo(Offer(offerId,position,offerName))
+        val action =ChooseCategoryOffersFragmentDirections.actionChooseCategoryOffersFragmentToOffersFragment(Offer(offerId,position,offerName))
        findNavController().navigate(action)
     }
 }

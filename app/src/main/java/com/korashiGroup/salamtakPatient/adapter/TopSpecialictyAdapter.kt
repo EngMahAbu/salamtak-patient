@@ -45,12 +45,12 @@ class TopSpecialictyAdapter(val iSelectSep:ISelectSpecialist,val status:Boolean)
             iSelectSep.onItemSelected(sp)
             notifyDataSetChanged()
         }
-        if (sp.id==-1) {
+        if (selectedPosition==holder.bindingAdapterPosition) {
             holder.binding.tvSpeciality.background =
                 ContextCompat.getDrawable(holder.itemView.context, R.drawable.bg_chooselang_button)
             holder.binding.tvSpeciality.setTextColor(Color.WHITE)
-            holder.binding.tvSpeciality.text="All"
-        } else {
+           }
+        else{
             holder.binding.tvSpeciality.background =
                 ContextCompat.getDrawable(holder.itemView.context, R.drawable.bg_popular_specialties)
             holder.binding.tvSpeciality.setTextColor(holder.itemView.context.getColor(R.color.new_dark_grey_color))

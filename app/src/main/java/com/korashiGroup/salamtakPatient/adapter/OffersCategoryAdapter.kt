@@ -44,7 +44,7 @@ class OffersCategoryAdapter(private val onServicesClick:Action):ListAdapter<Acti
              holder.binding.tvOffers.text="${services.offerCount} Offers Available"
         holder.itemView.setOnClickListener {
             selectedItemPosition = holder.bindingAdapterPosition
-            onServicesClick.onItemClick(position,services.id)
+            onServicesClick.onItemClick(position,services.id,services.name)
             notifyDataSetChanged()
         }
 
@@ -69,7 +69,7 @@ class OffersCategoryAdapter(private val onServicesClick:Action):ListAdapter<Acti
     }
 
     interface Action{
-        fun onItemClick(position: Int,offerId:Int)
+        fun onItemClick(position: Int,offerId:Int,offerName:String)
     }
 
 

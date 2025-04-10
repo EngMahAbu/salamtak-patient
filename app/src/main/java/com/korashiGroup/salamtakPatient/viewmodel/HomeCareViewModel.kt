@@ -8,6 +8,7 @@ import com.korashiGroup.salamtakPatient.repository.RegisterRepositry
 import com.korashiGroup.salamtakPatient.utils.Resource
 import com.google.gson.Gson
 import com.korashiGroup.salamtakPatient.model.homecare.GetHomeCareServicesResponse
+import com.korashiGroup.salamtakPatient.model.scheduling.GetLatestPatientAppointmentResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
@@ -20,6 +21,7 @@ class HomeCareViewModel @Inject constructor(private val repositry: RegisterRepos
 
 
     val homeCareServicesResponse=MutableLiveData<Resource<GetHomeCareServicesResponse>>()
+    val getLatestPatientAppointmentResponse=MutableLiveData<Resource<GetLatestPatientAppointmentResponse>>()
 
 
     fun getHomeCareService()=viewModelScope.launch(Dispatchers.IO+handler) {
@@ -36,6 +38,23 @@ class HomeCareViewModel @Inject constructor(private val repositry: RegisterRepos
             }
         }
         val error = Gson().fromJson<GetHomeCareServicesResponse>(response.errorBody()!!.string(), GetHomeCareServicesResponse::class.java)
+        return error.message?.let { Resource.Error(it) }
+    }
+
+    fun getLatestPatientAppointment()=viewModelScope.launch(Dispatchers.IO+handler) {
+        getLatestPatientAppointmentResponse.postValue(Resource.Loading())
+        val response=repositry.getLatestPatientAppointment()
+        getLatestPatientAppointmentResponse.postValue(response?.let { handlegetLatestPatientAppointment(it) })
+    }
+
+    private fun handlegetLatestPatientAppointment(response: Response<GetLatestPatientAppointmentResponse>): Resource<GetLatestPatientAppointmentResponse>? {
+        if (response.isSuccessful){
+            response.body()?.let {
+                return Resource.sucess(it)
+
+            }
+        }
+        val error = Gson().fromJson<GetLatestPatientAppointmentResponse>(response.errorBody()!!.string(), GetLatestPatientAppointmentResponse::class.java)
         return error.message?.let { Resource.Error(it) }
     }
 

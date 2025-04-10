@@ -339,7 +339,7 @@
     <string name="clinicservices">Clinic Services</string>
     <string name="avilableappointemnts">"Available "</string>
     <string name="avilableapapointemnts">Available Appointments</string>
-    <string name="reservation_required_first_come_first_served">Reservation Required,( First-in,First-Served )</string>
+    <string name="reservation_required_first_come_first_served">Reservation Required,( First-in/First-Served )</string>
     <string name="offercategories">All Offers</string>
     <string name="session">Session</string>
     <string name="recentoffers">Recent Offers:</string>
@@ -437,6 +437,8 @@
     <string name="choose_category">Choose Category</string>
     <string name="search_by_name_of_category">Search by name of category</string>
     <string name="category_name">Category Name</string>
+    <string name="search_by_specility">Search by speciality</string>
+    <string name="upcoming_bookings">Upcoming Bookings</string>
     <array name="choose">
         <item>Select</item>
     </array>

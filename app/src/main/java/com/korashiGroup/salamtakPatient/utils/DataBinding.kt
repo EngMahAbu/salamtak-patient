@@ -3,6 +3,7 @@ package com.korashiGroup.salamtakPatient.utils
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
@@ -61,5 +62,57 @@ object DataBinding {
     @BindingAdapter("imageUrl")
     fun loadPictureWithoutUrl(imageView: ImageView, url: String?) {
         Glide.with(imageView.context).load("${url}").fitCenter().into(imageView)
+    }
+    @JvmStatic
+    @BindingAdapter("imageUrl")
+    fun loadPictureFromDrawable(imageView: ImageView, url: Int?) {
+        Glide.with(imageView.context).asGif().load("${url}").into(imageView)
+    }
+
+    fun DateParsing(dateParsing:String):String{
+        var day=""
+        try {
+            val sdf = SimpleDateFormat("dd-MM-yyyy  hh:mm a", Locale.getDefault())
+            val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
+            val date = dateParsing.let { format.parse(it) }
+            day = sdf.format(date)
+
+        }catch (e:Exception){
+            Log.e("",e.localizedMessage)
+        }
+        return day
+    }
+
+    fun getDayId(formattedDate:String): Int {
+        var dayId = 0
+        val sdf = SimpleDateFormat("EEEE", Locale.ENGLISH)
+        val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.US)
+        val date = format.parse(formattedDate)
+        val day = sdf.format(date).subSequence(0, 3)
+
+        when (day) {
+            "Sun" -> {
+                dayId = 1
+            }
+            "Mon" -> {
+                dayId = 2
+            }
+            "Tue" -> {
+                dayId = 3
+            }
+            "Wed" -> {
+                dayId = 4
+            }
+            "Thu" -> {
+                dayId = 5
+            }
+            "Fri" -> {
+                dayId = 6
+            }
+            "Sat" -> {
+                dayId = 6
+            }
+        }
+        return dayId
     }
 }

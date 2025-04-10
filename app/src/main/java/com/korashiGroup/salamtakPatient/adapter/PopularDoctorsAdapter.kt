@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide
 import com.korashiGroup.salamtakPatient.databinding.ItemLayoutPoulardoctorsBinding
 import com.korashiGroup.salamtakPatient.databinding.ItemLayoutRvservicesBinding
 import com.korashiGroup.salamtakPatient.model.ImageServices
+import com.korashiGroup.salamtakPatient.model.populardoctors.PopularDoctorS
 import com.korashiGroup.salamtakPatient.model.populardoctors.PopularDoctorsResponseItem
 import com.korashiGroup.salamtakPatient.utils.Constans
 import com.korashiGroup.salamtakPatient.utils.DateUtils
@@ -21,7 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import kotlin.math.roundToInt
 
-class PopularDoctorsAdapter(val onitemclick:Action):ListAdapter<PopularDoctorsResponseItem,PopularDoctorsAdapter.ViewHolder>(DiffCallback()) {
+class PopularDoctorsAdapter(val onitemclick:Action):ListAdapter<PopularDoctorS,PopularDoctorsAdapter.ViewHolder>(DiffCallback()) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -49,7 +50,7 @@ class PopularDoctorsAdapter(val onitemclick:Action):ListAdapter<PopularDoctorsRe
             holder.binding.tvSpecialization.text=services.doctorSpec
         }else{
             holder.binding.tvDoctorName.text="د. ${services.doctorNameAr}"
-            holder.binding.tvSpecialization.text=services.DoctorSpeciality
+            holder.binding.tvSpecialization.text=services.doctorSpeciality
         }
 
         holder.binding.tvReviews.text="(reviews)"
@@ -57,7 +58,7 @@ class PopularDoctorsAdapter(val onitemclick:Action):ListAdapter<PopularDoctorsRe
        // holder.binding.ratingBar.rating= services.rate?.toFloat()?: 1.0f
 
         holder.binding.layoutDoctorsDetail.setOnClickListener {
-            services.DoctorId?.let { it1 -> onitemclick.onItemClickDoctorsDetails(it1) }
+            services.doctorId?.let { it1 -> onitemclick.onItemClickDoctorsDetails(it1) }
         }
 
 
@@ -70,12 +71,12 @@ class PopularDoctorsAdapter(val onitemclick:Action):ListAdapter<PopularDoctorsRe
     }
 
 
-    private class DiffCallback : DiffUtil.ItemCallback<PopularDoctorsResponseItem>() {
-        override fun areItemsTheSame(oldItem: PopularDoctorsResponseItem, newItem: PopularDoctorsResponseItem): Boolean {
+    private class DiffCallback : DiffUtil.ItemCallback<PopularDoctorS>() {
+        override fun areItemsTheSame(oldItem: PopularDoctorS, newItem: PopularDoctorS): Boolean {
             return oldItem==newItem
         }
 
-        override fun areContentsTheSame(oldItem: PopularDoctorsResponseItem, newItem: PopularDoctorsResponseItem): Boolean {
+        override fun areContentsTheSame(oldItem: PopularDoctorS, newItem: PopularDoctorS): Boolean {
             return true
         }
     }

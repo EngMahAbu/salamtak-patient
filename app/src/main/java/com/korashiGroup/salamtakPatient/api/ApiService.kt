@@ -35,6 +35,7 @@ import com.korashiGroup.salamtakPatient.model.offers.ActiveOffersResponse
 import com.korashiGroup.salamtakPatient.model.offers.OffersDetailsResponse
 import com.korashiGroup.salamtakPatient.model.populardoctors.GetDoctorHealthTopicsResponse
 import com.korashiGroup.salamtakPatient.model.populardoctors.GetDoctorSpotLightResponse
+import com.korashiGroup.salamtakPatient.model.populardoctors.NewPopularDoctorResponse
 import com.korashiGroup.salamtakPatient.model.populardoctors.PopularDoctorsResponseItem
 import com.korashiGroup.salamtakPatient.model.profile.*
 import com.korashiGroup.salamtakPatient.model.rating.RatingResponse
@@ -43,6 +44,7 @@ import com.korashiGroup.salamtakPatient.model.reviews.ReviewsResponse
 import com.korashiGroup.salamtakPatient.model.salamtakgate.BlogsResponse
 import com.korashiGroup.salamtakPatient.model.salamtakgate.SalamtakGateResponse
 import com.korashiGroup.salamtakPatient.model.scheduling.CancelPatientAppointmentResponse
+import com.korashiGroup.salamtakPatient.model.scheduling.GetLatestPatientAppointmentResponse
 import com.korashiGroup.salamtakPatient.model.scheduling.GetPatientAppointmentesResponse
 import com.korashiGroup.salamtakPatient.model.syemtoms.Syemtoms
 import com.korashiGroup.salamtakPatient.model.syemtoms.SymetomsResponse
@@ -245,7 +247,8 @@ interface ApiService {
     @POST("{culture}/Doctor/GetPopularDoctors")
     suspend fun getPopularDoctors(
         @Path("culture") culture: String,
-    ):Response<List<PopularDoctorsResponseItem>>
+        @Body doctorRateRequest: Map<String, String>,
+    ):Response<NewPopularDoctorResponse>
 
     @GET("{culture}/LookUp/GetDoctorSpotLight")
     suspend fun getDoctorSpotLight(
@@ -478,5 +481,9 @@ interface ApiService {
     suspend fun getHomeCareService(
         @Path("culture") culture: String,
     ): Response<GetHomeCareServicesResponse>
+ @GET("{culture}/PatientAppointment/GetLatestPatientAppointment")
+    suspend fun getLatestPatientAppointment(
+        @Path("culture") culture: String,
+    ): Response<GetLatestPatientAppointmentResponse>
 
 }

@@ -14,7 +14,7 @@
 
     >
 
-    <CheckBox
+    <RadioButton
             android:id="@+id/ch_examinationtype"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -43,8 +43,8 @@
 
         <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/ivExaminationtype"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="23dp"
+                android:layout_height="23dp"
                 android:adjustViewBounds="true"
                 android:src="@drawable/ic_doctors"
                 app:layout_constraintBottom_toBottomOf="parent"

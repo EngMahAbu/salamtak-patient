@@ -53,7 +53,7 @@ class CalenderAdapter(private val selectDate: Action) :
         }
         if (selectedItemPosition == position) {
             holder.binding.cardCalendar.background =
-                ContextCompat.getDrawable(holder.itemView.context, R.drawable.bg_completeprofile)
+                ContextCompat.getDrawable(holder.itemView.context, R.drawable.bg_calender)
             //  holder.binding.btnAll.setTextColor(Color.WHITE)
         } else {
             holder.binding.cardCalendar.background =

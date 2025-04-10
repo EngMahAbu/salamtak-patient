@@ -107,7 +107,7 @@
             android:drawableTint="@color/gray"
             android:drawablePadding="4dp"
             android:imeOptions="actionDone"
-            android:hint="@string/search_by_doctor_name"
+            android:hint="@string/search_by_specility"
             android:inputType="text"
             android:background="@drawable/more_cards_background"
             app:layout_constraintStart_toStartOf="parent"

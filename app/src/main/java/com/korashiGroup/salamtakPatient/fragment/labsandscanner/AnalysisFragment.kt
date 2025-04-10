@@ -342,8 +342,8 @@ class AnalysisFragment : Fragment(), ShowAnalysisAdapter.SelectSubSpecialist,
         bottomsheetbeahavoirBooking =
             BottomSheetBehavior.from(binding.layoutBottomsheetpersistantBooking.bookingConfirm)
         bottomsheetbeahavoirBooking.state = BottomSheetBehavior.STATE_HIDDEN
-        DataBinding.loadPictureWithoutUrl(binding.layoutBottomsheetpersistant.gifImageView,"https://s3-alpha-sig.figma.com/img/3ab8/d11c/c32f058e9e44f337429e17f39a8657b0?Expires=1743379200&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=o1r~M7XX8UIgytfcLx~rt3YtoWIwLlIm6y-IjWNsB8JvoP2uuhCGG2CzNXVkF7nNl92bIJZ1AK7i~POKIupJDmh4AITH6BxhmBMU-zkpU3-U4ajD8brIo-slORsdvYZ2dH5a6DFDTv2r2cJSVjAHxHRTSSZ9Uz5mWUTeAKEDh1D0lOs-6kAdiOLf9B1P1GMS8IwxDLhcB49K05bTMtLuoQYMQMHmzq0OClQZUAJAa0dYsYYE-J3tJ9Dp9AhqA3c75h9OzDn9NYLFnHITtWN6m6cqAZfq3gcW8iB2zAg-IeQH6UEUMqa9FCZ7bKkIGnTZwGIVLZdQl5VgA5mcAEJBMQ__")
-        DataBinding.loadPictureWithoutUrl(binding.layoutBottomsheetpersistantBooking.gifImageView,"https://s3-alpha-sig.figma.com/img/db21/2748/c5e9a44501446ed90a1aab448b354e23?Expires=1743379200&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=F~g2vZcEicZtzYyS5tzCbMvQxWdeongr61FYleD-8MY8ITlHGJe6lUTCj-9CIIPVdMbw5BihiISo6nICVA0ntWpX6R166bH4P0k0xW3PXf7Sl44Eex0riOGG9yPnQmb08lQZ7GPJ2S1~6FeJrggz12k6ntgXUxjCDYp5j6Satqqtown-UD5a9g6fpYAUztolKjA8r8XZlIvOulJ-G6RWfann4vhOPVp5zVk9iCPhQafWSBD46F0qMBQXezGhO5kohYnTUau9ywyGjAH2FRDMPj32XJhnXFIj0Ks6l0wH9tS1Xb1xZpmz8eFSUVa7ZdRsy8DlNi1ogtgIXcukoSz8kQ__")
+        DataBinding.loadPictureFromDrawable(binding.layoutBottomsheetpersistant.gifImageView,R.drawable.delete_reservations)
+        DataBinding.loadPictureFromDrawable(binding.layoutBottomsheetpersistantBooking.gifImageView,R.drawable.sucess)
 
     }
 }

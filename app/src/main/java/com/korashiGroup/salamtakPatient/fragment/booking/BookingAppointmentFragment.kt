@@ -278,10 +278,12 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
                         isFavorite = true
                         binding.tvAddtofavorite.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_heart,0,0,0)
                         binding.tvAddtofavorite.text=getString(R.string.add_to_favorite)
+                        binding.ivFavorite.setImageResource(R.drawable.heart)
                     }else{
                         isFavorite=false
                         binding.tvAddtofavorite.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_favoritered,0,0,0)
                         binding.tvAddtofavorite.text=getString(R.string.remove_from_favorite)
+                        binding.ivFavorite.setImageResource(R.drawable.svg_favorite)
                     }
 
                     binding.tvDoctorName.text = name

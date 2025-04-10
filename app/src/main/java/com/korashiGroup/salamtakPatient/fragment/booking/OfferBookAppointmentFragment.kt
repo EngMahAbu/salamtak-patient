@@ -81,7 +81,11 @@ class OfferBookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Ac
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.ivPrevious.isEnabled = step != 1
-
+        val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH).apply {
+            this.timeZone = TimeZone.getTimeZone("CST")
+        }
+        formattedDate = formatter.format(now.time)
+        getDayId()
         bindDataToViews()
         initButton()
         CalenderRecylerview()
@@ -289,19 +293,28 @@ class OfferBookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Ac
 
 
     private fun getClinicSchedualByClinicDayId() {
-        sharedDataViewmodel.ClinicSchedualByClinicDayId.observe(
-            viewLifecycleOwner,
-            androidx.lifecycle.Observer {
-                viewmodel.getClinicSchedualByClinicDayId(
-                    it.clinicId,
-                    it.dayId,
-                    it.medicalExaminationId,
-                    it.formattedDate,0,false
-                )
-                this.clinicId = args.clinkDto?.clinkId!!
-                this.medicalExaminationId = 1
-                this.formattedDate = it.formattedDate
-            })
+//        sharedDataViewmodel.ClinicSchedualByClinicDayId.observe(
+//            viewLifecycleOwner,
+//            androidx.lifecycle.Observer {
+//                viewmodel.getClinicSchedualByClinicDayId(
+//                    it.clinicId,
+//                    it.dayId,
+//                    it.medicalExaminationId,
+//                    it.formattedDate,0,false
+//                )
+//                this.clinicId = args.clinkDto?.clinkId!!
+//                this.medicalExaminationId = 1
+//                this.formattedDate = it.formattedDate
+//            })
+
+        args.clinkDto?.clinkId?.let {
+            viewmodel.getClinicSchedualByClinicDayId(
+                it,
+                dayId,
+                1,
+                formattedDate,0,false
+            )
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

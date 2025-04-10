@@ -4,5 +4,6 @@ import java.io.Serializable
 
 data class Offer(
     val id:Int,
-    val position:Int
+    val position:Int,
+    val offerName:String
 ):Serializable

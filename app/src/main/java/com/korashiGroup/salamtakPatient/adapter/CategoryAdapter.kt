@@ -31,7 +31,7 @@ class CategoryAdapter(private val onServicesClick:Action,position: Int):ListAdap
         holder.binding.tvSpeciality.text = services.name
         holder.binding.tvSpeciality.setOnClickListener {
             selectedItemPosition = holder.bindingAdapterPosition
-            onServicesClick.onItemClick(services.id)
+            onServicesClick.onItemClick(services.id,services.name)
             notifyDataSetChanged()
         }
         if (selectedItemPosition == position) {
@@ -64,7 +64,7 @@ class CategoryAdapter(private val onServicesClick:Action,position: Int):ListAdap
     }
 
     interface Action{
-        fun onItemClick(servicesId: Int)
+        fun onItemClick(servicesId: Int,name:String)
     }
 
 

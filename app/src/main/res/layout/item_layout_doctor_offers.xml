@@ -5,7 +5,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="4dp"
+            android:padding="2dp"
             >
 
         <androidx.cardview.widget.CardView
@@ -37,7 +37,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:background="@color/white_gray"
+                        android:background="#F3F4F6"
                         >
                     <TextView
                             android:id="@+id/tv_offerPercentage"
@@ -60,7 +60,7 @@
                             android:id="@+id/tv_offerName"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_3sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
                             android:fontFamily="@font/sf_pro_display_semibold"
                             android:gravity="start"
                             android:lines="1"
@@ -427,21 +427,39 @@
                             app:layout_constraintTop_toTopOf="@id/layout_Fees" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/Feesresult"
-                            android:layout_width="0dp"
+                            android:id="@+id/tv_priceBefore"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginEnd="10dp"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginBottom="@dimen/_5sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:gravity="start"
+                            android:padding="2dp"
+                            android:background="@drawable/bg_line"
+                            android:text=""
+                            android:lineBreakWordStyle="phrase"
+                            android:fontFamily="@font/sf_pro_display_semibold"
+                            android:textColor="@color/text_doctor_card_color"
+                            android:textSize="13sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/tv_Fees"
+                             />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_priceAfter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginBottom="@dimen/_5sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
                             android:fontFamily="@font/sf_pro_display_semibold"
                             android:gravity="start"
                             android:padding="2dp"
-                            android:text="200"
                             android:textColor="@color/text_doctor_card_color"
-                            android:textSize="14sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/tv_Fees"
+                            android:textSize="13sp"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintStart_toEndOf="@+id/tv_priceBefore"
+                             />
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/Call"
@@ -547,6 +565,7 @@
                             android:textSize="14sp"
                             android:textAllCaps="false"
                             android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
                             app:layout_constraintEnd_toStartOf="@+id/btn_more"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"

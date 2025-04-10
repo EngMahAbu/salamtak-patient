@@ -9,7 +9,7 @@
         android:title="@string/schedule"
         android:icon="@drawable/new_calendar"/>
 
-    <item android:id="@+id/offersFragment"
+    <item android:id="@+id/chooseCategoryOffersFragment"
           android:title="@string/offers"
           android:icon="@drawable/discount_shape"/>
     <item android:id="@+id/notificationListFragment"

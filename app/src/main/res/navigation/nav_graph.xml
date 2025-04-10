@@ -193,6 +193,12 @@
         <action
                 android:id="@+id/action_homeFragment_to_chooseSpecialistFragment"
                 app:destination="@id/chooseSpecialistFragment" />
+        <action
+                android:id="@+id/action_homeFragment_to_dailogAddMapFragment"
+                app:destination="@id/dailogAddMapFragment" />
+        <action
+                android:id="@+id/action_homeFragment_to_dialogSchduleFragment"
+                app:destination="@id/dialogSchduleFragment" />
 
 
     </fragment>
@@ -678,6 +684,11 @@
                 android:id="@+id/action_chooseCategoryOffersFragment_to_offersFragment"
                 app:destination="@id/offersFragment" />
     </fragment>
+    <fragment
+            android:id="@+id/medicalStateFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.navstrepercontent.MedicalStateFragment"
+            android:label="medical_statefragment"
+            tools:layout="@layout/medical_statefragment" />
 
 
 </navigation>

@@ -795,7 +795,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             sharedDataViewmodel.getClinicSchedualByClinicDayId(clinicSchedualByClinicDayId)
             sharedDataViewmodel.getDocotorId(doctorId)
             sharedDataViewmodel.getClinicIdAndDoctorId(ClinicData(doctorId, clinicId,true))
-           sharedDataViewmodel.getFees(fess)
+            sharedDataViewmodel.getFees(fess)
             findNavController().navigate(R.id.bookingAppointmentFragment)
        // }
     }
@@ -1008,7 +1008,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             binding.layoutCardview.visibility=View.VISIBLE
             Glide.with(this)
                 .asGif()
-                .load("https://s3-alpha-sig.figma.com/img/97f7/414c/23d5eb0bc35cefa80e43b61f3db180c7?Expires=1742774400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=VaC4Xz7SE7s85RcpIKajJ9os-RRFeb4yDsqHfdGfAo7jbNRMhYKdGrmmtsEoujvHcXlpUR6abb28UuJhNO0bA7cD~eJ0r7J3CRufmH~LrCC0KFi381rO8x~xhYm10-Q3Ags0sbFhC6Zh5iDdF5w45pwPsdz8Q4RKKepwHkCYirURchPXNaaUz1t7rS-7PePnbHbnqL5byWOM4Qk~lWf0plaE0nKrKyla0A293yiZcjx4a0l~ffuDrkJGTnXZmIs0M9JtxWiwWmAT7XAmC0AdvNEaOvo2h~zsfGxpRxkUYb~eHejBYmGBIEb7TpvK4SkmRopZQk4Gc42NXpI97z7HZw__")
+                .load(R.drawable.no_doctorfound)
                 .into(binding.gifImageView)
         } else {
 //            binding.crdView.visibility = View.GONE

@@ -16,22 +16,37 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import coil.load
+import coil.transform.CircleCropTransformation
 import com.google.android.material.snackbar.Snackbar
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.adapter.*
 import com.korashiGroup.salamtakPatient.databinding.HomefragmentBinding
 import com.korashiGroup.salamtakPatient.fragment.loginandforgetpassword.LoginFragment
+import com.korashiGroup.salamtakPatient.fragment.navbottom.MyScheduleFragmentDirections
 import com.korashiGroup.salamtakPatient.model.AreaData
 import com.korashiGroup.salamtakPatient.model.CityData
+import com.korashiGroup.salamtakPatient.model.ImageServices
 import com.korashiGroup.salamtakPatient.model.SpecialistData
+import com.korashiGroup.salamtakPatient.model.booking.ClinicSchedualByClinicDayId
+import com.korashiGroup.salamtakPatient.model.booking.clink.ClinicData
 import com.korashiGroup.salamtakPatient.model.notification.Data
+import com.korashiGroup.salamtakPatient.model.offers.ActiveOffers
+import com.korashiGroup.salamtakPatient.model.offers.OfferDoctor
 import com.korashiGroup.salamtakPatient.model.register.ChooseGender
+import com.korashiGroup.salamtakPatient.model.register.RatingDoctors
+import com.korashiGroup.salamtakPatient.model.scheduling.GetLatestPatientAppointmentResponse
+import com.korashiGroup.salamtakPatient.model.scheduling.LatestPatientAppointment
 import com.korashiGroup.salamtakPatient.utils.Constans
+import com.korashiGroup.salamtakPatient.utils.DataBinding
+import com.korashiGroup.salamtakPatient.utils.DataBinding.DateParsing
 import com.korashiGroup.salamtakPatient.utils.DateUtils
 import com.korashiGroup.salamtakPatient.utils.PermissionManager
 import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.utils.SpUtil
+import com.korashiGroup.salamtakPatient.utils.localization.DefaultLocaleHelper
 import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
+import com.korashiGroup.salamtakPatient.viewmodel.HomeCareViewModel
 import com.korashiGroup.salamtakPatient.viewmodel.ImageServicesViewModel
 import com.korashiGroup.salamtakPatient.viewmodel.LocationViewModel
 import com.korashiGroup.salamtakPatient.viewmodel.NotificationViewModel
@@ -60,13 +75,16 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
     private val imageServicesViewModel: ImageServicesViewModel by viewModels()
     private val notificationViewModel: NotificationViewModel by viewModels()
     private val polyClinicsViewmodel: PolyClinicsViewmodel by viewModels()
+    private val homeCareViewModel: HomeCareViewModel by viewModels()
     private val viewModel: LocationViewModel by viewModels()
     private lateinit var permissionManager: PermissionManager
+    private var partMap: Map<String, Any> = mutableMapOf()
     private var data: Data? = null
     var someEventListener: LoginFragment.onSomeEventListener? = null
 
-       private lateinit var popularDoctorsAdapter: PopularDoctorsAdapter
-//    private lateinit var healthTopicsAdapter: HealthTopicsAdapter
+    private lateinit var popularDoctorsAdapter: PopularDoctorsAdapter
+
+    //    private lateinit var healthTopicsAdapter: HealthTopicsAdapter
 //    private lateinit var spotlightAdapter: SpotlightAdapter
     private lateinit var gatesAdapter: GatesAdapter
     val sharedDataViewmodel: SharedDataViewmodel by activityViewModels()
@@ -109,17 +127,17 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
         callCheckUser()
         if (DateUtils.getToken().isNullOrEmpty()) {
             binding.layoutSignup.visibility = View.VISIBLE
-         //   binding.ivNotification.visibility = View.GONE
+            //   binding.ivNotification.visibility = View.GONE
             someEventListener?.someEvent("skip")
             //    sharedDataViewmodel.getCity(CityData(1,"",1,false,"",""))
 
         } else {
             binding.layoutSignup.visibility = View.GONE
-         //   binding.ivNotification.visibility = View.VISIBLE
+            //   binding.ivNotification.visibility = View.VISIBLE
             someEventListener?.someEvent("")
             profileCallBack()
         }
-
+        getCity()
         imageVideoAdapter = ImageVideoAdapter()
         servicesRecylerview()
         medicalServicesRecylerview()
@@ -133,6 +151,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
         medicalServices()
         //callBack()
         callBackGetDoctorFeedBakNotification()
+        callBackGetLatestPatientAppointment()
         initButton()
         setUP()
         getCurrentLocation()
@@ -140,29 +159,39 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
         observePermissionStatus()
     }
 
-    private fun getCurrentLocation(){
+    private fun getCurrentLocation() {
         if (permissionManager.hasLocationPermission()) {
             viewModel.getCurrentLocation()
         } else {
             permissionManager.requestLocationPermission()
         }
     }
+
     private fun observePermissionStatus() {
         viewModel.permissionStatus.observe(viewLifecycleOwner) { hasPermission ->
             if (!hasPermission) {
-                Toast.makeText(requireContext(), "يجب منح إذن الموقع لاستخدام هذه الميزة", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-    private fun observeLocationUpdates() {
-        viewModel.locationLiveData.observe(viewLifecycleOwner) { latLng ->
-            latLng?.let {
-                Log.e("Location", "observeLocationUpdates:${latLng.latitude}:${latLng.longitude} ", )
+                Toast.makeText(
+                    requireContext(),
+                    "يجب منح إذن الموقع لاستخدام هذه الميزة",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    private fun observeLocationUpdates() {
+        viewModel.locationLiveData.observe(viewLifecycleOwner) { latLng ->
+            latLng?.let {
+                Log.e("Location", "observeLocationUpdates:${latLng.latitude}:${latLng.longitude} ")
+            }
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (permissionManager.handlePermissionResult(requestCode, grantResults)) {
             viewModel.getCurrentLocation()
@@ -170,14 +199,20 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
             Toast.makeText(requireContext(), "تم رفض إذن الموقع", Toast.LENGTH_SHORT).show()
         }
     }
- private fun setUP(){
-     if (resources.configuration.layoutDirection == View.LAYOUT_DIRECTION_RTL) {
-         binding.ivImageSalamtakDoctor.scaleX = -1f // Flip the image for RTL
-     } else {
-         binding.ivImageSalamtakDoctor.scaleX = 1f
-     }
- }
+
+    private fun setUP() {
+        if (resources.configuration.layoutDirection == View.LAYOUT_DIRECTION_RTL) {
+            binding.ivImageSalamtakDoctor.scaleX = -1f // Flip the image for RTL
+        } else {
+            binding.ivImageSalamtakDoctor.scaleX = 1f
+        }
+    }
+
     private fun initButton() {
+
+        binding.tvSeeAllUpcomingBookings.setOnClickListener {
+            findNavController().navigate(R.id.myScheduleFragment)
+        }
         binding.ivSelectCity.setOnClickListener {
 
             val action =
@@ -266,6 +301,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
             }
         }
     }
+
     private fun medicalServices() {
         lifecycleScope.launch {
             imageServicesViewModel.imageMedicalServicesList.collectLatest { list ->
@@ -280,7 +316,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
             when (response) {
 
                 is Resource.Loading -> {
-                         //showprogtessbar()
+                    //showprogtessbar()
                 }
 
                 is Resource.sucess -> {
@@ -306,19 +342,22 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
         regviewmodel.getHomeAdds()
     }
 
-    private fun callBackPopularDoctors() {
+    private fun callBackPopularDoctors(specilityId: Int) {
+        if (specilityId != 0 && specilityId != null) {
+            partMap = partMap + mapOf("SpecialityId" to specilityId)
+        }
         viewmodel.popularResponse.observe(viewLifecycleOwner, Observer { response ->
 
             when (response) {
 
                 is Resource.Loading -> {
-                    showprogtessbar()
+                    //showprogtessbar()
                 }
 
                 is Resource.sucess -> {
                     hideprogressbar()
                     response.let {
-                        popularDoctorsAdapter.submitList(it.data?.take(4))
+                        popularDoctorsAdapter.submitList(it.data?.data?.take(4))
                         popularDoctorsAdapter.notifyDataSetChanged()
                     }
 
@@ -331,7 +370,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
 
         })
 
-        viewmodel.getPopularDoctors()
+        viewmodel.getPopularDoctors(partMap as HashMap<String, String>)
     }
 
 
@@ -439,7 +478,8 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
             7 -> {
                 findNavController().navigate(R.id.chooseCategoryOffersFragment)
             }
-            8 , 9->{
+
+            8, 9 -> {
                 findNavController().navigate(R.id.specialistDoctorsFragment)
             }
 
@@ -481,6 +521,16 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
 //            transformations(CircleCropTransformation())
 //        }
 
+    }
+
+    private fun getCity() {
+        sharedDataViewmodel.getCity.observe(viewLifecycleOwner) {
+            if (DefaultLocaleHelper.getInstance(requireContext()).getCurrentLocale() == "ar") {
+                binding.tvCity.text = it.nameAr
+            } else {
+                binding.tvCity.text = it.name
+            }
+        }
     }
 
     override fun onItemClickDoctorsDetails(DoctorId: Int) {
@@ -616,7 +666,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
             when (response) {
 
                 is Resource.Loading -> {
-                    showprogtessbar()
+                    //showprogtessbar()
                 }
 
                 is Resource.sucess -> {
@@ -646,16 +696,30 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
             when (response) {
 
                 is Resource.Loading -> {
-                    showprogtessbar()
+                    // showprogtessbar()
                 }
 
                 is Resource.sucess -> {
                     hideprogressbar()
+                    val extraItem = SpecialistData(
+                        id = -1,
+                        image = "",
+                        inactive = false,
+                        name = "All",
+                    )
 
-                    response.data?.data.let {
-                        topSpecialictyAdapter.submitList(it?.reversed())
+
+                    // Combine API data with the new item
+                    val updatedList = mutableListOf<SpecialistData>().apply {
+                        if (extraItem != null) {
+                            add(extraItem)
+                        } // Add manual item first (or last)
+                        response.data?.data?.let { apiData -> addAll(apiData) }
                     }
-                    callBackPopularDoctors()
+                    response.data?.data.let {
+                        topSpecialictyAdapter.submitList(updatedList.take(11))
+                    }
+                    callBackPopularDoctors(0)
 
                 }
 
@@ -678,9 +742,9 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
         } else {
             sharedDataViewmodel.getspecialication(specialist)
             if (DateUtils.getToken().isNullOrEmpty()) {
-                findNavController().navigate(R.id.specialistDoctorsFragment)
+                return
             } else {
-                findNavController().navigate(R.id.searchFragment)
+                callBackPopularDoctors(specilityId = specialist.id)
             }
         }
 
@@ -743,5 +807,229 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
 
     }
 
+    private fun callBackGetLatestPatientAppointment() {
+        homeCareViewModel.getLatestPatientAppointmentResponse.observe(
+            viewLifecycleOwner,
+            Observer { it ->
+                when (it) {
+                    is Resource.Loading -> {
+                        binding.progressBar.visibility = View.VISIBLE
+                    }
+
+                    is Resource.sucess -> {
+                        val respose = it.data?.data
+                        if (respose != null) {
+                            binding.layoutUpcomingBookings.visibility = View.VISIBLE
+                            binding.tvUpcomingBookings.visibility = View.VISIBLE
+                            binding.tvSeeAllUpcomingBookings.visibility = View.VISIBLE
+                            getLastPatientAppointements(respose)
+                        }
+                        binding.progressBar.visibility = View.GONE
+                    }
+
+                    is Resource.Error -> {
+                        binding.progressBar.visibility = View.GONE
+                    }
+                }
+            })
+        homeCareViewModel.getLatestPatientAppointment()
+    }
+
+    private fun getLastPatientAppointements(latestPatientAppointment: LatestPatientAppointment) {
+        if (DefaultLocaleHelper.getInstance(requireContext()).getCurrentLocale() == "en") {
+            binding.tvUpcomingBookingsdoctorName.text = "${latestPatientAppointment.doctorName}"
+        } else {
+            binding.tvUpcomingBookingsdoctorName.text = "${latestPatientAppointment.doctorName}"
+        }
+        binding.tvSpecialization.text =
+            "${latestPatientAppointment.specialistName} - ${latestPatientAppointment.seniorityLevelName}"
+        binding.Service.text = "${latestPatientAppointment.medicalExaminationTypeName}(${
+            DataBinding.DateParsing(latestPatientAppointment.appointmentDate.toString())
+        })"
+        if (latestPatientAppointment.isCompleted == true) {
+            binding.location.text = "Paid"
+        } else {
+            binding.location.text = "Pending Payment"
+        }
+
+        binding.waitingTime.text =
+            " ${DateParsing(latestPatientAppointment.appointmentDate.toString())}"
+        binding.Feesresult.text = latestPatientAppointment.fees.toString()
+        //   phones.text = services.ClinicPhone.toString()
+        binding.phones.text =
+            "${latestPatientAppointment.fees.toString()} ${getString(R.string.egp)}"
+        if (latestPatientAppointment.healthEntityOffersID == null || latestPatientAppointment.healthEntityOffersID.toString() == "null") {
+            binding.ivOffer.visibility = View.GONE
+        } else {
+            binding.ivOffer.visibility = View.VISIBLE
+        }
+
+        when (latestPatientAppointment.medicalExaminationTypeId) {
+            1 -> {
+                binding.ivSubSpecialization.setImageResource(R.drawable.svg_clinic_visit)
+            }
+
+            2 -> {
+                binding.ivSubSpecialization.setImageResource(R.drawable.svg_clinic_home)
+            }
+
+            3 -> {
+                binding.ivSubSpecialization.setImageResource(R.drawable.svg_video)
+            }
+
+            4 -> {
+                binding.ivSubSpecialization.setImageResource(R.drawable.svg_audio)
+            }
+        }
+        binding.ivDoctorProfile.load("https://salamtechapi.azurewebsites.net/${latestPatientAppointment.doctorImage}") {
+            crossfade(true)
+            crossfade(1000)
+            transformations(CircleCropTransformation())
+        }
+        binding.layoutLocation.setOnClickListener {
+            latestPatientAppointment.clinicLatitude?.let { it1 -> latestPatientAppointment.clinicLongitude?.let { it2 ->
+                onLocationClicked(it1,
+                    it2
+                )
+            } }
+        }
+        binding.layoutSupport.setOnClickListener {
+            onSupportClicked()
+        }
+        binding.layoutActions.setOnClickListener {
+            latestPatientAppointment.clinicId?.let { it1 ->
+                latestPatientAppointment.doctorId?.let { it2 ->
+                    latestPatientAppointment.clinicName?.let { it3 ->
+                        latestPatientAppointment.appointmentDate?.let { it4 ->
+                            latestPatientAppointment.medicalExaminationTypeId?.let { it5 ->
+                                latestPatientAppointment.appointmentId?.let { it6 ->
+                                    latestPatientAppointment.doctorName?.let { it7 ->
+                                        latestPatientAppointment.fees?.let { it8 ->
+                                            latestPatientAppointment.doctorImage?.let { it9 ->
+                                                latestPatientAppointment.specialistName?.let { it10 ->
+                                                    onItemClick(
+                                                        it1,
+                                                        it2,
+                                                        it3,
+                                                        it4,
+                                                        it5,
+                                                        it6,
+                                                        it7,
+                                                        it8,
+                                                        it9,latestPatientAppointment.healthEntityOffersID.toString(),
+                                                        it10
+                                                    )
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        binding.layoutUpcomingBookings.setOnClickListener {
+            latestPatientAppointment.clinicId?.let { it1 ->
+                latestPatientAppointment.doctorId?.let { it2 ->
+                    latestPatientAppointment.clinicName?.let { it3 ->
+                        latestPatientAppointment.rateCount?.let { it4 ->
+                            latestPatientAppointment.fees?.let { it5 ->
+                                latestPatientAppointment.appointmentDate?.let { it6 ->
+                                    latestPatientAppointment.medicalExaminationTypeId?.let { it7 ->
+                                        latestPatientAppointment.appointmentDate?.let { it6 ->
+                                            DataBinding.getDayId(
+                                                it6
+                                            )
+                                        }?.let { it8 ->
+                                            latestPatientAppointment.avgRate?.toDouble()?.let { it9 ->
+                                                onItemClickDoctorProfile(
+                                                    it1,
+                                                    it2, it3, it9, it4, it5,
+                                                    it6,
+                                                    it7,
+                                                    it8
+                                                )
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+   private fun onLocationClicked(lat: String, long: String) {
+        if (lat=="null" && long=="null"){
+            Toast.makeText(requireContext(), getString(R.string.thereisnolocatio) , Toast.LENGTH_LONG).show()
+        }else{
+            val action=
+                HomeFragmentDirections.actionHomeFragmentToDailogAddMapFragment(lat,long)
+            findNavController().navigate(action)
+        }
+    }
+   private fun onSupportClicked() {
+        val action =HomeFragmentDirections.actionHomeFragmentToDialogBottomSheetFragment("help")
+        findNavController().navigate(action)
+    }
+   private fun onItemClick(
+        clinicId: Int,
+        doctorId: Int,
+        clinkname: String,
+        formaterdate: String,
+        medicalExaminationTypeId:Int,
+        AppointmentId:Int,doctorname:String,fess:Int,image:String,offerId:String,specialistname:String
+    ) {
+        val clinicSchedualByClinicDayId = ClinicSchedualByClinicDayId(
+            clinicId,
+            DataBinding.getDayId(formaterdate),
+            medicalExaminationTypeId,
+            formaterdate,
+            clinkname
+        )
+        sharedDataViewmodel.getClinicSchedualByClinicDayId(clinicSchedualByClinicDayId)
+        sharedDataViewmodel.getDocotorId(doctorId)
+        sharedDataViewmodel.getClinicIdAndDoctorId(ClinicData(doctorId, clinicId,true))
+        val action=HomeFragmentDirections.actionHomeFragmentToDialogSchduleFragment("Upcoming",AppointmentId,
+            OfferDoctor(doctorId,clinicId,fess,doctorname,image,offerId,specialistname)
+        )
+        findNavController().navigate(action)
+    }
+
+    fun onItemClickDoctorProfile(
+        clinicId: Int,
+        doctorId: Int,
+        clinkname: String,
+        rate: Double,
+        rateCount: Int,
+        fess: Int,
+        formaterdate: String,
+        examinationtypeid:Int,
+        dayId:Int
+    ) {
+        sharedDataViewmodel.getRating(RatingDoctors(rate, rateCount))
+//        if (DateUtils.getToken().isNullOrEmpty()) {
+//            findNavController().navigate(R.id.dialogSignUp)
+//        } else {
+        val clinicSchedualByClinicDayId = ClinicSchedualByClinicDayId(
+            clinicId,
+            dayId,
+            examinationtypeid,
+            formaterdate,
+            clinkname
+        )
+        sharedDataViewmodel.getMedicalExaminationTypeId(ImageServices(0,"","",0,examinationtypeid))
+        sharedDataViewmodel.getClinicSchedualByClinicDayId(clinicSchedualByClinicDayId)
+        sharedDataViewmodel.getDocotorId(doctorId)
+        sharedDataViewmodel.getClinicIdAndDoctorId(ClinicData(doctorId, clinicId,true))
+        sharedDataViewmodel.getFees(fess)
+        findNavController().navigate(R.id.bookingAppointmentFragment)
+        // }
+    }
 
 }

@@ -29,20 +29,20 @@ class ImageServicesRepository @Inject constructor(
                 Id = 1,
             ),
             ImageServices(R.drawable.ic_home_visit, context.getString(R.string.Home_Visit),"كشف منزلى", Id = 2),
-            ImageServices(R.drawable.ic_vedieocall, context.getString(R.string.Video_Call),"مكالمة فيديو", Id = 3),
-            ImageServices(R.drawable.ic_calls, context.getString(R.string.Call),"مكالمة صوتية", Id = 4),
-            ImageServices(
-                R.drawable.ic_ray_radiology,
-                context.getString(R.string.medicalscan),"الأشعة",
-                Id = 9,
-            ),
             ImageServices(
                 R.drawable.ic_polyclinics,
                 context.getString(R.string.polyclinics),"مراكز طبية",
                 Id = 6
             ),
-            ImageServices(R.drawable.ic_labs, context.getString(R.string.labs),"التحاليل", Id = 8),
+            ImageServices(R.drawable.ic_vedieocall, context.getString(R.string.Video_Call),"مكالمة فيديو", Id = 3),
+            ImageServices(R.drawable.ic_calls, context.getString(R.string.Call),"مكالمة صوتية", Id = 4),
             ImageServices(R.drawable.ic_offers, context.getString(R.string.offers),"العروض", Id = 7),
+            ImageServices(R.drawable.ic_labs, context.getString(R.string.labs),"التحاليل", Id = 8),
+            ImageServices(
+                R.drawable.ic_ray_radiology,
+                context.getString(R.string.medicalscan),"الأشعة",
+                Id = 9,
+            ),
             ImageServices(R.drawable.ic_homecares, context.getString(R.string.home_care),"الرعاية المنزلية", Id = 10)
         )
         _imageServicesList.value = list

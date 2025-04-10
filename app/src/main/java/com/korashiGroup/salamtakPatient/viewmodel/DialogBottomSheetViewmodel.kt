@@ -25,6 +25,7 @@ import com.korashiGroup.salamtakPatient.model.docotorsearch.NewDoctorSearchReque
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCardResponse
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCompanyResponse
 import com.korashiGroup.salamtakPatient.model.insurance.SendInsuranceCardResponce
+import com.korashiGroup.salamtakPatient.model.populardoctors.NewPopularDoctorResponse
 import com.korashiGroup.salamtakPatient.model.salamtakgate.BlogsResponse
 import com.korashiGroup.salamtakPatient.model.salamtakgate.SalamtakGateResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -59,7 +60,7 @@ class DialogBottomSheetViewmodel @Inject constructor(private val repositry: Regi
     val patientProfileResponse=MutableLiveData<Resource<PatientProfileResponse>>()
     val patientLocationResponse=MutableLiveData<Resource<PatientLocationResponse>>()
     val healthyResponse=MutableLiveData<Resource<GetHealthEntityResponse>>()
-    val popularResponse=MutableLiveData<Resource<List<PopularDoctorsResponseItem>>>()
+    val popularResponse=MutableLiveData<Resource<NewPopularDoctorResponse>>()
     val healthTopicsResponse=MutableLiveData<Resource<GetDoctorHealthTopicsResponse>>()
     val doctorSpotLightResponse=MutableLiveData<Resource<GetDoctorSpotLightResponse>>()
     val updatePatientProfileResponse=MutableLiveData<Resource<UpdateProfilePatientResponse>>()
@@ -458,13 +459,13 @@ class DialogBottomSheetViewmodel @Inject constructor(private val repositry: Regi
         return error?.message?.let { Resource.Error(it)}
     }
 
-    fun getPopularDoctors()=viewModelScope.launch(Dispatchers.IO+handler) {
+    fun getPopularDoctors(doctorRateRequest: HashMap<String, String>)=viewModelScope.launch(Dispatchers.IO+handler) {
         popularResponse.postValue(Resource.Loading())
-        val response=repositry.getPopularDoctors()
+        val response=repositry.getPopularDoctors(doctorRateRequest)
         popularResponse.postValue(response?.let { handlegetPopularDoctors(it) })
     }
 
-    private fun handlegetPopularDoctors(response: Response<List<PopularDoctorsResponseItem>>): Resource<List<PopularDoctorsResponseItem>>? {
+    private fun handlegetPopularDoctors(response: Response<NewPopularDoctorResponse>): Resource<NewPopularDoctorResponse>? {
         if (response.isSuccessful){
             response.body()?.let {
                 return Resource.sucess(it)

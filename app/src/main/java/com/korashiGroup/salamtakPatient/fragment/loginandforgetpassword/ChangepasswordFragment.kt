@@ -8,18 +8,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.databinding.ChangepasswordfragmentBinding
 import com.korashiGroup.salamtakPatient.model.register.ChangePasswordRequest
 import com.korashiGroup.salamtakPatient.model.register.ResetChangePassword
+import com.korashiGroup.salamtakPatient.utils.DataBinding
 import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.utils.SpUtil
 import com.korashiGroup.salamtakPatient.viewmodel.RegisterViewmodel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -28,6 +35,7 @@ class ChangepasswordFragment : Fragment() {
     private lateinit var binding: ChangepasswordfragmentBinding
     private val viewmodel: RegisterViewmodel by viewModels()
     private val args:ChangepasswordFragmentArgs by navArgs()
+    private lateinit var bottomsheetbeahavoirBooking: BottomSheetBehavior<ConstraintLayout>
     @Inject
     lateinit var sp: SpUtil
 
@@ -52,6 +60,7 @@ class ChangepasswordFragment : Fragment() {
             binding.ivLogo.visibility=View.GONE
             binding.layoutHelp.visibility=View.GONE
         }
+        navigateBottomSheet()
         initButton()
         callBack()
         callbackChangePassord()
@@ -303,7 +312,14 @@ class ChangepasswordFragment : Fragment() {
                 is Resource.sucess -> {
                     binding.progressBar.visibility=View.GONE
                     it?.data?.let { response ->
-                        findNavController().navigate(R.id.loginFragment)
+                        bottomsheetbeahavoirBooking.state =
+                            if (bottomsheetbeahavoirBooking.state == BottomSheetBehavior.STATE_EXPANDED)
+                                BottomSheetBehavior.STATE_HIDDEN else BottomSheetBehavior.STATE_EXPANDED
+                        lifecycleScope.launch {
+                            delay(3000)
+                            bottomsheetbeahavoirBooking.state = BottomSheetBehavior.STATE_HIDDEN
+                            findNavController().navigate(R.id.loginFragment)
+                        }
                     }
                 }
                 is Resource.Error -> {
@@ -312,6 +328,15 @@ class ChangepasswordFragment : Fragment() {
                 }
             }
         })
+    }
+    private fun navigateBottomSheet() {
+        bottomsheetbeahavoirBooking =
+            BottomSheetBehavior.from(binding.layoutBottomsheetpersistantBooking.bookingConfirm)
+        bottomsheetbeahavoirBooking.state = BottomSheetBehavior.STATE_HIDDEN
+        Glide.with(this)
+            .asGif()
+            .load(R.drawable.no_doctorfound)
+            .into(binding.layoutBottomsheetpersistantBooking.gifImageView)
     }
 
 }

@@ -159,8 +159,8 @@ class RegisterRepositry @Inject constructor(private val apiService: ApiService) 
             )
         }
 
-    suspend fun getPopularDoctors() = sp.getUserLang(Constans.Language)
-        ?.let { apiService.getPopularDoctors(it) }
+    suspend fun getPopularDoctors(doctorRateRequest: HashMap<String, String>) = sp.getUserLang(Constans.Language)
+        ?.let { apiService.getPopularDoctors(it,doctorRateRequest) }
 
     suspend fun getDoctorHealthTopics() = sp.getUserLang(Constans.Language)
         ?.let { apiService.getDoctorHealthTopics(it) }
@@ -311,5 +311,8 @@ class RegisterRepositry @Inject constructor(private val apiService: ApiService) 
         ?.let { apiService.getPatientAppointments(it) }
     suspend fun getHomeCareService() = sp.getUserLang(Constans.Language)
         ?.let { apiService.getHomeCareService(it) }
+
+    suspend fun getLatestPatientAppointment() = sp.getUserLang(Constans.Language)
+        ?.let { apiService.getLatestPatientAppointment(it) }
 
 }
