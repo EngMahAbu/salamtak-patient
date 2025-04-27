@@ -15,9 +15,9 @@ android {
     defaultConfig {
         applicationId "com.korashiGroup.salamtakPatient"
         minSdk 26
-        targetSdk 33
-        versionCode 21
-        versionName "2.1.2"
+        targetSdk 34
+        versionCode 23
+        versionName "2.1.4"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true

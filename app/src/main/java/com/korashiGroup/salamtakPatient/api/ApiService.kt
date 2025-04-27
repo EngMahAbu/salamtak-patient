@@ -8,6 +8,7 @@ import com.korashiGroup.salamtakPatient.model.askandanswer.questions.AnswersDoct
 import com.korashiGroup.salamtakPatient.model.askandanswer.questions.QuestionsResponse
 import com.korashiGroup.salamtakPatient.model.booking.*
 import com.korashiGroup.salamtakPatient.model.booking.clink.GetDoctorClinksResponse
+import com.korashiGroup.salamtakPatient.model.booking.doctorprofile.DoctorProfileResponse
 import com.korashiGroup.salamtakPatient.model.checktoken.CheckTokenResponse
 import com.korashiGroup.salamtakPatient.model.deleteuser.DeleteUserResponse
 import com.korashiGroup.salamtakPatient.model.docotorsearch.DoctorSearchRequest
@@ -485,5 +486,11 @@ interface ApiService {
     suspend fun getLatestPatientAppointment(
         @Path("culture") culture: String,
     ): Response<GetLatestPatientAppointmentResponse>
+
+    @GET("{culture}/Doctor/GetDoctorProfileByDoctorId")
+    suspend fun getDoctorProfileByDoctorId(
+        @Path("culture") culture: String,
+        @Query("DoctorId") DoctorId :Int,
+    ): Response<DoctorProfileResponse>
 
 }

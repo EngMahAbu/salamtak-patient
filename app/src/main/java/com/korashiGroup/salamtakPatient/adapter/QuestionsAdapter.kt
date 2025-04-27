@@ -8,6 +8,8 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import coil.transform.CircleCropTransformation
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.databinding.ItemLayoutQandaBinding
 import com.korashiGroup.salamtakPatient.model.askandanswer.questions.Questions
@@ -71,6 +73,12 @@ class QuestionsAdapter(val book:IBook,val isFullName:Boolean):ListAdapter<Questi
             holder.binding.tvBook.visibility=View.VISIBLE
             holder.binding.tvBook.text="${holder.binding.tvBook.context.getString(R.string.showanswers)} : (${services.answers.size}) Answers"
         }
+        holder.binding.ivDoctorProfile.load("https://salamtechapi.azurewebsites.net/${services.specialityImage}") {
+            crossfade(true)
+            crossfade(1000)
+            transformations(CircleCropTransformation())
+        }
+
         holder.binding.tvBook.setOnClickListener {
             book.onItemClick(services)
         }

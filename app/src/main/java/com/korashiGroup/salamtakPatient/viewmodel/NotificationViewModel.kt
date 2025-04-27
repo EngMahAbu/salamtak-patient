@@ -1,13 +1,15 @@
 package com.korashiGroup.salamtakPatient.viewmodel
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.korashiGroup.salamtakPatient.repository.RegisterRepositry
-import com.korashiGroup.salamtakPatient.utils.Resource
 import com.google.gson.Gson
 import com.korashiGroup.salamtakPatient.model.notification.DoctorNotificationResponse
+import com.korashiGroup.salamtakPatient.notification.model.MenuIconUpdate
+import com.korashiGroup.salamtakPatient.repository.RegisterRepositry
+import com.korashiGroup.salamtakPatient.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
@@ -21,6 +23,8 @@ class NotificationViewModel @Inject constructor(private val repositry: RegisterR
 
     val doctorResponse=MutableLiveData<Resource<DoctorNotificationResponse>>()
     val doctorMarkResponse=MutableLiveData<Resource<DoctorNotificationResponse>>()
+    private val _iconUpdateLiveData = MutableLiveData<MenuIconUpdate>()
+    val iconUpdateLiveData: LiveData<MenuIconUpdate> = _iconUpdateLiveData
 
 
     fun getUnreadDoctorResponses()=viewModelScope.launch(Dispatchers.IO+handler) {
@@ -54,7 +58,6 @@ class NotificationViewModel @Inject constructor(private val repositry: RegisterR
         val error = Gson().fromJson<DoctorNotificationResponse>(response.errorBody()!!.string(), DoctorNotificationResponse::class.java)
         return error.message?.let { Resource.Error(it) }
     }
-
 
 
     val handler = CoroutineExceptionHandler { _, exception ->

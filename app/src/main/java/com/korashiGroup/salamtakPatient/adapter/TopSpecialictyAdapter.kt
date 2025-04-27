@@ -15,7 +15,7 @@ import com.korashiGroup.salamtakPatient.model.SpecialistData
 
 class TopSpecialictyAdapter(val iSelectSep:ISelectSpecialist,val status:Boolean):ListAdapter<SpecialistData,TopSpecialictyAdapter.ViewHolder>(DiffCallback()) {
 
-    var selectedPosition=0
+    var selectedPosition=-1
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 

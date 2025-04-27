@@ -15,7 +15,6 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.databinding.LoginfragmentBinding
-import com.korashiGroup.salamtakPatient.fragment.signupanddocotorprofile.DocotorProfileFragmentDirections
 import com.korashiGroup.salamtakPatient.model.booking.clink.GetDoctorClinksResponse
 import com.korashiGroup.salamtakPatient.model.register.DataLogin
 import com.korashiGroup.salamtakPatient.model.register.LoginUser
@@ -261,11 +260,9 @@ class LoginFragment : Fragment() {
     }
 
     private fun bindDataToviews() {
-
         if (sp.getUser() != null) {
             binding.etMobile.setText(sp.getUser()!!.phone)
         }
-
     }
 
     interface onSomeEventListener {

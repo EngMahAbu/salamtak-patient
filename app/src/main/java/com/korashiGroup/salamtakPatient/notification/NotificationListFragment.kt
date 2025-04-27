@@ -5,15 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.korashiGroup.salamtakPatient.R
-import com.korashiGroup.salamtakPatient.adapter.FavoriteDoctorsAdapter
 import com.korashiGroup.salamtakPatient.adapter.NotificationsAdapter
 import com.korashiGroup.salamtakPatient.databinding.NotificationListfragmentBinding
 import com.korashiGroup.salamtakPatient.utils.Resource
+import com.korashiGroup.salamtakPatient.viewmodel.MainViewModel
 import com.korashiGroup.salamtakPatient.viewmodel.PatientViewmodel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -22,6 +23,7 @@ class NotificationListFragment : Fragment() {
 
    private lateinit var binding:NotificationListfragmentBinding
    private val viewModel: PatientViewmodel by viewModels()
+    private val mainViewModel: MainViewModel by activityViewModels()
     private lateinit var notificationsAdapter: NotificationsAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

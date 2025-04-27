@@ -37,13 +37,13 @@ class ImageServicesRepository @Inject constructor(
             ImageServices(R.drawable.ic_vedieocall, context.getString(R.string.Video_Call),"مكالمة فيديو", Id = 3),
             ImageServices(R.drawable.ic_calls, context.getString(R.string.Call),"مكالمة صوتية", Id = 4),
             ImageServices(R.drawable.ic_offers, context.getString(R.string.offers),"العروض", Id = 7),
-            ImageServices(R.drawable.ic_labs, context.getString(R.string.labs),"التحاليل", Id = 8),
-            ImageServices(
-                R.drawable.ic_ray_radiology,
-                context.getString(R.string.medicalscan),"الأشعة",
-                Id = 9,
-            ),
-            ImageServices(R.drawable.ic_homecares, context.getString(R.string.home_care),"الرعاية المنزلية", Id = 10)
+//            ImageServices(R.drawable.ic_labs, context.getString(R.string.labs),"التحاليل", Id = 8),
+//            ImageServices(
+//                R.drawable.ic_ray_radiology,
+//                context.getString(R.string.medicalscan),"الأشعة",
+//                Id = 9,
+//            ),
+//            ImageServices(R.drawable.ic_homecares, context.getString(R.string.home_care),"الرعاية المنزلية", Id = 10)
         )
         _imageServicesList.value = list
     }
@@ -64,18 +64,18 @@ class ImageServicesRepository @Inject constructor(
                 5,
 
             ),
-//            ImageServices(
-//                R.drawable.svg_labs,
-//                context.getString(R.string.laboratories),"المختبرات",
-//                context.getColor(R.color.color_4),
-//                3,
-//            ),
-//            ImageServices(
-//                R.drawable.svg_radiology,
-//                context.getString(R.string.radiologycenter),"مراكز الاشعة",
-//                context.getColor(R.color.color_5),
-//                4,
-//            ),
+            ImageServices(
+                R.drawable.svg_labs,
+                context.getString(R.string.laboratories),"المختبرات",
+                context.getColor(R.color.color_4),
+                3,
+            ),
+            ImageServices(
+                R.drawable.svg_radiology,
+                context.getString(R.string.radiologycenter),"مراكز الاشعة",
+                context.getColor(R.color.color_5),
+                4,
+            ),
             ImageServices(
                 R.drawable.png_salatakangle,
                 context.getString(R.string.engile),"سلامتك Angel",

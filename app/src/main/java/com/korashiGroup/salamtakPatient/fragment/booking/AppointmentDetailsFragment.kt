@@ -1,6 +1,7 @@
 package com.korashiGroup.salamtakPatient.fragment.booking
 
 
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -52,6 +54,8 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
     val sharedDataViewmodel: SharedDataViewmodel by activityViewModels()
     private lateinit var insuranceCardAdapter: InsuranceCardAdapter
     private var offerid:Int?=null
+    private var fullName:String?=null
+    private var phoneNumber:String?=null
     @Inject
     lateinit var sp: SpUtil
     //Replace this with Testing/Staging/Production URL
@@ -69,6 +73,7 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
     var merchantSecretCode = "39d89b6c-5599-4a88-9854-2148179bc23d"
     val chargeItems = ArrayList<PayableItem>()
     var Patient_InsuranceID: Int? = null
+    private var isAnthorPatient=false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -115,6 +120,17 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
     }
 
     private fun initButton() {
+
+        binding.etFullNameAR.doOnTextChanged { text, start, before, count ->
+            if (binding.etFullNameAR.text?.trim().isNullOrEmpty()) {
+                fullName=binding.etFullNameAR.text.toString()
+            }
+        }
+        binding.etPhoneNumber.doOnTextChanged { text, start, before, count ->
+            if (binding.etPhoneNumber.text?.trim()!!.isEmpty()) {
+                phoneNumber=binding.etPhoneNumber.text.toString()
+            }
+        }
         binding.ivArrow.setOnClickListener {
             if (args.status == true) {
                 findNavController().navigate(R.id.searchFragment)
@@ -126,6 +142,8 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
         }
 
         binding.btnConfirm.setOnClickListener {
+            fullName=binding.etFullNameAR.text.toString()
+            phoneNumber=binding.etPhoneNumber.text.toString()
             val mediaclName = args.confirmappointments?.MedicalExaminationTypeName
             if (mediaclName == "Call" || mediaclName == "Video Call" || mediaclName == "مكالمة صوتية" || mediaclName == "مكالمة فيديو") {
                 startPayment()
@@ -141,7 +159,10 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
                         1,
                         "",
                         "",
-                        it1,offerid
+                        it1,offerid,
+                        IsBookingForAnotherPatient=isAnthorPatient,
+                        AnotherPatientFullName = fullName,
+                        AnotherPatientPhone = phoneNumber
                     )
                 }?.let { it2 ->
                     viewmodel.createPatientAppointment(
@@ -160,7 +181,10 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
                         1,
                         "",
                         "",
-                        it1
+                        it1,
+                        IsBookingForAnotherPatient=isAnthorPatient,
+                        AnotherPatientFullName = fullName,
+                        AnotherPatientPhone = phoneNumber
                     )
                 }?.let { it2 ->
                     viewmodel.createPatientAppointment(
@@ -177,13 +201,25 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
 
         binding.chCard.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
-                bottomsheetbeahavoir.state =
-                    if (bottomsheetbeahavoir.state == BottomSheetBehavior.STATE_EXPANDED)
-                        BottomSheetBehavior.STATE_HIDDEN else BottomSheetBehavior.STATE_EXPANDED
-                callBackGetInsuranceCards()
-                buttonView.isChecked = false
+                isAnthorPatient=true
+                binding.chCard.setTextColor(Color.parseColor("#00D2CB"))
+                binding.etFullNameAR.setText("")
+                binding.etPhoneNumber.setText("")
+            }else{
+                isAnthorPatient=false
+                binding.chCard.setTextColor(Color.parseColor("#8088A4"))
+                binding.etFullNameAR.setText(sp.getUser()?.name)
+                binding.etPhoneNumber.setText(sp.getUser()?.phone)
+                fullName=binding.etFullNameAR.text.toString()
+                phoneNumber=binding.etPhoneNumber.text.toString()
             }
 
+        }
+        binding.layoutInsuranceCompanies.setOnClickListener {
+            bottomsheetbeahavoir.state =
+                if (bottomsheetbeahavoir.state == BottomSheetBehavior.STATE_EXPANDED)
+                    BottomSheetBehavior.STATE_HIDDEN else BottomSheetBehavior.STATE_EXPANDED
+            callBackGetInsuranceCards()
         }
 
 
@@ -213,9 +249,13 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
         binding.tvSpecialization.text = args.confirmappointments?.SpecialistName
         binding.tvDate.text = DateParsing(args.confirmappointments?.formattedDate.toString())
         binding.Service.text = args.confirmappointments?.MedicalExaminationTypeName
-        binding.TotalFees.text =
-            args.confirmappointments?.fees.toString() + " " + getString(R.string.le)
 
+        binding.tvFees.text =
+            args.confirmappointments?.fees.toString() + " " + getString(R.string.le)
+          binding.etFullNameAR.setText(sp.getUser()?.name)
+          binding.etPhoneNumber.setText(sp.getUser()?.phone)
+        fullName=binding.etFullNameAR.text.toString()
+        phoneNumber=binding.etPhoneNumber.text.toString()
     }
 
     private fun callBack() {
@@ -348,6 +388,7 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
     override fun onItemSelected(card: InsuranceCard) {
         // Snackbar.make(requireView(), "insCompanyID:${card.id}", Snackbar.LENGTH_SHORT).show()
         Patient_InsuranceID = card.id
+        binding.tvCompleteProfile.text=card.insCompanyName
 
     }
 
@@ -405,7 +446,10 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
                             "",
                             3,
                             fawery?.referenceNumber!!,
-                            ""
+                            "",
+                            IsBookingForAnotherPatient=isAnthorPatient,
+                            AnotherPatientFullName = fullName,
+                            AnotherPatientPhone = phoneNumber
 
                         )
 
@@ -422,7 +466,10 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
                             "",
                             3,
                             fawery?.referenceNumber!!,
-                            fawery.signature!!
+                            fawery.signature!!,
+                            IsBookingForAnotherPatient=isAnthorPatient,
+                            AnotherPatientFullName = fullName,
+                            AnotherPatientPhone = phoneNumber
 
                         )
 

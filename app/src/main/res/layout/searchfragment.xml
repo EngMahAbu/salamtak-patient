@@ -387,7 +387,7 @@
                     android:id="@+id/textchange"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Try searching for a different specialty or change your location to see more available doctors."
+                    android:text="@string/try_searching_for_a_different_specialty_or_change_your_location_to_see_more_available_doctors"
                     android:fontFamily="@font/sd_pro_display_regular"
                     android:textColor="@color/text_doctor_card_color"
                     android:visibility="visible"

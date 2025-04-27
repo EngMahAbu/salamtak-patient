@@ -32,7 +32,12 @@ class AnswersAdapter(val book:IBook):ListAdapter<GetAnswers,AnswersAdapter.ViewH
                  )
              }"
              tvSpecialistName.text="${tvSpecialistName.context.getString(R.string.doctorname)} : ${services.doctorName}"
-             tvQuestions.text="${tvSpecialistName.context.getString(R.string.questionanswered)} : ${services.answer}"
+             if (services.answer=="null" || services.answer.isNullOrBlank()){
+                 tvQuestions.text="${tvSpecialistName.context.getString(R.string.questionanswered)}: - "
+             }else{
+                 tvQuestions.text="${tvSpecialistName.context.getString(R.string.questionanswered)} : ${services.answer}"
+             }
+
              tvBook.text="${tvSpecialistName.context.getString(R.string.book_at_theclinic)}"
              tvAge.visibility=View.GONE
              tvPrevSurgery.visibility=View.GONE

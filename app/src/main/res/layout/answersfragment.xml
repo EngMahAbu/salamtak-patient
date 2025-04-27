@@ -213,7 +213,7 @@
             android:layout_marginTop="25dp"
             android:layout_marginStart="15dp"
             android:fontFamily="@font/sf_pro_display_semibold"
-            android:text="Answers to your question"
+            android:text="@string/answers_to_your_question"
             android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"

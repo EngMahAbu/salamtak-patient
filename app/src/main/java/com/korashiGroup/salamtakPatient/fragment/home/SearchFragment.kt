@@ -748,6 +748,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
 //        if (DateUtils.getToken().isNullOrEmpty()) {
 //            findNavController().navigate(R.id.dialogSignUp)
 //        } else {
+        sharedDataViewmodel.getNavigateStatus("")
             sharedDataViewmodel.getClinicIdAndDoctorId(ClinicData(doctorId, clinicId,true))
             val clinicSchedualByClinicDayId = ClinicSchedualByClinicDayId(
                 clinicId,
@@ -784,6 +785,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
 //        if (DateUtils.getToken().isNullOrEmpty()) {
 //            findNavController().navigate(R.id.dialogSignUp)
 //        } else {
+        sharedDataViewmodel.getNavigateStatus("")
             val clinicSchedualByClinicDayId = ClinicSchedualByClinicDayId(
                 clinicId,
                 dayId,
@@ -1200,6 +1202,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             formattedDate,
             ""
         )
+        sharedDataViewmodel.getNavigateStatus("")
         sharedDataViewmodel.getMedicalExaminationTypeId(ImageServices(0,"","",0,examinationtypeid))
         sharedDataViewmodel.getRating(RatingDoctors(rate, rateCount))
         sharedDataViewmodel.getClinicSchedualByClinicDayId(clinicSchedualByClinicDayId)

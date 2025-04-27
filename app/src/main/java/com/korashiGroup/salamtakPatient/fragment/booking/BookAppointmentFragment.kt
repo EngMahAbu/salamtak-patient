@@ -30,7 +30,6 @@ import com.korashiGroup.salamtakPatient.fragment.home.HomeFragment
 import com.korashiGroup.salamtakPatient.fragment.home.SearchFragment
 import com.korashiGroup.salamtakPatient.model.CalendarDateModel
 import com.korashiGroup.salamtakPatient.model.SpecialistData
-import com.korashiGroup.salamtakPatient.model.SubSpecialistData
 import com.korashiGroup.salamtakPatient.model.booking.AppointmentBooking
 import com.korashiGroup.salamtakPatient.model.booking.AppointmentDetailBooking
 import com.korashiGroup.salamtakPatient.model.booking.BookingData
@@ -78,7 +77,7 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
     var dayId = 0
     var step = 1
     private var isPolyClinic:Boolean?=null
-    private var medicalExaminationId = 0
+    private var medicalExaminationId = 1
     var time: String? = null
     private var doctorWorkingDayTimeId: Int? = null
     private var fees: Int? = null
@@ -139,7 +138,8 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
             val formattedMonth = String.format("%02d", month + 1) // إضافة 1 وجعلها بصيغة رقمين
             val formattedDay = String.format("%02d", dayOfMonth) // جعل اليوم بصيغة رقمين
             formattedDate = "$year-$formattedMonth-$formattedDay"
-            val date=DataBinding.convertDateFormat(formattedDate,"yyyy-MM-dd","yyyy-MM-dd'T'HH:mm:ss'Z'")
+            val date=DataBinding.convertDateFormat(formattedDate,"yyyy-MM-dd","yyyy-MM-dd'T'HH:mm:ss'Z'",
+                Locale.US)
             getDayId()
             args.doctorclinks.data?.id?.let {
                 isPolyClinic?.let { it1 ->
@@ -459,7 +459,7 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
                     isPolyClinic?.let { it2 ->
                         viewmodel.getClinicSchedualByClinicDayId(
                             it.clinicId,
-                            it.dayId,
+                            dayId,
                             it.medicalExaminationId,
                             it.formattedDate, it1, it2
                         )
@@ -499,12 +499,14 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
                     val diff: Duration = Duration.between(timefrom, timeto)
                     var hours: Long = diff.toHours()
                     if(intervaltime!=null) {
+                        println("intervaltime ${intervaltime} ")
                         numbersofpatient = if (hours.toInt() == 0) {
                             60 / intervaltime
                         } else {
                             ((hours * 60) / intervaltime).toInt()
                         }
                     }else if (appointmentTime[i]?.maxNoOfPatients!=null){
+                        println("maxNoOfPatients ${appointmentTime[i]?.maxNoOfPatients}")
                         numbersofpatient= appointmentTime[i]?.maxNoOfPatients!!
                         try {
                             intervaltime=((hours * 60) / numbersofpatient).toInt()
@@ -517,7 +519,8 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
 
 
                     }else{
-                        Snackbar.make(requireView(), getString(R.string.there_is_no_appointment_available), Snackbar.LENGTH_SHORT).show()
+
+                      //  Snackbar.make(requireView(), getString(R.string.there_is_no_appointment_available), Snackbar.LENGTH_SHORT).show()
                     }
                     appointmentBookingList.add(
                         AppointmentBooking(
@@ -679,7 +682,8 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
 
     private fun getClinicSchedualByClinicOrServices(){
         args.doctorclinks.data?.id?.let { it1 ->
-            isPolyClinic?.let { it2 ->
+            isPolyClinic?.let {
+                    it2 ->
                 viewmodel.getClinicSchedualByClinicDayId(
                     this.clinicId,
                     this.dayId,
@@ -756,6 +760,13 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
         formattedDate=SearchFragment.instance?.let {
             it.formattedDate
         }?:""
+        if (formattedDate.isNullOrEmpty()){
+            val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH).apply {
+                this.timeZone = TimeZone.getTimeZone("CST")
+            }
+            formattedDate = formatter.format(now.time)
+            getDayId()
+        }
         isPolyClinic = medicalExaminationId==6
         sharedDataViewmodel.rating.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             binding.ratingBar.rating= it.rate?.toFloat()?: 1.0f

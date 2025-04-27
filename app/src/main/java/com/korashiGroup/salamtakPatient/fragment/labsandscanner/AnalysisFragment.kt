@@ -342,8 +342,14 @@ class AnalysisFragment : Fragment(), ShowAnalysisAdapter.SelectSubSpecialist,
         bottomsheetbeahavoirBooking =
             BottomSheetBehavior.from(binding.layoutBottomsheetpersistantBooking.bookingConfirm)
         bottomsheetbeahavoirBooking.state = BottomSheetBehavior.STATE_HIDDEN
-        DataBinding.loadPictureFromDrawable(binding.layoutBottomsheetpersistant.gifImageView,R.drawable.delete_reservations)
-        DataBinding.loadPictureFromDrawable(binding.layoutBottomsheetpersistantBooking.gifImageView,R.drawable.sucess)
+        Glide.with(this)
+            .asGif()
+            .load(R.drawable.delete_reservations)
+            .into(binding.layoutBottomsheetpersistant.gifImageView)
+        Glide.with(this)
+            .asGif()
+            .load(R.drawable.sucess)
+            .into(binding.layoutBottomsheetpersistant.gifImageView)
 
     }
 }

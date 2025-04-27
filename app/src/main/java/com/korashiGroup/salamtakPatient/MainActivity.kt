@@ -4,8 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
@@ -20,6 +23,7 @@ import com.korashiGroup.salamtakPatient.utils.Constans.KEY_CURRENT_VERSION
 import com.korashiGroup.salamtakPatient.utils.Constans.KEY_FORCE_UPDATE_REQUIRED
 import com.korashiGroup.salamtakPatient.utils.ForceUpdateUtils
 import com.korashiGroup.salamtakPatient.utils.localization.DefaultLocaleHelper
+import com.korashiGroup.salamtakPatient.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -28,6 +32,7 @@ class MainActivity : AppCompatActivity(), LoginFragment.onSomeEventListener {
 
     private lateinit var navController: NavController
     private lateinit var binding: ActivityMainBinding
+    private val mainViewModel: MainViewModel by viewModels()
     private val firebaseRemoteConfig by lazy { FirebaseRemoteConfig.getInstance() }
     private val dialog = Dialog()
     private val configSettings by lazy {
@@ -62,6 +67,7 @@ class MainActivity : AppCompatActivity(), LoginFragment.onSomeEventListener {
         instance = this
         logSentFriendRequestEvent()
         setupNavigationBottom()
+        changeNotificationIcon()
         navController.addOnDestinationChangedListener { _, destination, _ ->
 
             when (destination.id) {
@@ -69,6 +75,7 @@ class MainActivity : AppCompatActivity(), LoginFragment.onSomeEventListener {
                 R.id.moreFragment,
                 R.id.offersFragment,
                 R.id.notificationListFragment,
+                R.id.chooseCategoryOffersFragment,
                 R.id.myScheduleFragment -> {
                     binding.bottomViewNav.visibility = View.VISIBLE
 
@@ -80,6 +87,7 @@ class MainActivity : AppCompatActivity(), LoginFragment.onSomeEventListener {
                 }
             }
         }
+
     }
 
 
@@ -89,7 +97,6 @@ class MainActivity : AppCompatActivity(), LoginFragment.onSomeEventListener {
         navController = navHostFragment.navController
         binding.bottomViewNav.setupWithNavController(navController)
         NavigationUI.setupWithNavController(binding.bottomViewNav, navController, false)
-
     }
 
 
@@ -133,6 +140,20 @@ class MainActivity : AppCompatActivity(), LoginFragment.onSomeEventListener {
 
     fun logSentFriendRequestEvent() {
         AppEventsLogger.newLogger(this).logEvent("sentFriendRequest")
+    }
+
+    private fun changeNotificationIcon(){
+
+        mainViewModel.iconUpdateLiveData.observe(this) { update ->
+            if (update.state){
+                binding.bottomViewNav.itemIconTintList=null
+            }else{
+                val colorStateList = ContextCompat.getColorStateList(this, R.color.icon_sellector)
+                binding.bottomViewNav.itemIconTintList = colorStateList
+            }
+            binding.bottomViewNav.menu.findItem(R.id.notificationListFragment)?.icon = ContextCompat.getDrawable(this, update.iconResId)
+        }
+
     }
 
 }

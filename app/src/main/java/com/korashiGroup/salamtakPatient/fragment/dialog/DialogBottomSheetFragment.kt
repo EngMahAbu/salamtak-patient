@@ -15,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.adapter.*
 import com.korashiGroup.salamtakPatient.databinding.DialogBottomSheetfragmentBinding
@@ -266,6 +267,10 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
             "help" -> {
                 binding.tvCallus.visibility = View.VISIBLE
                 binding.ivCall.visibility = View.VISIBLE
+                Glide.with(this)
+                    .asGif()
+                    .load(R.drawable.gif_salamtak_connect)
+                    .into(binding.ivCall)
                 binding.btnCalling.visibility = View.VISIBLE
                 binding.btnDone.visibility = View.GONE
                 binding.tvAllSpecial.visibility = View.GONE

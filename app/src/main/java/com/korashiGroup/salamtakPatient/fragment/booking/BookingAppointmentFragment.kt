@@ -111,6 +111,7 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
 
     private fun initButton() {
 
+
         binding.layoutSharelink.setOnClickListener {
             val action= doctorId?.let { it1 ->
                 BookingAppointmentFragmentDirections.actionBookingAppointmentFragmentToSpecialDoctorAnswersFragment(
@@ -120,7 +121,24 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
             action?.let { it1 -> findNavController().navigate(it1) }
         }
         binding.ivArrow.setOnClickListener {
-            findNavController().navigate(R.id.searchFragment)
+            sharedDataViewmodel.navigateStatusResponse.observe(viewLifecycleOwner, Observer {
+               when(it){
+                   "favorite"->{
+                       findNavController().navigate(R.id.favoriteDoctorFragment)
+                   }
+                   "answerScreen"->{
+                       findNavController().navigate(R.id.myQuestionsFragment)
+                   }
+                   "home"->{
+                       findNavController().navigate(R.id.homeFragment)
+                   }
+                   else->{
+                       findNavController().navigate(R.id.searchFragment)
+                   }
+
+                }
+            })
+
         }
         binding.btnBooking.setOnClickListener {
             val send=BookingAppointmentFragmentDirections.actionBookingAppointmentFragmentToBookAppointmentFragment(getDoctorAndPolyClinksResponse,"booking appointment")

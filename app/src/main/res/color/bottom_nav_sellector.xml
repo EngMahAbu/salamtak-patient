@@ -4,8 +4,8 @@
 
     </item>
     <item android:state_pressed="true" android:color="@color/color_primary">
-
     </item>
+
     <item android:color="#AEB3BE">
     </item>
 

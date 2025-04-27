@@ -10,6 +10,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import coil.load
+import coil.transform.CircleCropTransformation
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.adapter.AnswersAdapter
 import com.korashiGroup.salamtakPatient.databinding.AnswersfragmentBinding
@@ -79,6 +81,7 @@ class AnswersFragment : Fragment(),AnswersAdapter.IBook{
 
     override fun onItemClick(doctorId: Int,clinicId: Int) {
         sharedDataViewmodel.getClinicIdAndDoctorId(ClinicData(doctorId, clinicId,true))
+        sharedDataViewmodel.getNavigateStatus("answerScreen")
         findNavController().navigate(R.id.bookingAppointmentFragment)
     }
 
@@ -114,6 +117,11 @@ class AnswersFragment : Fragment(),AnswersAdapter.IBook{
                     "MMM dd, yyyy"
                 )
             }"
+        }
+        binding.ivDoctorProfile.load("https://salamtechapi.azurewebsites.net/${args.answers?.specialityImage}") {
+            crossfade(true)
+            crossfade(1000)
+            transformations(CircleCropTransformation())
         }
     }
 

@@ -70,7 +70,7 @@ class ChooseCategoryOffersFragment : Fragment(),OffersCategoryAdapter.Action{
                         val extraItem = ActiveOffers(
                                 id = 0,
                                 imageRes = R.drawable.offer_catg,
-                                name = "All Offers",
+                                name = getString(R.string.all_offers),
                                 offerCount = totalOfferCount
                             )
 

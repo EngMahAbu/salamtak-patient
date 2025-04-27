@@ -14,6 +14,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.adapter.EaxminationTypeAdapter
 import com.korashiGroup.salamtakPatient.adapter.MyScheduleAdapter
@@ -165,7 +166,6 @@ class MyScheduleFragment : Fragment(), MyScheduleAdapter.ActionSchedule,
                                 it?.isCancel == true
                             }
                             myScheduleAdapter.submitList(Canceledlist)
-                            myScheduleAdapter.notifyDataSetChanged()
                             updateUi(Canceledlist as List<DataAppointment>)
                         }
 
@@ -174,7 +174,6 @@ class MyScheduleFragment : Fragment(), MyScheduleAdapter.ActionSchedule,
                                 it?.IsCompleted==true
                             }
                             myScheduleAdapter.submitList(Finshedlist)
-                            myScheduleAdapter.notifyDataSetChanged()
                             updateUi(Finshedlist as List<DataAppointment>)
                         }
 
@@ -312,11 +311,15 @@ class MyScheduleFragment : Fragment(), MyScheduleAdapter.ActionSchedule,
     }
 
     private fun updateUi(it: List<DataAppointment>) {
-        if (it.isNullOrEmpty()) {
-            binding.crdView.visibility = View.VISIBLE
-        } else {
-            binding.crdView.visibility = View.GONE
-        }
+            if (it.isNullOrEmpty()) {
+                binding.layoutCardview.visibility=View.VISIBLE
+                Glide.with(this)
+                    .asGif()
+                    .load(R.drawable.gif_nobooking)
+                    .into(binding.gifImageView)
+            } else {
+                binding.layoutCardview.visibility=View.GONE
+            }
     }
 
 }

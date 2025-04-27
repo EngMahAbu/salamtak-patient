@@ -191,6 +191,10 @@ class MoreFragment : Fragment() {
             binding.layoutDelete.visibility=View.GONE
             binding.layoutMyQuestions.visibility=View.GONE
             binding.layoutMedicalRecord.visibility=View.GONE
+            binding.layoutAccountSettings.visibility=View.GONE
+            binding.layoutSecurityLogout.visibility=View.GONE
+            binding.tvAccountSettings.visibility=View.GONE
+            binding.tvSecurityLogout.visibility=View.GONE
         }else{
             binding.layoutNextAvailableBooking.visibility=View.VISIBLE
             binding.layoutChangePassword.visibility=View.VISIBLE
@@ -202,6 +206,10 @@ class MoreFragment : Fragment() {
             binding.layoutDelete.visibility=View.VISIBLE
             binding.layoutMyQuestions.visibility=View.VISIBLE
             binding.layoutMedicalRecord.visibility=View.VISIBLE
+            binding.layoutAccountSettings.visibility=View.VISIBLE
+            binding.layoutSecurityLogout.visibility=View.VISIBLE
+            binding.tvAccountSettings.visibility=View.VISIBLE
+            binding.tvSecurityLogout.visibility=View.VISIBLE
         }
     }
 

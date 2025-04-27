@@ -40,6 +40,7 @@ class SharedDataViewmodel:ViewModel() {
     val foodAllergyList=MutableLiveData<List<DataFoodAllergy>>()
     val medicalInfoStatus=MutableLiveData<Boolean>()
     val skipLoginStatus=MutableLiveData<String>()
+    val navigateStatusResponse=MutableLiveData<String>()
     val patientType=MutableLiveData<ChoosePatient>()
     val offerId=MutableLiveData<Int>()
     val rating=MutableLiveData<RatingDoctors>()
@@ -139,6 +140,9 @@ class SharedDataViewmodel:ViewModel() {
 
     fun getSkipLoginStatus(skip:String){
         skipLoginStatus.postValue(skip)
+    }
+    fun getNavigateStatus(navigateStatus:String){
+        navigateStatusResponse.postValue(navigateStatus)
     }
     fun getRating(ratingDoctors: RatingDoctors){
         rating.postValue(ratingDoctors)

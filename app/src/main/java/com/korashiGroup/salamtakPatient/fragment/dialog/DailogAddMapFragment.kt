@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
+import android.location.Address
 import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
@@ -32,28 +33,37 @@ import java.io.IOException
 import java.util.Locale
 
 
-class DailogAddMapFragment : BottomSheetDialogFragment(), OnMapReadyCallback,GoogleMap.OnMarkerClickListener {
+class DailogAddMapFragment : BottomSheetDialogFragment(), OnMapReadyCallback,
+    GoogleMap.OnMarkerClickListener {
 
-    private lateinit var binding:DailogAddMapfragmentBinding
+    private lateinit var binding: DailogAddMapfragmentBinding
     private lateinit var mMap: GoogleMap
-   private var currentlocation: Location? = null
+    private var currentlocation: Location? = null
     private var latLng: LatLng? = null
-   private var fusedLocationProviderClient: FusedLocationProviderClient? = null
-    private val args:DailogAddMapFragmentArgs by navArgs()
+    private var fusedLocationProviderClient: FusedLocationProviderClient? = null
+    private val args: DailogAddMapFragmentArgs by navArgs()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding=DailogAddMapfragmentBinding.inflate(layoutInflater,container,false)
+        binding = DailogAddMapfragmentBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.mapview.onCreate(savedInstanceState)
-        latLng = args.longitude?.let { args.latitude?.let { it1 -> LatLng(it1.toDouble(), it.toDouble()) } }
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext())
+        latLng = args.longitude?.let {
+            args.latitude?.let { it1 ->
+                LatLng(
+                    it1.toDouble(),
+                    it.toDouble()
+                )
+            }
+        }
+        fusedLocationProviderClient =
+            LocationServices.getFusedLocationProviderClient(requireContext())
         if (isLocationPermissionAllowed()) {
 
             // call your function
@@ -125,24 +135,44 @@ class DailogAddMapFragment : BottomSheetDialogFragment(), OnMapReadyCallback,Goo
     private fun drawMarker() {
 
 
-        val lastlocaton = latLng?.let { args.latitude?.let { it1 -> args.longitude?.let { it2 -> LatLng(it1.toDouble(), it2.toDouble()) } } }
+        val lastlocaton = latLng?.let {
+            args.latitude?.let { it1 ->
+                args.longitude?.let { it2 ->
+                    LatLng(
+                        it1.toDouble(),
+                        it2.toDouble()
+                    )
+                }
+            }
+        }
         Log.e("location", "${lastlocaton?.latitude},${lastlocaton?.longitude}")
         if (lastlocaton == null || mMap == null) return
         lastlocaton?.let {
             if (marker == null)
-                marker = lastlocaton?.let { MarkerOptions().position(it).title("${latLng?.latitude?.let { it1 ->
-                    latLng?.longitude?.let { it2 ->
-                        getAddressFromLatLng(
-                            it1, it2
-                        )
-                    }
-                }}") }
+                marker = lastlocaton?.let {
+                    MarkerOptions().position(it).title(
+                        "${
+                            latLng?.latitude?.let { it1 ->
+                                latLng?.longitude?.let { it2 ->
+                                    getAddressFromLatLng(
+                                        it1, it2
+                                    )
+                                }
+                            }
+                        }"
+                    )
+                }
                     ?.let { mMap.addMarker(it) }
             mMap.setOnMarkerClickListener(this)
             mMap.moveCamera(CameraUpdateFactory.newLatLng(it))
             if (marker != null)
                 marker?.position =
-                    lastlocaton?.let { LatLng(lastlocaton.latitude, lastlocaton.longitude) }!!            //
+                    lastlocaton?.let {
+                        LatLng(
+                            lastlocaton.latitude,
+                            lastlocaton.longitude
+                        )
+                    }!!            //
             if (lastlocaton != null) {
                 mMap.animateCamera(
                     CameraUpdateFactory.newLatLngZoom(
@@ -157,6 +187,7 @@ class DailogAddMapFragment : BottomSheetDialogFragment(), OnMapReadyCallback,Goo
 
 
     }
+
     @SuppressLint("MissingPermission")
     fun getUserLocation() {
 
@@ -171,6 +202,7 @@ class DailogAddMapFragment : BottomSheetDialogFragment(), OnMapReadyCallback,Goo
         }
 
     }
+
     fun isLocationPermissionAllowed(): Boolean {
         return ContextCompat.checkSelfPermission(
             requireContext(),
@@ -205,7 +237,11 @@ class DailogAddMapFragment : BottomSheetDialogFragment(), OnMapReadyCallback,Goo
                     // system settings in an effort to convince the user to change
                     // their decision.
 
-                    Toast.makeText(requireContext(), " can not access Location ", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        " can not access Location ",
+                        Toast.LENGTH_SHORT
+                    ).show()
 
                 }
                 return
@@ -226,7 +262,6 @@ class DailogAddMapFragment : BottomSheetDialogFragment(), OnMapReadyCallback,Goo
     }
 
 
-
     override fun onStart() {
         super.onStart()
         binding.mapview.onStart()
@@ -242,7 +277,7 @@ class DailogAddMapFragment : BottomSheetDialogFragment(), OnMapReadyCallback,Goo
         return false
     }
 
-    fun getAddressFromLatLng( lat: Double, lng: Double): String {
+    fun getAddressFromLatLng(lat: Double, lng: Double): String {
         val geocoder = Geocoder(requireContext(), Locale.getDefault())
         return try {
             val addresses = geocoder.getFromLocation(lat, lng, 1)
@@ -255,4 +290,5 @@ class DailogAddMapFragment : BottomSheetDialogFragment(), OnMapReadyCallback,Goo
             "خطأ في جلب العنوان"
         }
     }
+
 }

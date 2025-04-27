@@ -35,6 +35,10 @@ data class Questions(
     val specialityName: String?,
     @SerializedName("PatientFirstname")
     val patientFirstname: String?,
+    @SerializedName("SpecialityImage")
+    val specialityImage: String?,
+    @SerializedName("DoctorImage")
+    val doctorImage: String?,
     @SerializedName("PatientFulltname")
     val patientFulltname: String?,
     @SerializedName("Chronic_disease")

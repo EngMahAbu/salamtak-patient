@@ -206,7 +206,7 @@
     <string name="surgeries">Surgeries</string>
     <string name="date">Date</string>
     <string name="appointments_available">Available Appointments </string>
-    <string name="summary">Summary</string>
+    <string name="summary">Booking Doctor</string>
     <string name="appointment_details">Booking Details</string>
     <string name="booking_date_time"><![CDATA[Booking Date & Time]]></string>
     <string name="service">Booking Type</string>
@@ -260,7 +260,7 @@
 
     <string name="Notification_channel_Id">Notification_channel_Id</string>
     <string name="Notification_channel_Name">Notification_channel_Name</string>
-    <string name="book_with_insurance">Use Your Insurance</string>
+    <string name="book_with_insurance">If you are booking on behalf of another patient</string>
     <string name="release_date">Release Date</string>
     <string name="update">Update</string>
     <string name="salamtak_gates">Salamtak Gate</string>
@@ -290,7 +290,7 @@
     </string>
     <string name="addcard">+Add Card</string>
     <string name="rate_doctor">Rate Doctor</string>
-    <string name="write_a_comment">Write a comment...</string>
+    <string name="write_a_comment">More Details</string>
     <string name="weneedpermissiontoaccesslocation">We need your Permission to accsess location</string>
     <string name="worning">Worning</string>
     <string name="ok">OK</string>
@@ -306,7 +306,7 @@
     <string name="selectanalysis">Choose Your Analysis(S)</string>
     <string name="select_bookingtype">Choose Your Type Of Booking</string>
     <string name="favorite_doctor">Favorite Doctor</string>
-    <string name="confirmed">Confirmed</string>
+    <string name="confirmed">Your Booking is Successful</string>
     <string name="offers">Offers</string>
     <string name="offers_not_available_at_the_moment">Offers not available at the moment.</string>
     <string name="promotion_not_available_at_the_moment">Promotion not available at the moment.</string>
@@ -339,7 +339,7 @@
     <string name="clinicservices">Clinic Services</string>
     <string name="avilableappointemnts">"Available "</string>
     <string name="avilableapapointemnts">Available Appointments</string>
-    <string name="reservation_required_first_come_first_served">Reservation Required,( First-in/First-Served )</string>
+    <string name="reservation_required_first_come_first_served">Reservation Required / First-in/First-Served</string>
     <string name="offercategories">All Offers</string>
     <string name="session">Session</string>
     <string name="recentoffers">Recent Offers:</string>
@@ -390,7 +390,7 @@
     <string name="bills">Invoices</string>
     <string name="we_will_answer_your_question_in_3_days"> Your question will be answered by Salamatak Doctors within 3 working days.</string>
     <string name="ages">Age</string>
-    <string name="choose_symptoms">Choose Symptoms</string>
+    <string name="choose_symptoms">Describe Symptoms</string>
     <string name="detailsaccount">Details account</string>
     <string name="booking_successfully">" booking Successfully"</string>
     <string name="medicine">Medicine</string>
@@ -439,6 +439,16 @@
     <string name="category_name">Category Name</string>
     <string name="search_by_specility">Search by speciality</string>
     <string name="upcoming_bookings">Upcoming Bookings</string>
+    <string name="PatientInfo">Patient Info</string>
+    <string name="full_name">Full Name</string>
+    <string name="InsuranceCompanies">Insurance Companies</string>
+    <string name="BookingDetails">Booking Details</string>
+    <string name="SuccessfullyBooking">Successfully Booking</string>
+    <string name="no_booking_found">No Booking Found</string>
+    <string name="try_searching_for_a_different_specialty_or_change_your_location_to_see_more_available_doctors">Try searching for a different specialty or change your location to see more available doctors.</string>
+    <string name="questionsnotes">Salamtak answers provide general information and are not a substitute for diagnosis or treatment. Consult a doctor for medical advice.</string>
+    <string name="answers_to_your_question">Answers to your question</string>
+    <string name="all_offers">All Offers</string>
     <array name="choose">
         <item>Select</item>
     </array>

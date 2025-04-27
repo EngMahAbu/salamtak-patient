@@ -35,7 +35,7 @@ import okhttp3.MultipartBody
 class AskDoctorFragment : Fragment() {
 
     private lateinit var binding: AskDoctorFragmentBinding
-    private var isMe: Boolean? = null
+    private var isMe: Boolean? = true
     val sharedDataViewmodel: SharedDataViewmodel by activityViewModels()
     val viewmodel: DialogBottomSheetViewmodel by viewModels()
 //    private var animationDrawable: AnimationDrawable? = null

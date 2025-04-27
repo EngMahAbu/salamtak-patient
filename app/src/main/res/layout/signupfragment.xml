@@ -558,7 +558,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_chooselang_button"
-                        android:fontFamily="@font/avenirltstd_black"
+                        android:fontFamily="@font/sf_pro_display_semibold"
                         android:padding="5dp"
                         android:text="@string/sign_ups"
                         android:textAllCaps="false"

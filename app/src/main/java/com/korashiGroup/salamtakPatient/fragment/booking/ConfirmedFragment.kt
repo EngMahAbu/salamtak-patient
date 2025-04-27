@@ -1,7 +1,6 @@
 package com.korashiGroup.salamtakPatient.fragment.booking
 
 import android.os.Bundle
-import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,16 +11,14 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.snackbar.Snackbar
 import com.korashiGroup.salamtakPatient.R
-import com.korashiGroup.salamtakPatient.adapter.SubSpecialistAdapter
 import com.korashiGroup.salamtakPatient.adapter.SyemtomsAdapter
 import com.korashiGroup.salamtakPatient.databinding.ConfirmedfragmentBinding
-import com.korashiGroup.salamtakPatient.model.SubSpecialistData
 import com.korashiGroup.salamtakPatient.model.syemtoms.SyemtomsData
 import com.korashiGroup.salamtakPatient.utils.Constans
-import com.korashiGroup.salamtakPatient.utils.DateUtils
 import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.utils.SpUtil
 import com.korashiGroup.salamtakPatient.viewmodel.PolyClinicsViewmodel
@@ -38,7 +35,7 @@ class ConfirmedFragment : Fragment(),SyemtomsAdapter.SelectSubSpecialist{
     private val patientViewmodel: PolyClinicsViewmodel by viewModels()
     private var partMap: Map<String, Any> = mutableMapOf()
     private val list = mutableListOf<Int>()
-    private val syemtomsList= mutableListOf<SyemtomsData>()
+    //private val syemtomsList= mutableListOf<SyemtomsData>()
     private lateinit var bottomsheetbeahavoir: BottomSheetBehavior<ConstraintLayout>
     val sharedDataViewmodel: SharedDataViewmodel by activityViewModels()
     private val syemtomsadapter:SyemtomsAdapter by lazy {
@@ -56,15 +53,22 @@ class ConfirmedFragment : Fragment(),SyemtomsAdapter.SelectSubSpecialist{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        setUp()
         bottomsheetbeahavoir =
             BottomSheetBehavior.from(binding.layoutBottomsheetpersistant.syemtoms)
         bottomsheetbeahavoir.state = BottomSheetBehavior.STATE_HIDDEN
         val date=args.date?.split(" ")
         binding.tvDate.text= date?.get(0)?:""
-        binding.time.text= "${date?.get(2)?:""}${date?.get(3)?:""}"
+        binding.Service.text= "${date?.get(2)?:""}${date?.get(3)?:""}"
         initButton()
         insuranceCardRecylerview()
+    }
+
+    private fun setUp(){
+        Glide.with(this)
+            .asGif()
+            .load(R.drawable.sucess)
+            .into(binding.layoutSucess)
     }
 
     private fun initButton(){
