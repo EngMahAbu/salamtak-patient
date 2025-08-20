@@ -120,13 +120,13 @@ class MainActivity : AppCompatActivity(), LoginFragment.onSomeEventListener {
     }
 
     private fun check() {
-        val appVersion = ForceUpdateUtils.getAppVersion(this)
+        val appVersion: String? = ForceUpdateUtils.getAppVersion(this)
         firebaseRemoteConfig.fetchAndActivate().addOnCompleteListener(this) {
             if (it.isSuccessful) {
                 val forceUpdate = firebaseRemoteConfig.getBoolean(KEY_FORCE_UPDATE_REQUIRED)
                 val currentVersion = firebaseRemoteConfig.getString(KEY_CURRENT_VERSION)
                 if (forceUpdate) {
-                    if (currentVersion > appVersion) {
+                    if (currentVersion > appVersion!!) {
                         showDialog()
                     }
                 }
