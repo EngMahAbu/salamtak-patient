@@ -94,7 +94,6 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
     val regviewmodel: RegisterViewmodel by viewModels()
     val viewmodel: DialogBottomSheetViewmodel by viewModels()
     var skip = ""
-
     companion object {
         var instance: HomeFragment? = null
     }
@@ -122,6 +121,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
         instance = this
         permissionManager = PermissionManager(requireActivity())
         sharedDataViewmodel.getMedicalInfoStatus(false)
+        getCity()
         bindDataToViews()
         callCheckUser()
         if (DateUtils.getToken().isNullOrEmpty()) {
@@ -136,7 +136,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
             someEventListener?.someEvent("")
             profileCallBack()
         }
-        getCity()
+
         imageVideoAdapter = ImageVideoAdapter()
         servicesRecylerview()
         medicalServicesRecylerview()
@@ -153,9 +153,9 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
         callBackGetLatestPatientAppointment()
         initButton()
         setUP()
-        getCurrentLocation()
-        observeLocationUpdates()
-        observePermissionStatus()
+
+
+
         callBackDoctorProfile()
     }
 
@@ -205,6 +205,21 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
             binding.ivImageSalamtakDoctor.scaleX = -1f // Flip the image for RTL
         } else {
             binding.ivImageSalamtakDoctor.scaleX = 1f
+        }
+
+        if (DateUtils.getToken().isNullOrEmpty()) {
+            sharedDataViewmodel.checkChooseCity.observe(viewLifecycleOwner) { value ->
+                if (value == false) {
+                    sharedDataViewmodel.CheckCity(true)
+                    val action = HomeFragmentDirections.actionHomeFragmentToDialogBottomSheetFragment("AllCity")
+                    findNavController().navigate(action)
+                }
+            }
+
+        }else {
+            getCurrentLocation()
+            observeLocationUpdates()
+            observePermissionStatus()
         }
     }
 

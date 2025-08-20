@@ -1,26 +1,21 @@
 package com.korashiGroup.salamtakPatient.fragment.askdoctor
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.korashiGroup.salamtakPatient.R
-import com.korashiGroup.salamtakPatient.adapter.PolyClinicsAdapter
 import com.korashiGroup.salamtakPatient.adapter.QuestionsAdapter
 import com.korashiGroup.salamtakPatient.databinding.MyQuestionsfragmentBinding
-import com.korashiGroup.salamtakPatient.model.SpecialistData
 import com.korashiGroup.salamtakPatient.model.askandanswer.questions.Questions
-import com.korashiGroup.salamtakPatient.model.booking.clink.ClinicData
 import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.viewmodel.PolyClinicsViewmodel
-import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

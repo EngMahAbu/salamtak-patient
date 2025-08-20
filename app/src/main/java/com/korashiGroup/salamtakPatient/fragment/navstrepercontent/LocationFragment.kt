@@ -146,24 +146,24 @@ class LocationFragment : Fragment() {
 
             isValid = true
         }
-        if (binding.etStreet.text?.trim()!!.isEmpty()) {
-            binding.tvStreatError.text = getString(R.string.requiredstreat)
-            binding.tvStreatError.visibility = View.VISIBLE
-            binding.textinputStreet.setBackgroundResource(R.drawable.bg_edittext_error)
-            binding.etStreet.setCompoundDrawablesWithIntrinsicBounds(
-                0,
-                0,
-                R.drawable.ic_error,
-                0
-            )
-            isValid = false
-        } else {
-            binding.tvStreatError.visibility = View.GONE
-            binding.textinputStreet.setBackgroundResource(R.drawable.bg_edittext)
-            binding.etStreet.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
-
-            isValid = true
-        }
+//        if (binding.etStreet.text?.trim()!!.isEmpty()) {
+//            binding.tvStreatError.text = getString(R.string.requiredstreat)
+//            binding.tvStreatError.visibility = View.VISIBLE
+//            binding.textinputStreet.setBackgroundResource(R.drawable.bg_edittext_error)
+//            binding.etStreet.setCompoundDrawablesWithIntrinsicBounds(
+//                0,
+//                0,
+//                R.drawable.ic_error,
+//                0
+//            )
+//            isValid = false
+//        } else {
+//            binding.tvStreatError.visibility = View.GONE
+//            binding.textinputStreet.setBackgroundResource(R.drawable.bg_edittext)
+//            binding.etStreet.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
+//
+//            isValid = true
+//        }
 
 
         return isValid
@@ -199,10 +199,9 @@ class LocationFragment : Fragment() {
 
     private fun sendData() {
 
-        var etFloorNumber = 0
-        if (!binding.etFloorNumber.text.toString().isNullOrEmpty()) {
+        var etFloorNumber :Int?= null
+        if (!binding.etFloorNumber.text.toString().isNullOrEmpty() && binding.etFloorNumber.text.toString()!="null" ) {
             etFloorNumber = binding.etFloorNumber.text.toString().toInt()
-
         }
 
         val locationRequest = LocationRequest(

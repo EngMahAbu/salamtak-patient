@@ -1,5 +1,6 @@
 package com.korashiGroup.salamtakPatient.fragment.dialog
 
+import android.app.Dialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -80,8 +81,15 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
         savedInstanceState: Bundle?
     ): View? {
         binding = DialogBottomSheetfragmentBinding.inflate(layoutInflater, container, false)
+
         return binding.root
     }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        isCancelable = false
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -214,6 +222,7 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
         }
         binding.btnDone.setOnClickListener {
             dismiss()
+
         }
         binding.itemGender.btnDone.setOnClickListener {
             dismiss()

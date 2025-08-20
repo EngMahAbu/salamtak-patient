@@ -11,7 +11,7 @@ data class DoctorSearchRequest(
     @SerializedName("AreaId")
     val AreaId: Int?=null,
     @SerializedName("DoctorName")
-    val doctorName: String?,
+    val doctorName: String?=null,
     @SerializedName("FeesFrom")
     val feesFrom: Int?=null,
     @SerializedName("FeesTo")
@@ -23,7 +23,7 @@ data class DoctorSearchRequest(
     @SerializedName("MedicalExaminationTypeId")
     val medicalExaminationTypeId: Int=0,
     @SerializedName("SeniortyLevelId")
-    val seniortyLevelId: Int=0,
+    val seniortyLevelId: Int?=null,
     @SerializedName("SkipCount")
     val skipCount: Int=0,
     @SerializedName("SpecialistId")

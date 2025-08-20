@@ -1,6 +1,7 @@
 package com.korashiGroup.salamtakPatient.fragment.askdoctor
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +16,6 @@ import coil.transform.CircleCropTransformation
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.adapter.AnswersAdapter
 import com.korashiGroup.salamtakPatient.databinding.AnswersfragmentBinding
-import com.korashiGroup.salamtakPatient.fragment.home.SearchFragmentDirections
 import com.korashiGroup.salamtakPatient.model.SpecialistData
 import com.korashiGroup.salamtakPatient.model.booking.ClinicSchedualByClinicDayId
 import com.korashiGroup.salamtakPatient.model.booking.clink.ClinicData
@@ -80,6 +80,7 @@ class AnswersFragment : Fragment(),AnswersAdapter.IBook{
     }
 
     override fun onItemClick(doctorId: Int,clinicId: Int) {
+        Log.e("TAG", "onItemClick: $doctorId :$clinicId", )
         sharedDataViewmodel.getClinicIdAndDoctorId(ClinicData(doctorId, clinicId,true))
         sharedDataViewmodel.getNavigateStatus("answerScreen")
         findNavController().navigate(R.id.bookingAppointmentFragment)

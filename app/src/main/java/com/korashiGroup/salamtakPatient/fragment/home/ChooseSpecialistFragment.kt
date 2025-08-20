@@ -1,6 +1,8 @@
 package com.korashiGroup.salamtakPatient.fragment.home
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +21,7 @@ import com.korashiGroup.salamtakPatient.adapter.PopularDoctorsAdapter
 import com.korashiGroup.salamtakPatient.adapter.SpecialictyAdapter
 import com.korashiGroup.salamtakPatient.databinding.ChooseSpecialistfragmentBinding
 import com.korashiGroup.salamtakPatient.model.SpecialistData
+import com.korashiGroup.salamtakPatient.model.labsandscanner.DataAnalysis
 import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
@@ -33,6 +36,7 @@ class ChooseSpecialistFragment : Fragment(),MostPopularSpecialtiesAdapter.Select
     private val mostPopularSpecialtiesAdapter:MostPopularSpecialtiesAdapter by lazy {
         MostPopularSpecialtiesAdapter(this)
     }
+    private val listOfSpecialistData = mutableListOf<SpecialistData>()
     private lateinit var specialistAdapter: SpecialictyAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,6 +59,17 @@ class ChooseSpecialistFragment : Fragment(),MostPopularSpecialtiesAdapter.Select
         binding.ivArrow.setOnClickListener {
             findNavController().navigate(R.id.homeFragment)
         }
+
+        binding.etSearch.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                filter(s.toString())
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+            }
+        })
     }
 
     private fun popularSpecialistRecylerview() {
@@ -80,11 +95,14 @@ class ChooseSpecialistFragment : Fragment(),MostPopularSpecialtiesAdapter.Select
                 }
 
                 is Resource.sucess -> {
-
+                    listOfSpecialistData.clear()
                     response.data?.data.let {
                         specialistAdapter.submitList(it)
-                    }
 
+                    }
+                    response.data?.data?.forEach {
+                        listOfSpecialistData.add(it)
+                    }
                 }
 
                 is Resource.Error -> {
@@ -132,5 +150,19 @@ class ChooseSpecialistFragment : Fragment(),MostPopularSpecialtiesAdapter.Select
         findNavController().navigate(R.id.searchFragment)
     }
 
+    private fun filter(query: String) {
+        val filteredList =
+            listOfSpecialistData.filter { it.name?.contains(query, ignoreCase = true) ?: false }
+        mostPopularSpecialtiesAdapter.submitList(filteredList)
+        if (!query.isNullOrEmpty()){
+            binding.rvOtherSpecialties.visibility=View.GONE
+            binding.tvOtherSpecialties.visibility=View.GONE
+            binding.tvMostPopularSpecialties.text=getString(R.string.search_results)
+        }else{
+            binding.rvOtherSpecialties.visibility=View.VISIBLE
+            binding.tvOtherSpecialties.visibility=View.VISIBLE
+            binding.tvMostPopularSpecialties.text=getString(R.string.most_popular_specialties)
+        }
 
+    }
 }

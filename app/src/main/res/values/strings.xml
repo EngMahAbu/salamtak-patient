@@ -449,6 +449,7 @@
     <string name="questionsnotes">Salamtak answers provide general information and are not a substitute for diagnosis or treatment. Consult a doctor for medical advice.</string>
     <string name="answers_to_your_question">Answers to your question</string>
     <string name="all_offers">All Offers</string>
+    <string name="search_results">Search Results</string>
     <array name="choose">
         <item>Select</item>
     </array>

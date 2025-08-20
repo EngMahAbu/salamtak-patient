@@ -40,7 +40,7 @@
                 android:padding="1dp"
                 android:layout_marginStart="14dp"
                 android:layout_marginEnd="@dimen/_3sdp"
-                android:text="cairo"
+                android:text=""
                 android:textColor="#8088A4"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toStartOf="@+id/iv_selectCity"
@@ -1090,7 +1090,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_PopularDoctors"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="320dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginStart="14dp"

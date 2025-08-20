@@ -144,10 +144,10 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
         binding.btnConfirm.setOnClickListener {
             fullName=binding.etFullNameAR.text.toString()
             phoneNumber=binding.etPhoneNumber.text.toString()
-            val mediaclName = args.confirmappointments?.MedicalExaminationTypeName
-            if (mediaclName == "Call" || mediaclName == "Video Call" || mediaclName == "مكالمة صوتية" || mediaclName == "مكالمة فيديو") {
+            val mediaclName = args.confirmappointments?.medicalExaminationId
+            if (mediaclName == 3 || mediaclName == 4) {
                 startPayment()
-            } else if (mediaclName == "Home visit" || mediaclName == "كشف منزلى" || mediaclName == "In-Clinic Booking" || mediaclName == "كشف بالعيادة") {
+            } else if (mediaclName == 1 || mediaclName == 2) {
 
                 Patient_InsuranceID.let { it1 ->
                     PatientAppointmentRequest(

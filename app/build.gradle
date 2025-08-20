@@ -5,6 +5,7 @@ plugins {
     id 'kotlin-kapt'
     id 'com.google.dagger.hilt.android'
     id 'com.google.gms.google-services'
+    id 'com.google.firebase.appdistribution'
     id 'kotlin-parcelize'
 }
 
@@ -37,9 +38,15 @@ android {
         }
         getByName("debug") {
             signingConfig = signingConfigs.getByName("debug")
-            buildConfigField("String","BASE_URL","\"https://salamtechapi-staging.azurewebsites.net/api/\"")
+            buildConfigField("String","BASE_URL","\"https://salamtechapi.azurewebsites.net/api/\"")
+            firebaseAppDistribution {
+                artifactType = "APK"
+                releaseNotes = "test new version"
+                testers = "testers.txt"
+            }
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8

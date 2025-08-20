@@ -1,19 +1,15 @@
 package com.korashiGroup.salamtakPatient.adapter
 
-import android.graphics.Color
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners
-import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.databinding.ItemLayoutCategoryOffersBinding
 import com.korashiGroup.salamtakPatient.model.labsandscanner.DataLabs
-import com.korashiGroup.salamtakPatient.model.offers.ActiveOffers
 
 
 class LabsAdapter(private val onServicesClick:Action):ListAdapter<DataLabs,LabsAdapter.ViewHolder>(DiffCallback()) {

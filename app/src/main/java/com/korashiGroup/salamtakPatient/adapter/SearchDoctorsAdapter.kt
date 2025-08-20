@@ -30,7 +30,7 @@ class SearchDoctorsAdapter(private val booking: Booking,private val isHomeVisit:
         val services = getItem(position)
 
         holder.binding.apply {
-            if (services.NickName==null || services.NickName=="null"){
+            if (services.NickName==null || services.NickName=="null"||services.NickName==""){
                 if (DefaultLocaleHelper.getInstance(this.tvDoctorName.context).getCurrentLocale()=="en"){
                     tvDoctorName.text = "${services.doctorName}"
                 }else{

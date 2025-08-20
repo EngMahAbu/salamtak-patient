@@ -301,7 +301,7 @@ class SignupFragment : Fragment() {
             var fullNameEn = binding.etFullNameEn.text.toString()
             var fullNameAr = binding.etFullNameAR.text.toString()
             var mobileNumber = binding.etPhoneNumber.text.toString()
-            var email = binding.etEmail.text.toString()
+            var email ="us@gmail.com"
             var password = binding.etPassword.text.toString()
             var confirmPassword = binding.confirmEtPassword.text.toString()
             if (isvalidateFeilds(
@@ -493,24 +493,24 @@ class SignupFragment : Fragment() {
 
 
 
-        if (email.trim().isEmpty()) {
-            binding.tvEmailError.text = getString(R.string.required_name_email)
-            binding.tvEmailError.visibility = View.VISIBLE
-            binding.textinputEmail.setBackgroundResource(R.drawable.bg_edittext_error)
-            binding.etEmail.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
-
-        } else if (!email.isValidEmail()) {
-            binding.tvEmailError.text = getString(R.string.match_email)
-            binding.tvEmailError.visibility = View.VISIBLE
-            binding.textinputEmail.setBackgroundResource(R.drawable.bg_edittext_error)
-            binding.etEmail.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
-
-        } else {
-            binding.tvEmailError.visibility = View.GONE
-            binding.textinputEmail.setBackgroundResource(R.drawable.bg_edittext)
-            binding.etEmail.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
-
-        }
+//        if (email.trim().isEmpty()) {
+//            binding.tvEmailError.text = getString(R.string.required_name_email)
+//            binding.tvEmailError.visibility = View.VISIBLE
+//            binding.textinputEmail.setBackgroundResource(R.drawable.bg_edittext_error)
+//            binding.etEmail.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
+//
+//        } else if (!email.isValidEmail()) {
+//            binding.tvEmailError.text = getString(R.string.match_email)
+//            binding.tvEmailError.visibility = View.VISIBLE
+//            binding.textinputEmail.setBackgroundResource(R.drawable.bg_edittext_error)
+//            binding.etEmail.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
+//
+//        } else {
+//            binding.tvEmailError.visibility = View.GONE
+//            binding.textinputEmail.setBackgroundResource(R.drawable.bg_edittext)
+//            binding.etEmail.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
+//
+//        }
 
 
         if (password.trim().isEmpty()) {

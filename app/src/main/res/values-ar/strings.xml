@@ -430,6 +430,7 @@
     <string name="questionsnotes">تُقدّم إجابات "سلامتك" معلومات عامة، وليست بديلاً عن التشخيص أو العلاج. استشر طبيباً للحصول على استشارة طبية.</string>
     <string name="answers_to_your_question">إجابات على سؤالك</string>
     <string name="all_offers">جميع العروض</string>
+    <string name="search_results">نتائج البحث</string>
     <array name="choose">
         <item>اختار</item>
     </array>

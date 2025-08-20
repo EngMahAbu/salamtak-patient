@@ -82,7 +82,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
     var doctorId = 0
     var polyclinicId = 0
     var dayId = 0
-    var seniortyLevelId = 0
+    var seniortyLevelId:Int? = null
     var examinationtypeid = 0
     var cityId:Int?= null
     var areaId :Int?= null
@@ -99,8 +99,8 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
     val viewmodel: DialogBottomSheetViewmodel by viewModels()
     val polyClinicsViewmodel: PolyClinicsViewmodel by viewModels()
     var totalsDoctors = 0
-    private var feesFrom: Int? = 1
-    private var feesTo: Int? = 10000
+    private var feesFrom: Int? = null
+    private var feesTo: Int? = null
     private var doctorSearchState = "new"
     private var isHomeVisit=false
     override fun onCreateView(
@@ -167,8 +167,9 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             if (!binding.etSearch.text.toString().isNullOrEmpty()){
                 sharedDataViewmodel.getCity.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
                     cityId=it.id
-                    doctorsSearch()
+
                 })
+                doctorsSearch()
             }else {
                 if (specialistId!=null){
                     sharedDataViewmodel.specialication.observe(viewLifecycleOwner) {
@@ -179,14 +180,19 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                           //  binding.tvSearch.setText(it.name)
                         }
                         specialistId = it.id
-                        doctorsSearch()
+
                     }
-                }
-                sharedDataViewmodel.getCity.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-                    cityId=it.id
+
                     doctorsSearch()
-                })
+                }
+
+                    sharedDataViewmodel.getCity.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+                        cityId=it.id
+                        doctorsSearch()
+                    })
+
             }
+
         }
 
         getSearchDoctors()
@@ -614,27 +620,23 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             }
 
         }
-        val doctorssearchRequset = feesFrom?.let { it1 ->
-                feesTo?.let { it2 ->
-                    DoctorSearchRequest(
+//        CityId=cityId,
+//        AreaId= areaId,
+        val doctorssearchRequset = DoctorSearchRequest(
                         null,
-                        cityId,
-                        areaId,
-                        binding.etSearch.text.toString(),
-                        it1,
-                        it2,
-                        genderId,
-                        10,
-                        examinationtypeid,
-                        seniortyLevelId,
-                        0,
-                        specialistId
+                           CityId=cityId,
+                          AreaId= areaId,
+                        doctorName=binding.etSearch.text.toString(),
+                        maxResultCount = 10,
+                        medicalExaminationTypeId= examinationtypeid,
+                        skipCount=0,
+                        specialistId= specialistId
                     )
-                }
-            }
-            if (doctorssearchRequset != null) {
+
+
+
                 viewmodel.searchDoctors(doctorssearchRequset, doctorSearchState)
-            }
+
 
     }
 
@@ -951,49 +953,43 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                 delay(500L)
                 it?.let {
                     if (it.isNotEmpty()) {
-                        val doctorssearchRequset = feesFrom?.let { it1 ->
-                            feesTo?.let { it2 ->
-                                DoctorSearchRequest(
+                        val doctorssearchRequset = DoctorSearchRequest(
                                     null,
-                                    cityId,
-                                    areaId,
-                                    it.toString(),
-                                    it1,
-                                    it2,
-                                    genderId,
-                                    10,
-                                    examinationtypeid,
-                                    seniortyLevelId,
-                                    0,
-                                    specialistId
+                                    CityId=cityId,
+                                    AreaId= areaId,
+                                    doctorName=it.toString(),
+                                    feesFrom=feesFrom,
+                                    feesTo=feesTo,
+                                    genderId=genderId,
+                                    maxResultCount=10,
+                                    medicalExaminationTypeId= examinationtypeid,
+                                    seniortyLevelId= seniortyLevelId,
+                                    skipCount=0,
+                                    specialistId=specialistId
                                 )
-                            }
-                        }
-                        if (doctorssearchRequset != null) {
+
                             viewmodel.searchDoctors(doctorssearchRequset, doctorSearchState)
-                        }
+
                     } else {
-                        val doctorssearchRequset = feesFrom?.let { it1 ->
-                            feesTo?.let { it2 ->
-                                DoctorSearchRequest(
-                                    null,
-                                    cityId,
-                                    areaId,
-                                    binding.etSearch.text.toString(),
-                                    it1,
-                                    it2,
-                                    genderId,
-                                    10,
-                                    examinationtypeid,
-                                    seniortyLevelId,
-                                    0,
-                                    specialistId
+                        val doctorssearchRequset = DoctorSearchRequest(
+                            null,
+                            CityId=cityId,
+                            AreaId= areaId,
+                            doctorName=  binding.etSearch.text.toString(),
+                            feesFrom=feesFrom,
+                            feesTo=feesTo,
+                            genderId=genderId,
+                            maxResultCount=10,
+                            medicalExaminationTypeId= examinationtypeid,
+                            seniortyLevelId= seniortyLevelId,
+                            skipCount=0,
+                            specialistId=specialistId
                                 )
-                            }
-                        }
-                        if (doctorssearchRequset != null) {
+
+
+
                             viewmodel.searchDoctors(doctorssearchRequset, doctorSearchState)
-                        }
+
                     }
 
                 }
@@ -1067,24 +1063,22 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                 isNotLoadingAndIsNotLastPage && isAtLastItem && isNotAtBeginning && isTotalMoreThanvisible && isScrolling
             if (shouldPaginate) {
 
-                val doctorssearchRequset = feesFrom?.let {
-                    feesTo?.let { it1 ->
-                        DoctorSearchRequest(
+                val doctorssearchRequset = DoctorSearchRequest(
                             null,
                             cityId,
                             areaId,
                             binding.etSearch.text.toString(),
-                            it,
-                            it1,
-                            genderId,
+                            feesFrom=feesFrom,
+                            feesTo=feesTo,
+                            genderId=genderId,
                             viewmodel.doctorSearchPage,
                             examinationtypeid,
                             seniortyLevelId,
-                            0,
+                            skipCount = 0,
                             specialistId
                         )
-                    }
-                }
+
+
                 if (doctorssearchRequset != null) {
                     viewmodel.searchDoctors(doctorssearchRequset, doctorSearchState)
                 }

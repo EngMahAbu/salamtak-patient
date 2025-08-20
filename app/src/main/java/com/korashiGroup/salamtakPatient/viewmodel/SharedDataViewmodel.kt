@@ -49,6 +49,7 @@ class SharedDataViewmodel:ViewModel() {
     val labsResponse=MutableLiveData<LabsInfo>()
     val feesResponse=MutableLiveData<Int>()
     val offerResponse=MutableLiveData<Offer>()
+    val checkChooseCity=MutableLiveData<Boolean>(false)
 
 
     fun getFees(fees:Int){
@@ -136,6 +137,9 @@ class SharedDataViewmodel:ViewModel() {
 
     fun getMedicalInfoStatus(status:Boolean){
         medicalInfoStatus.postValue(status)
+    }
+    fun CheckCity(status:Boolean){
+        checkChooseCity.postValue(status)
     }
 
     fun getSkipLoginStatus(skip:String){

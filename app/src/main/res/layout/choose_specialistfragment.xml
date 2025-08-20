@@ -42,7 +42,7 @@
             android:drawableTint="@color/move"
             android:drawablePadding="5dp"
             android:imeOptions="actionDone"
-            android:hint="@string/search_by_doctor_name"
+            android:hint="@string/search_by_specility"
             android:inputType="text"
             android:background="@drawable/bg_edittext"
             app:layout_constraintStart_toStartOf="parent"

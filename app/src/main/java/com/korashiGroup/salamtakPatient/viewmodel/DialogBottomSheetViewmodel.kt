@@ -39,7 +39,7 @@ import javax.inject.Inject
 @HiltViewModel
 class DialogBottomSheetViewmodel @Inject constructor(private val repositry: RegisterRepositry):ViewModel(){
 
-    var doctorSearchPage=1
+    var doctorSearchPage=10
     private var doctorSearchItemResponse:DoctorsearchItemResponse?=null
     var healthEntityPage=1
     var healthEntityResponse:GetHealthEntityResponse?=null
@@ -233,24 +233,9 @@ class DialogBottomSheetViewmodel @Inject constructor(private val repositry: Regi
     }
 
      fun searchDoctors(doctorSearchRequest: DoctorSearchRequest, new:String )=viewModelScope.launch(Dispatchers.IO+handler) {
-//       if (new=="new"){
-//           val newDoctorSearchRequest= doctorSearchRequest.let {
-//               doctorSearchRequest.specialistId?.let { it1 ->
-//                   NewDoctorSearchRequest(doctorSearchRequest.CityId,
-//                       null,doctorSearchRequest.maxResultCount,
-//                       doctorSearchRequest.medicalExaminationTypeId,doctorSearchRequest.skipCount,
-//                       it1
-//                   )
-//               }
-//           }
-//           docorsResponse.postValue(Resource.Loading())
-//           val response= newDoctorSearchRequest?.let { repositry.doctorSearch3(it) }
-//           docorsResponse.postValue(response?.let { handlingSearchDoctors(it) })
-//       }else{
            docorsResponse.postValue(Resource.Loading())
            val response=repositry.searchDoctors(doctorSearchRequest)
            docorsResponse.postValue(response?.let { handlingSearchDoctors(it) })
-     //  }
     }
 
     private fun handlingSearchDoctors(response: Response<DoctorsearchItemResponse>): Resource<DoctorsearchItemResponse>? {

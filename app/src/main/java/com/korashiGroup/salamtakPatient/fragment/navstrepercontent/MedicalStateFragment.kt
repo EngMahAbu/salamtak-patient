@@ -141,6 +141,7 @@ class MedicalStateFragment : Fragment() {
                         ).show()
 
                     }
+                    sharedDataViewmodel.getProfileStatus(3)
                 }
                 is Resource.Error -> {
                     binding.progressBar.visibility = View.GONE
