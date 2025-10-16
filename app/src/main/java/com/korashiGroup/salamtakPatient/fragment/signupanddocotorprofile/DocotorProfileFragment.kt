@@ -90,7 +90,7 @@ class DocotorProfileFragment : Fragment() {
                     navGraph.setStartDestination(R.id.locationFragment2)
                 }
                 2 -> {
-                    navGraph.setStartDestination(R.id.medicalStateFragment2)
+                    navGraph.setStartDestination(R.id.medicalStateFragment4)
                 }
             }
 

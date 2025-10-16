@@ -210,19 +210,19 @@
                     android:id="@+id/tv_pohneError"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="1dp"
                     android:layout_marginBottom="5dp"
                     android:layout_marginStart="15dp"
                     android:fontFamily="@font/avenirltstd_roman"
                     android:gravity="center"
-                    android:padding="2dp"
+                    android:padding="1dp"
                     android:text=""
                     android:textColor="@color/red"
                     android:textSize="12sp"
                     android:visibility="gone"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textinput_PhoneNumber"
-                    app:layout_constraintBottom_toTopOf="@+id/textinput_Email" />
+                     />
 
             <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textinput_Email"

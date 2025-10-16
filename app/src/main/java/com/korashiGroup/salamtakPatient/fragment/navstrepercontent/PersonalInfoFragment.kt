@@ -48,6 +48,7 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.karumi.dexter.listener.single.PermissionListener
 import com.korashiGroup.salamtakPatient.model.CityData
 import com.korashiGroup.salamtakPatient.model.register.DataLogin
+import com.korashiGroup.salamtakPatient.utils.localization.DefaultLocaleHelper
 import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -130,9 +131,9 @@ class PersonalInfoFragment : Fragment() {
 //        val gender = binding.etGender.text.toString()
 //        val birthDate = binding.etDateOfbirth.text.toString()
 //        val nationality = binding.etNationality.text.toString()
-
+//
 //        if(fullNameEn.trim().isEmpty() || fullNameAr.trim().isEmpty()|| mobileNumber.trim().isEmpty()
-//            ||  email.trim().isEmpty()|| gender.trim().isEmpty() ||birthDate.trim().isEmpty() ||nationality.trim().isEmpty()){
+//           ||  email.trim().isEmpty()|| gender.trim().isEmpty() ||birthDate.trim().isEmpty() ||nationality.trim().isEmpty()){
 //
 //
 //        }else{
@@ -677,8 +678,11 @@ class PersonalInfoFragment : Fragment() {
 
         sharedDataViewmodel.getCity.observe(viewLifecycleOwner, Observer {
             cityId = it.id
-            binding.etChooseCity.setText(it.name)
-            sharedDataViewmodel.getCity(CityData(0,"",it.id,false,it.name,""))
+            if (DefaultLocaleHelper.getInstance(requireContext()).getCurrentLocale()=="ar"){
+                binding.etChooseCity.setText(it.nameAr)
+            }else{
+                binding.etChooseCity.setText(it.name)
+            }
         })
 
         sharedDataViewmodel.getArea.observe(viewLifecycleOwner, Observer {

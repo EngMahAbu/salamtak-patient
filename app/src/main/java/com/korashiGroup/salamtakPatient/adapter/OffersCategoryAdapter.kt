@@ -41,11 +41,10 @@ class OffersCategoryAdapter(private val onServicesClick:Action):ListAdapter<Acti
         }
 
         holder.binding.tvCategoryName.text=services.name
-             holder.binding.tvOffers.text="${services.offerCount} Offers Available"
+             holder.binding.tvOffers.text="${services.offerCount} ${holder.binding.tvOffers.context.getString(R.string.offers_available)}"
         holder.itemView.setOnClickListener {
             selectedItemPosition = holder.bindingAdapterPosition
             onServicesClick.onItemClick(position,services.id,services.name)
-            notifyDataSetChanged()
         }
 
 

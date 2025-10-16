@@ -9,8 +9,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.korashiGroup.salamtakPatient.databinding.ItemLayoutCapsBinding
 import com.korashiGroup.salamtakPatient.model.salamtakgate.Blogs
+import com.korashiGroup.salamtakPatient.model.salamtakgate.blogs.DataBlogs
 
-class CapVideoAdapter: ListAdapter<Blogs, CapVideoAdapter.ViewHolder>(CapVideoAdapter.DiffCallback()) {
+class CapVideoAdapter: ListAdapter<DataBlogs, CapVideoAdapter.ViewHolder>(CapVideoAdapter.DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
@@ -21,7 +22,7 @@ class CapVideoAdapter: ListAdapter<Blogs, CapVideoAdapter.ViewHolder>(CapVideoAd
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val model = getItem(position)
 
-            val videoid=if (model.image.contains("v=") ) {
+            val videoid=if (model.image!!.contains("v=") ) {
                 model.image.split("=").toTypedArray()[1]
             } else{
                 if (model.image.contains("youtu.be/")){
@@ -67,12 +68,12 @@ class CapVideoAdapter: ListAdapter<Blogs, CapVideoAdapter.ViewHolder>(CapVideoAd
     }
 
 
-    private class DiffCallback : DiffUtil.ItemCallback<Blogs>() {
-        override fun areItemsTheSame(oldItem: Blogs, newItem: Blogs): Boolean {
+    private class DiffCallback : DiffUtil.ItemCallback<DataBlogs>() {
+        override fun areItemsTheSame(oldItem: DataBlogs, newItem: DataBlogs): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: Blogs, newItem: Blogs): Boolean {
+        override fun areContentsTheSame(oldItem: DataBlogs, newItem: DataBlogs): Boolean {
             return true
         }
     }

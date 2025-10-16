@@ -16,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.snackbar.Snackbar
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.databinding.ChangepasswordfragmentBinding
 import com.korashiGroup.salamtakPatient.model.register.ChangePasswordRequest
@@ -312,12 +313,14 @@ class ChangepasswordFragment : Fragment() {
                 is Resource.sucess -> {
                     binding.progressBar.visibility=View.GONE
                     it?.data?.let { response ->
-                        bottomsheetbeahavoirBooking.state =
-                            if (bottomsheetbeahavoirBooking.state == BottomSheetBehavior.STATE_EXPANDED)
-                                BottomSheetBehavior.STATE_HIDDEN else BottomSheetBehavior.STATE_EXPANDED
+//                        bottomsheetbeahavoirBooking.state =
+//                            if (bottomsheetbeahavoirBooking.state == BottomSheetBehavior.STATE_EXPANDED)
+//                                BottomSheetBehavior.STATE_HIDDEN else BottomSheetBehavior.STATE_EXPANDED
+                        Snackbar.make(requireView(),
+                            getString(R.string.password_changed_successfully), Snackbar.LENGTH_SHORT).show()
                         lifecycleScope.launch {
-                            delay(3000)
-                            bottomsheetbeahavoirBooking.state = BottomSheetBehavior.STATE_HIDDEN
+                            delay(1000)
+//                            bottomsheetbeahavoirBooking.state = BottomSheetBehavior.STATE_HIDDEN
                             findNavController().navigate(R.id.loginFragment)
                         }
                     }

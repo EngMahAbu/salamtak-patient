@@ -6,7 +6,7 @@ import java.io.Serializable
 
 data class CreateUser(
     @SerializedName("Email")
-    val email: String,
+    val email: String?=null,
     @SerializedName("Name")
     val name: String,
     @SerializedName("Password")

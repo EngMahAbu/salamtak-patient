@@ -28,6 +28,7 @@ import com.korashiGroup.salamtakPatient.model.insurance.SendInsuranceCardResponc
 import com.korashiGroup.salamtakPatient.model.populardoctors.NewPopularDoctorResponse
 import com.korashiGroup.salamtakPatient.model.salamtakgate.BlogsResponse
 import com.korashiGroup.salamtakPatient.model.salamtakgate.SalamtakGateResponse
+import com.korashiGroup.salamtakPatient.model.salamtakgate.blogs.GetBlogsResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
@@ -72,7 +73,7 @@ class DialogBottomSheetViewmodel @Inject constructor(private val repositry: Regi
     val patientMedicalInfo=MutableLiveData<Resource<PatientMedicalInfo>>()
     val InsuranceCompany=MutableLiveData<Resource<InsuranceCompanyResponse>>()
     val gatesResponse=MutableLiveData<Resource<SalamtakGateResponse>>()
-    val blogsResponse=MutableLiveData<Resource<BlogsResponse>>()
+    val blogsResponse=MutableLiveData<Resource<GetBlogsResponse>>()
     val questionAndAnswerResponse=MutableLiveData<Resource<QuestionAndAnswerResponse>>()
     val insuranceResponse=MutableLiveData<Resource<SendInsuranceCardResponce>>()
     val insurancecardResponse=MutableLiveData<Resource<InsuranceCardResponse>>()
@@ -577,13 +578,13 @@ class DialogBottomSheetViewmodel @Inject constructor(private val repositry: Regi
         blogsResponse.postValue(response?.let { handlegetBlogsGateResponse(it) })
     }
 
-    private fun handlegetBlogsGateResponse(response: Response<BlogsResponse>): Resource<BlogsResponse>? {
+    private fun handlegetBlogsGateResponse(response: Response<GetBlogsResponse>): Resource<GetBlogsResponse>? {
         if (response.isSuccessful){
             response.body()?.let {
                 return Resource.sucess(it)
             }
         }
-        val error = Gson().fromJson<BlogsResponse>(response.errorBody()!!.string(), BlogsResponse::class.java)
+        val error = Gson().fromJson<GetBlogsResponse>(response.errorBody()!!.string(), GetBlogsResponse::class.java)
         return error.message?.let { Resource.Error(it) }
     }
 

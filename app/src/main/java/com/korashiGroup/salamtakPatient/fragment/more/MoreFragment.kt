@@ -145,7 +145,7 @@ class MoreFragment : Fragment() {
             findNavController().navigate(R.id.favoriteDoctorFragment)
         }
         binding.layoutMedicalRecord.setOnClickListener {
-            findNavController().navigate(R.id.medicalStateFragment)
+            findNavController().navigate(R.id.medicalStateFragment4)
         }
 
         binding.layoutAboutApp.setOnClickListener {

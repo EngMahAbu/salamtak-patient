@@ -78,17 +78,17 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
     private val cal = Calendar.getInstance(Locale.US)
     private val dates = ArrayList<Date>()
     val now = Calendar.getInstance(TimeZone.getTimeZone("CST"))
-    var specialistId:Int? =null
+    var specialistId: Int? = null
     var doctorId = 0
     var polyclinicId = 0
     var dayId = 0
-    var seniortyLevelId:Int? = null
+    var seniortyLevelId: Int? = null
     var examinationtypeid = 0
-    var cityId:Int?= null
-    var areaId :Int?= null
-    private var cityName=""
-    private var areaName=""
-    var genderId:Int?= null
+    var cityId: Int? = null
+    var areaId: Int? = null
+    private var cityName = ""
+    private var areaName = ""
+    var genderId: Int? = null
     var formattedDate = ""
     var image = ""
     var step = 1
@@ -102,7 +102,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
     private var feesFrom: Int? = null
     private var feesTo: Int? = null
     private var doctorSearchState = "new"
-    private var isHomeVisit=false
+    private var isHomeVisit = false
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -111,9 +111,11 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         binding = SearchfragmentBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
+
     companion object {
         var instance: SearchFragment? = null
     }
+
     @SuppressLint("SimpleDateFormat")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -123,11 +125,11 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         examinationtypeid = HomeFragment.instance?.let {
             it.medicalExaminatioId
         } ?: 1
-        if (examinationtypeid==10){
-            examinationtypeid=2
-            isHomeVisit=true
+        if (examinationtypeid == 10) {
+            examinationtypeid = 2
+            isHomeVisit = true
         }
-       binding.etSearch.setText( SpecialistDoctorsFragment.instance?.let {
+        binding.etSearch.setText(SpecialistDoctorsFragment.instance?.let {
             it.doctorName
         } ?: "")
         bottomsheetbeahavoir =
@@ -150,10 +152,12 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         setupSpinner()
         if (examinationtypeid == 6) {
             if (DateUtils.getstatus() == "true") {
-                sharedDataViewmodel.polyClinicResponse.observe(viewLifecycleOwner,
+                sharedDataViewmodel.polyClinicResponse.observe(
+                    viewLifecycleOwner,
                     androidx.lifecycle.Observer {
                         specialistId?.let { it1 ->
-                            polyClinicsViewmodel.getDoctorByClinicId(it.clinicId,
+                            polyClinicsViewmodel.getDoctorByClinicId(
+                                it.clinicId,
                                 it1
                             )
                         }
@@ -164,32 +168,40 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                 polyClinicSearch()
             }
         } else {
-            if (!binding.etSearch.text.toString().isNullOrEmpty()){
-                sharedDataViewmodel.getCity.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-                    cityId=it.id
+            if (!binding.etSearch.text.toString().isNullOrEmpty()) {
+                sharedDataViewmodel.getCity.observe(
+                    viewLifecycleOwner,
+                    androidx.lifecycle.Observer {
+                        cityId = it.id
 
-                })
+                    })
                 doctorsSearch()
-            }else {
-                if (specialistId!=null){
+            } else {
+                if (specialistId != null) {
                     sharedDataViewmodel.specialication.observe(viewLifecycleOwner) {
                         binding.layoutBottomsheetpersistant.etSpecialization.setText(it.name)
                         if (it.name.isNullOrEmpty()) {
-                           // binding.tvSearch.setText(getString(R.string.search))
+                            // binding.tvSearch.setText(getString(R.string.search))
                         } else {
-                          //  binding.tvSearch.setText(it.name)
+                            //  binding.tvSearch.setText(it.name)
                         }
                         specialistId = it.id
 
                     }
 
                     doctorsSearch()
+                } else {
+                    sharedDataViewmodel.getCity.observe(
+                        viewLifecycleOwner,
+                        androidx.lifecycle.Observer {
+                            cityId = it.id
+                            doctorsSearch()
+                        })
                 }
 
-                    sharedDataViewmodel.getCity.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-                        cityId=it.id
-                        doctorsSearch()
-                    })
+                if (cityId == null) {
+                    doctorsSearch()
+                }
 
             }
 
@@ -214,7 +226,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
 
         binding.layoutBottomsheetpersistant.tvRESET.setOnClickListener {
             reset()
-        //    binding.tvSearch.text = getString(R.string.search)
+            //    binding.tvSearch.text = getString(R.string.search)
         }
 
         binding.ivNext.setOnClickListener {
@@ -231,13 +243,13 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         }
 
         binding.ivArrow.setOnClickListener {
-           if (type==0){
-               DateUtils.setstatus("")
-               findNavController().navigate(R.id.chooseSpecialistFragment)
-           }else{
-               polyClinicRecylerview()
-               polyClinicSearch()
-           }
+            if (type == 0) {
+                DateUtils.setstatus("")
+                findNavController().navigate(R.id.chooseSpecialistFragment)
+            } else {
+                polyClinicRecylerview()
+                polyClinicSearch()
+            }
         }
 
         binding.layoutFilter.setOnClickListener {
@@ -366,7 +378,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
     }
 
     private fun doctorsRecylerview() {
-        searchDoctorsAdapter = SearchDoctorsAdapter(this,isHomeVisit)
+        searchDoctorsAdapter = SearchDoctorsAdapter(this, isHomeVisit)
         binding.rvDoctors.apply {
             adapter = searchDoctorsAdapter
             layoutManager = LinearLayoutManager(requireContext())
@@ -466,9 +478,9 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         sharedDataViewmodel.specialication.observe(viewLifecycleOwner) {
             binding.layoutBottomsheetpersistant.etSpecialization.setText(it.name)
             if (it.name.isNullOrEmpty()) {
-             //   binding.tvSearch.setText(getString(R.string.search))
+                //   binding.tvSearch.setText(getString(R.string.search))
             } else {
-              //  binding.tvSearch.setText(it.name)
+                //  binding.tvSearch.setText(it.name)
             }
             specialistId = it.id
         }
@@ -497,7 +509,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
 
         sharedDataViewmodel.getArea.observe(viewLifecycleOwner) {
             binding.layoutBottomsheetpersistant.etChooseArea.setText(it.name)
-            areaName=it.name
+            areaName = it.name
             areaId = it.id
 //            if (!binding.layoutBottomsheetpersistant.etChooseArea.toString().isEmpty()) {
 //                areaId = it.id
@@ -527,8 +539,8 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             }
 
             //partMap = partMap + mapOf("HealthEntityTypeId" to 6)
-           // partMap = partMap + mapOf("MaxResultCount" to 30)
-         //   partMap = partMap + mapOf("SkipCount" to 0)
+            // partMap = partMap + mapOf("MaxResultCount" to 30)
+            //   partMap = partMap + mapOf("SkipCount" to 0)
             polyClinicsViewmodel.getFilteredHealthEntity(partMap as HashMap<String, String>)
         }
         polyClinicsViewmodel.polyClinicsResponse.observe(viewLifecycleOwner) {
@@ -537,17 +549,17 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
 
                 is Resource.Loading -> {
                     showprogtessbar()
-                    binding.layoutCardview.visibility=View.GONE
+                    binding.layoutCardview.visibility = View.GONE
                 }
 
                 is Resource.sucess -> {
                     hideprogressbar()
-                    type=0
+                    type = 0
                     if (!it.data?.data.isNullOrEmpty()) {
                         totalsDoctors = it.data?.data?.size!!
                     }
                     it.let {
-                        binding.rvPolyclinicDoctors.visibility=View.GONE
+                        binding.rvPolyclinicDoctors.visibility = View.GONE
                         binding.rvPolyclinic.visibility = View.VISIBLE
                         if (DefaultLocaleHelper.getInstance(requireContext())
                                 .getCurrentLocale() == "en"
@@ -559,7 +571,6 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                                 " ${getString(R.string.polyclinic_found)} ${totalsDoctors} "
                         }
                         polyClinicsAdapter.submitList(it.data?.data)
-                        polyClinicsAdapter.notifyDataSetChanged()
                     }
 
                 }
@@ -579,17 +590,17 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
 
                 is Resource.Loading -> {
                     showprogtessbar()
-                    binding.layoutCardview.visibility=View.GONE
+                    binding.layoutCardview.visibility = View.GONE
                 }
 
                 is Resource.sucess -> {
                     hideprogressbar()
                     it.let {
                         //    bottomsheetbeahavoir.state = BottomSheetBehavior.STATE_HIDDEN
-                        binding.tvCity.text="${cityName} - ${areaName}"
+                        binding.tvCity.text = "${cityName} - ${areaName}"
                         searchDoctorsAdapter.submitList(it.data?.data?.items?.toList())
                         searchDoctorsAdapter.notifyDataSetChanged()
-                         updateUi(it.data?.data?.items as List<Item>)
+                        updateUi(it.data?.data?.items as List<Item>)
                         val totalresult = (it.data?.data?.totalCount)?.div((10 + 2))
                         isLastPage = viewmodel.doctorSearchPage == totalresult
                         if (isLastPage) {
@@ -623,19 +634,19 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
 //        CityId=cityId,
 //        AreaId= areaId,
         val doctorssearchRequset = DoctorSearchRequest(
-                        null,
-                           CityId=cityId,
-                          AreaId= areaId,
-                        doctorName=binding.etSearch.text.toString(),
-                        maxResultCount = 10,
-                        medicalExaminationTypeId= examinationtypeid,
-                        skipCount=0,
-                        specialistId= specialistId
-                    )
+            null,
+            CityId = cityId,
+            AreaId = areaId,
+            doctorName = binding.etSearch.text.toString(),
+            maxResultCount = 10,
+            medicalExaminationTypeId = examinationtypeid,
+            skipCount = 0,
+            specialistId = specialistId
+        )
 
 
 
-                viewmodel.searchDoctors(doctorssearchRequset, doctorSearchState)
+        viewmodel.searchDoctors(doctorssearchRequset, doctorSearchState)
 
 
     }
@@ -681,18 +692,18 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
     }
 
     private fun showprogtessbar() {
-    //   binding.progressBar.visibility = View.VISIBLE
-       binding.ivMessage.playAnimation()
-       binding.ivMessage.visibility=View.VISIBLE
+        //   binding.progressBar.visibility = View.VISIBLE
+        binding.ivMessage.playAnimation()
+        binding.ivMessage.visibility = View.VISIBLE
         binding.layoutBottomsheetpersistant.progressBar.visibility = View.VISIBLE
         isloading = true
     }
 
     private fun hideprogressbar() {
-     //  binding.progressBar.visibility = View.GONE
-        binding.layoutCardview.visibility=View.GONE
-       binding.ivMessage.cancelAnimation()
-       binding.ivMessage.visibility=View.GONE
+        //  binding.progressBar.visibility = View.GONE
+        binding.layoutCardview.visibility = View.GONE
+        binding.ivMessage.cancelAnimation()
+        binding.ivMessage.visibility = View.GONE
         binding.layoutBottomsheetpersistant.progressBar.visibility = View.GONE
         isloading = false
     }
@@ -745,26 +756,40 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         }
     }
 
-    override fun onItemClick(clinicId: Int, doctorId: Int, fessTo: Int, image: String,clinkname: String) {
+    override fun onItemClick(
+        clinicId: Int,
+        doctorId: Int,
+        fessTo: Int,
+        image: String,
+        clinkname: String
+    ) {
 
 //        if (DateUtils.getToken().isNullOrEmpty()) {
 //            findNavController().navigate(R.id.dialogSignUp)
 //        } else {
         sharedDataViewmodel.getNavigateStatus("")
-            sharedDataViewmodel.getClinicIdAndDoctorId(ClinicData(doctorId, clinicId,true))
-            val clinicSchedualByClinicDayId = ClinicSchedualByClinicDayId(
-                clinicId,
-                dayId,
-                examinationtypeid,
-                formattedDate,
-                clinkname
+        sharedDataViewmodel.getClinicIdAndDoctorId(ClinicData(doctorId, clinicId, true))
+        val clinicSchedualByClinicDayId = ClinicSchedualByClinicDayId(
+            clinicId,
+            dayId,
+            examinationtypeid,
+            formattedDate,
+            clinkname
+        )
+        sharedDataViewmodel.getMedicalExaminationTypeId(
+            ImageServices(
+                0,
+                "",
+                "",
+                0,
+                examinationtypeid
             )
-            sharedDataViewmodel.getMedicalExaminationTypeId(ImageServices(0,"","",0,examinationtypeid))
-            sharedDataViewmodel.getClinicSchedualByClinicDayId(clinicSchedualByClinicDayId)
-            this.doctorId = doctorId
-            this.feesTo = feesTo
-            this.image = image
-            getDayId()
+        )
+        sharedDataViewmodel.getClinicSchedualByClinicDayId(clinicSchedualByClinicDayId)
+        this.doctorId = doctorId
+        this.feesTo = feesTo
+        this.image = image
+        getDayId()
 //            viewmodel.getClinicSchedualByClinicDayId(
 //                clinicId,
 //                dayId,
@@ -772,8 +797,8 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
 //                formattedDate,0
 //            )
 
-                viewmodel.getDoctorProfileByDoctorId(clinicId,doctorId)
-      // }
+        viewmodel.getDoctorProfileByDoctorId(clinicId, doctorId)
+        // }
     }
 
     override fun onItemClick(
@@ -781,27 +806,35 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         doctorId: Int,
         clinkname: String,
         rate: Double,
-        rateCount: Int,fess: Int
+        rateCount: Int, fess: Int
     ) {
         sharedDataViewmodel.getRating(RatingDoctors(rate, rateCount))
 //        if (DateUtils.getToken().isNullOrEmpty()) {
 //            findNavController().navigate(R.id.dialogSignUp)
 //        } else {
         sharedDataViewmodel.getNavigateStatus("")
-            val clinicSchedualByClinicDayId = ClinicSchedualByClinicDayId(
-                clinicId,
-                dayId,
-                examinationtypeid,
-                formattedDate,
-                clinkname
+        val clinicSchedualByClinicDayId = ClinicSchedualByClinicDayId(
+            clinicId,
+            dayId,
+            examinationtypeid,
+            formattedDate,
+            clinkname
+        )
+        sharedDataViewmodel.getMedicalExaminationTypeId(
+            ImageServices(
+                0,
+                "",
+                "",
+                0,
+                examinationtypeid
             )
-            sharedDataViewmodel.getMedicalExaminationTypeId(ImageServices(0,"","",0,examinationtypeid))
-            sharedDataViewmodel.getClinicSchedualByClinicDayId(clinicSchedualByClinicDayId)
-            sharedDataViewmodel.getDocotorId(doctorId)
-            sharedDataViewmodel.getClinicIdAndDoctorId(ClinicData(doctorId, clinicId,true))
-            sharedDataViewmodel.getFees(fess)
-            findNavController().navigate(R.id.bookingAppointmentFragment)
-       // }
+        )
+        sharedDataViewmodel.getClinicSchedualByClinicDayId(clinicSchedualByClinicDayId)
+        sharedDataViewmodel.getDocotorId(doctorId)
+        sharedDataViewmodel.getClinicIdAndDoctorId(ClinicData(doctorId, clinicId, true))
+        sharedDataViewmodel.getFees(fess)
+        findNavController().navigate(R.id.bookingAppointmentFragment)
+        // }
     }
 
     private fun getDayId() {
@@ -914,7 +947,8 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
 
     private fun callBackInsuranceCompany() {
 
-        viewmodel.InsuranceCompany?.observe(viewLifecycleOwner,
+        viewmodel.InsuranceCompany?.observe(
+            viewLifecycleOwner,
             androidx.lifecycle.Observer {
                 when (it) {
 
@@ -954,41 +988,41 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                 it?.let {
                     if (it.isNotEmpty()) {
                         val doctorssearchRequset = DoctorSearchRequest(
-                                    null,
-                                    CityId=cityId,
-                                    AreaId= areaId,
-                                    doctorName=it.toString(),
-                                    feesFrom=feesFrom,
-                                    feesTo=feesTo,
-                                    genderId=genderId,
-                                    maxResultCount=10,
-                                    medicalExaminationTypeId= examinationtypeid,
-                                    seniortyLevelId= seniortyLevelId,
-                                    skipCount=0,
-                                    specialistId=specialistId
-                                )
+                            null,
+                            CityId = cityId,
+                            AreaId = areaId,
+                            doctorName = it.toString(),
+                            feesFrom = feesFrom,
+                            feesTo = feesTo,
+                            genderId = genderId,
+                            maxResultCount = 10,
+                            medicalExaminationTypeId = examinationtypeid,
+                            seniortyLevelId = seniortyLevelId,
+                            skipCount = 0,
+                            specialistId = specialistId
+                        )
 
-                            viewmodel.searchDoctors(doctorssearchRequset, doctorSearchState)
+                        viewmodel.searchDoctors(doctorssearchRequset, doctorSearchState)
 
                     } else {
                         val doctorssearchRequset = DoctorSearchRequest(
                             null,
-                            CityId=cityId,
-                            AreaId= areaId,
-                            doctorName=  binding.etSearch.text.toString(),
-                            feesFrom=feesFrom,
-                            feesTo=feesTo,
-                            genderId=genderId,
-                            maxResultCount=10,
-                            medicalExaminationTypeId= examinationtypeid,
-                            seniortyLevelId= seniortyLevelId,
-                            skipCount=0,
-                            specialistId=specialistId
-                                )
+                            CityId = cityId,
+                            AreaId = areaId,
+                            doctorName = binding.etSearch.text.toString(),
+                            feesFrom = feesFrom,
+                            feesTo = feesTo,
+                            genderId = genderId,
+                            maxResultCount = 10,
+                            medicalExaminationTypeId = examinationtypeid,
+                            seniortyLevelId = seniortyLevelId,
+                            skipCount = 0,
+                            specialistId = specialistId
+                        )
 
 
 
-                            viewmodel.searchDoctors(doctorssearchRequset, doctorSearchState)
+                        viewmodel.searchDoctors(doctorssearchRequset, doctorSearchState)
 
                     }
 
@@ -1003,7 +1037,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
 //            binding.crdView.visibility = View.VISIBLE
 //            binding.textchange.visibility = View.VISIBLE
 //            binding.gifImageView.visibility = View.VISIBLE
-            binding.layoutCardview.visibility=View.VISIBLE
+            binding.layoutCardview.visibility = View.VISIBLE
             Glide.with(this)
                 .asGif()
                 .load(R.drawable.no_doctorfound)
@@ -1012,15 +1046,15 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
 //            binding.crdView.visibility = View.GONE
 //            binding.textchange.visibility = View.GONE
 //            binding.gifImageView.visibility = View.GONE
-            binding.layoutCardview.visibility=View.GONE
+            binding.layoutCardview.visibility = View.GONE
         }
     }
 
     private fun skipLogin() {
         if (DateUtils.getToken().isNullOrEmpty()) {
-           // binding.layoutCity.visibility = View.VISIBLE
+            // binding.layoutCity.visibility = View.VISIBLE
         } else {
-           // binding.layoutCity.visibility = View.VISIBLE
+            // binding.layoutCity.visibility = View.VISIBLE
         }
     }
 
@@ -1064,19 +1098,19 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             if (shouldPaginate) {
 
                 val doctorssearchRequset = DoctorSearchRequest(
-                            null,
-                            cityId,
-                            areaId,
-                            binding.etSearch.text.toString(),
-                            feesFrom=feesFrom,
-                            feesTo=feesTo,
-                            genderId=genderId,
-                            viewmodel.doctorSearchPage,
-                            examinationtypeid,
-                            seniortyLevelId,
-                            skipCount = 0,
-                            specialistId
-                        )
+                    null,
+                    cityId,
+                    areaId,
+                    binding.etSearch.text.toString(),
+                    feesFrom = feesFrom,
+                    feesTo = feesTo,
+                    genderId = genderId,
+                    viewmodel.doctorSearchPage,
+                    examinationtypeid,
+                    seniortyLevelId,
+                    skipCount = 0,
+                    specialistId
+                )
 
 
                 if (doctorssearchRequset != null) {
@@ -1093,19 +1127,19 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         sharedDataViewmodel.getCity.observe(viewLifecycleOwner) {
             if (DefaultLocaleHelper.getInstance(requireContext()).getCurrentLocale() == "ar") {
                 binding.layoutBottomsheetpersistant.etChooseCity.setText(it.nameAr)
-                binding.tvSelectCity.text=it.nameAr
-                cityName=it.nameAr
+                binding.tvSelectCity.text = it.nameAr
+                cityName = it.nameAr
                 cityId = it.id
             } else {
                 binding.layoutBottomsheetpersistant.etChooseCity.setText(it.name)
-                binding.tvSelectCity.text=it.name
-                cityName=it.name
+                binding.tvSelectCity.text = it.name
+                cityName = it.name
                 cityId = it.id
             }
 //            if (!binding.layoutBottomsheetpersistant.etChooseCity.text.toString().isEmpty()) {
 //                cityId = it.id
 //            } else cityId = null
-          //  cityId = it.id
+            //  cityId = it.id
         }
     }
 
@@ -1176,19 +1210,27 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             this.feesTo = feesTo
             this.image = image
             getDayId()
-            sharedDataViewmodel.getClinicIdAndDoctorId(ClinicData(doctorId, clinicId,false))
-            sharedDataViewmodel.getMedicalExaminationTypeId(ImageServices(0,"","",0,examinationtypeid))
+            sharedDataViewmodel.getClinicIdAndDoctorId(ClinicData(doctorId, clinicId, false))
+            sharedDataViewmodel.getMedicalExaminationTypeId(
+                ImageServices(
+                    0,
+                    "",
+                    "",
+                    0,
+                    examinationtypeid
+                )
+            )
 //            viewmodel.getClinicSchedualByClinicDayId(
 //                clinicId,
 //                dayId,
 //                1,
 //                formattedDate,doctorId
 //            )
-            viewmodel.getDoctorProfileByDoctorId(clinicId,doctorId)
+            viewmodel.getDoctorProfileByDoctorId(clinicId, doctorId)
         }
     }
 
-    override fun onTvBookItemClinic(doctorId: Int, ClinicID: Int,rate:Double,rateCount:Int) {
+    override fun onTvBookItemClinic(doctorId: Int, ClinicID: Int, rate: Double, rateCount: Int) {
         val clinicSchedualByClinicDayId = ClinicSchedualByClinicDayId(
             doctorId,
             dayId,
@@ -1197,10 +1239,18 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             ""
         )
         sharedDataViewmodel.getNavigateStatus("")
-        sharedDataViewmodel.getMedicalExaminationTypeId(ImageServices(0,"","",0,examinationtypeid))
+        sharedDataViewmodel.getMedicalExaminationTypeId(
+            ImageServices(
+                0,
+                "",
+                "",
+                0,
+                examinationtypeid
+            )
+        )
         sharedDataViewmodel.getRating(RatingDoctors(rate, rateCount))
         sharedDataViewmodel.getClinicSchedualByClinicDayId(clinicSchedualByClinicDayId)
-        sharedDataViewmodel.getClinicIdAndDoctorId(ClinicData(ClinicID, doctorId,false))
+        sharedDataViewmodel.getClinicIdAndDoctorId(ClinicData(ClinicID, doctorId, false))
         findNavController().navigate(R.id.bookingAppointmentFragment)
     }
 
@@ -1215,7 +1265,8 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
 
                 is Resource.sucess -> {
                     hideprogressbar()
-                    getDoctorAndPolyClinksResponse = GetDoctorClinksResponse(it.data?.data,it.message)
+                    getDoctorAndPolyClinksResponse =
+                        GetDoctorClinksResponse(it.data?.data, it.message)
                     val clinicSchedualByClinicDayId =
                         it.data?.data?.currentClinicDtos?.clinicId?.let { it1 ->
                             it.data.data.currentClinicDtos.name?.let { it2 ->
@@ -1228,10 +1279,16 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                             }
                         }
                     if (clinicSchedualByClinicDayId != null) {
-                        sharedDataViewmodel.getClinicSchedualByClinicDayId(clinicSchedualByClinicDayId)
+                        sharedDataViewmodel.getClinicSchedualByClinicDayId(
+                            clinicSchedualByClinicDayId
+                        )
                     }
 
-                    val action=SearchFragmentDirections.actionSearchFragmentToBookAppointmentFragment(getDoctorAndPolyClinksResponse,"booking appointment")
+                    val action =
+                        SearchFragmentDirections.actionSearchFragmentToBookAppointmentFragment(
+                            getDoctorAndPolyClinksResponse,
+                            "booking appointment"
+                        )
                     findNavController().navigate(action)
                 }
 

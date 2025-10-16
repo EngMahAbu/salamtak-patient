@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import androidx.paging.cachedIn
 import com.korashiGroup.salamtakPatient.model.healthy.ItemHealth
 import com.korashiGroup.salamtakPatient.pagination.DoctorsPagingSource
 import com.korashiGroup.salamtakPatient.repository.RegisterRepositry

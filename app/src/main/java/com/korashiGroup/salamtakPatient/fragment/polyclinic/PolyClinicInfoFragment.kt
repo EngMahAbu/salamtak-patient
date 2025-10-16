@@ -78,7 +78,7 @@ class PolyClinicInfoFragment : Fragment() {
                 transformations(CircleCropTransformation())
             }
         }
-        if (!args.polyclinicitems.ClinicBio.toString().isNullOrEmpty()) {
+        if (!args.polyclinicitems.ClinicBio.toString().isNullOrEmpty() && args.polyclinicitems.ClinicBio.toString()!="null") {
             binding.AboutDoctor.setText(args.polyclinicitems.ClinicBio.toString().removePrefix("[")?.removeSuffix("]"))
         }
         if (!args.polyclinicitems.features.toString().isNullOrEmpty()) {

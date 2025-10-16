@@ -56,7 +56,7 @@ class MedicalStateFragment : Fragment() {
         }
 
         binding.btnLayoutBloodGroup.setOnClickListener {
-            val action=MedicalStateFragmentDirections.actionMedicalStateFragment2ToDialogBottomSheetFragment("bloodTypes")
+            val action=MedicalStateFragmentDirections.actionMedicalStateFragment4ToDialogBottomSheetFragment("bloodTypes")
             findNavController().navigate(action)
             it.isEnabled=false
             Handler().postDelayed({
@@ -65,7 +65,7 @@ class MedicalStateFragment : Fragment() {
         }
 
         binding.btnLayoutMedicalAllergies.setOnClickListener {
-            val action=MedicalStateFragmentDirections.actionMedicalStateFragment2ToDialogBottomSheetFragment("medicineAllergy")
+            val action=MedicalStateFragmentDirections.actionMedicalStateFragment4ToDialogBottomSheetFragment("medicineAllergy")
             findNavController().navigate(action)
             it.isEnabled=false
             Handler().postDelayed({
@@ -74,7 +74,7 @@ class MedicalStateFragment : Fragment() {
         }
 
         binding.btnLayoutFoodAllergies.setOnClickListener {
-            val action=MedicalStateFragmentDirections.actionMedicalStateFragment2ToDialogBottomSheetFragment("FoodAllergy")
+            val action=MedicalStateFragmentDirections.actionMedicalStateFragment4ToDialogBottomSheetFragment("FoodAllergy")
             findNavController().navigate(action)
             it.isEnabled=false
             Handler().postDelayed({

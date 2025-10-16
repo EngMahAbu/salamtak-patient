@@ -685,10 +685,14 @@
                 app:destination="@id/offersFragment" />
     </fragment>
     <fragment
-            android:id="@+id/medicalStateFragment"
+            android:id="@+id/medicalStateFragment4"
             android:name="com.korashiGroup.salamtakPatient.fragment.navstrepercontent.MedicalStateFragment"
             android:label="medical_statefragment"
-            tools:layout="@layout/medical_statefragment" />
+            tools:layout="@layout/medical_statefragment" >
+        <action
+                android:id="@+id/action_medicalStateFragment4_to_dialogBottomSheetFragment"
+                app:destination="@id/dialogBottomSheetFragment" />
+    </fragment>
 
 
 </navigation>

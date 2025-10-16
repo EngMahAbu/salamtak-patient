@@ -379,6 +379,11 @@ class OtpFragment : Fragment() {
 
     override fun onStop() {
         super.onStop()
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
         timer.cancel()
     }
 

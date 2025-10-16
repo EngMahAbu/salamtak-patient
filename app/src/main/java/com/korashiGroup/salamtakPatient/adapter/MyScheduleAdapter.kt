@@ -44,9 +44,9 @@ class MyScheduleAdapter(private val schedule: ActionSchedule) :
            // location.text ="${services.clinicAddress?:""}-${services.BlockNo?:""}-${services.FloorNo?:""}-${services.areaName?:""}"
             // new
             if (services.IsCompleted==true){
-                location.text="Paid"
+                location.text="${location.context.getString(R.string.paid)}"
             }else{
-                location.text="Pending Payment"
+                location.text="${location.context.getString(R.string.pending_payment)}"
             }
 
             waitingTime.text = " ${DateParsing(services.appointmentDate.toString())}"

@@ -129,7 +129,7 @@
     <string name="home">الرئيسية</string>
     <string name="my_schedule">الحجوزات </string>
     <string name="more">المزيد...</string>
-    <string name="reviews">التعليقات</string>
+    <string name="reviews">التقيمات</string>
     <string name="next_available_booking_at_08_nov_from_06_30_pm">Next Available Booking at 08 Nov. from 06:30 PM</string>
     <string name="sub_specialization">التخصص الفرعي</string>
     <string name="book_now">احجز الآن</string>
@@ -247,7 +247,7 @@
     <string name="datasentupdatedsuccessfully">تم تحديث البيانات بنجاح</string>
     <string name="Notification_channel_Id">Notification_channel_Id</string>
     <string name="Notification_channel_Name">Notification_channel_Name</string>
-    <string name="book_with_insurance">استخدم التأمين الخاص بك</string>
+    <string name="book_with_insurance">احجز الى مريض اخر</string>
     <string name="release_date">تاريخ الافراج عنه</string>
     <string name="update">تحديث</string>
     <string name="salamtak_gates">بوابة سلامتك</string>
@@ -411,7 +411,7 @@
     <string name="choose_specialties">اختر التخصصات</string>
     <string name="most_popular_specialties">التخصصات الأكثر شعبية</string>
     <string name="other_specialties">تخصصات أخرى</string>
-    <string name="doctors_profile">الملف الشخى للطبيب</string>
+    <string name="doctors_profile">الملف الشخصى للطبيب</string>
     <string name="clinics_location">موقع العيادات</string>
     <string name="support">الدعم</string>
     <string name="choose_rays">اختر الأشعة</string>
@@ -431,6 +431,12 @@
     <string name="answers_to_your_question">إجابات على سؤالك</string>
     <string name="all_offers">جميع العروض</string>
     <string name="search_results">نتائج البحث</string>
+    <string name="password_changed_successfully">تم تغيير كلمة المرور بنجاح</string>
+    <string name="booking_with">الحجز مع</string>
+    <string name="offers_available">عروض متاحة</string>
+    <string name="paid">مدفوع</string>
+    <string name="pending_payment">الدفع المعلق</string>
+
     <array name="choose">
         <item>اختار</item>
     </array>

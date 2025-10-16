@@ -773,7 +773,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
             specilityId = specialist.id
             sharedDataViewmodel.getspecialication(specialist)
             if (DateUtils.getToken().isNullOrEmpty()) {
-                return
+                callBackPopularDoctors(specilityId = specialist.id)
             } else {
                 callBackPopularDoctors(specilityId = specialist.id)
             }

@@ -598,7 +598,7 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
         getDoctorClinksResponse.data?.specialistName?.forEach {
             subspecialist = "$subspecialist $it,"
         }
-        binding.layoutBottomsheetpersistant.tvSpecialization.text = "${getDoctorClinksResponse.data?.seniorityLevelName} ${subspecialist.toString()?.removePrefix("[")?.removeSuffix("]")}"
+        binding.layoutBottomsheetpersistant.tvSpecialization.text = "${getDoctorClinksResponse.data?.seniorityLevelName} - ${getDoctorClinksResponse.data?.specialistName.toString()?.removePrefix("[")?.removeSuffix("]")}"
         clinksDoctorsAdapter.submitList(getDoctorClinksResponse.data?.clinicDtos)
         clinksDoctorsAdapter.notifyDataSetChanged()
     }

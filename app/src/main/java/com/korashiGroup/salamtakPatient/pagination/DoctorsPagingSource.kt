@@ -25,15 +25,15 @@ class DoctorsPagingSource(
         val currentPage = params.key ?: 0
         return try {
             val response = repo.getHealthEntityPagedList(cityId, areaId, healthType, 1, currentPage)
-            val data = response?.body()?.data?.items as List<ItemHealth>
-            if (response.isSuccessful) {
+            if (response?.isSuccessful ?: false) {
+                val data = response?.body()?.data?.items as List<ItemHealth>
                 LoadResult.Page(
                     data = data,
                     prevKey = if (currentPage == 0) null else currentPage - 1,
                     nextKey = if (data.isEmpty()) null else currentPage + 1
                 )
             } else {
-                LoadResult.Error(IOException("Error loading data, code: ${response.code()}"))
+                LoadResult.Error(IOException("Error loading data, code: ${response?.code()}"))
 
             }
         } catch (e: IOException) {

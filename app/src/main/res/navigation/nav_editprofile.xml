@@ -35,17 +35,19 @@
                 android:id="@+id/action_locationFragment2_to_dialogBottomSheetFragment"
                 app:destination="@id/dialogBottomSheetFragment" />
         <action
-                android:id="@+id/action_locationFragment2_to_medicalStateFragment"
-                app:destination="@id/medicalStateFragment2" />
+                android:id="@+id/action_locationFragment2_to_medicalStateFragment4"
+                app:destination="@id/medicalStateFragment4" />
+
     </fragment>
     <fragment
-            android:id="@+id/medicalStateFragment2"
+            android:id="@+id/medicalStateFragment4"
             android:name="com.korashiGroup.salamtakPatient.fragment.navstrepercontent.MedicalStateFragment"
             android:label="medical_statefragment"
             tools:layout="@layout/medical_statefragment" >
         <action
-                android:id="@+id/action_medicalStateFragment2_to_dialogBottomSheetFragment"
+                android:id="@+id/action_medicalStateFragment4_to_dialogBottomSheetFragment"
                 app:destination="@id/dialogBottomSheetFragment" />
     </fragment>
+
 
 </navigation>

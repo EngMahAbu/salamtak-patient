@@ -22,8 +22,6 @@ data class PopularDoctorS(
     val doctorName: String?,
     @SerializedName("DoctorNameAr")
     val doctorNameAr: String?,
-    @SerializedName("DoctorNameEn")
-    val doctorNameEn: String?,
     @SerializedName("DoctorSpec")
     val doctorSpec: String?,
     @SerializedName("DoctorSpecAr")

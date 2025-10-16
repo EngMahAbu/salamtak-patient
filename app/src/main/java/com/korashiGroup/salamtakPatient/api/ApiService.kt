@@ -44,6 +44,7 @@ import com.korashiGroup.salamtakPatient.model.register.*
 import com.korashiGroup.salamtakPatient.model.reviews.ReviewsResponse
 import com.korashiGroup.salamtakPatient.model.salamtakgate.BlogsResponse
 import com.korashiGroup.salamtakPatient.model.salamtakgate.SalamtakGateResponse
+import com.korashiGroup.salamtakPatient.model.salamtakgate.blogs.GetBlogsResponse
 import com.korashiGroup.salamtakPatient.model.scheduling.CancelPatientAppointmentResponse
 import com.korashiGroup.salamtakPatient.model.scheduling.GetLatestPatientAppointmentResponse
 import com.korashiGroup.salamtakPatient.model.scheduling.GetPatientAppointmentesResponse
@@ -286,7 +287,7 @@ interface ApiService {
     suspend fun getBlogs(
         @Path("culture") culture: String,
         @Query("salamtakGateEnum") salamtakGateEnum :Int,
-    ):Response<BlogsResponse>
+    ):Response<GetBlogsResponse>
 
 
 

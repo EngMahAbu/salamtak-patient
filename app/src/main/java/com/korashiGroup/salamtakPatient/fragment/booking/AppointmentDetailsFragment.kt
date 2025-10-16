@@ -109,8 +109,7 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
             price = args.confirmappointments?.fees.toString()
         )
         chargeItems.add(billItem)
-        if (args.confirmappointments?.MedicalExaminationTypeName == "In-Clinic Booking"
-            || args.confirmappointments?.MedicalExaminationTypeName == "كشف بالعيادة"
+        if (args.confirmappointments?.medicalExaminationId == 1
         ) {
             binding.chCard.visibility = View.VISIBLE
         } else {
@@ -147,7 +146,7 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
             val mediaclName = args.confirmappointments?.medicalExaminationId
             if (mediaclName == 3 || mediaclName == 4) {
                 startPayment()
-            } else if (mediaclName == 1 || mediaclName == 2) {
+            } else if (mediaclName == 1 || mediaclName == 2|| mediaclName == 6) {
 
                 Patient_InsuranceID.let { it1 ->
                     PatientAppointmentRequest(

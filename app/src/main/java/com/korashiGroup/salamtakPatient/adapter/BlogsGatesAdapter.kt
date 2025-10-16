@@ -10,9 +10,10 @@ import com.bumptech.glide.Glide
 import com.korashiGroup.salamtakPatient.databinding.ItemLayoutBlogofGatesBinding
 import com.korashiGroup.salamtakPatient.model.salamtakgate.Blogs
 import com.korashiGroup.salamtakPatient.model.salamtakgate.GatesDetails
+import com.korashiGroup.salamtakPatient.model.salamtakgate.blogs.DataBlogs
 
 
-class BlogsGatesAdapter(val details:Action ):ListAdapter<Blogs,BlogsGatesAdapter.ViewHolder>(DiffCallback()) {
+class BlogsGatesAdapter(val details:Action ):ListAdapter<DataBlogs,BlogsGatesAdapter.ViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
@@ -27,7 +28,9 @@ class BlogsGatesAdapter(val details:Action ):ListAdapter<Blogs,BlogsGatesAdapter
             .into(holder.binding.ivDoctorProfile)
 
         holder.binding.ivDoctorProfile.setOnClickListener {
-            val gatesDetails=GatesDetails(services.typeID,services.title,services.description,services.image,services.createdDate,services.links)
+            val gatesDetails=GatesDetails(services.typeID,services.title,services.description,services.image,services.createdDate,
+                services.links as List<String>?
+            )
             details.onItemGatesClick(gatesDetails)
         }
 
@@ -41,12 +44,12 @@ class BlogsGatesAdapter(val details:Action ):ListAdapter<Blogs,BlogsGatesAdapter
     }
 
 
-    private class DiffCallback : DiffUtil.ItemCallback<Blogs>() {
-        override fun areItemsTheSame(oldItem: Blogs, newItem: Blogs): Boolean {
+    private class DiffCallback : DiffUtil.ItemCallback<DataBlogs>() {
+        override fun areItemsTheSame(oldItem: DataBlogs, newItem: DataBlogs): Boolean {
             return oldItem==newItem
         }
 
-        override fun areContentsTheSame(oldItem: Blogs, newItem: Blogs): Boolean {
+        override fun areContentsTheSame(oldItem: DataBlogs, newItem: DataBlogs): Boolean {
             return true
         }
     }

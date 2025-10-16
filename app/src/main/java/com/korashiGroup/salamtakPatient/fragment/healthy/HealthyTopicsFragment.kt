@@ -30,6 +30,7 @@ import com.korashiGroup.salamtakPatient.model.askandanswer.questions.Questions
 import com.korashiGroup.salamtakPatient.model.booking.clink.ClinicData
 import com.korashiGroup.salamtakPatient.model.salamtakgate.Blogs
 import com.korashiGroup.salamtakPatient.model.salamtakgate.GatesDetails
+import com.korashiGroup.salamtakPatient.model.salamtakgate.blogs.DataBlogs
 import com.korashiGroup.salamtakPatient.utils.Constans
 import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
@@ -191,7 +192,7 @@ class HealthyTopicsFragment : Fragment(), BlogsGatesAdapter.Action, MedicalHealt
                     blogsGatesAdapter.notifyDataSetChanged()
                     capsVideoAdapter.submitList(it.data?.data)
                    // binding.viewPager.adapter = capsVideoAdapter
-                    it.data?.let { it1 -> updateUi(it1.data) }
+                    it.data?.let { it1 -> updateUi(it1.data as List<DataBlogs>) }
                 }
 
                 is Resource.Error -> {
@@ -247,7 +248,7 @@ class HealthyTopicsFragment : Fragment(), BlogsGatesAdapter.Action, MedicalHealt
         binding.progressBar.visibility = View.GONE
     }
 
-    private fun updateUi(it: List<Blogs>) {
+    private fun updateUi(it: List<DataBlogs>) {
         if (it.isNullOrEmpty()) {
 //            binding.crdView.visibility = View.VISIBLE
 //        } else {
@@ -370,7 +371,8 @@ class HealthyTopicsFragment : Fragment(), BlogsGatesAdapter.Action, MedicalHealt
         binding.apply {
             lifecycleScope.launchWhenStarted {
                 pagingViewmodel.getDoctorsPagingData(cityId,areaId,7).collect{
-                    healthAdapter.submitData(it)
+                        healthAdapter.submitData(it)
+
                 }
             }
 

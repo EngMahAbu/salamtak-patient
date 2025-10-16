@@ -301,14 +301,13 @@ class SignupFragment : Fragment() {
             var fullNameEn = binding.etFullNameEn.text.toString()
             var fullNameAr = binding.etFullNameAR.text.toString()
             var mobileNumber = binding.etPhoneNumber.text.toString()
-            var email ="us@gmail.com"
             var password = binding.etPassword.text.toString()
             var confirmPassword = binding.confirmEtPassword.text.toString()
             if (isvalidateFeilds(
                     fullNameEn,
                     fullNameAr,
                     mobileNumber,
-                    email,
+                    binding.etEmail.text.toString(),
                     password,
                     confirmPassword
                 )
@@ -324,7 +323,7 @@ class SignupFragment : Fragment() {
                     binding.tvPasswordError.visibility = View.GONE
                     binding.layoutPassword.setBackgroundResource(R.drawable.bg_edittext)
                     binding.etPassword.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
-                    user = CreateUser(email, fullNameEn, password, mobileNumber, 3)
+                    user = CreateUser(null, fullNameEn, password, mobileNumber, 3)
                     sp.saveUserNameInArabic(NameAR, fullNameAr)
                     sp.saveUserNameInEnglish(NameEN, fullNameEn)
                     sp.saveUserfromSignup(UserSIGNUP, user!!)

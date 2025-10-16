@@ -98,7 +98,7 @@ class EditProfileFragment : Fragment() {
                 navGraph.setStartDestination(R.id.locationFragment2)
             }
             3 -> {
-                navGraph.setStartDestination(R.id.medicalStateFragment2)
+                navGraph.setStartDestination(R.id.medicalStateFragment4)
             }
         }
 

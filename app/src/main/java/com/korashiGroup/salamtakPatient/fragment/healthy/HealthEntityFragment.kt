@@ -20,6 +20,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.paging.LoadState
+import androidx.paging.PagingData
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -272,7 +273,8 @@ class HealthEntityFragment : Fragment(),MedicalHealthAdapter.Action {
         binding.apply {
             lifecycleScope.launchWhenStarted {
                 pagingViewmodel.getDoctorsPagingData(cityId,areaId,args.healthtype).collect{
-                    healthAdapter.submitData(it)
+                        healthAdapter.submitData(it)
+
                 }
             }
 
@@ -292,6 +294,7 @@ class HealthEntityFragment : Fragment(),MedicalHealthAdapter.Action {
 
 
     }
+
 
 
 

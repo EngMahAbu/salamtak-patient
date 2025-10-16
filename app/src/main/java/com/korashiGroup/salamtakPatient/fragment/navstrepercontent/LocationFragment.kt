@@ -98,7 +98,7 @@ class LocationFragment : Fragment() {
         }
 
         binding.btnSkip.setOnClickListener {
-            findNavController().navigate(R.id.medicalStateFragment2)
+            findNavController().navigate(R.id.medicalStateFragment4)
         }
     }
 
@@ -238,7 +238,7 @@ class LocationFragment : Fragment() {
                                 getString(R.string.datasentsuccessfully),
                                 Snackbar.LENGTH_SHORT
                             ).show()
-                            findNavController().navigate(R.id.medicalStateFragment2)
+                            findNavController().navigate(R.id.medicalStateFragment4)
                         }else{
                             Snackbar.make(
                                 requireView(),

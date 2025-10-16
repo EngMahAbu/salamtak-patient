@@ -83,9 +83,7 @@ class AskDoctorFragment : Fragment() {
             } else {
                 Toast.makeText(requireContext(),getString(R.string.fillallfields), Toast.LENGTH_SHORT).show()
             }
-            Toast.makeText(requireContext(),
-                 getString(R.string.we_will_answer_your_question_in_3_days), Toast.LENGTH_SHORT)
-                .show()
+
         }
 
         binding.btnLayoutChooseSpecialization.setOnClickListener {
@@ -171,7 +169,7 @@ class AskDoctorFragment : Fragment() {
             binding.tvQuestionError.visibility = View.VISIBLE
             binding.tvGenderError.visibility = View.VISIBLE
             binding.tvAgeError.visibility = View.VISIBLE
-            binding.tvPatientError.visibility = View.VISIBLE
+         //   binding.tvPatientError.visibility = View.VISIBLE
             return false
         }
         if (binding.etSpecialization.text?.trim().isNullOrEmpty()) {
