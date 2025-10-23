@@ -38,7 +38,11 @@ class PolyClinicsDoctorsAdapter(private val booking: IPolyClinicsBooking) :
                     tvDoctorName.text = "${services.fullNameAr}"
                 }
             }else{
-                tvDoctorName.text = "${services.nickName}"
+                if (DefaultLocaleHelper.getInstance(this.tvDoctorName.context).getCurrentLocale()=="en"){
+                    tvDoctorName.text = "${services.nickName}"
+                }else{
+                    tvDoctorName.text = "${services.nickNameAr}"
+                }
             }
 
             tvSpecialization.text = "${services.specialistName} - ${services.seniorityLevelName}"

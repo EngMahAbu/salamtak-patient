@@ -199,10 +199,6 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                         })
                 }
 
-                if (cityId == null) {
-                    doctorsSearch()
-                }
-
             }
 
         }
