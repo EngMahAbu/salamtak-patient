@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.WindowCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -513,7 +514,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
             }
 
             else -> {
-                val action = HomeFragmentDirections.actionHomeFragmentToChooseSpecialistFragment()
+                val action = HomeFragmentDirections.actionHomeFragmentToSpecialistDoctorsFragment()
                 findNavController().navigate(action)
             }
         }
@@ -530,14 +531,18 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
 //            } else {
 //                binding.tvWelcome.text = getString(R.string.good_morning)
 //            }
-            binding.tvPatientname.text = sp.getUser()?.name
+            val fullName = sp.getUser()?.name?.trim() ?: ""
+            val firstName = fullName.split(" ").firstOrNull() ?: ""
+            binding.tvPatientname.text = firstName
         } else {
 //            if (currentTime.contains("am") || currentTime.contains("AM") ||currentTime.contains("ص")) {
 //                binding.tvWelcome.text = getString(R.string.good_morning)
 //            } else {
 //                binding.tvWelcome.text = getString(R.string.good_evening)
 //            }
-            binding.tvPatientname.text = sp.getUser()?.NameAR
+            val fullName = sp.getUser()?.NameAR?.trim() ?: ""
+            val firstName = fullName.split(" ").firstOrNull() ?: ""
+            binding.tvPatientname.text = firstName
         }
 
 //        binding.ivPatientProfile.load("https://salamtechapi.azurewebsites.net/${sp.getUser()?.image}") {

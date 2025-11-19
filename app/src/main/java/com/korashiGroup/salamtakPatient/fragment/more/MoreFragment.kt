@@ -144,9 +144,9 @@ class MoreFragment : Fragment() {
         binding.layoutFavoriteDoctor.setOnClickListener {
             findNavController().navigate(R.id.favoriteDoctorFragment)
         }
-        binding.layoutMedicalRecord.setOnClickListener {
-            findNavController().navigate(R.id.medicalStateFragment4)
-        }
+//        binding.layoutMedicalRecord.setOnClickListener {
+//            findNavController().navigate(R.id.medicalStateFragment4)
+//        }
 
         binding.layoutAboutApp.setOnClickListener {
             findNavController().navigate(R.id.aboutAppFragment)
@@ -190,7 +190,7 @@ class MoreFragment : Fragment() {
             binding.layoutFavoriteDoctor.visibility=View.GONE
             binding.layoutDelete.visibility=View.GONE
             binding.layoutMyQuestions.visibility=View.GONE
-            binding.layoutMedicalRecord.visibility=View.GONE
+           // binding.layoutMedicalRecord.visibility=View.GONE
             binding.layoutAccountSettings.visibility=View.GONE
             binding.layoutSecurityLogout.visibility=View.GONE
             binding.tvAccountSettings.visibility=View.GONE
@@ -205,7 +205,7 @@ class MoreFragment : Fragment() {
             binding.layoutFavoriteDoctor.visibility=View.VISIBLE
             binding.layoutDelete.visibility=View.VISIBLE
             binding.layoutMyQuestions.visibility=View.VISIBLE
-            binding.layoutMedicalRecord.visibility=View.VISIBLE
+           // binding.layoutMedicalRecord.visibility=View.VISIBLE
             binding.layoutAccountSettings.visibility=View.VISIBLE
             binding.layoutSecurityLogout.visibility=View.VISIBLE
             binding.tvAccountSettings.visibility=View.VISIBLE

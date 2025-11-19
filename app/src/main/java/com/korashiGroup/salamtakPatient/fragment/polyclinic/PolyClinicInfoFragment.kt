@@ -1,6 +1,7 @@
 package com.korashiGroup.salamtakPatient.fragment.polyclinic
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -19,7 +20,7 @@ import com.korashiGroup.salamtakPatient.model.HomeAdsData
 import com.korashiGroup.salamtakPatient.model.salamtakgate.Gates
 import com.korashiGroup.salamtakPatient.utils.DateUtils
 
-class PolyClinicInfoFragment : Fragment() {
+class PolyClinicInfoFragment : Fragment(), ImagesAdapter.IPhotoViewr {
 
     private lateinit var binding:PolyClinicInfofragmentBinding
     private val args:PolyClinicInfoFragmentArgs by navArgs()
@@ -60,7 +61,7 @@ class PolyClinicInfoFragment : Fragment() {
         }
     }
     private fun gallaryRecylerview() {
-        imagesAdapter = ImagesAdapter()
+        imagesAdapter = ImagesAdapter(this)
         binding.rvGallry.apply {
             adapter = imagesAdapter
             setHasFixedSize(true)
@@ -117,6 +118,10 @@ class PolyClinicInfoFragment : Fragment() {
         }
         binding.tvDoctorName.text=args.polyclinicitems.name
         binding.tvSpecialization.text="${args.polyclinicitems.cityName} - ${args.polyclinicitems.areaName}"
+    }
+
+    override fun clickOnPhoto(image: String) {
+        Log.e("TAG", "clickOnPhoto: ", )
     }
 
 

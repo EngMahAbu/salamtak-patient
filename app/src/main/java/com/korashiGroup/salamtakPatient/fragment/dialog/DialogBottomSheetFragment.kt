@@ -244,7 +244,7 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
         binding.itemSignOut.btnYes.setOnClickListener {
             sharedDataViewmodel.getMedicalInfoStatus(false)
             sp.saveUserToken(Constans.TOKEN, "")
-            sp.save(UserLOGIN, DataLogin(0,"","","","",0,0,""))
+        //    sp.save(UserLOGIN, DataLogin(0,"","","","",0,0,""))
             DateUtils.setToken("")
             findNavController().navigate(R.id.loginFragment)
             dismiss()

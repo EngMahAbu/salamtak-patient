@@ -147,7 +147,7 @@
     <string name="fees">رسوم الكشف</string>
     <string name="reset">مسح</string>
     <string name="specialization">التخصص</string>
-    <string name="patientName">اسم المريض : </string>
+    <string name="patientName">اسم المريض </string>
     <string name="choose_specialization">اختر التخصص</string>
     <string name="choose_sub_specialization">اختر التخصص الفرعي</string>
     <string name="choose_Seniority_Level">اختر الدرجة العلمية</string>

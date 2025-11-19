@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.korashiGroup.salamtakPatient.databinding.ItemLayoutCapsBinding
-import com.korashiGroup.salamtakPatient.model.salamtakgate.Blogs
 import com.korashiGroup.salamtakPatient.model.salamtakgate.blogs.DataBlogs
 
 class CapVideoAdapter: ListAdapter<DataBlogs, CapVideoAdapter.ViewHolder>(CapVideoAdapter.DiffCallback()) {

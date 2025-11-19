@@ -53,8 +53,8 @@ class HealthyTopicsFragment : Fragment(), BlogsGatesAdapter.Action, MedicalHealt
     private lateinit var capsVideoAdapter: CapVideoAdapter
     private lateinit var healthAdapter: MedicalHealthAdapter
     private lateinit var blogsGatesAdapter: BlogsGatesAdapter
-    private var cityId = 0
-    private var areaId = 0
+    private var cityId = 1
+    private var areaId = 1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -347,7 +347,6 @@ class HealthyTopicsFragment : Fragment(), BlogsGatesAdapter.Action, MedicalHealt
                 is Resource.sucess -> {
                     binding.progressBar.visibility=View.GONE
                     questionsAdapter.submitList(it.data?.data)
-                    questionsAdapter.notifyDataSetChanged()
                 }
                 is Resource.Error -> {
                     binding.progressBar.visibility=View.GONE

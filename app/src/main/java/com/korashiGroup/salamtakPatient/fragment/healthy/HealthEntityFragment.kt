@@ -39,6 +39,7 @@ import com.korashiGroup.salamtakPatient.model.*
 import com.korashiGroup.salamtakPatient.model.docotorsearch.DoctorSearchRequest
 import com.korashiGroup.salamtakPatient.model.healthy.ItemHealth
 import com.korashiGroup.salamtakPatient.model.salamtakgate.Blogs
+import com.korashiGroup.salamtakPatient.utils.localization.DefaultLocaleHelper
 import com.korashiGroup.salamtakPatient.viewmodel.PagingViewmodel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -54,8 +55,8 @@ class HealthEntityFragment : Fragment(),MedicalHealthAdapter.Action {
     private val args:HealthEntityFragmentArgs by navArgs()
     private lateinit var healthAdapter: MedicalHealthAdapter
     val allHealthItem= mutableListOf<ItemHealth>()
-    private var cityId=0
-    private var areaId=0
+    private var cityId=1
+    private var areaId=1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -202,12 +203,17 @@ class HealthEntityFragment : Fragment(),MedicalHealthAdapter.Action {
     private fun bindDataToUi(){
 
         sharedDataViewmodel.getCity.observe(viewLifecycleOwner, Observer {
-            binding.layoutBottomsheetpersistant.etChooseCity.setText(it.name)
+            if (DefaultLocaleHelper.getInstance(requireContext()).getCurrentLocale()=="en") {
+                binding.layoutBottomsheetpersistant.etChooseCity.setText(it.name)
+            }else{
+                binding.layoutBottomsheetpersistant.etChooseCity.setText(it.nameAr)
+
+            }
             cityId=it.id
         })
 
         sharedDataViewmodel.getArea.observe(viewLifecycleOwner, Observer {
-            binding.layoutBottomsheetpersistant.etChooseArea.setText(it.name)
+                binding.layoutBottomsheetpersistant.etChooseArea.setText(it.name)
             if (it.id!=null) {
                 areaId = it.id
             }

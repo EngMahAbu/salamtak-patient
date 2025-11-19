@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,9 +13,7 @@ import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -26,9 +23,7 @@ import com.korashiGroup.salamtakPatient.adapter.AnalysisAdapter
 import com.korashiGroup.salamtakPatient.adapter.SpecialictyAdapter
 import com.korashiGroup.salamtakPatient.adapter.TopSpecialictyAdapter
 import com.korashiGroup.salamtakPatient.databinding.SpecialistDoctorsfragmentBinding
-import com.korashiGroup.salamtakPatient.fragment.askdoctor.AskDoctorFragmentDirections
 import com.korashiGroup.salamtakPatient.fragment.labsandscanner.model.LabsInfo
-import com.korashiGroup.salamtakPatient.model.CityData
 import com.korashiGroup.salamtakPatient.model.SpecialistData
 import com.korashiGroup.salamtakPatient.model.labsandscanner.DataAnalysis
 import com.korashiGroup.salamtakPatient.utils.Resource
@@ -81,7 +76,7 @@ class SpecialistDoctorsFragment : Fragment(),SpecialictyAdapter.SelectSpecialist
         //callBackSpecialist()
         initButton()
         getDataFromViews()
-        callBackGetAnalysis()
+       // callBackGetAnalysis()
     }
 
     private fun initButton(){
@@ -145,7 +140,6 @@ class SpecialistDoctorsFragment : Fragment(),SpecialictyAdapter.SelectSpecialist
                     }else{
                         Toast.makeText(requireContext(),getString(R.string.please_choose_analysis_first),Toast.LENGTH_SHORT).show()
                     }
-
                 }
                 9->{
                     if (!list.isNullOrEmpty()) {

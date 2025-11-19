@@ -7,14 +7,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.korashiGroup.salamtakPatient.databinding.ItemLayoutGatesBinding
 import com.korashiGroup.salamtakPatient.databinding.ItemLayoutImagesBinding
-import com.korashiGroup.salamtakPatient.databinding.ItemLayoutRvservicesBinding
-import com.korashiGroup.salamtakPatient.model.ImageServices
 import com.korashiGroup.salamtakPatient.model.salamtakgate.Gates
 
 
-class ImagesAdapter():ListAdapter<Gates,ImagesAdapter.ViewHolder>(DiffCallback()) {
+class ImagesAdapter(private val onclick: IPhotoViewr):ListAdapter<Gates,ImagesAdapter.ViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
@@ -27,6 +24,9 @@ class ImagesAdapter():ListAdapter<Gates,ImagesAdapter.ViewHolder>(DiffCallback()
         Glide.with(holder.binding.ivGallary.context)
             .load("https://salamtechapi.azurewebsites.net/${services.imageURL}")
             .into(holder.binding.ivGallary)
+        holder.binding.ivGallary.setOnClickListener {
+            onclick.clickOnPhoto(services.imageURL)
+        }
     }
 
 
@@ -44,6 +44,10 @@ class ImagesAdapter():ListAdapter<Gates,ImagesAdapter.ViewHolder>(DiffCallback()
         override fun areContentsTheSame(oldItem: Gates, newItem: Gates): Boolean {
             return true
         }
+    }
+
+    interface IPhotoViewr{
+        fun clickOnPhoto(image: String)
     }
 
 

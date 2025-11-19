@@ -241,7 +241,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         binding.ivArrow.setOnClickListener {
             if (type == 0) {
                 DateUtils.setstatus("")
-                findNavController().navigate(R.id.chooseSpecialistFragment)
+                findNavController().navigate(R.id.specialistDoctorsFragment)
             } else {
                 polyClinicRecylerview()
                 polyClinicSearch()

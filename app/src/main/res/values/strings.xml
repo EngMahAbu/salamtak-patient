@@ -117,7 +117,7 @@
         your doctor
     </string>
     <string name="salamtak_services">Our Services</string>
-    <string name="Clinic_Booking">Clinic Visit</string>
+    <string name="Clinic_Booking">In-Clinic Booking</string>
     <string name="Home_Visit">Home Visit</string>
     <string name="Chat">Chat</string>
     <string name="Call">Call</string>
@@ -157,7 +157,7 @@
     <string name="fees">Fees</string>
     <string name="reset">Reset</string>
     <string name="specialization">Speciality</string>
-    <string name="patientName">Patient Name:</string>
+    <string name="patientName">Patient Name</string>
     <string name="choose_specialization">Popular Specialties</string>
     <string name="choose_sub_specialization">Choose sub Speciality</string>
     <string name="choose_Seniority_Level">Choose Seniority Level</string>

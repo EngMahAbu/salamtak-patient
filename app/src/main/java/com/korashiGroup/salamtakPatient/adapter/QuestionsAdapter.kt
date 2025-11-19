@@ -29,28 +29,28 @@ class QuestionsAdapter(val book:IBook,val isFullName:Boolean):ListAdapter<Questi
         val services=getItem(position)
          holder.binding.apply {
              btnMore.visibility=View.GONE
-             tvSpecialistName.text=" ${services.specialityName}"
+             tvSpecialistName.text="${tvSpecialistName.context.getString(R.string.specialization)} : ${services.specialityName}"
              //tvAge.text="${tvSpecialistName.context.getString(R.string.patientage)} : ${services.age}"
              if (!services.chronic_disease.isNullOrEmpty()){
                  holder.binding.tvChronicDisease.visibility=View.VISIBLE
-                // tvChronicDisease.text="${tvSpecialistName.context.getString(R.string.chronicdisease)} : ${services.chronic_disease}"
+                 tvChronicDisease.text="${tvSpecialistName.context.getString(R.string.chronicdisease)} : ${services.chronic_disease}"
              }else{
                  holder.binding.tvChronicDisease.visibility=View.GONE
              }
              if (!services.prevSurgery.isNullOrEmpty()){
                  holder.binding.tvPrevSurgery.visibility=View.VISIBLE
-                // tvPrevSurgery.text="${tvSpecialistName.context.getString(R.string.prevSurgery)} : ${services.prevSurgery}"
+                 tvPrevSurgery.text="${tvSpecialistName.context.getString(R.string.prevSurgery)} : ${services.prevSurgery}"
              }else{
                  holder.binding.tvPrevSurgery.visibility=View.GONE
              }
              if (isFullName){
-                // tvPatientname.text="${tvSpecialistName.context.getString(R.string.patientName)} : ${services.patientFulltname}"
+                 tvPatientname.text="${tvSpecialistName.context.getString(R.string.patientName)} : ${services.patientFulltname}"
                  tvPatientname.visibility=View.GONE
              }else{
                  tvPatientname.text="${tvSpecialistName.context.getString(R.string.patientName)} : ${services.patientFirstname}"
              }
              if (DefaultLocaleHelper.getInstance(tvQuestions.context).getCurrentLocale()=="en"){
-                 tvQuestions.text=" ${services.question} ?"
+                 tvQuestions.text="${services.question} ?"
              }else{
                  tvQuestions.text=" ${services.question}؟ "
              }

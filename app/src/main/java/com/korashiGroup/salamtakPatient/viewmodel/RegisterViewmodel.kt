@@ -13,6 +13,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.json.JSONObject
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -37,11 +38,53 @@ class RegisterViewmodel @Inject constructor(private val repositry: RegisterRepos
     }
 
 
-    fun loginUser(culture:String,loginUser: LoginUser)=viewModelScope.launch(Dispatchers.IO+handler) {
+
+    fun loginUser(culture:String,loginUser: LoginUser) = viewModelScope.launch(Dispatchers.IO + handler) {
         loginResponse.postValue(Resource.Loading())
-        val response=repositry.login(culture,loginUser)
-        loginResponse.postValue(handleLogin(response))
+
+        try {
+            val response=repositry.login(culture,loginUser)
+
+            if (response.isSuccessful) {
+                response.body()?.let {
+                    loginResponse.postValue(Resource.sucess(it))
+                } ?: loginResponse.postValue(Resource.Error("الاستجابة من الخادم فارغة"))
+            } else {
+
+                val errorBody = response.errorBody()?.string()
+                val errorMessage = try {
+                    val json = JSONObject(errorBody ?: "")
+                    json.optString("message", "حدث خطأ غير معروف")
+                } catch (e: Exception) {
+                    "حدث خطأ غير معروف"
+                }
+
+                Log.e("HTTP Error", "Code: ${response.code()}, message: $errorMessage")
+                loginResponse.postValue(Resource.Error(errorMessage))
+            }
+
+        } catch (e: Exception) {
+            Log.e("exception", "Exception: ${e.message}")
+
+            val userMessage = when (e) {
+                is java.net.UnknownHostException -> "تعذر الاتصال بالخادم، تحقق من اتصال الإنترنت."
+                is java.net.SocketTimeoutException -> "انتهت مهلة الاتصال، حاول مرة أخرى لاحقاً."
+                is javax.net.ssl.SSLHandshakeException -> "حدث خطأ في الاتصال الآمن (SSL)."
+                else -> e.message ?: "حدث خطأ غير معروف"
+            }
+
+            loginResponse.postValue(Resource.Error(userMessage))
+        }
     }
+
+
+
+
+//    fun loginUser(culture:String,loginUser: LoginUser)=viewModelScope.launch(Dispatchers.IO+handler) {
+//        loginResponse.postValue(Resource.Loading())
+//        val response=repositry.login(culture,loginUser)
+//        loginResponse.postValue(handleLogin(response))
+//    }
 
     private fun handleLogin(response: Response<LoginResponse>): Resource<LoginResponse>? {
         if (response.isSuccessful){

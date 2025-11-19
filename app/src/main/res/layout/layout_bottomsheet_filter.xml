@@ -489,6 +489,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
                                 android:background="#E9EAEF"
+                                android:visibility="gone"
                                 android:layout_marginTop="2dp"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -23,6 +24,7 @@ import com.korashiGroup.salamtakPatient.adapter.ImageVideoAdapter
 import com.korashiGroup.salamtakPatient.adapter.ImagesAdapter
 import com.korashiGroup.salamtakPatient.adapter.ReveiwsAdapter
 import com.korashiGroup.salamtakPatient.databinding.BookingAppointmentfragmentBinding
+import com.korashiGroup.salamtakPatient.fragment.dialog.ImageDialogFragment
 import com.korashiGroup.salamtakPatient.fragment.home.HomeFragment
 import com.korashiGroup.salamtakPatient.fragment.home.SearchFragment
 import com.korashiGroup.salamtakPatient.model.HomeAdsData
@@ -47,7 +49,7 @@ import java.util.TimeZone
 import kotlin.math.roundToInt
 
 @AndroidEntryPoint
-class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
+class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking, ImagesAdapter.IPhotoViewr {
 
     private lateinit var binding: BookingAppointmentfragmentBinding
     private lateinit var bottomsheetbeahavoir: BottomSheetBehavior<ConstraintLayout>
@@ -195,7 +197,7 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
             }
     }
     private fun gallaryBottomsheetRecylerview() {
-        imagesAdapter = ImagesAdapter()
+        imagesAdapter = ImagesAdapter(this)
         binding.layoutBottomsheetpersistant.rvGallry.apply {
             adapter = imagesAdapter
             setHasFixedSize(true)
@@ -206,7 +208,7 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
     private fun capsVideoRecylerview() {
         imageVideoAdapter = ImageVideoAdapter()
         binding.viewPager.apply {
-            adapter = imageVideoAdapter
+         //   adapter = imageVideoAdapter
             layoutManager = LinearLayoutManager(requireContext())
             setHasFixedSize(true)
         }
@@ -215,7 +217,7 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
     private fun capsDoctorVideoRecylerview() {
         capVideoAdapter = CapVideoAdapter()
         binding.viewPagerclinic.apply {
-            adapter = capVideoAdapter
+         //   adapter = capVideoAdapter
             layoutManager = LinearLayoutManager(requireContext())
             setHasFixedSize(true)
         }
@@ -237,7 +239,7 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
 
     }
     private fun gallaryRecylerview() {
-        imagesAdapter = ImagesAdapter()
+        imagesAdapter = ImagesAdapter(this)
         binding.rvGallry.apply {
             adapter = imagesAdapter
             setHasFixedSize(true)
@@ -381,10 +383,11 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
                 }
 
                 is Resource.sucess -> {
+                    binding.rvReviews.visibility= View.VISIBLE
+                    binding.Reviews.visibility= View.VISIBLE
+                    binding.seeAll.visibility= View.VISIBLE
                     reveiwsAdapter.submitList(response.data?.data)
                     reviewsData= response.data!!
-                    reveiwsAdapter.notifyDataSetChanged()
-
                 }
 
                 is Resource.Error -> {
@@ -515,6 +518,8 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
             binding.detailsInsurance.setText(currentDtos.insurance?.toString()?.removePrefix("[")?.removeSuffix("]"))
         }
         if (!currentDtos.gallary.isNullOrEmpty()) {
+            binding.rvGallry.visibility= View.VISIBLE
+            binding.photo.visibility= View.VISIBLE
             val listBlogs= mutableListOf<Gates>()
             for (i in currentDtos.gallary.indices!!){
                  val gates=Gates(0,currentDtos.gallary[i].toString())
@@ -599,8 +604,12 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
             subspecialist = "$subspecialist $it,"
         }
         binding.layoutBottomsheetpersistant.tvSpecialization.text = "${getDoctorClinksResponse.data?.seniorityLevelName} - ${getDoctorClinksResponse.data?.specialistName.toString()?.removePrefix("[")?.removeSuffix("]")}"
-        clinksDoctorsAdapter.submitList(getDoctorClinksResponse.data?.clinicDtos)
-        clinksDoctorsAdapter.notifyDataSetChanged()
+       if (!getDoctorClinksResponse.data?.clinicDtos.isNullOrEmpty()){
+           binding.tvDoctorsClinics.visibility= View.VISIBLE
+           binding.rvClinkDoctors.visibility= View.VISIBLE
+           clinksDoctorsAdapter.submitList(getDoctorClinksResponse.data?.clinicDtos)
+       }
+
     }
 
     private fun callDoctorVideos(){
@@ -625,6 +634,11 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking {
         })
 
 
+    }
+
+    override fun clickOnPhoto(image: String) {
+        val dialog = ImageDialogFragment.newInstance(image)
+        dialog.show(parentFragmentManager, "image_res")
     }
 
 }

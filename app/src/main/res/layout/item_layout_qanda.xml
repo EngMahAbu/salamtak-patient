@@ -38,7 +38,7 @@
                             android:id="@+id/iv_doctorProfile"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
-                            android:visibility="visible"
+                            android:visibility="gone"
                             android:src="@drawable/care"
                             android:layout_marginTop="10dp"
                             android:layout_marginEnd="5dp"
@@ -52,13 +52,13 @@
                             android:layout_marginStart="10dp"
                             android:fontFamily="@font/sf_pro_display_semibold"
                             android:gravity="start"
-                            android:text=""
+                            android:text="osama"
                             android:textColor="@color/black"
                             android:textSize="15sp"
-                            app:layout_constraintStart_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
 
-                             />
+                            />
 
                     <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/tv_doctorName"
@@ -79,33 +79,45 @@
                             android:id="@+id/tv_specialistName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
-                            android:layout_marginEnd="10dp"
+                            android:layout_marginStart="10dp"
                             android:fontFamily="@font/sf_pro_display_semibold"
                             android:gravity="start"
                             android:text=""
+                            android:visibility="visible"
                             android:textColor="@color/black"
                             android:textSize="16sp"
                             android:layout_marginTop="10dp"
                             app:layout_constraintStart_toEndOf="@+id/iv_doctorProfile"
                             app:layout_constraintTop_toBottomOf="@+id/tv_doctorName" />
 
+                    <View
+                            android:id="@+id/view"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginStart="@dimen/_7sdp"
+                            android:layout_marginEnd="@dimen/_7sdp"
+                            android:layout_marginTop="@dimen/_6sdp"
+                            android:background="@color/gray_color"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_specialistName" />
+
+
                     <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/tv_questions"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
-                            android:layout_marginTop="15dp"
+                            android:layout_marginTop="10dp"
+                            android:visibility="visible"
                             android:fontFamily="@font/sf_pro_display_semibold"
                             android:gravity="start"
                             android:padding="1dp"
                             android:text=""
-                            android:textColor="@color/black"
-                            android:textSize="16sp"
+                            android:textColor="@color/dark_gray"
+                            android:textSize="18sp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             android:layout_marginEnd="@dimen/_10sdp"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_specialistName" />
+                            app:layout_constraintTop_toBottomOf="@+id/view" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/tv_Age"
@@ -116,6 +128,7 @@
                             android:fontFamily="@font/avenirltstd_roman"
                             android:gravity="start"
                             android:padding="1dp"
+                            android:visibility="gone"
                             android:textColor="@color/black"
                             android:textSize="15sp"
                             app:layout_constraintStart_toStartOf="parent"
@@ -128,9 +141,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
                             android:layout_marginTop="5dp"
-                            android:fontFamily="@font/avenirltstd_roman"
+                            android:fontFamily="@font/sf_pro_display_semibold"
                             android:gravity="start"
                             android:padding="1dp"
+                            android:visibility="gone"
                             android:textColor="@color/black"
                             android:textSize="15sp"
                             app:layout_constraintStart_toStartOf="parent"
@@ -143,9 +157,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
                             android:layout_marginTop="5dp"
-                            android:fontFamily="@font/avenirltstd_roman"
+                            android:fontFamily="@font/sf_pro_display_semibold"
                             android:gravity="start"
                             android:padding="1dp"
+                            android:visibility="gone"
                             android:textColor="@color/black"
                             android:textSize="15sp"
                             app:layout_constraintStart_toStartOf="parent"
