@@ -976,7 +976,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_Reviews"
                         android:layout_width="match_parent"
-                        android:layout_height="220dp"
+                        android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -1053,7 +1053,7 @@
     <include
             android:id="@+id/layoutBottomsheetpersistant"
             layout="@layout/item_layout_mainpage"
-            android:visibility="gone" />
+            android:visibility="visible" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
