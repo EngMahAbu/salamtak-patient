@@ -39,9 +39,9 @@ class MoreFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (DateUtils.getLanguage() == "en") {
-            binding.tvName.text = sp.getUser()?.name
+            binding.tvEdit.text = sp.getUser()?.name
         } else {
-            binding.tvName.text = sp.getUser()?.NameAR
+            binding.tvEdit.text = sp.getUser()?.NameAR
         }
 
 //        binding.ivPatientProfile.load("https://salamtechapi.azurewebsites.net/${sp.getUser()?.image}") {
@@ -131,7 +131,7 @@ class MoreFragment : Fragment() {
         binding.layoutBillsDoctor.setOnClickListener {
             findNavController().navigate(R.id.patientAccountFragment)
         }
-      binding.layoutNextAvailableBooking.setOnClickListener {
+      binding.layoutMedicalRecord.setOnClickListener {
 //                if (skipStatus=="skip"){
 //                    return@setOnClickListener
 //                }else{

@@ -27,17 +27,25 @@ class MainDoctorAccountAdapter(val addItems:IAddItems ,val status:Boolean):ListA
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val services=getItem(position)
        // holder.binding.editPatientAccountTv.visibility=View.GONE
+        val balance= services.totalAmount?.toDouble()?.minus(services?.paidAmount?.toDouble() ?: 0.0)
         if (DefaultLocaleHelper.getInstance(holder.binding.doctorNameTv.context).getCurrentLocale()=="ar"){
             holder.binding.doctorNameTv.text=services.doctorName
             holder.binding.balanceTv.text="${services.totalAmount!! - services.paidAmount!!} جنية "
             holder.binding.feeTv.text="${services.totalAmount!!} جنية "
             holder.binding.paidTv.text="${services.paidAmount!!} جنية "
             holder.binding.dateTv.text= DataBinding.convertDateFormat(services.date, "yyyy-MM-dd'T'HH:mm:ss", "yyyy-M-d")
+            holder.binding.totalfeesTv.text="${services.totalAmount!!} جنية "
+            holder.binding.totalpaidTv.text="${services.paidAmount!!} جنية "
+            holder.binding.totabalanceTv.text="${balance?.toInt()} جنية "
+
         }else{
          holder.binding.doctorNameTv.text=services.doctorName
             holder.binding.balanceTv.text="${services.totalAmount!! - services.paidAmount!!} EGP "
             holder.binding.feeTv.text="${services.totalAmount!!} EGP "
             holder.binding.paidTv.text="${services.paidAmount!!} EGP "
+            holder.binding.totalfeesTv.text="${services.totalAmount!!} EGP "
+            holder.binding.totalpaidTv.text="${services.paidAmount!!} EGP "
+            holder.binding.totabalanceTv.text="${balance?.toInt()} EGP "
             holder.binding.dateTv.text= DataBinding.convertDateFormat(services.date, "yyyy-MM-dd'T'HH:mm:ss", "yyyy-M-d")
         }
         val subItemAdapter = SubDoctorAccountAdapter(this)
@@ -55,8 +63,8 @@ class MainDoctorAccountAdapter(val addItems:IAddItems ,val status:Boolean):ListA
 //            holder.binding.rvSubItem.visibility = if ( holder.binding.rvSubItem.isShown) View.GONE else View.VISIBLE
 //        }
         holder.binding.editPatientAccountTv.setOnClickListener {
-            holder.binding.tab.visibility = if ( holder.binding.balance.isShown) View.VISIBLE else View.GONE
-            holder.binding.tvServices.visibility = if ( holder.binding.balance.isShown) View.INVISIBLE else View.VISIBLE
+            holder.binding.tab.visibility = if ( holder.binding.rvSubItem.isShown) View.VISIBLE else View.GONE
+            holder.binding.tvServices.visibility = if ( holder.binding.rvSubItem.isShown) View.GONE else View.VISIBLE
           //holder.binding.editPatientAccountTv.visibility = if ( holder.binding.editPatientAccountTv.isShown) View.GONE else View.VISIBLE
          // holder.binding.editNextArrow.visibility = if ( holder.binding.editNextArrow.isShown) View.GONE else View.VISIBLE
             holder.binding.rvSubItem.visibility = if ( holder.binding.rvSubItem.isShown) View.GONE else View.VISIBLE

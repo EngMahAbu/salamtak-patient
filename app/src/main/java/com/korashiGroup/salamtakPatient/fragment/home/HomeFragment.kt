@@ -1069,6 +1069,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
         examinationtypeid: Int,
         dayId: Int
     ) {
+        Log.e("rateCount", "onItemClickDoctorProfile:${rateCount} ", )
         sharedDataViewmodel.getRating(RatingDoctors(rate, rateCount))
 //        if (DateUtils.getToken().isNullOrEmpty()) {
 //            findNavController().navigate(R.id.dialogSignUp)

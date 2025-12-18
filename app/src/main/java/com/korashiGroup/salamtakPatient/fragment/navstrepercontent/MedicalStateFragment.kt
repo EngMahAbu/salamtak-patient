@@ -2,6 +2,9 @@ package com.korashiGroup.salamtakPatient.fragment.navstrepercontent
 
 import android.os.Bundle
 import android.os.Handler
+import android.text.Editable
+import android.text.InputFilter
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +21,7 @@ import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import com.google.android.material.snackbar.Snackbar
+import com.korashiGroup.salamtakPatient.utils.localization.DefaultLocaleHelper
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -42,12 +46,66 @@ class MedicalStateFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if (DefaultLocaleHelper.getInstance(requireContext()).getCurrentLocale()=="ar"){
+            binding.imPressgure.scaleX=-1f
+            binding.imSuggar.scaleX=-1f
+        }else{
+            binding.imPressgure.scaleX=1f
+            binding.imSuggar.scaleX=1f
+        }
         initButton()
         getData()
         callBackPatientMedicalInfo()
     }
 
     private fun  initButton(){
+        binding.etPressure.filters = arrayOf(InputFilter { source, start, end, dest, dstart, dend ->
+
+            val newText = dest.substring(0, dstart) +
+                    source.subSequence(start, end) +
+                    dest.substring(dend)
+
+            val parts = newText.split("/")
+
+            // منع أكثر من جزأين
+            if (parts.size > 2) return@InputFilter ""
+
+            // الجزء الأول قبل /
+            if (parts[0].length > 3) return@InputFilter ""
+
+            // الجزء الثاني بعد /
+            if (parts.size == 2 && parts[1].length > 3) return@InputFilter ""
+
+            // السماح بالكتابة
+            null
+        })
+
+
+        binding.etPressure.addTextChangedListener(object : TextWatcher {
+
+            private var isEditing = false
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+                if (isEditing) return
+                isEditing = true
+
+                val text = s.toString()
+
+                // إضافة / تلقائي بعد أول 3 أرقام
+                if (text.length == 3 && !text.contains("/")) {
+                    s?.append("/")
+                }
+
+                isEditing = false
+            }
+        })
+
+
+
         binding.btnNext.setOnClickListener {
             sendPatientMedicalInfo()
         }
@@ -93,11 +151,13 @@ class MedicalStateFragment : Fragment() {
         if (!binding.etWeight.text.toString().trim().isNullOrEmpty()){
             partMap = partMap + mapOf("Weight" to binding.etWeight.text.toString().toInt())
         }
+        val Pressure=binding.etPressureMMGG.text.toString()+"/"+binding.lastEtPressureMMGG.text.toString()
         if (!binding.etPressureMMGG.text.toString().trim().isNullOrEmpty()){
-            partMap = partMap + mapOf("Pressure" to binding.etPressureMMGG.text.toString())
+            partMap = partMap + mapOf("Pressure" to Pressure)
         }
+        val SugarLevel=binding.etSugarLevelMGDL.text.toString()+"/"+binding.lastEtSugarLevelMGDL.text.toString()
         if (!binding.etSugarLevelMGDL.text.toString().trim().isNullOrEmpty()){
-            partMap = partMap + mapOf("SugarLevel" to binding.etSugarLevelMGDL.text.toString())
+            partMap = partMap + mapOf("SugarLevel" to SugarLevel)
         }
         if (!binding.etHight.text.toString().trim().isNullOrEmpty()){
             partMap = partMap + mapOf("Height" to binding.etHight.text.toString().toInt())
@@ -125,6 +185,9 @@ class MedicalStateFragment : Fragment() {
         }
         if (!binding.etSurgeries.text.toString().trim().isNullOrEmpty()){
             partMap = partMap + mapOf("Surgeries" to binding.etSurgeries.text.toString())
+        }
+        if (!binding.etChronicDiseases.text.toString().trim().isNullOrEmpty()){
+            partMap = partMap + mapOf("ChronicDiseases" to binding.etChronicDiseases.text.toString())
         }
 
 
@@ -267,25 +330,42 @@ class MedicalStateFragment : Fragment() {
         }else{
             binding.etBloodGroup.setText("")
         }
+        val value = patientInfo.pressure.toString()
+        val parts = value.split("/")
+        val first = parts.getOrNull(0)?.toIntOrNull()
+        val second = parts.getOrNull(1)?.toIntOrNull()
         if (patientInfo.pressure!=null){
-            binding.etPressureMMGG.setText(patientInfo.pressure.toString())
+            binding.etPressureMMGG.setText(first.toString())
+            binding.lastEtPressureMMGG.setText(second.toString())
         }else{
             binding.etPressureMMGG.setText("")
+            binding.lastEtPressureMMGG.setText("")
         }
         if (patientInfo.prescriptions!=null){
         binding.etPrescriptions.setText(patientInfo.prescriptions.toString())
         }else{
             binding.etPrescriptions.setText("")
         }
+        val valueSugarLevel = patientInfo.sugarLevel.toString()
+        val partsSugarLevel = valueSugarLevel.split("/")
+        val firstSugarLevel = partsSugarLevel.getOrNull(0)?.toIntOrNull()
+        val secondSugarLevel = partsSugarLevel.getOrNull(1)?.toIntOrNull()
         if (patientInfo.sugarLevel!=null) {
-            binding.etSugarLevelMGDL.setText(patientInfo.sugarLevel.toString())
+            binding.etSugarLevelMGDL.setText(firstSugarLevel.toString())
+            binding.lastEtSugarLevelMGDL.setText(secondSugarLevel.toString())
         }else{
             binding.etSugarLevelMGDL.setText("")
+            binding.lastEtSugarLevelMGDL.setText("")
         }
         if (patientInfo.surgeries!=null) {
             binding.etSurgeries.setText(patientInfo.surgeries.toString())
         }else{
             binding.etSurgeries.setText("")
+        }
+        if (patientInfo.chronicDiseases!=null) {
+            binding.etChronicDiseases.setText(patientInfo.chronicDiseases.toString())
+        }else{
+            binding.etChronicDiseases.setText("")
         }
         if (patientInfo.currentMedication!=null) {
             binding.etCurrentMedication.setText(patientInfo.currentMedication.toString())

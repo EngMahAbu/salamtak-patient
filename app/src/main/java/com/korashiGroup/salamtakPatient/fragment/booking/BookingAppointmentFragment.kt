@@ -143,12 +143,21 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking, Ima
 
         }
         binding.btnBooking.setOnClickListener {
-            val send=BookingAppointmentFragmentDirections.actionBookingAppointmentFragmentToBookAppointmentFragment(getDoctorAndPolyClinksResponse,"booking appointment")
-            findNavController().navigate(send)
+            if (::getDoctorAndPolyClinksResponse.isInitialized){
+                val send=BookingAppointmentFragmentDirections.actionBookingAppointmentFragmentToBookAppointmentFragment(getDoctorAndPolyClinksResponse,"booking appointment")
+                findNavController().navigate(send)
+            }
+
         }
         binding.layoutBottomsheetpersistant.btnBooking.setOnClickListener {
-            val send=BookingAppointmentFragmentDirections.actionBookingAppointmentFragmentToBookAppointmentFragment(getDoctorAndPolyClinksResponse,"booking appointment")
-            findNavController().navigate(send)
+            if (::getDoctorAndPolyClinksResponse.isInitialized) {
+                val send =
+                    BookingAppointmentFragmentDirections.actionBookingAppointmentFragmentToBookAppointmentFragment(
+                        getDoctorAndPolyClinksResponse,
+                        "booking appointment"
+                    )
+                findNavController().navigate(send)
+            }
         }
 
         binding.ivFavorite.setOnClickListener {
@@ -383,6 +392,7 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking, Ima
                 }
 
                 is Resource.sucess -> {
+                    binding.Ratecount.text= response.data?.data?.size.toString()
                     binding.rvReviews.visibility= View.VISIBLE
                     binding.Reviews.visibility= View.VISIBLE
                     binding.seeAll.visibility= View.VISIBLE
@@ -428,8 +438,8 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking, Ima
     private fun bindViews(){
         sharedDataViewmodel.rating.observe(viewLifecycleOwner, Observer {
            // binding.ratingBar.rating= it.rate?.toFloat()?: 1.0f
-            binding.Reviewss.text="${it.rate?.roundToInt()?.toDouble()}"
-            binding.Ratecount.text="${it.rate?.toInt()}"
+            binding.Ratecount.text="${it?.rateCount}"
+            binding.Reviewss.text="${it.rate?.toInt()}"
         })
 
         binding.layoutClinicsLocation.setOnClickListener {

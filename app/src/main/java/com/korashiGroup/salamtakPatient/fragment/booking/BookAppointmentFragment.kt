@@ -364,7 +364,7 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
                                 doctorWorkingDayTimeId,
                                 fees,
                                 medicalExaminationTypeName,
-                                it.data?.data?.doctorDto?.specialistName,
+                                "${it.data?.data?.doctorDto?.specialistName} - ${it.data?.data?.doctorDto?.seniorityLevelName}",
                                 args.doctorclinks?.data?.image,
                                 medicalExaminationId
                             )

@@ -45,7 +45,7 @@ class PopularDoctorsAdapter(val onitemclick:Action):ListAdapter<PopularDoctorS,P
         }
 
         holder.binding.tvReviews.text="(${holder.binding.tvReviews.context.getString(R.string.reviews)})"
-        holder.binding.Ratecount.text="${services.rate.toString()}"
+        holder.binding.Ratecount.text="${services.rate?.toInt().toString()}"
        // holder.binding.ratingBar.rating= services.rate?.toFloat()?: 1.0f
 
         holder.binding.layoutDoctorsDetail.setOnClickListener {

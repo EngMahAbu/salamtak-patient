@@ -40,14 +40,68 @@
         android:orientation="vertical"
         android:layout_marginTop="@dimen/_15sdp"
         android:layout_marginHorizontal="@dimen/_12sdp"
-            android:layout_marginBottom="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@+id/tv_Filter"
-       app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:listitem="@layout/item_patient_parent_item"
         tools:itemCount="2"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_cardview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@+id/patient_data_rv"
+            app:layout_constraintEnd_toEndOf="@+id/patient_data_rv"
+            app:layout_constraintTop_toTopOf="@+id/patient_data_rv"
+            app:layout_constraintBottom_toBottomOf="@+id/patient_data_rv">
+        <ImageView
+                android:id="@+id/gifImageView"
+                android:layout_width="@dimen/_120sdp"
+                android:layout_height="120dp"
+                android:scaleType="fitCenter"
+                android:visibility="visible"
+                android:src="@drawable/invoiceicon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+        <TextView
+                android:id="@+id/crd_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no_data_registed"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/sf_pro_display_semibold"
+                android:textColor="@color/black"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/gifImageView"
+                android:textSize="20sp" />
+
+        <TextView
+                android:id="@+id/textchange"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/try_searching_for_a_different_specialty_or_change_your_location_to_see_more_available_doctors"
+                android:fontFamily="@font/sd_pro_display_regular"
+                android:textColor="@color/text_doctor_card_color"
+                android:visibility="gone"
+                android:gravity="center_vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/crd_view"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:textSize="16sp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <ProgressBar
         android:id="@+id/progress_bar"

@@ -212,7 +212,7 @@ class LocationFragment : Fragment() {
             1,
             "",
             etFloorNumber,
-            "${binding.etStreet.text}" + "."
+            "${binding.etStreet.text}"
         )
         viewmodel.sendPatientLocation(locationRequest)
 
@@ -302,7 +302,9 @@ class LocationFragment : Fragment() {
             binding.etChooseArea.setText(patientInfo.areaName)
             binding.etStreet.setText(patientInfo.address)
             binding.etBuildingNumber.setText(patientInfo.blockNo)
-            binding.etFloorNumber.setText(patientInfo.floorNo.toString())
+            if (patientInfo.floorNo.toString()!="null"){
+                binding.etFloorNumber.setText(patientInfo.floorNo.toString())
+            }
             binding.etApartmentNumber.setText(patientInfo.apartmentNo)
         }
     }

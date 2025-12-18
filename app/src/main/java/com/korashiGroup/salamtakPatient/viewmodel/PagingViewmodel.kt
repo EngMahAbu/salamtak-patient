@@ -16,9 +16,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PagingViewmodel @Inject constructor(private val repos: RegisterRepositry) :ViewModel(){
-    var citId=1
-    var areaId=1
-    var healthType=1
+//    var citId=1
+//    var areaId=1
+//    var healthType=1
 //    val list=Pager(PagingConfig(1)){
 //        DoctorsPagingSource(repos,citId,areaId,healthType)
 //    }.flow.cachedIn(viewModelScope)

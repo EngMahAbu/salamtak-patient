@@ -34,6 +34,7 @@ import com.korashiGroup.salamtakPatient.model.labsandscanner.LabsResponse
 import com.korashiGroup.salamtakPatient.model.notification.DoctorNotificationResponse
 import com.korashiGroup.salamtakPatient.model.offers.ActiveOffersResponse
 import com.korashiGroup.salamtakPatient.model.offers.OffersDetailsResponse
+import com.korashiGroup.salamtakPatient.model.patient.PatientRelationshipResponse
 import com.korashiGroup.salamtakPatient.model.populardoctors.GetDoctorHealthTopicsResponse
 import com.korashiGroup.salamtakPatient.model.populardoctors.GetDoctorSpotLightResponse
 import com.korashiGroup.salamtakPatient.model.populardoctors.NewPopularDoctorResponse
@@ -493,5 +494,15 @@ interface ApiService {
         @Path("culture") culture: String,
         @Query("DoctorId") DoctorId :Int,
     ): Response<DoctorProfileResponse>
+
+    @GET("{culture}/PatientRelationshipType/GetAllPatientRelationshipType")
+    suspend fun getAllPatientRelationshipType(
+        @Path("culture") culture: String,
+    ): Response<PatientRelationshipResponse>
+
+    @PUT("{culture}/LookUp/UpdateQandAIsNoShowByUser")
+    suspend fun updateQandAIsNoShowByUser(
+        @Path("culture") culture: String,
+    ): Response<MedicalExaminationResponse>
 
 }

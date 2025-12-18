@@ -6,71 +6,94 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp">
+
+            android:padding="@dimen/_3sdp"
+        >
 
         <TableLayout
-            android:id="@+id/tab"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:stretchColumns="1,2,3,4">
+                android:id="@+id/tab"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="1,2,3,4,5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
             <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                >
-
-                <TextView
-                    android:id="@+id/date_tv"
-                    android:layout_width="80dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_column="1"
-                    android:gravity="center"
-                    android:lines="1"
-                    android:background="@drawable/invoice_border"
-                    android:textColor="@color/black"
-                    android:textSize="12sp"
-                    tools:text="22/07/2020" />
+                    >
 
-
+                <!-- Date -->
                 <TextView
-                    android:id="@+id/service_tv"
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:layout_column="2"
-                    android:gravity="center_horizontal"
-                    android:textColor="@color/black"
-                    android:textSize="12sp"
-                    android:background="@drawable/invoice_border"
-                    tools:text="limpe tets" />
+                        android:id="@+id/date_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_17sdp"
+                        android:gravity="center"
+                        android:layout_column="1"
+                        android:background="@drawable/invoice_border"
+                        android:textColor="@color/black"
+                        android:textSize="11sp"
+                        android:lines="1"
+                        android:padding="2dp"
+                        tools:text="22/07/2020" />
 
+                <!-- Service -->
                 <TextView
-                    android:id="@+id/fee_tv"
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:layout_column="3"
-                    android:gravity="center_horizontal"
-                    android:textColor="@color/black"
-                    android:textSize="12sp"
-                    android:background="@drawable/invoice_border"
-                    tools:text="300" />
+                        android:id="@+id/service_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_17sdp"
+                        android:gravity="center"
+                        android:layout_column="2"
+                        android:padding="2dp"
+                        android:background="@drawable/invoice_border"
+                        android:textColor="@color/black"
+                        android:textSize="11sp"
+                        tools:text="Simple test" />
 
+                <!-- Fee -->
                 <TextView
-                    android:id="@+id/paid_tv"
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:layout_column="4"
-                    android:gravity="center_horizontal"
-                    android:textColor="@color/black"
-                    android:textSize="12sp"
-                    android:background="@drawable/invoice_border"
-                    tools:text="100" />
+                        android:id="@+id/fee_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_17sdp"
+                        android:gravity="center"
+                        android:layout_column="3"
+                        android:padding="2dp"
+                        android:background="@drawable/invoice_border"
+                        android:textColor="@color/black"
+                        android:textSize="11sp"
+                        tools:text="300" />
+
+                <!-- Paid -->
+                <TextView
+                        android:id="@+id/paid_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_17sdp"
+                        android:gravity="center"
+                        android:layout_column="4"
+                        android:padding="2dp"
+                        android:background="@drawable/invoice_border"
+                        android:textColor="@color/black"
+                        android:textSize="11sp"
+                        tools:text="100" />
+
+                <!-- Balance -->
+                <TextView
+                        android:id="@+id/balance_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_17sdp"
+                        android:gravity="center"
+                        android:layout_column="5"
+                        android:padding="2dp"
+                        android:background="@drawable/invoice_border"
+                        android:textColor="@color/black"
+                        android:textSize="11sp"
+                        tools:text="100" />
 
             </TableRow>
 
         </TableLayout>
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

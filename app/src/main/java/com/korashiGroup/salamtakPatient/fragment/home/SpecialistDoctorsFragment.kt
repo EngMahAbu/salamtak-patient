@@ -133,6 +133,7 @@ class SpecialistDoctorsFragment : Fragment(),SpecialictyAdapter.SelectSpecialist
                // }
         //    }
             when(examinationtypeid){
+
                 8->{
                     if (!list.isNullOrEmpty()){
                         sharedDataViewmodel.getLabsInfoResponse(LabsInfo(typeId,this.LabId,binding.etSearch.text.toString(),list,true))
@@ -337,6 +338,10 @@ class SpecialistDoctorsFragment : Fragment(),SpecialictyAdapter.SelectSpecialist
 
     private fun bindViews(){
         when(examinationtypeid){
+            6->{
+                binding.etSearch.setHint(getString(R.string.search_by_polyclinic_name))
+                binding.layoutChooseSpecialization.visibility=View.VISIBLE
+            }
             10->{
                 binding.layoutChooseSpecialization.visibility=View.GONE
                 binding.btnLayoutChooseSpecialization.visibility=View.GONE

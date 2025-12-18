@@ -9,11 +9,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.adapter.ALLReveiwsAdapter
-import com.korashiGroup.salamtakPatient.adapter.ReveiwsAdapter
 import com.korashiGroup.salamtakPatient.databinding.AllReviewsfragmentBinding
 import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.viewmodel.PatientViewmodel

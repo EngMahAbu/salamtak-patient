@@ -544,6 +544,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             when (it) {
 
                 is Resource.Loading -> {
+                    binding.etSearch.setHint(getString(R.string.search_by_polyclinic_name))
                     showprogtessbar()
                     binding.layoutCardview.visibility = View.GONE
                 }

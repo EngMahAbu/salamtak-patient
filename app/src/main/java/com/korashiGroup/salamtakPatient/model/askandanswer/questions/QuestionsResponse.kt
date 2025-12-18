@@ -47,8 +47,11 @@ data class Questions(
     val prevSurgery: String?,
     @SerializedName("QDate")
     val qDate: String?,
+    @SerializedName("IsNoShow")
+    val isNoShow: Boolean?,
     @SerializedName("getAnswers")
     val answers: List<GetAnswers?>?,
+
 ):Serializable
 data class GetAnswers(
     @SerializedName("DoctorID")

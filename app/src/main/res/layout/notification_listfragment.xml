@@ -30,6 +30,105 @@
             android:textSize="16sp"
             app:layout_constraintStart_toEndOf="@+id/iv_arrow"
             app:layout_constraintTop_toTopOf="parent"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_salamtakAngel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="15dp"
+            android:padding="3dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_arrow">
+
+        <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_emergencies"
+                android:layout_width="0dp"
+                android:layout_height="55dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginBottom="@dimen/_3sdp"
+                android:layout_marginTop="@dimen/_13sdp"
+                android:background="@drawable/bg_button_sellector"
+                android:fontFamily="@font/avenirltstd_roman"
+                android:text="@string/schedule"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textAllCaps="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btn_QandA"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+        <ImageView
+                android:id="@+id/iv_messageroundbg"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:visibility="gone"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/btn_emergencies"
+                app:layout_constraintVertical_bias="0.0"
+                app:srcCompat="@drawable/red_round_bg"
+                />
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_numberOfDoctorNotification"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/avenirltstd_book"
+                android:gravity="center"
+                android:text="12"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                app:layout_constraintStart_toStartOf="@id/iv_messageroundbg"
+                app:layout_constraintTop_toTopOf="@+id/iv_messageroundbg"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_messageroundbg"
+                app:layout_constraintEnd_toEndOf="@+id/iv_messageroundbg"
+                />
+
+        <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_QandA"
+                android:layout_width="0dp"
+                android:layout_height="55dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="@dimen/_3sdp"
+                android:layout_marginTop="@dimen/_13sdp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/bg_help"
+                android:fontFamily="@font/avenirltstd_roman"
+                android:text="@string/myquestions"
+                android:textColor="@color/blue"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/btn_emergencies"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+        <ImageView
+                android:id="@+id/iv_messageroundbg_questions"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:visibility="gone"
+                android:background="@drawable/transperent_btn"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/btn_QandA"
+                app:layout_constraintVertical_bias="0.0"
+                app:srcCompat="@drawable/red_round_bg"
+                />
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_numberOfDoctorNotification_questions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/avenirltstd_book"
+                android:gravity="center"
+                android:text="12"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                app:layout_constraintStart_toStartOf="@id/iv_messageroundbg_questions"
+                app:layout_constraintTop_toTopOf="@+id/iv_messageroundbg_questions"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_messageroundbg_questions"
+                app:layout_constraintEnd_toEndOf="@+id/iv_messageroundbg_questions"
+                />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_notifications"
             android:layout_width="match_parent"
@@ -40,8 +139,72 @@
             android:paddingBottom="5dp"
             tools:listitem="@layout/item_layout_notifications"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@+id/tv_name"
+            app:layout_constraintTop_toBottomOf="@+id/layout_salamtakAngel"
             app:layout_constraintBottom_toBottomOf="parent"
     />
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_Questions"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="14dp"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintHorizontal_bias="0.41"
+            app:layout_constraintTop_toBottomOf="@+id/layout_salamtakAngel"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:listitem="@layout/item_layout_qanda" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_cardview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@+id/rv_notifications"
+            app:layout_constraintEnd_toEndOf="@+id/rv_notifications"
+            app:layout_constraintTop_toTopOf="@+id/rv_notifications"
+            app:layout_constraintBottom_toBottomOf="@+id/rv_notifications">
+        <ImageView
+                android:id="@+id/gifImageView"
+                android:layout_width="@dimen/_120sdp"
+                android:layout_height="120dp"
+                android:scaleType="fitCenter"
+                android:visibility="gone"
+                android:src="@drawable/invoiceicon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+        <TextView
+                android:id="@+id/crd_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no_data_registed"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/sf_pro_display_semibold"
+                android:textColor="@color/black"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/gifImageView"
+                android:textSize="20sp" />
+
+        <TextView
+                android:id="@+id/textchange"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/try_searching_for_a_different_specialty_or_change_your_location_to_see_more_available_doctors"
+                android:fontFamily="@font/sd_pro_display_regular"
+                android:textColor="@color/text_doctor_card_color"
+                android:visibility="gone"
+                android:gravity="center_vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/crd_view"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:textSize="16sp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

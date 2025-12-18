@@ -16,4 +16,5 @@ data class PatientAppointmentRequest(
     var IsBookingForAnotherPatient:Boolean?=null,
     var AnotherPatientFullName:String?=null,
     var AnotherPatientPhone:String?=null,
+    var RelationshipTypeId:Int?=null,
 ): Serializable

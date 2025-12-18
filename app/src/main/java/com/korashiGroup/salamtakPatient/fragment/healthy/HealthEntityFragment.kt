@@ -42,6 +42,7 @@ import com.korashiGroup.salamtakPatient.model.salamtakgate.Blogs
 import com.korashiGroup.salamtakPatient.utils.localization.DefaultLocaleHelper
 import com.korashiGroup.salamtakPatient.viewmodel.PagingViewmodel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
@@ -278,6 +279,8 @@ class HealthEntityFragment : Fragment(),MedicalHealthAdapter.Action {
     private fun pagingcallBack(){
         binding.apply {
             lifecycleScope.launchWhenStarted {
+
+                delay(1000)
                 pagingViewmodel.getDoctorsPagingData(cityId,areaId,args.healthtype).collect{
                         healthAdapter.submitData(it)
 

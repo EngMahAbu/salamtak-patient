@@ -9,11 +9,13 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.adapter.FavoriteDoctorsAdapter
 import com.korashiGroup.salamtakPatient.databinding.FavoriteDoctorfragmentBinding
 import com.korashiGroup.salamtakPatient.model.booking.clink.ClinicData
+import com.korashiGroup.salamtakPatient.model.favorite.FavoriteDoctor
 import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.viewmodel.DoctorProfileViewModel
 import com.korashiGroup.salamtakPatient.viewmodel.PatientViewmodel
@@ -72,7 +74,7 @@ class FavoriteDoctorFragment : Fragment(),FavoriteDoctorsAdapter.Action{
                     hideprogressbar()
                     favoriteDoctorsAdapter.submitList(response.data?.data)
                     favoriteDoctorsAdapter.notifyDataSetChanged()
-
+                    updateUi(response.data?.data)
                 }
 
                 is Resource.Error -> {
@@ -135,5 +137,12 @@ class FavoriteDoctorFragment : Fragment(),FavoriteDoctorsAdapter.Action{
     private fun hideprogressbar() {
         binding.progressBar.visibility = View.GONE
     }
+    private fun updateUi(it: List<FavoriteDoctor>?) {
+        if (it.isNullOrEmpty()) {
+            binding.layoutCardview.visibility = View.VISIBLE
+        } else {
+            binding.layoutCardview.visibility = View.GONE
+        }
+        }
 
-}
+    }

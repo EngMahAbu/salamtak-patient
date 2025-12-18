@@ -26,7 +26,7 @@
     <string name="signup">Creat New Account</string>
     <string name="forsupportcallus">For support call us</string>
     <string name="callnumber">17143</string>
-    <string name="mobile_number_email">Phone Number or Email</string>
+    <string name="mobile_number_email">Phone Number</string>
     <string name="send">Send</string>
     <string name="verify">Verify</string>
     <string name="resetpasword">Forget Password</string>
@@ -78,7 +78,8 @@
     </string>
     <string name="upload_front_syndicate_card_image">Upload front Syndicate Card image</string>
     <string name="upload_back_syndicate_card_image">Upload back Syndicate Card image</string>
-    <string name="required">" required *"</string>
+    <string name="required">Incorrect phone number</string>
+    <string name="password_required">Password is required</string>
     <string name="requiredbirthdate">.Birth Date Is Required</string>
     <string name="requiredcountry">.Country Is Required</string>
     <string name="requiredgender">.Gender Is Required</string>
@@ -104,7 +105,7 @@
     <string name="powered_by">Powered By</string>
     <string name="salamtak_booking">Salamtak Booking</string>
     <string name="home_visit">Home Visit</string>
-    <string name="home_visitdesc">Salamtak Home Visit provides the proper solution for booking a Home Visit. Home Visit better services and more choices, are now available by Salamtak application more than ever.The good days of the “Family doctor” is back.
+    <string name="home_visitdesc">Salamtak Home Visit provides the proper solution for booking a Doctor Home Visit. Easier, faster and better services and more choices are now guaranteed by Salamtak Application more than ever.The good days of the “Family doctor” is back.
     </string>
     <string name="live_chat">Salamtak Connect</string>
     <string name="live_chatdesc">Salamtak Connect enables patient to enjoy full medical diagnosis “in simple medical cases“ by using call or video call services. it is a valuable tool that provides, at least, professional medical guidance. Save the First Visit (identify scans and lab analysis) and Third Visit (follow up consultation) by using Salamtak Connect.
@@ -116,14 +117,14 @@
     <string name="you_must_complete_your_profile_to_can_book_your_doctor">You must complete your profile to can book
         your doctor
     </string>
-    <string name="salamtak_services">Our Services</string>
+    <string name="salamtak_services">Salamtak Services</string>
     <string name="Clinic_Booking">In-Clinic Booking</string>
     <string name="Home_Visit">Home Visit</string>
     <string name="Chat">Chat</string>
     <string name="Call">Call</string>
     <string name="Video_Call">Video Call</string>
     <string name="medical_services_directory">Salamtak Guide</string>
-    <string name="see_all">More</string>
+    <string name="see_all">See All</string>
     <string name="hospitals">Hospitals</string>
     <string name="polyclinics">Polyclinics</string>
     <string name="pharmacies">Pharmacies</string>
@@ -158,7 +159,7 @@
     <string name="reset">Reset</string>
     <string name="specialization">Speciality</string>
     <string name="patientName">Patient Name</string>
-    <string name="choose_specialization">Popular Specialties</string>
+    <string name="choose_specialization">Choose Speciality</string>
     <string name="choose_sub_specialization">Choose sub Speciality</string>
     <string name="choose_Seniority_Level">Choose Seniority Level</string>
     <string name="choose_city">Choose City</string>
@@ -185,7 +186,7 @@
     <string name="save_edit">Save Edit</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="profile_info">Profile Info.</string>
-    <string name="medical_state">Medical Profile</string>
+    <string name="medical_state">Medical Record</string>
     <string name="street">Street</string>
     <string name="building_number">Building Number</string>
     <string name="floor_number">Floor Number</string>
@@ -305,7 +306,7 @@
     <string name="select">Choose Your Insurance Company</string>
     <string name="selectanalysis">Choose Your Analysis(S)</string>
     <string name="select_bookingtype">Choose Your Type Of Booking</string>
-    <string name="favorite_doctor">Favorite Doctor</string>
+    <string name="favorite_doctor">Favorite Doctor(s)</string>
     <string name="confirmed">Your Booking is Successful</string>
     <string name="offers">Offers</string>
     <string name="offers_not_available_at_the_moment">Offers not available at the moment.</string>
@@ -387,7 +388,7 @@
     <string name="fee">Tota Service Fees</string>
     <string name="paids">Total Paid</string>
     <string name="balance">Grand Total</string>
-    <string name="bills">Invoices</string>
+    <string name="bills">Billing</string>
     <string name="we_will_answer_your_question_in_3_days"> Your question will be answered by Salamatak Doctors within 3 working days.</string>
     <string name="ages">Age</string>
     <string name="choose_symptoms">Describe Symptoms</string>
@@ -455,6 +456,11 @@
     <string name="offers_available">Offers Available</string>
     <string name="paid">Paid</string>
     <string name="pending_payment">Pending Payment</string>
+    <string name="no_data_registed">No Data Registed</string>
+    <string name="helleo">Hello</string>
+    <string name="select_relation_type">Select Relation Type</string>
+    <string name="newbalance">Balance</string>
+    <string name="search_by_polyclinic_name">Search by Polyclinic name</string>
     <array name="choose">
         <item>Select</item>
     </array>

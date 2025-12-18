@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.korashiGroup.salamtakPatient.adapter.MainDoctorAccountAdapter
 import com.korashiGroup.salamtakPatient.databinding.PatientaccountfragmentBinding
+import com.korashiGroup.salamtakPatient.model.askandanswer.questions.Questions
 import com.korashiGroup.salamtakPatient.model.invoice.Item
 import com.korashiGroup.salamtakPatient.model.invoice.PatientData
 import com.korashiGroup.salamtakPatient.utils.Resource
@@ -58,6 +59,7 @@ private lateinit var binding:PatientaccountfragmentBinding
         polyViewModel.invoiceResponse.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
                 is Resource.sucess -> {
+                    updateUi(response?.data?.data as List<PatientData>?)
                     binding.progressBar.visibility = View.GONE
                     maindoctorAccountAdapter.submitList(response.data?.data)
                     maindoctorAccountAdapter.notifyDataSetChanged()
@@ -78,7 +80,13 @@ private lateinit var binding:PatientaccountfragmentBinding
 
     }
 
-
+    private fun updateUi(it: List<PatientData>?) {
+        if (it.isNullOrEmpty()) {
+            binding.layoutCardview.visibility = View.VISIBLE
+        } else {
+            binding.layoutCardview.visibility = View.GONE
+        }
+    }
 
     override fun onItemClick(invoiceId: Int) {
         Log.e("TAG", "update: ", )

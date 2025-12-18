@@ -284,28 +284,28 @@
                             android:layout_height="match_parent">
 
                         <TextView
-                                android:layout_width="80dp"
+                                android:layout_width="60dp"
                                 android:layout_height="wrap_content"
                                 android:layout_column="1"
                                 android:gravity="start"
                                 android:textColor="@color/hint_color"
-                                android:textSize="@dimen/_12ssp"
+                                android:textSize="@dimen/_11ssp"
                                 android:text="@string/datess" />
 
 
                         <TextView
                                 android:id="@+id/tv_services"
-                                android:layout_width="80dp"
+                                android:layout_width="60dp"
                                 android:layout_height="wrap_content"
                                 android:layout_column="2"
                                 android:gravity="center"
-                                android:visibility="invisible"
+                                android:visibility="gone"
                                 android:textColor="@color/hint_color"
                                 android:textSize="@dimen/_12ssp"
                                 android:text="@string/servicess" />
 
                         <TextView
-                                android:layout_width="80dp"
+                                android:layout_width="60dp"
                                 android:layout_height="wrap_content"
                                 android:layout_column="3"
                                 android:gravity="center"
@@ -314,13 +314,21 @@
                                 android:text="@string/fee" />
 
                         <TextView
-                                android:layout_width="80dp"
+                                android:layout_width="60dp"
                                 android:layout_height="wrap_content"
                                 android:layout_column="4"
                                 android:gravity="center"
                                 android:textColor="@color/hint_color"
-                                android:textSize="@dimen/_12ssp"
+                                android:textSize="@dimen/_11ssp"
                                 android:text="@string/paids" />
+                        <TextView
+                                android:layout_width="60dp"
+                                android:layout_height="wrap_content"
+                                android:layout_column="4"
+                                android:gravity="center"
+                                android:textColor="@color/hint_color"
+                                android:textSize="@dimen/_11ssp"
+                                android:text="@string/newbalance" />
 
                     </TableRow>
 
@@ -333,22 +341,25 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_5sdp"
+                    android:visibility="visible"
+                    android:layoutDirection="rtl"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    android:background="@drawable/invoice_border"
                     app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
                     android:stretchColumns="1,2,3,4">
 
                 <TableRow
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/invoice_border">
+                        android:layout_height="match_parent">
 
                     <TextView
                             android:id="@+id/date_tv"
-                            android:layout_width="80dp"
+                            android:layout_width="60dp"
                             android:layout_height="wrap_content"
                             android:layout_column="1"
-                            android:gravity="center"
+                            android:gravity="start"
+                            android:padding="2dp"
                             android:lines="1"
                             android:textColor="@color/black"
                             android:textSize="12sp"
@@ -357,35 +368,52 @@
 
                     <TextView
                             android:id="@+id/service_tv"
-                            android:layout_width="80dp"
+                            android:layout_width="60dp"
                             android:layout_height="wrap_content"
                             android:layout_column="2"
-                            android:gravity="center_horizontal"
+                            android:gravity="center"
                             android:textColor="@color/black"
                             android:textSize="12sp"
-                            android:visibility="invisible"
+                            android:padding="2dp"
                             android:background="@drawable/invoice_border"
+                            android:visibility="visible"
                             tools:text="limpe tets" />
 
                     <TextView
                             android:id="@+id/fee_tv"
-                            android:layout_width="80dp"
+                            android:layout_width="60dp"
                             android:layout_height="wrap_content"
                             android:layout_column="3"
-                            android:gravity="center_horizontal"
+                            android:gravity="center"
+                            android:padding="2dp"
                             android:textColor="@color/black"
+                            android:background="@drawable/invoice_border"
                             android:textSize="12sp"
                             tools:text="300" />
 
                     <TextView
                             android:id="@+id/paid_tv"
-                            android:layout_width="80dp"
+                            android:layout_width="60dp"
                             android:layout_height="wrap_content"
                             android:layout_column="4"
-                            android:gravity="center_horizontal"
+                            android:gravity="center"
+                            android:padding="2dp"
                             android:textColor="@color/black"
+                            android:background="@drawable/invoice_border"
                             android:textSize="12sp"
                             tools:text="100" />
+                    <TextView
+                            android:id="@+id/totabalance_tv"
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:layout_column="4"
+                            android:gravity="center"
+                            android:padding="2dp"
+                            android:textColor="@color/black"
+                            android:background="@drawable/invoice_border"
+                            android:textSize="12sp"
+                            tools:text="100" />
+
 
                 </TableRow>
 
@@ -395,11 +423,13 @@
                     android:id="@+id/rvSubItem"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
                     tools:itemCount="3"
                     android:visibility="gone"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintTop_toBottomOf="@id/linearLayout2"
+                    app:layout_constraintTop_toBottomOf="@id/tab"
+                    app:layout_constraintBottom_toTopOf="@+id/balance"
                     tools:listitem="@layout/item_layout_invoice" />
 
             <LinearLayout
@@ -407,35 +437,67 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="25dp"
+                    android:layout_marginTop="5dp"
+                    android:padding="@dimen/_3sdp"
                     android:paddingHorizontal="@dimen/_6sdp"
-                    android:visibility="visible"
+                    android:gravity="center"
                     android:background="@drawable/balance_bg"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/rvSubItem">
 
+                <!-- Title -->
                 <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="75dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="@dimen/_6sdp"
                         android:gravity="start"
-                        android:layout_weight="1"
-                        android:padding="@dimen/_6sdp"
+                        android:text="@string/balance"
                         android:textColor="@color/head_color"
-                        android:textSize="@dimen/_12ssp"
-                        android:text="@string/balance" />
+                        android:textSize="@dimen/_12ssp" />
 
+                <!-- Total Fees -->
                 <TextView
-                        android:id="@+id/balance_tv"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/totalfees_tv"
+                        android:layout_width="20dp"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/_6sdp"
                         android:layout_weight="1"
-                        android:gravity="center_horizontal"
+                        android:padding="@dimen/_6sdp"
+                        android:gravity="center"
+                        android:background="@drawable/invoice_border"
                         android:textColor="@color/head_color"
                         android:textSize="@dimen/_12ssp"
                         tools:text="100" />
+
+                <!-- Total Paid -->
+                <TextView
+                        android:id="@+id/totalpaid_tv"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="@dimen/_6sdp"
+                        android:gravity="center"
+                        android:background="@drawable/invoice_border"
+                        android:textColor="@color/head_color"
+                        android:textSize="@dimen/_12ssp"
+                        tools:text="100" />
+
+                <!-- Balance -->
+                <TextView
+                        android:id="@+id/balance_tv"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="@dimen/_6sdp"
+                        android:gravity="center"
+                        android:background="@drawable/invoice_border"
+                        android:textColor="@color/head_color"
+                        android:textSize="@dimen/_12ssp"
+                        tools:text="100" />
+
             </LinearLayout>
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

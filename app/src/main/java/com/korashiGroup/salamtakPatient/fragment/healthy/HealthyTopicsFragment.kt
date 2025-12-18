@@ -38,6 +38,7 @@ import com.korashiGroup.salamtakPatient.viewmodel.PagingViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.PolyClinicsViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 
 @AndroidEntryPoint
 class HealthyTopicsFragment : Fragment(), BlogsGatesAdapter.Action, MedicalHealthAdapter.Action,QuestionsAdapter.IBook{
@@ -369,6 +370,7 @@ class HealthyTopicsFragment : Fragment(), BlogsGatesAdapter.Action, MedicalHealt
     private fun pagingcallBack(){
         binding.apply {
             lifecycleScope.launchWhenStarted {
+                delay(1000)
                 pagingViewmodel.getDoctorsPagingData(cityId,areaId,7).collect{
                         healthAdapter.submitData(it)
 

@@ -9,6 +9,7 @@ import com.korashiGroup.salamtakPatient.model.booking.ClinicSchedualByClinicDayI
 import com.korashiGroup.salamtakPatient.model.booking.clink.ClinicData
 import com.korashiGroup.salamtakPatient.model.booking.clink.GetDoctorClinksResponse
 import com.korashiGroup.salamtakPatient.model.booking.clink.PolyClinicData
+import com.korashiGroup.salamtakPatient.model.patient.DataRelation
 import com.korashiGroup.salamtakPatient.model.profile.DataBloodType
 import com.korashiGroup.salamtakPatient.model.profile.DataFoodAllergy
 import com.korashiGroup.salamtakPatient.model.profile.DataMedicineAllergy
@@ -23,6 +24,7 @@ class SharedDataViewmodel:ViewModel() {
     val subSpecialication=MutableLiveData<List<SubSpecialistData>>()
     val seniorityLevelData=MutableLiveData<SeniorityLevelData>()
     val getCity=MutableLiveData<CityData>()
+    val relationResponse=MutableLiveData<DataRelation>()
     val clinicIdAndDoctorId=MutableLiveData<ClinicData>()
     val getArea=MutableLiveData<AreaData>()
     val doctorId=MutableLiveData<Int>()
@@ -82,6 +84,10 @@ class SharedDataViewmodel:ViewModel() {
 
     fun getCity(city:CityData){
         getCity.postValue(city)
+    }
+
+    fun getRelationType(relation: DataRelation){
+        relationResponse.postValue(relation)
     }
     fun getArea(area:AreaData){
         getArea.postValue(area)

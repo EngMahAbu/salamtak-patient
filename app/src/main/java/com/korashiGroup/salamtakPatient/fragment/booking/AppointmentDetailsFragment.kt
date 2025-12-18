@@ -73,6 +73,7 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
     var merchantSecretCode = "39d89b6c-5599-4a88-9854-2148179bc23d"
     val chargeItems = ArrayList<PayableItem>()
     var Patient_InsuranceID: Int? = null
+    private var relationId: Int? =null
     private var isAnthorPatient=false
 
     override fun onCreateView(
@@ -88,6 +89,7 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setImage()
+        getRelationType()
         binding.ivDoctorProfile.load("https://salamtechapi.azurewebsites.net/${args.confirmappointments?.image}") {
             crossfade(true)
             crossfade(1000)
@@ -140,6 +142,11 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
             }
         }
 
+        binding.layoutChooseRelationType.setOnClickListener {
+            val action = AppointmentDetailsFragmentDirections.actionAppointmentDetailsFragmentToDialogBottomSheetFragment("Relation")
+            findNavController().navigate(action)
+        }
+
         binding.btnConfirm.setOnClickListener {
             fullName=binding.etFullNameAR.text.toString()
             phoneNumber=binding.etPhoneNumber.text.toString()
@@ -161,7 +168,7 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
                         it1,offerid,
                         IsBookingForAnotherPatient=isAnthorPatient,
                         AnotherPatientFullName = fullName,
-                        AnotherPatientPhone = phoneNumber
+                        AnotherPatientPhone = phoneNumber,relationId
                     )
                 }?.let { it2 ->
                     viewmodel.createPatientAppointment(
@@ -183,7 +190,8 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
                         it1,
                         IsBookingForAnotherPatient=isAnthorPatient,
                         AnotherPatientFullName = fullName,
-                        AnotherPatientPhone = phoneNumber
+                        AnotherPatientPhone = phoneNumber,
+                        RelationshipTypeId=relationId
                     )
                 }?.let { it2 ->
                     viewmodel.createPatientAppointment(
@@ -204,6 +212,7 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
                 binding.chCard.setTextColor(Color.parseColor("#00D2CB"))
                 binding.etFullNameAR.setText("")
                 binding.etPhoneNumber.setText("")
+                binding.layoutChooseRelationType.visibility= View.VISIBLE
             }else{
                 isAnthorPatient=false
                 binding.chCard.setTextColor(Color.parseColor("#8088A4"))
@@ -211,6 +220,7 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
                 binding.etPhoneNumber.setText(sp.getUser()?.phone)
                 fullName=binding.etFullNameAR.text.toString()
                 phoneNumber=binding.etPhoneNumber.text.toString()
+                binding.layoutChooseRelationType.visibility= View.GONE
             }
 
         }
@@ -245,7 +255,7 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
         val date: Date = inputFormat.parse(args.confirmappointments?.formattedDate)
         val outputText: String = outputFormat.format(date)
         binding.tvDoctorName.text = args.confirmappointments?.doctorName
-        binding.tvSpecialization.text = args.confirmappointments?.SpecialistName
+        binding.tvSpecialization.text = "${args.confirmappointments?.SpecialistName} "
         binding.tvDate.text = DateParsing(args.confirmappointments?.formattedDate.toString())
         binding.Service.text = args.confirmappointments?.MedicalExaminationTypeName
 
@@ -448,7 +458,8 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
                             "",
                             IsBookingForAnotherPatient=isAnthorPatient,
                             AnotherPatientFullName = fullName,
-                            AnotherPatientPhone = phoneNumber
+                            AnotherPatientPhone = phoneNumber,
+                            RelationshipTypeId=relationId
 
                         )
 
@@ -468,7 +479,8 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
                             fawery.signature!!,
                             IsBookingForAnotherPatient=isAnthorPatient,
                             AnotherPatientFullName = fullName,
-                            AnotherPatientPhone = phoneNumber
+                            AnotherPatientPhone = phoneNumber,
+                            RelationshipTypeId=relationId
 
                         )
 
@@ -521,6 +533,13 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
         }else{
             binding.ivService.setImageResource(R.drawable.ic_homevisit)
         }
+    }
+
+    private fun getRelationType(){
+        sharedDataViewmodel.relationResponse.observe(viewLifecycleOwner,{
+            binding.tvRelation.text=it.name
+            relationId=it.id
+        })
     }
 
 

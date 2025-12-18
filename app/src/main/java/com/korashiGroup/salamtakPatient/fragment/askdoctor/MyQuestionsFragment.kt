@@ -14,6 +14,7 @@ import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.adapter.QuestionsAdapter
 import com.korashiGroup.salamtakPatient.databinding.MyQuestionsfragmentBinding
 import com.korashiGroup.salamtakPatient.model.askandanswer.questions.Questions
+import com.korashiGroup.salamtakPatient.model.favorite.FavoriteDoctor
 import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.viewmodel.PolyClinicsViewmodel
 import dagger.hilt.android.AndroidEntryPoint
@@ -62,6 +63,7 @@ class MyQuestionsFragment : Fragment(),QuestionsAdapter.IBook{
                     binding.progressBar.visibility=View.VISIBLE
                 }
                 is Resource.sucess -> {
+                    updateUi(it.data?.data as List<Questions>?)
                     binding.progressBar.visibility=View.GONE
                   questionsAdapter.submitList(it.data?.data)
                     questionsAdapter.notifyDataSetChanged()
@@ -82,6 +84,14 @@ class MyQuestionsFragment : Fragment(),QuestionsAdapter.IBook{
             findNavController().navigate(action)
         }else{
             Snackbar.make(requireView(),"No answers",Snackbar.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun updateUi(it: List<Questions>?) {
+        if (it.isNullOrEmpty()) {
+            binding.layoutCardview.visibility = View.VISIBLE
+        } else {
+            binding.layoutCardview.visibility = View.GONE
         }
     }
 }

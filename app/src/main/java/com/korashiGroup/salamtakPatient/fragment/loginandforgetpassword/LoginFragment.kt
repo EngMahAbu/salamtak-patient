@@ -45,7 +45,6 @@ class LoginFragment : Fragment() {
 
     companion object {
         var instance: LoginFragment? = null
-
     }
 
 
@@ -141,7 +140,7 @@ class LoginFragment : Fragment() {
 
     private fun isvalidateFeilds(mobile: String, password: String): Boolean {
 
-        var isValid = true
+        var isValid = false
 
         if (mobile.trim().isNullOrEmpty()) {
 
@@ -168,7 +167,7 @@ class LoginFragment : Fragment() {
         if (password.trim().isEmpty()) {
             binding.layoutPassword.setBackgroundResource(R.drawable.bg_edittext_error)
             binding.etPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
-            binding.tvPasswordError.text = getString(R.string.required)
+            binding.tvPasswordError.text = getString(R.string.password_required)
             binding.tvPasswordError.visibility = View.VISIBLE
 
 
@@ -186,9 +185,7 @@ class LoginFragment : Fragment() {
 
             isValid = true
         }
-
         return isValid
-
     }
 
     private fun callBack() {

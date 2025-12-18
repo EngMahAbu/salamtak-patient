@@ -327,6 +327,41 @@ class PersonalInfoFragment : Fragment() {
             binding.etNationality.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
             value = true
         }
+        if (binding.etChooseCity.text.toString().trim().isNullOrEmpty()) {
+            binding.etChooseCity.setCompoundDrawablesWithIntrinsicBounds(
+                0,
+                0,
+                R.drawable.ic_error,
+                0
+            )
+            binding.tvCityError.text = getString(R.string.requiredcity)
+            binding.tvCityError.visibility = View.VISIBLE
+            binding.layoutChooseCity.setBackgroundResource(R.drawable.bg_edittext_error)
+        } else {
+           binding.tvCityError.visibility = View.GONE
+            binding.layoutChooseCity.setBackgroundResource(R.drawable.bg_edittext)
+            binding.etChooseCity.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
+            return true
+        }
+
+        if (binding.etChooseArea.text.toString().trim().isNullOrEmpty()) {
+            binding.etChooseArea.setCompoundDrawablesWithIntrinsicBounds(
+                0,
+                0,
+                R.drawable.ic_error,
+                0
+            )
+            binding.tvAreaError.text = getString(R.string.requiredarea)
+            binding.tvAreaError.visibility = View.VISIBLE
+            binding.layoutChooseArea.setBackgroundResource(R.drawable.bg_edittext_error)
+            return false
+        } else {
+            binding.tvAreaError.visibility = View.GONE
+            binding.layoutChooseArea.setBackgroundResource(R.drawable.bg_edittext)
+            binding.etChooseArea.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
+            return true
+        }
+
         return value
 
     }

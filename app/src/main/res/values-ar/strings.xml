@@ -21,7 +21,7 @@
     <string name="signup">انشاء حساب جديد</string>
     <string name="forsupportcallus">للدعم اتصل بنا</string>
     <string name="callnumber">17143</string>
-    <string name="mobile_number_email">رقم الهاتف أو البريد الإلكتروني</string>
+    <string name="mobile_number_email">رقم الهاتف </string>
     <string name="send">ارسال</string>
     <string name="verify">تأكيد</string>
     <string name="resetpasword">نسيت كلمة المرور</string>
@@ -72,6 +72,7 @@
     <string name="upload_front_syndicate_card_image">Upload front Syndicate Card image</string>
     <string name="upload_back_syndicate_card_image">Upload back Syndicate Card image</string>
     <string name="required">" مطلوب *"</string>
+    <string name="password_required">مطلوب *</string>
     <string name="requiredbirthdate">.تاريخ الميلاد مطلوب</string>
     <string name="requiredcountry">.الدولة مطلوبة </string>
     <string name="requiredgender">.الجنس مطلوب</string>
@@ -129,7 +130,7 @@
     <string name="home">الرئيسية</string>
     <string name="my_schedule">الحجوزات </string>
     <string name="more">المزيد...</string>
-    <string name="reviews">التقيمات</string>
+    <string name="reviews">تعليقات</string>
     <string name="next_available_booking_at_08_nov_from_06_30_pm">Next Available Booking at 08 Nov. from 06:30 PM</string>
     <string name="sub_specialization">التخصص الفرعي</string>
     <string name="book_now">احجز الآن</string>
@@ -317,7 +318,7 @@
     <string name="salamatk_cap">Salamtak Capsule</string>
     <string name="salamtak_promotions">Salamtak Promotions</string>
     <string name="salamtak_angle">Salamtak Angle</string>
-    <string name="enter_your_registered">Enter your registered</string>
+    <string name="enter_your_registered">أدخل بياناتك المسجلة</string>
     <string name="or">أو</string>
     <string name="addresss">العنوان</string>
     <string name="clinicservices">خدمات العيادة</string>
@@ -436,6 +437,11 @@
     <string name="offers_available">عروض متاحة</string>
     <string name="paid">مدفوع</string>
     <string name="pending_payment">الدفع المعلق</string>
+    <string name="no_data_registed">لا توجد بيانات مسجلة</string>
+    <string name="helleo">مرحبا</string>
+    <string name="select_relation_type">اختر العلاقة </string>
+    <string name="newbalance">الرصيد</string>
+    <string name="search_by_polyclinic_name"> البحث باسم العيادة</string>
 
     <array name="choose">
         <item>اختار</item>

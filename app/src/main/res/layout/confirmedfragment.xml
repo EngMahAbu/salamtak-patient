@@ -532,6 +532,7 @@
                 android:elevation="1dp"
                 android:hint="@string/pressure_mm_gg"
                 android:paddingTop="2dp"
+                android:visibility="gone"
                 app:boxBackgroundMode="none"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -561,6 +562,7 @@
                 android:elevation="1dp"
                 android:hint="@string/sugar_level_mg_dl"
                 android:paddingTop="2dp"
+                android:visibility="gone"
                 app:boxBackgroundMode="none"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -608,7 +610,7 @@
                     android:importantForAutofill="no"
                     android:inputType="text"
                     android:textColor="@color/black"
-                    android:textSize="16sp"/>
+                    android:textSize="16dp"/>
 
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
@@ -695,6 +697,6 @@
     <include
             android:id="@+id/layoutBottomsheetpersistant"
             layout="@layout/layout_bottomsheet_syemtoms"
-            android:visibility="visible"
+            android:visibility="gone"
             />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

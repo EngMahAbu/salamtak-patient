@@ -23,12 +23,15 @@ class SubDoctorAccountAdapter(val edit:IEdit):ListAdapter<Item,SubDoctorAccountA
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val services=getItem(position)
        // holder.binding.editPatientAccountTv.visibility=View.GONE
+        val balance= services.serviceFee?.toDouble()?.minus(services?.paid?.toDouble() ?: 0.0)
         if (DefaultLocaleHelper.getInstance(holder.binding.serviceTv.context).getCurrentLocale()=="ar"){
          //   holder.binding.doctorNameTv.text=services.patientFulltname
             holder.binding.serviceTv.text=services.service
             holder.binding.dateTv.text= DataBinding.convertDateFormat(services.date, "yyyy-MM-dd'T'HH:mm:ss", "yyyy-M-d")
             holder.binding.feeTv.text="${services.serviceFee} جنية "
             holder.binding.paidTv.text="${services.paid} جنية "
+
+            holder.binding.balanceTv.text="${balance} جنية "
         //    holder.binding.balanceTv.text="${services.paid?.let { services.serviceFee?.minus(it) }} جنية "
         }else{
          //   holder.binding.doctorNameTv.text=services.patientFulltname
@@ -36,6 +39,7 @@ class SubDoctorAccountAdapter(val edit:IEdit):ListAdapter<Item,SubDoctorAccountA
             holder.binding.dateTv.text=DataBinding.convertDateFormat(services.date, "yyyy-MM-dd'T'HH:mm:ss", "yyyy-M-d")
             holder.binding.feeTv.text="${services.serviceFee} EGP "
             holder.binding.paidTv.text="${services.paid} EGP "
+            holder.binding.balanceTv.text="${balance} EGP "
           //  holder.binding.balanceTv.text="${services.paid?.let { services.serviceFee?.minus(it.toInt()) }} EGP "
         }
         holder.binding.tab.setOnClickListener {

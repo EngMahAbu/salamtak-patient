@@ -36,9 +36,11 @@ import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.snackbar.Snackbar
+import com.korashiGroup.salamtakPatient.model.patient.DataRelation
 import com.korashiGroup.salamtakPatient.model.register.ChoosePatient
 import com.korashiGroup.salamtakPatient.model.register.DataLogin
 import com.korashiGroup.salamtakPatient.utils.Constans.UserLOGIN
+import com.korashiGroup.salamtakPatient.viewmodel.DoctorProfileViewModel
 import com.korashiGroup.salamtakPatient.viewmodel.PatientViewmodel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -49,11 +51,13 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
     SubSpecialistAdapter.SelectSubSpecialist, SeniorityLevelAdapter.SelectSeniorityLevel,
     GetAllCitiesAdapter.SelectCity, GetAllAreaAdapter.SelectArea, NationalityAdapter.SelectCountry,
     MedicalEaxminationTypeAdapter.Action, BloodTypesAdapter.SelectBloodTypeList,
-    MedicineAllergyAdapter.SelectMedicineAllergy, FoodAllergyAdapter.SelectFoodAllergy {
+    MedicineAllergyAdapter.SelectMedicineAllergy, FoodAllergyAdapter.SelectFoodAllergy,
+    GetAllPatientRelationshipAdapter.SelectRelation{
 
 
     private lateinit var binding: DialogBottomSheetfragmentBinding
     private val viewmodel: DialogBottomSheetViewmodel by viewModels()
+    private val doctorProfileViewModel: DoctorProfileViewModel by viewModels()
     val sharedDataViewmodel: SharedDataViewmodel by activityViewModels()
     private val args: DialogBottomSheetFragmentArgs by navArgs()
     private lateinit var counteriesAdapter: NationalityAdapter
@@ -61,6 +65,7 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
     private lateinit var subSpecialistAdapter: SubSpecialistAdapter
     private lateinit var seniorityLevelAdapter: SeniorityLevelAdapter
     private lateinit var getAllCitiesAdapter: GetAllCitiesAdapter
+    private lateinit var allPatientRelationshipAdapter: GetAllPatientRelationshipAdapter
     private lateinit var getAllAreaAdapter: GetAllAreaAdapter
     private lateinit var examinationAdapter: MedicalEaxminationTypeAdapter
     private lateinit var bloodTypesAdapter: BloodTypesAdapter
@@ -103,7 +108,6 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
         setupresyclerviewMedicineAllergy()
         setupresyclerviewFoodAllergy()
         setupresyclerviewSeniorityLevel()
-        setupresyclerviewGetAllCities()
         setupresyclerviewGetAllArea()
         initButton()
         chooseGender()
@@ -180,6 +184,14 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
         getAllCitiesAdapter = GetAllCitiesAdapter(this)
         binding.itemAllcities.rvAllCities.apply {
             adapter = getAllCitiesAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+            addItemDecoration(object : DividerItemDecoration(activity, LinearLayout.VERTICAL) {})
+        }
+    }
+    fun setupresyclerviewGetAllRelationsType() {
+        allPatientRelationshipAdapter = GetAllPatientRelationshipAdapter(this)
+        binding.itemAllcities.rvAllCities.apply {
+            adapter = allPatientRelationshipAdapter
             layoutManager = LinearLayoutManager(requireContext())
             addItemDecoration(object : DividerItemDecoration(activity, LinearLayout.VERTICAL) {})
         }
@@ -341,7 +353,14 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
             "AllCity" -> {
                 binding.layoutAllCities.visibility = View.VISIBLE
                 binding.tvAllSpecial.text = getString(R.string.choose_city)
+                setupresyclerviewGetAllCities()
                 callBackGetAllCities()
+            }
+            "Relation" -> {
+                binding.layoutAllCities.visibility = View.VISIBLE
+                binding.tvAllSpecial.text = getString(R.string.select_relation_type)
+                setupresyclerviewGetAllRelationsType()
+                callGetAllPatientRelationshipType()
             }
             "AllArea" -> {
                 binding.layoutAllArea.visibility = View.VISIBLE
@@ -500,6 +519,36 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
         }
         viewmodel.getAllCities()
     }
+
+
+    private fun callGetAllPatientRelationshipType() {
+        doctorProfileViewModel.relationResponse.observe(viewLifecycleOwner) { response ->
+            when (response) {
+
+                is Resource.Loading -> {
+                    showprogtessbar()
+                }
+
+                is Resource.sucess -> {
+                    hideprogressbar()
+                    response.data?.relation.let {
+                        allPatientRelationshipAdapter.submitList(it)
+                    }
+                }
+
+                is Resource.Error -> {
+                    hideprogressbar()
+                    response.data?.let {
+                        Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                }
+            }
+        }
+        doctorProfileViewModel.getAllPatientRelationshipType()
+    }
+
+
     private fun callBackGetAllArea() {
         viewmodel.allAreasByCityIdResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
@@ -813,6 +862,10 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
             }
         })
         patientviewmodel.deleteUser()
+    }
+
+    override fun onItemSelected(relation: DataRelation) {
+        sharedDataViewmodel.getRelationType(relation)
     }
 
 

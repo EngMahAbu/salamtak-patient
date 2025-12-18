@@ -1,14 +1,11 @@
 package com.korashiGroup.salamtakPatient.fragment.askdoctor
 
-import android.animation.ObjectAnimator
 import android.graphics.Color
-import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
@@ -74,6 +71,7 @@ class AskDoctorFragment : Fragment() {
 
         binding.btnSend.setOnClickListener {
             if (validateQuestionInput()) {
+                binding.btnSend.isEnabled=false
                 val builder = MultipartBody.Builder().setType(MultipartBody.FORM)
                 for (item in partMap) {
                     val key = item.key
@@ -133,6 +131,7 @@ class AskDoctorFragment : Fragment() {
             when (response) {
 
                 is Resource.Loading -> {
+                    binding.btnSend.isEnabled=false
                     showprogtessbar()
                 }
 

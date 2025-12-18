@@ -517,7 +517,11 @@
     </fragment>
     <fragment android:id="@+id/notificationListFragment"
               android:name="com.korashiGroup.salamtakPatient.notification.NotificationListFragment"
-              android:label="notification_listfragment" tools:layout="@layout/notification_listfragment"/>
+              android:label="notification_listfragment" tools:layout="@layout/notification_listfragment">
+        <action
+                android:id="@+id/action_notificationListFragment_to_answersFragment"
+                app:destination="@id/answersFragment" />
+    </fragment>
     <fragment android:id="@+id/allReviewsFragment"
               android:name="com.korashiGroup.salamtakPatient.fragment.allreviews.AllReviewsFragment"
               android:label="all_reviewsfragment" tools:layout="@layout/all_reviewsfragment">
