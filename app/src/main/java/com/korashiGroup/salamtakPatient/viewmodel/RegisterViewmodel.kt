@@ -9,6 +9,8 @@ import com.korashiGroup.salamtakPatient.model.register.*
 import com.korashiGroup.salamtakPatient.repository.RegisterRepositry
 import com.korashiGroup.salamtakPatient.utils.Resource
 import com.google.gson.Gson
+import com.korashiGroup.salamtakPatient.model.whatspresponse.WhatSpResponse
+import com.korashiGroup.salamtakPatient.model.whatspresponse.WhatspRequest
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
@@ -23,6 +25,7 @@ class RegisterViewmodel @Inject constructor(private val repositry: RegisterRepos
 
     val response=MutableLiveData<Resource<RegisterReponse>>()
     val otpResponse=MutableLiveData<Resource<RegisterReponse>>()
+    val otpWhatspResponse=MutableLiveData<Resource<WhatSpResponse>>()
     val createResponse=MutableLiveData<Resource<UserResponse>>()
     val loginResponse=MutableLiveData<Resource<LoginResponse>>()
     val imagevedioresponse=MutableLiveData<Resource<HomeAdsResponse>>()
@@ -54,12 +57,11 @@ class RegisterViewmodel @Inject constructor(private val repositry: RegisterRepos
                 val errorBody = response.errorBody()?.string()
                 val errorMessage = try {
                     val json = JSONObject(errorBody ?: "")
-                    json.optString("message", "حدث خطأ غير معروف")
+                    // هنا ناخد قيمة الـ "Message" فقط
+                    json.optString("Message", "حدث خطأ غير معروف")
                 } catch (e: Exception) {
                     "حدث خطأ غير معروف"
                 }
-
-                Log.e("HTTP Error", "Code: ${response.code()}, message: $errorMessage")
                 loginResponse.postValue(Resource.Error(errorMessage))
             }
 
@@ -154,8 +156,13 @@ class RegisterViewmodel @Inject constructor(private val repositry: RegisterRepos
         return Resource.Error(error.message)
 
     }
+    fun sendOTPWhatsApp(registerUser: WhatspRequest)=viewModelScope.launch(Dispatchers.IO+handler) {
 
-    private fun handleOTP(otpResponse: Response<RegisterReponse>): Resource<RegisterReponse>?{
+        otpWhatspResponse.postValue(Resource.Loading())
+        val response=repositry.sendOTPWhatsApp(registerUser)
+        otpWhatspResponse.postValue(response?.let { handleOTPWhatsApp(it) })
+    }
+    private fun handleOTPWhatsApp(otpResponse: Response<WhatSpResponse>): Resource<WhatSpResponse>?{
 
         if (otpResponse.isSuccessful){
             otpResponse.body()?.let { registerResponse->
@@ -233,6 +240,20 @@ class RegisterViewmodel @Inject constructor(private val repositry: RegisterRepos
         val error = Gson().fromJson<ChangePasswordResponse>(response.errorBody()!!.string(), ChangePasswordResponse::class.java)
         return error.message?.let { Resource.Error(it) }
     }
+
+    private fun handleOTP(otpResponse: Response<RegisterReponse>): Resource<RegisterReponse>?{
+
+        if (otpResponse.isSuccessful){
+            otpResponse.body()?.let { registerResponse->
+                return Resource.sucess(registerResponse)
+            }
+
+        }
+        return Resource.Error(otpResponse.message())
+
+    }
+
+
 
     val handler = CoroutineExceptionHandler { _, exception ->
         Log.e("exception","osama${exception.message.toString()}")

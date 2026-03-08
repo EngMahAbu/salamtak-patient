@@ -20,15 +20,14 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.databinding.OtpfragmentBinding
+import com.korashiGroup.salamtakPatient.model.register.CreateUser
 import com.korashiGroup.salamtakPatient.utils.DateUtils
 import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.viewmodel.RegisterViewmodel
-import com.karumi.dexter.Dexter.withContext
-import com.korashiGroup.salamtakPatient.fragment.signupanddocotorprofile.SignupFragmentDirections
-import com.korashiGroup.salamtakPatient.model.register.CreateUser
 import com.korashiGroup.salamtakPatient.model.register.DataLogin
 import com.korashiGroup.salamtakPatient.model.register.ResetRequest
 import com.korashiGroup.salamtakPatient.model.register.UserForgetInfo
+import com.korashiGroup.salamtakPatient.model.whatspresponse.WhatspRequest
 import com.korashiGroup.salamtakPatient.utils.Constans
 import com.korashiGroup.salamtakPatient.utils.SpUtil
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
@@ -75,8 +74,9 @@ class OtpFragment : Fragment() {
         initButton()
         setupFocusEdittext()
         otpCallBack()
-        timer.start()
-        otpCallBackForgetPassword()
+     //   whatspOtpCallBack()
+       // timer.start()
+      //  otpCallBackForgetPassword()
     }
 
     private fun initButton() {
@@ -103,6 +103,7 @@ class OtpFragment : Fragment() {
                 Toast.makeText(requireContext(), getString(R.string.verified), Toast.LENGTH_SHORT)
                     .show()
             } else if (args.userforgetpassword?.code.toString() == getCodeFromEdittext()) {
+                Log.e("getCodeFromEdittext", "userforgetpassword:${args.userforgetpassword?.code} :${getCodeFromEdittext()} ", )
                 val action = args.userforgetpassword?.let { it1 ->
                     OtpFragmentDirections.actionOtpFragmentToChangepasswordFragment(
                         it1.userId
@@ -129,27 +130,34 @@ class OtpFragment : Fragment() {
 
         }
 
-        binding.tvResendCode.setOnClickListener {
-            binding.tvResendCode.visibility = View.GONE
+        binding.cardResendCode.setOnClickListener {
+            binding.cardResendCode.visibility = View.GONE
             val arg=args.user
             if (arg!=null){
-                arg?.let { it1 -> viewmodel.Sentotp( it1) }
+                arg?.let { it1 -> viewmodel.Sentotp(CreateUser(phone = "+2${args.user?.phone}")) }
             }else{
                 if (args.userforgetpassword?.phone?.contains(".com") == true){
                     val resetRequest= ResetRequest(args.userforgetpassword?.phone?.toString(),args.userforgetpassword?.phone?.toString(),1,3)
                     viewmodel.resetPassword(resetRequest)
                 }else{
                     val resetRequest= ResetRequest(args.userforgetpassword?.phone?.toString(),args.userforgetpassword?.phone,2,3)
-                    viewmodel.resetPassword(resetRequest)
+                   // viewmodel.resetPassword(resetRequest)
+                    viewmodel.Sentotp(CreateUser(phone = "+2${args.userforgetpassword?.phone}"))
                 }
             }
-
         }
 
-
+//        binding.tvResendCodebyWhatsp.setOnClickListener {
+//            binding.cardResendCode.visibility = View.GONE
+//            val arg=args.user
+//            if (arg!=null){
+//                arg?.let { it1 -> viewmodel.sendOTPWhatsApp(WhatspRequest(args.user?.phone ?: "")) }
+//            }
+//        }
     }
 
-    private fun setupFocusEdittext() {
+    private fun setupFocusEdittext()
+    {
 
         binding.etOtpFirst.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -248,7 +256,8 @@ class OtpFragment : Fragment() {
                     timer.start()
                     it.data?.let { response ->
 
-                        args.userforgetpassword?.code = response.data?.code!!
+                            args.userforgetpassword?.code = response.data?.code!!
+
                     }
                 }
                 is Resource.Error -> {
@@ -264,6 +273,7 @@ class OtpFragment : Fragment() {
 
 
     private fun otpCallBack() {
+        val arg=args.user
         viewmodel.otpResponse.observe(viewLifecycleOwner, Observer {
 
             when (it) {
@@ -275,7 +285,40 @@ class OtpFragment : Fragment() {
                     hideprogressbar()
                     timer.start()
                     it?.data?.let { response ->
-                        otpCode = response.data.code.toString()
+                        if (arg!=null){
+                            otpCode = response.data.code.toString()
+                        }else{
+                            args.userforgetpassword?.code = response.data?.code!!
+                        }
+
+
+                    }
+                }
+                is Resource.Error -> {
+                    hideprogressbar()
+                    it.message?.let { error ->
+                        Log.e("error", error)
+                    }
+                }
+
+            }
+
+        })
+
+    }
+    private fun whatspOtpCallBack() {
+        viewmodel.otpWhatspResponse.observe(viewLifecycleOwner, Observer {
+
+            when (it) {
+                is Resource.Loading -> {
+                    showprogtessbar()
+                }
+
+                is Resource.sucess -> {
+                    hideprogressbar()
+                    timer.start()
+                    it?.data?.let { response ->
+                        otpCode = response.otpCode.toString()
 
                     }
                 }
@@ -360,7 +403,7 @@ class OtpFragment : Fragment() {
 
     }
 
-    val timer = object : CountDownTimer(900000, 1000) {
+    val timer = object : CountDownTimer(30000, 1000) {
 
         override fun onTick(millisUntilFinished: Long) {
             binding.tvCounter.text= Html.fromHtml(("${getString(R.string.verification_code_will_be_sent_within_1_30)} <font color=#00D2CB>( ${String.format(FORMAT,
@@ -374,6 +417,7 @@ class OtpFragment : Fragment() {
         override fun onFinish() {
             binding.tvCounter.text= Html.fromHtml(("${getString(R.string.verification_code_will_be_sent_within_1_30)} <font color=#00D2CB>( 0 )</font>"))
             binding.tvResendCode.visibility = View.VISIBLE
+            binding.cardResendCode.visibility = View.VISIBLE
         }
     }
 

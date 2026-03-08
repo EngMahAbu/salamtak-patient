@@ -26,7 +26,8 @@
     <string name="verify">تأكيد</string>
     <string name="resetpasword">نسيت كلمة المرور</string>
     <string name="verification_code">تم ارسال الرمز التحقق الى </string>
-    <string name="resend_verification_code">إعادة إرسال رمز التحقق</string>
+    <string name="resend_verification_code">إعادة إرسال رمز التحقق عبر الرسائل النصية القصيرة</string>
+    <string name="resend_verification_codebywhatsp">إعادة إرسال رمز التحقق بواسطة واتساب </string>
     <string name="change_password">تغيير كلمة المرور</string>
     <string name="new_password">كلمة المرور الجديدة</string>
     <string name="confirm_new_password">تأكيد كلمة المرور الجديدة</string>
@@ -104,7 +105,7 @@
     <string name="live_chatdesc">يتيح تطبيق سلامتك للمريض بضغطة واحدة من الهاتف المحمول عمل تشخيص طبى كامل فى الحالات المرضية البسيطة كما تساعد خدمة سلامتك كونكت المريض فى الحصول عى كافة الاستشارات الطبية من خلال التواصل المباشر مع نخبة اطباء سلامتك باستخدام تقنية المكالمة الصوتية ( Call ) او المكالمة عبر الفديو ( Video Call ) واخير وليس اخرا تمكن هذة الخدمة كل من المريض والطبيب من توفير كل من الزيارة الاولى ( تحديد الاشاعات والتحاليل اللازمة للكشف الطبى ) وكذلك الزيارة الثالثة ( الاستشارة) والاكتفاء بالزيارة الثانية ( كشف بالعيادة ) مما يوفر الوقت والمجهود والتكلفة على كل من الطرفين. </string>
 
 
-    <string name="verification_code_will_be_sent_within_1_30">الرجاء ادخال رمز التحقق الذى قد تم ارسالة الى هاتفك المحمول</string>
+    <string name="verification_code_will_be_sent_within_1_30">الرجاء إدخال رمز التحقق الذي تم إرساله إلى حسابك على واتساب</string>
     <string name="conter">1:30</string>
     <string name="complete_your_profile">أكمل ملفك الشخصي</string>
     <string name="you_must_complete_your_profile_to_can_book_your_doctor">يجب عليك إكمال ملف التعريف الخاص بك لتتمكن من حجز طبيبك</string>
@@ -442,6 +443,9 @@
     <string name="select_relation_type">اختر العلاقة </string>
     <string name="newbalance">الرصيد</string>
     <string name="search_by_polyclinic_name"> البحث باسم العيادة</string>
+    <string name="if_you_donot_have_whats_app">إذا لم يكن لديك واتساب</string>
+    <string name="salamtak_app_offers_home_nursing_services">يقدم تطبيق سلامتك خدمة التمريض المنزلي بدراجتها المختلفة (جليس - ممرض حالات غير حرجة - ممرض حالات حرجة) وباعلي المعايير الطبية من خلال طاقم تمريض متخصص ومن ذوي الخبرة
+</string>
 
     <array name="choose">
         <item>اختار</item>

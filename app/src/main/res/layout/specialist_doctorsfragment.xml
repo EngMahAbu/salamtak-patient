@@ -585,7 +585,7 @@
     <include
             android:id="@+id/layoutBottomsheetpersistant"
             layout="@layout/layout_bottomsheet_analysis"
-            android:visibility="gone"
+            android:visibility="visible"
             />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

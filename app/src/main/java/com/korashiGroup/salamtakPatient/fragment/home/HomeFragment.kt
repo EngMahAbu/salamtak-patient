@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.view.WindowCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -71,6 +70,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
     private lateinit var imageVideoAdapter: ImageVideoAdapter
     private val doctorProfileViewModel: DoctorProfileViewModel by viewModels()
     private val patientviewmodel: PatientViewmodel by viewModels()
+    private val polyClinicsViewModel: PolyClinicsViewmodel by viewModels()
     private val imageServicesViewModel: ImageServicesViewModel by viewModels()
     private val notificationViewModel: NotificationViewModel by viewModels()
     private val polyClinicsViewmodel: PolyClinicsViewmodel by viewModels()
@@ -80,6 +80,8 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
     private lateinit var permissionManager: PermissionManager
     private var partMap: Map<String, Any> = mutableMapOf()
     private var data: Data? = null
+    private var questionsCount = 0
+    private var notificationsCount = 0
     var someEventListener: LoginFragment.onSomeEventListener? = null
     private var specilityId = 0
     private lateinit var popularDoctorsAdapter: PopularDoctorsAdapter
@@ -145,6 +147,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
         healthTopicsRecylerview()
         callBackGetTop10Specialist()
         callBackNotifications()
+        callBackquestionsCounter()
         setupresyclerviewSpecialist()
         popularDoctorsRecylerview()
         imageServices()
@@ -264,6 +267,10 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
             if (specilityId > 0) {
                 findNavController().navigate(R.id.searchFragment)
             }
+        }
+        binding.layputHomecare.setOnClickListener {
+            medicalExaminatioId=10
+            findNavController().navigate(R.id.homeCareFragment)
         }
     }
 
@@ -505,9 +512,9 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
                 findNavController().navigate(R.id.chooseCategoryOffersFragment)
             }
 
-            8, 9 -> {
-                findNavController().navigate(R.id.specialistDoctorsFragment)
-            }
+//            8, 9 -> {
+//                findNavController().navigate(R.id.specialistDoctorsFragment)
+//            }
 
             10 -> {
                 findNavController().navigate(R.id.homeCareFragment)
@@ -670,19 +677,11 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
                 }
 
                 is Resource.sucess -> {
+                    notificationsCount = response.data?.data
+                        ?.count { it.isSeen == false } ?: 0
 
-                    val listIsSeen = response.data?.data?.filter {
-                        it.isSeen == false
-                    }
-                    if (listIsSeen.isNullOrEmpty()) {
-//                        binding.tvNumberOfNotification.visibility = View.GONE
-//                        binding.ivRoundbg.visibility = View.GONE
-                         mainViewModel.updateBottomNavIcon(R.id.notificationListFragment,R.drawable.new_notification,false)
-                    } else {
-//                        binding.tvNumberOfNotification.text = listIsSeen.size.toString()
-                        mainViewModel.updateBottomNavIcon(R.id.notificationListFragment,R.drawable.ic_notification_changed,true)
-                    }
                     callBackGetTop10Specialist()
+                    updateTotalCount()
                 }
 
                 is Resource.Error -> {
@@ -694,6 +693,46 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
         })
 
         patientviewmodel.getUserNotifications()
+    }
+
+    private fun callBackquestionsCounter() {
+        polyClinicsViewModel.questionsResponse.observe(viewLifecycleOwner, androidx.lifecycle.Observer {response ->
+            when (response) {
+
+                is Resource.Loading -> {
+
+                }
+                is Resource.sucess -> {
+                    questionsCount = response.data?.data
+                        ?.count { it?.isNoShow == false } ?: 0
+
+                  //  updateTotalCount()
+
+                }
+                is Resource.Error -> {
+
+                }
+
+            }
+        })
+        polyClinicsViewModel.getAllQandAByDoctorId(true)
+    }
+    private fun updateTotalCount() {
+        val totalCount = questionsCount + notificationsCount
+
+        if (totalCount > 0) {
+            mainViewModel.updateBottomNavIcon(
+                menuItemId = totalCount,
+                iconResId = 0,
+                true
+            )
+        }else{
+            mainViewModel.updateBottomNavIcon(
+                menuItemId = 0,
+                iconResId = 0,
+                true
+            )
+        }
     }
 
     private fun callBackSpecialist() {

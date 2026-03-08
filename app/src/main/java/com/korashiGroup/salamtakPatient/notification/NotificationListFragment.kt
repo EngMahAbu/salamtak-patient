@@ -145,6 +145,11 @@ class NotificationListFragment : Fragment() ,QuestionsAdapter.IBook{
                 }
 
                 is Resource.sucess -> {
+                    mainViewModel.updateBottomNavIcon(
+                        menuItemId = 0,
+                        iconResId = 0,
+                        true
+                    )
                     binding.ivMessageroundbg.visibility= View.GONE
                 }
 

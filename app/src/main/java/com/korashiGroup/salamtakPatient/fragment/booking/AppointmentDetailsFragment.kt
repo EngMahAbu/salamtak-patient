@@ -127,11 +127,11 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
                 fullName=binding.etFullNameAR.text.toString()
             }
         }
-        binding.etPhoneNumber.doOnTextChanged { text, start, before, count ->
-            if (binding.etPhoneNumber.text?.trim()!!.isEmpty()) {
-                phoneNumber=binding.etPhoneNumber.text.toString()
-            }
-        }
+//        binding.etPhoneNumber.doOnTextChanged { text, start, before, count ->
+//            if (binding.etPhoneNumber.text?.trim()!!.isEmpty()) {
+//                phoneNumber=binding.etPhoneNumber.text.toString()
+//            }
+//        }
         binding.ivArrow.setOnClickListener {
             if (args.status == true) {
                 findNavController().navigate(R.id.searchFragment)

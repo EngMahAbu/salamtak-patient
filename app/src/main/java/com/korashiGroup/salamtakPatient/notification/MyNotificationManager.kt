@@ -8,6 +8,7 @@ import android.media.AudioAttributes
 import android.media.RingtoneManager
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.navigation.NavDeepLinkBuilder
 import com.korashiGroup.salamtakPatient.R
@@ -20,7 +21,7 @@ class MyNotificationManager @Inject constructor(private val mCtx: Application) {
     fun textNotification(title: String?, message: String?,deepLinkItem: DeepLinkItem?) {
         val rand = Random()
         val idNotification = rand.nextInt(1000000000)
-
+        Log.d("textNotification", "textNotification: ${deepLinkItem.toString()}")
         if (!deepLinkItem?.token.isNullOrEmpty()){
             val pendingDeeplink =
                 NavDeepLinkBuilder(mCtx).setGraph(R.navigation.nav_graph).setDestination(R.id.videoCallFragment)

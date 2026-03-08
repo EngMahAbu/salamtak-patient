@@ -51,6 +51,8 @@ import com.korashiGroup.salamtakPatient.model.scheduling.GetLatestPatientAppoint
 import com.korashiGroup.salamtakPatient.model.scheduling.GetPatientAppointmentesResponse
 import com.korashiGroup.salamtakPatient.model.syemtoms.Syemtoms
 import com.korashiGroup.salamtakPatient.model.syemtoms.SymetomsResponse
+import com.korashiGroup.salamtakPatient.model.whatspresponse.WhatSpResponse
+import com.korashiGroup.salamtakPatient.model.whatspresponse.WhatspRequest
 import com.korashiGroup.salamtakPatient.notification.NotificationListResponse
 import okhttp3.RequestBody
 import retrofit2.Response
@@ -65,9 +67,14 @@ interface ApiService {
     suspend fun registerUser(@Path("culture") culture: String,
                            @Body registerUser: CreateUser):Response<RegisterReponse>
 
-    @POST("{culture}/User/Register")
+    @POST("{culture}/User/SendOTP")
     suspend fun SendOTP(@Path("culture") culture: String,
                         @Body registerUser: CreateUser):Response<RegisterReponse>
+
+    @POST("{culture}/User/SendOTPWhatsApp")
+    suspend fun sendOTPWhatsApp(@Path("culture") culture: String,
+                        @Body registerUser: WhatspRequest
+    ):Response<WhatSpResponse>
 
     @POST("{culture}/User/CreateUser")
     suspend fun createUser(@Path("culture") culture: String,

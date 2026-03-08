@@ -75,10 +75,12 @@ class VideoCallFragment : Fragment() {
             binding.layoutVideocalling.visibility = View.GONE
             binding.layoutVoiceCallng.visibility = View.VISIBLE
             setupVoiceSDKEngine()
+            joinCall()
         } else {
             binding.layoutVideocalling.visibility = View.VISIBLE
             binding.layoutVoiceCallng.visibility = View.GONE
             setupVideoSDKEngine()
+            joinCall()
         }
 
         binding.ivProfile.load("https://salamtechapi.azurewebsites.net/${args.doctorimage}") {
@@ -94,7 +96,7 @@ class VideoCallFragment : Fragment() {
             placeholder(R.drawable.ic_profile)
             transformations(CircleCropTransformation())
         }
-        joinCall()
+
 
     }
 

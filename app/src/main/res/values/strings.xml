@@ -30,8 +30,9 @@
     <string name="send">Send</string>
     <string name="verify">Verify</string>
     <string name="resetpasword">Forget Password</string>
-    <string name="verification_code">Verification Code Is Sent To</string>
-    <string name="resend_verification_code">Resend verification code</string>
+    <string name="verification_code">Verification code is sent to whats app</string>
+    <string name="resend_verification_code">Resend verification code by sms</string>
+    <string name="resend_verification_codebywhatsp">Resend verification code by whatsp</string>
     <string name="change_password">Change password</string>
     <string name="new_password">New Password</string>
     <string name="confirm_new_password">Confirm New Password</string>
@@ -111,7 +112,7 @@
     <string name="live_chatdesc">Salamtak Connect enables patient to enjoy full medical diagnosis “in simple medical cases“ by using call or video call services. it is a valuable tool that provides, at least, professional medical guidance. Save the First Visit (identify scans and lab analysis) and Third Visit (follow up consultation) by using Salamtak Connect.
     </string>
 
-    <string name="verification_code_will_be_sent_within_1_30">Please Enter The Verification Code That Has Been Sent To Your Mobile Phone</string>
+    <string name="verification_code_will_be_sent_within_1_30">Please Enter Verification Code</string>
     <string name="conter">1:30</string>
     <string name="complete_your_profile">Complete your profile</string>
     <string name="you_must_complete_your_profile_to_can_book_your_doctor">You must complete your profile to can book
@@ -461,6 +462,8 @@
     <string name="select_relation_type">Select Relation Type</string>
     <string name="newbalance">Balance</string>
     <string name="search_by_polyclinic_name">Search by Polyclinic name</string>
+    <string name="if_you_donot_have_whats_app">If you don\'t have whats app</string>
+    <string name="salamtak_app_offers_home_nursing_services">Salamtak app offers home nursing services at different levels (caregiver – basic nursing – critical care nursing) delivered by experienced professional staff.</string>
     <array name="choose">
         <item>Select</item>
     </array>

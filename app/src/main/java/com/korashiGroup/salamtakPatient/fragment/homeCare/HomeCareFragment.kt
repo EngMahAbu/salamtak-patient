@@ -1,6 +1,7 @@
 package com.korashiGroup.salamtakPatient.fragment.homeCare
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +17,7 @@ import com.korashiGroup.salamtakPatient.databinding.HomeCarefragmentBinding
 import com.korashiGroup.salamtakPatient.model.ImageServices
 import com.korashiGroup.salamtakPatient.model.SpecialistData
 import com.korashiGroup.salamtakPatient.utils.Resource
+import com.korashiGroup.salamtakPatient.utils.ServiceNavigator
 import com.korashiGroup.salamtakPatient.viewmodel.HomeCareViewModel
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,7 +49,7 @@ class HomeCareFragment : Fragment(),ServicesAdapter.Action {
     private fun servicesRecylerview() {
         imageServicesAdapter = ServicesAdapter(this)
         binding.rvHomeCare.apply {
-            layoutManager = GridLayoutManager(requireContext(), 2)
+            layoutManager = GridLayoutManager(requireContext(), 3)
             adapter = imageServicesAdapter
             setHasFixedSize(true)
         }
@@ -77,6 +79,18 @@ class HomeCareFragment : Fragment(),ServicesAdapter.Action {
                                 }
                             }?.let { it2 -> listOfHomeCareServices.add(it2) }
                         }
+
+
+                        listOfHomeCareServices.add( ImageServices(R.drawable.ic_labs,
+                            requireContext().getString(R.string.labs) ?: "","التحاليل", Id = 8))
+                        listOfHomeCareServices.add( ImageServices(
+                            R.drawable.ic_ray_radiology,
+                            requireContext().getString(R.string.medicalscan),"الأشعة",
+                            Id = 9,
+                        ))
+                        listOfHomeCareServices.add(  ImageServices(R.drawable.health_care, "Medical Consultant","استشاري طبي", Id = 2))
+                                listOfHomeCareServices.add(ImageServices(R.drawable.health_check, "Mobile Clinic","عيادة متنقلة", Id = 3))
+                                listOfHomeCareServices.add(ImageServices(R.drawable.device, "monitoring devices levels","أجهزة مراقبة مستوى", Id = 4))
                         imageServicesAdapter.submitList(listOfHomeCareServices)
                     }
                 }
@@ -89,11 +103,9 @@ class HomeCareFragment : Fragment(),ServicesAdapter.Action {
     }
     override fun onItemClick(servicesId: Int) {
         sharedDataViewmodel.getspecialication(SpecialistData(servicesId,"",false,""))
-        if (servicesId!=0){
-            findNavController().navigate(R.id.searchFragment)
-        }else{
-            findNavController().navigate(R.id.askingFoNurssingFragment)
-        }
+
+        val navigator = ServiceNavigator.create(servicesId)
+        findNavController().navigate(navigator.destination)
 
     }
 }

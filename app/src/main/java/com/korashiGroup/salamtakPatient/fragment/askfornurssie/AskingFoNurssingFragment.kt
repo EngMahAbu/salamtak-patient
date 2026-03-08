@@ -38,7 +38,7 @@ class AskingFoNurssingFragment : Fragment() {
             com.facebook.R.layout.support_simple_spinner_dropdown_item,
             resources.getStringArray(R.array.work_hours_array)
         )
-        binding.workHours.setAdapter(workHoursAdapter)
+
 
         // Service Level Dropdown
         val serviceLevelAdapter = ArrayAdapter(
@@ -46,7 +46,7 @@ class AskingFoNurssingFragment : Fragment() {
             com.facebook.R.layout.support_simple_spinner_dropdown_item,
             resources.getStringArray(R.array.service_level_array)
         )
-        binding.serviceLevel.setAdapter(serviceLevelAdapter)
+
     }
 
 

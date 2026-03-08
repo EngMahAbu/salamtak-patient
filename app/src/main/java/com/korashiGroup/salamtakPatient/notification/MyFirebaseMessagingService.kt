@@ -28,78 +28,59 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)
-        //   Log.e(TAG, "data: ${message.data}")
 
 
-//        val uri: Uri = Uri.parse(message.notification?.link.toString())
-//        val url = uri.toString()
-        val x =
-            "link=SalamtakPatient://2?token=0068c6a0bb92eb943b28327bb286bd0b03fIAAOoKBCtgBYc!!1Lec0lHlOuG9rjSxmjXTiGegqvDQYBhA!!fbM8AAAAAEACzX8YFbnqVZAEAAQCmNJRk&" +
-                    "DoctorName=Mostafa *Ali*aaaaaa&DoctorImage=!!Images!!Doctor!!Profile!!9406c34c-521b-4730-8741-5f23b65d148a.jfif&Channelname=46c8b940-6214-4a6c-9310-f39bc6018ee7&PatientID=151&" +
-                    "date=2023-06-22 14:43:46"
-        val link =
-            "{link=SalamtakPatient://2?token=0068c6a0bb92eb943b28327bb286bd0b03fIAAOoKBCtgBYc!!1Lec0lHlOuG9rjSxmjXTiGegqvDQYBhA!!fbM8AAAAAEACzX8YFbnqVZAEAAQCmNJRk&DoctorName=Mostafa *Ali*aaaaaa&DoctorImage=!!Images!!Doctor!!Profile!!9406c34c-521b-4730-8741-5f23b65d148a.jfif&Channelname=46c8b940-6214-4a6c-9310-f39bc6018ee7&PatientID=151&date=2023-06-22 14:43:46}"
 
-        val value = message.data.values
-        val entriess = message.data.entries
-        var result = ""
-        for (enter in entriess) {
-            Log.e(TAG, "enter.value: ${enter.value}")
-            result = enter.value
+        val data = message.data
+
+        Log.e(TAG, "FCM Data: $data")
+
+        if (data.isNullOrEmpty()) {
+            Log.e(TAG, "Message data is empty")
+            return
         }
 
-//        for (values in value ){
-//            Log.e(TAG, "keys: $values")
-//            result=values
-//        }
+        val linkData = data["link"]  // الرابط الطويل من FCM
+        val map = getQueryString(linkData)
 
-//        val gson = Gson()
-//        val deeplink = gson.fromJson(result, DeepLinkItem::class.java)
-
-//          val lin=deeplink.link
-//              Log.e(TAG, "map: $lin")
-        val map = getQueryString(result)
-        Log.e(TAG, "map: $map")
-
-
-        if (result.contains("SalamtakPatient://4?")) {
-            linkAudioOrVideo = "audio"
-        } else  {
-            linkAudioOrVideo = "video"
+        val linkAudioOrVideo = if (linkData?.contains("SalamtakPatient://4?") == true) {
+            "audio"
+        } else {
+            "video"
         }
 
         val deepLinkItem = DeepLinkItem(
-            map?.get("token")?.let { getDeepLink(it) }, map?.get("DoctorName"),
-            map?.get("DoctorImage")?.let { getDeepLink(it) },
-            map?.get("Channelname"), map?.get("date"),linkAudioOrVideo
+            token = map["token"]?.let { getDeepLink(it) },
+            DoctorName = map["DoctorName"]?.replace("*", " "), // استبدل * بمسافة
+            DoctorImage = map["DoctorImage"]?.let { getDeepLink(it) },
+            Channelname = map["Channelname"],
+            date = map["date"],
+            link = linkAudioOrVideo
         )
-        Log.e("Element  ", "deepLinkItem: ${deepLinkItem}")
+        Log.e(TAG, "deepLinkItem: $deepLinkItem")
 
-        val uri: Uri = Uri.parse(link)
-        val jsonobject = convertUriToJson(uri)
-
-        Log.e(TAG, "jsonobject: ${jsonobject}")
+        // عرض الإشعار
         mNotificationManager.textNotification(
-            message.notification?.title.toString(),
-            message.notification?.body.toString(),
+            message.notification?.title.orEmpty(),
+            message.notification?.body.orEmpty(),
             deepLinkItem
         )
 
     }
 
-    fun getQueryString(url: String?): HashMap<String, String>? {
-        val uri: Uri = Uri.parse(url)
+    fun getQueryString(url: String?): HashMap<String, String> {
         val map: HashMap<String, String> = HashMap()
-        for (paramName in uri.getQueryParameterNames()) {
-            if (paramName != null) {
-                val paramValue: String? = uri.getQueryParameter(paramName)
-                if (paramValue != null) {
-                    map[paramName] = paramValue
-                }
+        if (url == null) return map
+
+        val uri = Uri.parse(url)
+        for (paramName in uri.queryParameterNames) {
+            uri.getQueryParameter(paramName)?.let { value ->
+                map[paramName] = value
             }
         }
         return map
     }
+
 
 
     fun convertUriToJson(uri: Uri): JSONObject {

@@ -2,7 +2,6 @@ package com.korashiGroup.salamtakPatient.fragment.navbottom
 
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -26,8 +25,11 @@ import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.snackbar.Snackbar
 import com.korashiGroup.salamtakPatient.model.booking.clink.ClinicData
 import com.korashiGroup.salamtakPatient.model.offers.OfferDoctor
+import com.korashiGroup.salamtakPatient.viewmodel.MainViewModel
+import com.korashiGroup.salamtakPatient.viewmodel.PatientViewmodel
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
@@ -39,12 +41,15 @@ class MyScheduleFragment : Fragment(), MyScheduleAdapter.ActionSchedule,
     private lateinit var binding: MySchedulefragmentBinding
     private lateinit var myScheduleAdapter: MyScheduleAdapter
     private lateinit var examinationAdapter: EaxminationTypeAdapter
+    private val patientviewmodel: PatientViewmodel by viewModels()
+    private val mainViewModel: MainViewModel by activityViewModels()
     private lateinit var bottomsheetbeahavoir: BottomSheetBehavior<ConstraintLayout>
     val sharedDataViewmodel: SharedDataViewmodel by activityViewModels()
     val viewmodel: DialogBottomSheetViewmodel by viewModels()
     val now = Calendar.getInstance(TimeZone.getTimeZone("CST"))
     var formattedDate = ""
     var sechdule = ""
+    private var notificationsCount = 0
     var examinationtypeId: Int? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -70,6 +75,7 @@ class MyScheduleFragment : Fragment(), MyScheduleAdapter.ActionSchedule,
         doctorsRecylerview()
         examinationRecylerview()
         callBackExaminationtypeId()
+        callBackNotifications()
 
     }
 
@@ -321,5 +327,47 @@ class MyScheduleFragment : Fragment(), MyScheduleAdapter.ActionSchedule,
                 binding.layoutCardview.visibility=View.GONE
             }
     }
+    private fun callBackNotifications() {
+        patientviewmodel.notificationResponse.observe(viewLifecycleOwner, Observer { response ->
+            when (response) {
 
+                is Resource.Loading -> {
+
+                }
+
+                is Resource.sucess -> {
+                    notificationsCount = response.data?.data
+                        ?.count { it.isSeen == false } ?: 0
+
+                    updateTotalCount()
+                }
+
+                is Resource.Error -> {
+                    Snackbar.make(requireView(), "${response.message}", Snackbar.LENGTH_SHORT)
+                        .show()
+                }
+            }
+
+        })
+
+        patientviewmodel.getUserNotifications()
+    }
+
+    private fun updateTotalCount() {
+        val totalCount =  notificationsCount
+
+        if (totalCount > 0) {
+            mainViewModel.updateBottomNavIcon(
+                menuItemId = totalCount,
+                iconResId = 0,
+                true
+            )
+        }else{
+            mainViewModel.updateBottomNavIcon(
+                menuItemId = 0,
+                iconResId = 0,
+                true
+            )
+        }
+    }
 }

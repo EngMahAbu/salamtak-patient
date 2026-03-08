@@ -76,7 +76,7 @@ class LabsAndScannerFragment : Fragment(), LabsAdapter.Action, AnalysisAdapter.S
     private fun initButton() {
         binding.ivArrow.setOnClickListener {
         //    if (status) {
-                findNavController().navigate(R.id.specialistDoctorsFragment)
+                findNavController().navigate(R.id.specialistLabsAndRdiologyFragment)
           //} else {
             //   callBackGetLabs()
            // }

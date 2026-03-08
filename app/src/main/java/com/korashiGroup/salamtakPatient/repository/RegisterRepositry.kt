@@ -9,6 +9,7 @@ import com.korashiGroup.salamtakPatient.model.docotorsearch.NewDoctorSearchReque
 import com.korashiGroup.salamtakPatient.model.favorite.FavoriteRequest
 import com.korashiGroup.salamtakPatient.model.profile.LocationRequest
 import com.korashiGroup.salamtakPatient.model.register.*
+import com.korashiGroup.salamtakPatient.model.whatspresponse.WhatspRequest
 import com.korashiGroup.salamtakPatient.utils.Constans
 import com.korashiGroup.salamtakPatient.utils.SpUtil
 import okhttp3.MultipartBody
@@ -24,6 +25,8 @@ class RegisterRepositry @Inject constructor(private val apiService: ApiService) 
 
     suspend fun SendOTP(registerUser: CreateUser) =
         sp.getUserLang(Constans.Language)?.let { apiService.SendOTP(it, registerUser) }
+    suspend fun sendOTPWhatsApp(registerUser: WhatspRequest) =
+        sp.getUserLang(Constans.Language)?.let { apiService.sendOTPWhatsApp(it, registerUser) }
 
     suspend fun createUser(createUser: CreateUser) =
         sp.getUserLang(Constans.Language)?.let { apiService.createUser(it, createUser) }

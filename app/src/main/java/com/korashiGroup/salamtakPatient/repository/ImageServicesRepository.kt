@@ -43,7 +43,7 @@ class ImageServicesRepository @Inject constructor(
 //                context.getString(R.string.medicalscan),"الأشعة",
 //                Id = 9,
 //            ),
-//            ImageServices(R.drawable.ic_homecares, context.getString(R.string.home_care),"الرعاية المنزلية", Id = 10)
+          //  ImageServices(R.drawable.ic_homecares, context.getString(R.string.home_care),"الرعاية المنزلية", Id = 10)
         )
         _imageServicesList.value = list
     }

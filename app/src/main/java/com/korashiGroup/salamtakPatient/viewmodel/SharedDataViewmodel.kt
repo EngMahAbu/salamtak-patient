@@ -23,6 +23,7 @@ class SharedDataViewmodel:ViewModel() {
     val specialication=MutableLiveData<SpecialistData>()
     val subSpecialication=MutableLiveData<List<SubSpecialistData>>()
     val seniorityLevelData=MutableLiveData<SeniorityLevelData>()
+    val notificationNumber = MutableLiveData<Pair<Int, Int>>()
     val getCity=MutableLiveData<CityData>()
     val relationResponse=MutableLiveData<DataRelation>()
     val clinicIdAndDoctorId=MutableLiveData<ClinicData>()

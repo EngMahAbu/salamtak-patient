@@ -697,6 +697,26 @@
                 android:id="@+id/action_medicalStateFragment4_to_dialogBottomSheetFragment"
                 app:destination="@id/dialogBottomSheetFragment" />
     </fragment>
+    <fragment
+            android:id="@+id/specialistLabsAndRdiologyFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.home.SpecialistLabsAndRdiologyFragment"
+            android:label="SpecialistLabsAndRdiologyFragment" >
+        <action
+                android:id="@+id/action_specialistLabsAndRdiologyFragment_to_dialogBottomSheetFragment"
+                app:destination="@id/dialogBottomSheetFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/mobileClinicFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.homeCare.MobileClinicFragment"
+            android:label="MobileClinicFragment" />
+    <fragment
+            android:id="@+id/medicalConsultantFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.homeCare.MedicalConsultantFragment"
+            android:label="MedicalConsultantFragment" />
+    <fragment
+            android:id="@+id/monitoringDevicesFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.homeCare.MonitoringDevicesFragment"
+            android:label="MonitoringDevicesFragment" />
 
 
 </navigation>

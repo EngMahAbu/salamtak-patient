@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
@@ -23,6 +24,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.facebook.appevents.AppEventsLogger
+import com.google.android.material.badge.BadgeDrawable
 import com.google.firebase.remoteconfig.BuildConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
@@ -34,6 +36,7 @@ import com.korashiGroup.salamtakPatient.utils.Constans.KEY_FORCE_UPDATE_REQUIRED
 import com.korashiGroup.salamtakPatient.utils.ForceUpdateUtils
 import com.korashiGroup.salamtakPatient.utils.localization.DefaultLocaleHelper
 import com.korashiGroup.salamtakPatient.viewmodel.MainViewModel
+import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -44,6 +47,7 @@ class MainActivity : AppCompatActivity(), LoginFragment.onSomeEventListener {
     private lateinit var binding: ActivityMainBinding
     private val NOTIFICATION_PERMISSION_CODE = 101
     private val mainViewModel: MainViewModel by viewModels()
+    private val sharedDataViewmodel: SharedDataViewmodel by viewModels()
     private val firebaseRemoteConfig by lazy { FirebaseRemoteConfig.getInstance() }
     private val dialog = Dialog()
     private val configSettings by lazy {
@@ -106,6 +110,7 @@ class MainActivity : AppCompatActivity(), LoginFragment.onSomeEventListener {
                 }
             }
         }
+
 
     }
 
@@ -204,12 +209,16 @@ class MainActivity : AppCompatActivity(), LoginFragment.onSomeEventListener {
 
         mainViewModel.iconUpdateLiveData.observe(this) { update ->
             if (update.state){
-                binding.bottomViewNav.itemIconTintList=null
-            }else{
+            //    binding.bottomViewNav.itemIconTintList=null
+                updateNotificationBadge(update.menuItemId)
                 val colorStateList = ContextCompat.getColorStateList(this, R.color.icon_sellector)
                 binding.bottomViewNav.itemIconTintList = colorStateList
+            }else{
+//                val colorStateList = ContextCompat.getColorStateList(this, R.color.icon_sellector)
+//                binding.bottomViewNav.itemIconTintList = colorStateList
+                updateNotificationBadge(0)
+
             }
-            binding.bottomViewNav.menu.findItem(R.id.notificationListFragment)?.icon = ContextCompat.getDrawable(this, update.iconResId)
         }
 
     }
@@ -252,5 +261,18 @@ class MainActivity : AppCompatActivity(), LoginFragment.onSomeEventListener {
             }
         }
     }
+
+    fun updateNotificationBadge(count: Int) {
+        val badge = binding.bottomViewNav.getOrCreateBadge(R.id.notificationListFragment)
+        badge.isVisible = count > 0
+        badge.number = count
+        badge.badgeGravity = BadgeDrawable.TOP_END
+        badge.backgroundColor = ContextCompat.getColor(this, R.color.red)
+        badge.badgeTextColor = ContextCompat.getColor(this, R.color.white)
+        badge.maxCharacterCount = 3
+        badge.horizontalOffset = 4
+        badge.verticalOffset = 4
+    }
+
 
 }

@@ -8,11 +8,11 @@ data class CreateUser(
     @SerializedName("Email")
     val email: String?=null,
     @SerializedName("Name")
-    val name: String,
+    val name: String?=null,
     @SerializedName("Password")
-    val password: String,
+    val password: String?=null,
     @SerializedName("Phone")
-    val phone: String,
+    val phone: String?=null,
     @SerializedName("UserTypeId")
-    val userTypeId: Int
+    val userTypeId: Int?=null
 ): Serializable

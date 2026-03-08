@@ -48,7 +48,7 @@ class SpecialistDoctorsFragment : Fragment(),SpecialictyAdapter.SelectSpecialist
     val sharedDataViewmodel: SharedDataViewmodel by activityViewModels()
     private lateinit var bottomsheetbeahavoir: BottomSheetBehavior<ConstraintLayout>
     var doctorName=""
-    var examinationtypeid = 0
+    var examinationtypeid = 8
     private var typeId = 1
     private var LabId = 0
     companion object {
@@ -68,7 +68,7 @@ class SpecialistDoctorsFragment : Fragment(),SpecialictyAdapter.SelectSpecialist
         instance=this
         examinationtypeid = HomeFragment.instance?.let {
             it.medicalExaminatioId
-        } ?: 1
+        } ?:1
         bindViews()
         setupresyclerviewSpecialist()
         clinksRecylerview()
@@ -192,7 +192,7 @@ class SpecialistDoctorsFragment : Fragment(),SpecialictyAdapter.SelectSpecialist
     }
     private fun clinksRecylerview() {
         analysisAdapter = AnalysisAdapter(this)
-        binding.rvAnalysis.apply {
+        binding.layoutBottomsheetpersistant.rvAnalysis.apply {
             adapter = analysisAdapter
             layoutManager = LinearLayoutManager(requireContext())
             setHasFixedSize(true)
@@ -354,15 +354,15 @@ class SpecialistDoctorsFragment : Fragment(),SpecialictyAdapter.SelectSpecialist
                 binding.tvAdds.text=getString(R.string.popularlabs)
                 binding.view.visibility=View.GONE
                 binding.imageAdds.visibility=View.GONE
-               // binding.layoutChooseAnalysis.visibility=View.VISIBLE
+                binding.layoutChooseAnalysis.visibility=View.VISIBLE
              //   binding.etSearch.visibility=View.GONE
              //   binding.tvOr.visibility=View.GONE
                 binding.etSearch.hint=getString(R.string.searchbylabname)
 
                 binding.textinputChooseAnalysis.hint=getString(R.string.selectanalysis)
                 binding.layoutBottomsheetpersistant.tvFilter.text=getString(R.string.analysis)
-                binding.layoutBottomsheetpersistant.etSearch.setText(getString(R.string.analysisname))
-             //   callBackGetLabs()
+            //    binding.layoutBottomsheetpersistant.etSearch.setText(getString(R.string.analysisname))
+                callBackGetLabs()
             }
             9->{
                typeId=2
@@ -372,14 +372,14 @@ class SpecialistDoctorsFragment : Fragment(),SpecialictyAdapter.SelectSpecialist
                 binding.view.visibility=View.GONE
                 binding.imageAdds.visibility=View.GONE
                 binding.tvSearch.text= getString(R.string.choose_rays)
-              //  binding.layoutChooseAnalysis.visibility=View.VISIBLE
+                binding.layoutChooseAnalysis.visibility=View.VISIBLE
                 //   binding.etSearch.visibility=View.GONE
                 //   binding.tvOr.visibility=View.GONE
                 binding.etSearch.hint=getString(R.string.searchbyRadiologyname)
                 binding.textinputChooseAnalysis.hint=getString(R.string.selectradialogy)
                 binding.layoutBottomsheetpersistant.tvFilter.text=getString(R.string.radiology)
-                binding.layoutBottomsheetpersistant.etSearch.setText(getString(R.string.radiologyname))
-              //  callBackGetLabs()
+              //  binding.layoutBottomsheetpersistant.etSearch.setText(getString(R.string.radiologyname))
+                callBackGetLabs()
             }else->{
             binding.layoutChooseSpecialization.visibility=View.VISIBLE
             binding.btnLayoutChooseSpecialization.visibility=View.VISIBLE

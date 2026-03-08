@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -17,7 +16,6 @@ import androidx.navigation.fragment.findNavController
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.databinding.SignupfragmentBinding
 import com.korashiGroup.salamtakPatient.model.register.CreateUser
-import com.korashiGroup.salamtakPatient.utils.Constans
 import com.korashiGroup.salamtakPatient.utils.Constans.NameAR
 import com.korashiGroup.salamtakPatient.utils.Constans.NameEN
 import com.korashiGroup.salamtakPatient.utils.Constans.UserSIGNUP
@@ -25,7 +23,6 @@ import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.utils.SpUtil
 import com.korashiGroup.salamtakPatient.viewmodel.RegisterViewmodel
 import com.google.android.material.snackbar.Snackbar
-import com.korashiGroup.salamtakPatient.utils.DateUtils
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -353,7 +350,8 @@ class SignupFragment : Fragment() {
             when (it) {
 
                 is Resource.Loading -> {
-                    //  showprogtessbar()
+                    binding.btnSignUp.isEnabled=false
+                  //    showprogtessbar()
                 }
 
                 is Resource.sucess -> {
@@ -369,7 +367,8 @@ class SignupFragment : Fragment() {
                 }
 
                 is Resource.Error -> {
-                    hideprogressbar()
+                    binding.btnSignUp.isEnabled=true
+                  //  hideprogressbar()
                     Snackbar.make(requireView(), "${it.message}", Snackbar.LENGTH_SHORT).show()
 
                 }

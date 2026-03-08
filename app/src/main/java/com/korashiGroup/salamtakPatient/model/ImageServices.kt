@@ -7,5 +7,4 @@ data class ImageServices(
     val color:Int=0,
     val Id:Int?=0,
     val image:String?=null,
-
 )
