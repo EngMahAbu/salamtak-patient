@@ -463,7 +463,9 @@
     <string name="newbalance">Balance</string>
     <string name="search_by_polyclinic_name">Search by Polyclinic name</string>
     <string name="if_you_donot_have_whats_app">If you don\'t have whats app</string>
-    <string name="salamtak_app_offers_home_nursing_services">Salamtak app offers home nursing services at different levels (caregiver – basic nursing – critical care nursing) delivered by experienced professional staff.</string>
+    <string name="salamtak_app_offers_home_nursing_services">Salamtak app offers home nursing services at different levels (Caregiver – Basic nursing – Critical care nursing) delivered by experienced professional staff.</string>
+    <string name="welcome_to_salamtak_mobile_clinic_service_please_complete_related_request_form_one_of_salamtak_customer_service_agent_will_confirm_your_request_to_guarantee_swift_and_fast_execution">Welcome to Salamtak Mobile Clinic Service. Please complete related request form .One of Salamtak Customer Service agent will confirm your request to guarantee swift and fast execution</string>
+    <string name="salamtak_application_provides_three_levels_of_health_monitoring_devices_basic_intermediate_premium_using_advanced_medical_technology_and_high_standards_of_medical_care">Salamtak Application provides three levels of Health Monitoring Devices (Basic - Intermediate - Premium) using advanced medical technology and high standards of medical care.</string>
     <array name="choose">
         <item>Select</item>
     </array>

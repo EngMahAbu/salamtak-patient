@@ -60,7 +60,7 @@
                         android:layout_height="160dp"
                         android:scaleType="centerCrop"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:src="@drawable/ic_nursing"
+                        android:src="@drawable/nurse"
                         />
                 <TextView
                         android:id="@+id/nursing_Title"
@@ -78,17 +78,17 @@
                         android:id="@+id/nursing_Desc"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/inter_regular"
+                        android:fontFamily="@font/avenirltstd_roman"
                         android:layout_marginStart="15dp"
                         android:layout_marginEnd="15dp"
                         android:layout_marginBottom="5dp"
-                        android:textColor="#475569"
+                        android:textColor="@color/black"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/nursing_Title"
                         android:text="@string/salamtak_app_offers_home_nursing_services"
-                        android:textSize="14sp"
+                        android:textSize="13sp"
                         />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -109,7 +109,7 @@
                 android:layout_marginTop="7dp"
                 android:fontFamily="@font/inter_regular"
                 android:textSize="11sp"
-                android:paddingStart="5dp"
+                android:paddingStart="10dp"
                 android:background="@drawable/bg_edittext_box"
                 android:hint="@string/full_name_in_english_first_middle_last"
                 android:inputType="text"/>
@@ -130,10 +130,20 @@
                 android:layout_height="50dp"
                 android:fontFamily="@font/inter_regular"
                 android:textSize="11sp"
-                android:paddingStart="5dp"
+                android:paddingStart="10dp"
                 android:background="@drawable/bg_edittext_box"
                 android:hint="Mobile Number: (+2)"
                 android:inputType="phone"/>
+
+        <!-- Address -->
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Address"
+                android:fontFamily="@font/inter_semibold"
+                android:textColor="@color/color_64748B"
+                android:textSize="12sp"
+                android:paddingTop="8dp"/>
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout_Location_Details"
                 android:layout_width="match_parent"
@@ -315,36 +325,28 @@
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-        <!-- Address -->
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Address"
-                android:fontFamily="@font/inter_semibold"
-                android:textColor="@color/color_64748B"
-                android:textSize="12sp"
-                android:paddingTop="8dp"/>
+        <EditText
+                android:id="@+id/etStreetName"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:fontFamily="@font/inter_regular"
+                android:textSize="11sp"
+                android:paddingStart="15dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/bg_edittext_box"
+                android:layout_weight="1"
+                android:hint="Street Name "
+                android:textColorHint="@color/Color_0f172a"
+                android:focusable="false"/>
 
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:weightSum="4"
+                android:layout_marginTop="5dp"
+                android:weightSum="3"
                 android:paddingTop="4dp">
 
-            <EditText
-                    android:id="@+id/etStreetName"
-                    android:layout_width="156dp"
-                    android:layout_height="50dp"
-                    android:fontFamily="@font/inter_regular"
-                    android:textSize="11sp"
-                    android:paddingStart="15dp"
-                    android:layout_marginEnd="5dp"
-                    android:background="@drawable/bg_edittext_box"
-                    android:layout_weight="1"
-                    android:hint="Street Name "
-                    android:textColorHint="@color/Color_0f172a"
-                    android:focusable="false"/>
 
             <EditText
                     android:id="@+id/etBuilding"
@@ -352,7 +354,7 @@
                     android:layout_height="50dp"
                     android:fontFamily="@font/inter_regular"
                     android:textSize="11sp"
-                    android:paddingStart="15dp"
+                    android:paddingStart="10dp"
                     android:layout_marginEnd="5dp"
                     android:background="@drawable/bg_edittext_box"
                     android:layout_weight="1"
@@ -485,27 +487,6 @@
                     android:text="Female"/>
         </RadioGroup>
 
-
-        <!-- Number of Days -->
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Number of Days"
-                android:fontFamily="@font/inter_semibold"
-                android:textColor="@color/color_64748B"
-                android:textSize="12sp"
-                android:paddingTop="8dp"/>
-        <EditText
-                android:id="@+id/etNumberofDays"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="8dp"
-                android:fontFamily="@font/inter_regular"
-                android:textSize="16sp"
-                android:paddingStart="5dp"
-                android:background="@drawable/bg_edittext_box"
-                android:hint="nursing service duration"
-                android:inputType="textPostalAddress"/>
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -551,7 +532,7 @@
                     android:layout_height="50dp"
                     android:fontFamily="@font/inter_regular"
                     android:textSize="16sp"
-                    android:paddingStart="15dp"
+                    android:paddingStart="10dp"
                     android:layout_marginEnd="15dp"
                     android:background="@drawable/bg_edittext_box"
                     android:layout_weight="1"
@@ -638,6 +619,26 @@
                     android:textColorHint="@color/Color_0f172a"
                     android:focusable="false"/>
         </LinearLayout>
+        <!-- Number of Days -->
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nursing service duration"
+                android:fontFamily="@font/inter_semibold"
+                android:textColor="@color/color_64748B"
+                android:textSize="12sp"
+                android:paddingTop="8dp"/>
+        <EditText
+                android:id="@+id/etNumberofDays"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/inter_regular"
+                android:textSize="11sp"
+                android:paddingStart="10dp"
+                android:background="@drawable/bg_edittext_box"
+                android:hint="Number of days"
+                android:inputType="textPostalAddress"/>
 
 
         <!-- Send Button -->

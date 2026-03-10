@@ -187,27 +187,27 @@ class SignupFragment : Fragment() {
 
 
         }
-        binding.etEmail.doOnTextChanged { text, start, before, count ->
-            if (binding.etEmail.text?.trim()!!.isEmpty()) {
-                binding.tvEmailError.text = getString(R.string.required_name_email)
-                binding.tvEmailError.visibility = View.VISIBLE
-                binding.textinputEmail.setBackgroundResource(R.drawable.bg_edittext_error)
-                binding.etEmail.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
-
-            } else if (!(binding.etEmail.text?.toString()?.isValidEmail() == true)) {
-                binding.tvEmailError.text = getString(R.string.match_email)
-                binding.tvEmailError.visibility = View.VISIBLE
-                binding.textinputEmail.setBackgroundResource(R.drawable.bg_edittext_error)
-                binding.etEmail.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
-
-            } else {
-                binding.tvEmailError.visibility = View.GONE
-                binding.textinputEmail.setBackgroundResource(R.drawable.bg_edittext)
-                binding.etEmail.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
-
-            }
-
-        }
+//        binding.etEmail.doOnTextChanged { text, start, before, count ->
+//            if (binding.etEmail.text?.trim()!!.isEmpty()) {
+//                binding.tvEmailError.text = getString(R.string.required_name_email)
+//                binding.tvEmailError.visibility = View.VISIBLE
+//                binding.textinputEmail.setBackgroundResource(R.drawable.bg_edittext_error)
+//                binding.etEmail.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
+//
+//            } else if (!(binding.etEmail.text?.toString()?.isValidEmail() == true)) {
+//                binding.tvEmailError.text = getString(R.string.match_email)
+//                binding.tvEmailError.visibility = View.VISIBLE
+//                binding.textinputEmail.setBackgroundResource(R.drawable.bg_edittext_error)
+//                binding.etEmail.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_error, 0)
+//
+//            } else {
+//                binding.tvEmailError.visibility = View.GONE
+//                binding.textinputEmail.setBackgroundResource(R.drawable.bg_edittext)
+//                binding.etEmail.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
+//
+//            }
+//
+//        }
         binding.etPassword.doOnTextChanged { text, start, before, count ->
             if (binding.etPassword.text?.trim()!!.isEmpty()) {
                 binding.tvPasswordError.text = getString(R.string.required_password)
@@ -351,7 +351,7 @@ class SignupFragment : Fragment() {
 
                 is Resource.Loading -> {
                     binding.btnSignUp.isEnabled=false
-                  //    showprogtessbar()
+                     showprogtessbar()
                 }
 
                 is Resource.sucess -> {
@@ -368,7 +368,7 @@ class SignupFragment : Fragment() {
 
                 is Resource.Error -> {
                     binding.btnSignUp.isEnabled=true
-                  //  hideprogressbar()
+                    hideprogressbar()
                     Snackbar.make(requireView(), "${it.message}", Snackbar.LENGTH_SHORT).show()
 
                 }

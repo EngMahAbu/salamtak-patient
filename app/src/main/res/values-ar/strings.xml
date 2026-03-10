@@ -446,6 +446,10 @@
     <string name="if_you_donot_have_whats_app">إذا لم يكن لديك واتساب</string>
     <string name="salamtak_app_offers_home_nursing_services">يقدم تطبيق سلامتك خدمة التمريض المنزلي بدراجتها المختلفة (جليس - ممرض حالات غير حرجة - ممرض حالات حرجة) وباعلي المعايير الطبية من خلال طاقم تمريض متخصص ومن ذوي الخبرة
 </string>
+    <string name="welcome_to_salamtak_mobile_clinic_service_please_complete_related_request_form_one_of_salamtak_customer_service_agent_will_confirm_your_request_to_guarantee_swift_and_fast_execution">مرحبا بكم في خدمة سلامتك للعيادات المتنقلة. يمكنك الان الحصول علي خدمة مميزة في اسرع وقت عن طريق ملئ نموذج طلب الخدمة . سيقوم أحد ممثلي خدمة عملاء سلامتك بمراجعة البيانات وتنفيذ طلبكم من خلال أحد اطباء سلامتك المتخصصين
+</string>
+    <string name="salamtak_application_provides_three_levels_of_health_monitoring_devices_basic_intermediate_premium_using_advanced_medical_technology_and_high_standards_of_medical_care">يوفر تطبيق سلامتك خدمة متابعة الحالة الصحية عن بعد من خلال 3 مستويات من اجهزة المتابعة (اساسي - متوسط - شامل) باستخدام اعلي معايير التكنولوجيا و الرعاية الطبية.
+</string>
 
     <array name="choose">
         <item>اختار</item>

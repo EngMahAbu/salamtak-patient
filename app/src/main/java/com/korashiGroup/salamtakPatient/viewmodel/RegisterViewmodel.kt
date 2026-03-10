@@ -36,8 +36,39 @@ class RegisterViewmodel @Inject constructor(private val repositry: RegisterRepos
     fun registerUser(createUser: CreateUser)=viewModelScope.launch(Dispatchers.IO+handler)  {
 
         response.postValue(Resource.Loading())
-        val registerResponse=repositry.registerUser(createUser)
-        response.postValue(registerResponse?.let { handleRegister(it) })
+        try {
+            val registerResponse=repositry.registerUser(createUser)
+
+            if (registerResponse?.isSuccessful == true) {
+                registerResponse?.body()?.let {
+                    response.postValue(Resource.sucess(it))
+                } ?: response.postValue(Resource.Error("الاستجابة من الخادم فارغة"))
+            } else {
+
+                val errorBody = registerResponse?.errorBody()?.string()
+                val errorMessage = try {
+                    val json = JSONObject(errorBody ?: "")
+                    // هنا ناخد قيمة الـ "Message" فقط
+                    json.optString("Message", "حدث خطأ غير معروف")
+                } catch (e: Exception) {
+                    "حدث خطأ غير معروف"
+                }
+                response.postValue(Resource.Error(errorMessage))
+            }
+
+        } catch (e: Exception) {
+            Log.e("exception", "Exception: ${e.message}")
+
+            val userMessage = when (e) {
+                is java.net.UnknownHostException -> "تعذر الاتصال بالخادم، تحقق من اتصال الإنترنت."
+                is java.net.SocketTimeoutException -> "انتهت مهلة الاتصال، حاول مرة أخرى لاحقاً."
+                is javax.net.ssl.SSLHandshakeException -> "حدث خطأ في الاتصال الآمن (SSL)."
+                else -> e.message ?: "حدث خطأ غير معروف"
+            }
+
+            response.postValue(Resource.Error(userMessage))
+        }
+
     }
 
 
