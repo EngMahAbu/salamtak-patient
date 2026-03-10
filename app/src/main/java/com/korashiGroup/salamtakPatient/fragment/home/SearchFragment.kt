@@ -753,7 +753,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         }
     }
 
-    override fun onItemClick(
+    override fun onItemClicks(
         clinicId: Int,
         doctorId: Int,
         fessTo: Int,

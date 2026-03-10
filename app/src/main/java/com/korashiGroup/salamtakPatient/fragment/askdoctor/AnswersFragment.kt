@@ -119,7 +119,7 @@ class AnswersFragment : Fragment(),AnswersAdapter.IBook{
                 )
             }"
         }
-        binding.ivDoctorProfile.load("https://salamtechapi.azurewebsites.net/${args.answers?.specialityImage}") {
+        binding.ivDoctorProfile.load(args.answers?.specialityImage) {
             crossfade(true)
             crossfade(1000)
             transformations(CircleCropTransformation())

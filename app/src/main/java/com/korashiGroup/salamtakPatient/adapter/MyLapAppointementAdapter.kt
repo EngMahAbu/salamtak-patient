@@ -50,7 +50,7 @@ class MyLapAppointementAdapter() :
         }
 
 
-        holder.binding.ivDoctorProfile.load("https://salamtechapi.azurewebsites.net/${services.branchImageUrl}") {
+        holder.binding.ivDoctorProfile.load(services.branchImageUrl) {
             crossfade(true)
             crossfade(1000)
             transformations(CircleCropTransformation())

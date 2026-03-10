@@ -76,7 +76,7 @@ class PolyClinicsDoctorsAdapter(private val booking: IPolyClinicsBooking) :
         }
 
 
-        holder.binding.ivDoctorProfile.load("https://salamtechapi.azurewebsites.net/${services.image}") {
+        holder.binding.ivDoctorProfile.load(services.image) {
             crossfade(true)
             crossfade(1000)
             transformations(CircleCropTransformation())

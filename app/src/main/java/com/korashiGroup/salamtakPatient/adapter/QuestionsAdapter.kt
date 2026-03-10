@@ -73,7 +73,7 @@ class QuestionsAdapter(val book:IBook,val isFullName:Boolean):ListAdapter<Questi
             holder.binding.tvBook.visibility=View.VISIBLE
             holder.binding.tvBook.text="${holder.binding.tvBook.context.getString(R.string.showanswers)} : (${services.answers.size}) Answers"
         }
-        holder.binding.ivDoctorProfile.load("https://salamtechapi.azurewebsites.net/${services.specialityImage}") {
+        holder.binding.ivDoctorProfile.load(services.specialityImage) {
             crossfade(true)
             crossfade(1000)
             transformations(CircleCropTransformation())

@@ -28,7 +28,7 @@ class PopularDoctorsAdapter(val onitemclick:Action):ListAdapter<PopularDoctorS,P
 //            .load("https://salamtechapi.azurewebsites.net/${services.doctorImage}")
 //            .into(holder.binding.ivDoctorProfile)
 
-        holder.binding.ivDoctorProfile.load("https://salamtechapi.azurewebsites.net/${services.doctorImage}") {
+        holder.binding.ivDoctorProfile.load(services.doctorImage) {
             crossfade(true)
             crossfade(1000)
             transformations(CircleCropTransformation())

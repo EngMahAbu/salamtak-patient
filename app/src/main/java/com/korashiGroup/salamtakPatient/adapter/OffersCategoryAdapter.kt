@@ -35,7 +35,7 @@ class OffersCategoryAdapter(private val onServicesClick:Action):ListAdapter<Acti
             holder.binding.ivCategory.setImageResource(services.imageRes)
         } else {
             Glide.with(holder.binding.ivCategory.context)
-                .load("https://salamtechapi.azurewebsites.net/${services.image}")
+                .load(services.image)
                 .apply(requestOptions)
                 .into(holder.binding.ivCategory)
         }

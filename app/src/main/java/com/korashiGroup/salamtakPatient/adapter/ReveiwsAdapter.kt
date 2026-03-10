@@ -29,7 +29,7 @@ class ReveiwsAdapter( ):ListAdapter<ReviewsData,ReveiwsAdapter.ViewHolder>(DiffC
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val services=getItem(position)
         Glide.with(holder.binding.ivDoctorProfile.context)
-            .load("https://salamtechapi.azurewebsites.net/${services.patientImage}")
+            .load(services.patientImage)
             .placeholder(R.drawable.ic_docspecialization)
             .into(holder.binding.ivDoctorProfile)
         holder.binding.apply {

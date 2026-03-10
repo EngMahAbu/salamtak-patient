@@ -24,7 +24,7 @@ class GatesAdapter(val action: Action ):ListAdapter<Gates,GatesAdapter.ViewHolde
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val services=getItem(position)
         Glide.with(holder.binding.ivServices.context)
-            .load("https://salamtechapi.azurewebsites.net/${services.imageURL}")
+            .load(services.imageURL)
             .into(holder.binding.ivServices)
 
 

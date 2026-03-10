@@ -22,7 +22,7 @@ class ImagesAdapter(private val onclick: IPhotoViewr):ListAdapter<Gates,ImagesAd
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val services=getItem(position)
         Glide.with(holder.binding.ivGallary.context)
-            .load("https://salamtechapi.azurewebsites.net/${services.imageURL}")
+            .load(services.imageURL)
             .into(holder.binding.ivGallary)
         holder.binding.ivGallary.setOnClickListener {
             onclick.clickOnPhoto(services.imageURL)

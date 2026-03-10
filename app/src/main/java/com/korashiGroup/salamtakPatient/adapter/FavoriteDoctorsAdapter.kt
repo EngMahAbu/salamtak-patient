@@ -34,7 +34,7 @@ class FavoriteDoctorsAdapter(val action:Action) :
         holder.binding.tvDoctorName.text = services.doctorName
         holder.binding.tvSpecialistName.text = "${services.getDoctor.seniorityLevelName} ${services.specialistName}"
 
-        holder.binding.ivDoctorProfile.load("https://salamtechapi.azurewebsites.net/${services.getDoctor.image}") {
+        holder.binding.ivDoctorProfile.load(services.getDoctor.image) {
             crossfade(true)
             crossfade(1000)
             transformations(CircleCropTransformation())

@@ -24,7 +24,7 @@ class LabsAdapter(private val onServicesClick:Action):ListAdapter<DataLabs,LabsA
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val services=getItem(position)
         Glide.with(holder.binding.ivServices)
-            .load("https://salamtechapi.azurewebsites.net/${services.image}")
+            .load(services.image)
             .transform( GranularRoundedCorners(25F, 25F, 0F, 0F))
             .into(holder.binding.ivServices)
 

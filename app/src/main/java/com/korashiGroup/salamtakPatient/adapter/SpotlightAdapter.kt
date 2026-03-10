@@ -23,7 +23,7 @@ class SpotlightAdapter(val onItemClick:Action):ListAdapter<SpotlightData,Spotlig
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val services=getItem(position)
         Glide.with(holder.binding.ivHealthTopics)
-            .load("https://salamtechapi.azurewebsites.net/${services.imageURL}")
+            .load(services.imageURL)
             .into(holder.binding.ivHealthTopics)
 
         holder.binding.tvHealthTopics.text=services.title

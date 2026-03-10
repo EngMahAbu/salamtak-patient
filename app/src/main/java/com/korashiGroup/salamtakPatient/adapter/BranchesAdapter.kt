@@ -66,7 +66,7 @@ class BranchesAdapter(private val booking: Booking) :
            // booking.onMoreItemClick(services)
         }
 
-        holder.binding.ivDoctorProfile.load("https://salamtechapi.azurewebsites.net/${services.labImage}") {
+        holder.binding.ivDoctorProfile.load(services.labImage) {
             crossfade(true)
             crossfade(1000)
             transformations(CircleCropTransformation())

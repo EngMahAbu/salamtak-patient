@@ -528,7 +528,7 @@ class OfferBookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Ac
 
         binding.tvSpecialization.text = "${args.clinkDto?.specialist}"
 
-        binding.ivDoctorProfile.load("https://salamtechapi.azurewebsites.net/${args.clinkDto?.image}") {
+        binding.ivDoctorProfile.load(args.clinkDto?.image) {
             crossfade(true)
             crossfade(1000)
             transformations(CircleCropTransformation())

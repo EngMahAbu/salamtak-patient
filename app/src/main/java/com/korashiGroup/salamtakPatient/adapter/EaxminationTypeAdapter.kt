@@ -29,7 +29,7 @@ class EaxminationTypeAdapter(private val onServicesClick:Action ):ListAdapter<Me
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val services=getItem(position)
-        holder.binding.ivExaminationtype.load("https://salamtechapi.azurewebsites.net/${services.image}") {
+        holder.binding.ivExaminationtype.load(services.image) {
             crossfade(true)
             crossfade(1000)
             transformations(CircleCropTransformation())

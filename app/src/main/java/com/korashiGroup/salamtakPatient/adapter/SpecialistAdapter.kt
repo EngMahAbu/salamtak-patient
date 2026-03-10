@@ -33,7 +33,7 @@ class SpecialistAdapter(private val select:SelectSpecialist):ListAdapter<Special
         val sp=getItem(position)
 
         holder.binding.chExaminationtype.text=sp.name
-        holder.binding.ivExaminationtype.load("https://salamtechapi.azurewebsites.net/${sp.image}") {
+        holder.binding.ivExaminationtype.load(sp.image) {
             crossfade(true)
             crossfade(1000)
             transformations(CircleCropTransformation())

@@ -283,7 +283,7 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking, Ima
                     if (clinicSchedualByClinicDayId != null) {
                         sharedDataViewmodel.getClinicSchedualByClinicDayId(clinicSchedualByClinicDayId)
                     }
-                    binding.ivDoctorProfile.load("https://salamtechapi.azurewebsites.net/${it.data?.data?.image}") {
+                    binding.ivDoctorProfile.load(it.data?.data?.image) {
                         crossfade(true)
                         crossfade(1000)
                         transformations(CircleCropTransformation())
@@ -537,7 +537,7 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking, Ima
             }
             imagesAdapter.submitList(listBlogs)
         }
-        binding.ivCurrentProfile.load("https://salamtechapi.azurewebsites.net/${currentDtos.logo}") {
+        binding.ivCurrentProfile.load(currentDtos.logo) {
             crossfade(true)
             crossfade(1000)
             transformations(CircleCropTransformation())
@@ -583,13 +583,13 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking, Ima
             imageVideoAdapter.submitList(listBlogs)
         }
 
-        binding.layoutBottomsheetpersistant.ivDoctorProfile.load("https://salamtechapi.azurewebsites.net/${getDoctorClinksResponse.data?.image}") {
+        binding.layoutBottomsheetpersistant.ivDoctorProfile.load(getDoctorClinksResponse.data?.image) {
             crossfade(true)
             crossfade(1000)
             transformations(CircleCropTransformation())
         }
 
-        binding.layoutBottomsheetpersistant.ivCurrentProfile.load("https://salamtechapi.azurewebsites.net/${getDoctorClinksResponse.data?.currentClinicDtos?.logo}") {
+        binding.layoutBottomsheetpersistant.ivCurrentProfile.load(getDoctorClinksResponse.data?.currentClinicDtos?.logo) {
             crossfade(true)
             crossfade(1000)
             transformations(CircleCropTransformation())

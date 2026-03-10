@@ -28,7 +28,7 @@ class SpecialictyAdapter(private val select:SelectSpecialist):ListAdapter<Specia
         val sp=getItem(position)
 
         holder.binding.tvSpecilization.text=sp.name
-        holder.binding.ivSpecilizationLogo.load("https://salamtechapi.azurewebsites.net/${sp.image}") {
+        holder.binding.ivSpecilizationLogo.load(sp.image) {
             crossfade(true)
             crossfade(1000)
             transformations(CircleCropTransformation())

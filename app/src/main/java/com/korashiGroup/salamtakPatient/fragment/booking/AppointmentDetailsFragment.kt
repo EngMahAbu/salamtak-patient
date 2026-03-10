@@ -90,7 +90,7 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
         super.onViewCreated(view, savedInstanceState)
         setImage()
         getRelationType()
-        binding.ivDoctorProfile.load("https://salamtechapi.azurewebsites.net/${args.confirmappointments?.image}") {
+        binding.ivDoctorProfile.load(args.confirmappointments?.image) {
             crossfade(true)
             crossfade(1000)
             transformations(CircleCropTransformation())

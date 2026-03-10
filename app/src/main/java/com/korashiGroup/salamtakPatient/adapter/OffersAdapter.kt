@@ -34,7 +34,7 @@ class OffersAdapter(private val onServicesClick:Action):ListAdapter<OfferDetails
 //            .load("https://salamtechapi.azurewebsites.net/${services.l1image}")
 //            .transform( GranularRoundedCorners(25F, 25F, 25F, 25F))
 //            .into(holder.binding.ivCatOffer)
-        holder.binding.ivDoctorProfile.load("https://salamtechapi.azurewebsites.net/${services.doctorDto.image}") {
+        holder.binding.ivDoctorProfile.load(services.doctorDto.image) {
             crossfade(true)
             crossfade(1000)
             transformations(CircleCropTransformation())

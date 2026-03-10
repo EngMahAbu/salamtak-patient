@@ -73,7 +73,7 @@ class PolyClinicInfoFragment : Fragment(), ImagesAdapter.IPhotoViewr {
 
          binding.tvName.text=args.polyclinicitems.name
         if (!args.polyclinicitems.logo.isNullOrEmpty()) {
-            binding.ivDoctorProfile.load("https://salamtechapi.azurewebsites.net/${args.polyclinicitems.logo}") {
+            binding.ivDoctorProfile.load(args.polyclinicitems.logo) {
                 crossfade(true)
                 crossfade(1000)
                 transformations(CircleCropTransformation())

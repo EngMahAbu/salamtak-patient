@@ -49,7 +49,7 @@ class PolyClinicsAdapter(private val booking: Booking) :
             booking.onMoreItemClick(services)
         }
 
-        holder.binding.ivDoctorProfile.load("https://salamtechapi.azurewebsites.net/${services.logo}") {
+        holder.binding.ivDoctorProfile.load(services.logo) {
             crossfade(true)
             crossfade(1000)
             transformations(CircleCropTransformation())

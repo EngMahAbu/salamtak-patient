@@ -27,7 +27,7 @@ class MedicalHealthAdapter(val onclick: Action) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val services = getItem(position)
         if (services != null) {
-            holder.binding.ivDoctorProfile.load("https://salamtechapi.azurewebsites.net/${services.logo}") {
+            holder.binding.ivDoctorProfile.load(services.logo) {
                 crossfade(true)
                 placeholder(R.drawable.ic_medicalhistory)
                 crossfade(1000)

@@ -28,7 +28,7 @@ class HealthTopicsAdapter(val onItemClick:Action):ListAdapter<HealthTopicsData,H
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val services=getItem(position)
         Glide.with(holder.binding.ivHealthTopics)
-            .load("https://salamtechapi.azurewebsites.net/${services.imageURL}")
+            .load(services.imageURL)
             .into(holder.binding.ivHealthTopics)
        if (DateUtils.getLanguage()=="En"){
            holder.binding.tvHealthTopics.text=services.title

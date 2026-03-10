@@ -30,7 +30,7 @@ class MedicalEaxminationTypeAdapter(private val onServicesClick:Action ):ListAda
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val services=getItem(position)
-        holder.binding.ivExaminationtype.load("https://salamtechapi.azurewebsites.net/${services.image_onboarding}") {
+        holder.binding.ivExaminationtype.load(services.image_onboarding) {
             crossfade(true)
             crossfade(1000)
             transformations(CircleCropTransformation())

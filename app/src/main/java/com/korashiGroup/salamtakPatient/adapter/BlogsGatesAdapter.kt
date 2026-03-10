@@ -24,7 +24,7 @@ class BlogsGatesAdapter(val details:Action ):ListAdapter<DataBlogs,BlogsGatesAda
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val services=getItem(position)
         Glide.with(holder.binding.ivDoctorProfile.context)
-            .load("https://salamtechapi.azurewebsites.net/${services.image}")
+            .load(services.image)
             .into(holder.binding.ivDoctorProfile)
 
         holder.binding.ivDoctorProfile.setOnClickListener {

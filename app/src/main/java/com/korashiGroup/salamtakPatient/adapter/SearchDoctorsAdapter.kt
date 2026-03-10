@@ -70,7 +70,7 @@ class SearchDoctorsAdapter(private val booking: Booking,private val isHomeVisit:
                     services.feesTo?.let { it3 ->
                         services.image?.let { it4 ->
                             services.clinicDto?.Name?.let { it5 ->
-                                booking.onItemClick(
+                                booking.onItemClicks(
                                     it1,
                                     it2, it3, it4, it5
                                 )
@@ -106,7 +106,7 @@ class SearchDoctorsAdapter(private val booking: Booking,private val isHomeVisit:
         }
 
 
-        holder.binding.ivDoctorProfile.load("https://salamtechapi.azurewebsites.net/${services.image}") {
+        holder.binding.ivDoctorProfile.load(services.image) {
             crossfade(true)
             crossfade(1000)
             transformations(CircleCropTransformation())
@@ -133,7 +133,7 @@ class SearchDoctorsAdapter(private val booking: Booking,private val isHomeVisit:
 
     interface Booking {
 
-        fun onItemClick(clinicId: Int, doctorId: Int, fess: Int,image:String,clinicName:String)
+        fun onItemClicks(clinicId: Int, doctorId: Int, fess: Int,image:String,clinicName:String)
         fun onItemClick(clinicId: Int, doctorId: Int,clinkname:String,rate:Double,rateCount:Int,fess: Int)
     }
 }

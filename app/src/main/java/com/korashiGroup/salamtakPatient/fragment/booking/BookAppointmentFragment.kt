@@ -734,7 +734,7 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
         }
         binding.tvSpecialization.text = "${args.doctorclinks.data?.seniorityLevelName} ${subspecialist}"
 
-        binding.ivDoctorProfile.load("https://salamtechapi.azurewebsites.net/${args.doctorclinks.data?.image}") {
+        binding.ivDoctorProfile.load(args.doctorclinks.data?.image) {
             crossfade(true)
             crossfade(1000)
             transformations(CircleCropTransformation())
