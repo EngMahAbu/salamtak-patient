@@ -57,11 +57,11 @@
                 <ImageView
                         android:id="@+id/nursing_image"
                         android:layout_width="match_parent"
-                        android:layout_height="160dp"
+                        android:layout_height="200dp"
                         android:adjustViewBounds="true"
                         android:scaleType="fitXY"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:src="@drawable/ic_mobile_clinic"
+                        android:src="@drawable/ic_mobileclinics"
                         />
                 <TextView
                         android:id="@+id/nursing_Title"
@@ -140,7 +140,7 @@
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Address"
+                android:text="@string/addressdetails"
                 android:fontFamily="@font/inter_semibold"
                 android:textColor="@color/color_64748B"
                 android:textSize="12sp"
@@ -225,7 +225,7 @@
                             android:inputType="text"
                             android:enabled="false"
                             android:textColor="@color/black"
-                            android:textSize="13sp" />
+                            android:textSize="11sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -301,7 +301,7 @@
                             android:inputType="text"
                             android:enabled="false"
                             android:textColor="@color/black"
-                            android:textSize="13sp" />
+                            android:textSize="11sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -447,7 +447,7 @@
                         android:inputType="text"
                         android:enabled="false"
                         android:textColor="@color/black"
-                        android:textSize="13sp" />
+                        android:textSize="11sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -516,7 +516,7 @@
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Service Level"
+                android:text="Seniority Level"
                 android:fontFamily="@font/inter_semibold"
                 android:textColor="@color/color_64748B"
                 android:textSize="12sp"
@@ -552,7 +552,7 @@
                     android:layout_height="55dp"
                     android:layout_marginEnd="25dp"
                     android:layout_marginBottom="5dp"
-                    android:hint="choose_Service Level"
+                    android:hint="Choose Seniority Level"
                     android:paddingTop="4dp"
                     app:boxBackgroundColor="@color/white"
                     app:boxBackgroundMode="none"
@@ -570,7 +570,7 @@
                         android:inputType="text"
                         android:enabled="false"
                         android:textColor="@color/black"
-                        android:textSize="13sp" />
+                        android:textSize="11sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -638,6 +638,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Describe your Symptoms..."
                     android:minLines="4"
+                    android:textSize="11sp"
                     android:gravity="start"
                     android:background="@drawable/bg_edittext_box"/>
 
@@ -658,6 +659,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Special Requirements (if Needed)"
                     android:minLines="4"
+                    android:textSize="11sp"
                     android:gravity="start"
                     android:background="@drawable/bg_edittext_box"/>
 

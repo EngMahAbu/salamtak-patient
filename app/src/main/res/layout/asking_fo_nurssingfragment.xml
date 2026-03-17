@@ -139,7 +139,7 @@
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Address"
+                android:text="@string/addressdetails"
                 android:fontFamily="@font/inter_semibold"
                 android:textColor="@color/color_64748B"
                 android:textSize="12sp"
@@ -428,7 +428,7 @@
                 android:layout_height="55dp"
                 android:layout_marginEnd="25dp"
                 android:layout_marginBottom="5dp"
-                android:hint="choose_Service Level"
+                android:hint="Choose Service Level"
                 android:paddingTop="4dp"
                 app:boxBackgroundColor="@color/white"
                 app:boxBackgroundMode="none"
@@ -487,6 +487,15 @@
                     android:text="Female"/>
         </RadioGroup>
 
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Service Duration"
+                android:fontFamily="@font/inter_semibold"
+                android:textColor="@color/color_64748B"
+                android:textSize="12sp"
+                android:paddingTop="8dp"/>
+
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -531,7 +540,7 @@
                     android:layout_width="156dp"
                     android:layout_height="50dp"
                     android:fontFamily="@font/inter_regular"
-                    android:textSize="16sp"
+                    android:textSize="11sp"
                     android:paddingStart="10dp"
                     android:layout_marginEnd="15dp"
                     android:background="@drawable/bg_edittext_box"
@@ -545,7 +554,7 @@
                     android:layout_width="156dp"
                     android:layout_height="50dp"
                     android:fontFamily="@font/inter_regular"
-                    android:textSize="16sp"
+                    android:textSize="11sp"
                     android:paddingStart="15dp"
                     android:background="@drawable/bg_edittext_box"
                     android:layout_weight="1"
@@ -598,11 +607,11 @@
                     android:layout_height="50dp"
                     android:layout_marginEnd="15dp"
                     android:fontFamily="@font/inter_regular"
-                    android:textSize="16sp"
+                    android:textSize="11sp"
                     android:paddingStart="15dp"
                     android:background="@drawable/bg_edittext_box"
                     android:layout_weight="1"
-                    android:hint="--:--"
+                    android:hint="--:-- AM"
                     android:textColorHint="@color/Color_0f172a"
                     android:focusable="false"/>
 
@@ -611,23 +620,15 @@
                     android:layout_width="156dp"
                     android:layout_height="50dp"
                     android:fontFamily="@font/inter_regular"
-                    android:textSize="16sp"
+                    android:textSize="11sp"
                     android:paddingStart="15dp"
                     android:background="@drawable/bg_edittext_box"
                     android:layout_weight="1"
-                    android:hint="--:--"
+                    android:hint="--:-- AM"
                     android:textColorHint="@color/Color_0f172a"
                     android:focusable="false"/>
         </LinearLayout>
         <!-- Number of Days -->
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nursing service duration"
-                android:fontFamily="@font/inter_semibold"
-                android:textColor="@color/color_64748B"
-                android:textSize="12sp"
-                android:paddingTop="8dp"/>
         <EditText
                 android:id="@+id/etNumberofDays"
                 android:layout_width="match_parent"
@@ -639,6 +640,47 @@
                 android:background="@drawable/bg_edittext_box"
                 android:hint="Number of days"
                 android:inputType="textPostalAddress"/>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/servise"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/text_Ask_ques"
+                android:layout_marginTop="8dp"
+                app:hintEnabled="false">
+
+        <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_servise"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Service or Medication Type"
+                android:minLines="4"
+                android:textSize="11sp"
+                android:gravity="start"
+                android:background="@drawable/bg_edittext_box"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/ask_text"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/text_Ask_ques"
+                android:layout_marginTop="8dp"
+                app:hintEnabled="false">
+
+        <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ask"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Special Requirements (if Needed)"
+                android:minLines="4"
+                android:textSize="11sp"
+                android:gravity="start"
+                android:background="@drawable/bg_edittext_box"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
 
 
         <!-- Send Button -->

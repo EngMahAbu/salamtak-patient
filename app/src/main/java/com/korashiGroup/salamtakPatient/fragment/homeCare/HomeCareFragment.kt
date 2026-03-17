@@ -90,7 +90,7 @@ class HomeCareFragment : Fragment(),ServicesAdapter.Action {
                         ))
                         listOfHomeCareServices.add(  ImageServices(R.drawable.health_care, "Medical Consultant","استشاري طبي", Id = 2))
                                 listOfHomeCareServices.add(ImageServices(R.drawable.health_check, "Mobile Clinic","عيادة متنقلة", Id = 3))
-                                listOfHomeCareServices.add(ImageServices(R.drawable.device, "monitoring devices levels","أجهزة مراقبة مستوى", Id = 4))
+                                listOfHomeCareServices.add(ImageServices(R.drawable.device, "Monitoring Devices Levels","أجهزة مراقبة مستوى", Id = 4))
                         imageServicesAdapter.submitList(listOfHomeCareServices)
                     }
                 }

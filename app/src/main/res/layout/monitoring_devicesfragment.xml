@@ -60,7 +60,7 @@
                         android:layout_height="160dp"
                         android:scaleType="centerCrop"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:src="@drawable/monit_image"
+                        android:src="@drawable/ic_monotring"
                         />
 
                 <TextView
@@ -83,140 +83,6 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
-
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="3">
-            <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/card1"
-                    android:layout_width="115dp"
-                    android:layout_height="175dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_margin="5dp"
-                    app:cardCornerRadius="12dp"
-                    >
-
-                <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="12dp"
-                        >
-                    <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/monitor_image"
-                            android:scaleType="fitXY"
-                            />
-
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Basic Monitor"
-                            android:layout_marginTop="8dp"
-                            android:textStyle="bold"
-                            />
-
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="100 L.E"
-                            android:fontFamily="@font/inter_semibold"
-                            android:textColor="#1F3D89"
-                            />
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-
-            <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/card2"
-                    android:layout_width="115dp"
-                    android:layout_height="175dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginStart="12dp"
-                    app:cardCornerRadius="12dp"
-                    android:layout_margin="5dp"
-                    >
-
-                <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="12dp"
-                        >
-                    <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/monitor_image1"
-                            android:scaleType="fitXY"
-                            />
-
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Basic Monitor"
-                            android:textStyle="bold"
-                            android:layout_marginTop="8dp"
-                            />
-
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="250 L.E"
-                            android:fontFamily="@font/inter_semibold"
-                            android:textColor="#1F3D89"
-                            />
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-
-            <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/card3"
-                    android:layout_width="120dp"
-                    android:layout_height="175dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginStart="12dp"
-                    app:cardCornerRadius="12dp"
-                    android:layout_margin="5dp"
-                    >
-
-                <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="12dp"
-                        >
-                    <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/monitor_image1"
-                            android:scaleType="fitXY"
-                            />
-
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Basic Monitor"
-                            android:textStyle="bold"
-                            android:layout_marginTop="8dp"
-                            />
-
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="250 L.E"
-                            android:fontFamily="@font/inter_semibold"
-                            android:textColor="#1F3D89"
-                            />
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-        </LinearLayout>
-
 
         <TextView
                 android:layout_width="wrap_content"
@@ -264,7 +130,7 @@
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Address"
+                android:text="@string/addressdetails"
                 android:fontFamily="@font/inter_semibold"
                 android:textColor="@color/color_64748B"
                 android:textSize="12sp"
@@ -349,7 +215,7 @@
                             android:inputType="text"
                             android:enabled="false"
                             android:textColor="@color/black"
-                            android:textSize="13sp" />
+                            android:textSize="11sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -425,7 +291,7 @@
                             android:inputType="text"
                             android:enabled="false"
                             android:textColor="@color/black"
-                            android:textSize="13sp" />
+                            android:textSize="11sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -553,7 +419,7 @@
                     android:layout_height="55dp"
                     android:layout_marginEnd="25dp"
                     android:layout_marginBottom="5dp"
-                    android:hint="choose_Service Level"
+                    android:hint="Monitoring Devices Level"
                     android:paddingTop="4dp"
                     app:boxBackgroundColor="@color/white"
                     app:boxBackgroundMode="none"
@@ -571,46 +437,161 @@
                         android:inputType="text"
                         android:enabled="false"
                         android:textColor="@color/black"
-                        android:textSize="13sp" />
+                        android:textSize="11sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
-        <!-- Gender -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp"
+                android:weightSum="3">
+            <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card1"
+                    android:layout_width="115dp"
+                    android:layout_height="175dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_margin="5dp"
+                    app:cardCornerRadius="12dp"
+                    >
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="12dp"
+                        >
+                    <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/monitor_image"
+                            android:scaleType="fitXY"
+                            />
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Basic Monitor"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="8dp"
+                            android:textStyle="bold"
+                            />
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="L.E"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/inter_semibold"
+                            android:textColor="#1F3D89"
+                            />
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card2"
+                    android:layout_width="115dp"
+                    android:layout_height="175dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginStart="12dp"
+                    app:cardCornerRadius="12dp"
+                    android:layout_margin="5dp"
+                    >
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="12dp"
+                        >
+                    <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/monitor_image1"
+                            android:scaleType="fitXY"
+                            />
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Intermediate"
+                            android:layout_gravity="center"
+                            android:textStyle="bold"
+                            android:layout_marginTop="8dp"
+                            />
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="L.E"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/inter_semibold"
+                            android:textColor="#1F3D89"
+                            />
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card3"
+                    android:layout_width="120dp"
+                    android:layout_height="175dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginStart="12dp"
+                    app:cardCornerRadius="12dp"
+                    android:layout_margin="5dp"
+                    >
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="12dp"
+                        >
+                    <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/monitor_image1"
+                            android:scaleType="fitXY"
+                            />
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Premium"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:textStyle="bold"
+                            android:layout_marginTop="8dp"
+                            />
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="L.E"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/inter_semibold"
+                            android:textColor="#1F3D89"
+                            />
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+
+
+        <!-- Number of Days -->
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Gender"
+                android:text="Service Duration"
                 android:fontFamily="@font/inter_semibold"
                 android:textColor="@color/color_64748B"
                 android:textSize="12sp"
                 android:paddingTop="8dp"/>
-
-        <RadioGroup
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:textColor="@color/Color_0f172a"
-                android:orientation="horizontal">
-
-            <RadioButton
-                    android:id="@+id/rbMale"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    android:layout_marginEnd="15dp"
-                    android:textColor="@color/Color_0f172a"
-                    android:buttonTint="@color/colortint_cbd5e1"
-                    android:text="Male"/>
-
-            <RadioButton
-                    android:id="@+id/rbFemale"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    android:buttonTint="@color/colortint_cbd5e1"
-                    android:textColor="@color/Color_0f172a"
-                    android:text="Female"/>
-        </RadioGroup>
 
         <LinearLayout
                 android:layout_width="match_parent"
@@ -656,7 +637,7 @@
                     android:layout_width="156dp"
                     android:layout_height="50dp"
                     android:fontFamily="@font/inter_regular"
-                    android:textSize="16sp"
+                    android:textSize="11sp"
                     android:paddingStart="10dp"
                     android:layout_marginEnd="15dp"
                     android:background="@drawable/bg_edittext_box"
@@ -670,7 +651,7 @@
                     android:layout_width="156dp"
                     android:layout_height="50dp"
                     android:fontFamily="@font/inter_regular"
-                    android:textSize="16sp"
+                    android:textSize="11sp"
                     android:paddingStart="15dp"
                     android:background="@drawable/bg_edittext_box"
                     android:layout_weight="1"
@@ -723,11 +704,11 @@
                     android:layout_height="50dp"
                     android:layout_marginEnd="15dp"
                     android:fontFamily="@font/inter_regular"
-                    android:textSize="16sp"
+                    android:textSize="11sp"
                     android:paddingStart="15dp"
                     android:background="@drawable/bg_edittext_box"
                     android:layout_weight="1"
-                    android:hint="--:--"
+                    android:hint="--:-- AM"
                     android:textColorHint="@color/Color_0f172a"
                     android:focusable="false"/>
 
@@ -736,23 +717,14 @@
                     android:layout_width="156dp"
                     android:layout_height="50dp"
                     android:fontFamily="@font/inter_regular"
-                    android:textSize="16sp"
+                    android:textSize="11sp"
                     android:paddingStart="15dp"
                     android:background="@drawable/bg_edittext_box"
                     android:layout_weight="1"
-                    android:hint="--:--"
+                    android:hint="--:-- PM"
                     android:textColorHint="@color/Color_0f172a"
                     android:focusable="false"/>
         </LinearLayout>
-        <!-- Number of Days -->
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nursing service duration"
-                android:fontFamily="@font/inter_semibold"
-                android:textColor="@color/color_64748B"
-                android:textSize="12sp"
-                android:paddingTop="8dp"/>
         <EditText
                 android:id="@+id/etNumberofDays"
                 android:layout_width="match_parent"
@@ -779,6 +751,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Special Requirements (if Needed)"
                     android:minLines="4"
+                    android:textSize="11sp"
                     android:gravity="start"
                     android:background="@drawable/bg_edittext_box"/>
 
