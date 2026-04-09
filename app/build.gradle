@@ -38,7 +38,7 @@ android {
         }
         getByName("debug") {
             signingConfig = signingConfigs.getByName("debug")
-            buildConfigField("String","BASE_URL","\"https://salamtechapi-staging.azurewebsites.net/api/\"")
+            buildConfigField("String","BASE_URL","\"http://13.82.138.89/api/\"")
             firebaseAppDistribution {
                 artifactType = "APK"
                 releaseNotes = "test new version"

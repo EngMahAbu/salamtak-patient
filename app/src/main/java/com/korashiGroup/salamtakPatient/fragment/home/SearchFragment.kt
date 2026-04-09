@@ -348,7 +348,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                         binding.etSearch.text.toString(),
                         it1,
                         it2,
-                        genderId,
+                        genderId = genderId,
                         10,
                         examinationtypeid,
                         seniortyLevelId,

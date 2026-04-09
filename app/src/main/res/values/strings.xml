@@ -79,7 +79,7 @@
     </string>
     <string name="upload_front_syndicate_card_image">Upload front Syndicate Card image</string>
     <string name="upload_back_syndicate_card_image">Upload back Syndicate Card image</string>
-    <string name="required">Incorrect phone number</string>
+    <string name="required">Required</string>
     <string name="password_required">Password is required</string>
     <string name="requiredbirthdate">.Birth Date Is Required</string>
     <string name="requiredcountry">.Country Is Required</string>

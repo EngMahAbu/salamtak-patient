@@ -320,12 +320,11 @@ class PersonalInfoFragment : Fragment() {
                 R.drawable.ic_error,
                 0
             )
-
+             return false
         } else {
             binding.tvNationaltyError.visibility = View.GONE
             binding.layoutNationality.setBackgroundResource(R.drawable.bg_edittext)
             binding.etNationality.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
-            value = true
         }
         if (binding.etChooseCity.text.toString().trim().isNullOrEmpty()) {
             binding.etChooseCity.setCompoundDrawablesWithIntrinsicBounds(
@@ -337,11 +336,11 @@ class PersonalInfoFragment : Fragment() {
             binding.tvCityError.text = getString(R.string.requiredcity)
             binding.tvCityError.visibility = View.VISIBLE
             binding.layoutChooseCity.setBackgroundResource(R.drawable.bg_edittext_error)
+            return false
         } else {
            binding.tvCityError.visibility = View.GONE
             binding.layoutChooseCity.setBackgroundResource(R.drawable.bg_edittext)
             binding.etChooseCity.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
-            return true
         }
 
         if (binding.etChooseArea.text.toString().trim().isNullOrEmpty()) {
@@ -359,7 +358,7 @@ class PersonalInfoFragment : Fragment() {
             binding.tvAreaError.visibility = View.GONE
             binding.layoutChooseArea.setBackgroundResource(R.drawable.bg_edittext)
             binding.etChooseArea.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
-            return true
+            value= true
         }
 
         return value

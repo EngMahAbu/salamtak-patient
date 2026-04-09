@@ -237,6 +237,7 @@
                             android:layout_gravity="center_horizontal"
                             android:gravity="start"
                             android:text=""
+                            android:enabled="false"
                             android:imeOptions="actionNext"
                             android:textColor="@color/black"
                             android:fontFamily="@font/sf_pro_display_semibold"

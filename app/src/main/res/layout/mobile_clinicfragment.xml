@@ -63,18 +63,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         android:src="@drawable/ic_mobileclinics"
                         />
-                <TextView
-                        android:id="@+id/nursing_Title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/inter_bold"
-                        android:layout_marginStart="15dp"
-                        android:textColor="@color/blue"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/nursing_image"
-                        android:text="Professional Nursing Services"
-                        android:textSize="16sp"
-                        android:paddingTop="8dp"/>
+
                 <TextView
                         android:id="@+id/nursing_Desc"
                         android:layout_width="0dp"
@@ -83,11 +72,12 @@
                         android:layout_marginStart="15dp"
                         android:layout_marginEnd="15dp"
                         android:layout_marginBottom="5dp"
+                        android:layout_marginTop="8dp"
                         android:textColor="@color/black"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/nursing_Title"
+                        app:layout_constraintTop_toBottomOf="@+id/nursing_image"
                         android:text="@string/welcome_to_salamtak_mobile_clinic_service_please_complete_related_request_form_one_of_salamtak_customer_service_agent_will_confirm_your_request_to_guarantee_swift_and_fast_execution"
                         android:textSize="13sp"
                         />

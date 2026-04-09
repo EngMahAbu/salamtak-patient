@@ -472,7 +472,7 @@
                     <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Basic Monitor"
+                            android:text="Basic"
                             android:layout_gravity="center"
                             android:layout_marginTop="8dp"
                             android:textStyle="bold"

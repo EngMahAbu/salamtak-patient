@@ -111,12 +111,12 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
             price = args.confirmappointments?.fees.toString()
         )
         chargeItems.add(billItem)
-        if (args.confirmappointments?.medicalExaminationId == 1
-        ) {
-            binding.chCard.visibility = View.VISIBLE
-        } else {
-            binding.chCard.visibility = View.GONE
-        }
+//        if (args.confirmappointments?.medicalExaminationId == 1
+//        ) {
+//            binding.chCard.visibility = View.VISIBLE
+//        } else {
+//            binding.chCard.visibility = View.GONE
+//        }
 
     }
 
@@ -208,10 +208,12 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
 
         binding.chCard.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
+
                 isAnthorPatient=true
                 binding.chCard.setTextColor(Color.parseColor("#00D2CB"))
                 binding.etFullNameAR.setText("")
                 binding.etPhoneNumber.setText("")
+                binding.etPhoneNumber.isEnabled=true
                 binding.layoutChooseRelationType.visibility= View.VISIBLE
             }else{
                 isAnthorPatient=false
@@ -221,6 +223,7 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
                 fullName=binding.etFullNameAR.text.toString()
                 phoneNumber=binding.etPhoneNumber.text.toString()
                 binding.layoutChooseRelationType.visibility= View.GONE
+                binding.etPhoneNumber.isEnabled=false
             }
 
         }
