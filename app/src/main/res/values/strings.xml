@@ -483,4 +483,34 @@
         <item>ممرض رعاية مركزة</item>
     </string-array>
 
+    <string name="btn_i_am_patient">I am a patient</string>
+    <string name="btn_i_am_doctor">I am a doctor</string>
+
+    <string name="welcome_title">Welcome to our app</string>
+
+    <string name="welcome_subtitle">Book your appointment with the best doctors easily and conveniently</string>
+
+    <string name="who_are_you">Who are you?</string>
+
+    <string name="wrong_app_icon_patient">🚑</string>
+
+    <string name="wrong_app_icon_doctor">👨‍⚕️</string>
+
+    <string name="wrong_app_tag_patient">Patient App</string>
+
+    <string name="wrong_app_tag_doctor">Doctor App</string>
+
+    <string name="wrong_app_title_patient">This app is for patients only</string>
+
+    <string name="wrong_app_title_doctor">This app is for doctors only</string>
+
+    <string name="wrong_app_desc_patient">It appears you have downloaded the wrong patient app. Please download the doctor app to continue.</string>
+
+    <string name="wrong_app_desc_doctor">It appears you have downloaded the wrong doctor app. Please download the patient app to continue.</string>
+
+    <string name="wrong_app_btn_download_doctor">Download the doctor app</string>
+
+    <string name="wrong_app_btn_download_patient">Download the patient app</string>
+
+    <string name="wrong_app_btn_close">Close the app</string>
 </resources>

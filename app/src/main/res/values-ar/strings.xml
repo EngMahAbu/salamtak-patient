@@ -451,6 +451,22 @@
     <string name="salamtak_application_provides_three_levels_of_health_monitoring_devices_basic_intermediate_premium_using_advanced_medical_technology_and_high_standards_of_medical_care">يوفر تطبيق سلامتك خدمة متابعة الحالة الصحية عن بعد من خلال 3 مستويات من اجهزة المتابعة (اساسي - متوسط - شامل) باستخدام اعلي معايير التكنولوجيا و الرعاية الطبية.
 </string>
     <string name="addressdetails">Address</string>
+    <string name="welcome_title">مرحباً بك في تطبيقنا</string>
+    <string name="welcome_subtitle">احجز موعدك مع أفضل الأطباء بكل سهولة ويسر</string>
+    <string name="who_are_you">من أنت؟</string>
+    <string name="btn_i_am_patient">أنا مريض</string>
+    <string name="btn_i_am_doctor">أنا طبيب</string>
+    <string name="wrong_app_icon_patient">🚑</string>
+    <string name="wrong_app_icon_doctor">👨‍⚕️</string>
+    <string name="wrong_app_tag_patient">Patient App</string>
+    <string name="wrong_app_tag_doctor">Doctor App</string>
+    <string name="wrong_app_title_patient">هذا التطبيق للمرضى فقط</string>
+    <string name="wrong_app_title_doctor">هذا التطبيق للأطباء فقط</string>
+    <string name="wrong_app_desc_patient">يبدو أنك قمت بتحميل تطبيق المرضى بالخطأ، يرجى تحميل تطبيق الأطباء للمتابعة.</string>
+    <string name="wrong_app_desc_doctor">يبدو أنك قمت بتحميل تطبيق الأطباء بالخطأ، يرجى تحميل تطبيق المرضى للمتابعة.</string>
+    <string name="wrong_app_btn_download_doctor">تحميل تطبيق الأطباء</string>
+    <string name="wrong_app_btn_download_patient">تحميل تطبيق المرضى</string>
+    <string name="wrong_app_btn_close">إغلاق التطبيق</string>
 
     <array name="choose">
         <item>اختار</item>

@@ -37,6 +37,18 @@
         <action
                 android:id="@+id/action_onboardingFragment_to_loginFragment"
                 app:destination="@id/loginFragment" />
+        <action
+                android:id="@+id/action_onboardingFragment_to_welcomeFragment"
+                app:destination="@id/welcomeFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/welcomeFragment"
+            android:name="com.korashiGroup.salamtakPatient.ui.welcome.WelcomeFragment"
+            android:label="WelcomeFragment"
+            tools:layout="@layout/fragment_welcome">
+        <action
+                android:id="@+id/action_welcome_to_register"
+                app:destination="@id/signupFragment" />
     </fragment>
     <fragment
             android:id="@+id/loginFragment"
@@ -62,6 +74,11 @@
                 android:id="@+id/action_loginFragment_to_bookAppointmentFragment"
                 app:destination="@id/bookAppointmentFragment" />
     </fragment>
+    <fragment
+            android:id="@+id/patientLoginFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.loginandforgetpassword.PatientLoginFragment"
+            android:label="PatientLoginFragment"
+            tools:layout="@layout/fragment_patient_login" />
     <dialog
             android:id="@+id/dialogBottomSheetFragment"
             android:name="com.korashiGroup.salamtakPatient.fragment.dialog.DialogBottomSheetFragment"
@@ -459,6 +476,11 @@
                 android:name="status"
                 app:argType="boolean" />
     </dialog>
+    <dialog
+            android:id="@+id/wrongDialogFragment"
+            android:name="com.korashiGroup.salamtakPatient.fragment.dialog.WrongDialogFragment"
+            android:label="dialog_wrong_app"
+            tools:layout="@layout/dialog_wrong_app" />
     <fragment android:id="@+id/askDoctorFragment"
               android:name="com.korashiGroup.salamtakPatient.fragment.askdoctor.AskDoctorFragment"
               android:label="ask_doctor_fragment" tools:layout="@layout/ask_doctor_fragment">

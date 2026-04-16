@@ -33,12 +33,12 @@ android {
             minifyEnabled false
             proguardFiles(
                     getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-            buildConfigField("String","BASE_URL","\"https://salamtechapi.azurewebsites.net/api/\"")
+            buildConfigField("String","BASE_URL","\"https://salamtakapi.salamtakgroup.com/api/\"")
             signingConfig signingConfigs.debug
         }
         getByName("debug") {
             signingConfig = signingConfigs.getByName("debug")
-            buildConfigField("String","BASE_URL","\"http://13.82.138.89/api/\"")
+            buildConfigField("String","BASE_URL","\"https://salamtakapi.salamtakgroup.com/api/\"")
             firebaseAppDistribution {
                 artifactType = "APK"
                 releaseNotes = "test new version"

@@ -42,4 +42,14 @@
     <color name="color_64748B">#64748B</color>
     <color name="Color_0f172a">#0F172A</color>
     <color name="colortint_cbd5e1">#CBD5E1</color>
+    <color name="doctor_primary">#185FA5</color>
+    <color name="patient_primary">#0F6E56</color>
+    <color name="tag_green_bg">#9FE1CB</color>
+    <color name="tag_green_text">#085041</color>
+    <color name="tag_blue_bg">#B5D4F4</color>
+    <color name="tag_blue_text">#0C447C</color>
+    <color name="text_primary">#1A1A1A</color>
+    <color name="text_secondary">#888780</color>
+    <color name="border_light">#D3D1C7</color>
+    <color name="dialog_overlay">#73000000</color>
 </resources>
