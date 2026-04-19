@@ -25,6 +25,7 @@ import com.korashiGroup.salamtakPatient.model.docotorsearch.NewDoctorSearchReque
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCardResponse
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCompanyResponse
 import com.korashiGroup.salamtakPatient.model.insurance.SendInsuranceCardResponce
+import com.korashiGroup.salamtakPatient.model.nursingServices.service.ServiceLevelResponse
 import com.korashiGroup.salamtakPatient.model.populardoctors.NewPopularDoctorResponse
 import com.korashiGroup.salamtakPatient.model.salamtakgate.BlogsResponse
 import com.korashiGroup.salamtakPatient.model.salamtakgate.SalamtakGateResponse
@@ -49,6 +50,7 @@ class DialogBottomSheetViewmodel @Inject constructor(private val repositry: Regi
     val top10SpecialistResponse=MutableLiveData<Resource<GetSpecialistResponse>>()
     val subSpecialistResponse=MutableLiveData<Resource<GetSubSpecilistResponse>>()
     val seniorityLevelResponse=MutableLiveData<Resource<GetSeniorityLevelResponse>>()
+    val serviceLevelResponse=MutableLiveData<Resource<ServiceLevelResponse>>()
     val allCitiesResponse=MutableLiveData<Resource<GetAllCitiesResponse>>()
     val allAreasByCityIdResponse=MutableLiveData<Resource<GetAreasByCityIdResponse>>()
     val docorsResponse=MutableLiveData<Resource<DoctorsearchItemResponse>>()
@@ -194,7 +196,26 @@ class DialogBottomSheetViewmodel @Inject constructor(private val repositry: Regi
         seniorityLevelResponse.postValue(response?.let { handelGetseniorityLevel(it) })
     }
 
+    fun getServiceLevel()=viewModelScope.launch(Dispatchers.IO+handler) {
+        serviceLevelResponse.postValue(Resource.Loading())
+        val response=repositry.getServiceLevel()
+        Log.e("RAW_CODE", response?.code().toString())
+        Log.e("RAW_BODY", response?.body()?.toString() ?: "NULL BODY")
+        Log.e("RAW_ERROR", response?.errorBody()?.string() ?: "NO ERROR")
+        serviceLevelResponse.postValue(response?.let { handelGetServiceLevel(it) })
+    }
+
     private fun handelGetseniorityLevel(response: Response<GetSeniorityLevelResponse>): Resource<GetSeniorityLevelResponse>? {
+        if (response.isSuccessful){
+            response.body()?.let {
+                return Resource.sucess(it)
+            }
+        }
+        return Resource.Error(response.message())
+
+    }
+
+    private fun handelGetServiceLevel(response: Response<ServiceLevelResponse>): Resource<ServiceLevelResponse>? {
         if (response.isSuccessful){
             response.body()?.let {
                 return Resource.sucess(it)

@@ -9,6 +9,7 @@ import com.korashiGroup.salamtakPatient.model.booking.ClinicSchedualByClinicDayI
 import com.korashiGroup.salamtakPatient.model.booking.clink.ClinicData
 import com.korashiGroup.salamtakPatient.model.booking.clink.GetDoctorClinksResponse
 import com.korashiGroup.salamtakPatient.model.booking.clink.PolyClinicData
+import com.korashiGroup.salamtakPatient.model.nursingServices.service.ServiceLevelData
 import com.korashiGroup.salamtakPatient.model.patient.DataRelation
 import com.korashiGroup.salamtakPatient.model.profile.DataBloodType
 import com.korashiGroup.salamtakPatient.model.profile.DataFoodAllergy
@@ -23,6 +24,7 @@ class SharedDataViewmodel:ViewModel() {
     val specialication=MutableLiveData<SpecialistData>()
     val subSpecialication=MutableLiveData<List<SubSpecialistData>>()
     val seniorityLevelData=MutableLiveData<SeniorityLevelData>()
+    val serviceLevelData=MutableLiveData<ServiceLevelData>()
     val notificationNumber = MutableLiveData<Pair<Int, Int>>()
     val getCity=MutableLiveData<CityData>()
     val relationResponse=MutableLiveData<DataRelation>()
@@ -32,9 +34,11 @@ class SharedDataViewmodel:ViewModel() {
     val profileStatus=MutableLiveData<Int>()
     val birthDate=MutableLiveData<String>()
     val releaeDate=MutableLiveData<String>()
+
     val endDate=MutableLiveData<String>()
     val chooseGender=MutableLiveData<ChooseGender>()
     val country=MutableLiveData<DataCountry>()
+
     val ClinicSchedualByClinicDayId=MutableLiveData<ClinicSchedualByClinicDayId>()
     val ExaminationTypeId=MutableLiveData<ImageServices>()
     val updateProfileStatus=MutableLiveData<Boolean>()
@@ -81,6 +85,11 @@ class SharedDataViewmodel:ViewModel() {
 
     fun getSeniorityLevelData(seniorityLevel:SeniorityLevelData){
         seniorityLevelData.postValue(seniorityLevel)
+    }
+
+
+    fun getServiceLevelData(serviceLevel: ServiceLevelData){
+        serviceLevelData.postValue(serviceLevel)
     }
 
     fun getCity(city:CityData){

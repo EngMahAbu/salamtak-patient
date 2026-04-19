@@ -1,23 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.korashiGroup.salamtakPatient.viewmodel.MedicalConsultantViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none"
         android:background="#F4F4F6"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:padding="16dp">
 
-    <LinearLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
-            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/iv_arrow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -29,7 +37,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/tv_Filter" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -41,28 +49,29 @@
                     android:textSize="16sp"
                     app:layout_constraintStart_toEndOf="@+id/iv_arrow"
                     app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        <androidx.cardview.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="@dimen/_15sdp">
-            <androidx.constraintlayout.widget.ConstraintLayout
+
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                <ImageView
+                    <ImageView
                         android:id="@+id/nursing_image"
                         android:layout_width="match_parent"
                         android:layout_height="160dp"
                         android:scaleType="centerCrop"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:src="@drawable/medical_consultation_ic"
-                        />
-                <TextView
+                        android:src="@drawable/medical_consultation_ic" />
+
+                    <TextView
                         android:id="@+id/nursing_Title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -73,8 +82,9 @@
                         app:layout_constraintTop_toBottomOf="@+id/nursing_image"
                         android:text="Professional Nursing Services"
                         android:textSize="16sp"
-                        android:paddingTop="8dp"/>
-                <TextView
+                        android:paddingTop="8dp" />
+
+                    <TextView
                         android:id="@+id/nursing_Desc"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -88,72 +98,77 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/nursing_Title"
                         android:text="Salamtak Application provides reliable medical information and directive diagnosis for simple cases through direct phone call with one of Salamtak Specialized Doctors"
-                        android:textSize="13sp"
-                        />
+                        android:textSize="13sp" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-        <TextView
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/full_name"
                 android:fontFamily="@font/inter_semibold"
                 android:textColor="@color/color_64748B"
                 android:textSize="12sp"
-                android:paddingTop="8dp"/>
 
-        <EditText
+                android:paddingTop="8dp" />
+
+            <EditText
                 android:id="@+id/etPatientName"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="7dp"
                 android:fontFamily="@font/inter_regular"
                 android:textSize="11sp"
+                android:text="@={vm.fullName}"
+                app:errorText="@{vm.fullNameError}"
                 android:paddingStart="10dp"
                 android:background="@drawable/bg_edittext_box"
                 android:hint="@string/full_name_in_english_first_middle_last"
-                android:inputType="text"/>
+                android:inputType="text" />
 
-        <!-- Mobile Number -->
-        <TextView
+            <!-- Mobile Number -->
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Mobile Number"
                 android:fontFamily="@font/inter_semibold"
                 android:textColor="@color/color_64748B"
                 android:textSize="12sp"
-                android:paddingTop="8dp"/>
+                android:paddingTop="8dp" />
 
-        <EditText
+            <EditText
                 android:id="@+id/etMobileNumber"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/inter_regular"
                 android:textSize="11sp"
-                android:paddingStart="10dp"
+                android:text="@={vm.mobileNumber}"
+                app:errorText="@{vm.mobileNumberError}"
+                android:paddingStart="12dp"
                 android:background="@drawable/bg_edittext_box"
                 android:hint="Mobile Number: (+2)"
-                android:inputType="phone"/>
+                android:inputType="phone" />
 
-        <!-- Address -->
-        <TextView
+            <!-- Address -->
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/specialization"
                 android:fontFamily="@font/inter_semibold"
                 android:textColor="@color/color_64748B"
                 android:textSize="12sp"
-                android:paddingTop="8dp"/>
-        <androidx.constraintlayout.widget.ConstraintLayout
+                android:paddingTop="8dp" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout_Location_Details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:visibility="visible"
-                >
+                android:visibility="visible">
 
-            <androidx.appcompat.widget.AppCompatButton
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_layout_Choose_City"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
@@ -163,7 +178,7 @@
                     app:layout_constraintTop_toTopOf="@+id/layout_Choose_City"
                     app:layout_constraintBottom_toBottomOf="@+id/layout_Choose_City" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layout_Choose_City"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -173,7 +188,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                <androidx.appcompat.widget.AppCompatImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/iv_arrowdownChoose_City"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
@@ -186,14 +201,14 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent" />
 
-                <com.google.android.material.textfield.TextInputLayout
+                    <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/textinput_Choose_City"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
                         android:layout_marginEnd="25dp"
                         android:layout_marginBottom="5dp"
-                        android:hint="@string/choose_city"
+                        android:hint="@string/choose_speciality"
                         android:paddingTop="4dp"
                         app:boxBackgroundColor="@color/white"
                         app:boxBackgroundMode="none"
@@ -202,21 +217,30 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                        <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/et_Choose_City"
                             android:layout_width="match_parent"
                             android:layout_height="55dp"
                             android:layout_gravity="center_horizontal"
                             android:fontFamily="@font/avenirltstd_roman"
+                            app:errorText="@{vm.specialityError}"
                             android:inputType="text"
-                            android:enabled="false"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
+                            android:cursorVisible="false"
+                            android:clickable="true"
                             android:textColor="@color/color_64748B"
                             android:textSize="13sp" />
 
-                </com.google.android.material.textfield.TextInputLayout>
+                    </com.google.android.material.textfield.TextInputLayout>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-            <androidx.appcompat.widget.AppCompatTextView
+
+
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_cityError"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
@@ -233,21 +257,20 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/layout_Choose_City" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!-- Symptoms -->
+            <!-- Symptoms -->
 
-        <TextView
+            <TextView
                 android:id="@+id/text_symptoms"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Symptoms"
                 android:layout_marginTop="10dp"
                 android:textColor="@color/color_64748B"
-                android:fontFamily="sans-serif-medium"
-                />
+                android:fontFamily="sans-serif-medium" />
 
-        <com.google.android.material.textfield.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/symptoms_text"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
@@ -256,20 +279,22 @@
                 android:layout_marginTop="4dp"
                 app:hintEnabled="false">
 
-            <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/symptoms"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Describe your Symptoms..."
                     android:minLines="4"
+                    android:text="@={vm.symptoms}"
+                    app:errorText="@{vm.symptomsError}"
                     android:gravity="start"
-                    android:background="@drawable/bg_edittext_box"/>
+                    android:background="@drawable/bg_edittext_box" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Ask Question -->
+            <!-- Ask Question -->
 
-        <TextView
+            <TextView
                 android:id="@+id/text_Ask_ques"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -278,9 +303,9 @@
                 android:fontFamily="sans-serif-medium"
                 app:layout_constraintTop_toBottomOf="@id/symptoms_text"
                 app:layout_constraintStart_toStartOf="@id/symptoms_text"
-                android:layout_marginTop="8dp"/>
+                android:layout_marginTop="8dp" />
 
-        <com.google.android.material.textfield.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/ask_text"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
@@ -289,19 +314,21 @@
                 android:layout_marginTop="4dp"
                 app:hintEnabled="false">
 
-            <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/ask"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Describe your question..."
                     android:minLines="4"
+                    android:text="@={vm.askQuestion}"
+                    app:errorText="@{vm.askQuestionError}"
                     android:gravity="start"
-                    android:background="@drawable/bg_edittext_box"/>
+                    android:background="@drawable/bg_edittext_box" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Send Button -->
-        <androidx.constraintlayout.widget.ConstraintLayout
+            <!-- Send Button -->
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -310,9 +337,9 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/all_layout"
                 app:layout_constraintWidth_percent=".95"
-                android:padding="8dp"
-                >
-            <androidx.appcompat.widget.AppCompatButton
+                android:padding="8dp">
+
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_send"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -326,8 +353,18 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-
                     />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+
+                <ProgressBar
+                    android:id="@+id/progress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/btn_send"
+                    app:layout_constraintEnd_toEndOf="@id/btn_send"
+                    app:layout_constraintTop_toTopOf="@id/btn_send"
+                    android:visibility="gone"
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

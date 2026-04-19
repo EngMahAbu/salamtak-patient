@@ -1,19 +1,24 @@
 package com.korashiGroup.salamtakPatient.repository
 
 import com.korashiGroup.salamtakPatient.api.ApiService
-import com.korashiGroup.salamtakPatient.model.askandanswer.QuestionRequest
 import com.korashiGroup.salamtakPatient.model.booking.EditPatientAppointmentRequest
 import com.korashiGroup.salamtakPatient.model.booking.PatientAppointmentRequest
 import com.korashiGroup.salamtakPatient.model.docotorsearch.DoctorSearchRequest
 import com.korashiGroup.salamtakPatient.model.docotorsearch.NewDoctorSearchRequest
 import com.korashiGroup.salamtakPatient.model.favorite.FavoriteRequest
+import com.korashiGroup.salamtakPatient.model.medicalConsultant.MedicalConsultantReqBody
+import com.korashiGroup.salamtakPatient.model.medicalConsultant.MedicalConsultantResponse
+import com.korashiGroup.salamtakPatient.model.mobileClinic.MobileClinicReqBody
+import com.korashiGroup.salamtakPatient.model.mobileClinic.MobileClinicResponse
+import com.korashiGroup.salamtakPatient.model.notification.Response
+import com.korashiGroup.salamtakPatient.model.nursingServices.NursingReqBody
+import com.korashiGroup.salamtakPatient.model.nursingServices.NursingResponse
 import com.korashiGroup.salamtakPatient.model.profile.LocationRequest
 import com.korashiGroup.salamtakPatient.model.register.*
 import com.korashiGroup.salamtakPatient.model.whatspresponse.WhatspRequest
 import com.korashiGroup.salamtakPatient.utils.Constans
 import com.korashiGroup.salamtakPatient.utils.SpUtil
 import okhttp3.MultipartBody
-import retrofit2.http.Query
 import javax.inject.Inject
 
 class RegisterRepositry @Inject constructor(private val apiService: ApiService) {
@@ -74,6 +79,10 @@ class RegisterRepositry @Inject constructor(private val apiService: ApiService) 
 
     suspend fun getSeniorityLevel() = sp.getUserLang(Constans.Language)
         ?.let { apiService.getSeniorityLevel(it) }
+
+
+    suspend fun getServiceLevel() = sp.getUserLang(Constans.Language)
+        ?.let { apiService.getServiceLevel(it) }
 
     suspend fun getAllCities() = sp.getUserLang(Constans.Language)
         ?.let { apiService.getAllCities(it) }
@@ -324,5 +333,117 @@ class RegisterRepositry @Inject constructor(private val apiService: ApiService) 
         ?.let { apiService.getAllPatientRelationshipType(it) }
     suspend fun updateQandAIsNoShowByUser() = sp.getUserLang(Constans.Language)
         ?.let { apiService.updateQandAIsNoShowByUser(it) }
+
+    // phase 2
+
+    suspend fun sendMedicalConsultant(fullName: String,
+                                      mobileNumber: String,
+                                      specialityId: Int,
+                                      symptoms: String,
+                                      question: String): retrofit2.Response<MedicalConsultantResponse> {
+        val requestBody = MedicalConsultantReqBody(
+            FullName = fullName,
+            MobileNumber = mobileNumber,
+            SpecialityId = specialityId,
+            Symptoms = symptoms,
+            Question = question
+        )
+        sp.getUserLang(Constans.Language).let {
+            return apiService.sendMedicalConsultant(
+                culture = it,
+                medicalConsultantRequest = requestBody
+            )
+        }
+
+
+    }
+
+
+    suspend fun sendMobileClinic(fullName: String,
+                                 mobileNumber: String,
+                                 specialityId: Int,
+                                 buildingNumber: String,
+                                 floor: String,
+                                 apartment: String,
+                                 street: String,
+                                 cityId: Int,
+                                 areaId: Int,
+                                 subSpecialistyId: Int,
+                                 seniorityLevelId: Int,
+                                 sepcialRecuirements: String,
+                                 genderId: Int,
+                                 symptoms: String
+                                 ): retrofit2.Response<MobileClinicResponse> {
+        val requestBody = MobileClinicReqBody(
+            FullName = fullName,
+            MobailPhone = mobileNumber,
+            SpecialityId = specialityId,
+            Symptoms = symptoms,
+            BuildingNumber = buildingNumber,
+            Floor = floor,
+            Aparment = apartment,
+            Street = street,
+            CityId = cityId,
+            AreaId = areaId,
+            SubSpecialistyId = subSpecialistyId,
+            SeniorityLevelId = seniorityLevelId,
+            SepcialRecuirements = sepcialRecuirements,
+            GenderId = genderId
+        )
+        sp.getUserLang(Constans.Language).let {
+            return apiService.sendMobileClinic(
+                culture = it,
+                mobileClinicRequest = requestBody
+            )
+        }
+
+
+    }
+
+    suspend fun sendNursingService(fullName: String,
+                                 mobileNumber: String,
+                                 buildingNumber: String,
+                                 street: String,
+                                 floor: String,
+                                 apartment: String,
+                                 cityId: Int,
+                                 areaId: Int,
+                                 genderId: Int,
+                                 fromDay:String,
+                                 toDay:String,
+                                 fromHour:String,
+                                 toHour:String,
+                                 serviceId:Int,
+                                 service:String
+    ): retrofit2.Response<NursingResponse> {
+        val requestBody = NursingReqBody(
+            FullName = fullName,
+            MobailPhone = mobileNumber,
+            BuildingNumber = buildingNumber,
+            Street = street,
+            Floor = floor,
+            Apartment = apartment,
+            CityId = cityId,
+            AreaId = areaId,
+            GenderId = genderId,
+            FromDay = fromDay,
+            ToDay = toDay,
+            FromHour = fromHour,
+            ToHour = toHour,
+            ServiceId = serviceId,
+            Service = service
+        )
+        sp.getUserLang(Constans.Language).let {
+            return apiService.sendNursingServiceReq(
+                culture = it,
+                nursingServicesReq = requestBody
+            )
+        }
+
+
+    }
+
+
+
 
 }

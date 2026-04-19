@@ -1,7 +1,6 @@
 package com.korashiGroup.salamtakPatient.fragment.homeCare
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -87,10 +86,15 @@ class HomeCareFragment : Fragment(),ServicesAdapter.Action {
                             R.drawable.ic_ray_radiology,
                             requireContext().getString(R.string.medicalscan),"الأشعة",
                             Id = 9,
-                        ))
+                        )
+
+
+                        )
+
                         listOfHomeCareServices.add(  ImageServices(R.drawable.health_care, "Medical Consultant","استشاري طبي", Id = 2))
                                 listOfHomeCareServices.add(ImageServices(R.drawable.health_check, "Mobile Clinic","عيادة متنقلة", Id = 3))
-                                listOfHomeCareServices.add(ImageServices(R.drawable.device, "monitoring devices levels","أجهزة مراقبة مستوى", Id = 4))
+                                listOfHomeCareServices.add(ImageServices(R.drawable.device, "monitoring devices levels","أجهزة مراقبة مستوى", Id = 4)
+                                )
                         imageServicesAdapter.submitList(listOfHomeCareServices)
                     }
                 }

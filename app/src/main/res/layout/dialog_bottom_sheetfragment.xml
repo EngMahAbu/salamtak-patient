@@ -270,6 +270,25 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_serviceLevel"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginBottom="5dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+            <include
+                android:id="@+id/item_serviceLevel"
+                layout="@layout/layout_bottomsheetlayoutservicelevel"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_bloodtypes"
             android:layout_width="match_parent"

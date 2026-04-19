@@ -40,7 +40,7 @@
                 android:padding="1dp"
                 android:layout_marginStart="14dp"
                 android:layout_marginEnd="@dimen/_3sdp"
-                android:text="@string/choose_city"
+                android:text="@string/choose_speciality"
                 android:textColor="#8088A4"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toStartOf="@+id/iv_selectCity"

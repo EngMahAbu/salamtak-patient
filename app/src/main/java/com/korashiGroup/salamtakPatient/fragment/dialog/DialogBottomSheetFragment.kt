@@ -1,10 +1,8 @@
 package com.korashiGroup.salamtakPatient.fragment.dialog
 
-import android.app.Dialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,10 +34,9 @@ import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.snackbar.Snackbar
+import com.korashiGroup.salamtakPatient.model.nursingServices.service.ServiceLevelData
 import com.korashiGroup.salamtakPatient.model.patient.DataRelation
 import com.korashiGroup.salamtakPatient.model.register.ChoosePatient
-import com.korashiGroup.salamtakPatient.model.register.DataLogin
-import com.korashiGroup.salamtakPatient.utils.Constans.UserLOGIN
 import com.korashiGroup.salamtakPatient.viewmodel.DoctorProfileViewModel
 import com.korashiGroup.salamtakPatient.viewmodel.PatientViewmodel
 import dagger.hilt.android.AndroidEntryPoint
@@ -49,6 +46,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter.SelectSpecialist,
     SubSpecialistAdapter.SelectSubSpecialist, SeniorityLevelAdapter.SelectSeniorityLevel,
+    ServiceLevelAdapter.SelectServiceLevel,
     GetAllCitiesAdapter.SelectCity, GetAllAreaAdapter.SelectArea, NationalityAdapter.SelectCountry,
     MedicalEaxminationTypeAdapter.Action, BloodTypesAdapter.SelectBloodTypeList,
     MedicineAllergyAdapter.SelectMedicineAllergy, FoodAllergyAdapter.SelectFoodAllergy,
@@ -64,6 +62,7 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
     private lateinit var specialistAdapter: SpecialistAdapter
     private lateinit var subSpecialistAdapter: SubSpecialistAdapter
     private lateinit var seniorityLevelAdapter: SeniorityLevelAdapter
+    private lateinit var serviceLevelAdapter: ServiceLevelAdapter
     private lateinit var getAllCitiesAdapter: GetAllCitiesAdapter
     private lateinit var allPatientRelationshipAdapter: GetAllPatientRelationshipAdapter
     private lateinit var getAllAreaAdapter: GetAllAreaAdapter
@@ -108,6 +107,7 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
         setupresyclerviewMedicineAllergy()
         setupresyclerviewFoodAllergy()
         setupresyclerviewSeniorityLevel()
+        setupresyclerviewServiceLevel()
         setupresyclerviewGetAllArea()
         initButton()
         chooseGender()
@@ -175,6 +175,15 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
         seniorityLevelAdapter = SeniorityLevelAdapter(this)
         binding.itemSeniorityLevel.rvSeniorityLevel.apply {
             adapter = seniorityLevelAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+            addItemDecoration(object : DividerItemDecoration(activity, LinearLayout.VERTICAL) {})
+        }
+    }
+
+    fun setupresyclerviewServiceLevel() {
+        serviceLevelAdapter = ServiceLevelAdapter(this)
+        binding.itemServiceLevel.rvServiceLevel.apply {
+            adapter = serviceLevelAdapter
             layoutManager = LinearLayoutManager(requireContext())
             addItemDecoration(object : DividerItemDecoration(activity, LinearLayout.VERTICAL) {})
         }
@@ -349,10 +358,16 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
                 binding.layoutSeniorityLevel.visibility = View.VISIBLE
                 binding.tvAllSpecial.text = getString(R.string.choose_seniority_level)
                 callBackSeniorityLevel()
+
+            }
+            "ServiceLevel" -> {
+                binding.layoutServiceLevel.visibility = View.VISIBLE
+                binding.tvAllSpecial.text = getString(R.string.choose_service_level)
+                callBackServiceLevel()
             }
             "AllCity" -> {
                 binding.layoutAllCities.visibility = View.VISIBLE
-                binding.tvAllSpecial.text = getString(R.string.choose_city)
+                binding.tvAllSpecial.text = getString(R.string.choose_speciality)
                 setupresyclerviewGetAllCities()
                 callBackGetAllCities()
             }
@@ -491,6 +506,33 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
             }
         }
         viewmodel.getSeniorityLevel()
+    }
+
+
+    private fun callBackServiceLevel() {
+        viewmodel.serviceLevelResponse.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is Resource.Loading -> {
+                    showprogtessbar()
+                }
+                is Resource.sucess -> {
+                    hideprogressbar()
+                    response.data?.data.let {
+                        serviceLevelAdapter.submitList(it)
+
+                    }
+                }
+
+                is Resource.Error -> {
+                    hideprogressbar()
+                    response.data?.let {
+                        Toast.makeText(requireContext(), it.data.toString(), Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                }
+            }
+        }
+        viewmodel.getServiceLevel()
     }
 
     private fun callBackGetAllCities() {
@@ -671,6 +713,7 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
         binding.itemSpecialist.progressBar.visibility = View.VISIBLE
         binding.itemSubSpecialist.progressBar.visibility = View.VISIBLE
         binding.itemSeniorityLevel.progressBar.visibility = View.VISIBLE
+        binding.itemServiceLevel.progressBar.visibility = View.VISIBLE
         binding.itemAllcities.progressBar.visibility = View.VISIBLE
         binding.itemAllArea.progressBar.visibility = View.VISIBLE
         binding.itemExaminationtype.progressBar.visibility = View.VISIBLE
@@ -683,6 +726,7 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
         binding.itemSpecialist.progressBar.visibility = View.GONE
         binding.itemSubSpecialist.progressBar.visibility = View.GONE
         binding.itemSeniorityLevel.progressBar.visibility = View.GONE
+        binding.itemServiceLevel.progressBar.visibility = View.GONE
         binding.itemAllcities.progressBar.visibility = View.GONE
         binding.itemAllArea.progressBar.visibility = View.GONE
         binding.itemExaminationtype.progressBar.visibility = View.GONE
@@ -706,6 +750,11 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
     }
     override fun onItemSelectSeniorityLevel(SeniorityLevel: SeniorityLevelData) {
         sharedDataViewmodel.getSeniorityLevelData(SeniorityLevel)
+    }
+
+    override fun onItemSelectServiceLevel(serviceLevelData: ServiceLevelData) {
+        sharedDataViewmodel.getServiceLevelData(serviceLevelData)
+
     }
     override fun onItemSelected(city: CityData) {
         sharedDataViewmodel.getArea(AreaData(null,""))
@@ -867,6 +916,8 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
     override fun onItemSelected(relation: DataRelation) {
         sharedDataViewmodel.getRelationType(relation)
     }
+
+
 
 
 }

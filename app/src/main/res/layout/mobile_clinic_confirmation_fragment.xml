@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:backgroundTint="#F4F4F6"
+        >
+
+        <Toolbar
+            android:id="@+id/confirm_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+            <ImageView
+                android:id="@+id/iv_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_back"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mobile Clinic Confirmation"
+                android:fontFamily="@font/inter_bold"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:layout_gravity="center"
+                />
+        </Toolbar>
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/confirm_toolbar"
+            android:layout_margin="15dp"
+            app:cardCornerRadius="18dp"
+            android:elevation="18dp"
+            android:background="@color/white"
+            >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                >
+
+                <ImageView
+                    android:id="@+id/nursing_image_confirm"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:src="@drawable/mobile_clinic_image"
+                    android:scaleType="fitXY"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+                <ImageView
+                    android:id="@+id/level_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/agent_icon"
+                    app:layout_constraintTop_toTopOf="@id/doctor_name"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_margin="16dp"
+                    />
+
+                <TextView
+                    android:id="@+id/doctor_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Doctor Name"
+                    android:fontFamily="sans-serif-medium"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@id/nursing_image_confirm"
+                    app:layout_constraintStart_toEndOf="@id/level_icon"
+                    android:layout_marginStart="22dp"
+                    android:textColor="#64748B"
+                    android:textSize="14sp"
+                    />
+
+                <TextView
+                    android:id="@+id/device_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dr. Julia Eid"
+                    android:fontFamily="@font/inter_bold"
+                    android:textColor="@color/black"
+                    app:layout_constraintTop_toBottomOf="@id/doctor_name"
+                    app:layout_constraintStart_toEndOf="@id/level_icon"
+                    android:layout_marginStart="22dp"
+                    android:textSize="18sp"
+                    />
+
+
+                <ImageView
+                    android:id="@+id/speciality_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/level_icon"
+                    app:layout_constraintTop_toBottomOf="@id/device_name"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_margin="16dp"
+                    />
+
+                <TextView
+                    android:id="@+id/gender_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Speciality"
+                    android:fontFamily="sans-serif-medium"
+                    android:layout_marginTop="4dp"
+                    app:layout_constraintTop_toBottomOf="@id/device_name"
+                    app:layout_constraintStart_toEndOf="@id/level_icon"
+                    android:layout_marginStart="22dp"
+                    android:textColor="#64748B"
+                    android:textSize="14sp"
+                    />
+
+                <TextView
+                    android:id="@+id/speciality_level"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dentistry"
+                    android:fontFamily="@font/inter_bold"
+                    android:textColor="@color/black"
+                    app:layout_constraintTop_toBottomOf="@id/gender_group"
+                    app:layout_constraintStart_toEndOf="@id/level_icon"
+                    android:layout_marginStart="22dp"
+                    android:textSize="18sp"
+                    />
+
+                <View
+                    android:id="@+id/line"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="#E4DEDE"
+                    android:layout_margin="18dp"
+                    app:layout_constraintTop_toBottomOf="@id/speciality_level"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+
+                <ImageView
+                    android:id="@+id/seniority_icon"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/seniority_icon"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@id/line"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <TextView
+                    android:id="@+id/seniority_level"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Seniority Level"
+                    android:textColor="#64748B"
+                    android:textSize="14sp"
+                    android:fontFamily="sans-serif-medium"
+                    android:layout_marginStart="12dp"
+                    app:layout_constraintStart_toEndOf="@id/seniority_icon"
+                    app:layout_constraintTop_toTopOf="@id/seniority_icon"/>
+
+                <TextView
+                    android:id="@+id/seniority"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Consultant"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/inter_bold"
+                    app:layout_constraintStart_toStartOf="@id/seniority_level"
+                    app:layout_constraintTop_toBottomOf="@id/seniority_level"/>
+
+
+                <ImageView
+                    android:id="@+id/gender_icon"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/gender_icon"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@id/seniority"
+                    app:layout_constraintStart_toStartOf="@id/seniority_icon"/>
+
+                <TextView
+                    android:id="@+id/gender_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Gender"
+                    android:textColor="#64748B"
+                    android:textSize="14sp"
+                    android:fontFamily="sans-serif-medium"
+                    android:layout_marginEnd="32dp"
+                    app:layout_constraintStart_toStartOf="@id/seniority_level"
+                    app:layout_constraintTop_toTopOf="@id/gender_icon"/>
+
+                <TextView
+                    android:id="@+id/gender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Female"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/inter_bold"
+                    app:layout_constraintStart_toStartOf="@id/gender_text"
+                    app:layout_constraintTop_toBottomOf="@id/gender_text"/>
+
+
+                <TextView
+                    android:id="@+id/fee_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/gender"
+                    android:text="Fees"
+                    android:layout_marginTop="18dp"
+                    app:layout_constraintStart_toStartOf="@id/seniority_level"
+                    android:textColor="#64748B"
+                    android:textSize="18sp"
+                    android:fontFamily="sans-serif-medium"
+                    />
+
+                <TextView
+                    android:id="@+id/fee"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/fee_text"
+                    android:text="500 L.E"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintStart_toStartOf="@id/gender_text"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:fontFamily="sans-serif-medium"
+                    />
+
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/equipement_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/card1"
+            app:layout_constraintStart_toStartOf="@id/card1"
+            android:text="Equipment &amp; Extra Medication Fees"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="#1F3D89"
+            android:textColor="@color/white"
+            android:padding="6dp"
+            android:background="@drawable/rounded_btn"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            />
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/equipement_text"
+            app:layout_constraintStart_toStartOf="@id/equipement_text"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            app:cardCornerRadius="18dp"
+            android:layout_marginTop="8dp"
+            android:elevation="18dp"
+            android:background="@color/white"
+
+            >
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="6dp"
+                >
+
+                <TextView
+                    android:id="@+id/daily_fee_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Service or Medication Type"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="16sp"
+                    android:textColor="#475569"
+                    android:layout_margin="12dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:id="@+id/daily_fee"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="100 L.E"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/inter_bold"
+                    android:layout_margin="12dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBaseline_toBaselineOf="@id/daily_fee_text"/>
+
+                <TextView
+                    android:id="@+id/duration_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Service or Medication Type"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="16sp"
+                    android:textColor="#475569"
+                    android:layout_margin="12dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/daily_fee_text"/>
+
+                <TextView
+                    android:id="@+id/duration_fee"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="30 L.E"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/inter_bold"
+                    android:layout_margin="12dp"
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBaseline_toBaselineOf="@id/duration_text"/>
+
+
+                <View
+                    android:id="@+id/line3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#E4DEDE"
+                    app:layout_constraintTop_toBottomOf="@id/duration_text"
+                    android:layout_margin="18dp"
+                    />
+
+
+                <TextView
+                    android:id="@+id/total_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/line3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="6dp"
+                    android:text="TOTAL FEES"
+                    android:textSize="14sp"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="#1F3D89"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="630 L.E"
+                    android:fontFamily="@font/inter_bold"
+                    android:textSize="30sp"
+                    android:textColor="#1F3D89"
+                    app:layout_constraintTop_toBottomOf="@id/total_amount"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/time_arrival_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/card2"
+            app:layout_constraintStart_toStartOf="@id/card2"
+            android:text="Time of Arrival (ETA)"
+            android:layout_marginTop="12dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@id/card2"
+            app:layout_constraintTop_toBottomOf="@id/card2"
+            android:layout_marginTop="12dp"
+            android:text=".. : .. PM"
+            android:layout_marginEnd="12dp"
+            android:textColor="#1F3D89"
+            android:textSize="14sp"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/send"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/time_arrival_text"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="@id/card2"
+            app:layout_constraintEnd_toEndOf="@id/card1"
+            android:backgroundTint="#1F3D89"
+            android:text="Pay Now"
+            app:cornerRadius="18dp"
+            android:fontFamily="@font/inter_bold"
+            android:textSize="18sp"
+            android:padding="8dp"
+
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</androidx.core.widget.NestedScrollView>

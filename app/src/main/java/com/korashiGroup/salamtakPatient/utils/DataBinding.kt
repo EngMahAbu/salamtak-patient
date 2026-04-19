@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.util.Log
 import android.view.View
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.databinding.BindingAdapter
@@ -67,6 +68,14 @@ object DataBinding {
     @BindingAdapter("imageUrl")
     fun loadPictureFromDrawable(imageView: ImageView, url: Int?) {
         Glide.with(imageView.context).asGif().load("${url}").into(imageView)
+    }
+
+    @JvmStatic
+    @BindingAdapter ("app:errorText")
+    fun setError(editText: EditText, errorMessage: String?){
+
+        editText.error = errorMessage
+
     }
 
     fun DateParsing(dateParsing:String):String{

@@ -721,7 +721,7 @@
                                         android:layout_height="55dp"
                                         android:layout_marginEnd="25dp"
                                         android:layout_marginBottom="5dp"
-                                        android:hint="@string/choose_city"
+                                        android:hint="@string/choose_speciality"
                                         android:paddingTop="4dp"
                                         app:boxBackgroundColor="@color/white"
                                         app:boxBackgroundMode="none"

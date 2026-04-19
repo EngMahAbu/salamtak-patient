@@ -1,23 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.korashiGroup.salamtakPatient.viewmodel.MobileClinicViewModel" />
+        <import type="android.view.View"/>
+    </data>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none"
         android:background="#F4F4F6"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:padding="16dp">
 
-    <LinearLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
-            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/iv_arrow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -29,7 +38,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/tv_Filter" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -41,29 +50,30 @@
                     android:textSize="16sp"
                     app:layout_constraintStart_toEndOf="@+id/iv_arrow"
                     app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        <androidx.cardview.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="@dimen/_15sdp">
-            <androidx.constraintlayout.widget.ConstraintLayout
+
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                <ImageView
+                    <ImageView
                         android:id="@+id/nursing_image"
                         android:layout_width="match_parent"
-                        android:layout_height="160dp"
+                        android:layout_height="260dp"
                         android:adjustViewBounds="true"
                         android:scaleType="fitXY"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:src="@drawable/ic_mobile_clinic"
-                        />
-                <TextView
+                        android:src="@drawable/ic_mobile_clinic" />
+
+                    <TextView
                         android:id="@+id/nursing_Title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -74,8 +84,9 @@
                         app:layout_constraintTop_toBottomOf="@+id/nursing_image"
                         android:text="Professional Nursing Services"
                         android:textSize="16sp"
-                        android:paddingTop="8dp"/>
-                <TextView
+                        android:paddingTop="8dp" />
+
+                    <TextView
                         android:id="@+id/nursing_Desc"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -88,64 +99,69 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/nursing_Title"
-                        android:text="@string/welcome_to_salamtak_mobile_clinic_service_please_complete_related_request_form_one_of_salamtak_customer_service_agent_will_confirm_your_request_to_guarantee_swift_and_fast_execution"
-                        android:textSize="13sp"
-                        />
+                        android:text="@string/welcome_mobile_clinic"
+                        android:textSize="13sp" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-        <TextView
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/full_name"
                 android:fontFamily="@font/inter_semibold"
                 android:textColor="@color/color_64748B"
                 android:textSize="12sp"
-                android:paddingTop="8dp"/>
+                android:paddingTop="8dp" />
 
-        <EditText
+            <EditText
                 android:id="@+id/etPatientName"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="7dp"
                 android:fontFamily="@font/inter_regular"
                 android:textSize="11sp"
+                android:text="@={vm.fullName}"
+                app:errorText="@{vm.fullNameError}"
                 android:paddingStart="10dp"
                 android:background="@drawable/bg_edittext_box"
                 android:hint="@string/full_name_in_english_first_middle_last"
-                android:inputType="text"/>
+                android:inputType="text" />
 
-        <!-- Mobile Number -->
-        <TextView
+            <!-- Mobile Number -->
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Mobile Number"
                 android:fontFamily="@font/inter_semibold"
                 android:textColor="@color/color_64748B"
                 android:textSize="12sp"
-                android:paddingTop="8dp"/>
+                android:paddingTop="8dp" />
 
-        <EditText
+            <EditText
                 android:id="@+id/etMobileNumber"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:fontFamily="@font/inter_regular"
                 android:textSize="11sp"
+                android:text="@={vm.mobileNumber}"
+                app:errorText="@{vm.mobileNumberError}"
                 android:paddingStart="10dp"
                 android:background="@drawable/bg_edittext_box"
                 android:hint="Mobile Number: (+2)"
-                android:inputType="phone"/>
+                android:inputType="phone" />
 
-        <!-- Address -->
-        <TextView
+            <!-- Address -->
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Address"
                 android:fontFamily="@font/inter_semibold"
                 android:textColor="@color/color_64748B"
                 android:textSize="12sp"
-                android:paddingTop="8dp"/>
-        <androidx.constraintlayout.widget.ConstraintLayout
+                android:paddingTop="8dp" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout_Location_Details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -155,7 +171,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/layout_Choose_Specialization">
 
-            <androidx.appcompat.widget.AppCompatButton
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_layout_Choose_City"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
@@ -165,7 +181,7 @@
                     app:layout_constraintTop_toTopOf="@+id/layout_Choose_City"
                     app:layout_constraintBottom_toBottomOf="@+id/layout_Choose_City" />
 
-            <androidx.appcompat.widget.AppCompatButton
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_layout_Choose_Area"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
@@ -175,7 +191,7 @@
                     app:layout_constraintTop_toTopOf="@+id/layout_Choose_Area"
                     app:layout_constraintBottom_toBottomOf="@+id/layout_Choose_Area" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layout_Choose_City"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -187,7 +203,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                <androidx.appcompat.widget.AppCompatImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/iv_arrowdownChoose_City"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
@@ -200,14 +216,14 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent" />
 
-                <com.google.android.material.textfield.TextInputLayout
+                    <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/textinput_Choose_City"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
                         android:layout_marginEnd="25dp"
                         android:layout_marginBottom="5dp"
-                        android:hint="@string/choose_city"
+                        android:hint="@string/choose_speciality"
                         android:paddingTop="4dp"
                         app:boxBackgroundColor="@color/white"
                         app:boxBackgroundMode="none"
@@ -216,21 +232,23 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                        <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/et_Choose_City"
                             android:layout_width="match_parent"
                             android:layout_height="55dp"
                             android:layout_gravity="center_horizontal"
                             android:fontFamily="@font/avenirltstd_roman"
                             android:inputType="text"
+                            app:errorText="@{vm.cityError}"
                             android:enabled="false"
                             android:textColor="@color/black"
                             android:textSize="13sp" />
 
-                </com.google.android.material.textfield.TextInputLayout>
+                    </com.google.android.material.textfield.TextInputLayout>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-            <androidx.appcompat.widget.AppCompatTextView
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_cityError"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
@@ -248,7 +266,7 @@
                     app:layout_constraintBottom_toTopOf="@+id/layout_Choose_Area"
                     app:layout_constraintTop_toBottomOf="@+id/layout_Choose_City" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layout_Choose_Area"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -260,10 +278,9 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/layout_Choose_City"
-                    >
+                    app:layout_constraintStart_toEndOf="@+id/layout_Choose_City">
 
-                <androidx.appcompat.widget.AppCompatImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/iv_arrowdownArea"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
@@ -276,7 +293,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent" />
 
-                <com.google.android.material.textfield.TextInputLayout
+                    <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/textinput_Choose_Area"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
@@ -292,21 +309,23 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                        <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/et_Choose_Area"
                             android:layout_width="match_parent"
                             android:layout_height="55dp"
                             android:layout_gravity="center_horizontal"
                             android:fontFamily="@font/avenirltstd_roman"
                             android:inputType="text"
+                            app:errorText="@{vm.areaError}"
                             android:enabled="false"
                             android:textColor="@color/black"
                             android:textSize="13sp" />
 
-                </com.google.android.material.textfield.TextInputLayout>
+                    </com.google.android.material.textfield.TextInputLayout>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-            <androidx.appcompat.widget.AppCompatTextView
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_areaError"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
@@ -325,8 +344,9 @@
                     app:layout_constraintTop_toBottomOf="@+id/layout_Choose_Area" />
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-        <EditText
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <EditText
                 android:id="@+id/etStreetName"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -336,11 +356,13 @@
                 android:layout_marginEnd="5dp"
                 android:background="@drawable/bg_edittext_box"
                 android:layout_weight="1"
+                android:text="@={vm.streetName}"
+                app:errorText="@{vm.streetNameError}"
                 android:hint="Street Name "
                 android:textColorHint="@color/Color_0f172a"
-                android:focusable="false"/>
+                 />
 
-        <LinearLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -349,7 +371,7 @@
                 android:paddingTop="4dp">
 
 
-            <EditText
+                <EditText
                     android:id="@+id/etBuilding"
                     android:layout_width="156dp"
                     android:layout_height="50dp"
@@ -357,12 +379,15 @@
                     android:textSize="11sp"
                     android:paddingStart="10dp"
                     android:layout_marginEnd="5dp"
+                    android:text="@={vm.building}"
+                    app:errorText="@{vm.buildingError}"
                     android:background="@drawable/bg_edittext_box"
                     android:layout_weight="1"
                     android:hint="Building#"
                     android:textColorHint="@color/Color_0f172a"
-                    android:focusable="false"/>
-            <EditText
+                    />
+
+                <EditText
                     android:id="@+id/etFloor"
                     android:layout_width="156dp"
                     android:layout_height="50dp"
@@ -370,12 +395,15 @@
                     android:textSize="11sp"
                     android:paddingStart="15dp"
                     android:layout_marginEnd="5dp"
+                    android:text="@={vm.floor}"
+                    app:errorText="@{vm.floorError}"
                     android:background="@drawable/bg_edittext_box"
                     android:layout_weight="1"
                     android:hint="Floor #"
                     android:textColorHint="@color/Color_0f172a"
-                    android:focusable="false"/>
-            <EditText
+                     />
+
+                <EditText
                     android:id="@+id/etApartment"
                     android:layout_width="156dp"
                     android:layout_height="50dp"
@@ -383,33 +411,34 @@
                     android:textSize="11sp"
                     android:paddingStart="15dp"
                     android:layout_marginEnd="5dp"
+                    android:text="@={vm.apartment}"
+                    app:errorText="@{vm.apartmentError}"
                     android:background="@drawable/bg_edittext_box"
                     android:layout_weight="1"
                     android:hint="Apartment #"
                     android:textColorHint="@color/Color_0f172a"
-                    android:focusable="false"/>
-        </LinearLayout>
-        <!-- Nurse Request -->
-        <TextView
+                     />
+            </LinearLayout>
+            <!-- Nurse Request -->
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/specialization"
                 android:fontFamily="@font/inter_semibold"
                 android:textColor="@color/color_64748B"
                 android:textSize="12sp"
-                android:paddingTop="8dp"/>
+                android:paddingTop="8dp" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout_Choose_Speciality"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/bg_edittext_box"
-                android:elevation="1dp"
-                >
+                android:elevation="1dp">
 
 
-            <androidx.appcompat.widget.AppCompatImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv_arrowdownChoose_Speciality"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
@@ -422,7 +451,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
 
-            <com.google.android.material.textfield.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textinput_Speciality"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
@@ -438,40 +467,40 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                <com.google.android.material.textfield.TextInputEditText
+                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_Speciality"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
                         android:layout_gravity="center_horizontal"
                         android:fontFamily="@font/avenirltstd_roman"
                         android:inputType="text"
+                        app:errorText="@{vm.specialityError}"
                         android:enabled="false"
                         android:textColor="@color/black"
                         android:textSize="13sp" />
 
-            </com.google.android.material.textfield.TextInputLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.textfield.TextInputLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TextView
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/sub_specialization"
                 android:fontFamily="@font/inter_semibold"
                 android:textColor="@color/color_64748B"
                 android:textSize="12sp"
-                android:paddingTop="8dp"/>
+                android:paddingTop="8dp" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout_Choose_SubSpeciality"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/bg_edittext_box"
-                android:elevation="1dp"
-                >
+                android:elevation="1dp">
 
 
-            <androidx.appcompat.widget.AppCompatImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv_arrowdownChoose_SubSpeciality"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
@@ -484,7 +513,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
 
-            <com.google.android.material.textfield.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textinput_SubSpeciality"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
@@ -500,39 +529,41 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                <com.google.android.material.textfield.TextInputEditText
+                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_SubSpeciality"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
                         android:layout_gravity="center_horizontal"
                         android:fontFamily="@font/avenirltstd_roman"
                         android:inputType="text"
+
+                        app:errorText="@{vm.subSpecialityError}"
                         android:enabled="false"
                         android:textColor="@color/black"
                         android:textSize="13sp" />
 
-            </com.google.android.material.textfield.TextInputLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-        <TextView
+                </com.google.android.material.textfield.TextInputLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Service Level"
+                android:text="Seniority Level"
                 android:fontFamily="@font/inter_semibold"
                 android:textColor="@color/color_64748B"
                 android:textSize="12sp"
-                android:paddingTop="8dp"/>
+                android:paddingTop="8dp" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout_Choose_serviceLevel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/bg_edittext_box"
-                android:elevation="1dp"
-                >
+                android:elevation="1dp">
 
 
-            <androidx.appcompat.widget.AppCompatImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv_arrowdownChoose_serviceLevel"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
@@ -545,14 +576,14 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
 
-            <com.google.android.material.textfield.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textinput_serviceLevel"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:layout_marginEnd="25dp"
                     android:layout_marginBottom="5dp"
-                    android:hint="choose_Service Level"
+                    android:hint="choose_Seniority Level"
                     android:paddingTop="4dp"
                     app:boxBackgroundColor="@color/white"
                     app:boxBackgroundMode="none"
@@ -561,37 +592,40 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                <com.google.android.material.textfield.TextInputEditText
+                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_serviceLevel"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
                         android:layout_gravity="center_horizontal"
                         android:fontFamily="@font/avenirltstd_roman"
                         android:inputType="text"
+                        app:errorText="@{vm.serviceLevelError}"
                         android:enabled="false"
                         android:textColor="@color/black"
                         android:textSize="13sp" />
 
-            </com.google.android.material.textfield.TextInputLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-        <!-- Gender -->
-        <TextView
+                </com.google.android.material.textfield.TextInputLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <!-- Gender -->
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Gender"
+                android:hint="Gender"
                 android:fontFamily="@font/inter_semibold"
                 android:textColor="@color/color_64748B"
                 android:textSize="12sp"
-                android:paddingTop="8dp"/>
+                android:paddingTop="8dp"
+                />
 
-        <RadioGroup
+            <RadioGroup
+                android:id="@+id/radioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
                 android:textColor="@color/Color_0f172a"
                 android:orientation="horizontal">
 
-            <RadioButton
+                <RadioButton
                     android:id="@+id/rbMale"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -599,31 +633,30 @@
                     android:layout_marginEnd="15dp"
                     android:textColor="@color/Color_0f172a"
                     android:buttonTint="@color/colortint_cbd5e1"
-                    android:text="Male"/>
+                    android:text="Male" />
 
-            <RadioButton
+                <RadioButton
                     android:id="@+id/rbFemale"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
                     android:buttonTint="@color/colortint_cbd5e1"
                     android:textColor="@color/Color_0f172a"
-                    android:text="Female"/>
-        </RadioGroup>
+                    android:text="Female" />
+            </RadioGroup>
 
-        <!-- Symptoms -->
+            <!-- Symptoms -->
 
-        <TextView
+            <TextView
                 android:id="@+id/text_symptoms"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Symptoms"
                 android:layout_marginTop="10dp"
                 android:textColor="@color/color_64748B"
-                android:fontFamily="sans-serif-medium"
-                />
+                android:fontFamily="sans-serif-medium" />
 
-        <com.google.android.material.textfield.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/symptoms_text"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
@@ -632,18 +665,20 @@
                 android:layout_marginTop="8dp"
                 app:hintEnabled="false">
 
-            <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/symptoms"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Describe your Symptoms..."
                     android:minLines="4"
+                    android:text="@={vm.symptoms}"
+                    app:errorText="@{vm.symptomsError}"
                     android:gravity="start"
-                    android:background="@drawable/bg_edittext_box"/>
+                    android:background="@drawable/bg_edittext_box" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/ask_text"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
@@ -652,20 +687,22 @@
                 android:layout_marginTop="8dp"
                 app:hintEnabled="false">
 
-            <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/ask"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Special Requirements (if Needed)"
                     android:minLines="4"
+                    android:text="@={vm.specialRequirements}"
+                    app:errorText="@{vm.specialRequirementsError}"
                     android:gravity="start"
-                    android:background="@drawable/bg_edittext_box"/>
+                    android:background="@drawable/bg_edittext_box" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
 
-        <!-- Send Button -->
-        <androidx.constraintlayout.widget.ConstraintLayout
+            <!-- Send Button -->
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -674,9 +711,9 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/all_layout"
                 app:layout_constraintWidth_percent=".95"
-                android:padding="8dp"
-                >
-            <androidx.appcompat.widget.AppCompatButton
+                android:padding="8dp">
+
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_send"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -692,6 +729,17 @@
                     app:layout_constraintTop_toTopOf="parent"
 
                     />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+
+                <ProgressBar
+                    android:id="@+id/progress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/btn_send"
+                    app:layout_constraintEnd_toEndOf="@id/btn_send"
+                    app:layout_constraintTop_toTopOf="@id/btn_send"
+                    android:visibility="gone"
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

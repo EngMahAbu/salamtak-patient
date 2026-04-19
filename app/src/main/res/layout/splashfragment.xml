@@ -5,8 +5,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"
@@ -33,52 +32,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-<!--        <ImageView-->
-<!--            android:id="@+id/imageView_bg"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:src="@drawable/ic_splash_bg2"-->
-<!--            android:visibility="gone"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="@id/guideline_half" />-->
-
-
-        <!--        <ImageView-->
-        <!--            android:layout_width="200dp"-->
-        <!--            android:layout_height="200dp"-->
-        <!--            android:textSize="@dimen/_16ssp"-->
-        <!--            android:src="@drawable/ic_resource_do"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toBottomOf="@id/imageView2"-->
-        <!--            app:layout_constraintBottom_toTopOf="@+id/power_tv"/>-->
-
-        <!--        <TextView-->
-        <!--            android:id="@+id/power_tv"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginBottom="@dimen/_10sdp"-->
-        <!--            android:fontFamily="@font/my_font_semibold"-->
-        <!--            android:text="@string/powered_by"-->
-        <!--            android:textColor="@color/head_color"-->
-        <!--            android:textSize="@dimen/_16ssp"-->
-        <!--            app:layout_constraintBottom_toTopOf="@id/useLogo"-->
-        <!--            app:layout_constraintEnd_toEndOf="@id/useLogo"-->
-        <!--            app:layout_constraintStart_toStartOf="@id/useLogo" />-->
-
-        <!--        <ImageView-->
-        <!--            android:id="@+id/useLogo"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginBottom="@dimen/_40sdp"-->
-        <!--            android:scaleType="centerCrop"-->
-        <!--            android:padding="8dp"-->
-        <!--            android:src="@drawable/ic_korashi_logo"-->
-        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="parent" />-->
-
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_startPick"
             android:layout_width="wrap_content"
@@ -91,6 +44,7 @@
             android:fontFamily="@font/avenirltstd_roman"
             android:text="@string/powered_by"
             app:layout_constraintBottom_toTopOf="@+id/iv_korahilogo"/>
+
         <ImageView
             android:id="@+id/iv_korahilogo"
             android:layout_width="180dp"
@@ -99,8 +53,7 @@
             android:layout_marginBottom="30dp"
             app:layout_constraintBottom_toTopOf="@+id/imageView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
             android:id="@+id/imageView"
@@ -111,8 +64,7 @@
             android:layout_marginBottom="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            />
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

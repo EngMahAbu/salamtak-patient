@@ -43,6 +43,7 @@ import com.korashiGroup.salamtakPatient.model.booking.clink.ClinicData
 import com.korashiGroup.salamtakPatient.model.booking.clink.GetDoctorClinksResponse
 import com.korashiGroup.salamtakPatient.model.booking.clink.PolyClinicData
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCompany
+import com.korashiGroup.salamtakPatient.model.nursingServices.service.ServiceLevelData
 import com.korashiGroup.salamtakPatient.model.register.ChooseGender
 import com.korashiGroup.salamtakPatient.model.register.RatingDoctors
 import com.korashiGroup.salamtakPatient.utils.Constans.Query_Page_Size
@@ -83,6 +84,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
     var polyclinicId = 0
     var dayId = 0
     var seniortyLevelId: Int? = null
+
     var examinationtypeid = 0
     var cityId: Int? = null
     var areaId: Int? = null
@@ -293,6 +295,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                 it.isEnabled = true
             }, 1000)
         }
+
         binding.layoutBottomsheetpersistant.btnLayoutChooseCity.setOnClickListener {
 
             val action =
@@ -1066,6 +1069,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         sharedDataViewmodel.getGender(ChooseGender("", 0))
         sharedDataViewmodel.getspecialication(SpecialistData(0, "", false, ""))
         sharedDataViewmodel.getSeniorityLevelData(SeniorityLevelData(0, ""))
+       // sharedDataViewmodel.getServiceLevelData(ServiceLevelData("",true,0,"",""))
     }
 
     var isloading = false

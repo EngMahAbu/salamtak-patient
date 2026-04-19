@@ -673,7 +673,13 @@
     <fragment
             android:id="@+id/askingFoNurssingFragment"
             android:name="com.korashiGroup.salamtakPatient.fragment.askfornurssie.AskingFoNurssingFragment"
-            android:label="AskingFoNurssingFragment" />
+            android:label="AskingFoNurssingFragment" >
+        <action
+            android:id="@+id/action_askingFoNurssingFragment_to_dialogBottomSheetFragment"
+            app:destination="@id/dialogBottomSheetFragment"
+            />
+    </fragment>
+
     <fragment
             android:id="@+id/chooseSpecialistFragment"
             android:name="com.korashiGroup.salamtakPatient.fragment.home.ChooseSpecialistFragment"
@@ -706,17 +712,40 @@
                 app:destination="@id/dialogBottomSheetFragment" />
     </fragment>
     <fragment
-            android:id="@+id/mobileClinicFragment"
-            android:name="com.korashiGroup.salamtakPatient.fragment.homeCare.MobileClinicFragment"
-            android:label="MobileClinicFragment" />
-    <fragment
             android:id="@+id/medicalConsultantFragment"
             android:name="com.korashiGroup.salamtakPatient.fragment.homeCare.MedicalConsultantFragment"
-            android:label="MedicalConsultantFragment" />
+            android:label="MedicalConsultantFragment" >
+        <action
+            android:id="@+id/action_medicalConsultantFragment_to_dialogBottomSheetFragment"
+            app:destination="@id/dialogBottomSheetFragment" />
+    </fragment>
     <fragment
             android:id="@+id/monitoringDevicesFragment"
             android:name="com.korashiGroup.salamtakPatient.fragment.homeCare.MonitoringDevicesFragment"
             android:label="MonitoringDevicesFragment" />
+
+    <fragment
+        android:id="@+id/mobileClinicFragment"
+        android:name="com.korashiGroup.salamtakPatient.fragment.homeCare.MobileClinicFragment"
+        android:label="MobileClinicFragment">
+
+        <action
+            android:id="@+id/action_mobileClinicFragment_to_dialogBottomSheetFragment"
+            app:destination="@id/dialogBottomSheetFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/NursingServicesFragment"
+        android:name="com.korashiGroup.salamtakPatient.fragment.homeCare.NursingServiceFragment"
+        android:label="NursingServicesFragment">
+
+        <action
+            android:id="@+id/action_NursingServicesFragment_to_dialogBottomSheetFragment"
+            app:destination="@id/dialogBottomSheetFragment" />
+
+    </fragment>
+
 
 
 </navigation>
