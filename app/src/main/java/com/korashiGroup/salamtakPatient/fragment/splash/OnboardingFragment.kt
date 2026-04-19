@@ -42,13 +42,13 @@ class OnboardingFragment : Fragment() {
                     binding.next.text=getString(R.string.lets_start)
                 }
             }else{
-                findNavController().navigate(R.id.homeFragment)
+                findNavController().navigate(R.id.welcomeFragment)
             }
         }
 
 
         binding.tvSkip.setOnClickListener {
-            findNavController().navigate(R.id.homeFragment)
+            findNavController().navigate(R.id.welcomeFragment)
         }
 
     }
