@@ -133,7 +133,7 @@ class SpecialistLabsAndRdiologyFragment : Fragment(),SpecialictyAdapter.SelectSp
         //    }
             when(examinationtypeid){
 
-                8->{
+                10->{
                     if (!list.isNullOrEmpty()){
                         sharedDataViewmodel.getLabsInfoResponse(LabsInfo(typeId,this.LabId,binding.etSearch.text.toString(),list,true))
                         findNavController().navigate(R.id.labsAndScannerFragment)
@@ -141,7 +141,7 @@ class SpecialistLabsAndRdiologyFragment : Fragment(),SpecialictyAdapter.SelectSp
                         Toast.makeText(requireContext(),getString(R.string.please_choose_analysis_first),Toast.LENGTH_SHORT).show()
                     }
                 }
-                9->{
+                15->{
                     if (!list.isNullOrEmpty()) {
                         sharedDataViewmodel.getLabsInfoResponse(
                             LabsInfo(
@@ -337,7 +337,7 @@ class SpecialistLabsAndRdiologyFragment : Fragment(),SpecialictyAdapter.SelectSp
 
     private fun bindViews(examinationtypeid:Int){
         when(examinationtypeid){
-            8->{
+            10->{
                 typeId=1
                 binding.layoutChooseSpecialization.visibility=View.GONE
                 binding.btnLayoutChooseSpecialization.visibility=View.GONE
@@ -354,7 +354,7 @@ class SpecialistLabsAndRdiologyFragment : Fragment(),SpecialictyAdapter.SelectSp
             //    binding.layoutBottomsheetpersistant.etSearch.setText(getString(R.string.analysisname))
                 callBackGetLabs()
             }
-            9->{
+            15->{
                typeId=2
                binding.layoutChooseSpecialization.visibility=View.GONE
                binding.btnLayoutChooseSpecialization.visibility=View.GONE

@@ -72,7 +72,7 @@ class HomeCareFragment : Fragment(),ServicesAdapter.Action {
                                             it1,
                                             it2,"",
                                             it3,
-                                            it3,
+                                            it1,
                                             it.image
                                         )
                                     }

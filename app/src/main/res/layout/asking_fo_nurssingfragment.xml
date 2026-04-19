@@ -14,7 +14,6 @@
         android:layout_height="match_parent"
         android:scrollbars="none"
         android:background="#F4F4F6"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:padding="16dp">
 
     <LinearLayout
@@ -757,9 +756,9 @@
                     android:id="@+id/progress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="@id/btn_send"
-                    app:layout_constraintEnd_toEndOf="@id/btn_send"
-                    app:layout_constraintTop_toTopOf="@id/btn_send"
+                    app:layout_constraintStart_toStartOf="@id/btn_sendd"
+                    app:layout_constraintEnd_toEndOf="@id/btn_sendd"
+                    app:layout_constraintTop_toTopOf="@id/btn_sendd"
                     android:visibility="gone"
                     />
             </androidx.constraintlayout.widget.ConstraintLayout>

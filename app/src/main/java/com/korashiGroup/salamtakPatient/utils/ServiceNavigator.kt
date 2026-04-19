@@ -15,12 +15,13 @@ sealed class ServiceNavigator(val destination: Int) {
 
         fun create(serviceId: Int): ServiceNavigator =
             when {
-                serviceId > 9 -> Search
-                serviceId == 8 || serviceId == 9 -> Labs
-                serviceId == 3  -> MobileClinic
-                serviceId == 2  -> MedicalConsultant
-                serviceId == 4  -> MonitoringDevices
-                else -> Nursing
+                serviceId == 2  -> Nursing
+                serviceId >= 1 && serviceId<=9-> Search
+                serviceId == 15 || serviceId == 10 -> Labs
+                serviceId == 17  -> MobileClinic
+                serviceId == 16  -> MedicalConsultant
+                serviceId == 18  -> MonitoringDevices
+                else -> Search
             }
     }
 }

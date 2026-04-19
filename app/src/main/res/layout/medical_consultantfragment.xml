@@ -14,7 +14,6 @@
         android:layout_height="match_parent"
         android:scrollbars="none"
         android:background="#F4F4F6"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:padding="16dp">
 
     <LinearLayout

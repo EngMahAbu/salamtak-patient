@@ -163,6 +163,8 @@
     <string name="choose_specialization">Choose Speciality</string>
     <string name="choose_sub_specialization">Choose sub Speciality</string>
     <string name="choose_Seniority_Level">Choose Seniority Level</string>
+    <string name="choose_speciality">Choose city</string>
+    <string name="choose_service_level">Choose academic degree</string>
     <string name="choose_city">Choose City</string>
     <string name="choose_area">Choose Area</string>
     <string name="to">To</string>
@@ -466,6 +468,27 @@
     <string name="salamtak_app_offers_home_nursing_services">Salamtak app offers home nursing services at different levels (Caregiver – Basic nursing – Critical care nursing) delivered by experienced professional staff.</string>
     <string name="welcome_to_salamtak_mobile_clinic_service_please_complete_related_request_form_one_of_salamtak_customer_service_agent_will_confirm_your_request_to_guarantee_swift_and_fast_execution">Welcome to Salamtak Mobile Clinic Service. Please complete related request form .One of Salamtak Customer Service agent will confirm your request to guarantee swift and fast execution</string>
     <string name="salamtak_application_provides_three_levels_of_health_monitoring_devices_basic_intermediate_premium_using_advanced_medical_technology_and_high_standards_of_medical_care">Salamtak Application provides three levels of Health Monitoring Devices (Basic - Intermediate - Premium) using advanced medical technology and high standards of medical care.</string>
+    <string name="addressdetails">Address</string>
+    <string name="welcome_title">Welcome to our app</string>
+    <string name="welcome_subtitle">Book your appointment with the best doctors بسهولة and conveniently</string>
+    <string name="who_are_you">Who are you?</string>
+    <string name="btn_i_am_patient">I am a patient</string>
+    <string name="btn_i_am_doctor">I am a doctor</string>
+    <string name="wrong_app_icon_patient">🚑</string>
+    <string name="wrong_app_icon_doctor">👨‍⚕️</string>
+    <string name="wrong_app_tag_patient">Patient App</string>
+    <string name="wrong_app_tag_doctor">Doctor App</string>
+    <string name="wrong_app_title_patient">This app is for patients only</string>
+    <string name="wrong_app_title_doctor">This app is for doctors only</string>
+    <string name="wrong_app_desc_patient">It looks like you downloaded the patient app by mistake. Please download the doctor app to continue.</string>
+    <string name="wrong_app_desc_doctor">It looks like you downloaded the doctor app by mistake. Please download the patient app to continue.</string>
+    <string name="wrong_app_btn_download_doctor">Download Doctor App</string>
+    <string name="wrong_app_btn_download_patient">Download Patient App</string>
+    <string name="wrong_app_btn_close">Close App</string>
+    <string name="welcome_mobile_clinic">
+Welcome to Salamtak mobile clinics service. You can now get a premium service in the fastest time by filling out the service request form. One of Salamtak customer service representatives will review the information and process your request through one of Salamtak’s specialized doctors.
+</string>
+
     <array name="choose">
         <item>Select</item>
     </array>
