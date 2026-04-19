@@ -33,7 +33,7 @@ android {
             minifyEnabled false
             proguardFiles(
                     getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-            buildConfigField("String","BASE_URL","\"https://salamtechapi.azurewebsites.net/api/\"")
+            buildConfigField("String","BASE_URL","\"https://salamtakapi.salamtakgroup.com/api/\"")
             signingConfig signingConfigs.debug
         }
         getByName("debug") {
