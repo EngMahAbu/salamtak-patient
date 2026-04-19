@@ -69,8 +69,8 @@ class HomeCareFragment : Fragment(),ServicesAdapter.Action {
                                 it.name?.let { it2 ->
                                     it.specialityId?.let { it3 ->
                                         ImageServices(
-                                            it1,
-                                            it2,"",
+                                            it3,
+                                            it2,it2,
                                             it3,
                                             it1,
                                             it.image
@@ -101,8 +101,21 @@ class HomeCareFragment : Fragment(),ServicesAdapter.Action {
         })
         homeCareViewModel.getHomeCareService()
     }
-    override fun onItemClick(servicesId: Int) {
-        sharedDataViewmodel.getspecialication(SpecialistData(servicesId,"",false,""))
+    override fun onItemClick(servicesId: Int,Id:Int) {
+        Log.e("servicesId", "onItemClick: ${servicesId}", )
+        Log.e("Id", "onItemClick: ${Id}", )
+        when(servicesId){
+            10->{
+                sharedDataViewmodel.getspecialication(SpecialistData(servicesId,"",false,""))
+            }
+            15->{
+                sharedDataViewmodel.getspecialication(SpecialistData(servicesId,"",false,""))
+            }
+            else -> {
+                sharedDataViewmodel.getspecialication(SpecialistData(Id,"",false,""))
+            }
+        }
+
 
         val navigator = ServiceNavigator.create(servicesId)
         findNavController().navigate(navigator.destination)

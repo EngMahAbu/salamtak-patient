@@ -46,7 +46,7 @@ class ServicesAdapter(private val onServicesClick:Action):ListAdapter<ImageServi
 
         holder.binding.cardview.setOnClickListener {
 
-                services.Id?.let { it1 -> onServicesClick.onItemClick(it1) }
+                services.Id?.let { it1 -> onServicesClick.onItemClick(it1,services.image_onboarding) }
                 it.isEnabled = false
                 android.os.Handler().postDelayed({
                     it.isEnabled = true
@@ -74,7 +74,7 @@ class ServicesAdapter(private val onServicesClick:Action):ListAdapter<ImageServi
     }
 
     interface Action{
-        fun onItemClick(servicesId: Int)
+        fun onItemClick(servicesId: Int,Id:Int)
     }
 
 

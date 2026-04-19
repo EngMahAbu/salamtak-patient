@@ -501,7 +501,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
         binding.progressBar.visibility = View.GONE
     }
 
-    override fun onItemClick(servicesID: Int) {
+    override fun onItemClick(servicesID: Int,Id:Int) {
         medicalExaminatioId = servicesID
         sharedDataViewmodel.getGender(ChooseGender("", 0))
 //        val action =

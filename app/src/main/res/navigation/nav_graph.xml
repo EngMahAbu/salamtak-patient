@@ -74,11 +74,6 @@
                 android:id="@+id/action_loginFragment_to_bookAppointmentFragment"
                 app:destination="@id/bookAppointmentFragment" />
     </fragment>
-    <fragment
-            android:id="@+id/patientLoginFragment"
-            android:name="com.korashiGroup.salamtakPatient.fragment.loginandforgetpassword.PatientLoginFragment"
-            android:label="PatientLoginFragment"
-            tools:layout="@layout/fragment_patient_login" />
     <dialog
             android:id="@+id/dialogBottomSheetFragment"
             android:name="com.korashiGroup.salamtakPatient.fragment.dialog.DialogBottomSheetFragment"
