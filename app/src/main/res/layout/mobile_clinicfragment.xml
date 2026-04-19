@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.korashiGroup.salamtakPatient.viewmodel.MobileClinicViewModel" />
+        <import type="android.view.View"/>
+    </data>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none"
@@ -100,6 +110,8 @@
                 android:layout_marginTop="7dp"
                 android:fontFamily="@font/inter_regular"
                 android:textSize="11sp"
+                android:text="@={vm.fullName}"
+                app:errorText="@{vm.fullNameError}"
                 android:paddingStart="10dp"
                 android:background="@drawable/bg_edittext_box"
                 android:hint="@string/full_name_in_english_first_middle_last"
@@ -121,6 +133,8 @@
                 android:layout_height="50dp"
                 android:fontFamily="@font/inter_regular"
                 android:textSize="11sp"
+                android:text="@={vm.mobileNumber}"
+                app:errorText="@{vm.mobileNumberError}"
                 android:paddingStart="10dp"
                 android:background="@drawable/bg_edittext_box"
                 android:hint="Mobile Number: (+2)"
@@ -213,6 +227,7 @@
                             android:layout_gravity="center_horizontal"
                             android:fontFamily="@font/avenirltstd_roman"
                             android:inputType="text"
+                            app:errorText="@{vm.cityError}"
                             android:enabled="false"
                             android:textColor="@color/black"
                             android:textSize="11sp" />
@@ -289,6 +304,7 @@
                             android:layout_gravity="center_horizontal"
                             android:fontFamily="@font/avenirltstd_roman"
                             android:inputType="text"
+                            app:errorText="@{vm.areaError}"
                             android:enabled="false"
                             android:textColor="@color/black"
                             android:textSize="11sp" />
@@ -326,11 +342,13 @@
                 android:layout_marginEnd="5dp"
                 android:background="@drawable/bg_edittext_box"
                 android:layout_weight="1"
+                android:text="@={vm.streetName}"
+                app:errorText="@{vm.streetNameError}"
                 android:hint="Street Name "
                 android:textColorHint="@color/Color_0f172a"
-                android:focusable="false"/>
+                 />
 
-        <LinearLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -339,7 +357,7 @@
                 android:paddingTop="4dp">
 
 
-            <EditText
+                <EditText
                     android:id="@+id/etBuilding"
                     android:layout_width="156dp"
                     android:layout_height="50dp"
@@ -347,12 +365,15 @@
                     android:textSize="11sp"
                     android:paddingStart="10dp"
                     android:layout_marginEnd="5dp"
+                    android:text="@={vm.building}"
+                    app:errorText="@{vm.buildingError}"
                     android:background="@drawable/bg_edittext_box"
                     android:layout_weight="1"
                     android:hint="Building#"
                     android:textColorHint="@color/Color_0f172a"
-                    android:focusable="false"/>
-            <EditText
+                    />
+
+                <EditText
                     android:id="@+id/etFloor"
                     android:layout_width="156dp"
                     android:layout_height="50dp"
@@ -360,12 +381,15 @@
                     android:textSize="11sp"
                     android:paddingStart="15dp"
                     android:layout_marginEnd="5dp"
+                    android:text="@={vm.floor}"
+                    app:errorText="@{vm.floorError}"
                     android:background="@drawable/bg_edittext_box"
                     android:layout_weight="1"
                     android:hint="Floor #"
                     android:textColorHint="@color/Color_0f172a"
-                    android:focusable="false"/>
-            <EditText
+                     />
+
+                <EditText
                     android:id="@+id/etApartment"
                     android:layout_width="156dp"
                     android:layout_height="50dp"
@@ -373,14 +397,16 @@
                     android:textSize="11sp"
                     android:paddingStart="15dp"
                     android:layout_marginEnd="5dp"
+                    android:text="@={vm.apartment}"
+                    app:errorText="@{vm.apartmentError}"
                     android:background="@drawable/bg_edittext_box"
                     android:layout_weight="1"
                     android:hint="Apartment #"
                     android:textColorHint="@color/Color_0f172a"
-                    android:focusable="false"/>
-        </LinearLayout>
-        <!-- Nurse Request -->
-        <TextView
+                     />
+            </LinearLayout>
+            <!-- Nurse Request -->
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/specialization"
@@ -435,6 +461,7 @@
                         android:layout_gravity="center_horizontal"
                         android:fontFamily="@font/avenirltstd_roman"
                         android:inputType="text"
+                        app:errorText="@{vm.specialityError}"
                         android:enabled="false"
                         android:textColor="@color/black"
                         android:textSize="11sp" />
@@ -497,6 +524,8 @@
                         android:layout_gravity="center_horizontal"
                         android:fontFamily="@font/avenirltstd_roman"
                         android:inputType="text"
+
+                        app:errorText="@{vm.subSpecialityError}"
                         android:enabled="false"
                         android:textColor="@color/black"
                         android:textSize="13sp" />
@@ -558,6 +587,7 @@
                         android:layout_gravity="center_horizontal"
                         android:fontFamily="@font/avenirltstd_roman"
                         android:inputType="text"
+                        app:errorText="@{vm.serviceLevelError}"
                         android:enabled="false"
                         android:textColor="@color/black"
                         android:textSize="11sp" />
@@ -628,6 +658,8 @@
                     android:layout_height="wrap_content"
                     android:hint="Describe your Symptoms..."
                     android:minLines="4"
+                    android:text="@={vm.symptoms}"
+                    app:errorText="@{vm.symptomsError}"
                     android:textSize="11sp"
                     android:gravity="start"
                     android:background="@drawable/bg_edittext_box"/>
@@ -650,6 +682,8 @@
                     android:hint="Special Requirements (if Needed)"
                     android:minLines="4"
                     android:textSize="11sp"
+                    android:text="@={vm.specialRequirements}"
+                    app:errorText="@{vm.specialRequirementsError}"
                     android:gravity="start"
                     android:background="@drawable/bg_edittext_box"/>
 
@@ -683,6 +717,16 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
 
+                    />
+
+                <ProgressBar
+                    android:id="@+id/progress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/btn_send"
+                    app:layout_constraintEnd_toEndOf="@id/btn_send"
+                    app:layout_constraintTop_toTopOf="@id/btn_send"
+                    android:visibility="gone"
                     />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>

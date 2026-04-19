@@ -172,6 +172,7 @@ class MainActivity : AppCompatActivity(), LoginFragment.onSomeEventListener {
         navController.handleDeepLink(intent)
     }
 
+
     override fun someEvent(skipLogin: String?) {
         if (skipLogin == "skip") {
             binding.bottomViewNav.getMenu().getItem(1).setEnabled(false)

@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="vm"
+            type="com.korashiGroup.salamtakPatient.viewmodel.NursingServiceViewModel" />
+
+    </data>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none"
@@ -110,6 +119,8 @@
                 android:fontFamily="@font/inter_regular"
                 android:textSize="11sp"
                 android:paddingStart="10dp"
+                android:text="@={vm.fullName}"
+                app:errorText="@{vm.fullNameError}"
                 android:background="@drawable/bg_edittext_box"
                 android:hint="@string/full_name_in_english_first_middle_last"
                 android:inputType="text"/>
@@ -130,6 +141,8 @@
                 android:layout_height="50dp"
                 android:fontFamily="@font/inter_regular"
                 android:textSize="11sp"
+                android:text="@={vm.mobileNumber}"
+                app:errorText="@{vm.mobileNumberError}"
                 android:paddingStart="10dp"
                 android:background="@drawable/bg_edittext_box"
                 android:hint="Mobile Number: (+2)"
@@ -139,7 +152,7 @@
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/addressdetails"
+                android:text="Address"
                 android:fontFamily="@font/inter_semibold"
                 android:textColor="@color/color_64748B"
                 android:textSize="12sp"
@@ -333,11 +346,13 @@
                 android:textSize="11sp"
                 android:paddingStart="15dp"
                 android:layout_marginEnd="5dp"
+                android:text="@={vm.streetName}"
+                app:errorText="@{vm.streetNameError}"
                 android:background="@drawable/bg_edittext_box"
                 android:layout_weight="1"
                 android:hint="Street Name "
                 android:textColorHint="@color/Color_0f172a"
-                android:focusable="false"/>
+                />
 
         <LinearLayout
                 android:layout_width="match_parent"
@@ -356,12 +371,15 @@
                     android:textSize="11sp"
                     android:paddingStart="10dp"
                     android:layout_marginEnd="5dp"
+                    android:text="@={vm.building}"
+                    app:errorText="@{vm.buildingError}"
                     android:background="@drawable/bg_edittext_box"
                     android:layout_weight="1"
                     android:hint="Building#"
                     android:textColorHint="@color/Color_0f172a"
-                    android:focusable="false"/>
-            <EditText
+                     />
+
+                <EditText
                     android:id="@+id/etFloor"
                     android:layout_width="156dp"
                     android:layout_height="50dp"
@@ -369,12 +387,15 @@
                     android:textSize="11sp"
                     android:paddingStart="15dp"
                     android:layout_marginEnd="5dp"
+                    android:text="@={vm.floor}"
+                    app:errorText="@{vm.floorError}"
                     android:background="@drawable/bg_edittext_box"
                     android:layout_weight="1"
                     android:hint="Floor #"
                     android:textColorHint="@color/Color_0f172a"
-                    android:focusable="false"/>
-            <EditText
+                    />
+
+                <EditText
                     android:id="@+id/etApartment"
                     android:layout_width="156dp"
                     android:layout_height="50dp"
@@ -382,14 +403,16 @@
                     android:textSize="11sp"
                     android:paddingStart="15dp"
                     android:layout_marginEnd="5dp"
+                    android:text="@={vm.apartment}"
+                    app:errorText="@{vm.apartmentError}"
                     android:background="@drawable/bg_edittext_box"
                     android:layout_weight="1"
                     android:hint="Apartment #"
                     android:textColorHint="@color/Color_0f172a"
-                    android:focusable="false"/>
-        </LinearLayout>
-        <!-- Nurse Request -->
-        <TextView
+                     />
+            </LinearLayout>
+            <!-- Nurse Request -->
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Service Level"
@@ -408,18 +431,18 @@
                >
 
 
-        <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/iv_arrowdownChoose_serviceLevel"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginEnd="12dp"
-                android:layout_marginBottom="12dp"
-                android:gravity="start"
-                android:src="@drawable/ic_arrowdwon"
-                android:tint="@color/color_64748B"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_arrowdownChoose_serviceLevel"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:gravity="start"
+                    android:src="@drawable/ic_arrowdwon"
+                    android:tint="@color/color_64748B"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textinput_serviceLevel"
@@ -460,14 +483,15 @@
                 android:textSize="12sp"
                 android:paddingTop="8dp"/>
 
-        <RadioGroup
+            <RadioGroup
+                android:id="@+id/radioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
                 android:textColor="@color/Color_0f172a"
                 android:orientation="horizontal">
 
-            <RadioButton
+                <RadioButton
                     android:id="@+id/rbMale"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -543,11 +567,12 @@
                     android:textSize="11sp"
                     android:paddingStart="10dp"
                     android:layout_marginEnd="15dp"
+                    android:text="@={vm.fromDate}"
                     android:background="@drawable/bg_edittext_box"
                     android:layout_weight="1"
                     android:hint="mm/dd/yyyy"
                     android:textColorHint="@color/Color_0f172a"
-                    android:focusable="false"/>
+                    android:focusable="false" />
 
             <EditText
                     android:id="@+id/etToDate"
@@ -558,11 +583,13 @@
                     android:paddingStart="15dp"
                     android:background="@drawable/bg_edittext_box"
                     android:layout_weight="1"
+                    android:text="@={vm.toDate}"
                     android:hint="mm/dd/yyyy"
                     android:textColorHint="@color/Color_0f172a"
-                    android:focusable="false"/>
-        </LinearLayout>
-        <LinearLayout
+                    android:focusable="false" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -609,11 +636,12 @@
                     android:fontFamily="@font/inter_regular"
                     android:textSize="11sp"
                     android:paddingStart="15dp"
+                    android:text="@={vm.fromTime}"
                     android:background="@drawable/bg_edittext_box"
                     android:layout_weight="1"
                     android:hint="--:-- AM"
                     android:textColorHint="@color/Color_0f172a"
-                    android:focusable="false"/>
+                    android:focusable="false" />
 
             <EditText
                     android:id="@+id/etToTime"
@@ -622,6 +650,7 @@
                     android:fontFamily="@font/inter_regular"
                     android:textSize="11sp"
                     android:paddingStart="15dp"
+                    android:text="@={vm.toTime}"
                     android:background="@drawable/bg_edittext_box"
                     android:layout_weight="1"
                     android:hint="--:-- AM"
@@ -629,6 +658,14 @@
                     android:focusable="false"/>
         </LinearLayout>
         <!-- Number of Days -->
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nursing service duration"
+                android:fontFamily="@font/inter_semibold"
+                android:textColor="@color/color_64748B"
+                android:textSize="12sp"
+                android:paddingTop="8dp"/>
         <EditText
                 android:id="@+id/etNumberofDays"
                 android:layout_width="match_parent"
@@ -636,10 +673,14 @@
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/inter_regular"
                 android:textSize="11sp"
+                android:text="@={vm.numOfDays}"
+                app:errorText="@{vm.numOfDaysError}"
                 android:paddingStart="10dp"
                 android:background="@drawable/bg_edittext_box"
                 android:hint="Number of days"
-                android:inputType="textPostalAddress"/>
+                android:inputType="textPostalAddress"
+                android:focusable="false"
+                />
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -693,10 +734,10 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/all_layout"
                 app:layout_constraintWidth_percent=".95"
-                android:padding="8dp"
-                >
-            <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_send"
+                android:padding="8dp">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_sendd"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_chooselang_button"
@@ -711,6 +752,17 @@
                     app:layout_constraintTop_toTopOf="parent"
 
                     />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+
+                <ProgressBar
+                    android:id="@+id/progress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/btn_send"
+                    app:layout_constraintEnd_toEndOf="@id/btn_send"
+                    app:layout_constraintTop_toTopOf="@id/btn_send"
+                    android:visibility="gone"
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

@@ -31,7 +31,14 @@ import com.korashiGroup.salamtakPatient.model.labsandscanner.LabAppointementResp
 import com.korashiGroup.salamtakPatient.model.labsandscanner.LabReservationResponse
 import com.korashiGroup.salamtakPatient.model.labsandscanner.LabsBranchesResponse
 import com.korashiGroup.salamtakPatient.model.labsandscanner.LabsResponse
+import com.korashiGroup.salamtakPatient.model.medicalConsultant.MedicalConsultantReqBody
+import com.korashiGroup.salamtakPatient.model.medicalConsultant.MedicalConsultantResponse
+import com.korashiGroup.salamtakPatient.model.mobileClinic.MobileClinicReqBody
+import com.korashiGroup.salamtakPatient.model.mobileClinic.MobileClinicResponse
 import com.korashiGroup.salamtakPatient.model.notification.DoctorNotificationResponse
+import com.korashiGroup.salamtakPatient.model.nursingServices.NursingReqBody
+import com.korashiGroup.salamtakPatient.model.nursingServices.NursingResponse
+import com.korashiGroup.salamtakPatient.model.nursingServices.service.ServiceLevelResponse
 import com.korashiGroup.salamtakPatient.model.offers.ActiveOffersResponse
 import com.korashiGroup.salamtakPatient.model.offers.OffersDetailsResponse
 import com.korashiGroup.salamtakPatient.model.patient.PatientRelationshipResponse
@@ -136,6 +143,11 @@ interface ApiService {
     suspend fun getSeniorityLevel(
         @Path("culture") culture: String,
     ): Response<GetSeniorityLevelResponse>
+
+    @GET("{culture}/NursingForm/GetAllServices")
+    suspend fun getServiceLevel(
+        @Path("culture") culture: String,
+    ): Response<ServiceLevelResponse>
 
     @GET("{culture}/City/GetAllCities")
     suspend fun getAllCities(
@@ -511,5 +523,27 @@ interface ApiService {
     suspend fun updateQandAIsNoShowByUser(
         @Path("culture") culture: String,
     ): Response<MedicalExaminationResponse>
+
+    // phase 2
+
+    @POST("{culture}/MedicalConsultationForm")
+    suspend fun sendMedicalConsultant(
+        @Path("culture") culture: String?,
+        @Body medicalConsultantRequest: MedicalConsultantReqBody
+    ): Response<MedicalConsultantResponse>
+
+
+
+    @POST("{culture}/MobileClinicForm")
+    suspend fun sendMobileClinic(
+        @Path("culture") culture: String?,
+        @Body mobileClinicRequest: MobileClinicReqBody
+    ): Response<MobileClinicResponse>
+
+    @POST("{culture}/NursingForm")
+    suspend fun sendNursingServiceReq(
+        @Path("culture") culture: String?,
+        @Body nursingServicesReq: NursingReqBody
+    ): Response<NursingResponse>
 
 }

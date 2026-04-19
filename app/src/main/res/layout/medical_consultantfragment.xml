@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.korashiGroup.salamtakPatient.viewmodel.MedicalConsultantViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none"
@@ -98,6 +107,8 @@
                 android:layout_marginTop="7dp"
                 android:fontFamily="@font/inter_regular"
                 android:textSize="11sp"
+                android:text="@={vm.fullName}"
+                app:errorText="@{vm.fullNameError}"
                 android:paddingStart="10dp"
                 android:background="@drawable/bg_edittext_box"
                 android:hint="@string/full_name_in_english_first_middle_last"
@@ -120,7 +131,9 @@
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/inter_regular"
                 android:textSize="11sp"
-                android:paddingStart="10dp"
+                android:text="@={vm.mobileNumber}"
+                app:errorText="@{vm.mobileNumberError}"
+                android:paddingStart="12dp"
                 android:background="@drawable/bg_edittext_box"
                 android:hint="Mobile Number: (+2)"
                 android:inputType="phone"/>
@@ -197,8 +210,12 @@
                             android:layout_height="55dp"
                             android:layout_gravity="center_horizontal"
                             android:fontFamily="@font/avenirltstd_roman"
+                            app:errorText="@{vm.specialityError}"
                             android:inputType="text"
-                            android:enabled="false"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
+                            android:cursorVisible="false"
+                            android:clickable="true"
                             android:textColor="@color/color_64748B"
                             android:textSize="11sp" />
 
@@ -251,6 +268,8 @@
                     android:layout_height="wrap_content"
                     android:hint="Describe your Symptoms..."
                     android:minLines="4"
+                    android:text="@={vm.symptoms}"
+                    app:errorText="@{vm.symptomsError}"
                     android:gravity="start"
                     android:background="@drawable/bg_edittext_box"/>
 
@@ -284,6 +303,8 @@
                     android:layout_height="wrap_content"
                     android:hint="Describe your question..."
                     android:minLines="4"
+                    android:text="@={vm.askQuestion}"
+                    app:errorText="@{vm.askQuestionError}"
                     android:gravity="start"
                     android:background="@drawable/bg_edittext_box"/>
 
@@ -315,8 +336,18 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-
                     />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+
+                <ProgressBar
+                    android:id="@+id/progress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/btn_send"
+                    app:layout_constraintEnd_toEndOf="@id/btn_send"
+                    app:layout_constraintTop_toTopOf="@id/btn_send"
+                    android:visibility="gone"
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>
