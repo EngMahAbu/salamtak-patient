@@ -261,6 +261,7 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
         binding.tvSpecialization.text = "${args.confirmappointments?.SpecialistName} "
         binding.tvDate.text = DateParsing(args.confirmappointments?.formattedDate.toString())
         binding.Service.text = args.confirmappointments?.MedicalExaminationTypeName
+        //binding.tvArea.text = args.confirmappointments?.areaName
 
         binding.tvFees.text =
             args.confirmappointments?.fees.toString() + " " + getString(R.string.le)

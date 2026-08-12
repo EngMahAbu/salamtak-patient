@@ -151,10 +151,12 @@
     <string name="specialization">التخصص</string>
     <string name="patientName">اسم المريض </string>
     <string name="choose_specialization">اختر التخصص</string>
+    <string name="tip_of_the_day">نصيحة اليوم</string>
     <string name="choose_sub_specialization">اختر التخصص الفرعي</string>
     <string name="choose_Seniority_Level">اختر الدرجة العلمية</string>
     <string name="choose_speciality">اختر المدينة</string>
     <string name="choose_service_level">اختر الدرجة العلمية</string>
+    <string name="choose_monitoring_device_level">اختر مستوى جهاز المراقبة</string>
     <string name="choose_area">اختر المنطقة</string>
     <string name="to">الى</string>
     <string name="egp">ج م</string>
@@ -208,6 +210,7 @@
     <string name="add_to_favorite">أضف إلى المفضلة</string>
     <string name="remove_from_favorite">حذف من المضلة</string>
     <string name="about_doctor">معلومات عن الطبيب</string>
+    <string name="sub_spec_doctor">التخصص الثانوي</string>
     <string name="doctor_s_clinics">عيادات الطبيب</string>
     <string name="book_appointment">حجز موعد</string>
     <string name="choose_clinic">اختر العيادة</string>
@@ -454,8 +457,8 @@
     <string name="welcome_title">مرحباً بك في تطبيقنا</string>
     <string name="welcome_subtitle">احجز موعدك مع أفضل الأطباء بكل سهولة ويسر</string>
     <string name="who_are_you">من أنت؟</string>
-    <string name="btn_i_am_patient">أنا مريض</string>
-    <string name="btn_i_am_doctor">أنا طبيب</string>
+    <string name="btn_i_am_patient">المرضي فقط</string>
+    <string name="btn_i_am_doctor">الأطباء فقط</string>
     <string name="wrong_app_icon_patient">🚑</string>
     <string name="wrong_app_icon_doctor">👨‍⚕️</string>
     <string name="wrong_app_tag_patient">Patient App</string>
@@ -467,6 +470,7 @@
     <string name="wrong_app_btn_download_doctor">تحميل تطبيق الأطباء</string>
     <string name="wrong_app_btn_download_patient">تحميل تطبيق المرضى</string>
     <string name="wrong_app_btn_close">إغلاق التطبيق</string>
+    <string name="sub_spec_error">يجب اختيار تخصص اولا</string>
 
     <array name="choose">
         <item>اختار</item>

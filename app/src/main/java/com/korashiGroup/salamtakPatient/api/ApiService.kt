@@ -35,9 +35,15 @@ import com.korashiGroup.salamtakPatient.model.medicalConsultant.MedicalConsultan
 import com.korashiGroup.salamtakPatient.model.medicalConsultant.MedicalConsultantResponse
 import com.korashiGroup.salamtakPatient.model.mobileClinic.MobileClinicReqBody
 import com.korashiGroup.salamtakPatient.model.mobileClinic.MobileClinicResponse
+import com.korashiGroup.salamtakPatient.model.monitoring.monitConfir.MonitoringConfirmationResponse
+import com.korashiGroup.salamtakPatient.model.monitoring.monitReq.DevicesResponse
+import com.korashiGroup.salamtakPatient.model.monitoring.monitReq.MonitoringDeviceLevelResponse
+import com.korashiGroup.salamtakPatient.model.monitoring.monitReq.MonitoringReqBody
+import com.korashiGroup.salamtakPatient.model.monitoring.monitReq.MonitoringRequestResponse
 import com.korashiGroup.salamtakPatient.model.notification.DoctorNotificationResponse
 import com.korashiGroup.salamtakPatient.model.nursingServices.NursingReqBody
 import com.korashiGroup.salamtakPatient.model.nursingServices.NursingResponse
+import com.korashiGroup.salamtakPatient.model.nursingServices.nursingConfirm.NursingConfirmResponse
 import com.korashiGroup.salamtakPatient.model.nursingServices.service.ServiceLevelResponse
 import com.korashiGroup.salamtakPatient.model.offers.ActiveOffersResponse
 import com.korashiGroup.salamtakPatient.model.offers.OffersDetailsResponse
@@ -45,12 +51,10 @@ import com.korashiGroup.salamtakPatient.model.patient.PatientRelationshipRespons
 import com.korashiGroup.salamtakPatient.model.populardoctors.GetDoctorHealthTopicsResponse
 import com.korashiGroup.salamtakPatient.model.populardoctors.GetDoctorSpotLightResponse
 import com.korashiGroup.salamtakPatient.model.populardoctors.NewPopularDoctorResponse
-import com.korashiGroup.salamtakPatient.model.populardoctors.PopularDoctorsResponseItem
 import com.korashiGroup.salamtakPatient.model.profile.*
 import com.korashiGroup.salamtakPatient.model.rating.RatingResponse
 import com.korashiGroup.salamtakPatient.model.register.*
 import com.korashiGroup.salamtakPatient.model.reviews.ReviewsResponse
-import com.korashiGroup.salamtakPatient.model.salamtakgate.BlogsResponse
 import com.korashiGroup.salamtakPatient.model.salamtakgate.SalamtakGateResponse
 import com.korashiGroup.salamtakPatient.model.salamtakgate.blogs.GetBlogsResponse
 import com.korashiGroup.salamtakPatient.model.scheduling.CancelPatientAppointmentResponse
@@ -58,6 +62,7 @@ import com.korashiGroup.salamtakPatient.model.scheduling.GetLatestPatientAppoint
 import com.korashiGroup.salamtakPatient.model.scheduling.GetPatientAppointmentesResponse
 import com.korashiGroup.salamtakPatient.model.syemtoms.Syemtoms
 import com.korashiGroup.salamtakPatient.model.syemtoms.SymetomsResponse
+import com.korashiGroup.salamtakPatient.model.tipDay.TipOfDayResponse
 import com.korashiGroup.salamtakPatient.model.whatspresponse.WhatSpResponse
 import com.korashiGroup.salamtakPatient.model.whatspresponse.WhatspRequest
 import com.korashiGroup.salamtakPatient.notification.NotificationListResponse
@@ -545,5 +550,40 @@ interface ApiService {
         @Path("culture") culture: String?,
         @Body nursingServicesReq: NursingReqBody
     ): Response<NursingResponse>
+
+
+    @GET("{culture}/NursingConfirmation/GetAllForUser")
+    suspend fun payNursingServiceConfirm(
+        @Path("culture") culture: String?
+    ): Response<NursingConfirmResponse>
+
+
+    @POST("{culture}/MonitoringDeviceRequest/Create")
+    suspend fun sendMonitoringDeviceReq(
+        @Path("culture") culture: String?,
+        @Body monitoringDeviceReq: MonitoringReqBody
+    ): Response<MonitoringRequestResponse>
+
+
+    @GET("{culture}/MonitoringDeviceLevel/GetAll")
+    suspend fun getMonitoringDeviceLevel(
+        @Path("culture") culture: String,
+    ): Response<MonitoringDeviceLevelResponse>
+
+    @GET("{culture}/MonitoringDevice/GetById/{id}")
+    suspend fun getDevices(
+        @Path("culture") culture: String,
+        @Path("id") id: Int
+    ): Response<DevicesResponse>
+
+    @GET("{culture}/MonitoringDeviceConfirmation/GetByUserId")
+    suspend fun getMonitoringConfirmation(
+        @Path("culture") culture: String
+    ): Response<MonitoringConfirmationResponse>
+
+    @GET("{culture}/DailyInformation/GetRotatingByMinute")
+    suspend fun getRotatingByMinute(
+        @Path("culture") culture: String
+    ): Response<TipOfDayResponse>
 
 }

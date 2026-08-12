@@ -8,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.addCallback
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
@@ -116,23 +118,33 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
     }
 
     private fun initButton() {
-        binding.ivArrow.setOnClickListener {
+        val navigateAction = {
             when (args.status) {
-                "Edit Appointment" -> {
-                    findNavController().navigate(R.id.myScheduleFragment)
-                }
-                "Reschedule" -> {
-                    findNavController().navigate(R.id.myScheduleFragment)
-                }
+                "Edit Appointment",
+                "Reschedule",
                 "Re-Booking Appointment" -> {
                     findNavController().navigate(R.id.myScheduleFragment)
                 }
                 else -> {
-                    findNavController().navigate(R.id.bookingAppointmentFragment)
+                    //findNavController().navigate(R.id.searchFragment)
+                    findNavController().popBackStack()
                 }
             }
-
         }
+
+        binding.ivArrow.setOnClickListener {
+            navigateAction()
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    navigateAction()
+                }
+            }
+        )
+
 
         binding.calendar.setOnDateChangeListener { _, year, month, dayOfMonth ->
             val formattedMonth = String.format("%02d", month + 1) // إضافة 1 وجعلها بصيغة رقمين

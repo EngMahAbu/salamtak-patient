@@ -97,35 +97,34 @@
                             app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_Address"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:fontFamily="@font/avenirltstd_roman"
-                        android:gravity="start"
-                        android:padding="2dp"
-                        android:text="@string/address"
-                        android:textColor="@color/black"
-                        android:textSize="15sp"
-                        app:layout_constraintStart_toEndOf="@+id/layout_Address"
-                        app:layout_constraintBottom_toBottomOf="@+id/layout_Address"
-                        app:layout_constraintTop_toTopOf="parent" />
+<!--                    <androidx.appcompat.widget.AppCompatTextView-->
+<!--                        android:id="@+id/tv_Address"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="10dp"-->
+<!--                        android:fontFamily="@font/avenirltstd_roman"-->
+<!--                        android:gravity="start"-->
+<!--                        android:padding="2dp"-->
+<!--                        android:text="@string/address"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textSize="15sp"-->
+<!--                        app:layout_constraintStart_toEndOf="@+id/layout_Address"-->
+<!--                        app:layout_constraintBottom_toBottomOf="@+id/layout_Address"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/location"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
+                        android:layout_marginStart="50dp"
                         android:layout_marginEnd="10dp"
                         android:fontFamily="@font/avenirltstd_black"
-                        android:gravity="end"
+                        android:gravity="start"
                         android:padding="2dp"
-                        android:text="التجمع الخامس الحي الرابع بجوار مركز شباب التجمع الخامس 44 بـــ شارع 11"
+                        android:text=" Nasr City "
                         android:textColor="@color/gray"
                         android:textSize="12sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/tv_Address"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -54,6 +54,8 @@ import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.util.*
 import javax.inject.Inject
 
@@ -85,6 +87,8 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
     var someEventListener: LoginFragment.onSomeEventListener? = null
     private var specilityId = 0
     private lateinit var popularDoctorsAdapter: PopularDoctorsAdapter
+
+    private var rating: Double? = null
 
     //    private lateinit var healthTopicsAdapter: HealthTopicsAdapter
 //    private lateinit var spotlightAdapter: SpotlightAdapter
@@ -121,6 +125,10 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //observeTipOfDay()
+        viewmodel.getRotatingByMinute()
+
         instance = this
         permissionManager = PermissionManager(requireActivity())
         sharedDataViewmodel.getMedicalInfoStatus(false)
@@ -259,19 +267,23 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
             findNavController().navigate(R.id.signupFragment)
         }
         binding.tvSeeAll.setOnClickListener {
-            if (specilityId > 0) {
+            //if (specilityId > 0) {
                 findNavController().navigate(R.id.searchFragment)
-            }
+            //}
         }
         binding.tvSeeAllspecial.setOnClickListener {
             if (specilityId > 0) {
                 findNavController().navigate(R.id.searchFragment)
             }
         }
-        binding.layputHomecare.setOnClickListener {
-            medicalExaminatioId=10
-            findNavController().navigate(R.id.homeCareFragment)
-        }
+
+//        binding.frame1.setOnClickListener {
+//            findNavController().navigate(R.id.salamtakCommunityFragment)
+//        }
+//        binding.layputHomecare.setOnClickListener {
+//            medicalExaminatioId=10
+//            findNavController().navigate(R.id.homeCareFragment)
+//        }
     }
 
     fun setupresyclerviewSpecialist() {
@@ -328,12 +340,78 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
 //    }
 
     private fun imageServices() {
-        lifecycleScope.launch {
-            imageServicesViewModel.imageServicesList.collectLatest { list ->
-                imageServicesAdapter.submitList(list)
+        imageServicesViewModel.imageServicesList.observe(viewLifecycleOwner, Observer { response ->
+            when (response) {
+                is Resource.Loading -> {
+                    // showprogressbar()
+                }
+
+                is Resource.sucess -> {
+                    // hideprogressbar()
+                    response.data?.let { combinedList ->
+                        // Since the ViewModel already mapped the API items and added
+                        // the static items, you can submit the list directly to your adapter!
+                        imageServicesAdapter.submitList(combinedList)
+                    }
+                }
+
+                is Resource.Error -> {
+                    // hideprogressbar()
+                    // handle error message if needed
+                }
             }
-        }
+        })
+        imageServicesViewModel.fetchImageServices()
     }
+
+//    private fun observeTipOfDay() {
+//
+//        viewmodel.getTipOfDayResponse.observe(viewLifecycleOwner) { response ->
+//
+//            when (response) {
+//
+//                is Resource.Loading -> {
+//
+//                    // show loading
+//                }
+//
+//                is Resource.sucess -> {
+//
+//                    response.data?.let { data ->
+//
+//                        binding.tvTipText.text =
+//                            data.data?.displayName ?: ""
+//
+////                        // لو جاي image url
+////                        Glide.with(requireContext())
+////                            .load(data.data?.image)
+////                            .into(binding.imgTip)
+//                    }
+//                }
+//
+//                is Resource.Error -> {
+//
+//                    Toast.makeText(
+//                        requireContext(),
+//                        response.message ?: "Error",
+//                        Toast.LENGTH_SHORT
+//                    ).show()
+//                }
+//            }
+//        }
+//    }
+
+    override fun onStart() {
+        super.onStart()
+        viewmodel.startTipUpdates()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        viewmodel.stopTipUpdates()
+    }
+
+
 
     private fun medicalServices() {
         lifecycleScope.launch {
@@ -384,11 +462,11 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
             when (response) {
 
                 is Resource.Loading -> {
-                    //showprogtessbar()
+                    showPopularProgressBar()
                 }
 
                 is Resource.sucess -> {
-                    hideprogressbar()
+                    hidePopularProgressBar()
                     response.let {
                         popularDoctorsAdapter.submitList(it.data?.data?.take(4))
                         popularDoctorsAdapter.notifyDataSetChanged()
@@ -397,7 +475,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
                 }
 
                 is Resource.Error -> {
-                    hideprogressbar()
+                    hidePopularProgressBar()
                 }
             }
 
@@ -501,7 +579,16 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
         binding.progressBar.visibility = View.GONE
     }
 
-    override fun onItemClick(servicesID: Int,Id:Int) {
+    private fun showPopularProgressBar() {
+        binding.progressBar.visibility = View.VISIBLE
+    }
+
+    private fun hidePopularProgressBar() {
+        binding.progressBar.visibility = View.GONE
+    }
+
+
+    override fun onItemClick(servicesID: Int,Id:Int, name: String) {
         medicalExaminatioId = servicesID
         sharedDataViewmodel.getGender(ChooseGender("", 0))
 //        val action =
@@ -521,8 +608,10 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
             }
 
             else -> {
-                val action = HomeFragmentDirections.actionHomeFragmentToSpecialistDoctorsFragment()
-                findNavController().navigate(action)
+                val bundle = Bundle().apply {
+                    putString("name", name)
+                }
+                findNavController().navigate(R.id.specialistDoctorsFragment, bundle)
             }
         }
     }
@@ -570,13 +659,99 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
         }
     }
 
-    override fun onItemClickDoctorsDetails(doctorId: Int) {
+    override fun onMoreClick(
+        doctorId: Int,
+        rate: Double,
+    ) {
+        rating = rate
         if (DateUtils.getToken().isNullOrEmpty()) {
             val action = HomeFragmentDirections.actionHomeFragmentToDialogSignUp(false)
             findNavController().navigate(action)
         } else {
+            sharedDataViewmodel.navigateStatusResponse.postValue("home")
             doctorProfileViewModel.getDoctorProfileByDoctorId(doctorId)
         }
+    }
+
+    override fun onBookClick(
+        clinicId: Int,
+        doctorId: Int,
+        clinicName: String,
+        rate: Double,
+        rateCount: Int,
+        fess: Int
+    ) {
+        val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US)
+        formatter.timeZone = TimeZone.getTimeZone("UTC")
+        val formattedDate = formatter.format(Date())
+        sharedDataViewmodel.getRating(RatingDoctors(rate, rateCount))
+//        if (DateUtils.getToken().isNullOrEmpty()) {
+//            findNavController().navigate(R.id.dialogSignUp)
+//        } else {
+        sharedDataViewmodel.getNavigateStatus("")
+        val clinicSchedualByClinicDayId = ClinicSchedualByClinicDayId(
+            clinicId,
+            getDayId(formattedDate),
+            1,
+            formattedDate,
+            clinicName
+        )
+        sharedDataViewmodel.getMedicalExaminationTypeId(
+            ImageServices(
+                0,
+                "",
+                "",
+                0,
+                0
+            )
+        )
+        sharedDataViewmodel.getClinicSchedualByClinicDayId(clinicSchedualByClinicDayId)
+        sharedDataViewmodel.getDocotorId(doctorId)
+        sharedDataViewmodel.getClinicIdAndDoctorId(ClinicData(doctorId, clinicId, true))
+        sharedDataViewmodel.getFees(fess)
+        findNavController().navigate(R.id.bookingAppointmentFragment)
+    }
+
+    private fun getDayId(formattedDate: String): Int {
+        val sdf = SimpleDateFormat("EEEE", Locale.US)
+        val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.US)
+        val date = format.parse(formattedDate)
+        val day = sdf.format(date).subSequence(0, 3)
+
+        return when (day) {
+            "Sun" -> {
+                 1
+            }
+
+            "Mon" -> {
+                2
+            }
+
+            "Tue" -> {
+                 3
+            }
+
+            "Wed" -> {
+                4
+            }
+
+            "Thu" -> {
+                 5
+            }
+
+            "Fri" -> {
+                6
+            }
+
+            "Sat" -> {
+                 7
+            }
+
+            else -> {
+                0
+            }
+        }
+
     }
 
     override fun onItemGatesClick(gateId: Int) {
@@ -928,6 +1103,8 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
             binding.location.text = "Pending Payment"
         }
 
+        binding.addresses.text = "${latestPatientAppointment.clinicAddress}"
+
         binding.waitingTime.text =
             " ${DateParsing(latestPatientAppointment.appointmentDate.toString())}"
         binding.Feesresult.text = latestPatientAppointment.fees.toString()
@@ -957,7 +1134,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
                 binding.ivSubSpecialization.setImageResource(R.drawable.svg_audio)
             }
         }
-        binding.ivUpcomingBookingsdoctorProfile.load("https://salamtechapi.azurewebsites.net/${latestPatientAppointment.doctorImage}") {
+        binding.ivUpcomingBookingsdoctorProfile.load(latestPatientAppointment.doctorImage) {
             crossfade(true)
             crossfade(1000)
             transformations(CircleCropTransformation())
@@ -1168,7 +1345,11 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
                         }
                         val action =
                             HomeFragmentDirections.actionHomeFragmentToBookingAppointmentFragment()
-                        findNavController().navigate(action)
+                        val bundle = Bundle().apply {
+                            putDouble("rating", rating ?: 0.0)
+                        }
+
+                        findNavController().navigate(R.id.bookingAppointmentFragment,bundle)
                     }
 
                     is Resource.Error -> {

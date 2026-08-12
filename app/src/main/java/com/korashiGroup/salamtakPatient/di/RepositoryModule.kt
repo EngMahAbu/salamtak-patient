@@ -14,7 +14,7 @@ import javax.inject.Singleton
 object RepositoryModule {
     @Singleton
     @Provides
-    fun provideImageServicesRepository(@ApplicationContext context: Context): ImageServicesRepository {
+    fun provideImageServicesRepository(@ApplicationContext context: Context, ): ImageServicesRepository {
         return ImageServicesRepository(context)
     }
 }

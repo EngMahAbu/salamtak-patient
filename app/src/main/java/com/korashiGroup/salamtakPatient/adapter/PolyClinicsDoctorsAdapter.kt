@@ -45,7 +45,7 @@ class PolyClinicsDoctorsAdapter(private val booking: IPolyClinicsBooking) :
                 }
             }
 
-            tvSpecialization.text = "${services.specialistName} - ${services.seniorityLevelName}"
+            tvSpecialization.text = "${services.seniorityLevelName} ${services.specialistName}"
             subSpecialization.text = services.subSpecialistName.toString().removePrefix("[").removeSuffix("]")
           location.text="${services.CityName} - ${services.AreaName}"
           //  waitingTime.text = "${services.waitingTime}"

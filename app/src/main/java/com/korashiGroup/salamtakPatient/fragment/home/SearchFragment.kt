@@ -11,6 +11,7 @@ import android.widget.AbsListView
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.widget.addTextChangedListener
@@ -121,6 +122,14 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
     @SuppressLint("SimpleDateFormat")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+       /* requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    findNavController().navigate(R.id.specialistDoctorsFragment)
+                }
+            }
+        )*/
         instance = this
         bindFields()
         binding.ivPrevious.isEnabled = step != 1
@@ -243,7 +252,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         binding.ivArrow.setOnClickListener {
             if (type == 0) {
                 DateUtils.setstatus("")
-                findNavController().navigate(R.id.specialistDoctorsFragment)
+                findNavController().popBackStack()
             } else {
                 polyClinicRecylerview()
                 polyClinicSearch()
@@ -356,7 +365,8 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                         examinationtypeid,
                         seniortyLevelId,
                         0,
-                        specialistId
+                        specialistId,
+                        sub_SpecialistId
                     )
                 }
             }
@@ -443,6 +453,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         binding.layoutBottomsheetpersistant.ivArrow.setOnClickListener {
             findNavController().navigate(R.id.searchFragment)
         }
+
 
     }
 

@@ -56,7 +56,7 @@ class AskingFoNurssingFragment : Fragment() {
     private fun observeLiveData() {
         viewModel.event.observe(viewLifecycleOwner){
             when (it) {
-                Events.NavigateToMobileClinic -> findNavController().navigate(R.id.homeCareFragment)
+                Events.NavigateToNursingConfirmation -> findNavController().navigate(R.id.action_askingFoNurssingFragment_to_nursingConfirmationFragment)
                 else -> {}
             }
         }
@@ -72,7 +72,7 @@ class AskingFoNurssingFragment : Fragment() {
                 is Resource.sucess -> {
 
                     Toast.makeText(requireContext(), "Success", Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.homeCareFragment)
+                   // findNavController().navigate(R.id.action_askingFoNurssingFragment_to_nursingConfirmationFragment)
 
                 }
                 is Resource.Error -> {
@@ -95,7 +95,7 @@ class AskingFoNurssingFragment : Fragment() {
 
     private fun initButton(){
         binding.ivArrow.setOnClickListener {
-            findNavController().navigate(R.id.homeCareFragment)
+            findNavController().navigate(R.id.action_askingFoNurssingFragment_to_nursingConfirmationFragment)
         }
         binding.btnLayoutChooseCity.setOnClickListener {
             val action = AskingFoNurssingFragmentDirections.actionAskingFoNurssingFragmentToDialogBottomSheetFragment("AllCity")
@@ -136,7 +136,6 @@ class AskingFoNurssingFragment : Fragment() {
         }
 
         binding.btnSendd.setOnClickListener {
-            Toast.makeText(requireContext(), "Clicked", Toast.LENGTH_SHORT).show()
             viewModel.sendNursingService()
         }
 
@@ -156,7 +155,7 @@ class AskingFoNurssingFragment : Fragment() {
 
                 val formattedDate = "$year-$monthStr-$dayStr"
                 binding.etFromDate.setText(formattedDate)
-
+                viewModel.fromDate.value = formattedDate
 
 
                 calendar.set(year, month, day)
@@ -181,6 +180,8 @@ class AskingFoNurssingFragment : Fragment() {
 
                 val formattedDate = "$year-$monthStr-$dayStr"
                 binding.etToDate.setText(formattedDate)
+                viewModel.toDate.value = formattedDate
+
 
                 calendar.set(year, month, day)
                 calendar.set(Calendar.HOUR_OF_DAY, 0)
@@ -208,6 +209,8 @@ class AskingFoNurssingFragment : Fragment() {
 
                     // حطها في الـ EditText
                     binding.etFromTime.setText(formattedTime)
+                    viewModel.fromTime.value = formattedTime
+
 
                     // لو محتاج تحفظها في Calendar
                     calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
@@ -237,6 +240,9 @@ class AskingFoNurssingFragment : Fragment() {
 
                     // حطها في الـ EditText
                     binding.etToTime.setText(formattedTime)
+                    viewModel.toTime.value = formattedTime
+
+
 
                     // لو محتاج تحفظها في Calendar
                     calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
@@ -279,6 +285,7 @@ class AskingFoNurssingFragment : Fragment() {
     }
 
     fun calculateDays() {
+        Log.e("DATE_DEBUG", "from=${viewModel.fromDate.value}, to=${viewModel.toDate.value}")
         val from = viewModel.fromDate.value ?: return
         val to = viewModel.toDate.value ?: return
 
@@ -289,7 +296,7 @@ class AskingFoNurssingFragment : Fragment() {
             val toDate = formatter.parse(to) ?: return
 
             val diff = toDate.time - fromDate.time
-            val days = (diff / (1000 * 60 * 60 * 24)).toInt()
+            val days = (diff / (1000 * 60 * 60 * 24)).toInt() + 1
 
             viewModel.numOfDays.value = if (days < 0) "0" else days.toString()
 

@@ -48,11 +48,10 @@
                         app:layout_constraintTop_toTopOf="parent" />
                 <com.google.android.material.imageview.ShapeableImageView
                         android:id="@+id/iv_homecare"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
+                        android:layout_width="@dimen/_90sdp"
+                        android:layout_height="@dimen/_90sdp"
                         android:adjustViewBounds="true"
                         android:scaleType="fitCenter"
-                        app:tint="@color/blue"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"

@@ -31,9 +31,9 @@ class PrivacyPolicyFragment : Fragment() {
 
     private fun initview() {
         if (DefaultLocaleHelper.getInstance(requireContext()).getCurrentLocale() == "en") {
-            createLink("https://salamtakgroup.com/privacyPolicy.html")
+            createLink("https://salamtakgroup.com/en/privacyPolicy")
         } else {
-            createLink("https://salamtakgroup.com/PrivacyPolicyAr.html")
+            createLink("https://salamtakgroup.com/ar/سياسة-الخصوصية")
         }
     }
 

@@ -34,6 +34,7 @@ import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.snackbar.Snackbar
+import com.korashiGroup.salamtakPatient.model.monitoring.monitReq.MonitoringDeviceLevelDataItem
 import com.korashiGroup.salamtakPatient.model.nursingServices.service.ServiceLevelData
 import com.korashiGroup.salamtakPatient.model.patient.DataRelation
 import com.korashiGroup.salamtakPatient.model.register.ChoosePatient
@@ -46,7 +47,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter.SelectSpecialist,
     SubSpecialistAdapter.SelectSubSpecialist, SeniorityLevelAdapter.SelectSeniorityLevel,
-    ServiceLevelAdapter.SelectServiceLevel,
+    ServiceLevelAdapter.SelectServiceLevel, MonitoringDeviceLevelAdapter.SelectMonitoringDeviceLevel,
     GetAllCitiesAdapter.SelectCity, GetAllAreaAdapter.SelectArea, NationalityAdapter.SelectCountry,
     MedicalEaxminationTypeAdapter.Action, BloodTypesAdapter.SelectBloodTypeList,
     MedicineAllergyAdapter.SelectMedicineAllergy, FoodAllergyAdapter.SelectFoodAllergy,
@@ -63,6 +64,7 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
     private lateinit var subSpecialistAdapter: SubSpecialistAdapter
     private lateinit var seniorityLevelAdapter: SeniorityLevelAdapter
     private lateinit var serviceLevelAdapter: ServiceLevelAdapter
+    private lateinit var monitoringDeviceLevelAdapter: MonitoringDeviceLevelAdapter
     private lateinit var getAllCitiesAdapter: GetAllCitiesAdapter
     private lateinit var allPatientRelationshipAdapter: GetAllPatientRelationshipAdapter
     private lateinit var getAllAreaAdapter: GetAllAreaAdapter
@@ -108,6 +110,7 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
         setupresyclerviewFoodAllergy()
         setupresyclerviewSeniorityLevel()
         setupresyclerviewServiceLevel()
+        setupresyclerviewMonitoringDeviceLevel()
         setupresyclerviewGetAllArea()
         initButton()
         chooseGender()
@@ -184,6 +187,15 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
         serviceLevelAdapter = ServiceLevelAdapter(this)
         binding.itemServiceLevel.rvServiceLevel.apply {
             adapter = serviceLevelAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+            addItemDecoration(object : DividerItemDecoration(activity, LinearLayout.VERTICAL) {})
+        }
+    }
+
+    fun setupresyclerviewMonitoringDeviceLevel() {
+        monitoringDeviceLevelAdapter = MonitoringDeviceLevelAdapter(this)
+        binding.itemMonitoringDeviceLevel.rvMonitoringDeviceLevel.apply {
+            adapter = monitoringDeviceLevelAdapter
             layoutManager = LinearLayoutManager(requireContext())
             addItemDecoration(object : DividerItemDecoration(activity, LinearLayout.VERTICAL) {})
         }
@@ -365,6 +377,11 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
                 binding.tvAllSpecial.text = getString(R.string.choose_service_level)
                 callBackServiceLevel()
             }
+            "MonitoringDeviceLevel" -> {
+                binding.layoutMonitoringDeviceLevel.visibility = View.VISIBLE
+                binding.tvAllSpecial.text = getString(R.string.choose_monitoring_device_level)
+                callBackMonitoringDeviceLevel()
+            }
             "AllCity" -> {
                 binding.layoutAllCities.visibility = View.VISIBLE
                 binding.tvAllSpecial.text = getString(R.string.choose_speciality)
@@ -535,6 +552,32 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
         viewmodel.getServiceLevel()
     }
 
+    private fun callBackMonitoringDeviceLevel() {
+        viewmodel.monitoringDeviceLevelResponse.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is Resource.Loading -> {
+                    showprogtessbar()
+                }
+                is Resource.sucess -> {
+                    hideprogressbar()
+                    response.data?.data.let {
+                        monitoringDeviceLevelAdapter.submitList(it)
+
+                    }
+                }
+
+                is Resource.Error -> {
+                    hideprogressbar()
+                    response.data?.let {
+                        Toast.makeText(requireContext(), it.data.toString(), Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                }
+            }
+        }
+        viewmodel.getMonitoringDeviceLevel()
+    }
+
     private fun callBackGetAllCities() {
         viewmodel.allCitiesResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
@@ -545,8 +588,8 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
 
                 is Resource.sucess -> {
                     hideprogressbar()
-                    response.data?.data.let {
-                        getAllCitiesAdapter.submitList(it)
+                    response.data?.data?.let {
+                        getAllCitiesAdapter.submitList(it.sortedBy { if (lang == "en") it.name.lowercase() else it.nameAr })
                     }
                 }
 
@@ -714,6 +757,7 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
         binding.itemSubSpecialist.progressBar.visibility = View.VISIBLE
         binding.itemSeniorityLevel.progressBar.visibility = View.VISIBLE
         binding.itemServiceLevel.progressBar.visibility = View.VISIBLE
+        binding.itemMonitoringDeviceLevel.progressBar.visibility = View.VISIBLE
         binding.itemAllcities.progressBar.visibility = View.VISIBLE
         binding.itemAllArea.progressBar.visibility = View.VISIBLE
         binding.itemExaminationtype.progressBar.visibility = View.VISIBLE
@@ -727,6 +771,7 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
         binding.itemSubSpecialist.progressBar.visibility = View.GONE
         binding.itemSeniorityLevel.progressBar.visibility = View.GONE
         binding.itemServiceLevel.progressBar.visibility = View.GONE
+        binding.itemMonitoringDeviceLevel.progressBar.visibility = View.GONE
         binding.itemAllcities.progressBar.visibility = View.GONE
         binding.itemAllArea.progressBar.visibility = View.GONE
         binding.itemExaminationtype.progressBar.visibility = View.GONE
@@ -756,6 +801,7 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
         sharedDataViewmodel.getServiceLevelData(serviceLevelData)
 
     }
+
     override fun onItemSelected(city: CityData) {
         sharedDataViewmodel.getArea(AreaData(null,""))
         sharedDataViewmodel.getCity(city)
@@ -917,7 +963,9 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
         sharedDataViewmodel.getRelationType(relation)
     }
 
-
+    override fun onItemMonitoringDeviceLevel(monitoringDeviceLevelData: MonitoringDeviceLevelDataItem) {
+        sharedDataViewmodel.getMonitoringDeviceLevelData(monitoringDeviceLevelData)
+    }
 
 
 }

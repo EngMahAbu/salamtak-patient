@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.adapter.MostPopularSpecialtiesAdapter
-import com.korashiGroup.salamtakPatient.adapter.PopularDoctorsAdapter
 import com.korashiGroup.salamtakPatient.adapter.SpecialictyAdapter
 import com.korashiGroup.salamtakPatient.databinding.ChooseSpecialistfragmentBinding
 import com.korashiGroup.salamtakPatient.model.SpecialistData

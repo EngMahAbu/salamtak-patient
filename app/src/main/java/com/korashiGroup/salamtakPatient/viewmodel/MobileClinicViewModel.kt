@@ -202,7 +202,7 @@ class MobileClinicViewModel @Inject constructor(val repository: RegisterRepositr
 
                 if (body != null && body.success == true) {
                     mobileResponse.postValue(Resource.sucess(body))
-                    event.postValue(Events.NavigateToMobileClinicConfirmation)
+                    event.postValue(Events.NavigateToNursingConfirmation)
                 } else if (body != null && body.success == false) {
 
                     mobileResponse.postValue(Resource.Error(body.message ?: "حدث خطأ أثناء الإرسال"))

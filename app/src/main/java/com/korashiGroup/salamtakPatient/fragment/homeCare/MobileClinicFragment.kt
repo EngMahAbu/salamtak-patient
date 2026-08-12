@@ -43,17 +43,15 @@ class MobileClinicFragment : Fragment() {
         setupObservers()
     }
 
-
     private fun initViews() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.vm = viewModel
-
     }
 
     private fun observeLiveData() {
         viewModel.event.observe(viewLifecycleOwner) { events ->
             when (events) {
-                Events.NavigateToMobileClinicConfirmation -> findNavController().navigate(R.id.homeCareFragment)
+                Events.NavigateToNursingConfirmation -> findNavController().navigate(R.id.action_askingFoNurssingFragment_to_nursingConfirmationFragment)
                 else -> {}
             }
         }
@@ -83,7 +81,6 @@ class MobileClinicFragment : Fragment() {
 //           binding.progress.visibility = if (loading) View.VISIBLE else View.GONE
 //
 //        }
-
 
     }
     private fun initButton(){
@@ -153,7 +150,7 @@ class MobileClinicFragment : Fragment() {
         }
 
         sharedDataViewmodel.seniorityLevelData.observe(viewLifecycleOwner) { seniorityLevel ->
-            binding.etServiceLevel.setText(seniorityLevel.name)
+            binding.etSeniorityLevel.setText(seniorityLevel.name)
             viewModel.serviceLevel.value = seniorityLevel.id
         }
 

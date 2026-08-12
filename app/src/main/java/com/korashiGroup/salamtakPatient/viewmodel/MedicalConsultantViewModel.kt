@@ -63,7 +63,13 @@ class MedicalConsultantViewModel @Inject constructor(val repository: RegisterRep
             mobileNumberError.value = null
         }
 
-        if (speciality.value.toInt().toString().isNullOrEmpty()) {
+//        if (speciality.value.toInt().toString().isNullOrEmpty()) {
+//            specialityError.value = "Please choose your speciality"
+//            isValid = false
+//        } else {
+//            specialityError.value = null
+//        }
+        if (speciality.value == null || speciality.value == 0) {
             specialityError.value = "Please choose your speciality"
             isValid = false
         } else {

@@ -1,5 +1,6 @@
 package com.korashiGroup.salamtakPatient.adapter
 
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,16 +21,30 @@ class CapVideoAdapter: ListAdapter<DataBlogs, CapVideoAdapter.ViewHolder>(CapVid
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val model = getItem(position)
+//
+//            val videoid=if (model.image!!.contains("v=") ) {
+//                model.image.split("=").toTypedArray()[1]
+//            } else{
+//                if (model.image.contains("youtu.be/")){
+//                    model.image.substringAfter("youtu.be/")+model.image.substringBefore("?")
+//                }else{
+//                    model.image.substringAfter("shorts/")+model.image.substringBefore("?")
+//                }
+//            }
 
-            val videoid=if (model.image!!.contains("v=") ) {
-                model.image.split("=").toTypedArray()[1]
-            } else{
-                if (model.image.contains("youtu.be/")){
-                    model.image.substringAfter("youtu.be/")+model.image.substringBefore("?")
-                }else{
-                    model.image.substringAfter("shorts/")+model.image.substringBefore("?")
-                }
-            }
+        val videoId = when {
+            model.image!!.contains("v=") ->
+                model.image.substringAfter("v=").substringBefore("&")
+            model.image.contains("youtu.be/") ->
+                model.image.substringAfter("youtu.be/").substringBefore("?")
+            model.image.contains("shorts/") ->
+                model.image.substringAfter("shorts/").substringBefore("?")
+            else -> ""
+        }
+
+
+
+
             holder.binding.youtubePlayerView.visibility = View.VISIBLE
  //           holder.binding.ivHome.visibility = View.GONE
 //                holder.binding.youtubePlayerView.apply {
@@ -49,14 +64,15 @@ class CapVideoAdapter: ListAdapter<DataBlogs, CapVideoAdapter.ViewHolder>(CapVid
 //                    })
 //                }
 
-//
+
             holder.binding.youtubePlayerView.apply {
                 //  val videoId =videoid[1].substringBefore("&")
-                this.loadData("<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/${videoid}\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+                this.loadData("<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/${videoId}\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
                     "text/html","utf-8")
                 settings.javaScriptEnabled=true
                 webChromeClient= WebChromeClient()
             }
+
 
 
     }

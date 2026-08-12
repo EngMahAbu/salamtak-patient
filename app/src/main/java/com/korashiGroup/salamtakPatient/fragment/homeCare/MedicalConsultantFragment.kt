@@ -69,6 +69,7 @@ class MedicalConsultantFragment : Fragment() {
             viewModel.sendBtn()
         }
 
+
     }
 
     private fun observeLiveData() {

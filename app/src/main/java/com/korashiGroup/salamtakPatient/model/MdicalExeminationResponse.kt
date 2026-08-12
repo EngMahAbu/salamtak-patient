@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class MedicalExaminationResponse(
     @SerializedName("Data")
-    val data: List<MedicalExamination?>?
+    var data: List<MedicalExamination?>?
 )
 
 data class MedicalExamination(

@@ -47,6 +47,7 @@ import java.util.Calendar
 import java.util.Locale
 import java.util.TimeZone
 import kotlin.math.roundToInt
+import androidx.core.view.isGone
 
 @AndroidEntryPoint
 class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking, ImagesAdapter.IPhotoViewr {
@@ -70,6 +71,8 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking, Ima
     }
     private var doctorId: Int? = null
     private var isFavorite: Boolean? = null
+
+    private var rate: Float? = null
     private var type=0
     var dayId:Int? = null
     var examinationtypeid = 0
@@ -86,6 +89,7 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking, Ima
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         formattedDate = formatter.format(now.time)
         dayId = SearchFragment.instance?.let {
             it.dayId
@@ -96,7 +100,11 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking, Ima
         bottomsheetbeahavoir =
             BottomSheetBehavior.from(binding.layoutBottomsheetpersistant.mainPageBottomsheet)
         bottomsheetbeahavoir.state = BottomSheetBehavior.STATE_HIDDEN
-
+        if (arguments?.getDouble("rating") != null) {
+            val x = arguments?.getDouble("rating")
+            binding.bookingRatingBar.rating = (x?.toFloat()?.div(2.0f)) ?: 1.0f
+           // findNavController().setOnBackPressedDispatcher()
+        }
         bindViews()
         capsVideoRecylerview()
         capsDoctorVideoRecylerview()
@@ -108,6 +116,7 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking, Ima
         reviewsFavoriteDoctor()
         callBack()
         callDoctorVideos()
+
     }
 
 
@@ -140,6 +149,7 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking, Ima
 
                 }
             })
+
 
         }
         binding.btnBooking.setOnClickListener {
@@ -177,6 +187,7 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking, Ima
             val action=BookingAppointmentFragmentDirections.actionBookingAppointmentFragmentToAllReviewsFragment()
             findNavController().navigate(action)
         }
+
 
     }
 
@@ -297,6 +308,7 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking, Ima
                     }else{
                         binding.DetailsAboutDoctor.text = it.data?.data?.doctorInfoAr.toString()
                     }
+
                     val name = if (DateUtils.getLanguage() == "en") {
                         "${it.data?.data?.firstName} ${it.data?.data?.middelName} ${it.data?.data?.lastName}"
                     } else {
@@ -322,7 +334,8 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking, Ima
                         subspecialist = "$subspecialist $it,"
                     }
                     binding.tvSpecialization.text = "${it.data?.data?.seniorityLevelName} - ${it.data?.data?.specialistName.toString()?.removePrefix("[")?.removeSuffix("]")}"
-                    binding.subSpecialization.text = " ${it.data?.data?.subSpecialistName.toString()?.removePrefix("[")?.removeSuffix("]")}"
+                    binding.DetailsSupSpecDoctor.text = " ${it.data?.data?.subSpecialistName.toString()?.removePrefix("[")?.removeSuffix("]")}"
+
                    sharedDataViewmodel.feesResponse.observe(viewLifecycleOwner, Observer {
                        binding.Feesresult.text = "${it}"
                    })
@@ -436,10 +449,11 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking, Ima
     }
 
     private fun bindViews(){
+
         sharedDataViewmodel.rating.observe(viewLifecycleOwner, Observer {
-           // binding.ratingBar.rating= it.rate?.toFloat()?: 1.0f
+            //binding.ratingBar.rating= (it.rate?.toFloat()?: 1.0f)
             binding.Ratecount.text="${it?.rateCount}"
-            binding.Reviewss.text="${it.rate?.toInt()}"
+            //binding..text="${it.rate?.toInt()}"
         })
 
         binding.layoutClinicsLocation.setOnClickListener {
@@ -463,6 +477,18 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking, Ima
                 binding.DetailsAboutDoctor.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.collapse))
                 binding.DetailsAboutDoctor.visibility = View.GONE
                 binding.ivAboutDoctor.setImageResource(R.drawable.svg_arrow_up)
+            }
+        }
+
+        binding.layoutSubSpecDoctor.setOnClickListener {
+            if (binding.DetailsSupSpecDoctor.isGone) {
+                binding.DetailsSupSpecDoctor.visibility = View.VISIBLE
+                binding.ivSubSpecDoctor.setImageResource(R.drawable.svg_arrow_down)
+                binding.DetailsSupSpecDoctor.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.expand))
+            } else {
+                binding.DetailsSupSpecDoctor.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.collapse))
+                binding.DetailsSupSpecDoctor.visibility = View.GONE
+                binding.ivSubSpecDoctor.setImageResource(R.drawable.svg_arrow_up)
             }
         }
 

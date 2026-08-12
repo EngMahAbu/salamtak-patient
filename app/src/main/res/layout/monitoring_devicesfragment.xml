@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -176,6 +177,8 @@
                     app:layout_constraintTop_toTopOf="@+id/layout_Choose_Area"
                     app:layout_constraintBottom_toBottomOf="@+id/layout_Choose_Area" />
 
+                />
+
             <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layout_Choose_City"
                     android:layout_width="0dp"
@@ -224,7 +227,6 @@
                             android:layout_gravity="center_horizontal"
                             android:fontFamily="@font/avenirltstd_roman"
                             android:inputType="text"
-                            android:text="@={vm.city}"
                             app:errorText="@{vm.cityError}"
                             android:enabled="false"
                             android:textColor="@color/black"
@@ -302,7 +304,6 @@
                             android:layout_gravity="center_horizontal"
                             android:fontFamily="@font/avenirltstd_roman"
                             android:inputType="text"
-                            android:text="@={vm.area}"
                             app:errorText="@{vm.areaError}"
                             android:enabled="false"
                             android:textColor="@color/black"
@@ -419,6 +420,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:clickable="true"
+                android:focusable="true"
                 android:background="@drawable/bg_edittext_box"
                 android:elevation="1dp"
                 >
@@ -444,7 +447,7 @@
                     android:layout_height="55dp"
                     android:layout_marginEnd="25dp"
                     android:layout_marginBottom="5dp"
-                    android:hint="choose_Service Level"
+                    android:hint="Choose Monitoring Device Level"
                     android:paddingTop="4dp"
                     app:boxBackgroundColor="@color/white"
                     app:boxBackgroundMode="none"
@@ -454,158 +457,33 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/et_serviceLevel"
+                        android:id="@+id/et_monitoringDeviceLevel"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
                         android:layout_gravity="center_horizontal"
                         android:fontFamily="@font/avenirltstd_roman"
                         android:inputType="text"
-                        android:text="@={vm.serviceLevel}"
                         app:errorText="@{vm.serviceLevelError}"
                         android:enabled="false"
                         android:textColor="@color/black"
                         android:textSize="11sp" />
 
+
+
+
             </com.google.android.material.textfield.TextInputLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="8dp"
-                android:weightSum="3">
-            <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/card1"
-                    android:layout_width="115dp"
-                    android:layout_height="175dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_margin="5dp"
-                    app:cardCornerRadius="12dp"
-                    >
-
-                <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="12dp"
-                        >
-                    <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/monitor_image"
-                            android:scaleType="fitXY"
-                            />
-
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Basic"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="8dp"
-                            android:textStyle="bold"
-                            />
-
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="L.E"
-                            android:layout_gravity="center"
-                            android:fontFamily="@font/inter_semibold"
-                            android:textColor="#1F3D89"
-                            />
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
 
 
-            <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/card2"
-                    android:layout_width="115dp"
-                    android:layout_height="175dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginStart="12dp"
-                    app:cardCornerRadius="12dp"
-                    android:layout_margin="5dp"
-                    >
-
-                <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="12dp"
-                        >
-                    <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/monitor_image1"
-                            android:scaleType="fitXY"
-                            />
-
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Intermediate"
-                            android:layout_gravity="center"
-                            android:textStyle="bold"
-                            android:layout_marginTop="8dp"
-                            />
-
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="L.E"
-                            android:layout_gravity="center"
-                            android:fontFamily="@font/inter_semibold"
-                            android:textColor="#1F3D89"
-                            />
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-
-            <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/card3"
-                    android:layout_width="120dp"
-                    android:layout_height="175dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginStart="12dp"
-                    app:cardCornerRadius="12dp"
-                    android:layout_margin="5dp"
-                    >
-
-                <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="12dp"
-                        >
-                    <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/monitor_image1"
-                            android:scaleType="fitXY"
-                            />
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="premium"
-                            android:layout_gravity="center"
-                            android:textStyle="bold"
-                            android:layout_marginTop="8dp"
-                            />
-
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="L.E"
-                            android:layout_gravity="center"
-                            android:fontFamily="@font/inter_semibold"
-                            android:textColor="#1F3D89"
-                            />
-
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-        </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvDevices"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            tools:listitem="@layout/item_device"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            />
 
 
         <!-- Number of Days -->
@@ -766,11 +644,12 @@
                 android:fontFamily="@font/inter_regular"
                 android:textSize="11sp"
                 android:paddingStart="10dp"
-                android:text="@={vm.nursingServiceDays}"
-                app:errorText="@{vm.nursingServiceDaysError}"
+                android:enabled="false"
+                android:text="@={vm.numOfDays}"
+                app:errorText="@{vm.numOfDaysError}"
                 android:background="@drawable/bg_edittext_box"
                 android:hint="Number of days"
-                android:inputType="textPostalAddress"/>
+                />
         <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/ask_text"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -816,7 +695,6 @@
                     android:padding="5dp"
                     android:text="@string/send"
                     android:textAllCaps="false"
-                    android:onClick="@{() -> vm.sendBtn()}"
                     android:textColor="@color/white"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -824,6 +702,16 @@
                     app:layout_constraintTop_toTopOf="parent"
 
                     />
+
+            <ProgressBar
+                android:id="@+id/progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/btn_send"
+                app:layout_constraintEnd_toEndOf="@id/btn_send"
+                app:layout_constraintTop_toTopOf="@id/btn_send"
+                android:visibility="gone"
+                />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

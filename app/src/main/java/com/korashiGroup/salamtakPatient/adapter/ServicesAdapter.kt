@@ -18,6 +18,7 @@ import com.korashiGroup.salamtakPatient.utils.localization.DefaultLocaleHelper
 
 
 class ServicesAdapter(private val onServicesClick:Action):ListAdapter<ImageServices,ServicesAdapter.ViewHolder>(DiffCallback()) {
+    private var nam = ""
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
@@ -45,8 +46,13 @@ class ServicesAdapter(private val onServicesClick:Action):ListAdapter<ImageServi
         }
 
         holder.binding.cardview.setOnClickListener {
+            if (DefaultLocaleHelper.getInstance(holder.binding.tvServiceName.context).getCurrentLocale()=="en"){
+                nam=services.textService
+            }else{
+                nam=services.textServiceArabic ?: ""
+            }
 
-                services.Id?.let { it1 -> onServicesClick.onItemClick(it1,services.image_onboarding) }
+             services.Id?.let { it1 -> onServicesClick.onItemClick(it1,services.image_onboarding, nam) }
                 it.isEnabled = false
                 android.os.Handler().postDelayed({
                     it.isEnabled = true
@@ -74,7 +80,7 @@ class ServicesAdapter(private val onServicesClick:Action):ListAdapter<ImageServi
     }
 
     interface Action{
-        fun onItemClick(servicesId: Int,Id:Int)
+        fun onItemClick(servicesId: Int,Id:Int, name: String)
     }
 
 

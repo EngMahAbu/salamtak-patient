@@ -51,6 +51,10 @@ class SpecialistDoctorsFragment : Fragment(),SpecialictyAdapter.SelectSpecialist
     var examinationtypeid = 8
     private var typeId = 1
     private var LabId = 0
+
+    private var isAreaSelected = false
+    private var isSpecalistSelected = false
+    private var isCitySelected = false
     companion object {
         var instance: SpecialistDoctorsFragment? = null
     }
@@ -98,6 +102,24 @@ class SpecialistDoctorsFragment : Fragment(),SpecialictyAdapter.SelectSpecialist
             Handler().postDelayed({
                 it.isEnabled = true
             }, 1000)
+        }
+
+        binding.btnLayoutChooseSubSpecialization.setOnClickListener {
+            if (isSpecalistSelected) {
+                binding.tvSubSpecializationError.visibility = View.GONE
+                val action =
+                    SpecialistDoctorsFragmentDirections.actionSpecialistDoctorsFragmentToDialogBottomSheetFragment(
+                        "SubSpecialist"
+                    )
+                findNavController().navigate(action)
+                it.isEnabled = false
+                Handler().postDelayed({
+                    it.isEnabled = true
+                }, 1000)
+            }
+            else{
+                binding.tvSubSpecializationError.visibility = View.VISIBLE
+            }
         }
 
         binding.btnLayoutChooseCity.setOnClickListener {
@@ -160,6 +182,7 @@ class SpecialistDoctorsFragment : Fragment(),SpecialictyAdapter.SelectSpecialist
                         }
                 }
                 else->{
+                    if ((isSpecalistSelected && isAreaSelected && isCitySelected) || (doctorName.isNotBlank() && isSpecalistSelected && isCitySelected))
                     findNavController().navigate(R.id.searchFragment)
                 }
             }
@@ -261,9 +284,16 @@ class SpecialistDoctorsFragment : Fragment(),SpecialictyAdapter.SelectSpecialist
 
     private fun getDataFromViews() {
         sharedDataViewmodel.specialication.observe(viewLifecycleOwner) {
+            isSpecalistSelected = true
             binding.etSpecialization.setText(it.name)
         }
+
+        sharedDataViewmodel.subSpecialication.observe(viewLifecycleOwner) {
+            binding.etSubSpecialization.setText(it.joinToString(", ") { it.name })
+        }
+
         sharedDataViewmodel.getCity.observe(viewLifecycleOwner) {
+            isCitySelected = true
             if (DefaultLocaleHelper.getInstance(requireContext()).getCurrentLocale() == "ar") {
                 binding.etChooseCity.setText(it.nameAr)
             } else {
@@ -272,6 +302,7 @@ class SpecialistDoctorsFragment : Fragment(),SpecialictyAdapter.SelectSpecialist
         }
 
         sharedDataViewmodel.getArea.observe(viewLifecycleOwner) {
+            isAreaSelected = true
             binding.etChooseArea.setText(it.name)
         }
     }
@@ -345,12 +376,16 @@ class SpecialistDoctorsFragment : Fragment(),SpecialictyAdapter.SelectSpecialist
             10->{
                 binding.layoutChooseSpecialization.visibility=View.GONE
                 binding.btnLayoutChooseSpecialization.visibility=View.GONE
+                binding.layoutChooseSubSpecialization.visibility=View.GONE
+                binding.btnLayoutChooseSubSpecialization.visibility=View.GONE
                 binding.layoutChooseAnalysis.visibility=View.GONE
             }
             8->{
                 typeId=1
                 binding.layoutChooseSpecialization.visibility=View.GONE
                 binding.btnLayoutChooseSpecialization.visibility=View.GONE
+                binding.layoutChooseSubSpecialization.visibility=View.GONE
+                binding.btnLayoutChooseSubSpecialization.visibility=View.GONE
                 binding.tvAdds.text=getString(R.string.popularlabs)
                 binding.view.visibility=View.GONE
                 binding.imageAdds.visibility=View.GONE
@@ -368,6 +403,8 @@ class SpecialistDoctorsFragment : Fragment(),SpecialictyAdapter.SelectSpecialist
                typeId=2
                binding.layoutChooseSpecialization.visibility=View.GONE
                binding.btnLayoutChooseSpecialization.visibility=View.GONE
+                binding.layoutChooseSubSpecialization.visibility=View.GONE
+                binding.btnLayoutChooseSubSpecialization.visibility=View.GONE
                 binding.tvAdds.text=getString(R.string.radiologypoular)
                 binding.view.visibility=View.GONE
                 binding.imageAdds.visibility=View.GONE
@@ -383,10 +420,18 @@ class SpecialistDoctorsFragment : Fragment(),SpecialictyAdapter.SelectSpecialist
             }else->{
             binding.layoutChooseSpecialization.visibility=View.VISIBLE
             binding.btnLayoutChooseSpecialization.visibility=View.VISIBLE
+            binding.layoutChooseSubSpecialization.visibility=View.VISIBLE
+            binding.btnLayoutChooseSubSpecialization.visibility=View.VISIBLE
             binding.layoutChooseAnalysis.visibility=View.GONE
             binding.btnLayoutChooseClinic.visibility=View.GONE
             binding.seeAll.visibility=View.GONE
             }
+        }
+        if (arguments?.getString("name", "none") != "none"){
+            binding.tvTitle.text = arguments?.getString("name", "none")
+        }
+        else{
+            binding.tvTitle.visibility = View.GONE
         }
 
     }

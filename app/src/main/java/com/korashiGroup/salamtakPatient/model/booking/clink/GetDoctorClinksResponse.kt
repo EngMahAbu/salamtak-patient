@@ -19,6 +19,8 @@ data class Data(
     val clinicDtos: List<ClinicDto?>?,
     @SerializedName("CurrentClinicDtos")
     val currentClinicDtos: CurrentClinicDtos?,
+    @SerializedName("Rate")
+    val rate: Int?,
     @SerializedName("Code")
     val code: String?,
     @SerializedName("DoctorInfo")

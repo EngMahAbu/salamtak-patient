@@ -30,9 +30,11 @@ class MyScheduleAdapter(private val schedule: ActionSchedule) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
         val services = getItem(position)
 
         holder.binding.apply {
+
             if (DefaultLocaleHelper.getInstance(this.tvDoctorName.context).getCurrentLocale()=="en"){
                 tvDoctorName.text = "${services.doctorName}"
             }else{
@@ -41,7 +43,7 @@ class MyScheduleAdapter(private val schedule: ActionSchedule) :
             tvSpecialization.text = "${services.specialistName} - ${services.seniorityLevelName}"
             Service.text="${services.medicalExaminationTypeName}(${DateParsing(services.appointmentDate.toString())})"
             // old
-           // location.text ="${services.clinicAddress?:""}-${services.BlockNo?:""}-${services.FloorNo?:""}-${services.areaName?:""}"
+            //location.text ="${services.clinicAddress?:""}-${services.BlockNo?:""}-${services.FloorNo?:""}-${services.areaName?:""}"
             // new
             if (services.IsCompleted==true){
                 location.text="${location.context.getString(R.string.paid)}"
@@ -53,7 +55,9 @@ class MyScheduleAdapter(private val schedule: ActionSchedule) :
             Feesresult.text = services.fees.toString()
          //   phones.text = services.ClinicPhone.toString()
             phones.text ="${services.fees.toString()} ${phones.context.getString(R.string.egp)}"
+
         }
+
         if (services.HealthEntity_OffersID==null || services.HealthEntity_OffersID.toString()=="null"){
             holder.binding.ivOffer.visibility=View.GONE
         }else{
@@ -121,11 +125,17 @@ class MyScheduleAdapter(private val schedule: ActionSchedule) :
             schedule.onSupportClicked()
         }
 
+
+
         holder.binding.ivDoctorProfile.load(services.doctorImage) {
             crossfade(true)
             crossfade(1000)
             transformations(CircleCropTransformation())
         }
+
+        holder.binding.tvvAddress.text =
+            "${services.clinicAddress ?: ""}"
+
 
     }
 

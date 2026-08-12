@@ -161,10 +161,12 @@
     <string name="specialization">Speciality</string>
     <string name="patientName">Patient Name</string>
     <string name="choose_specialization">Choose Speciality</string>
+    <string name="tip_of_the_day">Tip Of The Day</string>
     <string name="choose_sub_specialization">Choose sub Speciality</string>
     <string name="choose_Seniority_Level">Choose Seniority Level</string>
     <string name="choose_speciality">Choose city</string>
     <string name="choose_service_level">Choose academic degree</string>
+    <string name="choose_monitoring_device_level">Choose monitoring device level</string>
     <string name="choose_city">Choose City</string>
     <string name="choose_area">Choose Area</string>
     <string name="to">To</string>
@@ -220,6 +222,7 @@
     <string name="add_to_favorite">Add to favorite</string>
     <string name="remove_from_favorite">Remove from favorite</string>
     <string name="about_doctor">About Doctor</string>
+    <string name="sub_spec_doctor">Sub Specialty</string>
     <string name="doctor_s_clinics">Doctor’s Clinics</string>
     <string name="book_appointment">Book Appointment</string>
     <string name="choose_clinic">Choose Clinic</string>
@@ -426,7 +429,7 @@
     <string name="life_coach">Life coach</string>
     <string name="therapeutic_nutrition">Therapeutic nutrition</string>
     <string name="seeall">See All</string>
-    <string name="accountsettings">AccountSettings</string>
+    <string name="accountsettings">Account Settings</string>
     <string name="medical_record">Medical Record</string>
     <string name="support_amp_help">Support &amp; Help</string>
     <string name="settings_amp_amp_preferences">Settings &amp; Preferences</string>
@@ -472,8 +475,8 @@
     <string name="welcome_title">Welcome to our app</string>
     <string name="welcome_subtitle">Book your appointment with the best doctors بسهولة and conveniently</string>
     <string name="who_are_you">Who are you?</string>
-    <string name="btn_i_am_patient">I am a patient</string>
-    <string name="btn_i_am_doctor">I am a doctor</string>
+    <string name="btn_i_am_patient">Patients Only</string>
+    <string name="btn_i_am_doctor">Doctors Only</string>
     <string name="wrong_app_icon_patient">🚑</string>
     <string name="wrong_app_icon_doctor">👨‍⚕️</string>
     <string name="wrong_app_tag_patient">Patient App</string>
@@ -488,6 +491,7 @@
     <string name="welcome_mobile_clinic">
 Welcome to Salamtak mobile clinics service. You can now get a premium service in the fastest time by filling out the service request form. One of Salamtak customer service representatives will review the information and process your request through one of Salamtak’s specialized doctors.
 </string>
+    <string name="sub_spec_error">You must select Specialization first</string>
 
     <array name="choose">
         <item>Select</item>

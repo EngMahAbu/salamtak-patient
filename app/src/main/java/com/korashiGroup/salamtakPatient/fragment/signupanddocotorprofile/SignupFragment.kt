@@ -399,6 +399,7 @@ class SignupFragment : Fragment() {
 
         var value = false
 
+
         if (fullNameEn.trim().isNullOrEmpty()) {
             binding.etFullNameEn.setCompoundDrawablesWithIntrinsicBounds(
                 0,
@@ -455,11 +456,16 @@ class SignupFragment : Fragment() {
             binding.textinputFullNameAr.setBackgroundResource(R.drawable.bg_edittext_error)
 
 
+
         } else {
             binding.tvFullNameARError.visibility = View.GONE
             binding.textinputFullNameAr.setBackgroundResource(R.drawable.bg_edittext)
             binding.etFullNameAR.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
         }
+
+
+
+
 
         if (mobileNumber.trim().isEmpty()) {
             binding.tvPohneError.text = getString(R.string.required_mobile)

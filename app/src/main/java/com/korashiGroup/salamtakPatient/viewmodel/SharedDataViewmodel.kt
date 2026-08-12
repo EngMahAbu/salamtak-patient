@@ -9,6 +9,7 @@ import com.korashiGroup.salamtakPatient.model.booking.ClinicSchedualByClinicDayI
 import com.korashiGroup.salamtakPatient.model.booking.clink.ClinicData
 import com.korashiGroup.salamtakPatient.model.booking.clink.GetDoctorClinksResponse
 import com.korashiGroup.salamtakPatient.model.booking.clink.PolyClinicData
+import com.korashiGroup.salamtakPatient.model.monitoring.monitReq.MonitoringDeviceLevelDataItem
 import com.korashiGroup.salamtakPatient.model.nursingServices.service.ServiceLevelData
 import com.korashiGroup.salamtakPatient.model.patient.DataRelation
 import com.korashiGroup.salamtakPatient.model.profile.DataBloodType
@@ -25,6 +26,8 @@ class SharedDataViewmodel:ViewModel() {
     val subSpecialication=MutableLiveData<List<SubSpecialistData>>()
     val seniorityLevelData=MutableLiveData<SeniorityLevelData>()
     val serviceLevelData=MutableLiveData<ServiceLevelData>()
+    val MonitoringDeviceLevel = MutableLiveData<MonitoringDeviceLevelDataItem>()
+
     val notificationNumber = MutableLiveData<Pair<Int, Int>>()
     val getCity=MutableLiveData<CityData>()
     val relationResponse=MutableLiveData<DataRelation>()
@@ -72,6 +75,7 @@ class SharedDataViewmodel:ViewModel() {
     fun getSubSpecialication(subSpecialist:List<SubSpecialistData>){
         subSpecialication.postValue(subSpecialist)
     }
+
     fun getMedicineAllergy(medicineAllergy:List<DataMedicineAllergy>){
         medicineAllergyList.postValue(medicineAllergy)
     }
@@ -90,6 +94,9 @@ class SharedDataViewmodel:ViewModel() {
 
     fun getServiceLevelData(serviceLevel: ServiceLevelData){
         serviceLevelData.postValue(serviceLevel)
+    }
+    fun getMonitoringDeviceLevelData(monitoringDevice: MonitoringDeviceLevelDataItem){
+        MonitoringDeviceLevel.postValue(monitoringDevice)
     }
 
     fun getCity(city:CityData){

@@ -31,9 +31,9 @@ class WebViewFragment : Fragment() {
 
     private fun initview() {
         if (DefaultLocaleHelper.getInstance(requireContext()).getCurrentLocale() == "en") {
-            createLink("https://salamtakgroup.com/Terms.html")
+            createLink("https://salamtakgroup.com/en/termsOf")
         } else {
-            createLink("https://salamtakgroup.com/TermsAr.html")
+            createLink("https://salamtakgroup.com/ar/شروط-الاستخدام")
         }
     }
 

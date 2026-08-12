@@ -167,7 +167,7 @@ class MainActivity : AppCompatActivity(), LoginFragment.onSomeEventListener {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
-    override fun onNewIntent(intent: Intent?) {
+    override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         navController.handleDeepLink(intent)
     }

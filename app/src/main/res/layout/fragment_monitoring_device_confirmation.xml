@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="vm"
+            type="com.korashiGroup.salamtakPatient.viewmodel.MonitoringDeviceConfirmationViewModel" />
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            tools:context="com.example.fawrypay.phase2.MonitoringDeviceConfirmationActivity">
+
+            <Toolbar
+                android:id="@+id/confirm_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_back" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Monitoring Devices Confirmation"
+                    android:fontFamily="@font/inter_bold"
+                    android:textSize="20sp"
+                    android:layout_gravity="center" />
+            </Toolbar>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/confirm_toolbar"
+                android:layout_margin="15dp"
+                app:cardCornerRadius="18dp"
+                android:elevation="18dp"
+                android:background="@color/white">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    >
+
+                    <ImageView
+                        android:id="@+id/nursing_image_confirm"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:src="@drawable/monit_image"
+                        android:scaleType="fitXY"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/level_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/agent_icon"
+                        app:layout_constraintTop_toTopOf="@id/doctor_name"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_margin="16dp" />
+
+                    <TextView
+                        android:id="@+id/doctor_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Doctor/Agent Name"
+                        android:fontFamily="sans-serif-medium"
+                        android:layout_marginTop="22dp"
+                        app:layout_constraintTop_toBottomOf="@id/nursing_image_confirm"
+                        app:layout_constraintStart_toEndOf="@id/level_icon"
+                        android:layout_marginStart="22dp"
+                        android:textColor="#64748B"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/device_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Dr. Mahmoud Elsayed"
+                        android:fontFamily="@font/inter_bold"
+                        app:layout_constraintTop_toBottomOf="@id/doctor_name"
+                        app:layout_constraintStart_toEndOf="@id/level_icon"
+                        android:layout_marginStart="22dp"
+                        android:textSize="18sp" />
+
+
+                    <ImageView
+                        android:id="@+id/agent_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/level_icon"
+                        app:layout_constraintTop_toBottomOf="@id/device_name"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_margin="16dp" />
+
+                    <TextView
+                        android:id="@+id/gender_group"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Selected Level"
+                        android:fontFamily="sans-serif-medium"
+                        android:layout_marginTop="4dp"
+                        app:layout_constraintTop_toBottomOf="@id/device_name"
+                        app:layout_constraintStart_toEndOf="@id/level_icon"
+                        android:layout_marginStart="22dp"
+                        android:textColor="#64748B"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/agent_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Basic Monitor"
+                        android:fontFamily="@font/inter_bold"
+                        app:layout_constraintTop_toBottomOf="@id/gender_group"
+                        app:layout_constraintStart_toEndOf="@id/level_icon"
+                        android:layout_marginStart="22dp"
+                        android:textSize="18sp" />
+
+                    <View
+                        android:id="@+id/line"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:background="#E4DEDE"
+                        android:layout_margin="18dp"
+                        app:layout_constraintTop_toBottomOf="@id/agent_name"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                    <TextView
+                        android:id="@+id/service_duration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Service Duration"
+                        app:layout_constraintTop_toBottomOf="@id/line"
+                        android:layout_marginTop="6dp"
+                        android:background="@drawable/blue_round_background"
+                        android:padding="6dp"
+                        android:fontFamily="@font/inter_bold"
+                        android:backgroundTint="#1F3D89"
+                        android:textColor="@color/white"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <TextView
+                        android:id="@+id/date_head"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Date : "
+                        android:fontFamily="@font/inter_bold"
+                        app:layout_constraintBottom_toBottomOf="@id/date_icon"
+                        android:textSize="16dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/date_icon"
+                        android:layout_marginStart="12dp" />
+
+                    <ImageView
+                        android:id="@+id/date_icon"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/date_icon"
+                        android:layout_marginStart="60dp"
+                        android:layout_marginTop="6dp"
+                        app:layout_constraintTop_toTopOf="@id/date_from_range"
+                        app:layout_constraintBottom_toBottomOf="@id/date_from_range"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <TextView
+                        android:id="@+id/date_from_range"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="From Oct 20  "
+                        android:textSize="14sp"
+                        android:fontFamily="@font/inter_bold"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="18dp"
+                        app:layout_constraintStart_toEndOf="@id/date_icon"
+                        app:layout_constraintTop_toBottomOf="@id/service_duration" />
+                    <TextView
+                        android:id="@+id/space"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" - "
+                        android:textSize="14sp"
+                        android:fontFamily="@font/inter_bold"
+                        android:layout_marginTop="18dp"
+                        app:layout_constraintStart_toEndOf="@id/date_from_range"
+                        app:layout_constraintTop_toBottomOf="@id/service_duration" />
+                    <TextView
+                        android:id="@+id/date_to_range"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="To Oct 20  "
+                        android:textSize="14sp"
+                        android:fontFamily="@font/inter_bold"
+                        android:layout_marginTop="18dp"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintStart_toEndOf="@id/date_from_range"
+                        app:layout_constraintTop_toBottomOf="@id/service_duration" />
+
+
+
+
+                    <TextView
+                        android:id="@+id/time_head"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Time : "
+                        android:fontFamily="@font/inter_bold"
+                        app:layout_constraintBottom_toBottomOf="@id/time_icon"
+                        android:textSize="16dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/time_icon"
+                        android:layout_marginStart="12dp" />
+
+                    <ImageView
+                        android:id="@+id/time_icon"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/time_icon"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintTop_toTopOf="@id/time_range_text"
+                        app:layout_constraintBottom_toBottomOf="@id/time_range_text"
+                        app:layout_constraintStart_toStartOf="@id/date_icon" />
+
+                    <TextView
+                        android:id="@+id/time_range_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="From 08:00 AM - To 04:00 PM"
+                        android:textSize="14sp"
+                        android:layout_marginTop="18dp"
+                        android:fontFamily="@font/inter_bold"
+                        android:layout_marginEnd="32dp"
+                        app:layout_constraintStart_toStartOf="@id/date_from_range"
+                        app:layout_constraintTop_toBottomOf="@id/date_from_range" />
+
+                    <ImageView
+                        android:id="@+id/number_days_icon"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/number_days"
+                        android:layout_marginTop="16dp"
+                        app:layout_constraintTop_toBottomOf="@id/time_head"
+                        app:layout_constraintStart_toStartOf="@id/time_head" />
+
+                    <TextView
+                        android:id="@+id/text_number_days"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total Service Duration"
+                        android:fontFamily="sans-serif-medium"
+                        app:layout_constraintTop_toBottomOf="@id/time_head"
+                        app:layout_constraintBottom_toBottomOf="@id/number_days_icon"
+                        app:layout_constraintStart_toStartOf="@id/time_icon"
+                        android:textColor="#1F3D89"
+                        android:layout_marginTop="6dp" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/number_days_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/text_number_days"
+                        android:layout_marginTop="2dp"
+                        app:layout_constraintStart_toStartOf="@id/text_number_days"
+                        app:layout_constraintEnd_toEndOf="@id/text_number_days"
+                        app:hintEnabled="false">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/number_days"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="3 Days"
+                            android:textSize="15sp"
+                            android:gravity="center"
+                            android:autofillHints="phone"
+                            android:background="@drawable/edittext_no_border" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/duration_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Fees/Day"
+                        android:fontFamily="sans-serif-medium"
+                        android:textSize="16sp"
+                        android:textColor="#475569"
+                        android:layout_margin="12dp"
+                        app:layout_constraintStart_toStartOf="@id/number_days_text"
+                        app:layout_constraintEnd_toEndOf="@id/number_days_text"
+                        app:layout_constraintTop_toBottomOf="@id/number_days_text" />
+
+                    <TextView
+                        android:id="@+id/duration_fee"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100 L.E"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/inter_bold"
+                        android:layout_margin="12dp"
+                        app:layout_constraintEnd_toEndOf="@id/duration_text"
+                        app:layout_constraintStart_toStartOf="@id/duration_text"
+                        app:layout_constraintTop_toBottomOf="@id/duration_text" />
+
+
+                    <TextView
+                        android:id="@+id/total_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/duration_fee"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginTop="16dp"
+                        android:text="TOTAL FEES"
+                        android:textSize="14sp"
+                        android:fontFamily="sans-serif-medium"
+                        android:textColor="#1F3D89" />
+
+                    <TextView
+                        android:id="@+id/total_amount_fees"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="300 L.E"
+                        android:fontFamily="@font/inter_bold"
+                        android:textSize="30sp"
+                        android:textColor="#1F3D89"
+                        app:layout_constraintTop_toBottomOf="@id/total_amount"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/send"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/card1"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="@id/card1"
+                app:layout_constraintEnd_toEndOf="@id/card1"
+                android:backgroundTint="#1F3D89"
+                android:text="Pay Now"
+                android:padding="10dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>
+
+
+
+
+
+

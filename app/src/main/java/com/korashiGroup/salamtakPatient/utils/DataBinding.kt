@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.google.android.material.textfield.TextInputLayout
 import com.korashiGroup.salamtakPatient.R
 import java.text.SimpleDateFormat
 import java.util.*
@@ -73,9 +74,15 @@ object DataBinding {
     @JvmStatic
     @BindingAdapter ("app:errorText")
     fun setError(editText: EditText, errorMessage: String?){
-
         editText.error = errorMessage
 
+    }
+
+    @JvmStatic
+    @BindingAdapter("app:errorTextLayout")
+    fun setErrorLayout(view: TextInputLayout, error: String?) {
+        Log.d("BINDING", "error = $error")
+        view.error = error
     }
 
     fun DateParsing(dateParsing:String):String{

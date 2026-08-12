@@ -7,10 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -62,6 +64,23 @@ class MyScheduleFragment : Fragment(), MyScheduleAdapter.ActionSchedule,
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+
+                    findNavController().navigate(
+                        R.id.homeFragment,
+                        null,
+                        NavOptions.Builder()
+                            .setPopUpTo(R.id.myScheduleFragment, true)
+                            .setLaunchSingleTop(true)
+                            .build()
+                    )
+                }
+            }
+        )
 
         bottomsheetbeahavoir =
             BottomSheetBehavior.from(binding.layoutBottomsheetpersistant.examinationtypeBottomsheet)
@@ -265,13 +284,35 @@ class MyScheduleFragment : Fragment(), MyScheduleAdapter.ActionSchedule,
         findNavController().navigate(action)
     }
 
+//    override fun onLocationClicked(lat: String, long: String) {
+//            if (lat=="null" && long=="null"){
+//                Toast.makeText(requireContext(), getString(R.string.thereisnolocatio) , Toast.LENGTH_LONG).show()
+//            }else{
+//                val action=MyScheduleFragmentDirections.actionMyScheduleFragmentToDailogAddMapFragment(lat,long)
+//                findNavController().navigate(action)
+//            }
+//    }
+
     override fun onLocationClicked(lat: String, long: String) {
-            if (lat=="null" && long=="null"){
-                Toast.makeText(requireContext(), getString(R.string.thereisnolocatio) , Toast.LENGTH_LONG).show()
-            }else{
-                val action=MyScheduleFragmentDirections.actionMyScheduleFragmentToDailogAddMapFragment(lat,long)
-                findNavController().navigate(action)
-            }
+
+        if (lat.isNullOrBlank() || long.isNullOrBlank() || lat == "null" || long == "null") {
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.thereisnolocatio),
+                Toast.LENGTH_LONG
+            ).show()
+            return
+        }
+
+        val navController = findNavController()
+
+        val currentDestination = navController.currentDestination?.id
+        if (currentDestination != R.id.myScheduleFragment) return
+
+        val action = MyScheduleFragmentDirections
+            .actionMyScheduleFragmentToDailogAddMapFragment(lat, long)
+
+        navController.navigate(action)
     }
 
     override fun onSupportClicked() {

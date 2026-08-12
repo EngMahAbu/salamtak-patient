@@ -25,7 +25,7 @@ class ClinksDoctorsAdapter(private val book:Booking) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val services = getItem(position)
 
-        holder.binding.location.text=services.areaName
+        holder.binding.location.text=services.cityName  + " - " + services.areaName
         holder.binding.tvDoctorName.text=services.name
         holder.binding.tvTitle.text="You can book now at ${services.name}"
         holder.binding.ivDoctorProfile.load(services.logo) {

@@ -11,7 +11,6 @@ import com.korashiGroup.salamtakPatient.model.docotorsearch.DoctorsearchItemResp
 import com.korashiGroup.salamtakPatient.model.healthy.GetHealthEntityResponse
 import com.korashiGroup.salamtakPatient.model.populardoctors.GetDoctorHealthTopicsResponse
 import com.korashiGroup.salamtakPatient.model.populardoctors.GetDoctorSpotLightResponse
-import com.korashiGroup.salamtakPatient.model.populardoctors.PopularDoctorsResponseItem
 import com.korashiGroup.salamtakPatient.model.profile.*
 import com.korashiGroup.salamtakPatient.model.register.*
 import com.korashiGroup.salamtakPatient.model.scheduling.CancelPatientAppointmentResponse
@@ -21,18 +20,21 @@ import com.korashiGroup.salamtakPatient.utils.Resource
 import com.google.gson.Gson
 import com.korashiGroup.salamtakPatient.model.askandanswer.QuestionAndAnswerResponse
 import com.korashiGroup.salamtakPatient.model.booking.clink.GetDoctorClinksResponse
-import com.korashiGroup.salamtakPatient.model.docotorsearch.NewDoctorSearchRequest
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCardResponse
 import com.korashiGroup.salamtakPatient.model.insurance.InsuranceCompanyResponse
 import com.korashiGroup.salamtakPatient.model.insurance.SendInsuranceCardResponce
+import com.korashiGroup.salamtakPatient.model.monitoring.monitReq.MonitoringDeviceLevelResponse
 import com.korashiGroup.salamtakPatient.model.nursingServices.service.ServiceLevelResponse
 import com.korashiGroup.salamtakPatient.model.populardoctors.NewPopularDoctorResponse
-import com.korashiGroup.salamtakPatient.model.salamtakgate.BlogsResponse
 import com.korashiGroup.salamtakPatient.model.salamtakgate.SalamtakGateResponse
 import com.korashiGroup.salamtakPatient.model.salamtakgate.blogs.GetBlogsResponse
+import com.korashiGroup.salamtakPatient.model.tipDay.TipOfDayResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 import retrofit2.Response
@@ -47,10 +49,12 @@ class DialogBottomSheetViewmodel @Inject constructor(private val repositry: Regi
     var healthEntityResponse:GetHealthEntityResponse?=null
     val nationalityResponse=MutableLiveData<Resource<GetCountry>>()
     val specialistResponse=MutableLiveData<Resource<GetSpecialistResponse>>()
+    val getTipOfDayResponse=MutableLiveData<Resource<TipOfDayResponse>>()
     val top10SpecialistResponse=MutableLiveData<Resource<GetSpecialistResponse>>()
     val subSpecialistResponse=MutableLiveData<Resource<GetSubSpecilistResponse>>()
     val seniorityLevelResponse=MutableLiveData<Resource<GetSeniorityLevelResponse>>()
     val serviceLevelResponse=MutableLiveData<Resource<ServiceLevelResponse>>()
+    val monitoringDeviceLevelResponse = MutableLiveData<Resource<MonitoringDeviceLevelResponse>>()
     val allCitiesResponse=MutableLiveData<Resource<GetAllCitiesResponse>>()
     val allAreasByCityIdResponse=MutableLiveData<Resource<GetAreasByCityIdResponse>>()
     val docorsResponse=MutableLiveData<Resource<DoctorsearchItemResponse>>()
@@ -205,6 +209,16 @@ class DialogBottomSheetViewmodel @Inject constructor(private val repositry: Regi
         serviceLevelResponse.postValue(response?.let { handelGetServiceLevel(it) })
     }
 
+    fun getMonitoringDeviceLevel()=viewModelScope.launch(Dispatchers.IO+handler) {
+        monitoringDeviceLevelResponse.postValue(Resource.Loading())
+        val response=repositry.getMonitoringDeviceLevel()
+        Log.e("RAW_CODE", response?.code().toString())
+        Log.e("RAW_BODY", response?.body()?.toString() ?: "NULL BODY")
+        Log.e("RAW_ERROR", response?.errorBody()?.string() ?: "NO ERROR")
+        monitoringDeviceLevelResponse.postValue(response?.let { handelGetMonitoringDeviceLevel(it) })
+    }
+
+
     private fun handelGetseniorityLevel(response: Response<GetSeniorityLevelResponse>): Resource<GetSeniorityLevelResponse>? {
         if (response.isSuccessful){
             response.body()?.let {
@@ -225,10 +239,61 @@ class DialogBottomSheetViewmodel @Inject constructor(private val repositry: Regi
 
     }
 
+    private fun handelGetMonitoringDeviceLevel(response: Response<MonitoringDeviceLevelResponse>): Resource<MonitoringDeviceLevelResponse>? {
+        if (response.isSuccessful){
+            response.body()?.let {
+                return Resource.sucess(it)
+            }
+        }
+        return Resource.Error(response.message())
+
+    }
+
     fun getAllCities()=viewModelScope.launch(Dispatchers.IO+handler) {
         allCitiesResponse.postValue(Resource.Loading())
         val response=repositry.getAllCities()
         allCitiesResponse.postValue(response?.let { handelGetAllCities(it) })
+    }
+
+    fun getRotatingByMinute()=viewModelScope.launch(Dispatchers.IO+handler) {
+        getTipOfDayResponse.postValue(Resource.Loading())
+        val response=repositry.getRotatingByMinute()
+        getTipOfDayResponse.postValue(response?.let { handelGetRotatingByMinute(it) })
+    }
+
+    private var tipJob: Job? = null
+
+    fun startTipUpdates() {
+        tipJob?.cancel()
+
+        tipJob = viewModelScope.launch(Dispatchers.IO + handler) {
+
+            while (isActive) {
+
+                getTipOfDayResponse.postValue(Resource.Loading())
+
+                val response = repositry.getRotatingByMinute()
+
+                getTipOfDayResponse.postValue(
+                    response?.let { handelGetRotatingByMinute(it) }
+                )
+
+                delay(60_000) // دقيقة
+            }
+        }
+    }
+
+    fun stopTipUpdates() {
+        tipJob?.cancel()
+    }
+
+    private fun handelGetRotatingByMinute(it: Response<TipOfDayResponse>): Resource<TipOfDayResponse> {
+        if (it.isSuccessful){
+            it.body()?.let {
+                return Resource.sucess(it)
+            }
+        }
+        return Resource.Error(it.message())
     }
 
     private fun handelGetAllCities(response: Response<GetAllCitiesResponse>): Resource<GetAllCitiesResponse>? {

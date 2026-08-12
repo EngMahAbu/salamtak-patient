@@ -219,7 +219,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                    <EditText
                             android:id="@+id/et_Choose_City"
                             android:layout_width="match_parent"
                             android:layout_height="55dp"
@@ -461,6 +461,7 @@
                         android:fontFamily="@font/avenirltstd_roman"
                         android:inputType="text"
                         app:errorText="@{vm.specialityError}"
+                        app:errorEnabled="true"
                         android:enabled="false"
                         android:textColor="@color/black"
                         android:textSize="11sp" />
@@ -580,7 +581,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/et_serviceLevel"
+                        android:id="@+id/et_seniority_level"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
                         android:layout_gravity="center_horizontal"

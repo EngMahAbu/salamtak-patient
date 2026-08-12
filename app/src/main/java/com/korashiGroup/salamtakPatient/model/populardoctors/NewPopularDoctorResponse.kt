@@ -2,6 +2,7 @@ package com.korashiGroup.salamtakPatient.model.populardoctors
 
 
 import com.google.gson.annotations.SerializedName
+import com.korashiGroup.salamtakPatient.model.docotorsearch.ClinicDto
 
 data class NewPopularDoctorResponse(
     @SerializedName("Data")
@@ -28,6 +29,27 @@ data class PopularDoctorS(
     val doctorSpecAr: String?,
     @SerializedName("DoctorSpeciality")
     val doctorSpeciality: String?,
+    @SerializedName("clinicDto")
+    val clinicDto: ClinicDto?,
     @SerializedName("Rate")
-    val rate: Double?
+    val rate: Double?,
+    @SerializedName("FeesTo")
+    val feesTo: Int?,
+    @SerializedName("ClinicId")
+    val clinicId: Int?,
+    @SerializedName("Image")
+    val image: String?,
+    @SerializedName("WaitingTime")
+    val waitingTime: Int?,
+    @SerializedName("Sub_SpecialistList")
+    val subSpecialistName: List<SubSpecial?>?,
+    val RateCount: Int?,
+    val NickName: String?,
+    )
+
+data class SubSpecial(
+    @SerializedName("Id")
+    val id: Int?,
+    @SerializedName("Name")
+    val name: String?,
 )

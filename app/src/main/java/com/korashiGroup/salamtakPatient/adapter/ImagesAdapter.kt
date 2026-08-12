@@ -24,9 +24,10 @@ class ImagesAdapter(private val onclick: IPhotoViewr):ListAdapter<Gates,ImagesAd
         Glide.with(holder.binding.ivGallary.context)
             .load(services.imageURL)
             .into(holder.binding.ivGallary)
-        holder.binding.ivGallary.setOnClickListener {
-            onclick.clickOnPhoto(services.imageURL)
-        }
+//        holder.binding.ivGallary.setOnClickListener {
+//            onclick.clickOnPhoto(services.imageURL)
+//        }
+        holder.binding.ivGallary.setOnClickListener(null)
     }
 
 

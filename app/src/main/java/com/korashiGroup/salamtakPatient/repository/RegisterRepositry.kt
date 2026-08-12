@@ -1,5 +1,6 @@
 package com.korashiGroup.salamtakPatient.repository
 
+import android.util.Log
 import com.korashiGroup.salamtakPatient.api.ApiService
 import com.korashiGroup.salamtakPatient.model.booking.EditPatientAppointmentRequest
 import com.korashiGroup.salamtakPatient.model.booking.PatientAppointmentRequest
@@ -10,9 +11,11 @@ import com.korashiGroup.salamtakPatient.model.medicalConsultant.MedicalConsultan
 import com.korashiGroup.salamtakPatient.model.medicalConsultant.MedicalConsultantResponse
 import com.korashiGroup.salamtakPatient.model.mobileClinic.MobileClinicReqBody
 import com.korashiGroup.salamtakPatient.model.mobileClinic.MobileClinicResponse
-import com.korashiGroup.salamtakPatient.model.notification.Response
+import com.korashiGroup.salamtakPatient.model.monitoring.monitReq.MonitoringReqBody
+import com.korashiGroup.salamtakPatient.model.monitoring.monitReq.MonitoringRequestResponse
 import com.korashiGroup.salamtakPatient.model.nursingServices.NursingReqBody
 import com.korashiGroup.salamtakPatient.model.nursingServices.NursingResponse
+import com.korashiGroup.salamtakPatient.model.nursingServices.nursingConfirm.NursingConfirmResponse
 import com.korashiGroup.salamtakPatient.model.profile.LocationRequest
 import com.korashiGroup.salamtakPatient.model.register.*
 import com.korashiGroup.salamtakPatient.model.whatspresponse.WhatspRequest
@@ -83,6 +86,11 @@ class RegisterRepositry @Inject constructor(private val apiService: ApiService) 
 
     suspend fun getServiceLevel() = sp.getUserLang(Constans.Language)
         ?.let { apiService.getServiceLevel(it) }
+
+
+    suspend fun loadImageServices() =  sp.getUserLang(Constans.Language)?.let { apiService.getMedicalExamination(it) }
+
+
 
     suspend fun getAllCities() = sp.getUserLang(Constans.Language)
         ?.let { apiService.getAllCities(it) }
@@ -416,6 +424,8 @@ class RegisterRepositry @Inject constructor(private val apiService: ApiService) 
                                  serviceId:Int,
                                  service:String
     ): retrofit2.Response<NursingResponse> {
+
+
         val requestBody = NursingReqBody(
             FullName = fullName,
             MobailPhone = mobileNumber,
@@ -433,6 +443,7 @@ class RegisterRepositry @Inject constructor(private val apiService: ApiService) 
             ServiceId = serviceId,
             Service = service
         )
+
         sp.getUserLang(Constans.Language).let {
             return apiService.sendNursingServiceReq(
                 culture = it,
@@ -440,9 +451,84 @@ class RegisterRepositry @Inject constructor(private val apiService: ApiService) 
             )
         }
 
+    }
+
+    suspend fun payNursingServiceConfirmation(): retrofit2.Response<NursingConfirmResponse> {
+        sp.getUserLang(Constans.Language).let {
+            val lang = sp.getUserLang(Constans.Language)
+
+            val response = apiService.payNursingServiceConfirm(
+                culture = lang
+            )
+
+            Log.e("API_CODE", response.code().toString())
+            Log.e("API_BODY", response.body().toString())
+            Log.e("API_ERROR", response.errorBody()?.string().toString())
+
+            return response
+        }
+
 
     }
 
+    suspend fun sendMonitoringRequest(fullName: String,
+                                      mobileNumber: String,
+                                      buildingNumber: String,
+                                      street: String,
+                                      floor: String,
+                                      apartment: String,
+                                      cityId: Int,
+                                      areaId: Int,
+                                      fromDay:String,
+                                      toDay:String,
+                                      fromHour:String,
+                                      toHour:String,
+                                      monitDeviceId:Int,
+                                      service: Int,
+                                      text: String
+    ): retrofit2.Response<MonitoringRequestResponse> {
+
+
+        val requestBody = MonitoringReqBody(
+            FullName = fullName,
+            MobileNumber = mobileNumber,
+            BuildingNumber = buildingNumber,
+            StreetName = street,
+            FloorNumber = floor,
+            ApartmentNumber = apartment,
+            CityId = cityId,
+            AreaId = areaId,
+            FromDate = fromDay,
+            ToDate = toDay,
+            FromTime = fromHour,
+            ToTime = toHour,
+            MonitoringDeviceId = monitDeviceId,
+            NumberOfDays = service,
+            Text = text
+
+        )
+
+        sp.getUserLang(Constans.Language).let {
+            return apiService.sendMonitoringDeviceReq(
+                culture = it,
+                monitoringDeviceReq = requestBody
+            )
+        }
+
+    }
+
+    suspend fun getMonitoringDeviceLevel() = sp.getUserLang(Constans.Language)
+        ?.let { apiService.getMonitoringDeviceLevel(it) }
+
+    suspend fun getDevices(serviceLevel: Int) = sp.getUserLang(Constans.Language)
+        ?.let { apiService.getDevices(it,serviceLevel) }
+
+    suspend fun getMonitoringConfirmation() = sp.getUserLang(Constans.Language)
+        ?.let { apiService.getMonitoringConfirmation(it) }
+
+
+    suspend fun getRotatingByMinute() = sp.getUserLang(Constans.Language)
+        ?.let { apiService.getRotatingByMinute(it) }
 
 
 

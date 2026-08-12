@@ -464,7 +464,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/et_serviceLevel"
+                        android:id="@+id/et_monitoringDeviceLevel"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
                         android:layout_gravity="center_horizontal"

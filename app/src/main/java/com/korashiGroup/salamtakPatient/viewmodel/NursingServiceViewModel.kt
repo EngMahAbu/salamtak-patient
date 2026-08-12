@@ -16,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class NursingServiceViewModel@Inject constructor(val repository: RegisterRepositry) : ViewModel() {
 
-     val nursingResponse = MutableLiveData <Resource<NursingResponse>>()
+    val nursingResponse = MutableLiveData <Resource<NursingResponse>>()
     val fullName = MutableLiveData<String>()
     val fullNameError = MutableLiveData<String?>()
 
@@ -78,7 +78,7 @@ class NursingServiceViewModel@Inject constructor(val repository: RegisterReposit
         val nameParts = fullName.value?.trim()?.split("\\s+".toRegex()) ?: emptyList()
 
         if (nameParts.size < 3) {
-            fullNameError.value = "Please enter your first, middle and last name"
+            fullNameError.value = "Full Name (first-middle-last)"
             isValid = false
         } else {
             fullNameError.value = null
@@ -87,24 +87,24 @@ class NursingServiceViewModel@Inject constructor(val repository: RegisterReposit
         val mobileRegex = Regex("^01[0-9]{9}$")
 
         if (mobileNumber.value.isNullOrEmpty()) {
-            mobileNumberError.value = "Please enter your mobile Number"
+            mobileNumberError.value = "Mobile Number Must Be 11 Numbers"
             isValid = false
         } else if (!mobileRegex.matches(mobileNumber.value!!)) {
-            mobileNumberError.value = "Enter valid Egyptian phone number that include 11 numbers"
+            mobileNumberError.value = "Enter valid Egyptian phone number that include 11 numbers and start with 01"
             isValid = false
         } else {
             mobileNumberError.value = null
         }
 
         if (city.value == null || city.value == 0) {
-            cityError.value = "Please choose your city"
+            cityError.value = "city is required"
             isValid = false
         } else {
             cityError.value = null
         }
 
         if (area.value == null || area.value == 0) {
-            areaError.value = "Please choose your area"
+            areaError.value = "area is required"
             isValid = false
         } else {
             areaError.value = null
@@ -153,13 +153,15 @@ class NursingServiceViewModel@Inject constructor(val repository: RegisterReposit
             genderError.value = null
         }
 
-        val dateRegex = Regex("^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-\\d{4}$")
+       // val dateRegex = Regex("^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-\\d{4}$")
+        val dateRegex = Regex("^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$")
 
         if (fromDate.value.isNullOrEmpty()) {
             fromDateError.value = "Please enter from date"
             isValid = false
         } else if (!dateRegex.matches(fromDate.value!!)) {
-            fromDateError.value = "Invalid date format (MM/DD/YYYY)"
+            //fromDateError.value = "Invalid date format (MM/DD/YYYY)"
+            fromDateError.value = "Invalid date format (yyyy-MM-dd)"
             isValid = false
         } else {
             fromDateError.value = null
@@ -211,7 +213,7 @@ class NursingServiceViewModel@Inject constructor(val repository: RegisterReposit
 
         if (!validateForm()){
 
-                        Log.e("VALIDATION_DEBUG", """
+            Log.e("VALIDATION_DEBUG", """
             fullName = ${fullName.value}
             mobile = ${mobileNumber.value}
             city = ${city.value}
@@ -229,12 +231,9 @@ class NursingServiceViewModel@Inject constructor(val repository: RegisterReposit
             numOfDays = ${numOfDays.value}
             """.trimIndent())
 
-            Log.e("VALIDATION", "FAILED")
-            message.postValue("Validation Failed ❌")
             return
         }
 
-//        Log.e("VALIDATION", "PASSED ✅")
 
         viewModelScope.launch(Dispatchers.IO) {
 
@@ -257,12 +256,13 @@ class NursingServiceViewModel@Inject constructor(val repository: RegisterReposit
                      toTime.value.toString(),
                       serviceLevel.value?:0,
                       numOfDays.value.toString()
+
                   )
                 val body = response.body()
 
                 if (body != null && body.success == true) {
                     nursingResponse.postValue(Resource.sucess(body))
-                    event.postValue(Events.NavigateToMobileClinicConfirmation)
+                    event.postValue(Events.NavigateToNursingConfirmation)
                 } else if (body != null && body.success == false) {
 
                     nursingResponse.postValue(Resource.Error(body.message ?: "حدث خطأ أثناء الإرسال"))

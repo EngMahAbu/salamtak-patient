@@ -101,7 +101,7 @@ class HomeCareFragment : Fragment(),ServicesAdapter.Action {
         })
         homeCareViewModel.getHomeCareService()
     }
-    override fun onItemClick(servicesId: Int,Id:Int) {
+    override fun onItemClick(servicesId: Int,Id:Int, name: String) {
         Log.e("servicesId", "onItemClick: ${servicesId}", )
         Log.e("Id", "onItemClick: ${Id}", )
         when(servicesId){

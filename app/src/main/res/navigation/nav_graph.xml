@@ -177,6 +177,9 @@
                 android:id="@+id/action_homeFragment_to_searchFragment"
                 app:destination="@id/searchFragment" />
         <action
+            android:id="@+id/action_homeFragment_to_salamtakCommunityFragment"
+            app:destination="@id/salamtakCommunityFragment" />
+        <action
                 android:id="@+id/action_homeFragment_to_dialogBottomSheetFragment"
                 app:destination="@id/dialogBottomSheetFragment" />
         <action
@@ -695,6 +698,9 @@
             android:id="@+id/action_askingFoNurssingFragment_to_dialogBottomSheetFragment"
             app:destination="@id/dialogBottomSheetFragment"
             />
+        <action
+            android:id="@+id/action_askingFoNurssingFragment_to_nursingConfirmationFragment"
+            app:destination="@id/NursingServicesConfirmationFragment" />
     </fragment>
 
     <fragment
@@ -739,8 +745,19 @@
     <fragment
             android:id="@+id/monitoringDevicesFragment"
             android:name="com.korashiGroup.salamtakPatient.fragment.homeCare.MonitoringDevicesFragment"
-            android:label="MonitoringDevicesFragment" />
+            android:label="MonitoringDevicesFragment" >
+    <action
+        android:id="@+id/action_MonitoringDevicesFragment_to_homeCareFragment"
+        app:destination="@id/homeCareFragment" />
+        <action
+            android:id="@+id/action_MonitoringDevicesFragment_to_dialogBottomSheetFragment"
+            app:destination="@id/dialogBottomSheetFragment"
+            />
+        <action
+            android:id="@+id/action_MonitoringDevicesFragment_to_monitoringDeviceConfirmationFragment"
+            app:destination="@id/monitoringDeviceConfirmationFragment" />
 
+    </fragment>
     <fragment
         android:id="@+id/mobileClinicFragment"
         android:name="com.korashiGroup.salamtakPatient.fragment.homeCare.MobileClinicFragment"
@@ -762,6 +779,20 @@
             app:destination="@id/dialogBottomSheetFragment" />
 
     </fragment>
+
+    <fragment
+        android:id="@+id/NursingServicesConfirmationFragment"
+        android:name="com.korashiGroup.salamtakPatient.fragment.homeCare.NursingServiceConfirmationFragment"
+        android:label="NursingServicesConfirmationFragment" />
+
+
+    <fragment
+        android:id="@+id/monitoringDeviceConfirmationFragment"
+        android:name="com.korashiGroup.salamtakPatient.fragment.homeCare.MonitoringDeviceConfirmationFragment" />
+
+    <fragment
+        android:id="@+id/salamtakCommunityFragment"
+        android:name="com.korashiGroup.salamtakPatient.fragment.home.SalamtakCommunityFragment" />
 
 
 
