@@ -4,7 +4,6 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="2dp"
         android:background="@color/bg_color_gray"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         tools:context=".fragment.home.HomeFragment">
@@ -12,7 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="3dp">
+            android:padding="2dp">
 
         <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_patientname"
@@ -1347,16 +1346,13 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_PopularDoctors"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
+                    android:paddingBottom="8dp"
                     android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="false"
-                    android:paddingBottom="10dp"
-                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_popularDoctor"
-                    tools:itemCount="3"
-                    tools:listitem="@layout/item_layout_poulardoctors" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:listitem="@layout/item_layout_popular_doctors" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_Medical_ServicesDirectory"

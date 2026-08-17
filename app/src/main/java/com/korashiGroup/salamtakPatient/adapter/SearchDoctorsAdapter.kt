@@ -43,11 +43,9 @@ class SearchDoctorsAdapter(private val booking: Booking,private val isHomeVisit:
 
             tvSpecialization.text = "${services.specialistName} - ${services.seniortyLevelName}"
 
-            services.subSpecialistName?.forEach {
-                subspecialist= "$subspecialist $it,"
-            }
-            subSpecialization.text = subspecialist
-            subspecialist=""
+            val subSpecList = services.subSpecialistName?.filterNotNull()?.filter { it.isNotBlank() }
+            subSpecialization.text = subSpecList?.take(2)?.joinToString(", ") ?: ""
+
             location.text = services.clinicDto?.AreaName
             waitingTime.text = "${services.waitingTime}"
             Feesresult.text = "${services.feesTo.toString()} ${holder.binding.Feesresult.context.getString(R.string.le)}"

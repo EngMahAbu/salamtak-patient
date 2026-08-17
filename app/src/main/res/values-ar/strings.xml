@@ -325,7 +325,11 @@
     <string name="enter_your_registered">أدخل بياناتك المسجلة</string>
     <string name="or">أو</string>
     <string name="addresss">العنوان</string>
-    <string name="clinicservices">خدمات العيادة</string>
+    <string name="clinicservices">الخدمات الطبية للعيادة</string>
+    <string name="none_clinics">لا يوجد</string>
+    <string name="please_select_specialization">الرجاء اختيار التخصص</string>
+    <string name="please_select_city">الرجاء اختيار المدينة</string>
+    <string name="please_select_area">الرجاء اختيار المنطقة</string>
     <string name="avilableappointemnts">"Available "</string>
     <string name="avilableapapointemnts">المواعيد المتاحة</string>
     <string name="reservation_required_first_come_first_served">الكشف بأسبقية الحضور</string>

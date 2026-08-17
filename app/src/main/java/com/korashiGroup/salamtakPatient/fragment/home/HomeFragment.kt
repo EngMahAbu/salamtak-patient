@@ -1,5 +1,6 @@
 package com.korashiGroup.salamtakPatient.fragment.home
 
+import GridSpacingItemDecoration
 import android.app.Activity
 import android.os.Bundle
 import android.util.Log
@@ -319,6 +320,9 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
             adapter = popularDoctorsAdapter
             layoutManager = GridLayoutManager(requireContext(), 2)
             setHasFixedSize(true)
+
+            val spacingInPixels = 6
+            addItemDecoration(GridSpacingItemDecoration(2, spacingInPixels, true))
         }
     }
 

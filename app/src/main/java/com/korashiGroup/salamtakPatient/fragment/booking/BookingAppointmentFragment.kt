@@ -399,27 +399,31 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking, Ima
     private fun reviewsFavoriteDoctor() {
         patientViewModel.reviewsResponse.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
-
                 is Resource.Loading -> {
-
                 }
-
                 is Resource.sucess -> {
-                    binding.Ratecount.text= response.data?.data?.size.toString()
-                    binding.rvReviews.visibility= View.VISIBLE
-                    binding.Reviews.visibility= View.VISIBLE
-                    binding.seeAll.visibility= View.VISIBLE
-                    reveiwsAdapter.submitList(response.data?.data)
-                    reviewsData= response.data!!
-                }
+                    val reviewsList = response.data?.data
 
+                    if (reviewsList.isNullOrEmpty()) {
+                        binding.Reviews.visibility = View.GONE
+                        binding.seeAll.visibility = View.GONE
+                        binding.rvReviews.visibility = View.GONE
+                    } else {
+                        binding.Ratecount.text = reviewsList.size.toString()
+                        binding.rvReviews.visibility = View.VISIBLE
+                        binding.Reviews.visibility = View.VISIBLE
+                        binding.seeAll.visibility = View.VISIBLE
+                        reveiwsAdapter.submitList(reviewsList)
+                        reviewsData = response.data
+                    }
+                }
                 is Resource.Error -> {
 //                    Snackbar.make(requireView(), "${response.message}", Snackbar.LENGTH_SHORT)
 //                        .show()
                 }
             }
-
         })
+
         sharedDataViewmodel.clinicIdAndDoctorId.observe(viewLifecycleOwner, Observer {
             patientViewModel.getDoctorReviews(it.doctorId)
         })
@@ -456,17 +460,6 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking, Ima
             //binding..text="${it.rate?.toInt()}"
         })
 
-        binding.layoutClinicsLocation.setOnClickListener {
-            if (binding.layoutCurrent.visibility == View.GONE) {
-                binding.layoutCurrent.visibility = View.VISIBLE
-                binding.ivClinicsLocation.setImageResource(R.drawable.svg_arrow_down)
-                binding.layoutCurrent.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.expand))
-            } else {
-                binding.layoutCurrent.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.collapse))
-                binding.layoutCurrent.visibility = View.GONE
-                binding.ivClinicsLocation.setImageResource(R.drawable.svg_arrow_up)
-            }
-        }
 
         binding.layoutAboutDoctor.setOnClickListener {
             if (binding.DetailsAboutDoctor.visibility == View.GONE) {
@@ -527,15 +520,21 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking, Ima
             }
         }
     }
-    private fun bindFeatures(currentDtos:CurrentClinicDtos){
-        if (!currentDtos.Videos.isNullOrEmpty()) {
-            val listBlogs= mutableListOf<HomeAdsData>()
-            for (i in currentDtos.Videos.indices!!){
-                val homeAdsData= currentDtos.Videos[i]?.let { it1 ->
-                    currentDtos.Videos[i]?.let { it2 ->
-                        HomeAdsData(true,
-                            it1
-                        )
+    private fun bindFeatures(currentDtos: CurrentClinicDtos) {
+
+        if (currentDtos.Videos.isNullOrEmpty()) {
+            binding.videos.visibility = View.GONE
+            binding.layoutShowDoctorVideos.visibility = View.GONE
+            binding.doctorvideos.visibility = View.GONE
+            binding.layoutShowclinicVideos.visibility = View.GONE
+        } else {
+            binding.videos.visibility = View.VISIBLE
+            binding.layoutShowDoctorVideos.visibility = View.VISIBLE
+            val listBlogs = mutableListOf<HomeAdsData>()
+            for (i in currentDtos.Videos.indices) {
+                val homeAdsData = currentDtos.Videos[i].let { it1 ->
+                    currentDtos.Videos[i].let { it2 ->
+                        HomeAdsData(true, it1)
                     }
                 }
                 if (homeAdsData != null) {
@@ -544,32 +543,34 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking, Ima
             }
             imageVideoAdapter.submitList(listBlogs)
         }
+
         if (!currentDtos.services.isNullOrEmpty()) {
             binding.detailsclinicservices.setText(currentDtos.services?.toString()?.removePrefix("[")?.removeSuffix("]"))
         }
+
         if (!currentDtos.features.isNullOrEmpty()) {
             binding.detailsFeatures.setText(currentDtos.features?.toString()?.removePrefix("[")?.removeSuffix("]"))
         }
+
         if (!currentDtos.insurance.isNullOrEmpty()) {
             binding.detailsInsurance.setText(currentDtos.insurance?.toString()?.removePrefix("[")?.removeSuffix("]"))
         }
-        if (!currentDtos.gallary.isNullOrEmpty()) {
-            binding.rvGallry.visibility= View.VISIBLE
-            binding.photo.visibility= View.VISIBLE
-            val listBlogs= mutableListOf<Gates>()
-            for (i in currentDtos.gallary.indices!!){
-                 val gates=Gates(0,currentDtos.gallary[i].toString())
-                    listBlogs.add(gates)
+
+        if (currentDtos.gallary.isNullOrEmpty()) {
+            binding.photo.visibility = View.GONE
+            binding.layoutPhoto.visibility = View.GONE
+            binding.rvGallry.visibility = View.GONE
+        } else {
+            binding.photo.visibility = View.VISIBLE
+            binding.layoutPhoto.visibility = View.VISIBLE
+            binding.rvGallry.visibility = View.VISIBLE
+            val listBlogs = mutableListOf<Gates>()
+            for (i in currentDtos.gallary.indices) {
+                val gates = Gates(0, currentDtos.gallary[i].toString())
+                listBlogs.add(gates)
             }
             imagesAdapter.submitList(listBlogs)
         }
-        binding.ivCurrentProfile.load(currentDtos.logo) {
-            crossfade(true)
-            crossfade(1000)
-            transformations(CircleCropTransformation())
-        }
-        binding.tvCurrentdoctorName.text=currentDtos.name
-        binding.tvCurrentSpecialization.text="${currentDtos.cityName}-${currentDtos.areaName}"
     }
 
     private fun bindAnthorMainPage(getDoctorClinksResponse: GetDoctorClinksResponse){
@@ -640,11 +641,19 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking, Ima
             subspecialist = "$subspecialist $it,"
         }
         binding.layoutBottomsheetpersistant.tvSpecialization.text = "${getDoctorClinksResponse.data?.seniorityLevelName} - ${getDoctorClinksResponse.data?.specialistName.toString()?.removePrefix("[")?.removeSuffix("]")}"
-       if (!getDoctorClinksResponse.data?.clinicDtos.isNullOrEmpty()){
-           binding.tvDoctorsClinics.visibility= View.VISIBLE
-           binding.rvClinkDoctors.visibility= View.VISIBLE
-           clinksDoctorsAdapter.submitList(getDoctorClinksResponse.data?.clinicDtos)
-       }
+
+        val otherClinicsList = getDoctorClinksResponse.data?.clinicDtos
+        binding.tvDoctorsClinics.visibility = View.VISIBLE
+        binding.tvDoctorsClinics.text = getString(R.string.otherclinics)
+
+        if (otherClinicsList.isNullOrEmpty()) {
+            binding.rvClinkDoctors.visibility = View.GONE
+            binding.tvNoOtherClinics.visibility = View.VISIBLE
+        } else {
+            binding.tvNoOtherClinics.visibility = View.GONE
+            binding.rvClinkDoctors.visibility = View.VISIBLE
+            clinksDoctorsAdapter.submitList(otherClinicsList)
+        }
 
     }
 
@@ -676,5 +685,8 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking, Ima
         val dialog = ImageDialogFragment.newInstance(image)
         dialog.show(parentFragmentManager, "image_res")
     }
+
+
+
 
 }

@@ -392,118 +392,6 @@
                 android:padding="3dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/layout_clinics_location"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:background="@drawable/more_cards_background"
-                    android:padding="5dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/clinics_location"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:background="@drawable/more_background"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-
-                        <TextView
-                            android:id="@+id/tv_clinics_location"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginEnd="10dp"
-                            android:fontFamily="@font/sf_pro_display_semibold"
-                            android:gravity="start"
-                            android:text="@string/clinics_location"
-                            android:textColor="@color/black"
-                            android:textSize="15sp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:id="@+id/iv_clinics_location"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_marginEnd="10dp"
-                            android:adjustViewBounds="true"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/svg_arrow_up"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/layout_current"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="15dp"
-                        android:layout_marginBottom="8dp"
-                        android:background="@color/white"
-                        android:padding="8dp"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/clinics_location">
-
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:id="@+id/iv_currentProfile"
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tv_currentdoctorName"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:fontFamily="@font/avenirltstd_black"
-                            android:gravity="start"
-                            android:padding="3dp"
-                            android:text=""
-                            android:textColor="@color/black"
-                            android:textSize="15sp"
-                            app:layout_constraintStart_toEndOf="@+id/iv_currentProfile"
-                            app:layout_constraintTop_toTopOf="@+id/iv_currentProfile" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tv_currentSpecialization"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginEnd="10dp"
-                            android:fontFamily="@font/avenirltstd_roman"
-                            android:gravity="start"
-                            android:padding="2dp"
-                            android:text=""
-                            android:textColor="@color/black"
-                            android:textSize="15sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/iv_currentProfile"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_currentdoctorName" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layout_About_Doctor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -514,7 +402,7 @@
                     android:padding="5dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/layout_clinics_location">
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/About_Doctor"
@@ -1062,7 +950,6 @@
                     android:text="@string/otherclinics"
                     android:textColor="@color/black"
                     android:textSize="18sp"
-                    android:visibility="gone"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/rv_Reviews" />
 
@@ -1075,12 +962,30 @@
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:layout_marginBottom="@dimen/_10sdp"
                     android:paddingBottom="10dp"
-                    android:visibility="gone"
                     app:layout_constraintBottom_toTopOf="@+id/btn_booking"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_DoctorsClinics"
                     tools:listitem="@layout/item_layout_clinks" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_NoOtherClinics"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:gravity="start"
+                    android:text="@string/none_clinics"
+                    android:textColor="@color/gray"
+                    android:fontFamily="@font/avenirltstd_black"
+                    android:textSize="15sp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toTopOf="@+id/btn_booking"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_DoctorsClinics" />
 
                 <ProgressBar
                     android:id="@+id/progress_bar"

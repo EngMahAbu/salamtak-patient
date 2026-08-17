@@ -27,6 +27,8 @@ data class PopularDoctorS(
     val doctorSpec: String?,
     @SerializedName("DoctorSpecAr")
     val doctorSpecAr: String?,
+    @SerializedName("SeniortyLevelName")
+    val seniortyLevelName: String?,
     @SerializedName("DoctorSpeciality")
     val doctorSpeciality: String?,
     @SerializedName("clinicDto")

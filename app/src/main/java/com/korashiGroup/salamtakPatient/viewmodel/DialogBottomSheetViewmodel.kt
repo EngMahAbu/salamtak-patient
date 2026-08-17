@@ -297,12 +297,35 @@ class DialogBottomSheetViewmodel @Inject constructor(private val repositry: Regi
     }
 
     private fun handelGetAllCities(response: Response<GetAllCitiesResponse>): Resource<GetAllCitiesResponse>? {
-        if (response.isSuccessful){
-            response.body()?.let {
-                return Resource.sucess(it)
+        if (response.isSuccessful) {
+            response.body()?.let { dataResponse ->
+                val citiesList = dataResponse.data
+
+                if (!citiesList.isNullOrEmpty()) {
+                    // Check if current system/app language is Arabic
+                    val isArabic = java.util.Locale.getDefault().language == "ar"
+
+                    // Sort cities alphabetically based on locale
+                    val sortedList = if (isArabic) {
+                        citiesList.sortedBy { it.nameAr ?: "" }
+                    } else {
+                        citiesList.sortedWith(compareBy(String.CASE_INSENSITIVE_ORDER) { it.name ?: "" })
+                    }
+
+                    // Update the list inside the response data object if it's mutable,
+                    // or recreate the response object depending on your model structure.
+                    // If dataResponse.data is a MutableList:
+                    if (citiesList is MutableList) {
+                        citiesList.clear()
+                        citiesList.addAll(sortedList)
+                    }
+                }
+
+                return Resource.sucess(dataResponse)
             }
         }
-        return Resource.Error(response.message())    }
+        return Resource.Error(response.message())
+    }
 
     fun getAreasByCityId(cityId:Int)=viewModelScope.launch(Dispatchers.IO+handler) {
         allAreasByCityIdResponse.postValue(Resource.Loading())

@@ -146,25 +146,18 @@ class SpecialistDoctorsFragment : Fragment(),SpecialictyAdapter.SelectSpecialist
             }, 1000)
         }
         binding.btnSend.setOnClickListener {
-            doctorName=binding.etSearch.text.toString()
-//            if (!binding.etSearch.text.toString().isNullOrEmpty()){
-//                findNavController().navigate(R.id.searchFragment)
-//            }else{
-                //if (isvalidateFeilds()) {
-                  //  findNavController().navigate(R.id.searchFragment)
-               // }
-        //    }
-            when(examinationtypeid){
+            doctorName = binding.etSearch.text.toString()
 
-                8->{
-                    if (!list.isNullOrEmpty()){
-                        sharedDataViewmodel.getLabsInfoResponse(LabsInfo(typeId,this.LabId,binding.etSearch.text.toString(),list,true))
+            when (examinationtypeid) {
+                8 -> {
+                    if (!list.isNullOrEmpty()) {
+                        sharedDataViewmodel.getLabsInfoResponse(LabsInfo(typeId, this.LabId, binding.etSearch.text.toString(), list, true))
                         findNavController().navigate(R.id.labsAndScannerFragment)
-                    }else{
-                        Toast.makeText(requireContext(),getString(R.string.please_choose_analysis_first),Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(requireContext(), getString(R.string.please_choose_analysis_first), Toast.LENGTH_SHORT).show()
                     }
                 }
-                9->{
+                9 -> {
                     if (!list.isNullOrEmpty()) {
                         sharedDataViewmodel.getLabsInfoResponse(
                             LabsInfo(
@@ -176,14 +169,15 @@ class SpecialistDoctorsFragment : Fragment(),SpecialictyAdapter.SelectSpecialist
                             )
                         )
                         findNavController().navigate(R.id.labsAndScannerFragment)
-                    }  else{
-                            Toast.makeText(requireContext(),
-                                getString(R.string.please_choose_analysis_first),Toast.LENGTH_SHORT).show()
-                        }
+                    } else {
+                        Toast.makeText(requireContext(), getString(R.string.please_choose_analysis_first), Toast.LENGTH_SHORT).show()
+                    }
                 }
-                else->{
-                    if ((isSpecalistSelected && isAreaSelected && isCitySelected) || (doctorName.isNotBlank() && isSpecalistSelected && isCitySelected))
-                    findNavController().navigate(R.id.searchFragment)
+                else -> {
+                    // Enforce validation for standard doctor search
+                    if (isvalidateFields()) {
+                        findNavController().navigate(R.id.searchFragment)
+                    }
                 }
             }
         }
@@ -286,10 +280,16 @@ class SpecialistDoctorsFragment : Fragment(),SpecialictyAdapter.SelectSpecialist
         sharedDataViewmodel.specialication.observe(viewLifecycleOwner) {
             isSpecalistSelected = true
             binding.etSpecialization.setText(it.name)
+            // The sub-specialization text view will also clear automatically
+            // because the viewmodel will post an empty list.
         }
 
         sharedDataViewmodel.subSpecialication.observe(viewLifecycleOwner) {
-            binding.etSubSpecialization.setText(it.joinToString(", ") { it.name })
+            if (it.isNullOrEmpty()) {
+                binding.etSubSpecialization.setText("")
+            } else {
+                binding.etSubSpecialization.setText(it.joinToString(", ") { sub -> sub.name })
+            }
         }
 
         sharedDataViewmodel.getCity.observe(viewLifecycleOwner) {
@@ -307,64 +307,48 @@ class SpecialistDoctorsFragment : Fragment(),SpecialictyAdapter.SelectSpecialist
         }
     }
 
-    private fun isvalidateFeilds(): Boolean {
+    private fun isvalidateFields(): Boolean {
+        val cityName = binding.etChooseCity.text.toString().trim()
+        val areaName = binding.etChooseArea.text.toString().trim()
+        val specializationName = binding.etSpecialization.text.toString().trim()
+        val doctorNameInput = binding.etSearch.text.toString().trim()
 
-        var value = false
-        if (binding.etChooseCity.text.toString().trim().isNullOrEmpty() && binding.etChooseArea.text.toString().trim().isNullOrEmpty()
-            && binding.etSpecialization.text.toString().trim().isNullOrEmpty()){
-            binding.tvCityError.text = getString(R.string.required)
-            binding.tvCityError.visibility = View.VISIBLE
-            binding.tvAreaError.text = getString(R.string.required)
-            binding.tvAreaError.visibility = View.VISIBLE
-            binding.tvSpecializationError.text = getString(R.string.required)
-            binding.tvSpecializationError.visibility = View.VISIBLE
-            return false
-        }else{
-        if (binding.etChooseCity.text.toString().trim().isNullOrEmpty()) {
-            binding.btnLayoutChooseCity.setCompoundDrawablesWithIntrinsicBounds(
-                0,
-                0,
-                R.drawable.ic_error,
-                0
-            )
-            binding.tvCityError.text = getString(R.string.requiredcity)
-            binding.tvCityError.visibility = View.VISIBLE
-            binding.layoutChooseCity.setBackgroundResource(R.drawable.bg_edittext_error)
-           return false
+        var isValid = true
 
-        } else {
-            binding.tvCityError.visibility = View.GONE
-            binding.layoutChooseCity.setBackgroundResource(R.drawable.bg_edittext)
-            binding.btnLayoutChooseCity.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
-
-        }
-
-        if (binding.etChooseArea.text.toString().trim().isNullOrEmpty()) {
-            binding.tvAreaError.text = getString(R.string.requiredarea)
-            binding.tvAreaError.visibility = View.VISIBLE
-            binding.layoutChooseArea.setBackgroundResource(R.drawable.bg_edittext_error)
-          return false
-        }else {
-            binding.tvAreaError.visibility = View.GONE
-            binding.layoutChooseArea.setBackgroundResource(R.drawable.bg_edittext)
-            binding.btnLayoutChooseArea.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
-
-        }
-
-        if (binding.etSpecialization.text.toString().trim().isNullOrEmpty()) {
-            binding.tvSpecializationError.text = getString(R.string.required)
+        // 1. Specialization validation
+        if (specializationName.isEmpty()) {
+            binding.tvSpecializationError.text = getString(R.string.please_select_specialization)
             binding.tvSpecializationError.visibility = View.VISIBLE
             binding.layoutChooseSpecialization.setBackgroundResource(R.drawable.bg_edittext_error)
-
+            isValid = false
         } else {
             binding.tvSpecializationError.visibility = View.GONE
             binding.layoutChooseSpecialization.setBackgroundResource(R.drawable.bg_edittext)
-            binding.btnLayoutChooseSpecialization.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
-            value = true
         }
-        }
-        return value
 
+        // 2. City OR Doctor Name validation
+        if (cityName.isEmpty() && doctorNameInput.isEmpty()) {
+            binding.tvCityError.text = getString(R.string.please_select_city)
+            binding.tvCityError.visibility = View.VISIBLE
+            binding.layoutChooseCity.setBackgroundResource(R.drawable.bg_edittext_error)
+            isValid = false
+        } else {
+            binding.tvCityError.visibility = View.GONE
+            binding.layoutChooseCity.setBackgroundResource(R.drawable.bg_edittext)
+        }
+
+        // 3. Area validation (Required if City is selected)
+        if (cityName.isNotEmpty() && areaName.isEmpty()) {
+            binding.tvAreaError.text = getString(R.string.please_select_area)
+            binding.tvAreaError.visibility = View.VISIBLE
+            binding.layoutChooseArea.setBackgroundResource(R.drawable.bg_edittext_error)
+            isValid = false
+        } else {
+            binding.tvAreaError.visibility = View.GONE
+            binding.layoutChooseArea.setBackgroundResource(R.drawable.bg_edittext)
+        }
+
+        return isValid
     }
 
     private fun bindViews(){

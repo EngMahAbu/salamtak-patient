@@ -79,7 +79,14 @@
     </string>
     <string name="upload_front_syndicate_card_image">Upload front Syndicate Card image</string>
     <string name="upload_back_syndicate_card_image">Upload back Syndicate Card image</string>
+
+    <string name="please_select_specialization">Please Select Speciality</string>
+    <string name="please_select_city">Please Select City</string>
+    <string name="please_select_area">Please Select Area</string>
+
+
     <string name="required">Required</string>
+
     <string name="password_required">Password is required</string>
     <string name="requiredbirthdate">.Birth Date Is Required</string>
     <string name="requiredcountry">.Country Is Required</string>
@@ -133,7 +140,7 @@
     <string name="radiologycenter">Radiology Centers</string>
     <string name="engile">Salamtak ِِAngel</string>
     <string name="search">Search</string>
-    <string name="search_by_doctor_name">Search by doctor name...</string>
+    <string name="search_by_doctor_name">Search by Doctor Name</string>
     <string name="doctors_found">Doctors</string>
     <string name="polyclinic_found">PolyClinics Found</string>
     <string name="all">All</string>
@@ -162,7 +169,7 @@
     <string name="patientName">Patient Name</string>
     <string name="choose_specialization">Choose Speciality</string>
     <string name="tip_of_the_day">Tip Of The Day</string>
-    <string name="choose_sub_specialization">Choose sub Speciality</string>
+    <string name="choose_sub_specialization">Choose Sub Speciality</string>
     <string name="choose_Seniority_Level">Choose Seniority Level</string>
     <string name="choose_speciality">Choose city</string>
     <string name="choose_service_level">Choose academic degree</string>
@@ -343,7 +350,8 @@
     <string name="enter_your_registered">Enter your registered</string>
     <string name="or">OR</string>
     <string name="addresss">Address</string>
-    <string name="clinicservices">Clinic Services</string>
+    <string name="clinicservices">Clinic Medical Services</string>
+    <string name="none_clinics">Non</string>
     <string name="avilableappointemnts">"Available "</string>
     <string name="avilableapapointemnts">Available Appointments</string>
     <string name="reservation_required_first_come_first_served">Reservation Required / First-in/First-Served</string>
@@ -361,7 +369,7 @@
     <string name="privacy_policy">"Privacy Policy "</string>
     <string name="dr">Dr.</string>
     <string name="there_is_no_appointments_available"> There Is No available Bookings in the Date For The Doctor Please Choose Another Date</string>
-    <string name="features">Features</string>
+    <string name="features">Clinic Features</string>
     <string name="wifiandtv">wifi,tv</string>
     <string name="photos">Clinics Gallary</string>
     <string name="otherclinics">Other Clinics</string>

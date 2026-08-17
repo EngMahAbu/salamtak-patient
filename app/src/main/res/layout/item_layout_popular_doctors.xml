@@ -13,7 +13,6 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/more_cards_background"
                 app:cardCornerRadius="10dp"
-                app:cardUseCompatPadding="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -196,6 +195,7 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:isIndicator="true"
+                        android:rating="4"
                         android:scaleX="1.1"
                         android:scaleY="1.1"
                         android:stepSize="0.5"
@@ -203,7 +203,7 @@
                         app:layout_constraintEnd_toStartOf="@+id/Reviews"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tv_Specialization"
-                        tools:rating="4.5" />
+                        tools:rating="4" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -230,7 +230,7 @@
                             android:layout_height="21dp"
                             android:adjustViewBounds="true"
                             android:scaleType="fitCenter"
-                            android:src="@drawable/svg_stethoscope"
+                            android:src="@drawable/stethoscope"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -264,18 +264,17 @@
                         android:ellipsize="end"
                         android:fontFamily="@font/sf_pro_display_semibold"
                         android:gravity="start"
-                        android:lines="1"
-                        android:padding="2dp"
-                        android:scrollbars="horizontal"
-                        android:text="Gynecology and Infertility"
-                        android:textColor="@color/blue"
-                        android:textSize="12sp"
-                        app:layout_constraintBottom_toBottomOf="@+id/layout_Sub_specialization"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toEndOf="@+id/tv_sub_specialization"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.687" />
+                        android:maxLines="3"
+                    android:padding="2dp"
+                    tools:text="Gynecology and Infertility"
+                    android:textColor="@color/blue"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/layout_Sub_specialization"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/tv_sub_specialization"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.687" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -295,11 +294,11 @@
 
                         <com.google.android.material.imageview.ShapeableImageView
                             android:id="@+id/iv_Address"
-                            android:layout_width="21dp"
-                            android:layout_height="21dp"
+                            android:layout_width="23dp"
+                            android:layout_height="18dp"
                             android:adjustViewBounds="true"
                             android:scaleType="fitCenter"
-                            android:src="@drawable/svg_location"
+                            android:src="@drawable/location"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -427,7 +426,7 @@
                             android:layout_height="21dp"
                             android:adjustViewBounds="true"
                             android:scaleType="fitCenter"
-                            android:src="@drawable/svg_money"
+                            android:src="@drawable/money"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"

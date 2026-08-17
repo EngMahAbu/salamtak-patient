@@ -65,9 +65,6 @@ class SharedDataViewmodel:ViewModel() {
     fun getFees(fees:Int){
         feesResponse.postValue(fees)
     }
-    fun getspecialication(specialist:SpecialistData){
-        specialication.postValue(specialist)
-    }
     fun getOfferInfo(offer: Offer){
         offerResponse.postValue(offer)
     }
@@ -183,5 +180,14 @@ class SharedDataViewmodel:ViewModel() {
     fun getLabsInfoResponse(labsInfo: LabsInfo){
         labsResponse.postValue(labsInfo)
     }
+    fun clearSubSpecialization(){
+        subSpecialication.postValue(emptyList())
+    }
+
+    fun getspecialication(specialist:SpecialistData){
+        specialication.postValue(specialist)
+        clearSubSpecialization() // Automatically clears sub-specializations when a new specialization is picked
+    }
+
 
 }

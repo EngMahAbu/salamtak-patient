@@ -588,8 +588,18 @@ class DialogBottomSheetFragment : BottomSheetDialogFragment(), SpecialistAdapter
 
                 is Resource.sucess -> {
                     hideprogressbar()
-                    response.data?.data?.let {
-                        getAllCitiesAdapter.submitList(it.sortedBy { if (lang == "en") it.name.lowercase() else it.nameAr })
+                    response.data?.data?.let { citiesList ->
+                        val currentLocale = DefaultLocaleHelper.getInstance(requireContext()).getCurrentLocale()
+
+                        // Sort cities alphabetically based on the current app language
+                        val sortedList = if (currentLocale == "ar") {
+                            citiesList.sortedBy { it.nameAr ?: "" }
+                        } else {
+                            citiesList.sortedWith(compareBy(String.CASE_INSENSITIVE_ORDER) { it.name ?: "" })
+                        }
+
+                        getAllCitiesAdapter.submitList(sortedList)
+                        getAllCitiesAdapter.notifyDataSetChanged()
                     }
                 }
 

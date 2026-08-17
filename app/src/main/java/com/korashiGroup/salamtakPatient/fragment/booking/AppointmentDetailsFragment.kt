@@ -547,4 +547,8 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
     }
 
 
+
+
+
+
 }
