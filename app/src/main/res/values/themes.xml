@@ -60,6 +60,11 @@
     </style>
 
     <style name="circle">
-        <item name="cornerSize">40dp</item>
+        <item name="cornerSize">50dp</item>
+    </style>
+
+    <style name="CircleImageViewStyle">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
     </style>
 </resources>
