@@ -486,13 +486,13 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
     private fun bindFields() {
         getCity()
         sharedDataViewmodel.specialication.observe(viewLifecycleOwner) {
-            binding.layoutBottomsheetpersistant.etSpecialization.setText(it.name)
-            if (it.name.isNullOrEmpty()) {
-                //   binding.tvSearch.setText(getString(R.string.search))
+            if (it.id == 0) {
+                binding.layoutBottomsheetpersistant.etSpecialization.setText("")
+                specialistId = null // Clear the specialist filter so all doctors show
             } else {
-                //  binding.tvSearch.setText(it.name)
+                binding.layoutBottomsheetpersistant.etSpecialization.setText(it.name)
+                specialistId = it.id
             }
-            specialistId = it.id
         }
         sharedDataViewmodel.subSpecialication.observe(viewLifecycleOwner) {
             var name = ""

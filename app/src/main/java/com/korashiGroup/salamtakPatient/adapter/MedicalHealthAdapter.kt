@@ -14,7 +14,7 @@ import com.korashiGroup.salamtakPatient.databinding.ItemLayoutHealthBinding
 import com.korashiGroup.salamtakPatient.model.healthy.ItemHealth
 
 
-class MedicalHealthAdapter(val onclick: Action) :
+class MedicalHealthAdapter(val onclick: Action, val defaultImageResId: Int = R.drawable.ic_medicalhistory) :
    PagingDataAdapter<ItemHealth, MedicalHealthAdapter.ViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -26,37 +26,28 @@ class MedicalHealthAdapter(val onclick: Action) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val services = getItem(position)
+
         if (services != null) {
-            holder.binding.ivDoctorProfile.load(services.logo) {
-                crossfade(true)
-                placeholder(R.drawable.ic_medicalhistory)
-                crossfade(1000)
-                transformations(CircleCropTransformation())
-            }
-        }
-        if (services != null) {
+            // Load the determined static icon into the item view
+            holder.binding.ivDoctorProfile.setImageResource(defaultImageResId)
+
             holder.binding.tvDoctorName.text = services.name
-        }
-        if (services != null) {
+
             if (!services.healthEntityPhoneDtos.isNullOrEmpty()) {
-                holder.binding.tvSubSpecialization.text = services.healthEntityPhoneDtos.get(0)
+                holder.binding.tvSubSpecialization.text = services.healthEntityPhoneDtos[0]
             }
-        }
-        if (services != null) {
+
             holder.binding.tvAddress.text = services.address
-        }
-        if (services != null) {
             holder.binding.tvWaitingTime.text = services.fixedFee.toString()
         }
 
         holder.binding.btnBooking.setOnClickListener {
             if (services != null) {
                 if (!services.healthEntityPhoneDtos.isNullOrEmpty()) {
-                    services.healthEntityPhoneDtos.get(0)?.let { it1 -> onclick.onItemClick(it1) }
+                    services.healthEntityPhoneDtos[0]?.let { it1 -> onclick.onItemClick(it1) }
                 }
             }
         }
-
     }
 
 

@@ -88,7 +88,14 @@ class HealthEntityFragment : Fragment(),MedicalHealthAdapter.Action {
     }
 
     private fun medicalServicesRecylerview(){
-        healthAdapter = MedicalHealthAdapter(this)
+        val defaultImageResId = when (args.healthtype) {
+            2 -> R.drawable.icon_hospital_guide
+            3 -> R.drawable.icon_labs_guide
+            4 -> R.drawable.icon_radiology_guide
+            5 -> R.drawable.icon_pharmacy_guide
+            else -> R.drawable.icon_hospital_guide
+        }
+        healthAdapter = MedicalHealthAdapter(this, defaultImageResId)
 //        binding.rvHelthEntity.apply {
 //            adapter = healthAdapter
 //            layoutManager = LinearLayoutManager(requireContext())

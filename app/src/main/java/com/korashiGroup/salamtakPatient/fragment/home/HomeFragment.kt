@@ -126,7 +126,6 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         //observeTipOfDay()
         viewmodel.getRotatingByMinute()
 
@@ -268,14 +267,15 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
             findNavController().navigate(R.id.signupFragment)
         }
         binding.tvSeeAll.setOnClickListener {
-            //if (specilityId > 0) {
-                findNavController().navigate(R.id.searchFragment)
-            //}
+            specilityId = 0
+            sharedDataViewmodel.getspecialication(SpecialistData(0, "", false, "")) // Reset shared data
+            findNavController().navigate(R.id.searchFragment)
         }
+
         binding.tvSeeAllspecial.setOnClickListener {
-            if (specilityId > 0) {
-                findNavController().navigate(R.id.searchFragment)
-            }
+            specilityId = 0
+            sharedDataViewmodel.getspecialication(SpecialistData(0, "", false, "")) // Reset shared data
+            findNavController().navigate(R.id.searchFragment)
         }
 
 //        binding.frame1.setOnClickListener {
