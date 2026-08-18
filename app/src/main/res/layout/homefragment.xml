@@ -21,11 +21,11 @@
                 android:gravity="center"
                 android:padding="2dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginStart="14dp"
+                android:layout_marginStart="10dp"
                 android:text=""
                 android:textColor="@color/black"
                 android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/profile_doctor_image"
                 app:layout_constraintTop_toBottomOf="@+id/tv_Welcome"
         />
 
@@ -56,6 +56,17 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
+        <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/profile_doctor_image"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_Welcome"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_patientname"
+                />
+
         <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_Welcome"
                 android:layout_width="0dp"
@@ -64,11 +75,11 @@
                 android:gravity="center"
                 android:padding="2dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginStart="15dp"
+                android:layout_marginStart="10dp"
                 android:text="os"
                 android:textColor="@color/dark_grey"
                 android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/profile_doctor_image"
                 app:layout_constraintTop_toTopOf="parent"
         />
         <com.airbnb.lottie.LottieAnimationView

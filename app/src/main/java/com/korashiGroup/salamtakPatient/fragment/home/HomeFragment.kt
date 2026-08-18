@@ -267,8 +267,6 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
             findNavController().navigate(R.id.signupFragment)
         }
         binding.tvSeeAll.setOnClickListener {
-            specilityId = 0
-            sharedDataViewmodel.getspecialication(SpecialistData(0, "", false, "")) // Reset shared data
             findNavController().navigate(R.id.searchFragment)
         }
 
@@ -645,11 +643,11 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
             binding.tvPatientname.text = firstName
         }
 
-//        binding.ivPatientProfile.load("https://salamtechapi.azurewebsites.net/${sp.getUser()?.image}") {
-//            crossfade(true)
-//            crossfade(1000)
-//            transformations(CircleCropTransformation())
-//        }
+        binding.profileDoctorImage.load("https://salamtechapi.azurewebsites.net/${sp.getUser()?.image}") {
+            crossfade(true)
+            crossfade(1000)
+            transformations(CircleCropTransformation())
+        }
 
     }
 
@@ -1354,6 +1352,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
                         }
 
                         findNavController().navigate(R.id.bookingAppointmentFragment,bundle)
+                        doctorProfileViewModel.doctorprofileResponse.value = null
                     }
 
                     is Resource.Error -> {

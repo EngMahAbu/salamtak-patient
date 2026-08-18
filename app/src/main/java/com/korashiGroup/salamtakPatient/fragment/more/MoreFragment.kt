@@ -20,6 +20,8 @@ import com.korashiGroup.salamtakPatient.utils.SpUtil
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+import coil.load
+import coil.transform.CircleCropTransformation
 
 @AndroidEntryPoint
 class MoreFragment : Fragment() {
@@ -62,12 +64,12 @@ class MoreFragment : Fragment() {
             binding.tvEdit.text = sp.getUser()?.NameAR
         }
 
-//        binding.ivPatientProfile.load("https://salamtechapi.azurewebsites.net/${sp.getUser()?.image}") {
-//            crossfade(true)
-//            crossfade(1000)
-//            placeholder(R.drawable.ic_profile)
-//            transformations(CircleCropTransformation())
-//        }
+        binding.profileDoctorImage.load("https://salamtechapi.azurewebsites.net/${sp.getUser()?.image}") {
+            crossfade(true)
+            crossfade(1000)
+            placeholder(R.drawable.ic_profile)
+            transformations(CircleCropTransformation())
+        }
         initButton()
        // getSkipLoginStatus()
         editUi()

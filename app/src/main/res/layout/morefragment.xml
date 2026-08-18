@@ -46,7 +46,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/tv_more">
 
                 <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/iv_patientImage"
+                        android:id="@+id/profile_doctor_image"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_marginTop="20dp"
@@ -78,8 +78,8 @@
                         android:text="@string/helleo"
                         android:textColor="@color/white"
                         android:textSize="18sp"
-                        app:layout_constraintStart_toEndOf="@+id/iv_patientImage"
-                        app:layout_constraintTop_toTopOf="@+id/iv_patientImage" />
+                        app:layout_constraintStart_toEndOf="@+id/profile_doctor_image"
+                        app:layout_constraintTop_toTopOf="@+id/profile_doctor_image" />
 
                 <TextView
                         android:id="@+id/tv_Edit"
@@ -95,8 +95,8 @@
                         android:text="@string/click_here_to_edit_your_profile"
                         android:textColor="@color/white"
                         android:textSize="12sp"
-                        app:layout_constraintBottom_toBottomOf="@+id/iv_patientImage"
-                        app:layout_constraintStart_toEndOf="@+id/iv_patientImage"
+                        app:layout_constraintBottom_toBottomOf="@+id/profile_doctor_image"
+                        app:layout_constraintStart_toEndOf="@+id/profile_doctor_image"
                         app:layout_constraintTop_toBottomOf="@+id/tv_name" />
 
                 <com.google.android.material.imageview.ShapeableImageView

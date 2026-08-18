@@ -122,14 +122,20 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
     @SuppressLint("SimpleDateFormat")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-       /* requireActivity().onBackPressedDispatcher.addCallback(
+        requireActivity().onBackPressedDispatcher.addCallback(
             viewLifecycleOwner,
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    findNavController().navigate(R.id.specialistDoctorsFragment)
+                    if (type == 0) {
+                        DateUtils.setstatus("")
+                        findNavController().popBackStack()
+                    } else {
+                        polyClinicRecylerview()
+                        polyClinicSearch()
+                    }
                 }
             }
-        )*/
+        )
         instance = this
         bindFields()
         binding.ivPrevious.isEnabled = step != 1
@@ -1302,6 +1308,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                             "booking appointment"
                         )
                     findNavController().navigate(action)
+                    viewmodel.doctorClinkResponse.value = null
                 }
 
                 is Resource.Error -> {
