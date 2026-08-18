@@ -267,6 +267,9 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
             findNavController().navigate(R.id.signupFragment)
         }
         binding.tvSeeAll.setOnClickListener {
+            if (specilityId == 0) {
+                sharedDataViewmodel.getspecialication(SpecialistData(0, "", false, ""))
+            }
             findNavController().navigate(R.id.searchFragment)
         }
 
@@ -642,13 +645,6 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
             val firstName = fullName.split(" ").firstOrNull() ?: ""
             binding.tvPatientname.text = firstName
         }
-
-        binding.profileDoctorImage.load("https://salamtechapi.azurewebsites.net/${sp.getUser()?.image}") {
-            crossfade(true)
-            crossfade(1000)
-            transformations(CircleCropTransformation())
-        }
-
     }
 
     private fun getCity() {

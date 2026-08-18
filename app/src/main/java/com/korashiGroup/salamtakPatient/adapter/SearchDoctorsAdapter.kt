@@ -45,8 +45,13 @@ class SearchDoctorsAdapter(private val booking: Booking,private val isHomeVisit:
 
             val subSpecList = services.subSpecialistName?.filterNotNull()?.filter { it.isNotBlank() }
             subSpecialization.text = subSpecList?.take(2)?.joinToString(", ") ?: ""
-
-            location.text = services.clinicDto?.AreaName
+            val city = services.clinicDto?.CityName?.trim().orEmpty()
+            val area = services.clinicDto?.AreaName?.trim().orEmpty()
+            location.text = when {
+                city.isNotEmpty() && area.isNotEmpty() -> "$city - $area"
+                city.isNotEmpty() -> city
+                else -> area
+            }
             waitingTime.text = "${services.waitingTime}"
             Feesresult.text = "${services.feesTo.toString()} ${holder.binding.Feesresult.context.getString(R.string.le)}"
            holder.binding.docRatingBar.rating= (services.rate?.toFloat()?: 1.0f) / 2.0f

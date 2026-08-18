@@ -68,24 +68,42 @@ class ImageServicesViewModel @Inject constructor(
                     )
                 } ?: emptyList()
 
-                // 2. Create your static items (using string literals to avoid Context leaks)
-                val offersItem = ImageServices(
-                     R.drawable.ic_offers,context.getString(R.string.offers),
-                    "العروض",
-                    Id = 7
-                )
+                // 2. Find specific API items to arrange in 2x3 grid order:
+                // Row 1: In Clinic Booking | Home Visit | Poly Clinic
+                // Row 2: Video Call | Call | Offers
+                val inClinicItem = apiMappedList.find { it.Id == 1 }
+                    ?: apiMappedList.find { it.textService.contains("Clinic", ignoreCase = true) || it.textServiceArabic?.contains("عيادة") == true }
+                val homeVisitItem = apiMappedList.find { it.Id == 2 || it.Id == 10 }
+                    ?: apiMappedList.find { it.textService.contains("Home", ignoreCase = true) || it.textServiceArabic?.contains("منزل") == true }
+                val videoCallItem = apiMappedList.find { it.Id == 8 || it.Id == 3 || it.Id == 4 }
+                    ?: apiMappedList.find { it.textService.contains("Video", ignoreCase = true) || it.textServiceArabic?.contains("فيديو") == true }
+                val callItem = apiMappedList.find { it.Id == 9 || it.Id == 5 }
+                    ?: apiMappedList.find { it.textService.contains("Call", ignoreCase = true) || it.textServiceArabic?.contains("مكالمة") == true || it.textServiceArabic?.contains("هاتف") == true }
 
-                val polyclinicItem = ImageServices(
-                  R.drawable.ic_polyclinics,
-                    context.getString(R.string.polyclinics),"مراكز طبية",
-                    Id = 6
-                )
+                val itemInClinic = inClinicItem?.copy(image_onboarding = R.drawable.m_book, textService = "In Clinic Booking")
+                    ?: ImageServices(R.drawable.m_book, "In Clinic Booking", "حجز عيادة", Id = 1)
 
-                // 3. Combine API items and static items into a single mutable list
-                val combinedList = apiMappedList.toMutableList().apply {
-                    add(polyclinicItem)
-                    add(offersItem)
-                }
+                val itemHomeVisit = homeVisitItem?.copy(image_onboarding = R.drawable.m_home, textService = "Home Visit")
+                    ?: ImageServices(R.drawable.m_home, "Home Visit", "زيارة منزلية", Id = 2)
+
+                val itemPolyClinic = ImageServices(R.drawable.m_poly, "PolyClinic", "مراكز طبية", Id = 6)
+
+                val itemVideoCall = videoCallItem?.copy(image_onboarding = R.drawable.m_video, textService = "Video Call", textServiceArabic = "مكالمة فيديو")
+                    ?: ImageServices(R.drawable.m_video, "Video Call", "مكالمة فيديو", Id = 8)
+
+                val itemCall = callItem?.copy(image_onboarding = R.drawable.m_call, textService = "Call")
+                    ?: ImageServices(R.drawable.m_call, "Call", "استشارة هاتفية", Id = 9)
+
+                val itemOffers = ImageServices(R.drawable.ic_offers, context.getString(R.string.offers), "العروض", Id = 7)
+
+                val combinedList = listOf(
+                    itemInClinic,
+                    itemHomeVisit,
+                    itemPolyClinic,
+                    itemVideoCall,
+                    itemCall,
+                    itemOffers
+                )
 
                 return Resource.sucess(combinedList)
             }
