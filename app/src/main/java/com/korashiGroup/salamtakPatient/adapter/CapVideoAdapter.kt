@@ -66,11 +66,78 @@ class CapVideoAdapter: ListAdapter<DataBlogs, CapVideoAdapter.ViewHolder>(CapVid
 
 
             holder.binding.youtubePlayerView.apply {
-                //  val videoId =videoid[1].substringBefore("&")
-                this.loadData("<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/${videoId}\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
-                    "text/html","utf-8")
-                settings.javaScriptEnabled=true
-                webChromeClient= WebChromeClient()
+                settings.javaScriptEnabled = true
+                settings.domStorageEnabled = true
+                webChromeClient = object : WebChromeClient() {
+                    private var customView: View? = null
+                    private var customViewCallback: CustomViewCallback? = null
+
+                    private fun getActivity(context: android.content.Context?): android.app.Activity? {
+                        if (context == null) return null
+                        if (context is android.app.Activity) return context
+                        if (context is android.content.ContextWrapper) return getActivity(context.baseContext)
+                        return null
+                    }
+
+                    override fun onShowCustomView(view: View?, callback: CustomViewCallback?) {
+                        if (customView != null) {
+                            callback?.onCustomViewHidden()
+                            return
+                        }
+                        customView = view
+                        customViewCallback = callback
+                        
+                        val activity = getActivity(holder.itemView.context)
+                        val decorView = activity?.window?.decorView as? android.widget.FrameLayout
+                        
+                        // Hide system UI for true full screen
+                        activity?.window?.decorView?.systemUiVisibility = (View.SYSTEM_UI_FLAG_FULLSCREEN
+                                or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                                or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
+                                
+                        decorView?.addView(customView, android.widget.FrameLayout.LayoutParams(
+                            android.widget.FrameLayout.LayoutParams.MATCH_PARENT,
+                            android.widget.FrameLayout.LayoutParams.MATCH_PARENT
+                        ))
+                    }
+
+                    override fun onHideCustomView() {
+                        val activity = getActivity(holder.itemView.context)
+                        val decorView = activity?.window?.decorView as? android.widget.FrameLayout
+                        decorView?.removeView(customView)
+                        customView = null
+                        
+                        // Restore system UI
+                        activity?.window?.decorView?.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
+                        
+                        customViewCallback?.onCustomViewHidden()
+                    }
+                }
+
+                webViewClient = object : android.webkit.WebViewClient() {
+                    override fun shouldOverrideUrlLoading(view: android.webkit.WebView?, request: android.webkit.WebResourceRequest?): Boolean {
+                        val url = request?.url?.toString()
+                        if (url != null && (url.contains("youtube.com") || url.contains("youtu.be"))) {
+                            val intent = android.content.Intent(android.content.Intent.ACTION_VIEW, android.net.Uri.parse(url))
+                            holder.itemView.context.startActivity(intent)
+                            return true
+                        }
+                        return super.shouldOverrideUrlLoading(view, request)
+                    }
+
+                    override fun shouldOverrideUrlLoading(view: android.webkit.WebView?, url: String?): Boolean {
+                        if (url != null && (url.contains("youtube.com") || url.contains("youtu.be"))) {
+                            val intent = android.content.Intent(android.content.Intent.ACTION_VIEW, android.net.Uri.parse(url))
+                            holder.itemView.context.startActivity(intent)
+                            return true
+                        }
+                        return super.shouldOverrideUrlLoading(view, url)
+                    }
+                }
+                
+                val iframeHtml = "<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/${videoId}?enablejsapi=1&origin=https://salamtak.com\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+                
+                loadDataWithBaseURL("https://salamtak.com", iframeHtml, "text/html", "utf-8", null)
             }
 
 

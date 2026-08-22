@@ -40,12 +40,12 @@ class MainDoctorAccountAdapter(val addItems:IAddItems ,val status:Boolean):ListA
 
         }else{
          holder.binding.doctorNameTv.text=services.doctorName
-            holder.binding.balanceTv.text="${services.totalAmount!! - services.paidAmount!!} EGP "
-            holder.binding.feeTv.text="${services.totalAmount!!} EGP "
-            holder.binding.paidTv.text="${services.paidAmount!!} EGP "
-            holder.binding.totalfeesTv.text="${services.totalAmount!!} EGP "
-            holder.binding.totalpaidTv.text="${services.paidAmount!!} EGP "
-            holder.binding.totabalanceTv.text="${balance?.toInt()} EGP "
+            holder.binding.balanceTv.text="${services.totalAmount!! - services.paidAmount!!} LE "
+            holder.binding.feeTv.text="${services.totalAmount!!} LE "
+            holder.binding.paidTv.text="${services.paidAmount!!} LE "
+            holder.binding.totalfeesTv.text="${services.totalAmount!!} LE "
+            holder.binding.totalpaidTv.text="${services.paidAmount!!} LE "
+            holder.binding.totabalanceTv.text="${balance?.toInt()} LE "
             holder.binding.dateTv.text= DataBinding.convertDateFormat(services.date, "yyyy-MM-dd'T'HH:mm:ss", "yyyy-M-d")
         }
         val subItemAdapter = SubDoctorAccountAdapter(this)
@@ -61,14 +61,22 @@ class MainDoctorAccountAdapter(val addItems:IAddItems ,val status:Boolean):ListA
 //          //  holder.binding.editNextArrow.visibility = if ( holder.binding.editNextArrow.isShown) View.GONE else View.VISIBLE
 //         //  holder.binding.editPatientAccountTv.visibility = if ( holder.binding.editPatientAccountTv.isShown) View.GONE else View.VISIBLE
 //            holder.binding.rvSubItem.visibility = if ( holder.binding.rvSubItem.isShown) View.GONE else View.VISIBLE
-//        }
-        holder.binding.editPatientAccountTv.setOnClickListener {
-            holder.binding.tab.visibility = if ( holder.binding.rvSubItem.isShown) View.VISIBLE else View.GONE
-            holder.binding.tvServices.visibility = if ( holder.binding.rvSubItem.isShown) View.GONE else View.VISIBLE
-          //holder.binding.editPatientAccountTv.visibility = if ( holder.binding.editPatientAccountTv.isShown) View.GONE else View.VISIBLE
-         // holder.binding.editNextArrow.visibility = if ( holder.binding.editNextArrow.isShown) View.GONE else View.VISIBLE
-            holder.binding.rvSubItem.visibility = if ( holder.binding.rvSubItem.isShown) View.GONE else View.VISIBLE
+        val toggleVisibility = View.OnClickListener {
+            val isExpanded = holder.binding.rvSubItem.visibility == View.VISIBLE
+            if (isExpanded) {
+                holder.binding.rvSubItem.visibility = View.GONE
+                holder.binding.editPatientAccountTv.visibility = View.VISIBLE
+                holder.binding.editNextArrow.visibility = View.GONE
+            } else {
+                holder.binding.rvSubItem.visibility = View.VISIBLE
+                holder.binding.editPatientAccountTv.visibility = View.GONE
+                holder.binding.editNextArrow.visibility = View.VISIBLE
+            }
+            holder.binding.tab.visibility = View.GONE
         }
+        
+        holder.binding.editPatientAccountTv.setOnClickListener(toggleVisibility)
+        holder.binding.editNextArrow.setOnClickListener(toggleVisibility)
         holder.binding.mcard.setOnClickListener {
             services.id?.let { it1 -> addItems.onItemClick(it1) }
         }

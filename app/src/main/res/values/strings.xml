@@ -205,11 +205,11 @@
     <string name="apartment_number">Apartment Number</string>
     <string name="hight">Height ( CM )</string>
     <string name="weight">Weight ( KG )</string>
-    <string name="blood_group">Choose Blood Group</string>
+    <string name="blood_group">Blood Group</string>
     <string name="pressure_mm_gg"> Blood Pressure ( MM/GG )</string>
     <string name="sugar_level_mg_dl">Sugar Level ( MG/DL )</string>
-    <string name="medical_allergies">Choose Medical Allergies</string>
-    <string name="food_allergies">Choose Food Allergies</string>
+    <string name="medical_allergies">Medical Allergies</string>
+    <string name="food_allergies">Food Allergies</string>
     <string name="other_allergies">Other Allergies</string>
     <string name="prescriptions">Prescriptions</string>
     <string name="current_medication">Current Medication</string>
@@ -500,6 +500,7 @@
 Welcome to Salamtak mobile clinics service. You can now get a premium service in the fastest time by filling out the service request form. One of Salamtak customer service representatives will review the information and process your request through one of Salamtak’s specialized doctors.
 </string>
     <string name="sub_spec_error">You must select Specialization first</string>
+    <string name="notice_doctor_app">Congratulations! You downloaded Salamtak Patients Application. If you are a Doctor, Please Download Salamtak Doctors Application instead</string>
 
     <array name="choose">
         <item>Select</item>

@@ -378,7 +378,9 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
                                 medicalExaminationTypeName,
                                 "${it.data?.data?.doctorDto?.specialistName} - ${it.data?.data?.doctorDto?.seniorityLevelName}",
                                 args.doctorclinks?.data?.image,
-                                medicalExaminationId
+                                medicalExaminationId,
+                                args.doctorclinks.data?.currentClinicDtos?.cityName,
+                                args.doctorclinks.data?.currentClinicDtos?.areaName
                             )
                         }
                     }
@@ -388,12 +390,14 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
                             BookAppointmentFragmentDirections.actionBookAppointmentFragmentToAppointmentDetailsFragment(
                                 appointmentDetailBooking, true
                             )
+                        viewmodel.patientAppointmentResponse.value = null
                         findNavController().navigate(action)
                     } else {
                         val action =
                             BookAppointmentFragmentDirections.actionBookAppointmentFragmentToAppointmentDetailsFragment(
                                 appointmentDetailBooking, false
                             )
+                        viewmodel.patientAppointmentResponse.value = null
                         findNavController().navigate(action)
                     }
 
@@ -431,7 +435,9 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
                                 medicalExaminationTypeName,
                                 it.data?.data?.doctorDto?.specialistName,
                                 args.doctorclinks.data?.image,
-                                medicalExaminationId
+                                medicalExaminationId,
+                                args.doctorclinks.data?.currentClinicDtos?.cityName,
+                                args.doctorclinks.data?.currentClinicDtos?.areaName
                             )
                         }
                     }
@@ -441,12 +447,14 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
                             BookAppointmentFragmentDirections.actionBookAppointmentFragmentToAppointmentDetailsFragment(
                                 appointmentDetailBooking, true
                             )
+                        patientviewmodel.editAppointmentResponse.value = null
                         findNavController().navigate(action)
                     } else {
                         val action =
                             BookAppointmentFragmentDirections.actionBookAppointmentFragmentToAppointmentDetailsFragment(
                                 appointmentDetailBooking, false
                             )
+                        patientviewmodel.editAppointmentResponse.value = null
                         findNavController().navigate(action)
                     }
 

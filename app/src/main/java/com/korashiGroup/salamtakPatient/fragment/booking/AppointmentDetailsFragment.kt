@@ -133,13 +133,7 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
 //            }
 //        }
         binding.ivArrow.setOnClickListener {
-            if (args.status == true) {
-                findNavController().navigate(R.id.searchFragment)
-            } else if (offerid!=null){
-                findNavController().navigate(R.id.offersFragment)
-            }else{
-                findNavController().navigate(R.id.searchFragment)
-            }
+            findNavController().popBackStack()
         }
 
         binding.layoutChooseRelationType.setOnClickListener {
@@ -206,26 +200,34 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
         }
 
 
-        binding.chCard.setOnCheckedChangeListener { buttonView, isChecked ->
-            if (isChecked) {
+        binding.tvPatientNo.setOnClickListener {
+            isAnthorPatient = false
+            binding.tvPatientNo.setBackgroundResource(R.drawable.bg_segment_selected)
+            binding.tvPatientNo.setTextColor(Color.BLACK)
+            binding.tvPatientYes.setBackgroundResource(android.R.color.transparent)
+            binding.tvPatientYes.setTextColor(Color.GRAY)
 
-                isAnthorPatient=true
-                binding.chCard.setTextColor(Color.parseColor("#00D2CB"))
-                binding.etFullNameAR.setText("")
-                binding.etPhoneNumber.setText("")
-                binding.etPhoneNumber.isEnabled=true
-                binding.layoutChooseRelationType.visibility= View.VISIBLE
-            }else{
-                isAnthorPatient=false
-                binding.chCard.setTextColor(Color.parseColor("#8088A4"))
-                binding.etFullNameAR.setText(sp.getUser()?.name)
-                binding.etPhoneNumber.setText(sp.getUser()?.phone)
-                fullName=binding.etFullNameAR.text.toString()
-                phoneNumber=binding.etPhoneNumber.text.toString()
-                binding.layoutChooseRelationType.visibility= View.GONE
-                binding.etPhoneNumber.isEnabled=false
-            }
+            binding.etFullNameAR.setText(sp.getUser()?.name)
+            binding.etPhoneNumber.setText(sp.getUser()?.phone)
+            fullName = binding.etFullNameAR.text.toString()
+            phoneNumber = binding.etPhoneNumber.text.toString()
+            binding.layoutChooseRelationType.visibility = View.GONE
+            binding.textinputFullName.visibility = View.GONE
+            binding.etPhoneNumber.isEnabled = false
+        }
 
+        binding.tvPatientYes.setOnClickListener {
+            isAnthorPatient = true
+            binding.tvPatientYes.setBackgroundResource(R.drawable.bg_segment_selected)
+            binding.tvPatientYes.setTextColor(Color.BLACK)
+            binding.tvPatientNo.setBackgroundResource(android.R.color.transparent)
+            binding.tvPatientNo.setTextColor(Color.GRAY)
+
+            binding.etFullNameAR.setText("")
+            binding.etPhoneNumber.setText("")
+            binding.etPhoneNumber.isEnabled = true
+            binding.layoutChooseRelationType.visibility = View.VISIBLE
+            binding.textinputFullName.visibility = View.VISIBLE
         }
         binding.layoutInsuranceCompanies.setOnClickListener {
             bottomsheetbeahavoir.state =
@@ -261,7 +263,15 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
         binding.tvSpecialization.text = "${args.confirmappointments?.SpecialistName} "
         binding.tvDate.text = DateParsing(args.confirmappointments?.formattedDate.toString())
         binding.Service.text = args.confirmappointments?.MedicalExaminationTypeName
-        //binding.tvArea.text = args.confirmappointments?.areaName
+        val cityName = args.confirmappointments?.cityName ?: ""
+        val areaName = args.confirmappointments?.areaName ?: ""
+        if (cityName.isNotEmpty() && areaName.isNotEmpty()) {
+            binding.tvLocation.text = "$cityName - $areaName"
+        } else if (cityName.isNotEmpty()) {
+            binding.tvLocation.text = cityName
+        } else {
+            binding.tvLocation.text = areaName
+        }
 
         binding.tvFees.text =
             args.confirmappointments?.fees.toString() + " " + getString(R.string.le)

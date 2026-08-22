@@ -37,10 +37,10 @@ class SubDoctorAccountAdapter(val edit:IEdit):ListAdapter<Item,SubDoctorAccountA
          //   holder.binding.doctorNameTv.text=services.patientFulltname
             holder.binding.serviceTv.text=services.service
             holder.binding.dateTv.text=DataBinding.convertDateFormat(services.date, "yyyy-MM-dd'T'HH:mm:ss", "yyyy-M-d")
-            holder.binding.feeTv.text="${services.serviceFee} EGP "
-            holder.binding.paidTv.text="${services.paid} EGP "
-            holder.binding.balanceTv.text="${balance} EGP "
-          //  holder.binding.balanceTv.text="${services.paid?.let { services.serviceFee?.minus(it.toInt()) }} EGP "
+            holder.binding.feeTv.text="${services.serviceFee} LE "
+            holder.binding.paidTv.text="${services.paid} LE "
+            holder.binding.balanceTv.text="${balance} LE "
+          //  holder.binding.balanceTv.text="${services.paid?.let { services.serviceFee?.minus(it.toInt()) }} LE "
         }
         holder.binding.tab.setOnClickListener {
             edit.onItemClick(services)

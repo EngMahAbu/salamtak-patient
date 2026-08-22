@@ -99,7 +99,7 @@ class OfferBookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Ac
 
     private fun initButton() {
         binding.ivArrow.setOnClickListener {
-            findNavController().navigate(R.id.offersFragment)
+            findNavController().popBackStack()
         }
 
         binding.ivNext.setOnClickListener {
@@ -269,7 +269,9 @@ class OfferBookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Ac
                                 medicalExaminationTypeName,
                                 it.data?.data?.doctorDto?.specialistName,
                                 args.clinkDto?.image,
-                                1
+                                1,
+                                null,
+                                null
                             )
                         }
                     }
@@ -277,6 +279,7 @@ class OfferBookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Ac
                             OfferBookAppointmentFragmentDirections.actionOfferBookAppointmentFragmentToAppointmentDetailsFragment(
                                 appointmentDetailBooking, false
                             )
+                        viewmodel.patientAppointmentResponse.value = null
                         findNavController().navigate(action)
 
                 }

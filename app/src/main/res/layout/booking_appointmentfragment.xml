@@ -517,20 +517,14 @@
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <LinearLayout
                         android:id="@+id/DetailsSupSpecDoctor"
                         android:layout_width="match_parent"
-                        android:layout_height="60dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
-                        android:layout_marginTop="5dp"
                         android:layout_marginEnd="10dp"
-                        android:fontFamily="@font/sd_pro_display_regular"
-                        android:gravity="start"
-                        android:lines="3"
-                        android:padding="3dp"
-                        android:text=""
-                        android:textColor="@color/text_doctor_card_color"
-                        android:textSize="14sp"
+                        android:orientation="vertical"
+                        android:paddingBottom="8dp"
                         android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -591,19 +585,14 @@
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <LinearLayout
                         android:id="@+id/detailsclinicservices"
                         android:layout_width="match_parent"
-                        android:layout_height="60dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:layout_marginTop="5dp"
                         android:layout_marginEnd="15dp"
-                        android:fontFamily="@font/sd_pro_display_regular"
-                        android:gravity="start"
-                        android:padding="3dp"
-                        android:text=""
-                        android:textColor="@color/text_doctor_card_color"
-                        android:textSize="14sp"
+                        android:orientation="vertical"
+                        android:paddingBottom="8dp"
                         android:visibility="gone"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/ClinicServices" />
@@ -735,19 +724,14 @@
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <LinearLayout
                         android:id="@+id/detailsFeatures"
                         android:layout_width="match_parent"
-                        android:layout_height="60dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:layout_marginTop="5dp"
                         android:layout_marginEnd="15dp"
-                        android:fontFamily="@font/sd_pro_display_regular"
-                        android:gravity="start"
-                        android:padding="3dp"
-                        android:text=""
-                        android:textColor="@color/text_doctor_card_color"
-                        android:textSize="14sp"
+                        android:orientation="vertical"
+                        android:paddingBottom="8dp"
                         android:visibility="gone"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/Features" />

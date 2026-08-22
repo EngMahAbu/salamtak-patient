@@ -115,7 +115,7 @@
     <string name="Chat">دردشه</string>
     <string name="Call">مكالمة صوتية</string>
     <string name="Video_Call">مكالمة فيديو</string>
-    <string name="medical_services_directory">Guide سلامتك</string>
+    <string name="medical_services_directory">دليل سلامتك</string>
     <string name="see_all">المزيد</string>
     <string name="hospitals">المستشفيات</string>
     <string name="polyclinics">مراكز طبية</string>
@@ -186,11 +186,11 @@
     <string name="apartment_number">رقم الشقة</string>
     <string name="hight">الطول ( سم )</string>
     <string name="weight">الوزن( كجم )</string>
-    <string name="blood_group">اختر فصيلة الدم</string>
+    <string name="blood_group">فصيلة الدم</string>
     <string name="pressure_mm_gg">قياس ضغط الدم (مم / جيغاغرام)</string>
     <string name="sugar_level_mg_dl">قياس مستوى السكر (ملغم/دل)</string>
-    <string name="medical_allergies">اختر حساسية الادوية (ان وجدت)</string>
-    <string name="food_allergies">اختر حساسية الطعام (ان وجدت)</string>
+    <string name="medical_allergies">حساسية الادوية (ان وجدت)</string>
+    <string name="food_allergies">حساسية الطعام (ان وجدت)</string>
     <string name="other_allergies"> اذكر حساسيةأخرى (ان وجدت)</string>
     <string name="prescriptions">تشخيصات طبية السابقة</string>
     <string name="current_medication">الدواء الحالي</string>
@@ -258,8 +258,10 @@
     <string name="salamtak_gates">بوابة سلامتك</string>
     <string name="skip_login_explore_our_features"> يمكنك تخطي تسجيل الدخول للإطلاع على خدمات سلامتك.</string>
     <string name="you_must_sign_up_to_book_your_doctor">لاستكمال خطوات الحجز</string>
-    <string name="no_data_to_show">لا يوجد بيانات </string>
-    <string name="have_amedicalquestion">هل لديك سؤال طبى؟</string>
+    <string name="no_data_to_show">لا يوجد بيانات</string>
+    <string name="have_amedicalquestion">
+        احصل على اجابات لجميع اسئلتك الطبية من الأطباء المتخصصين
+    </string>
     <string name="ask_a_doctor_for_free_and_get_response_in_24_hours">  احصل على اجابات لجميع اسئلتك الطبية من الأطباء المتخصصين
     </string>
     <string name="ask_now">أسأل الأن </string>
@@ -475,6 +477,7 @@
     <string name="wrong_app_btn_download_patient">تحميل تطبيق المرضى</string>
     <string name="wrong_app_btn_close">إغلاق التطبيق</string>
     <string name="sub_spec_error">يجب اختيار تخصص اولا</string>
+    <string name="notice_doctor_app">تهانينا! لقد قمت بتنزيل تطبيق سلامتك للمرضى. إذا كنت طبيباً، يرجى تنزيل تطبيق سلامتك للأطباء بدلاً من ذلك</string>
 
     <array name="choose">
         <item>اختار</item>

@@ -25,6 +25,7 @@ import com.korashiGroup.salamtakPatient.viewmodel.DialogBottomSheetViewmodel
 import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.MultipartBody
+import com.korashiGroup.salamtakPatient.utils.localization.DefaultLocaleHelper
 
 
 @Suppress("UNREACHABLE_CODE")
@@ -61,6 +62,32 @@ class AskDoctorFragment : Fragment() {
         callBack()
         val animation = AnimationUtils.loadAnimation(requireContext(), R.anim.image_animation)
         binding.ivAnimatio.startAnimation(animation)
+        setInputLanguageFilter()
+    }
+
+    private fun setInputLanguageFilter() {
+        val isArabic = DefaultLocaleHelper.getInstance(requireContext()).getCurrentLocale() == "ar"
+
+        val filter = android.text.InputFilter { source, start, end, dest, dstart, dend ->
+            for (i in start until end) {
+                val char = source[i]
+                if (Character.isWhitespace(char) || Character.isDigit(char) || !Character.isLetter(char)) {
+                    continue
+                }
+                val block = Character.UnicodeBlock.of(char)
+                val isArabicChar = block == Character.UnicodeBlock.ARABIC ||
+                        block == Character.UnicodeBlock.ARABIC_PRESENTATION_FORMS_A ||
+                        block == Character.UnicodeBlock.ARABIC_PRESENTATION_FORMS_B
+                if (isArabic && !isArabicChar) {
+                    return@InputFilter ""
+                } else if (!isArabic && isArabicChar) {
+                    return@InputFilter ""
+                }
+            }
+            null
+        }
+        binding.etQuestion.filters = arrayOf(filter)
+        binding.textinputQuestionDetails.filters = arrayOf(filter)
     }
 
     private fun initButton() {

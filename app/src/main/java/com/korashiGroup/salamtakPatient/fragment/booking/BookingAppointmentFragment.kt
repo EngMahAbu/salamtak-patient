@@ -316,7 +316,7 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking, Ima
                         subspecialist = "$subspecialist $it,"
                     }
                     binding.tvSpecialization.text = "${it.data?.data?.seniorityLevelName} - ${it.data?.data?.specialistName.toString()?.removePrefix("[")?.removeSuffix("]")}"
-                    binding.DetailsSupSpecDoctor.text = " ${it.data?.data?.subSpecialistName.toString()?.removePrefix("[")?.removeSuffix("]")}"
+                    populateTabs(binding.DetailsSupSpecDoctor, it.data?.data?.subSpecialistName?.toString())
 
                    sharedDataViewmodel.feesResponse.observe(viewLifecycleOwner, Observer {
                        binding.Feesresult.text = "${it}"
@@ -527,11 +527,11 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking, Ima
         }
 
         if (!currentDtos.services.isNullOrEmpty()) {
-            binding.detailsclinicservices.setText(currentDtos.services?.toString()?.removePrefix("[")?.removeSuffix("]"))
+            populateTabs(binding.detailsclinicservices, currentDtos.services?.toString())
         }
 
         if (!currentDtos.features.isNullOrEmpty()) {
-            binding.detailsFeatures.setText(currentDtos.features?.toString()?.removePrefix("[")?.removeSuffix("]"))
+            populateTabs(binding.detailsFeatures, currentDtos.features?.toString())
         }
 
         if (!currentDtos.insurance.isNullOrEmpty()) {
@@ -561,7 +561,7 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking, Ima
             binding.layoutBottomsheetpersistant.clinicservices.setText(getDoctorClinksResponse.data?.currentClinicDtos?.services?.toString()?.removePrefix("[")?.removeSuffix("]"))
         }
         if (!getDoctorClinksResponse.data?.currentClinicDtos?.features.isNullOrEmpty()) {
-            binding.detailsFeatures.setText(getDoctorClinksResponse.data?.currentClinicDtos?.features?.toString()?.removePrefix("[")?.removeSuffix("]"))
+            populateTabs(binding.detailsFeatures, getDoctorClinksResponse.data?.currentClinicDtos?.features?.toString())
         }
         if (!getDoctorClinksResponse.data?.currentClinicDtos?.insurance.isNullOrEmpty()) {
             binding.detailsInsurance.setText(getDoctorClinksResponse.data?.currentClinicDtos?.insurance?.toString()?.removePrefix("[")?.removeSuffix("]"))
@@ -668,7 +668,17 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking, Ima
         dialog.show(parentFragmentManager, "image_res")
     }
 
-
-
+    private fun populateTabs(linearLayout: android.widget.LinearLayout, itemsString: String?) {
+        linearLayout.removeAllViews()
+        val str = itemsString?.removePrefix("[")?.removeSuffix("]") ?: return
+        if (str.isBlank()) return
+        str.split(",").forEach {
+            if (it.isNotBlank()) {
+                val tv = layoutInflater.inflate(R.layout.item_doctor_profile_tab, linearLayout, false) as android.widget.TextView
+                tv.text = it.trim()
+                linearLayout.addView(tv)
+            }
+        }
+    }
 
 }

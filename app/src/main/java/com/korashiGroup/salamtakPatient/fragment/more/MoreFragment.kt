@@ -64,12 +64,12 @@ class MoreFragment : Fragment() {
             binding.tvEdit.text = sp.getUser()?.NameAR
         }
 
-        binding.profileDoctorImage.load("https://salamtechapi.azurewebsites.net/${sp.getUser()?.image}") {
-            crossfade(true)
-            crossfade(1000)
-            placeholder(R.drawable.ic_profile)
-            transformations(CircleCropTransformation())
-        }
+//        binding.profileDoctorImage.load("https://salamtechapi.azurewebsites.net/${sp.getUser()?.image}") {
+//            crossfade(true)
+//            crossfade(1000)
+//            placeholder(R.drawable.ic_profile)
+//            transformations(CircleCropTransformation())
+//        }
         initButton()
        // getSkipLoginStatus()
         editUi()

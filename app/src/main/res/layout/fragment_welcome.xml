@@ -81,7 +81,6 @@
         android:textSize="@dimen/welcome_btn_text_size"
         app:backgroundTint="@color/doctor_primary"
         app:cornerRadius="@dimen/welcome_btn_corner"
-        app:icon="@drawable/ic_patientwelcome"
         app:iconGravity="textStart"
         app:iconSize="@dimen/welcome_btn_icon_size"
         app:iconTint="@color/white"
@@ -89,26 +88,57 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvWhoAreYou" />
 
+    <LinearLayout
+        android:id="@+id/llNoticeDoctor"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/welcome_btn_margin_horizontal"
+        android:layout_marginTop="@dimen/welcome_btn_margin_top"
+        android:layout_marginEnd="@dimen/welcome_btn_margin_horizontal"
+        android:background="@drawable/bg_notice_doctor"
+        android:layoutDirection="ltr"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnPatient">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="12dp"
+            android:src="@drawable/svg_info_circle"
+            app:tint="@color/color_orange" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/notice_doctor_app"
+            android:textColor="@color/color_orange"
+            android:textSize="13sp"
+            android:lineSpacingExtra="2dp" />
+    </LinearLayout>
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnDoctor"
         style="@style/Widget.Material3.Button.OutlinedButton"
         android:layout_width="0dp"
         android:layout_height="@dimen/welcome_btn_height"
         android:layout_marginStart="@dimen/welcome_btn_margin_horizontal"
+        android:layout_marginTop="@dimen/welcome_btn_margin_top"
         android:layout_marginEnd="@dimen/welcome_btn_margin_horizontal"
         android:text="@string/btn_i_am_doctor"
         android:textColor="@color/doctor_primary"
         android:textSize="@dimen/welcome_btn_text_size"
         app:backgroundTint="@android:color/transparent"
         app:cornerRadius="@dimen/welcome_btn_corner"
-        app:icon="@drawable/ic_doctors"
         app:iconGravity="textStart"
         app:iconSize="@dimen/welcome_btn_icon_size"
         app:iconTint="@color/doctor_primary"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnPatient"
+        app:layout_constraintTop_toBottomOf="@id/llNoticeDoctor"
         app:strokeColor="@color/doctor_primary"
         app:strokeWidth="@dimen/welcome_btn_stroke_width" />
 

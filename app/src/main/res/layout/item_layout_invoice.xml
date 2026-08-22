@@ -10,91 +10,81 @@
             android:padding="@dimen/_3sdp"
         >
 
-        <TableLayout
+        <LinearLayout
                 android:id="@+id/tab"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:stretchColumns="1,2,3,4,5"
+                android:orientation="horizontal"
+                android:paddingVertical="8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-            <TableRow
-                    android:layout_width="match_parent"
+            <!-- Date -->
+            <TextView
+                    android:id="@+id/date_tv"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    >
+                    android:layout_weight="1.2"
+                    android:gravity="center"
+                    android:textColor="#333333"
+                    android:textSize="12sp"
+                    android:lines="1"
+                    tools:text="22/07/2020" />
 
-                <!-- Date -->
-                <TextView
-                        android:id="@+id/date_tv"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/_17sdp"
-                        android:gravity="center"
-                        android:layout_column="1"
-                        android:background="@drawable/invoice_border"
-                        android:textColor="@color/black"
-                        android:textSize="11sp"
-                        android:lines="1"
-                        android:padding="2dp"
-                        tools:text="22/07/2020" />
+            <View android:layout_width="1dp" android:layout_height="match_parent" android:background="#E0E0E0" />
 
-                <!-- Service -->
-                <TextView
-                        android:id="@+id/service_tv"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/_17sdp"
-                        android:gravity="center"
-                        android:layout_column="2"
-                        android:padding="2dp"
-                        android:background="@drawable/invoice_border"
-                        android:textColor="@color/black"
-                        android:textSize="11sp"
-                        tools:text="Simple test" />
+            <!-- Service -->
+            <TextView
+                    android:id="@+id/service_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.2"
+                    android:gravity="center"
+                    android:textColor="#333333"
+                    android:textSize="12sp"
+                    tools:text="Simple test" />
 
-                <!-- Fee -->
-                <TextView
-                        android:id="@+id/fee_tv"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/_17sdp"
-                        android:gravity="center"
-                        android:layout_column="3"
-                        android:padding="2dp"
-                        android:background="@drawable/invoice_border"
-                        android:textColor="@color/black"
-                        android:textSize="11sp"
-                        tools:text="300" />
+            <View android:layout_width="1dp" android:layout_height="match_parent" android:background="#E0E0E0" />
 
-                <!-- Paid -->
-                <TextView
-                        android:id="@+id/paid_tv"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/_17sdp"
-                        android:gravity="center"
-                        android:layout_column="4"
-                        android:padding="2dp"
-                        android:background="@drawable/invoice_border"
-                        android:textColor="@color/black"
-                        android:textSize="11sp"
-                        tools:text="100" />
+            <!-- Fee (Service Cost) -->
+            <TextView
+                    android:id="@+id/fee_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.1"
+                    android:gravity="center"
+                    android:textColor="#333333"
+                    android:textSize="12sp"
+                    tools:text="300 LE" />
 
-                <!-- Balance -->
-                <TextView
-                        android:id="@+id/balance_tv"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/_17sdp"
-                        android:gravity="center"
-                        android:layout_column="5"
-                        android:padding="2dp"
-                        android:background="@drawable/invoice_border"
-                        android:textColor="@color/black"
-                        android:textSize="11sp"
-                        tools:text="100" />
+            <View android:layout_width="1dp" android:layout_height="match_parent" android:background="#E0E0E0" />
 
-            </TableRow>
+            <!-- Paid -->
+            <TextView
+                    android:id="@+id/paid_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="#333333"
+                    android:textSize="12sp"
+                    tools:text="100 LE" />
 
-        </TableLayout>
+            <View android:layout_width="1dp" android:layout_height="match_parent" android:background="#E0E0E0" />
 
+            <!-- Balance -->
+            <TextView
+                    android:id="@+id/balance_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="#333333"
+                    android:textSize="12sp"
+                    tools:text="100 LE" />
 
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

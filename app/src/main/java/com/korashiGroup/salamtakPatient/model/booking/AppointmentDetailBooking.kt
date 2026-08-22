@@ -13,6 +13,7 @@ data class AppointmentDetailBooking(
     val MedicalExaminationTypeName:String?,
     val SpecialistName:String?,
     val image:String?,
-    val medicalExaminationId:Int?
-
+    val medicalExaminationId:Int?,
+    val cityName: String? = null,
+    val areaName: String? = null
 ): Serializable
