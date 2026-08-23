@@ -62,32 +62,129 @@ class AskDoctorFragment : Fragment() {
         callBack()
         val animation = AnimationUtils.loadAnimation(requireContext(), R.anim.image_animation)
         binding.ivAnimatio.startAnimation(animation)
-        setInputLanguageFilter()
+        validateTextError()
     }
 
-    private fun setInputLanguageFilter() {
-        val isArabic = DefaultLocaleHelper.getInstance(requireContext()).getCurrentLocale() == "ar"
+    private fun hasArabicCharacters(text: String): Boolean {
+        for (char in text) {
+            val block = Character.UnicodeBlock.of(char)
+            if (block == Character.UnicodeBlock.ARABIC ||
+                block == Character.UnicodeBlock.ARABIC_PRESENTATION_FORMS_A ||
+                block == Character.UnicodeBlock.ARABIC_PRESENTATION_FORMS_B ||
+                block == Character.UnicodeBlock.ARABIC_SUPPLEMENT ||
+                block == Character.UnicodeBlock.ARABIC_EXTENDED_A) {
+                return true
+            }
+        }
+        return false
+    }
 
-        val filter = android.text.InputFilter { source, start, end, dest, dstart, dend ->
-            for (i in start until end) {
-                val char = source[i]
-                if (Character.isWhitespace(char) || Character.isDigit(char) || !Character.isLetter(char)) {
-                    continue
-                }
-                val block = Character.UnicodeBlock.of(char)
-                val isArabicChar = block == Character.UnicodeBlock.ARABIC ||
-                        block == Character.UnicodeBlock.ARABIC_PRESENTATION_FORMS_A ||
-                        block == Character.UnicodeBlock.ARABIC_PRESENTATION_FORMS_B
-                if (isArabic && !isArabicChar) {
-                    return@InputFilter ""
-                } else if (!isArabic && isArabicChar) {
-                    return@InputFilter ""
+    private fun hasEnglishCharacters(text: String): Boolean {
+        for (char in text) {
+            val block = Character.UnicodeBlock.of(char)
+            if (block == Character.UnicodeBlock.BASIC_LATIN ||
+                block == Character.UnicodeBlock.LATIN_1_SUPPLEMENT ||
+                block == Character.UnicodeBlock.LATIN_EXTENDED_A ||
+                block == Character.UnicodeBlock.LATIN_EXTENDED_B) {
+                if (Character.isLetter(char)) {
+                    return true
                 }
             }
-            null
         }
-        binding.etQuestion.filters = arrayOf(filter)
-        binding.textinputQuestionDetails.filters = arrayOf(filter)
+        return false
+    }
+
+    private fun isLanguageValid(text: String, isArabicApp: Boolean): Boolean {
+        if (text.isBlank()) return true
+        return if (isArabicApp) {
+            !hasEnglishCharacters(text)
+        } else {
+            !hasArabicCharacters(text)
+        }
+    }
+
+    private fun validateQuestionField(isArabicApp: Boolean): Boolean {
+        val text = binding.etQuestion.text?.toString()?.trim() ?: ""
+        if (text.isEmpty()) {
+            binding.tvQuestionError.visibility = View.GONE
+            return false
+        } else if (!isLanguageValid(text, isArabicApp)) {
+            binding.tvQuestionError.text = if (isArabicApp) {
+                getString(R.string.please_write_question_in_arabic)
+            } else {
+                getString(R.string.please_write_question_in_english)
+            }
+            binding.tvQuestionError.visibility = View.VISIBLE
+            return false
+        } else {
+            binding.tvQuestionError.visibility = View.GONE
+            partMap = partMap + mapOf("Question" to text)
+            return true
+        }
+    }
+
+    private fun validateChronicDiseasesField(isArabicApp: Boolean): Boolean {
+        val text = binding.textinputQuestionDetails.text?.toString()?.trim() ?: ""
+        if (text.isNotEmpty() && !isLanguageValid(text, isArabicApp)) {
+            binding.tvChronicDiseasesError.text = if (isArabicApp) {
+                getString(R.string.please_write_diseases_in_arabic)
+            } else {
+                getString(R.string.please_write_diseases_in_english)
+            }
+            binding.tvChronicDiseasesError.visibility = View.VISIBLE
+            return false
+        } else {
+            binding.tvChronicDiseasesError.visibility = View.GONE
+            if (text.isNotEmpty()) {
+                partMap = partMap + mapOf("Chronic_disease" to text)
+            }
+            return true
+        }
+    }
+
+    private fun validateSurgeryField(isArabicApp: Boolean): Boolean {
+        val text = binding.textinputSurgeryOperations.text?.toString()?.trim() ?: ""
+        if (text.isNotEmpty() && !isLanguageValid(text, isArabicApp)) {
+            binding.tvSurgeryError.text = if (isArabicApp) {
+                getString(R.string.please_write_surgeries_in_arabic)
+            } else {
+                getString(R.string.please_write_surgeries_in_english)
+            }
+            binding.tvSurgeryError.visibility = View.VISIBLE
+            return false
+        } else {
+            binding.tvSurgeryError.visibility = View.GONE
+            if (text.isNotEmpty()) {
+                partMap = partMap + mapOf("PrevSurgery" to text)
+            }
+            return true
+        }
+    }
+
+    private fun checkFormStateAndToggleSendButton(): Boolean {
+        val isArabicApp = DefaultLocaleHelper.getInstance(requireContext()).getCurrentLocale() == "ar"
+
+        val specEmpty = binding.etSpecialization.text?.toString()?.trim().isNullOrEmpty()
+        val questionText = binding.etQuestion.text?.toString()?.trim() ?: ""
+        val ageEmpty = binding.etAge.text?.toString()?.trim().isNullOrEmpty()
+        val genderEmpty = binding.etChooseGender.text?.toString()?.trim().isNullOrEmpty()
+
+        val questionLangValid = isLanguageValid(questionText, isArabicApp)
+        val chronicLangValid = validateChronicDiseasesField(isArabicApp)
+        val surgeryLangValid = validateSurgeryField(isArabicApp)
+        val questionValid = validateQuestionField(isArabicApp)
+
+        // Ensure all required static error views remain hidden (no "Required" text)
+        binding.tvSpecError.visibility = View.GONE
+        binding.tvGenderError.visibility = View.GONE
+        binding.tvAgeError.visibility = View.GONE
+        binding.tvPatientError.visibility = View.GONE
+
+        val isAllValid = !specEmpty && questionText.isNotEmpty() && !ageEmpty && !genderEmpty &&
+                questionLangValid && chronicLangValid && surgeryLangValid && questionValid
+
+        binding.btnSend.isEnabled = isAllValid
+        return isAllValid
     }
 
     private fun initButton() {
@@ -97,7 +194,7 @@ class AskDoctorFragment : Fragment() {
         }
 
         binding.btnSend.setOnClickListener {
-            if (validateQuestionInput()) {
+            if (checkFormStateAndToggleSendButton()) {
                 binding.btnSend.isEnabled=false
                 val builder = MultipartBody.Builder().setType(MultipartBody.FORM)
                 for (item in partMap) {
@@ -139,6 +236,7 @@ class AskDoctorFragment : Fragment() {
             binding.btnQandA.setBackgroundResource(R.drawable.bg_help)
             binding.btnQandA.setTextColor(Color.parseColor("#262D70"))
             isMe=false
+            checkFormStateAndToggleSendButton()
         }
 
         binding.btnQandA.setOnClickListener {
@@ -147,8 +245,8 @@ class AskDoctorFragment : Fragment() {
             binding.btnEmergencies.setBackgroundResource(R.drawable.bg_help)
             binding.btnEmergencies.setTextColor(Color.parseColor("#262D70"))
             isMe=true
+            checkFormStateAndToggleSendButton()
         }
-
 
     }
 
@@ -174,6 +272,7 @@ class AskDoctorFragment : Fragment() {
 
                 is Resource.Error -> {
                     hideprogressbar()
+                    checkFormStateAndToggleSendButton()
                     response.data?.let {
                         Snackbar.make(requireView(), it.message, Snackbar.LENGTH_SHORT)
                             .show()
@@ -187,153 +286,58 @@ class AskDoctorFragment : Fragment() {
 
 
     private fun validateQuestionInput(): Boolean {
-       validateTextError()
-        var value = false
-        if (binding.etSpecialization.text?.trim().isNullOrEmpty() && binding.etQuestion.text?.trim().isNullOrEmpty()
-            && binding.etAge.text?.trim().isNullOrEmpty()&& binding.etChooseMe.text?.trim().isNullOrEmpty()&& binding.etChooseGender.text?.trim().isNullOrEmpty()) {
-            binding.tvSpecError.visibility = View.VISIBLE
-            binding.tvQuestionError.visibility = View.VISIBLE
-            binding.tvGenderError.visibility = View.VISIBLE
-            binding.tvAgeError.visibility = View.VISIBLE
-         //   binding.tvPatientError.visibility = View.VISIBLE
-            return false
-        }
-        if (binding.etSpecialization.text?.trim().isNullOrEmpty()) {
-            binding.tvSpecError.visibility = View.VISIBLE
-            return false
-        } else {
-            binding.tvSpecError.visibility = View.GONE
-        }
-
-        if (binding.etQuestion.text?.trim().isNullOrEmpty()) {
-            binding.tvQuestionError.visibility = View.VISIBLE
-            return false
-        } else {
-            binding.tvQuestionError.visibility = View.GONE
-            partMap = partMap + mapOf("Question" to binding.etQuestion.text.toString())
-
-        }
-
-//        if (binding.textinputQuestionDetails.text?.trim().isNullOrEmpty()) {
-//            binding.tvQuestionDetailsError.visibility = View.VISIBLE
-//
-//
-//        } else {
-//            binding.tvQuestionDetailsError.visibility = View.GONE
-//            partMap = partMap + mapOf("QDetails" to binding.textinputQuestionDetails.text.toString())
-//        }
-        if (!binding.textinputQuestionDetails.text.toString().isNullOrEmpty()){
-            partMap = partMap + mapOf("Chronic_disease" to binding.textinputQuestionDetails.text.toString())
-        }
-        if (!binding.textinputSurgeryOperations.text.toString().isNullOrEmpty()){
-            partMap = partMap + mapOf("PrevSurgery" to binding.textinputSurgeryOperations.text.toString())
-        }
-
-        if (binding.etAge.text?.trim().isNullOrEmpty()) {
-            binding.tvGenderError.visibility = View.VISIBLE
-            return false
-        } else {
-            binding.tvGenderError.visibility = View.GONE
-            partMap = partMap + mapOf("Age" to binding.etAge.text.toString().toInt())
-        }
-
-        if (binding.etChooseGender.text?.trim().isNullOrEmpty()) {
-            binding.tvAgeError.visibility = View.VISIBLE
-            return false
-        } else {
-            binding.tvAgeError.visibility = View.GONE
-        }
-
-        if (isMe==null) {
-            binding.tvPatientError.visibility = View.VISIBLE
-            return false
-        } else {
-           value=true
-            binding.tvPatientError.visibility = View.GONE
-            partMap = (partMap + mapOf("IsForMe" to isMe!!))
-        }
-
-       return value
+        return checkFormStateAndToggleSendButton()
     }
 
 
     private fun validateTextError() {
-        binding.etSpecialization.doOnTextChanged { text, start, before, count ->
-            if (binding.etSpecialization.text?.trim().isNullOrEmpty()) {
-                binding.tvSpecError.visibility = View.VISIBLE
-
-            } else {
-                binding.tvSpecError.visibility = View.GONE
-            }
+        binding.etSpecialization.doOnTextChanged { _, _, _, _ ->
+            checkFormStateAndToggleSendButton()
         }
-        binding.etQuestion.doOnTextChanged { text, start, before, count ->
-            if (binding.etQuestion.text?.trim().isNullOrEmpty()) {
-                binding.tvQuestionError.visibility = View.VISIBLE
-
-            } else {
-                binding.tvQuestionError.visibility = View.GONE
-                partMap = partMap + mapOf("Question" to binding.etQuestion.text.toString())
-
-            }
+        binding.etQuestion.doOnTextChanged { _, _, _, _ ->
+            checkFormStateAndToggleSendButton()
+        }
+        binding.textinputQuestionDetails.doOnTextChanged { _, _, _, _ ->
+            checkFormStateAndToggleSendButton()
+        }
+        binding.textinputSurgeryOperations.doOnTextChanged { _, _, _, _ ->
+            checkFormStateAndToggleSendButton()
         }
 
-        binding.etChooseMe.doOnTextChanged { text, start, before, count ->
-            if (binding.etChooseMe.text?.trim().isNullOrEmpty()) {
-                binding.tvPatientError.visibility = View.VISIBLE
-
-            } else {
-                binding.tvPatientError.visibility = View.GONE
-
-            }
+        binding.etChooseMe.doOnTextChanged { _, _, _, _ ->
+            checkFormStateAndToggleSendButton()
         }
 
-//        binding.textinputQuestionDetails.doOnTextChanged { text, start, before, count ->
-//            if (binding.textinputQuestionDetails.text?.trim().isNullOrEmpty()) {
-//                binding.tvQuestionDetailsError.visibility = View.VISIBLE
-//
-//
-//            } else {
-//                binding.tvQuestionDetailsError.visibility = View.GONE
-//                partMap = partMap + mapOf("QDetails" to binding.textinputQuestionDetails.text.toString())
-//            }
-//        }
-
-        binding.etAge.doOnTextChanged { text, start, before, count ->
-            if (binding.etAge.text?.trim().isNullOrEmpty()) {
-                binding.tvGenderError.visibility = View.VISIBLE
-            } else {
-                binding.tvGenderError.visibility = View.GONE
-                partMap = partMap + mapOf("Age" to binding.etAge.text.toString().toInt())
-            }
-
+        binding.etAge.doOnTextChanged { _, _, _, _ ->
+            checkFormStateAndToggleSendButton()
         }
 
-        binding.etChooseGender.doOnTextChanged { text, start, before, count ->
-            if (binding.etChooseGender.text?.trim().isNullOrEmpty()) {
-                binding.tvAgeError.visibility = View.VISIBLE
-            } else {
-                binding.tvAgeError.visibility = View.GONE
-            }
+        binding.etChooseGender.doOnTextChanged { _, _, _, _ ->
+            checkFormStateAndToggleSendButton()
         }
+
+        checkFormStateAndToggleSendButton()
     }
 
     private fun getDataFromViews() {
         sharedDataViewmodel.specialication.observe(viewLifecycleOwner) {
             binding.etSpecialization.setText(it.name)
             partMap = partMap + mapOf("SpecialistID" to it.id)
+            checkFormStateAndToggleSendButton()
         }
 
         sharedDataViewmodel.chooseGender.observe(viewLifecycleOwner) {
             binding.etChooseGender.setText(it.gender)
             partMap = partMap + mapOf("GenderID" to it.id)
+            checkFormStateAndToggleSendButton()
         }
 
         sharedDataViewmodel.patientType.observe(viewLifecycleOwner) {
             binding.etChooseMe.setText(it.type)
             isMe=it.status
             partMap = partMap + mapOf("IsForMe" to it.status)
+            checkFormStateAndToggleSendButton()
         }
-
 
     }
 

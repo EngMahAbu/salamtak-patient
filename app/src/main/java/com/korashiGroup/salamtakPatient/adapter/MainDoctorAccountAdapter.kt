@@ -28,8 +28,23 @@ class MainDoctorAccountAdapter(val addItems:IAddItems ,val status:Boolean):ListA
         val services=getItem(position)
        // holder.binding.editPatientAccountTv.visibility=View.GONE
         val balance= services.totalAmount?.toDouble()?.minus(services?.paidAmount?.toDouble() ?: 0.0)
-        if (DefaultLocaleHelper.getInstance(holder.binding.doctorNameTv.context).getCurrentLocale()=="ar"){
-            holder.binding.doctorNameTv.text=services.doctorName
+        val isArabic = DefaultLocaleHelper.getInstance(holder.binding.doctorNameTv.context).getCurrentLocale() == "ar"
+        val rawDoctorName = services.doctorName ?: ""
+        val drPrefix = if (isArabic) "د. " else "Dr. "
+        val formattedDoctorName = if (rawDoctorName.isBlank()) {
+            ""
+        } else if (rawDoctorName.startsWith("Dr.", ignoreCase = true) ||
+            rawDoctorName.startsWith("د.") ||
+            rawDoctorName.startsWith("د/") ||
+            rawDoctorName.startsWith("دكتور")
+        ) {
+            rawDoctorName
+        } else {
+            "$drPrefix$rawDoctorName"
+        }
+
+        if (isArabic){
+            holder.binding.doctorNameTv.text=formattedDoctorName
             holder.binding.balanceTv.text="${services.totalAmount!! - services.paidAmount!!} جنية "
             holder.binding.feeTv.text="${services.totalAmount!!} جنية "
             holder.binding.paidTv.text="${services.paidAmount!!} جنية "
@@ -39,7 +54,7 @@ class MainDoctorAccountAdapter(val addItems:IAddItems ,val status:Boolean):ListA
             holder.binding.totabalanceTv.text="${balance?.toInt()} جنية "
 
         }else{
-         holder.binding.doctorNameTv.text=services.doctorName
+            holder.binding.doctorNameTv.text=formattedDoctorName
             holder.binding.balanceTv.text="${services.totalAmount!! - services.paidAmount!!} LE "
             holder.binding.feeTv.text="${services.totalAmount!!} LE "
             holder.binding.paidTv.text="${services.paidAmount!!} LE "

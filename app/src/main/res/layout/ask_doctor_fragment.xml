@@ -292,6 +292,23 @@
                     app:layout_constraintEnd_toEndOf="parent"
                    app:layout_constraintTop_toTopOf="parent"
                     />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_chronicDiseasesError"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/avenirltstd_roman"
+                    android:gravity="center"
+                    android:padding="2dp"
+                    android:text="@string/required"
+                    android:textColor="@color/red"
+                    android:textSize="12sp"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textinput_QuestionDetails"/>
+
             <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/textinput_surgeryOperations"
                     android:padding="8dp"
@@ -311,11 +328,28 @@
                     android:hint="@string/prevSurgery"
                     android:gravity="start|center_vertical"
                     android:inputType="textMultiLine"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textinput_QuestionDetails"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_chronicDiseasesError"
                     />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_surgeryError"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/avenirltstd_roman"
+                    android:gravity="center"
+                    android:padding="2dp"
+                    android:text="@string/required"
+                    android:textColor="@color/red"
+                    android:textSize="12sp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textinput_surgeryOperations"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -625,7 +659,7 @@
                 android:id="@+id/btn_send"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_chooselang_button"
+                android:background="@drawable/bg_button_send_selector"
                 android:fontFamily="@font/avenirltstd_black"
                 android:padding="5dp"
                 android:text="@string/send"

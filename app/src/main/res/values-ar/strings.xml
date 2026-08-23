@@ -197,7 +197,7 @@
     <string name="past_medication">الأدوية السابقة</string>
     <string name="injuries">إصابات</string>
     <string name="chronic_diseases">الأمراض المزمنة</string>
-    <string name="surgeries">العمليات الجراحية</string>
+    <string name="surgeries">العمليات الجراحية السابقه</string>
     <string name="date">تاريخ</string>
     <string name="appointments_available">المواعيد المتاحة</string>
     <string name="summary">ملخص</string>
@@ -368,6 +368,12 @@
     <string name="showanswers">عرض الاجابات</string>
     <string name="myanswers">إجابة السؤال</string>
     <string name="chronicdisease">الامراض المزمنة</string>
+    <string name="please_write_question_in_english">برجاء كتابة السؤال باللغة الإنجليزية.</string>
+    <string name="please_write_question_in_arabic">برجاء كتابة السؤال باللغة العربية.</string>
+    <string name="please_write_surgeries_in_english">برجاء كتابة العمليات الجراحية السابقة باللغة الإنجليزية.</string>
+    <string name="please_write_surgeries_in_arabic">برجاء كتابة العمليات الجراحية السابقة باللغة العربية.</string>
+    <string name="please_write_diseases_in_english">برجاء كتابة الأمراض المزمنة باللغة الإنجليزية.</string>
+    <string name="please_write_diseases_in_arabic">برجاء كتابة الأمراض المزمنة باللغة العربية.</string>
     <string name="prevSurgery">عمليات جراحية سابقة</string>
     <string name="chooses">اختر</string>
     <string name="book_as_visitor">احجز كزائر</string>

@@ -321,13 +321,105 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
-                    android:id="@+id/PressureMMGG_tv"
+                    android:id="@+id/SugarLevelMGDL_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="@dimen/_10sdp"
                     app:layout_constraintTop_toBottomOf="@+id/textinput_OtherAllergies"
+                    android:textSize="15sp"
+                    android:text="@string/sugar_level_mg_dl"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_textinput_SugarLevelMGDL"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_edittext"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/SugarLevelMGDL_tv"
+                    >
+                <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/first_textinput_SugarLevelMGDL"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="@dimen/_100sdp"
+                        android:layout_height="60dp"
+                        android:elevation="1dp"
+                        android:hint="100"
+                        android:paddingTop="2dp"
+                        app:boxBackgroundMode="none"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_SugarLevelMGDL"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:layout_gravity="center_horizontal"
+                            android:fontFamily="@font/avenirltstd_roman"
+                            android:gravity="center"
+                            android:maxLength="3"
+                            android:importantForAutofill="no"
+                            android:imeOptions="actionDone"
+                            android:inputType="text"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+                <ImageView
+                        android:id="@+id/im_suggar"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:visibility="visible"
+                        app:tint="@color/dark_gray"
+                        android:src="@drawable/slash"
+                        />
+
+                <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/textinput_SugarLevelMGDL"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="@dimen/_100sdp"
+                        android:layout_height="60dp"
+                        android:elevation="1dp"
+                        android:hint="80"
+                        android:paddingTop="2dp"
+                        app:boxBackgroundMode="none"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/last_et_SugarLevelMGDL"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:layout_gravity="center_horizontal"
+                            android:fontFamily="@font/avenirltstd_roman"
+                            android:gravity="center"
+                            android:maxLength="3"
+                            android:importantForAutofill="no"
+                            android:imeOptions="actionDone"
+                            android:inputType="text"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                    android:id="@+id/PressureMMGG_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_textinput_SugarLevelMGDL"
                     android:textSize="15sp"
                     android:text="@string/pressure_mm_gg"/>
 
@@ -427,97 +519,6 @@
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-            <TextView
-                    android:id="@+id/SugarLevelMGDL_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    app:layout_constraintTop_toBottomOf="@+id/layout_textinput_PressureMMGG"
-                    android:textSize="15sp"
-                    android:text="@string/sugar_level_mg_dl"/>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/layout_textinput_SugarLevelMGDL"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/bg_edittext"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:layout_marginTop="@dimen/_3sdp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/SugarLevelMGDL_tv"
-                    >
-                <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/first_textinput_SugarLevelMGDL"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="@dimen/_100sdp"
-                        android:layout_height="60dp"
-                        android:elevation="1dp"
-                        android:hint="100"
-                        android:paddingTop="2dp"
-                        app:boxBackgroundMode="none"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/et_SugarLevelMGDL"
-                            android:layout_width="match_parent"
-                            android:layout_height="60dp"
-                            android:layout_gravity="center_horizontal"
-                            android:fontFamily="@font/avenirltstd_roman"
-                            android:gravity="center"
-                            android:maxLength="3"
-                            android:importantForAutofill="no"
-                            android:imeOptions="actionDone"
-                            android:inputType="text"
-                            android:textColor="@color/black"
-                            android:textSize="12sp" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-                <ImageView
-                        android:id="@+id/im_suggar"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:visibility="visible"
-                        app:tint="@color/dark_gray"
-                        android:src="@drawable/slash"
-                        />
-
-                <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/textinput_SugarLevelMGDL"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="@dimen/_100sdp"
-                        android:layout_height="60dp"
-                        android:elevation="1dp"
-                        android:hint="80"
-                        android:paddingTop="2dp"
-                        app:boxBackgroundMode="none"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/last_et_SugarLevelMGDL"
-                            android:layout_width="match_parent"
-                            android:layout_height="60dp"
-                            android:layout_gravity="center_horizontal"
-                            android:fontFamily="@font/avenirltstd_roman"
-                            android:gravity="center"
-                            android:maxLength="3"
-                            android:importantForAutofill="no"
-                            android:imeOptions="actionDone"
-                            android:inputType="text"
-                            android:textColor="@color/black"
-                            android:textSize="12sp" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             <com.google.android.material.textfield.TextInputLayout
@@ -533,7 +534,7 @@
                 app:boxBackgroundMode="none"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/layout_textinput_SugarLevelMGDL">
+                app:layout_constraintTop_toBottomOf="@+id/layout_textinput_PressureMMGG">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_Prescriptions"
@@ -581,36 +582,6 @@
 
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textinput_PastMedication"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_margin="15dp"
-                android:background="@drawable/bg_edittext"
-                android:elevation="1dp"
-                android:hint="@string/past_medication"
-                android:paddingTop="2dp"
-                app:boxBackgroundMode="none"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textinput_CurrentMedication">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_PastMedication"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center_horizontal"
-                    android:fontFamily="@font/avenirltstd_roman"
-                    android:gravity="start"
-                    android:inputType="text"
-                    android:padding="5dp"
-                    android:importantForAutofill="no"
-                    android:imeOptions="actionNext"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textinput_Injuries"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
@@ -623,7 +594,7 @@
                 app:boxBackgroundMode="none"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textinput_PastMedication">
+                app:layout_constraintTop_toBottomOf="@+id/textinput_CurrentMedication">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_Injuries"

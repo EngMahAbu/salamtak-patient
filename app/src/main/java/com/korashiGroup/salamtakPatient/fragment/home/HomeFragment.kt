@@ -28,6 +28,7 @@ import com.korashiGroup.salamtakPatient.model.ImageServices
 import com.korashiGroup.salamtakPatient.model.SpecialistData
 import com.korashiGroup.salamtakPatient.model.booking.ClinicSchedualByClinicDayId
 import com.korashiGroup.salamtakPatient.model.booking.clink.ClinicData
+import com.korashiGroup.salamtakPatient.model.booking.clink.GetDoctorClinksResponse
 import com.korashiGroup.salamtakPatient.model.notification.Data
 import com.korashiGroup.salamtakPatient.model.offers.OfferDoctor
 import com.korashiGroup.salamtakPatient.model.register.ChooseGender
@@ -166,8 +167,7 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
         initButton()
         setUP()
 
-
-
+        callBackDoctorClink()
         callBackDoctorProfile()
     }
 
@@ -685,13 +685,11 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
         rateCount: Int,
         fess: Int
     ) {
+        rating = rate
         val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US)
         formatter.timeZone = TimeZone.getTimeZone("UTC")
         val formattedDate = formatter.format(Date())
         sharedDataViewmodel.getRating(RatingDoctors(rate, rateCount))
-//        if (DateUtils.getToken().isNullOrEmpty()) {
-//            findNavController().navigate(R.id.dialogSignUp)
-//        } else {
         sharedDataViewmodel.getNavigateStatus("")
         val clinicSchedualByClinicDayId = ClinicSchedualByClinicDayId(
             clinicId,
@@ -713,7 +711,12 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
         sharedDataViewmodel.getDocotorId(doctorId)
         sharedDataViewmodel.getClinicIdAndDoctorId(ClinicData(doctorId, clinicId, true))
         sharedDataViewmodel.getFees(fess)
-        findNavController().navigate(R.id.bookingAppointmentFragment)
+        if (DateUtils.getToken().isNullOrEmpty()) {
+            val action = HomeFragmentDirections.actionHomeFragmentToDialogSignUp(false)
+            findNavController().navigate(action)
+        } else {
+            viewmodel.getDoctorProfileByDoctorId(clinicId, doctorId)
+        }
     }
 
     private fun getDayId(formattedDate: String): Int {
@@ -1318,6 +1321,31 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
         // }
     }
 
+    private fun callBackDoctorClink() {
+        viewmodel.doctorClinkResponse.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is Resource.Loading -> {
+                    showprogtessbar()
+                }
+                is Resource.sucess -> {
+                    hideprogressbar()
+                    response.data?.let { doctorClinks ->
+                        val action = HomeFragmentDirections.actionHomeFragmentToBookAppointmentFragment(
+                            doctorClinks,
+                            "booking appointment"
+                        )
+                        findNavController().navigate(action)
+                        viewmodel.doctorClinkResponse.value = null
+                    }
+                }
+                is Resource.Error -> {
+                    hideprogressbar()
+                    Snackbar.make(requireView(), "${response.message}", Snackbar.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
     private fun callBackDoctorProfile() {
         doctorProfileViewModel.doctorprofileResponse.observe(
             viewLifecycleOwner,
@@ -1347,13 +1375,10 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
                                 )
                             }
                         }
-                        val action =
-                            HomeFragmentDirections.actionHomeFragmentToBookingAppointmentFragment()
                         val bundle = Bundle().apply {
                             putDouble("rating", rating ?: 0.0)
                         }
-
-                        findNavController().navigate(R.id.bookingAppointmentFragment,bundle)
+                        findNavController().navigate(R.id.bookingAppointmentFragment, bundle)
                         doctorProfileViewModel.doctorprofileResponse.value = null
                     }
 

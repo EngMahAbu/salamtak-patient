@@ -189,6 +189,9 @@
                 android:id="@+id/action_homeFragment_to_bookingAppointmentFragment"
                 app:destination="@id/bookingAppointmentFragment" />
         <action
+                android:id="@+id/action_homeFragment_to_bookAppointmentFragment"
+                app:destination="@id/bookAppointmentFragment" />
+        <action
                 android:id="@+id/action_homeFragment_to_healthyTopicsFragment"
                 app:destination="@id/healthyTopicsFragment" />
         <action

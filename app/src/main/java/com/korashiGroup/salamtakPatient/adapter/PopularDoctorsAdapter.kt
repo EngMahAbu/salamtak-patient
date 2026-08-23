@@ -80,21 +80,22 @@ class PopularDoctorsAdapter(val onitemclick: Action) : ListAdapter<PopularDoctor
         }
 
         holder.binding.btnBooking.setOnClickListener {
-            services.clinicId?.let { it1 ->
-                services.doctorId?.let { it2 ->
-                    services.clinicDto?.Name?.let { it3 ->
-                        services.rate?.let { it4 ->
-                            services.RateCount?.let { it5 ->
-                                services.feesTo?.let { it6 ->
-                                    onitemclick.onBookClick(
-                                        it1,
-                                        it2, it3, it4, it5, it6
-                                    )
-                                }
-                            }
-                        }
-                    }
-                }
+            val clinicId = services.clinicId ?: 0
+            val doctorId = services.doctorId ?: 0
+            val clinicName = services.clinicDto?.Name ?: ""
+            val rate = services.rate ?: 0.0
+            val rateCount = services.RateCount ?: 0
+            val fees = services.feesTo ?: 0
+
+            if (doctorId != 0) {
+                onitemclick.onBookClick(
+                    clinicId,
+                    doctorId,
+                    clinicName,
+                    rate,
+                    rateCount,
+                    fees
+                )
             }
         }
 

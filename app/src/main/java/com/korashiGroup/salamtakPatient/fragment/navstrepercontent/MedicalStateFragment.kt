@@ -180,9 +180,6 @@ class MedicalStateFragment : Fragment() {
         if (!binding.etCurrentMedication.text.toString().trim().isNullOrEmpty()){
             partMap = partMap + mapOf("CurrentMedication" to binding.etCurrentMedication.text.toString())
         }
-        if (!binding.etPastMedication.text.toString().trim().isNullOrEmpty()){
-            partMap = partMap + mapOf("PastMedication" to binding.etPastMedication.text.toString())
-        }
         if (!binding.etSurgeries.text.toString().trim().isNullOrEmpty()){
             partMap = partMap + mapOf("Surgeries" to binding.etSurgeries.text.toString())
         }
@@ -371,11 +368,6 @@ class MedicalStateFragment : Fragment() {
             binding.etCurrentMedication.setText(patientInfo.currentMedication.toString())
         }else{
             binding.etCurrentMedication.setText("")
-        }
-        if (patientInfo.pastMedication!=null){
-            binding.etPastMedication.setText(patientInfo.pastMedication.toString())
-        }else{
-            binding.etPastMedication.setText("")
         }
         if (patientInfo.iinjuries!=null) {
             binding.etInjuries.setText(patientInfo.iinjuries.toString())

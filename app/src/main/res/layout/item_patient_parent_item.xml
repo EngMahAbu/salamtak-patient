@@ -222,12 +222,12 @@
             <!-- Using a standard ImageView with background for the expand icon -->
             <ImageView
                     android:id="@+id/edit_patient_account_tv"
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:background="@drawable/bg_dark_blue_square"
-                    android:padding="6dp"
-                    android:src="@drawable/ic_circle_arrow_down"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_arrowdwonwhite"
                     app:tint="@color/white"
                     app:layout_constraintBottom_toBottomOf="@+id/doctor_name_tv"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -235,12 +235,12 @@
 
             <ImageView
                     android:id="@+id/edit_next_arrow"
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:background="@drawable/bg_dark_blue_square"
-                    android:padding="6dp"
-                    android:src="@drawable/ic_up_arrow"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_arrowupwhite"
                     android:visibility="gone"
                     app:tint="@color/white"
                     app:layout_constraintBottom_toBottomOf="@+id/doctor_name_tv"

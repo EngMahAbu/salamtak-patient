@@ -259,15 +259,15 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
             layoutManager = LinearLayoutManager(requireContext())
             setHasFixedSize(true)
 
-            val list=args.doctorclinks.data?.clinicDtos as MutableList
+            val list=args.doctorclinks?.data?.clinicDtos as MutableList
             list.add(
-                args.doctorclinks.data!!.currentClinicDtos?.services?.let {
+                args.doctorclinks?.data!!.currentClinicDtos?.services?.let {
                     ClinicDto(
-                        args.doctorclinks.data!!.currentClinicDtos?.address,null,null,null,
-                        args.doctorclinks.data!!.currentClinicDtos?.cityName,
-                        args.doctorclinks.data!!.currentClinicDtos?.clinicId,null,null,null,null,null,
-                        args.doctorclinks.data!!.currentClinicDtos?.logo,
-                        args.doctorclinks.data!!.currentClinicDtos?.name,null,
+                        args.doctorclinks?.data!!.currentClinicDtos?.address,null,null,null,
+                        args.doctorclinks?.data!!.currentClinicDtos?.cityName,
+                        args.doctorclinks?.data!!.currentClinicDtos?.clinicId,null,null,null,null,null,
+                        args.doctorclinks?.data!!.currentClinicDtos?.logo,
+                        args.doctorclinks?.data!!.currentClinicDtos?.name,null,
                         it
                     )
                 }
@@ -366,7 +366,7 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
 
                 is Resource.sucess -> {
                     binding.progressbar1.visibility = View.GONE
-                    val appointmentDetailBooking = args.doctorclinks.data?.let { it1 ->
+                    val appointmentDetailBooking = args.doctorclinks?.data?.let { it1 ->
                         it1.id?.let { it2 ->
                             AppointmentDetailBooking(
                                 name,
@@ -379,8 +379,8 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
                                 "${it.data?.data?.doctorDto?.specialistName} - ${it.data?.data?.doctorDto?.seniorityLevelName}",
                                 args.doctorclinks?.data?.image,
                                 medicalExaminationId,
-                                args.doctorclinks.data?.currentClinicDtos?.cityName,
-                                args.doctorclinks.data?.currentClinicDtos?.areaName
+                                args.doctorclinks?.data?.currentClinicDtos?.cityName,
+                                args.doctorclinks?.data?.currentClinicDtos?.areaName
                             )
                         }
                     }
@@ -424,7 +424,7 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
                 is Resource.sucess -> {
                     binding.progressbar1.visibility = View.GONE
                     val appointmentDetailBooking = args.doctorclinks.let { it1 ->
-                        it1.data?.id?.let { it2 ->
+                        it1?.data?.id?.let { it2 ->
                             AppointmentDetailBooking(
                                 name,
                                 it2,
@@ -434,10 +434,10 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
                                 fees,
                                 medicalExaminationTypeName,
                                 it.data?.data?.doctorDto?.specialistName,
-                                args.doctorclinks.data?.image,
+                                args.doctorclinks?.data?.image,
                                 medicalExaminationId,
-                                args.doctorclinks.data?.currentClinicDtos?.cityName,
-                                args.doctorclinks.data?.currentClinicDtos?.areaName
+                                args.doctorclinks?.data?.currentClinicDtos?.cityName,
+                                args.doctorclinks?.data?.currentClinicDtos?.areaName
                             )
                         }
                     }
@@ -475,7 +475,7 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
             viewLifecycleOwner,
             androidx.lifecycle.Observer {
                 this.clinicId = it.clinicId
-                args.doctorclinks.data?.id?.let { it1 ->
+                args.doctorclinks?.data?.id?.let { it1 ->
                     isPolyClinic?.let { it2 ->
                         viewmodel.getClinicSchedualByClinicDayId(
                             it.clinicId,
@@ -646,7 +646,7 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
         formattedDate = formatter.format(date)
         Log.e("TAG", "onItemClick: ${formattedDate}", )
         getDayId()
-        args.doctorclinks.data?.id?.let {
+        args.doctorclinks?.data?.id?.let {
             isPolyClinic?.let { it1 ->
                 viewmodel.getClinicSchedualByClinicDayId(
                     clinicId,
@@ -701,7 +701,7 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
     }
 
     private fun getClinicSchedualByClinicOrServices(){
-        args.doctorclinks.data?.id?.let { it1 ->
+        args.doctorclinks?.data?.id?.let { it1 ->
             isPolyClinic?.let {
                     it2 ->
                 viewmodel.getClinicSchedualByClinicDayId(
@@ -731,17 +731,17 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
                 binding.tvName.text = getString(R.string.book_appointment)
             }
         }
-        args.doctorclinks.data?.specialistId?.let {
+        args.doctorclinks?.data?.specialistId?.let {
             SpecialistData(
                 it,"",false,"")
         }?.let { sharedDataViewmodel.getspecialication(it) }
         name =if (DateUtils.getLanguage()=="en"){
-            "Dr.${args.doctorclinks.data?.firstName} ${args.doctorclinks.data?.middelName} ${args.doctorclinks.data?.lastName}"
+            "Dr.${args.doctorclinks?.data?.firstName} ${args.doctorclinks?.data?.middelName} ${args.doctorclinks?.data?.lastName}"
 
         }else{
-            "دكتور.${args.doctorclinks.data?.firstNameAr} ${args.doctorclinks.data?.middelNameAr} ${args.doctorclinks.data?.lastNameAr}"
+            "دكتور.${args.doctorclinks?.data?.firstNameAr} ${args.doctorclinks?.data?.middelNameAr} ${args.doctorclinks?.data?.lastNameAr}"
         }
-        if (!args.doctorclinks.data?.clinicDtos.isNullOrEmpty()) {
+        if (!args.doctorclinks?.data?.clinicDtos.isNullOrEmpty()) {
             val clincServices = args.doctorclinks?.data?.clinicDtos?.get(0)?.services
             if (clincServices != null) {
                 initClinkservices(clincServices)
@@ -749,12 +749,12 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
         }
         binding.tvDoctorName.text = name
         var subspecialist: String? = ""
-        args.doctorclinks.data?.subSpecialistName?.forEach {
+        args.doctorclinks?.data?.subSpecialistName?.forEach {
             subspecialist = "$subspecialist $it,"
         }
-        binding.tvSpecialization.text = "${args.doctorclinks.data?.seniorityLevelName} ${subspecialist}"
+        binding.tvSpecialization.text = "${args.doctorclinks?.data?.seniorityLevelName} ${subspecialist}"
 
-        binding.ivDoctorProfile.load(args.doctorclinks.data?.image) {
+        binding.ivDoctorProfile.load(args.doctorclinks?.data?.image) {
             crossfade(true)
             crossfade(1000)
             transformations(CircleCropTransformation())
