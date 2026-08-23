@@ -792,7 +792,11 @@
 
     <fragment
         android:id="@+id/salamtakCommunityFragment"
-        android:name="com.korashiGroup.salamtakPatient.fragment.home.SalamtakCommunityFragment" />
+        android:name="com.korashiGroup.salamtakPatient.fragment.home.SalamtakCommunityFragment">
+        <action
+            android:id="@+id/action_salamtakCommunityFragment_to_dialogBottomSheetFragment"
+            app:destination="@id/dialogBottomSheetFragment" />
+    </fragment>
 
 
 

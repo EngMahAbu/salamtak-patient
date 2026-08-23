@@ -279,9 +279,12 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
             findNavController().navigate(R.id.searchFragment)
         }
 
-//        binding.frame1.setOnClickListener {
-//            findNavController().navigate(R.id.salamtakCommunityFragment)
-//        }
+        binding.cardSalamtakCommunity.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_salamtakCommunityFragment)
+        }
+        binding.btnJoinNow.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_salamtakCommunityFragment)
+        }
 //        binding.layputHomecare.setOnClickListener {
 //            medicalExaminatioId=10
 //            findNavController().navigate(R.id.homeCareFragment)
@@ -647,12 +650,15 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
         }
     }
 
+
     private fun getCity() {
-        sharedDataViewmodel.getCity.observe(viewLifecycleOwner) {
-            if (DefaultLocaleHelper.getInstance(requireContext()).getCurrentLocale() == "ar") {
-                binding.tvCity.text = it.nameAr
-            } else {
-                binding.tvCity.text = it.name
+        sharedDataViewmodel.getCity.observe(viewLifecycleOwner) { cityData ->
+            cityData?.let {
+                if (DefaultLocaleHelper.getInstance(requireContext()).getCurrentLocale() == "ar") {
+                    binding.tvCity.text = it.nameAr
+                } else {
+                    binding.tvCity.text = it.name
+                }
             }
         }
     }

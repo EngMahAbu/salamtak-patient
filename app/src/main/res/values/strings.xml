@@ -502,6 +502,73 @@ Welcome to Salamtak mobile clinics service. You can now get a premium service in
     <string name="sub_spec_error">You must select Specialization first</string>
     <string name="notice_doctor_app">Congratulations! You downloaded Salamtak Patients Application. If you are a Doctor, Please Download Salamtak Doctors Application instead</string>
 
+    <string name="street2">Street Name</string>
+
+
+    <string name="salamtak_community_desc">Salamtak Community, in collaboration with hospitals, blood banks, and humanitarian organizations, connects donors with people in need through a trusted health network.</string>
+    <string name="join_now">Join Now</string>
+
+    <string name="salamtak_community">Salamtak Community</string>
+    <string name="are_you">Are You :</string>
+    <string name="provider">Provider</string>
+    <string name="receiver">Receiver</string>
+    <string name="please_select_provider_or_receiver">Please select Provider or Receiver</string>
+    <string name="full_name_hint">Full Name In English (First - Middle - Last)</string>
+    <string name="error_full_name_required">Full name (First - Middle - Last) is required</string>
+    <string name="mobile_number_label">Mobile Number</string>
+    <string name="mobile_number_hint">Mobile Number (+2)</string>
+    <string name="error_mobile_digits">Mobile number must be 11 digits</string>
+    <string name="error_select_city">Please select city</string>
+    <string name="error_select_area">Please select area</string>
+    <string name="street_name">Street Name</string>
+    <string name="error_enter_street_name">Please enter street name</string>
+    <string name="building_no">Building #</string>
+    <string name="floor_no">Floor #</string>
+    <string name="apartment_no">Apartment #</string>
+    <string name="services_label">Services:</string>
+    <string name="blood_donation">Blood Donation</string>
+    <string name="in_clinic_bookings">In-Clinic Bookings</string>
+    <string name="surgery">Surgery</string>
+    <string name="medical_consultation">Medical Consultation</string>
+    <string name="medication">Medication</string>
+    <string name="medical_supplies">Medical Supplies</string>
+    <string name="location_or_space">Location or Space</string>
+    <string name="volunteer_effort">Volunteer Effort</string>
+    <string name="error_select_service">Please select a service</string>
+
+    <string name="age_label">Age</string>
+    <string name="error_specify_age">Please specify your age</string>
+    <string name="gender_label">Gender</string>
+    <string name="select_blood_type">Select Blood Type</string>
+    <string name="error_select_blood_type">Please select a blood type</string>
+    <string name="do_you_have_chronic_diseases">Do you have chronic diseases?</string>
+    <string name="please_specify">Please specify</string>
+    <string name="error_specify_chronic">Please specify your chronic disease</string>
+    <string name="are_you_taking_any_medications">Are you taking any medications?</string>
+    <string name="error_specify_medications">Please specify your medication</string>
+    <string name="additional_details_symptoms">Additional Details / Symptoms</string>
+    <string name="enter_additional_details_here">Enter additional details</string>
+    <string name="error_select_speciality">Please select a speciality</string>
+    <string name="error_specify_medication_details">Please specify medications details</string>
+    <string name="additional_details">Additional Details</string>
+    <string name="error_describe_medical_supplies">Please describe available medical supplies</string>
+    <string name="location_type_hint">Location Type (e.g. Building, Land)</string>
+    <string name="error_enter_location_type">Please enter location type</string>
+    <string name="location_address">Location Address</string>
+    <string name="approximate_space_hint">Approximate Space (m²)</string>
+    <string name="error_specify_space">Please specify approximate space</string>
+    <string name="setup_if_available">Setup (If Available)</string>
+    <string name="duration">Duration</string>
+    <string name="time">Time</string>
+    <string name="from_date_hint">From  dd/mm/yyyy</string>
+    <string name="to_date_hint">To  dd/mm/yyyy</string>
+    <string name="from_time_hint">From  --:--  am/pm</string>
+    <string name="to_time_hint">To  --:--  am/pm</string>
+    <string name="error_select_date_time">Please select date and time</string>
+    <string name="describe_experience_hint">Describe Your Experience (if available)</string>
+    <string name="submitted_successfully">Submitted successfully</string>
+
+
     <array name="choose">
         <item>Select</item>
     </array>

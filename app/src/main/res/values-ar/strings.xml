@@ -479,6 +479,75 @@
     <string name="sub_spec_error">يجب اختيار تخصص اولا</string>
     <string name="notice_doctor_app">تهانينا! لقد قمت بتنزيل تطبيق سلامتك للمرضى. إذا كنت طبيباً، يرجى تنزيل تطبيق سلامتك للأطباء بدلاً من ذلك</string>
 
+    <string name="street2">اسم الشارع</string>
+
+    <string name="salamtak_community_desc">
+        مجتمع سلامتك، بالتعاون مع المستشفيات وبنوك الدم والمؤسسات الإنسانية، يربط بين المتبرعين والأشخاص المحتاجين للدعم من خلال شبكة صحية موثوقة، مما يجعل الرعاية والدعم الصحي أكثر سهولة ووصولًا للجميع.
+    </string>
+
+    <string name="join_now">انضم الآن</string>
+
+    <string name="salamtak_community">مجتمع سلامتك</string>
+    <string name="are_you">أنت :</string>
+    <string name="provider">مُقدّم خدمة</string>
+    <string name="receiver">مستفيد</string>
+    <string name="please_select_provider_or_receiver">برجاء اختيار مُقدّم خدمة أو مستفيد</string>
+    <string name="full_name_hint">الاسم بالكامل باللغة الإنجليزية (الأول - الأوسط - الأخير)</string>
+    <string name="error_full_name_required">الاسم بالكامل (الأول - الأوسط - الأخير) مطلوب</string>
+    <string name="mobile_number_label">رقم الموبايل</string>
+    <string name="mobile_number_hint">رقم الموبايل (+2)</string>
+    <string name="error_mobile_digits">يجب أن يتكون رقم الموبايل من 11 رقم</string>
+    <string name="error_select_city">برجاء اختيار المحافظة</string>
+    <string name="error_select_area">برجاء اختيار المنطقة</string>
+    <string name="street_name">اسم الشارع</string>
+    <string name="error_enter_street_name">برجاء إدخال اسم الشارع</string>
+    <string name="building_no">رقم المبنى #</string>
+    <string name="floor_no">رقم الدور #</string>
+    <string name="apartment_no">رقم الشقة #</string>
+    <string name="services_label">الخدمات:</string>
+    <string name="blood_donation">التبرع بالدم</string>
+    <string name="in_clinic_bookings">حجز عيادات</string>
+    <string name="surgery">عمليات جراحية</string>
+    <string name="medical_consultation">استشارة طبية</string>
+    <string name="medication">أدوية</string>
+    <string name="medical_supplies">مستلزمات طبية</string>
+    <string name="location_or_space">مكان أو مساحة</string>
+    <string name="volunteer_effort">جهد تطوعي</string>
+    <string name="error_select_service">برجاء اختيار خدمة</string>
+
+    <string name="age_label">العمر</string>
+    <string name="error_specify_age">برجاء تحديد العمر</string>
+    <string name="gender_label">الجنس</string>
+    <string name="select_blood_type">اختر فصيلة الدم</string>
+    <string name="error_select_blood_type">برجاء اختيار فصيلة الدم</string>
+    <string name="do_you_have_chronic_diseases">هل لديك أمراض مزمنة؟</string>
+    <string name="please_specify">برجاء التحديد</string>
+    <string name="error_specify_chronic">برجاء تحديد المرض المزمن</string>
+    <string name="are_you_taking_any_medications">هل تتناول أي أدوية؟</string>
+    <string name="error_specify_medications">برجاء تحديد الدواء</string>
+    <string name="additional_details_symptoms">تفاصيل إضافية / الأعراض</string>
+    <string name="enter_additional_details_here">أدخل التفاصيل الإضافية</string>
+    <string name="error_select_speciality">برجاء اختيار التخصص</string>
+    <string name="error_specify_medication_details">برجاء تحديد تفاصيل الأدوية</string>
+    <string name="additional_details">تفاصيل إضافية</string>
+    <string name="error_describe_medical_supplies">برجاء وصف المستلزمات الطبية المتاحة</string>
+    <string name="location_type_hint">نوع المكان (مثل: مبنى، أرض)</string>
+    <string name="error_enter_location_type">برجاء إدخال نوع المكان</string>
+    <string name="location_address">عنوان المكان</string>
+    <string name="approximate_space_hint">المساحة التقريبية (م²)</string>
+    <string name="error_specify_space">برجاء تحديد المساحة التقريبية</string>
+    <string name="setup_if_available">التجهيزات (إن وجدت)</string>
+    <string name="time">الوقت</string>
+    <string name="from_date_hint">من  dd/mm/yyyy</string>
+    <string name="to_date_hint">إلى  dd/mm/yyyy</string>
+    <string name="from_time_hint">من  --:--  ص/م</string>
+    <string name="to_time_hint">إلى  --:--  ص/م</string>
+    <string name="error_select_date_time">برجاء اختيار التاريخ والوقت</string>
+    <string name="describe_experience_hint">صف خبرتك (إن وجدت)</string>
+    <string name="submitted_successfully">تم الإرسال بنجاح</string>
+
+
+
     <array name="choose">
         <item>اختار</item>
     </array>
