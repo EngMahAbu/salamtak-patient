@@ -408,7 +408,7 @@
     <string name="fee">Tota Service Fees</string>
     <string name="paids">Total Paid</string>
     <string name="balance">Grand Total</string>
-    <string name="bills">Billing</string>
+    <string name="bills">Billings</string>
     <string name="we_will_answer_your_question_in_3_days"> Your question will be answered by Salamatak Doctors within 3 working days.</string>
     <string name="ages">Age</string>
     <string name="choose_symptoms">Describe Symptoms</string>
@@ -487,7 +487,7 @@
     <string name="salamtak_application_provides_three_levels_of_health_monitoring_devices_basic_intermediate_premium_using_advanced_medical_technology_and_high_standards_of_medical_care">Salamtak Application provides three levels of Health Monitoring Devices (Basic - Intermediate - Premium) using advanced medical technology and high standards of medical care.</string>
     <string name="addressdetails">Address</string>
     <string name="welcome_title">Welcome to our app</string>
-    <string name="welcome_subtitle">Book your appointment with the best doctors بسهولة and conveniently</string>
+    <string name="welcome_subtitle">Book your appointment with the best doctors easly and conveniently</string>
     <string name="who_are_you">Who are you?</string>
     <string name="btn_i_am_patient">Patients Only</string>
     <string name="btn_i_am_doctor">Doctors Only</string>
@@ -591,4 +591,9 @@ Welcome to Salamtak mobile clinics service. You can now get a premium service in
         <item>ممرض رعاية مركزة</item>
     </string-array>
 
+    <string name="other_doctors">Other Doctors</string>
+    <string name="choose_specialization_required">Choose Speciality <font color="#F60707">*</font></string>
+    <string name="your_question_required">Your question <font color="#F60707">*</font></string>
+    <string name="choose_gender_required">Choose Gender <font color="#F60707">*</font></string>
+    <string name="ages_required">Age <font color="#F60707">*</font></string>
 </resources>

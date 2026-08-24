@@ -54,9 +54,20 @@ class SearchDoctorsAdapter(private val booking: Booking,private val isHomeVisit:
             }
             waitingTime.text = "${services.waitingTime}"
             Feesresult.text = "${services.feesTo.toString()} ${holder.binding.Feesresult.context.getString(R.string.le)}"
-           holder.binding.docRatingBar.rating= (services.rate?.toFloat()?: 1.0f) / 2.0f
+            holder.binding.docRatingBar.rating= (services.rate?.toFloat()?: 1.0f) / 2.0f
             holder.binding.Reviews.text=String.format("%.1f", services.rate?.toFloat()?: 1.0f)
             holder.binding.Ratecount.text="${services.RateCount?.toInt()}"
+
+            val polyName = services.clinicDto?.Name?.trim() ?: services.clinicName?.trim() ?: ""
+            if (polyName.isNotEmpty()) {
+                tvPolyclinicName.text = polyName
+                tvPolyclinicName.visibility = View.VISIBLE
+                tvPolyclinicName.setOnClickListener {
+                    services.clinicId?.let { id -> booking.onPolyClinicNameClick(id) }
+                }
+            } else {
+                tvPolyclinicName.visibility = View.GONE
+            }
         }
         if (isHomeVisit){
             holder.binding.layoutIsHomeVisit.visibility=View.VISIBLE
@@ -138,5 +149,6 @@ class SearchDoctorsAdapter(private val booking: Booking,private val isHomeVisit:
 
         fun onItemClicks(clinicId: Int, doctorId: Int, fess: Int,image:String,clinicName:String)
         fun onItemClick(clinicId: Int, doctorId: Int,clinkname:String,rate:Double,rateCount:Int,fess: Int)
+        fun onPolyClinicNameClick(clinicId: Int)
     }
 }

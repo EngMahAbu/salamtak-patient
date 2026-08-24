@@ -483,7 +483,8 @@
     <string name="wrong_app_btn_download_patient">تحميل تطبيق المرضى</string>
     <string name="wrong_app_btn_close">إغلاق التطبيق</string>
     <string name="sub_spec_error">يجب اختيار تخصص اولا</string>
-    <string name="notice_doctor_app">تهانينا! لقد قمت بتنزيل تطبيق سلامتك للمرضى. إذا كنت طبيباً، يرجى تنزيل تطبيق سلامتك للأطباء بدلاً من ذلك</string>
+    <string name="notice_doctor_app">"تهانينا! لقد قمت بتحميل تطبيق سلامتك للمرضى. إذا كنت طبيبًا، يرجى تحميل تطبيق سلامتك للأطباء.</string>
+
 
     <string name="street2">اسم الشارع</string>
 
@@ -569,4 +570,9 @@
         <item>ممرض متخصص</item>
         <item>ممرض رعاية مركزة</item>
     </string-array>
+    <string name="other_doctors">أطباء آخرون</string>
+    <string name="choose_specialization_required">اختر التخصص <font color="#F60707">*</font></string>
+    <string name="your_question_required">ما هو سؤالك؟ <font color="#F60707">*</font></string>
+    <string name="choose_gender_required">اختر الجنس <font color="#F60707">*</font></string>
+    <string name="ages_required">السن <font color="#F60707">*</font></string>
 </resources>

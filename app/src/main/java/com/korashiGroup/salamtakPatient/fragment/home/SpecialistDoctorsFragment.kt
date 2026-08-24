@@ -48,6 +48,7 @@ class SpecialistDoctorsFragment : Fragment(),SpecialictyAdapter.SelectSpecialist
     val sharedDataViewmodel: SharedDataViewmodel by activityViewModels()
     private lateinit var bottomsheetbeahavoir: BottomSheetBehavior<ConstraintLayout>
     var doctorName=""
+    var polyclinicName=""
     var examinationtypeid = 8
     private var typeId = 1
     private var LabId = 0
@@ -147,6 +148,7 @@ class SpecialistDoctorsFragment : Fragment(),SpecialictyAdapter.SelectSpecialist
         }
         binding.btnSend.setOnClickListener {
             doctorName = binding.etSearch.text.toString()
+            polyclinicName = binding.etSearchPolyclinic.text.toString()
 
             when (examinationtypeid) {
                 8 -> {
@@ -312,22 +314,31 @@ class SpecialistDoctorsFragment : Fragment(),SpecialictyAdapter.SelectSpecialist
         val areaName = binding.etChooseArea.text.toString().trim()
         val specializationName = binding.etSpecialization.text.toString().trim()
         val doctorNameInput = binding.etSearch.text.toString().trim()
+        val polyclinicNameInput = binding.etSearchPolyclinic.text.toString().trim()
 
         var isValid = true
 
-        // 1. Specialization validation
-        if (specializationName.isEmpty()) {
+        // In PolyClinic mode: if polyclinic name OR doctor name is entered, skip other validations
+        if (examinationtypeid == 6 && (polyclinicNameInput.isNotEmpty() || doctorNameInput.isNotEmpty())) {
+            return true
+        }
+
+        // 1. Specialization validation (not needed in polyclinic mode if name is entered)
+        if (examinationtypeid != 6 && specializationName.isEmpty()) {
             binding.tvSpecializationError.text = getString(R.string.please_select_specialization)
             binding.tvSpecializationError.visibility = View.VISIBLE
             binding.layoutChooseSpecialization.setBackgroundResource(R.drawable.bg_edittext_error)
             isValid = false
+        } else if (examinationtypeid == 6 && specializationName.isEmpty()) {
+            binding.tvSpecializationError.visibility = View.GONE
+            binding.layoutChooseSpecialization.setBackgroundResource(R.drawable.bg_edittext)
         } else {
             binding.tvSpecializationError.visibility = View.GONE
             binding.layoutChooseSpecialization.setBackgroundResource(R.drawable.bg_edittext)
         }
 
-        // 2. City OR Doctor Name validation
-        if (cityName.isEmpty() && doctorNameInput.isEmpty()) {
+        // 2. City OR Doctor Name OR PolyClinic Name validation
+        if (cityName.isEmpty() && doctorNameInput.isEmpty() && polyclinicNameInput.isEmpty()) {
             binding.tvCityError.text = getString(R.string.please_select_city)
             binding.tvCityError.visibility = View.VISIBLE
             binding.layoutChooseCity.setBackgroundResource(R.drawable.bg_edittext_error)
@@ -351,11 +362,47 @@ class SpecialistDoctorsFragment : Fragment(),SpecialictyAdapter.SelectSpecialist
         return isValid
     }
 
+    private fun initPolyClinicMutualDimming() {
+        // Doctor name typed → dim polyclinic field
+        binding.etSearch.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (!s.isNullOrEmpty()) {
+                    binding.etSearchPolyclinic.alpha = 0.4f
+                    binding.etSearchPolyclinic.isEnabled = false
+                } else {
+                    binding.etSearchPolyclinic.alpha = 1.0f
+                    binding.etSearchPolyclinic.isEnabled = true
+                }
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
+        // PolyClinic name typed → dim doctor field
+        binding.etSearchPolyclinic.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (!s.isNullOrEmpty()) {
+                    binding.etSearch.alpha = 0.4f
+                    binding.etSearch.isEnabled = false
+                } else {
+                    binding.etSearch.alpha = 1.0f
+                    binding.etSearch.isEnabled = true
+                }
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
+    }
+
     private fun bindViews(){
         when(examinationtypeid){
             6->{
-                binding.etSearch.setHint(getString(R.string.search_by_polyclinic_name))
+                // Show the second OR and PolyClinic name search field
+                binding.tvOr2.visibility = View.VISIBLE
+                binding.etSearchPolyclinic.visibility = View.VISIBLE
+                // Restore doctor name hint
+                binding.etSearch.setHint(getString(R.string.search_by_doctor_name))
                 binding.layoutChooseSpecialization.visibility=View.VISIBLE
+                initPolyClinicMutualDimming()
             }
             10->{
                 binding.layoutChooseSpecialization.visibility=View.GONE

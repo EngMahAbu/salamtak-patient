@@ -20,6 +20,7 @@ import kotlin.math.roundToInt
 class PolyClinicsDoctorsAdapter(private val booking: IPolyClinicsBooking) :
     ListAdapter<PolyClinicsDoctorsList, PolyClinicsDoctorsAdapter.ViewHolder>(DiffCallback()) {
     var subspecialist:String?=""
+    var polyclinicName: String? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
         val view =
@@ -48,12 +49,23 @@ class PolyClinicsDoctorsAdapter(private val booking: IPolyClinicsBooking) :
             tvSpecialization.text = "${services.seniorityLevelName} ${services.specialistName}"
             val subSpecsStr = services.subSpecialistName.toString().removePrefix("[").removeSuffix("]")
             subSpecialization.text = subSpecsStr.split(",").take(2).joinToString(",")
-          location.text="${services.CityName} - ${services.AreaName}"
-          //  waitingTime.text = "${services.waitingTime}"
-           Feesresult.text = "${services.Fees.toString()} ${holder.binding.Feesresult.context.getString(R.string.le)}"
-           //holder.binding.ratingBar.rating= services.rate?.toFloat()?: 1.0f
-         //   holder.binding.Reviews.text="${services.rate?.roundToInt()?.toDouble()}"
-           holder.binding.Ratecount.text="${services.RateCount?.toInt()}"
+            location.text="${services.CityName} - ${services.AreaName}"
+            //  waitingTime.text = "${services.waitingTime}"
+            Feesresult.text = "${services.Fees.toString()} ${holder.binding.Feesresult.context.getString(R.string.le)}"
+            holder.binding.docRatingBar.rating = (services.rate?.toFloat() ?: 1.0f) / 2.0f
+            holder.binding.Reviews.text = String.format(java.util.Locale.ENGLISH, "%.1f", services.rate?.toFloat() ?: 1.0f)
+            holder.binding.Ratecount.text="${services.RateCount?.toInt()}"
+
+            val polyName = polyclinicName?.trim().orEmpty()
+            if (polyName.isNotEmpty()) {
+                tvPolyclinicName.text = polyName
+                tvPolyclinicName.visibility = View.VISIBLE
+                tvPolyclinicName.setOnClickListener {
+                    services.ClinicID?.let { id -> booking.onPolyClinicBadgeClick(id) }
+                }
+            } else {
+                tvPolyclinicName.visibility = View.GONE
+            }
         }
         holder.binding.btnBooking.setOnClickListener {
             services.id?.let { it1 -> services.ClinicID?.let { it2 ->
@@ -104,5 +116,6 @@ class PolyClinicsDoctorsAdapter(private val booking: IPolyClinicsBooking) :
     interface IPolyClinicsBooking {
         fun onPolyClinicsDoctorItemClick(doctorId: Int, fess: Int,image:String,ClinicID:Int)
         fun onTvBookItemClinic(doctorId: Int, ClinicID:Int,rate:Double,rateCount:Int)
+        fun onPolyClinicBadgeClick(clinicId: Int)
     }
 }

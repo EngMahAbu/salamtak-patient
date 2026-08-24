@@ -595,6 +595,15 @@
         <argument
                 android:name="polyclinicitems"
                 app:argType="com.korashiGroup.salamtakPatient.fragment.polyclinic.model.PolyClinicsItem" />
+        <action
+                android:id="@+id/action_polyClinicInfoFragment_to_bookAppointmentFragment"
+                app:destination="@id/bookAppointmentFragment" />
+        <action
+                android:id="@+id/action_polyClinicInfoFragment_to_bookingAppointmentFragment"
+                app:destination="@id/bookingAppointmentFragment" />
+        <action
+                android:id="@+id/action_polyClinicInfoFragment_to_dialogSignUp"
+                app:destination="@id/dialogSignUp" />
     </fragment>
     <fragment
             android:id="@+id/specialistDoctorsFragment"

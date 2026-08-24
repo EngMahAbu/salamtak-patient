@@ -106,6 +106,10 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
     private var feesTo: Int? = null
     private var doctorSearchState = "new"
     private var isHomeVisit = false
+    private var loadedPolyClinicDoctorsList = listOf<com.korashiGroup.salamtakPatient.fragment.polyclinic.model.PolyClinicsDoctorsList>()
+    // Holds the full unfiltered polyclinic list for local prefix search
+    private var fullPolyclinicList: List<com.korashiGroup.salamtakPatient.fragment.polyclinic.model.PolyClinicsItem> = emptyList()
+    private var isSearchingPolyclinicDoctors = false
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -138,6 +142,8 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         )
         instance = this
         bindFields()
+        val selectedSpec = sharedDataViewmodel.specialication.value
+        specialistId = if (selectedSpec == null || selectedSpec.id == 0) null else selectedSpec.id
         binding.ivPrevious.isEnabled = step != 1
         examinationtypeid = HomeFragment.instance?.let {
             it.medicalExaminatioId
@@ -168,21 +174,60 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         initButton()
         setupSpinner()
         if (examinationtypeid == 6) {
-            if (DateUtils.getstatus() == "true") {
-                sharedDataViewmodel.polyClinicResponse.observe(
+            val doctorNameFilter = SpecialistDoctorsFragment.instance?.doctorName ?: ""
+            if (doctorNameFilter.isNotEmpty()) {
+                // Doctor search mode within PolyClinic
+                isSearchingPolyclinicDoctors = true
+                binding.etSearch.visibility = View.VISIBLE
+                binding.layoutFilter.visibility = View.GONE
+                binding.tvOrPolyclinic.visibility = View.GONE
+                binding.etSearchPolyclinic.visibility = View.GONE
+                binding.etSearch.setHint(getString(R.string.search_by_doctor_name))
+                
+                binding.etSearch.setText(doctorNameFilter)
+                
+                binding.rvPolyclinic.visibility = View.GONE
+                binding.rvDoctors.visibility = View.VISIBLE
+                
+                // Fetch the city and search doctors of polyclinics
+                sharedDataViewmodel.getCity.observe(
                     viewLifecycleOwner,
                     androidx.lifecycle.Observer {
-                        specialistId?.let { it1 ->
+                        cityId = it.id
+                    })
+                doctorsSearch()
+            } else {
+                // PolyClinic search mode
+                isSearchingPolyclinicDoctors = false
+                binding.etSearch.visibility = View.VISIBLE
+                binding.layoutFilter.visibility = View.GONE
+                binding.tvOrPolyclinic.visibility = View.GONE
+                binding.etSearchPolyclinic.visibility = View.GONE
+                binding.etSearch.setHint(getString(R.string.search_by_polyclinic_name))
+                
+                // Pre-fill search text from filter screen if any
+                val initialFilter = SpecialistDoctorsFragment.instance?.polyclinicName ?: ""
+                binding.etSearch.setText(initialFilter)
+                
+                binding.rvPolyclinic.visibility = View.VISIBLE
+                binding.rvDoctors.visibility = View.GONE
+                
+                initPolyClinicResultsSearchField()
+
+                if (DateUtils.getstatus() == "true") {
+                    sharedDataViewmodel.polyClinicResponse.observe(
+                        viewLifecycleOwner,
+                        androidx.lifecycle.Observer {
                             polyClinicsViewmodel.getDoctorByClinicId(
                                 it.clinicId,
-                                it1
+                                specialistId ?: 0
                             )
-                        }
-                    })
+                        })
 
-            } else {
-                polyClinicRecylerview()
-                polyClinicSearch()
+                } else {
+                    polyClinicRecylerview()
+                    polyClinicSearch()
+                }
             }
         } else {
             if (!binding.etSearch.text.toString().isNullOrEmpty()) {
@@ -368,7 +413,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                         it2,
                         genderId = genderId,
                         10,
-                        examinationtypeid,
+                        if (examinationtypeid == 6) 1 else examinationtypeid,
                         seniortyLevelId,
                         0,
                         specialistId,
@@ -564,7 +609,6 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             when (it) {
 
                 is Resource.Loading -> {
-                    binding.etSearch.setHint(getString(R.string.search_by_polyclinic_name))
                     showprogtessbar()
                     binding.layoutCardview.visibility = View.GONE
                 }
@@ -572,12 +616,22 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                 is Resource.sucess -> {
                     hideprogressbar()
                     type = 0
-                    if (!it.data?.data.isNullOrEmpty()) {
-                        totalsDoctors = it.data?.data?.size!!
+                    // Save the full list for local prefix filtering
+                    fullPolyclinicList = it.data?.data ?: emptyList()
+                    // Apply polyclinic name prefix filter from search bar if provided
+                    val polyNameFilter = binding.etSearch.text.toString()
+                    val displayList = if (polyNameFilter.isNotEmpty()) {
+                        fullPolyclinicList.filter { item ->
+                            item.name?.startsWith(polyNameFilter, ignoreCase = true) == true
+                        }
+                    } else {
+                        fullPolyclinicList
                     }
+                    totalsDoctors = displayList.size
                     it.let {
                         binding.rvPolyclinicDoctors.visibility = View.GONE
                         binding.rvPolyclinic.visibility = View.VISIBLE
+                        binding.tvCountofDoctors.visibility = View.VISIBLE
                         if (DefaultLocaleHelper.getInstance(requireContext())
                                 .getCurrentLocale() == "en"
                         ) {
@@ -587,7 +641,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                             binding.tvCountofDoctors.text =
                                 " ${getString(R.string.polyclinic_found)} ${totalsDoctors} "
                         }
-                        polyClinicsAdapter.submitList(it.data?.data)
+                        polyClinicsAdapter.submitList(displayList)
                     }
 
                 }
@@ -597,6 +651,58 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                 }
             }
 
+        }
+    }
+
+    /**
+     * Sets up a local prefix-based filter on the results search bar (etSearch)
+     * when in PolyClinic mode.
+     */
+    private fun initPolyClinicResultsSearchField() {
+        binding.etSearch.addTextChangedListener { text ->
+            if (examinationtypeid == 6) {
+                val query = text?.toString() ?: ""
+                if (binding.rvPolyclinicDoctors.visibility == View.VISIBLE) {
+                    val filtered = if (query.isNotEmpty()) {
+                        loadedPolyClinicDoctorsList.filter { doc ->
+                            doc.fullName?.contains(query, ignoreCase = true) == true ||
+                            doc.fullNameAr?.contains(query, ignoreCase = true) == true ||
+                            doc.nickName?.contains(query, ignoreCase = true) == true ||
+                            doc.nickNameAr?.contains(query, ignoreCase = true) == true
+                        }
+                    } else {
+                        loadedPolyClinicDoctorsList
+                    }
+                    totalsDoctors = filtered.size
+                    if (DefaultLocaleHelper.getInstance(requireContext())
+                            .getCurrentLocale() == "en"
+                    ) {
+                        binding.tvSearch.text =
+                            "${totalsDoctors}   ${getString(R.string.doctors_found)} "
+                    } else {
+                        binding.tvSearch.text =
+                            " ${getString(R.string.doctors_found)} ${totalsDoctors} "
+                    }
+                    polyClinicsDoctorsAdapter.submitList(filtered)
+                    polyClinicsDoctorsAdapter.notifyDataSetChanged()
+                } else {
+                    val filtered = if (query.isNotEmpty()) {
+                        fullPolyclinicList.filter { item ->
+                            item.name?.startsWith(query, ignoreCase = true) == true
+                        }
+                    } else {
+                        fullPolyclinicList
+                    }
+                    polyClinicsAdapter.submitList(filtered)
+                    val count = filtered.size
+                    binding.tvCountofDoctors.visibility = View.VISIBLE
+                    if (DefaultLocaleHelper.getInstance(requireContext()).getCurrentLocale() == "en") {
+                        binding.tvCountofDoctors.text = "$count   ${getString(R.string.polyclinic_found)} "
+                    } else {
+                        binding.tvCountofDoctors.text = " ${getString(R.string.polyclinic_found)} $count "
+                    }
+                }
+            }
         }
     }
 
@@ -656,7 +762,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             AreaId = areaId,
             doctorName = binding.etSearch.text.toString(),
             maxResultCount = 10,
-            medicalExaminationTypeId = examinationtypeid,
+            medicalExaminationTypeId = if (examinationtypeid == 6) 1 else examinationtypeid,
             skipCount = 0,
             specialistId = specialistId
         )
@@ -761,7 +867,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                     it1,
                     genderId,
                     10,
-                    examinationtypeid,
+                    if (examinationtypeid == 6) 1 else examinationtypeid,
                     seniortyLevelId,
                     0,
                     specialistId
@@ -852,6 +958,43 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         sharedDataViewmodel.getFees(fess)
         findNavController().navigate(R.id.bookingAppointmentFragment)
         // }
+    }
+
+    override fun onPolyClinicNameClick(clinicId: Int) {
+        val polyClinicItem = fullPolyclinicList.find { it.clinicId == clinicId }
+            ?: run {
+                val doctorItem = searchDoctorsAdapter.currentList.find { it.clinicId == clinicId || it.clinicDto?.ClinicId == clinicId }
+                if (doctorItem != null) {
+                    com.korashiGroup.salamtakPatient.fragment.polyclinic.model.PolyClinicsItem(
+                        address = doctorItem.clinicDto?.Address,
+                        apartmentNo = null,
+                        areaName = doctorItem.clinicDto?.AreaName,
+                        areaPackageID = null,
+                        blockNo = null,
+                        cityName = doctorItem.clinicDto?.CityName,
+                        clinicId = clinicId,
+                        clinicLatitude = doctorItem.clinicDto?.ClinicLatitude,
+                        clinicLongitude = doctorItem.clinicDto?.ClinicLongitude,
+                        email = null,
+                        features = null,
+                        fixedFee = null,
+                        floorNo = null,
+                        gallary = null,
+                        videos = null,
+                        insurance = null,
+                        logo = null,
+                        name = doctorItem.clinicDto?.Name ?: doctorItem.clinicName,
+                        phone = null,
+                        services = null,
+                        subAreaName = null,
+                        ClinicBio = null
+                    )
+                } else null
+            }
+
+        if (polyClinicItem != null) {
+            onMoreItemClick(polyClinicItem)
+        }
     }
 
     private fun getDayId() {
@@ -998,6 +1141,8 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
     private fun getSearchDoctors() {
         var job: Job? = null
         binding.etSearch.addTextChangedListener {
+            // Skip API search if in PolyClinic mode and not searching for doctors
+            if (examinationtypeid == 6 && !isSearchingPolyclinicDoctors) return@addTextChangedListener
             doctorSearchState = "old"
             job?.cancel()
             job = MainScope().launch {
@@ -1013,7 +1158,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                             feesTo = feesTo,
                             genderId = genderId,
                             maxResultCount = 10,
-                            medicalExaminationTypeId = examinationtypeid,
+                            medicalExaminationTypeId = if (examinationtypeid == 6) 1 else examinationtypeid,
                             seniortyLevelId = seniortyLevelId,
                             skipCount = 0,
                             specialistId = specialistId
@@ -1031,7 +1176,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                             feesTo = feesTo,
                             genderId = genderId,
                             maxResultCount = 10,
-                            medicalExaminationTypeId = examinationtypeid,
+                            medicalExaminationTypeId = if (examinationtypeid == 6) 1 else examinationtypeid,
                             seniortyLevelId = seniortyLevelId,
                             skipCount = 0,
                             specialistId = specialistId
@@ -1124,7 +1269,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                     feesTo = feesTo,
                     genderId = genderId,
                     viewmodel.doctorSearchPage,
-                    examinationtypeid,
+                    if (examinationtypeid == 6) 1 else examinationtypeid,
                     seniortyLevelId,
                     skipCount = 0,
                     specialistId
@@ -1166,7 +1311,9 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
     ) {
         binding.rvPolyclinic.visibility = View.GONE
         polyclinicId = clinicId
-        specialistId?.let { polyClinicsViewmodel.getDoctorByClinicId(clinicId, it) }
+        val clinicName = fullPolyclinicList.find { it.clinicId == clinicId }?.name
+        polyClinicsDoctorsAdapter.polyclinicName = clinicName
+        polyClinicsViewmodel.getDoctorByClinicId(clinicId, specialistId ?: 0)
     }
 
     override fun onMoreItemClick(polyClinicsItem: PolyClinicsItem) {
@@ -1189,10 +1336,19 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
 
                 is Resource.sucess -> {
                     type = 1
+                    isSearchingPolyclinicDoctors = true
                     hideprogressbar()
-                    if (!it.data?.data.isNullOrEmpty()) {
-                        totalsDoctors = it.data?.data?.size!!
+                    val rawList = it.data?.data ?: emptyList()
+                    val chosenSpecName = sharedDataViewmodel.specialication.value?.name ?: ""
+                    val displayList = if (chosenSpecName.isNotEmpty() && specialistId != null) {
+                        rawList.filter { doc ->
+                            doc != null && doc.specialistName.equals(chosenSpecName, ignoreCase = true)
+                        }
+                    } else {
+                        rawList
                     }
+                    loadedPolyClinicDoctorsList = displayList.filterNotNull()
+                    totalsDoctors = displayList.size
                     it.let {
                         binding.rvPolyclinicDoctors.visibility = View.VISIBLE
                         if (DefaultLocaleHelper.getInstance(requireContext())
@@ -1204,7 +1360,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                             binding.tvSearch.text =
                                 " ${getString(R.string.doctors_found)} ${totalsDoctors} "
                         }
-                        polyClinicsDoctorsAdapter.submitList(it.data?.data)
+                        polyClinicsDoctorsAdapter.submitList(displayList)
                         polyClinicsDoctorsAdapter.notifyDataSetChanged()
                     }
 
@@ -1270,6 +1426,43 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
         sharedDataViewmodel.getClinicSchedualByClinicDayId(clinicSchedualByClinicDayId)
         sharedDataViewmodel.getClinicIdAndDoctorId(ClinicData(ClinicID, doctorId, false))
         findNavController().navigate(R.id.bookingAppointmentFragment)
+    }
+
+    override fun onPolyClinicBadgeClick(clinicId: Int) {
+        val polyClinicItem = fullPolyclinicList.find { it.clinicId == clinicId }
+            ?: run {
+                val doc = polyClinicsDoctorsAdapter.currentList.find { it.ClinicID == clinicId }
+                if (doc != null) {
+                    com.korashiGroup.salamtakPatient.fragment.polyclinic.model.PolyClinicsItem(
+                        address = null,
+                        apartmentNo = null,
+                        areaName = doc.AreaName,
+                        areaPackageID = null,
+                        blockNo = null,
+                        cityName = doc.CityName,
+                        clinicId = clinicId,
+                        clinicLatitude = null,
+                        clinicLongitude = null,
+                        email = null,
+                        features = null,
+                        fixedFee = null,
+                        floorNo = null,
+                        gallary = null,
+                        videos = null,
+                        insurance = null,
+                        logo = null,
+                        name = polyClinicsDoctorsAdapter.polyclinicName ?: "",
+                        phone = null,
+                        services = null,
+                        subAreaName = null,
+                        ClinicBio = null
+                    )
+                } else null
+            }
+
+        if (polyClinicItem != null) {
+            onMoreItemClick(polyClinicItem)
+        }
     }
 
     private fun callBackDoctorProfile() {
