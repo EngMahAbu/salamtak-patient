@@ -134,6 +134,9 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                         DateUtils.setstatus("")
                         findNavController().popBackStack()
                     } else {
+                        binding.etSearch.setHint(getString(R.string.search_by_polyclinic_name))
+                        binding.etSearch.setText("")
+                        isSearchingPolyclinicDoctors = false
                         polyClinicRecylerview()
                         polyClinicSearch()
                     }
@@ -305,6 +308,9 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                 DateUtils.setstatus("")
                 findNavController().popBackStack()
             } else {
+                binding.etSearch.setHint(getString(R.string.search_by_polyclinic_name))
+                binding.etSearch.setText("")
+                isSearchingPolyclinicDoctors = false
                 polyClinicRecylerview()
                 polyClinicSearch()
             }
@@ -631,16 +637,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                     it.let {
                         binding.rvPolyclinicDoctors.visibility = View.GONE
                         binding.rvPolyclinic.visibility = View.VISIBLE
-                        binding.tvCountofDoctors.visibility = View.VISIBLE
-                        if (DefaultLocaleHelper.getInstance(requireContext())
-                                .getCurrentLocale() == "en"
-                        ) {
-                            binding.tvCountofDoctors.text =
-                                "${totalsDoctors}   ${getString(R.string.polyclinic_found)} "
-                        } else {
-                            binding.tvCountofDoctors.text =
-                                " ${getString(R.string.polyclinic_found)} ${totalsDoctors} "
-                        }
+                        binding.tvCountofDoctors.visibility = View.GONE
                         polyClinicsAdapter.submitList(displayList)
                     }
 
@@ -665,24 +662,16 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                 if (binding.rvPolyclinicDoctors.visibility == View.VISIBLE) {
                     val filtered = if (query.isNotEmpty()) {
                         loadedPolyClinicDoctorsList.filter { doc ->
-                            doc.fullName?.contains(query, ignoreCase = true) == true ||
-                            doc.fullNameAr?.contains(query, ignoreCase = true) == true ||
-                            doc.nickName?.contains(query, ignoreCase = true) == true ||
-                            doc.nickNameAr?.contains(query, ignoreCase = true) == true
+                            doc.fullName?.startsWith(query, ignoreCase = true) == true ||
+                            doc.fullNameAr?.startsWith(query, ignoreCase = true) == true ||
+                            doc.nickName?.startsWith(query, ignoreCase = true) == true ||
+                            doc.nickNameAr?.startsWith(query, ignoreCase = true) == true
                         }
                     } else {
                         loadedPolyClinicDoctorsList
                     }
                     totalsDoctors = filtered.size
-                    if (DefaultLocaleHelper.getInstance(requireContext())
-                            .getCurrentLocale() == "en"
-                    ) {
-                        binding.tvSearch.text =
-                            "${totalsDoctors}   ${getString(R.string.doctors_found)} "
-                    } else {
-                        binding.tvSearch.text =
-                            " ${getString(R.string.doctors_found)} ${totalsDoctors} "
-                    }
+                    binding.tvSearch.text = getString(R.string.search)
                     polyClinicsDoctorsAdapter.submitList(filtered)
                     polyClinicsDoctorsAdapter.notifyDataSetChanged()
                 } else {
@@ -695,12 +684,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                     }
                     polyClinicsAdapter.submitList(filtered)
                     val count = filtered.size
-                    binding.tvCountofDoctors.visibility = View.VISIBLE
-                    if (DefaultLocaleHelper.getInstance(requireContext()).getCurrentLocale() == "en") {
-                        binding.tvCountofDoctors.text = "$count   ${getString(R.string.polyclinic_found)} "
-                    } else {
-                        binding.tvCountofDoctors.text = " ${getString(R.string.polyclinic_found)} $count "
-                    }
+                    binding.tvCountofDoctors.visibility = View.GONE
                 }
             }
         }
@@ -730,15 +714,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                             binding.rvDoctors.setPadding(0, 0, 0, 0)
                         }
                         totalsDoctors = it.data?.data?.totalCount!!
-                        if (DefaultLocaleHelper.getInstance(requireContext())
-                                .getCurrentLocale() == "en"
-                        ) {
-                            binding.tvSearch.text =
-                                "${totalsDoctors}   ${getString(R.string.doctors_found)} "
-                        } else {
-                            binding.tvSearch.text =
-                                " ${getString(R.string.doctors_found)} ${totalsDoctors} "
-                        }
+                        binding.tvSearch.text = getString(R.string.search)
 
                     }
 
@@ -1309,6 +1285,9 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
     override fun onPolyClinicsItemClick(
         clinicId: Int
     ) {
+        binding.etSearch.setHint(getString(R.string.search_by_doctor_name))
+        binding.etSearch.setText("")
+        isSearchingPolyclinicDoctors = true
         binding.rvPolyclinic.visibility = View.GONE
         polyclinicId = clinicId
         val clinicName = fullPolyclinicList.find { it.clinicId == clinicId }?.name
@@ -1351,15 +1330,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                     totalsDoctors = displayList.size
                     it.let {
                         binding.rvPolyclinicDoctors.visibility = View.VISIBLE
-                        if (DefaultLocaleHelper.getInstance(requireContext())
-                                .getCurrentLocale() == "en"
-                        ) {
-                            binding.tvSearch.text =
-                                "${totalsDoctors}   ${getString(R.string.doctors_found)} "
-                        } else {
-                            binding.tvSearch.text =
-                                " ${getString(R.string.doctors_found)} ${totalsDoctors} "
-                        }
+                        binding.tvSearch.text = getString(R.string.search)
                         polyClinicsDoctorsAdapter.submitList(displayList)
                         polyClinicsDoctorsAdapter.notifyDataSetChanged()
                     }

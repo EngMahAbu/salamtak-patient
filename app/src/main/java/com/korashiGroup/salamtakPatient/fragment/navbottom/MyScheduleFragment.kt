@@ -29,6 +29,7 @@ import com.korashiGroup.salamtakPatient.viewmodel.SharedDataViewmodel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.snackbar.Snackbar
 import com.korashiGroup.salamtakPatient.model.booking.clink.ClinicData
+import com.korashiGroup.salamtakPatient.model.booking.clink.GetDoctorClinksResponse
 import com.korashiGroup.salamtakPatient.model.offers.OfferDoctor
 import com.korashiGroup.salamtakPatient.viewmodel.MainViewModel
 import com.korashiGroup.salamtakPatient.viewmodel.PatientViewmodel
@@ -95,6 +96,7 @@ class MyScheduleFragment : Fragment(), MyScheduleAdapter.ActionSchedule,
         examinationRecylerview()
         callBackExaminationtypeId()
         callBackNotifications()
+        callBackDoctorProfile()
 
     }
 
@@ -409,6 +411,46 @@ class MyScheduleFragment : Fragment(), MyScheduleAdapter.ActionSchedule,
                 iconResId = 0,
                 true
             )
+        }
+    }
+
+    private fun callBackDoctorProfile() {
+        viewmodel.doctorClinkResponse.observe(viewLifecycleOwner, Observer {
+            when (it) {
+                is Resource.Loading -> {
+                    showprogtessbar()
+                }
+                is Resource.sucess -> {
+                    hideprogressbar()
+                    val doctorclinks = it.data?.data
+                    if (doctorclinks != null) {
+                        val getDoctorAndPolyClinksResponse = GetDoctorClinksResponse(doctorclinks, it.message)
+                        val navController = findNavController()
+                        if (navController.currentDestination?.id == R.id.myScheduleFragment) {
+                            val action = MyScheduleFragmentDirections.actionMyScheduleFragmentToBookAppointmentFragment(
+                                getDoctorAndPolyClinksResponse,
+                                "Re-Booking Appointment"
+                            )
+                            navController.navigate(action)
+                        }
+                    }
+                }
+                is Resource.Error -> {
+                    hideprogressbar()
+                    it.message?.let { msg ->
+                        Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+        })
+    }
+
+    override fun onBookAgainClicked(clinicId: Int, doctorId: Int) {
+        if (clinicId != 0 && doctorId != 0) {
+            showprogtessbar()
+            viewmodel.getDoctorProfileByDoctorId(clinicId, doctorId)
+        } else {
+            Toast.makeText(requireContext(), "Invalid clinic or doctor ID", Toast.LENGTH_SHORT).show()
         }
     }
 }

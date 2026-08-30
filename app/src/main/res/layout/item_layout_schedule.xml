@@ -254,7 +254,7 @@
                                 android:layout_width="21dp"
                                 android:layout_height="21dp"
                                 android:adjustViewBounds="true"
-                                android:src="@drawable/svg_money"
+                                android:src="@drawable/money"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -319,6 +319,7 @@
                             android:layout_height="21dp"
                             android:adjustViewBounds="true"
                             android:src="@drawable/ic_location"
+                            android:tint="#8088A4"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -344,7 +345,7 @@
                     <!-- VALUE -->
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tvv_address"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
                         android:fontFamily="@font/sf_pro_display_semibold"
@@ -353,6 +354,8 @@
                         android:text="Clinic Address"
                         android:textColor="@color/text_doctor_card_color"
                         android:textSize="14sp"
+                        app:layout_constrainedWidth="true"
+                        app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toEndOf="@+id/layout_address"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -514,7 +517,7 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/tv_help"
-                                android:layout_width="0dp"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginEnd="5dp"
                                 android:fontFamily="@font/sf_pro_display_semibold"
@@ -534,6 +537,7 @@
                                 android:adjustViewBounds="true"
                                 android:src="@drawable/svg_location"
                                 android:tint="@color/blue"
+                                app:layout_constraintHorizontal_chainStyle="packed"
                                 app:layout_constraintBottom_toBottomOf="@+id/tv_help"
                                 app:layout_constraintEnd_toStartOf="@+id/tv_help"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -557,7 +561,7 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/tv_Support"
-                                android:layout_width="0dp"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginEnd="5dp"
                                 android:fontFamily="@font/sf_pro_display_semibold"
@@ -577,6 +581,7 @@
                                 android:adjustViewBounds="true"
                                 android:src="@drawable/svg_support"
                                 android:tint="@color/blue"
+                                app:layout_constraintHorizontal_chainStyle="packed"
                                 app:layout_constraintBottom_toBottomOf="@+id/tv_Support"
                                 app:layout_constraintEnd_toStartOf="@+id/tv_Support"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -601,7 +606,7 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/tv_Actions"
-                                android:layout_width="0dp"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginEnd="5dp"
                                 android:fontFamily="@font/sf_pro_display_semibold"
@@ -622,6 +627,7 @@
                                 android:adjustViewBounds="true"
                                 android:src="@drawable/new_category"
                                 android:tint="@color/blue"
+                                app:layout_constraintHorizontal_chainStyle="packed"
                                 app:layout_constraintBottom_toBottomOf="@+id/tv_Actions"
                                 app:layout_constraintEnd_toStartOf="@+id/tv_Actions"
                                 app:layout_constraintStart_toStartOf="parent"

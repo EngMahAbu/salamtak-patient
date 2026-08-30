@@ -166,7 +166,8 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking, Ima
         }
 
         binding.seeAll.setOnClickListener {
-            val action=BookingAppointmentFragmentDirections.actionBookingAppointmentFragmentToAllReviewsFragment()
+            sharedDataViewmodel.doctorId.postValue(doctorId)
+            val action = BookingAppointmentFragmentDirections.actionBookingAppointmentFragmentToAllReviewsFragment()
             findNavController().navigate(action)
         }
 
@@ -229,6 +230,7 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking, Ima
         reveiwsAdapter = ReveiwsAdapter()
         binding.rvReviews.apply {
             adapter = reveiwsAdapter
+            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             setHasFixedSize(true)
         }
     }
@@ -318,6 +320,11 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking, Ima
                     binding.tvSpecialization.text = "${it.data?.data?.seniorityLevelName} - ${it.data?.data?.specialistName.toString()?.removePrefix("[")?.removeSuffix("]")}"
                     populateTabs(binding.DetailsSupSpecDoctor, it.data?.data?.subSpecialistName?.toString())
 
+                    // Bind rating bar and badge
+                    val rate = it.data?.data?.rate ?: 0
+                    binding.bookingRatingBar.rating = if (rate > 0) (rate.toFloat() / 2f) else 4f
+                    binding.Ratecount.text = if (rate > 0) rate.toString() else "0"
+
                    sharedDataViewmodel.feesResponse.observe(viewLifecycleOwner, Observer {
                        binding.Feesresult.text = "${it}"
                    })
@@ -391,7 +398,7 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking, Ima
                         binding.seeAll.visibility = View.GONE
                         binding.rvReviews.visibility = View.GONE
                     } else {
-                        binding.Ratecount.text = reviewsList.size.toString()
+                        binding.tvReviews.text = "${reviewsList.size} ${getString(R.string.reviews)}"
                         binding.rvReviews.visibility = View.VISIBLE
                         binding.Reviews.visibility = View.VISIBLE
                         binding.seeAll.visibility = View.VISIBLE
@@ -420,18 +427,17 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking, Ima
         binding.progressBar.visibility = View.GONE
     }
 
-    override fun onItemClick(clinicId:Int) {
-        type=1
-        clinksBottomsheetRecylerview()
-        gallaryBottomsheetRecylerview()
-        reviewsBottomRecylerview()
-        reviewsFavoriteDoctor()
-        doctorId?.let { viewmodel.getDoctorProfileByDoctorId(clinicId, it) }
-        bottomsheetbeahavoir.state =
-            if (bottomsheetbeahavoir.state == BottomSheetBehavior.STATE_EXPANDED)
-                BottomSheetBehavior.STATE_HIDDEN else BottomSheetBehavior.STATE_EXPANDED
-//       val send=BookingAppointmentFragmentDirections.actionBookingAppointmentFragmentToBookAppointmentFragment(getDoctorAndPolyClinksResponse,"b")
-//        findNavController().navigate(send)
+    override fun onItemClick(clinicId: Int) {
+        doctorId?.let { dId ->
+            sharedDataViewmodel.getClinicIdAndDoctorId(
+                com.korashiGroup.salamtakPatient.model.booking.clink.ClinicData(
+                    doctorId = dId,
+                    ClinicId = clinicId,
+                    isDoctor = false
+                )
+            )
+        }
+        findNavController().navigate(R.id.action_bookingAppointmentFragment_self)
     }
 
     private fun bindViews(){

@@ -509,47 +509,13 @@
                     app:layout_constraintTop_toBottomOf="@+id/layout_confirmpassword" />
 
 
-            <TextView
-                    android:id="@id/ch_terms"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="22dp"
-                    android:textSize="11sp"
-                    android:text="@string/agree_to"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/layout_confirmpassword" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_termsandconditions"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="25dp"
-                    android:layout_marginStart="2dp"
-                    android:padding="2dp"
-                    android:fontFamily="@font/avenirltstd_roman"
-                    android:text="@string/terms_conditions"
-                    android:textColor="@color/blue"
-                    android:textSize="10sp"
-                    app:layout_constraintStart_toEndOf="@+id/ch_terms"
-                    app:layout_constraintTop_toBottomOf="@+id/layout_confirmpassword"
-                    app:layout_constraintBottom_toBottomOf="@+id/ch_terms" />
-
-            <View
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:background="@color/blue"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_termsandconditions"
-                    app:layout_constraintStart_toStartOf="@+id/tv_termsandconditions"
-                    app:layout_constraintEnd_toEndOf="@+id/tv_termsandconditions" />
-
             <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/ch_terms"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_confirmpassword"
                     app:layout_constraintBottom_toTopOf="@+id/imageView"
                     app:layout_constraintWidth_percent=".9"
                     android:layout_marginTop="20dp">

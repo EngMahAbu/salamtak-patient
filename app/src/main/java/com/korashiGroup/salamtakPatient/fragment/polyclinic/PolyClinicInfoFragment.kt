@@ -72,7 +72,7 @@ class PolyClinicInfoFragment : Fragment(), ImagesAdapter.IPhotoViewr, PolyClinic
 
     private fun initButton() {
         binding.ivArrow.setOnClickListener {
-            findNavController().navigate(R.id.searchFragment)
+            findNavController().popBackStack()
         }
     }
 

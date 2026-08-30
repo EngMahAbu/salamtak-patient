@@ -210,7 +210,7 @@
     <string name="add_to_favorite">أضف إلى المفضلة</string>
     <string name="remove_from_favorite">حذف من المضلة</string>
     <string name="about_doctor">معلومات عن الطبيب</string>
-    <string name="sub_spec_doctor">التخصص الثانوي</string>
+    <string name="sub_spec_doctor">التخصص الفرعي</string>
     <string name="doctor_s_clinics">عيادات الطبيب</string>
     <string name="book_appointment">حجز موعد</string>
     <string name="choose_clinic">اختر العيادة</string>
@@ -575,4 +575,5 @@
     <string name="your_question_required">ما هو سؤالك؟ <font color="#F60707">*</font></string>
     <string name="choose_gender_required">اختر الجنس <font color="#F60707">*</font></string>
     <string name="ages_required">السن <font color="#F60707">*</font></string>
+    <string name="book_again">حجز مرة أخرى</string>
 </resources>

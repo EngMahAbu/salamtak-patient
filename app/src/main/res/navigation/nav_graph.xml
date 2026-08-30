@@ -262,6 +262,9 @@
         <action
                 android:id="@+id/action_myScheduleFragment_to_dialogBottomSheetFragment"
                 app:destination="@id/dialogBottomSheetFragment" />
+        <action
+                android:id="@+id/action_myScheduleFragment_to_bookAppointmentFragment"
+                app:destination="@id/bookAppointmentFragment" />
     </fragment>
     <fragment
             android:id="@+id/moreFragment"
@@ -355,6 +358,9 @@
         <action
                 android:id="@+id/action_bookingAppointmentFragment_to_specialDoctorAnswersFragment"
                 app:destination="@id/specialDoctorAnswersFragment" />
+        <action
+                android:id="@+id/action_bookingAppointmentFragment_self"
+                app:destination="@id/bookingAppointmentFragment" />
     </fragment>
     <fragment
             android:id="@+id/bookAppointmentFragment"

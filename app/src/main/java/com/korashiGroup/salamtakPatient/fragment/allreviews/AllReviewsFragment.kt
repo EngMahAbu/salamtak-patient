@@ -43,7 +43,7 @@ class AllReviewsFragment : Fragment() {
 
     private fun initButton(){
         binding.ivArrow.setOnClickListener {
-            findNavController().navigate(R.id.bookingAppointmentFragment)
+            findNavController().popBackStack()
         }
     }
 
@@ -78,8 +78,11 @@ class AllReviewsFragment : Fragment() {
             }
 
         })
-        sharedDataViewmodel.clinicIdAndDoctorId.observe(viewLifecycleOwner, Observer {
-            patientViewModel.getDoctorReviews(it.doctorId)
+        // Observe doctorId — freshly emitted by BookingAppointmentFragment just before navigating here
+        sharedDataViewmodel.doctorId.observe(viewLifecycleOwner, Observer { id ->
+            if (id != null) {
+                patientViewModel.getDoctorReviews(id)
+            }
         })
 
 

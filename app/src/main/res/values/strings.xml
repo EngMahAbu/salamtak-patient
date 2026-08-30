@@ -596,4 +596,5 @@ Welcome to Salamtak mobile clinics service. You can now get a premium service in
     <string name="your_question_required">Your question <font color="#F60707">*</font></string>
     <string name="choose_gender_required">Choose Gender <font color="#F60707">*</font></string>
     <string name="ages_required">Age <font color="#F60707">*</font></string>
+    <string name="book_again">Book Again</string>
 </resources>

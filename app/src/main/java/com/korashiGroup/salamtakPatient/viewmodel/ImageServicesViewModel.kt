@@ -86,7 +86,7 @@ class ImageServicesViewModel @Inject constructor(
                 val itemHomeVisit = homeVisitItem?.copy(image_onboarding = R.drawable.m_home, textService = "Home Visit")
                     ?: ImageServices(R.drawable.m_home, "Home Visit", "زيارة منزلية", Id = 2)
 
-                val itemPolyClinic = ImageServices(R.drawable.m_poly, "PolyClinic", "مراكز طبية", Id = 6)
+                val itemPolyClinic = ImageServices(R.drawable.polyclinic_image_new, "PolyClinic", "مراكز طبية", Id = 6)
 
                 val itemVideoCall = videoCallItem?.copy(image_onboarding = R.drawable.m_video, textService = "Video Call", textServiceArabic = "مكالمة فيديو")
                     ?: ImageServices(R.drawable.m_video, "Video Call", "مكالمة فيديو", Id = 8)
@@ -94,7 +94,7 @@ class ImageServicesViewModel @Inject constructor(
                 val itemCall = callItem?.copy(image_onboarding = R.drawable.m_call, textService = "Call")
                     ?: ImageServices(R.drawable.m_call, "Call", "استشارة هاتفية", Id = 9)
 
-                val itemOffers = ImageServices(R.drawable.ic_offers, context.getString(R.string.offers), "العروض", Id = 7)
+                val itemOffers = ImageServices(R.drawable.offers_image_new, context.getString(R.string.offers), "العروض", Id = 7)
 
                 val combinedList = listOf(
                     itemInClinic,

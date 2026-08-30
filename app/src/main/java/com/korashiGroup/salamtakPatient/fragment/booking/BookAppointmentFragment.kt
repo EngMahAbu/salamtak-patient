@@ -146,6 +146,7 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
         )
 
 
+        binding.calendar.firstDayOfWeek = java.util.Calendar.SATURDAY
         binding.calendar.setOnDateChangeListener { _, year, month, dayOfMonth ->
             val formattedMonth = String.format("%02d", month + 1) // إضافة 1 وجعلها بصيغة رقمين
             val formattedDay = String.format("%02d", dayOfMonth) // جعل اليوم بصيغة رقمين
@@ -748,11 +749,19 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
             }
         }
         binding.tvDoctorName.text = name
-        var subspecialist: String? = ""
-        args.doctorclinks?.data?.subSpecialistName?.forEach {
-            subspecialist = "$subspecialist $it,"
+        val seniority = args.doctorclinks?.data?.seniorityLevelName?.trim().orEmpty()
+        val specialist = args.doctorclinks?.data?.specialistName?.trim().orEmpty()
+        binding.tvSpecialization.text = if (seniority.isNotEmpty() && specialist.isNotEmpty()) {
+            "$seniority $specialist"
+        } else {
+            seniority.ifEmpty { specialist }
         }
-        binding.tvSpecialization.text = "${args.doctorclinks?.data?.seniorityLevelName} ${subspecialist}"
+
+        val subspecialistList = args.doctorclinks?.data?.subSpecialistName
+            ?.filterNotNull()
+            ?.filter { it.isNotBlank() }
+            ?: emptyList()
+        binding.tvSubSpecialization.text = subspecialistList.joinToString(", ")
 
         binding.ivDoctorProfile.load(args.doctorclinks?.data?.image) {
             crossfade(true)

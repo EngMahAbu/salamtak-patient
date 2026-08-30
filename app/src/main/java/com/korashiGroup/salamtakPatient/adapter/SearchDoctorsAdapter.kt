@@ -58,16 +58,7 @@ class SearchDoctorsAdapter(private val booking: Booking,private val isHomeVisit:
             holder.binding.Reviews.text=String.format("%.1f", services.rate?.toFloat()?: 1.0f)
             holder.binding.Ratecount.text="${services.RateCount?.toInt()}"
 
-            val polyName = services.clinicDto?.Name?.trim() ?: services.clinicName?.trim() ?: ""
-            if (polyName.isNotEmpty()) {
-                tvPolyclinicName.text = polyName
-                tvPolyclinicName.visibility = View.VISIBLE
-                tvPolyclinicName.setOnClickListener {
-                    services.clinicId?.let { id -> booking.onPolyClinicNameClick(id) }
-                }
-            } else {
-                tvPolyclinicName.visibility = View.GONE
-            }
+            tvPolyclinicName.visibility = View.GONE
         }
         if (isHomeVisit){
             holder.binding.layoutIsHomeVisit.visibility=View.VISIBLE

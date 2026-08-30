@@ -111,18 +111,31 @@ class MyScheduleAdapter(private val schedule: ActionSchedule) :
                 }
             }
         }
-        holder.binding.layoutLocation.setOnClickListener {
-            if (!services.clinicLatitude.isNullOrEmpty() && !services.clinicLongitude.isNullOrEmpty()){
-            services.clinicLatitude?.let { it1 -> services.clinicLongitude?.let { it2 ->
-                schedule.onLocationClicked(it1,
-                    it2)
-            } }
-            }else{
-                Toast.makeText(it.context, it.context.getString(R.string.thereisnolocatio) , Toast.LENGTH_LONG).show()
+        val isCompletedOrCanceled = services.IsCompleted == true || services.isCancel == true
+        if (isCompletedOrCanceled) {
+            holder.binding.layoutLocation.visibility = View.GONE
+            holder.binding.tvSupport.setText(R.string.book_again)
+            holder.binding.ivSupport.setImageResource(R.drawable.ic_refresh)
+            holder.binding.layoutSupport.setOnClickListener {
+                schedule.onBookAgainClicked(services.clinicId ?: 0, services.doctorId ?: 0)
             }
-        }
-        holder.binding.layoutSupport.setOnClickListener {
-            schedule.onSupportClicked()
+        } else {
+            holder.binding.layoutLocation.visibility = View.VISIBLE
+            holder.binding.tvSupport.setText(R.string.support)
+            holder.binding.ivSupport.setImageResource(R.drawable.svg_support)
+            holder.binding.layoutSupport.setOnClickListener {
+                schedule.onSupportClicked()
+            }
+            holder.binding.layoutLocation.setOnClickListener {
+                if (!services.clinicLatitude.isNullOrEmpty() && !services.clinicLongitude.isNullOrEmpty()){
+                    services.clinicLatitude?.let { it1 -> services.clinicLongitude?.let { it2 ->
+                        schedule.onLocationClicked(it1,
+                            it2)
+                    } }
+                }else{
+                    Toast.makeText(it.context, it.context.getString(R.string.thereisnolocatio) , Toast.LENGTH_LONG).show()
+                }
+            }
         }
 
 
@@ -161,6 +174,7 @@ class MyScheduleAdapter(private val schedule: ActionSchedule) :
                         doctorname:String,fess:Int,image:String,offerId:String,specialistname:String)
         fun onLocationClicked(lat:String,long:String)
         fun onSupportClicked()
+        fun onBookAgainClicked(clinicId: Int, doctorId: Int)
     }
 
     private fun DateParsing(dateParsing:String):String{

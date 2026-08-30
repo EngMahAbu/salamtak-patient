@@ -13,12 +13,11 @@
         app:layout_constraintTop_toTopOf="parent"
 
 >
-    <WebView
+    <FrameLayout
             android:id="@+id/youtube_player_view"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_200sdp"
             app:layout_constraintTop_toTopOf="parent"
-
     />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
