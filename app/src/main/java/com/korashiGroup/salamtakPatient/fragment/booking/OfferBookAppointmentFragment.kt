@@ -267,7 +267,7 @@ class OfferBookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Ac
                                 doctorWorkingDayTimeId,
                                 args.clinkDto?.fess?.toInt(),
                                 medicalExaminationTypeName,
-                                it.data?.data?.doctorDto?.specialistName,
+                                "${it.data?.data?.doctorDto?.seniorityLevelName} - ${it.data?.data?.doctorDto?.specialistName}",
                                 args.clinkDto?.image,
                                 1,
                                 null,

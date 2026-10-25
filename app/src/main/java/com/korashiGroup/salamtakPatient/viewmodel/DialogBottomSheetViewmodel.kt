@@ -33,6 +33,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
@@ -557,6 +560,27 @@ class DialogBottomSheetViewmodel @Inject constructor(private val repositry: Regi
     fun getPopularDoctors(doctorRateRequest: HashMap<String, String>)=viewModelScope.launch(Dispatchers.IO+handler) {
         popularResponse.postValue(Resource.Loading())
         val response=repositry.getPopularDoctors(doctorRateRequest)
+        if (response != null && response.isSuccessful) {
+            val doctorsList = response.body()?.data?.filterNotNull().orEmpty()
+            coroutineScope {
+                doctorsList.map { doctor ->
+                    async {
+                        val docId = doctor.doctorId
+                        if (docId != null) {
+                            try {
+                                val reviewRes = repositry.getDoctorReviews(docId)
+                                if (reviewRes != null && reviewRes.isSuccessful) {
+                                    val count = reviewRes.body()?.data?.size ?: 0
+                                    doctor.RateCount = count
+                                }
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                            }
+                        }
+                    }
+                }.awaitAll()
+            }
+        }
         popularResponse.postValue(response?.let { handlegetPopularDoctors(it) })
     }
 

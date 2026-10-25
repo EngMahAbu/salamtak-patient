@@ -35,26 +35,33 @@ class MyScheduleAdapter(private val schedule: ActionSchedule) :
 
         holder.binding.apply {
 
-            if (DefaultLocaleHelper.getInstance(this.tvDoctorName.context).getCurrentLocale()=="en"){
+            if (DefaultLocaleHelper.getInstance(this.tvDoctorName.context).getCurrentLocale() == "en") {
                 tvDoctorName.text = "${services.doctorName}"
-            }else{
+            } else {
                 tvDoctorName.text = "${services.doctorName}"
             }
-            tvSpecialization.text = "${services.specialistName} - ${services.seniorityLevelName}"
-            Service.text="${services.medicalExaminationTypeName}(${DateParsing(services.appointmentDate.toString())})"
-            // old
-            //location.text ="${services.clinicAddress?:""}-${services.BlockNo?:""}-${services.FloorNo?:""}-${services.areaName?:""}"
-            // new
-            if (services.IsCompleted==true){
-                location.text="${location.context.getString(R.string.paid)}"
-            }else{
-                location.text="${location.context.getString(R.string.pending_payment)}"
+            tvSpecialization.text = "${services.seniorityLevelName} ${services.specialistName}"
+            Service.text = "${services.medicalExaminationTypeName} (${DateParsing(services.appointmentDate.toString())})"
+
+            // Rating & Reviews
+            docRatingBar.rating = 4.0f
+            Reviews.text = "8.0"
+            tvReviews.text = "0 ${tvReviews.context.getString(R.string.reviews)}"
+
+            // Sub Speciality row (take first 2 sub-specialities)
+            val subSpecs = services.subSpecialistName?.filterNotNull()?.filter { it.isNotBlank() }?.take(2)
+            if (!subSpecs.isNullOrEmpty()) {
+                location.text = subSpecs.joinToString(", ")
+                Address.visibility = View.VISIBLE
+            } else {
+                location.text = ""
+                Address.visibility = View.GONE
             }
 
             waitingTime.text = " ${DateParsing(services.appointmentDate.toString())}"
             Feesresult.text = services.fees.toString()
-         //   phones.text = services.ClinicPhone.toString()
-            phones.text ="${services.fees.toString()} ${phones.context.getString(R.string.egp)}"
+            phones.text = "${services.fees ?: 0} ${phones.context.getString(R.string.egp)}"
+            phone.visibility = View.VISIBLE
 
         }
 
@@ -146,8 +153,31 @@ class MyScheduleAdapter(private val schedule: ActionSchedule) :
             transformations(CircleCropTransformation())
         }
 
-        holder.binding.tvvAddress.text =
-            "${services.clinicAddress ?: ""}"
+        val isArabic = DefaultLocaleHelper.getInstance(holder.binding.root.context).getCurrentLocale() == "ar"
+        val city = resolveCityName(services.cityName, services.areaName, services.clinicAddress, isArabic)
+        val area = services.areaName?.trim().orEmpty()
+        val addressDetail = services.clinicAddress?.trim().orEmpty()
+
+        val locationLine1 = when {
+            city.isNotEmpty() && area.isNotEmpty() -> "$city - $area"
+            city.isNotEmpty() -> city
+            area.isNotEmpty() -> area
+            else -> ""
+        }
+
+        val fullLocationText = when {
+            locationLine1.isNotEmpty() && addressDetail.isNotEmpty() -> "$locationLine1\n$addressDetail"
+            locationLine1.isNotEmpty() -> locationLine1
+            addressDetail.isNotEmpty() -> addressDetail
+            else -> ""
+        }
+
+        if (fullLocationText.isNotEmpty()) {
+            holder.binding.tvvAddress.text = fullLocationText
+            holder.binding.address.visibility = View.VISIBLE
+        } else {
+            holder.binding.address.visibility = View.GONE
+        }
 
 
     }
@@ -189,5 +219,115 @@ class MyScheduleAdapter(private val schedule: ActionSchedule) :
             Log.e("",e.localizedMessage)
         }
         return day
+    }
+
+    companion object {
+        fun resolveCityName(cityName: String?, areaName: String?, clinicAddress: String?, isArabic: Boolean): String {
+            val trimmedCity = cityName?.trim().orEmpty()
+            if (trimmedCity.isNotEmpty() && !trimmedCity.equals("null", ignoreCase = true)) {
+                return trimmedCity
+            }
+
+            val combined = "${areaName.orEmpty()} ${clinicAddress.orEmpty()}".lowercase()
+
+            return when {
+                // Giza areas
+                combined.contains("6th of october") || combined.contains("october") || combined.contains("6 اكتوبر") || combined.contains("اكتوبر") || combined.contains("أكتوبر") ||
+                combined.contains("dokki") || combined.contains("دقي") || combined.contains("الدقي") ||
+                combined.contains("mohandessin") || combined.contains("mohandessien") || combined.contains("المهندسين") || combined.contains("مهندسين") ||
+                combined.contains("haram") || combined.contains("الهرم") || combined.contains("هرم") ||
+                combined.contains("faisal") || combined.contains("فيصل") ||
+                combined.contains("sheikh zayed") || combined.contains("zayed") || combined.contains("الشيخ زايد") || combined.contains("زايد") ||
+                combined.contains("agouza") || combined.contains("العجوزة") || combined.contains("عجوزة") ||
+                combined.contains("giza") || combined.contains("الجيزة") || combined.contains("جيزة") ||
+                combined.contains("imbaba") || combined.contains("إمبابة") || combined.contains("امبابة") -> {
+                    if (isArabic) "الجيزة" else "Giza"
+                }
+
+                // Cairo areas
+                combined.contains("nasr city") || combined.contains("مدينة نصر") ||
+                combined.contains("maadi") || combined.contains("المعادي") || combined.contains("معادي") ||
+                combined.contains("new cairo") || combined.contains("القاهرة الجديدة") ||
+                combined.contains("tagamoa") || combined.contains("tagamo'") || combined.contains("fifth settlement") || combined.contains("التجمع") || combined.contains("تجمع") ||
+                combined.contains("heliopolis") || combined.contains("مصر الجديدة") ||
+                combined.contains("zamalek") || combined.contains("الزمالك") || combined.contains("زمالك") ||
+                combined.contains("shubra") || combined.contains("شبرا") ||
+                combined.contains("downtown") || combined.contains("وسط البلد") ||
+                combined.contains("mokattam") || combined.contains("المقطم") || combined.contains("مقطم") ||
+                combined.contains("helwan") || combined.contains("حلوان") ||
+                combined.contains("sheraton") || combined.contains("شيراتون") ||
+                combined.contains("cairo") || combined.contains("القاهرة") || combined.contains("قاهرة") -> {
+                    if (isArabic) "القاهرة" else "Cairo"
+                }
+
+                // Alexandria
+                combined.contains("alexandria") || combined.contains("alex") || combined.contains("الإسكندرية") || combined.contains("اسكندرية") ||
+                combined.contains("smouha") || combined.contains("سموحة") ||
+                combined.contains("sidi gaber") || combined.contains("سيدي جابر") ||
+                combined.contains("miami") || combined.contains("ميامي") ||
+                combined.contains("gleem") || combined.contains("جليم") ||
+                combined.contains("stanley") || combined.contains("ستانلي") ||
+                combined.contains("montaza") || combined.contains("المنتزه") -> {
+                    if (isArabic) "الإسكندرية" else "Alexandria"
+                }
+
+                // Mansoura / Dakahlia
+                combined.contains("mansoura") || combined.contains("المنصورة") || combined.contains("منصورة") -> {
+                    if (isArabic) "الدقهلية" else "Dakahlia"
+                }
+
+                // Tanta / Gharbia
+                combined.contains("tanta") || combined.contains("طنطا") -> {
+                    if (isArabic) "الغربية" else "Gharbia"
+                }
+
+                // Zagazig / Sharqia
+                combined.contains("zagazig") || combined.contains("الزقازيق") || combined.contains("زقازيق") -> {
+                    if (isArabic) "الشرقية" else "Sharqia"
+                }
+
+                // Port Said
+                combined.contains("port said") || combined.contains("بورسعيد") -> {
+                    if (isArabic) "بورسعيد" else "Port Said"
+                }
+
+                // Ismailia
+                combined.contains("ismailia") || combined.contains("الإسماعيلية") || combined.contains("اسماعيلية") -> {
+                    if (isArabic) "الإسماعيلية" else "Ismailia"
+                }
+
+                // Suez
+                combined.contains("suez") || combined.contains("السويس") || combined.contains("سويس") -> {
+                    if (isArabic) "السويس" else "Suez"
+                }
+
+                // Assiut
+                combined.contains("assiut") || combined.contains("أسيوط") || combined.contains("اسيوط") -> {
+                    if (isArabic) "أسيوط" else "Assiut"
+                }
+
+                // Sohag
+                combined.contains("sohag") || combined.contains("سوهاج") -> {
+                    if (isArabic) "سوهاج" else "Sohag"
+                }
+
+                // Aswan
+                combined.contains("aswan") || combined.contains("أسوان") || combined.contains("اسوان") -> {
+                    if (isArabic) "أسوان" else "Aswan"
+                }
+
+                // Luxor
+                combined.contains("luxor") || combined.contains("الأقصر") || combined.contains("اقصر") -> {
+                    if (isArabic) "الأقصر" else "Luxor"
+                }
+
+                // Red Sea
+                combined.contains("hurghada") || combined.contains("الغردقة") || combined.contains("غردقة") -> {
+                    if (isArabic) "البحر الأحمر" else "Red Sea"
+                }
+
+                else -> ""
+            }
+        }
     }
 }

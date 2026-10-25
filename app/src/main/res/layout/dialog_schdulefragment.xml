@@ -198,71 +198,46 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_Re_BookingAppointment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="8dp"
-        android:visibility="gone"
-        >
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:visibility="gone">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/iv_Re_BookingAppointment"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="20dp"
-            android:adjustViewBounds="true"
-            android:src="@drawable/ic_calenderblack"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_Re_BookingAppointment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/avenirltstd_roman"
-            android:gravity="start"
-            android:padding="2dp"
-            android:text="@string/re_booking_appointment"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_Re_BookingAppointment"
-            app:layout_constraintStart_toEndOf="@+id/iv_Re_BookingAppointment"
-            app:layout_constraintTop_toTopOf="parent" />
-
+        <!-- 1. Electronic Medical Record (EMR) -->
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iv_MedicalHistory"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="16dp"
             android:adjustViewBounds="true"
             android:src="@drawable/ic_medicalhistory"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_Re_BookingAppointment" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_MedicalHistory"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="15dp"
-            android:fontFamily="@font/avenirltstd_roman"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="15dp"
+            android:fontFamily="@font/sf_pro_display_semibold"
             android:gravity="start"
             android:padding="2dp"
-            android:text="@string/medical_history"
+            android:text="@string/electronic_medical_record_emr"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/iv_MedicalHistory"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/iv_MedicalHistory"
-            app:layout_constraintTop_toBottomOf="@+id/tv_Re_BookingAppointment" />
+            app:layout_constraintTop_toTopOf="@+id/iv_MedicalHistory" />
 
+        <!-- 2. Doctors reviews (Rate) -->
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iv_Rate"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="24dp"
             android:adjustViewBounds="true"
             android:src="@drawable/ic_blackstar"
             app:layout_constraintStart_toStartOf="parent"
@@ -270,19 +245,51 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_Rate"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="15dp"
-            android:fontFamily="@font/avenirltstd_roman"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="15dp"
+            android:fontFamily="@font/sf_pro_display_semibold"
             android:gravity="start"
             android:padding="2dp"
-            android:text="@string/rate"
+            android:text="@string/doctors_reviews_rate"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/iv_Rate"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/iv_Rate"
-            app:layout_constraintTop_toBottomOf="@+id/tv_MedicalHistory" />
+            app:layout_constraintTop_toTopOf="@+id/iv_Rate" />
+
+        <!-- 3. Support 17143 -->
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_SupportAction"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="24dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/svg_support"
+            android:tint="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_Rate" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_SupportAction"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/sf_pro_display_semibold"
+            android:gravity="start"
+            android:padding="2dp"
+            android:text="@string/support_17143"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_SupportAction"
+            app:layout_constraintTop_toTopOf="@+id/iv_SupportAction" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

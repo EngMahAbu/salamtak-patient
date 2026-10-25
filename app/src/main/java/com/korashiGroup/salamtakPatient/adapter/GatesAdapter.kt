@@ -30,6 +30,10 @@ class GatesAdapter(val action: Action ):ListAdapter<Gates,GatesAdapter.ViewHolde
 
         holder.binding.cardview.setOnClickListener {
            action.onItemGatesClick(services.id)
+            it.isEnabled = false
+            it.postDelayed({
+                it.isEnabled = true
+            }, 1000)
         }
 
     }

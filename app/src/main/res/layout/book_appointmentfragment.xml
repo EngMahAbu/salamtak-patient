@@ -116,7 +116,6 @@
                     android:fontFamily="@font/avenirltstd_roman"
                     android:gravity="start"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:text="0"
                     android:visibility="gone"
                     android:textColor="@color/black"
                     android:textSize="14sp"

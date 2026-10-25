@@ -279,33 +279,46 @@ class SpecialistDoctorsFragment : Fragment(),SpecialictyAdapter.SelectSpecialist
     }
 
     private fun getDataFromViews() {
-        sharedDataViewmodel.specialication.observe(viewLifecycleOwner) {
-            isSpecalistSelected = true
-            binding.etSpecialization.setText(it.name)
-            // The sub-specialization text view will also clear automatically
-            // because the viewmodel will post an empty list.
+        sharedDataViewmodel.specialication.observe(viewLifecycleOwner) { spec ->
+            if (spec != null) {
+                isSpecalistSelected = true
+                binding.etSpecialization.setText(spec.name ?: "")
+            } else {
+                isSpecalistSelected = false
+                binding.etSpecialization.setText("")
+            }
         }
 
         sharedDataViewmodel.subSpecialication.observe(viewLifecycleOwner) {
             if (it.isNullOrEmpty()) {
                 binding.etSubSpecialization.setText("")
             } else {
-                binding.etSubSpecialization.setText(it.joinToString(", ") { sub -> sub.name })
+                binding.etSubSpecialization.setText(it.joinToString(", ") { sub -> sub.name ?: "" })
             }
         }
 
-        sharedDataViewmodel.getCity.observe(viewLifecycleOwner) {
-            isCitySelected = true
-            if (DefaultLocaleHelper.getInstance(requireContext()).getCurrentLocale() == "ar") {
-                binding.etChooseCity.setText(it.nameAr)
+        sharedDataViewmodel.getCity.observe(viewLifecycleOwner) { city ->
+            if (city != null) {
+                isCitySelected = true
+                if (DefaultLocaleHelper.getInstance(requireContext()).getCurrentLocale() == "ar") {
+                    binding.etChooseCity.setText(city.nameAr ?: "")
+                } else {
+                    binding.etChooseCity.setText(city.name ?: "")
+                }
             } else {
-                binding.etChooseCity.setText(it.name)
+                isCitySelected = false
+                binding.etChooseCity.setText("")
             }
         }
 
-        sharedDataViewmodel.getArea.observe(viewLifecycleOwner) {
-            isAreaSelected = true
-            binding.etChooseArea.setText(it.name)
+        sharedDataViewmodel.getArea.observe(viewLifecycleOwner) { area ->
+            if (area != null) {
+                isAreaSelected = true
+                binding.etChooseArea.setText(area.name ?: "")
+            } else {
+                isAreaSelected = false
+                binding.etChooseArea.setText("")
+            }
         }
     }
 
@@ -318,45 +331,44 @@ class SpecialistDoctorsFragment : Fragment(),SpecialictyAdapter.SelectSpecialist
 
         var isValid = true
 
-        // In PolyClinic mode: if polyclinic name OR doctor name is entered, skip other validations
-        if (examinationtypeid == 6 && (polyclinicNameInput.isNotEmpty() || doctorNameInput.isNotEmpty())) {
-            return true
-        }
-
-        // 1. Specialization validation (not needed in polyclinic mode if name is entered)
-        if (examinationtypeid != 6 && specializationName.isEmpty()) {
+        // 1. Specialization validation - MANDATORY for all modes (including PolyClinic)
+        if (specializationName.isEmpty()) {
             binding.tvSpecializationError.text = getString(R.string.please_select_specialization)
             binding.tvSpecializationError.visibility = View.VISIBLE
             binding.layoutChooseSpecialization.setBackgroundResource(R.drawable.bg_edittext_error)
             isValid = false
-        } else if (examinationtypeid == 6 && specializationName.isEmpty()) {
-            binding.tvSpecializationError.visibility = View.GONE
-            binding.layoutChooseSpecialization.setBackgroundResource(R.drawable.bg_edittext)
         } else {
             binding.tvSpecializationError.visibility = View.GONE
             binding.layoutChooseSpecialization.setBackgroundResource(R.drawable.bg_edittext)
         }
 
-        // 2. City OR Doctor Name OR PolyClinic Name validation
-        if (cityName.isEmpty() && doctorNameInput.isEmpty() && polyclinicNameInput.isEmpty()) {
-            binding.tvCityError.text = getString(R.string.please_select_city)
-            binding.tvCityError.visibility = View.VISIBLE
-            binding.layoutChooseCity.setBackgroundResource(R.drawable.bg_edittext_error)
-            isValid = false
-        } else {
+        // 2. Mode-specific validation
+        if (examinationtypeid == 6) {
+            // PolyClinic mode: Specialization is mandatory ONLY; doctor name and polyclinic name are optional.
             binding.tvCityError.visibility = View.GONE
-            binding.layoutChooseCity.setBackgroundResource(R.drawable.bg_edittext)
-        }
-
-        // 3. Area validation (Required if City is selected)
-        if (cityName.isNotEmpty() && areaName.isEmpty()) {
-            binding.tvAreaError.text = getString(R.string.please_select_area)
-            binding.tvAreaError.visibility = View.VISIBLE
-            binding.layoutChooseArea.setBackgroundResource(R.drawable.bg_edittext_error)
-            isValid = false
-        } else {
             binding.tvAreaError.visibility = View.GONE
-            binding.layoutChooseArea.setBackgroundResource(R.drawable.bg_edittext)
+        } else {
+            // Standard mode: City OR Doctor Name OR PolyClinic Name validation
+            if (cityName.isEmpty() && doctorNameInput.isEmpty() && polyclinicNameInput.isEmpty()) {
+                binding.tvCityError.text = getString(R.string.please_select_city)
+                binding.tvCityError.visibility = View.VISIBLE
+                binding.layoutChooseCity.setBackgroundResource(R.drawable.bg_edittext_error)
+                isValid = false
+            } else {
+                binding.tvCityError.visibility = View.GONE
+                binding.layoutChooseCity.setBackgroundResource(R.drawable.bg_edittext)
+            }
+
+            // Area validation (Required if City is selected)
+            if (cityName.isNotEmpty() && areaName.isEmpty()) {
+                binding.tvAreaError.text = getString(R.string.please_select_area)
+                binding.tvAreaError.visibility = View.VISIBLE
+                binding.layoutChooseArea.setBackgroundResource(R.drawable.bg_edittext_error)
+                isValid = false
+            } else {
+                binding.tvAreaError.visibility = View.GONE
+                binding.layoutChooseArea.setBackgroundResource(R.drawable.bg_edittext)
+            }
         }
 
         return isValid

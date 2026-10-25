@@ -356,10 +356,8 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
 
                 is Resource.sucess -> {
                     // hideprogressbar()
-                    response.data?.let { combinedList ->
-                        // Since the ViewModel already mapped the API items and added
-                        // the static items, you can submit the list directly to your adapter!
-                        imageServicesAdapter.submitList(combinedList)
+                    response.data?.let { list ->
+                        imageServicesAdapter.submitList(list)
                     }
                 }
 

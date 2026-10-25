@@ -15,7 +15,9 @@ data class DataAppointment(
     val appointmentDate: String?,
     @SerializedName("AppointmentId")
     val appointmentId: Int?,
-    @SerializedName("AreaName")
+    @SerializedName("CityName", alternate = ["cityName", "City", "city", "cityNameAr", "CityNameAr", "city_name", "City_Name", "clinicCityName", "ClinicCityName", "clinicCity", "ClinicCity", "CityNameEn", "cityNameEn"])
+    val cityName: String?,
+    @SerializedName("AreaName", alternate = ["areaName", "Area", "area", "areaNameAr", "AreaNameAr", "area_name", "Area_Name", "clinicAreaName", "ClinicAreaName", "clinicArea", "ClinicArea", "AreaNameEn", "areaNameEn", "subAreaName", "SubAreaName"])
     val areaName: String?,
     @SerializedName("CanRate")
     val canRate: Boolean?,

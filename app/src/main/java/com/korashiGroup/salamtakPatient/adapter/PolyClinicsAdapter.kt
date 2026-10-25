@@ -48,6 +48,12 @@ class PolyClinicsAdapter(private val booking: Booking) :
         holder.binding.btnMore.setOnClickListener {
             booking.onMoreItemClick(services)
         }
+        holder.binding.tvDoctorName.setOnClickListener {
+            booking.onMoreItemClick(services)
+        }
+        holder.binding.ivDoctorProfile.setOnClickListener {
+            booking.onMoreItemClick(services)
+        }
 
         holder.binding.ivDoctorProfile.load(services.logo) {
             crossfade(true)

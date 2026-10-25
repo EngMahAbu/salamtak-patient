@@ -45,9 +45,11 @@ data class PopularDoctorS(
     val waitingTime: Int?,
     @SerializedName("Sub_SpecialistList")
     val subSpecialistName: List<SubSpecial?>?,
-    val RateCount: Int?,
+    @SerializedName("RateCount", alternate = ["rateCount", "CountRate", "ReviewsCount", "reviewCount", "Rate_Count", "countRate", "rate_count"])
+    var RateCount: Int?,
+    @SerializedName("NickName")
     val NickName: String?,
-    )
+)
 
 data class SubSpecial(
     @SerializedName("Id")

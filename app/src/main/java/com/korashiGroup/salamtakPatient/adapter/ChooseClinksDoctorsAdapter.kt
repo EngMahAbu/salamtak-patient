@@ -43,7 +43,7 @@ class ChooseClinksDoctorsAdapter(private val book: Booking) :
 
         holder.itemView.setOnClickListener {
             selectedItemPosition = holder.bindingAdapterPosition
-            services.clinicId?.let { it1 -> services.name?.let { it2 -> book.onItemClick(it1, it2,services.services) } }
+            services.clinicId?.let { it1 -> services.name?.let { it2 -> book.onItemClick(it1, it2, services.services ?: emptyList()) } }
             notifyDataSetChanged()
         }
         if (selectedItemPosition == position) {

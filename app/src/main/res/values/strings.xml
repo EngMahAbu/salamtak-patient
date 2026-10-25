@@ -83,6 +83,7 @@
     <string name="please_select_specialization">Please Select Speciality</string>
     <string name="please_select_city">Please Select City</string>
     <string name="please_select_area">Please Select Area</string>
+    <string name="please_enter_doctor_or_polyclinic_name">Please enter doctor name or polyclinic name</string>
 
 
     <string name="required">Required</string>
@@ -346,7 +347,7 @@
     <string name="salamatak_scoope">Salamatak Scope</string>
     <string name="salamatk_cap">Salamatk Capsule</string>
     <string name="salamtak_promotions">Salamtak Promotions</string>
-    <string name="salamtak_angle">Salamtak Angle</string>
+    <string name="salamtak_angle">Salamtak Angel</string>
     <string name="enter_your_registered">Enter your registered</string>
     <string name="or">OR</string>
     <string name="addresss">Address</string>
@@ -476,7 +477,7 @@
     <string name="offers_available">Offers Available</string>
     <string name="paid">Paid</string>
     <string name="pending_payment">Pending Payment</string>
-    <string name="no_data_registed">No Data Registed</string>
+    <string name="no_data_registed">No Data Registered</string>
     <string name="helleo">Hello</string>
     <string name="select_relation_type">Select Relation Type</string>
     <string name="newbalance">Balance</string>
@@ -553,7 +554,7 @@ Welcome to Salamtak mobile clinics service. You can now get a premium service in
     <string name="are_you_taking_any_medications">Are you taking any medications?</string>
     <string name="error_specify_medications">Please specify your medication</string>
     <string name="additional_details_symptoms">Additional Details / Symptoms</string>
-    <string name="enter_additional_details_here">Enter additional details</string>
+    <string name="enter_additional_details_here">Enter additional details...</string>
     <string name="error_select_speciality">Please select a speciality</string>
     <string name="error_specify_medication_details">Please specify medications details</string>
     <string name="additional_details">Additional Details</string>
@@ -594,7 +595,10 @@ Welcome to Salamtak mobile clinics service. You can now get a premium service in
     <string name="other_doctors">Other Doctors</string>
     <string name="choose_specialization_required">Choose Speciality <font color="#F60707">*</font></string>
     <string name="your_question_required">Your question <font color="#F60707">*</font></string>
-    <string name="choose_gender_required">Choose Gender <font color="#F60707">*</font></string>
+    <string name="choose_gender_required">Gender <font color="#F60707">*</font></string>
     <string name="ages_required">Age <font color="#F60707">*</font></string>
     <string name="book_again">Book Again</string>
+    <string name="electronic_medical_record_emr">Electronic Medical Record (EMR)</string>
+    <string name="doctors_reviews_rate">Doctors reviews (Rate)</string>
+    <string name="support_17143">Support 17143</string>
 </resources>

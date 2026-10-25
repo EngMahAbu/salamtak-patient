@@ -341,7 +341,7 @@
                         android:ellipsize="end"
                         android:fontFamily="@font/sf_pro_display_semibold"
                         android:gravity="start"
-                        android:lines="1"
+                        android:lines="2"
                         android:padding="2dp"
                         android:text="التجمع الخامس الحي الرابع بجوار مركز شباب التجمع الخامس 44 بـــ شارع 11"
                         android:textColor="@color/blue"

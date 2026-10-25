@@ -332,6 +332,7 @@
     <string name="please_select_specialization">الرجاء اختيار التخصص</string>
     <string name="please_select_city">الرجاء اختيار المدينة</string>
     <string name="please_select_area">الرجاء اختيار المنطقة</string>
+    <string name="please_enter_doctor_or_polyclinic_name">الرجاء إدخال اسم الطبيب أو اسم المركز الطبي</string>
     <string name="avilableappointemnts">"Available "</string>
     <string name="avilableapapointemnts">المواعيد المتاحة</string>
     <string name="reservation_required_first_come_first_served">الكشف بأسبقية الحضور</string>
@@ -573,7 +574,10 @@
     <string name="other_doctors">أطباء آخرون</string>
     <string name="choose_specialization_required">اختر التخصص <font color="#F60707">*</font></string>
     <string name="your_question_required">ما هو سؤالك؟ <font color="#F60707">*</font></string>
-    <string name="choose_gender_required">اختر الجنس <font color="#F60707">*</font></string>
+    <string name="choose_gender_required">الجنس<font color="#F60707">*</font></string>
     <string name="ages_required">السن <font color="#F60707">*</font></string>
     <string name="book_again">حجز مرة أخرى</string>
+    <string name="electronic_medical_record_emr">السجل الطبي الإلكتروني (EMR)</string>
+    <string name="doctors_reviews_rate">تقييمات الأطباء (تقييم)</string>
+    <string name="support_17143">الدعم 17143</string>
 </resources>

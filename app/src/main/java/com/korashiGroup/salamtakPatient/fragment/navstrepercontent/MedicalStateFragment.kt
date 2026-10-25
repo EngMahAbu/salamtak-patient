@@ -53,9 +53,36 @@ class MedicalStateFragment : Fragment() {
             binding.imPressgure.scaleX=1f
             binding.imSuggar.scaleX=1f
         }
+        setupPlaceholders()
         initButton()
         getData()
         callBackPatientMedicalInfo()
+    }
+
+    private fun setupPlaceholders() {
+        setupDashPlaceholder(binding.etPressureMMGG)
+        setupDashPlaceholder(binding.lastEtPressureMMGG)
+        setupDashPlaceholder(binding.etSugarLevelMGDL)
+        setupDashPlaceholder(binding.lastEtSugarLevelMGDL)
+
+        if (binding.etPressureMMGG.text.isNullOrBlank()) binding.etPressureMMGG.setText("---")
+        if (binding.lastEtPressureMMGG.text.isNullOrBlank()) binding.lastEtPressureMMGG.setText("---")
+        if (binding.etSugarLevelMGDL.text.isNullOrBlank()) binding.etSugarLevelMGDL.setText("---")
+        if (binding.lastEtSugarLevelMGDL.text.isNullOrBlank()) binding.lastEtSugarLevelMGDL.setText("---")
+    }
+
+    private fun setupDashPlaceholder(editText: com.google.android.material.textfield.TextInputEditText) {
+        editText.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                if (editText.text.toString().trim() == "---") {
+                    editText.setText("")
+                }
+            } else {
+                if (editText.text.toString().trim().isEmpty()) {
+                    editText.setText("---")
+                }
+            }
+        }
     }
 
     private fun  initButton(){
@@ -151,12 +178,16 @@ class MedicalStateFragment : Fragment() {
         if (!binding.etWeight.text.toString().trim().isNullOrEmpty()){
             partMap = partMap + mapOf("Weight" to binding.etWeight.text.toString().toInt())
         }
-        val Pressure=binding.etPressureMMGG.text.toString()+"/"+binding.lastEtPressureMMGG.text.toString()
-        if (!binding.etPressureMMGG.text.toString().trim().isNullOrEmpty()){
+        val firstPressure = binding.etPressureMMGG.text.toString().trim()
+        val lastPressure = binding.lastEtPressureMMGG.text.toString().trim()
+        if (firstPressure.isNotEmpty() && firstPressure != "---" && lastPressure.isNotEmpty() && lastPressure != "---") {
+            val Pressure = "$firstPressure/$lastPressure"
             partMap = partMap + mapOf("Pressure" to Pressure)
         }
-        val SugarLevel=binding.etSugarLevelMGDL.text.toString()+"/"+binding.lastEtSugarLevelMGDL.text.toString()
-        if (!binding.etSugarLevelMGDL.text.toString().trim().isNullOrEmpty()){
+        val firstSugar = binding.etSugarLevelMGDL.text.toString().trim()
+        val lastSugar = binding.lastEtSugarLevelMGDL.text.toString().trim()
+        if (firstSugar.isNotEmpty() && firstSugar != "---" && lastSugar.isNotEmpty() && lastSugar != "---") {
+            val SugarLevel = "$firstSugar/$lastSugar"
             partMap = partMap + mapOf("SugarLevel" to SugarLevel)
         }
         if (!binding.etHight.text.toString().trim().isNullOrEmpty()){
@@ -327,32 +358,32 @@ class MedicalStateFragment : Fragment() {
         }else{
             binding.etBloodGroup.setText("")
         }
-        val value = patientInfo.pressure.toString()
-        val parts = value.split("/")
-        val first = parts.getOrNull(0)?.toIntOrNull()
-        val second = parts.getOrNull(1)?.toIntOrNull()
-        if (patientInfo.pressure!=null){
-            binding.etPressureMMGG.setText(first.toString())
-            binding.lastEtPressureMMGG.setText(second.toString())
-        }else{
-            binding.etPressureMMGG.setText("")
-            binding.lastEtPressureMMGG.setText("")
+        val pressureValue = patientInfo.pressure?.toString()?.takeIf { it.isNotBlank() && it != "null" }
+        if (pressureValue != null) {
+            val parts = pressureValue.split("/")
+            val first = parts.getOrNull(0)?.trim()
+            val second = parts.getOrNull(1)?.trim()
+            binding.etPressureMMGG.setText(if (first.isNullOrBlank() || first == "null") "---" else first)
+            binding.lastEtPressureMMGG.setText(if (second.isNullOrBlank() || second == "null") "---" else second)
+        } else {
+            binding.etPressureMMGG.setText("---")
+            binding.lastEtPressureMMGG.setText("---")
         }
-        if (patientInfo.prescriptions!=null){
-        binding.etPrescriptions.setText(patientInfo.prescriptions.toString())
+        if (patientInfo.prescriptions!=null && patientInfo.prescriptions.toString() != "null"){
+            binding.etPrescriptions.setText(patientInfo.prescriptions.toString())
         }else{
             binding.etPrescriptions.setText("")
         }
-        val valueSugarLevel = patientInfo.sugarLevel.toString()
-        val partsSugarLevel = valueSugarLevel.split("/")
-        val firstSugarLevel = partsSugarLevel.getOrNull(0)?.toIntOrNull()
-        val secondSugarLevel = partsSugarLevel.getOrNull(1)?.toIntOrNull()
-        if (patientInfo.sugarLevel!=null) {
-            binding.etSugarLevelMGDL.setText(firstSugarLevel.toString())
-            binding.lastEtSugarLevelMGDL.setText(secondSugarLevel.toString())
-        }else{
-            binding.etSugarLevelMGDL.setText("")
-            binding.lastEtSugarLevelMGDL.setText("")
+        val sugarValue = patientInfo.sugarLevel?.toString()?.takeIf { it.isNotBlank() && it != "null" }
+        if (sugarValue != null) {
+            val partsSugarLevel = sugarValue.split("/")
+            val firstSugarLevel = partsSugarLevel.getOrNull(0)?.trim()
+            val secondSugarLevel = partsSugarLevel.getOrNull(1)?.trim()
+            binding.etSugarLevelMGDL.setText(if (firstSugarLevel.isNullOrBlank() || firstSugarLevel == "null") "---" else firstSugarLevel)
+            binding.lastEtSugarLevelMGDL.setText(if (secondSugarLevel.isNullOrBlank() || secondSugarLevel == "null") "---" else secondSugarLevel)
+        } else {
+            binding.etSugarLevelMGDL.setText("---")
+            binding.lastEtSugarLevelMGDL.setText("---")
         }
         if (patientInfo.surgeries!=null) {
             binding.etSurgeries.setText(patientInfo.surgeries.toString())

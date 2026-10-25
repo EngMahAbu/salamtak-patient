@@ -46,7 +46,7 @@ class PolyClinicsDoctorsAdapter(private val booking: IPolyClinicsBooking) :
                 }
             }
 
-            tvSpecialization.text = "${services.seniorityLevelName} ${services.specialistName}"
+            tvSpecialization.text = "${services.seniorityLevelName} - ${services.specialistName}"
             val subSpecsStr = services.subSpecialistName.toString().removePrefix("[").removeSuffix("]")
             subSpecialization.text = subSpecsStr.split(",").take(2).joinToString(",")
             location.text="${services.CityName} - ${services.AreaName}"

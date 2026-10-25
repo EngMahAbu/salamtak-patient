@@ -197,7 +197,34 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                     viewLifecycleOwner,
                     androidx.lifecycle.Observer {
                         cityId = it.id
+                        // Also load the actual polyclinic list for filtering
+                        partMap = partMap + mapOf("CityId" to it.id)
+                        specialistId?.let { specId ->
+                            partMap = partMap + mapOf("SpecID" to specId)
+                        }
+                        polyClinicsViewmodel.getFilteredHealthEntity(partMap as HashMap<String, String>)
                     })
+                // Observe polyclinic list to build the polyclinicMap for filtering
+                polyClinicsViewmodel.polyClinicsResponse.observe(viewLifecycleOwner) { res ->
+                    if (res is Resource.sucess) {
+                        fullPolyclinicList = res.data?.data ?: emptyList()
+                        val polyMap = fullPolyclinicList
+                            .filter { it.clinicId != null && it.clinicId != 0 }
+                            .associate { it.clinicId!! to (it.name ?: "") }
+                        searchDoctorsAdapter.polyclinicMap = polyMap
+                        // Re-filter and re-submit the current doctor list
+                        val currentItems = searchDoctorsAdapter.currentList.toList()
+                        if (currentItems.isNotEmpty()) {
+                            val filteredItems = currentItems.filter { item ->
+                                SearchDoctorsAdapter.getDoctorPolyclinic(item, polyMap) != null
+                            }
+                            searchDoctorsAdapter.submitList(filteredItems)
+                            searchDoctorsAdapter.notifyDataSetChanged()
+                            updateUi(filteredItems)
+                            totalsDoctors = filteredItems.size
+                        }
+                    }
+                }
                 doctorsSearch()
             } else {
                 // PolyClinic search mode
@@ -445,6 +472,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
 
     private fun doctorsRecylerview() {
         searchDoctorsAdapter = SearchDoctorsAdapter(this, isHomeVisit)
+        searchDoctorsAdapter.isPolyClinic = (examinationtypeid == 6)
         binding.rvDoctors.apply {
             adapter = searchDoctorsAdapter
             layoutManager = LinearLayoutManager(requireContext())
@@ -703,17 +731,25 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
                 is Resource.sucess -> {
                     hideprogressbar()
                     it.let {
-                        //    bottomsheetbeahavoir.state = BottomSheetBehavior.STATE_HIDDEN
                         binding.tvCity.text = "${cityName} - ${areaName}"
-                        searchDoctorsAdapter.submitList(it.data?.data?.items?.toList())
+                        val rawItems = it.data?.data?.items?.filterNotNull() ?: emptyList()
+                        val filteredItems = if (examinationtypeid == 6) {
+                            rawItems.filter { item ->
+                                SearchDoctorsAdapter.getDoctorPolyclinic(item, searchDoctorsAdapter.polyclinicMap) != null
+                            }
+                        } else {
+                            rawItems
+                        }
+                        searchDoctorsAdapter.isPolyClinic = (examinationtypeid == 6)
+                        searchDoctorsAdapter.submitList(filteredItems)
                         searchDoctorsAdapter.notifyDataSetChanged()
-                        updateUi(it.data?.data?.items as List<Item>)
+                        updateUi(filteredItems)
                         val totalresult = (it.data?.data?.totalCount)?.div((10 + 2))
                         isLastPage = viewmodel.doctorSearchPage == totalresult
                         if (isLastPage) {
                             binding.rvDoctors.setPadding(0, 0, 0, 0)
                         }
-                        totalsDoctors = it.data?.data?.totalCount!!
+                        totalsDoctors = filteredItems.size
                         binding.tvSearch.text = getString(R.string.search)
 
                     }
@@ -939,8 +975,40 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
     override fun onPolyClinicNameClick(clinicId: Int) {
         val polyClinicItem = fullPolyclinicList.find { it.clinicId == clinicId }
             ?: run {
-                val doctorItem = searchDoctorsAdapter.currentList.find { it.clinicId == clinicId || it.clinicDto?.ClinicId == clinicId }
-                if (doctorItem != null) {
+                val doctorItem = searchDoctorsAdapter.currentList.find { doc ->
+                    doc.healthEntities?.any { it?.clinicId == clinicId } == true ||
+                    doc.clinicId == clinicId ||
+                    doc.clinicDto?.ClinicId == clinicId
+                }
+                val healthEntity = doctorItem?.healthEntities?.find { it?.clinicId == clinicId }
+                    ?: doctorItem?.healthEntities?.firstOrNull { it != null && !it.name.isNullOrBlank() }
+
+                if (healthEntity != null) {
+                    com.korashiGroup.salamtakPatient.fragment.polyclinic.model.PolyClinicsItem(
+                        address = healthEntity.address ?: doctorItem?.clinicDto?.Address,
+                        apartmentNo = null,
+                        areaName = healthEntity.areaName ?: doctorItem?.clinicDto?.AreaName,
+                        areaPackageID = null,
+                        blockNo = null,
+                        cityName = healthEntity.cityName ?: doctorItem?.clinicDto?.CityName,
+                        clinicId = healthEntity.clinicId ?: clinicId,
+                        clinicLatitude = healthEntity.clinicLatitude ?: doctorItem?.clinicDto?.ClinicLatitude,
+                        clinicLongitude = healthEntity.clinicLongitude ?: doctorItem?.clinicDto?.ClinicLongitude,
+                        email = healthEntity.email,
+                        features = null,
+                        fixedFee = healthEntity.fixedFee,
+                        floorNo = healthEntity.floorNo,
+                        gallary = null,
+                        videos = null,
+                        insurance = null,
+                        logo = healthEntity.logo,
+                        name = healthEntity.name ?: doctorItem?.clinicDto?.Name ?: doctorItem?.clinicName,
+                        phone = healthEntity.phone,
+                        services = null,
+                        subAreaName = null,
+                        ClinicBio = null
+                    )
+                } else if (doctorItem != null) {
                     com.korashiGroup.salamtakPatient.fragment.polyclinic.model.PolyClinicsItem(
                         address = doctorItem.clinicDto?.Address,
                         apartmentNo = null,

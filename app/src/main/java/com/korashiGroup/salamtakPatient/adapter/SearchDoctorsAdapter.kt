@@ -19,6 +19,9 @@ import kotlin.math.roundToInt
 class SearchDoctorsAdapter(private val booking: Booking,private val isHomeVisit:Boolean) :
     ListAdapter<Item, SearchDoctorsAdapter.ViewHolder>(DiffCallback()) {
     var subspecialist:String?=""
+    var isPolyClinic: Boolean = false
+    // Map of actual polyclinic clinicId -> polyclinic name from backend
+    var polyclinicMap: Map<Int, String> = emptyMap()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
         val view =
@@ -41,7 +44,7 @@ class SearchDoctorsAdapter(private val booking: Booking,private val isHomeVisit:
             }
 
 
-            tvSpecialization.text = "${services.specialistName} - ${services.seniortyLevelName}"
+            tvSpecialization.text = "${services.seniortyLevelName} - ${services.specialistName}"
 
             val subSpecList = services.subSpecialistName?.filterNotNull()?.filter { it.isNotBlank() }
             subSpecialization.text = subSpecList?.take(2)?.joinToString(", ") ?: ""
@@ -58,7 +61,20 @@ class SearchDoctorsAdapter(private val booking: Booking,private val isHomeVisit:
             holder.binding.Reviews.text=String.format("%.1f", services.rate?.toFloat()?: 1.0f)
             holder.binding.Ratecount.text="${services.RateCount?.toInt()}"
 
-            tvPolyclinicName.visibility = View.GONE
+            val polyInfo = getDoctorPolyclinic(services, polyclinicMap)
+
+            if (isPolyClinic && polyInfo != null) {
+                tvPolyclinicName.text = polyInfo.first
+                tvPolyclinicName.visibility = View.VISIBLE
+                tvPolyclinicName.setOnClickListener {
+                    if (polyInfo.second != 0) {
+                        booking.onPolyClinicNameClick(polyInfo.second)
+                    }
+                }
+            } else {
+                tvPolyclinicName.visibility = View.GONE
+                tvPolyclinicName.setOnClickListener(null)
+            }
         }
         if (isHomeVisit){
             holder.binding.layoutIsHomeVisit.visibility=View.VISIBLE
@@ -141,5 +157,112 @@ class SearchDoctorsAdapter(private val booking: Booking,private val isHomeVisit:
         fun onItemClicks(clinicId: Int, doctorId: Int, fess: Int,image:String,clinicName:String)
         fun onItemClick(clinicId: Int, doctorId: Int,clinkname:String,rate:Double,rateCount:Int,fess: Int)
         fun onPolyClinicNameClick(clinicId: Int)
+    }
+
+    companion object {
+        fun isNotDoctorPrivateClinic(clinicName: String?, item: Item): Boolean {
+            val trimmedClinic = clinicName?.trim().orEmpty()
+            if (trimmedClinic.isEmpty() || trimmedClinic.equals("null", ignoreCase = true)) return false
+
+            val noiseWords = setOf(
+                "dr", "dr.", "doctor", "doc", "clinic", "clinics",
+                "د", "د.", "د/", "دكتور", "دكتوره", "دكتورة", "عيادة", "عيادات", "عياده"
+            )
+
+            // Tokenize clinic name
+            val clinicTokens = trimmedClinic.lowercase()
+                .replace(Regex("[.,/\\-_#():;]"), " ")
+                .split(Regex("\\s+"))
+                .map { it.trim() }
+                .filter { it.isNotEmpty() }
+
+            val significantClinicTokens = clinicTokens.filter { it !in noiseWords }
+
+            // If only noise words remain (e.g. "Clinic" or "عيادة"), it is not a valid polyclinic name
+            if (significantClinicTokens.isEmpty()) return false
+
+            // Collect tokens from doctor's name and nickname
+            val docNameStrings = listOfNotNull(item.doctorName, item.NickName)
+            val docTokens = docNameStrings.flatMap { docName ->
+                docName.lowercase()
+                    .replace(Regex("[.,/\\-_#():;]"), " ")
+                    .split(Regex("\\s+"))
+                    .map { it.trim() }
+                    .filter { it.isNotEmpty() && it !in noiseWords }
+            }.toSet()
+
+            if (docTokens.isEmpty()) return true
+
+            // If every significant token in the clinic name is contained within the doctor's name tokens,
+            // then it is a private clinic generated from the doctor's name
+            val allTokensMatchDoctor = significantClinicTokens.all { token ->
+                token in docTokens || docTokens.any { docToken -> docToken.contains(token) || token.contains(docToken) }
+            }
+
+            return !allTokensMatchDoctor
+        }
+
+        fun getDoctorPolyclinic(item: Item, polyclinicMap: Map<Int, String> = emptyMap()): Pair<String, Int>? {
+            // 1. Check against fullPolyclinicList / polyclinicMap if available
+            if (polyclinicMap.isNotEmpty()) {
+                val candidateNames = mutableListOf<String>()
+                item.healthEntities?.filterNotNull()?.forEach { he ->
+                    he.name?.trim()?.let { if (it.isNotEmpty() && it != "null") candidateNames.add(it) }
+                }
+                item.clinicDto?.Name?.trim()?.let { if (it.isNotEmpty() && it != "null") candidateNames.add(it) }
+                item.clinicName?.trim()?.let { if (it.isNotEmpty() && it != "null") candidateNames.add(it) }
+
+                for (candidateName in candidateNames) {
+                    val normalizedCandidate = candidateName.lowercase().trim()
+                    for ((polyId, polyName) in polyclinicMap) {
+                        val normalizedPoly = polyName.lowercase().trim()
+                        if (normalizedPoly.isNotEmpty() && (normalizedCandidate == normalizedPoly ||
+                            normalizedCandidate.contains(normalizedPoly) ||
+                            normalizedPoly.contains(normalizedCandidate))) {
+                            return Pair(polyName, polyId)
+                        }
+                    }
+                }
+
+                val heMatch = item.healthEntities?.firstOrNull { he ->
+                    he != null && he.clinicId != null && polyclinicMap.containsKey(he.clinicId)
+                }
+                if (heMatch != null) {
+                    val id = heMatch.clinicId!!
+                    return Pair(polyclinicMap[id] ?: heMatch.name?.trim() ?: "", id)
+                }
+                if (item.clinicDto?.ClinicId != null && polyclinicMap.containsKey(item.clinicDto.ClinicId)) {
+                    return Pair(polyclinicMap[item.clinicDto.ClinicId]!!, item.clinicDto.ClinicId)
+                }
+                if (item.clinicId != null && polyclinicMap.containsKey(item.clinicId)) {
+                    return Pair(polyclinicMap[item.clinicId]!!, item.clinicId)
+                }
+            }
+
+            // 2. HealthEntities from backend response
+            val healthEntity = item.healthEntities?.firstOrNull { it != null && !it.name.isNullOrBlank() && it.name != "null" }
+            if (healthEntity != null) {
+                val heName = healthEntity.name!!.trim()
+                if (isNotDoctorPrivateClinic(heName, item)) {
+                    val clinicId = healthEntity.clinicId ?: item.clinicDto?.ClinicId ?: item.clinicId ?: 0
+                    return Pair(heName, clinicId)
+                }
+            }
+
+            // 3. clinicDto.Name or clinicName if it is an actual medical center / polyclinic (not doctor name clinic)
+            val clinicDtoName = item.clinicDto?.Name?.trim()
+            if (!clinicDtoName.isNullOrEmpty() && clinicDtoName != "null" && isNotDoctorPrivateClinic(clinicDtoName, item)) {
+                val clinicId = item.clinicDto?.ClinicId ?: item.clinicId ?: healthEntity?.clinicId ?: 0
+                return Pair(clinicDtoName, clinicId)
+            }
+
+            val clinicName = item.clinicName?.trim()
+            if (!clinicName.isNullOrEmpty() && clinicName != "null" && isNotDoctorPrivateClinic(clinicName, item)) {
+                val clinicId = item.clinicId ?: item.clinicDto?.ClinicId ?: healthEntity?.clinicId ?: 0
+                return Pair(clinicName, clinicId)
+            }
+
+            return null
+        }
     }
 }

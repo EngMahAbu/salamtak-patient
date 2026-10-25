@@ -122,6 +122,7 @@ class HealthyTopicsFragment : Fragment(), BlogsGatesAdapter.Action, MedicalHealt
             binding.btnQandA.setBackgroundResource(R.drawable.bg_help)
             binding.btnQandA.setTextColor(Color.parseColor("#262D70"))
             binding.layoutFilter.visibility = View.VISIBLE
+            binding.crdView.visibility = View.GONE
             binding.rvQuestions.visibility=View.GONE
             binding.rvAngles.visibility=View.VISIBLE
             //viewmodel.getHealthEntityPagedList(cityId, areaId, 7, 100, 0)
@@ -134,6 +135,7 @@ class HealthyTopicsFragment : Fragment(), BlogsGatesAdapter.Action, MedicalHealt
             binding.btnEmergencies.setBackgroundResource(R.drawable.bg_help)
             binding.btnEmergencies.setTextColor(Color.parseColor("#262D70"))
             binding.layoutFilter.visibility = View.GONE
+            binding.crdView.visibility = View.GONE
             binding.rvAngles.visibility=View.GONE
             binding.rvQuestions.visibility=View.VISIBLE
             callGetQuestions()
@@ -305,6 +307,7 @@ class HealthyTopicsFragment : Fragment(), BlogsGatesAdapter.Action, MedicalHealt
 
             Constans.SalamtakGateAngleICO -> {
                 binding.tvHealth.text = getString(R.string.salamtak_angle)
+                binding.ivHealthIcon.visibility = View.GONE
                 binding.rvGates.visibility = View.GONE
                 binding.rvAngles.visibility = View.VISIBLE
                 binding.layoutSalamtakAngel.visibility = View.VISIBLE
@@ -345,22 +348,30 @@ class HealthyTopicsFragment : Fragment(), BlogsGatesAdapter.Action, MedicalHealt
         }
     }
 
-    private fun callGetQuestions(){
-
+    private fun callGetQuestions() {
         polyClinicsViewModel.questionsResponse.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             when (it) {
-
                 is Resource.Loading -> {
-                    binding.progressBar.visibility=View.VISIBLE
+                    binding.progressBar.visibility = View.VISIBLE
+                    binding.crdView.visibility = View.GONE
                 }
                 is Resource.sucess -> {
-                    binding.progressBar.visibility=View.GONE
-                    questionsAdapter.submitList(it.data?.data)
+                    binding.progressBar.visibility = View.GONE
+                    val questionsList = it.data?.data
+                    if (questionsList.isNullOrEmpty()) {
+                        binding.crdView.visibility = View.VISIBLE
+                        binding.rvQuestions.visibility = View.GONE
+                    } else {
+                        binding.crdView.visibility = View.GONE
+                        binding.rvQuestions.visibility = View.VISIBLE
+                        questionsAdapter.submitList(questionsList)
+                    }
                 }
                 is Resource.Error -> {
-                    binding.progressBar.visibility=View.GONE
+                    binding.progressBar.visibility = View.GONE
+                    binding.crdView.visibility = View.VISIBLE
+                    binding.rvQuestions.visibility = View.GONE
                 }
-
             }
         })
         polyClinicsViewModel.getAllQandAByDoctorId(false)

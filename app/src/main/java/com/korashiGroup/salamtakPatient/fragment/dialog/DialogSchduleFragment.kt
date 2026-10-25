@@ -75,23 +75,7 @@ class DialogSchduleFragment : BottomSheetDialogFragment() {
         }
 
         binding.btnReschedule.setOnClickListener {
-//            if (this::getDoctorClinksResponse.isInitialized){
-//            val action=DialogSchduleFragmentDirections.actionDialogSchduleFragmentToBookAppointmentFragment(getDoctorClinksResponse,"Reschedule")
-//            findNavController().navigate(action) }else{
-//                return@setOnClickListener
-//            }
             dismiss()
-        }
-        binding.tvReBookingAppointment.setOnClickListener {
-            if (this::getDoctorAndPolyClinksResponse.isInitialized) {
-                val action = DialogSchduleFragmentDirections.actionDialogSchduleFragmentToBookAppointmentFragment(
-                    getDoctorAndPolyClinksResponse,
-                    "Re-Booking Appointment"
-                )
-                findNavController().navigate(action)
-            } else {
-                return@setOnClickListener
-            }
         }
 
         binding.btnConfirm.setOnClickListener {
@@ -107,55 +91,47 @@ class DialogSchduleFragment : BottomSheetDialogFragment() {
             }, 1000)
         }
 
-        binding.tvMedicalHistory.setOnClickListener {
+        val openEMR = View.OnClickListener {
             if (this::getDoctorAndPolyClinksResponse.isInitialized) {
                 val action = DialogSchduleFragmentDirections.actionDialogSchduleFragmentToMedicalHistoryFragment(
                     getDoctorAndPolyClinksResponse,
                     args.appointmentId
                 )
                 findNavController().navigate(action)
-            } else {
-                return@setOnClickListener
             }
         }
+        binding.tvMedicalHistory.setOnClickListener(openEMR)
+        binding.ivMedicalHistory.setOnClickListener(openEMR)
 
-        binding.tvRate.setOnClickListener {
+        val openRate = View.OnClickListener {
             if (this::getDoctorAndPolyClinksResponse.isInitialized) {
                 val action = DialogSchduleFragmentDirections.actionDialogSchduleFragmentToDialogRatingDoctorFragment(
-                    getDoctorAndPolyClinksResponse.data?.firstName?.let { it1 ->
-                        getDoctorAndPolyClinksResponse.data!!.firstNameAr?.let { it2 ->
-                            getDoctorAndPolyClinksResponse.data!!.middelName?.let { it3 ->
-                                getDoctorAndPolyClinksResponse.data!!.middelNameAr?.let { it4 ->
-                                    getDoctorAndPolyClinksResponse.data!!.lastName?.let { it5 ->
-                                        getDoctorAndPolyClinksResponse.data!!.lastNameAr?.let { it6 ->
-                                            getDoctorAndPolyClinksResponse.data!!.id?.let { it7 ->
-                                                getDoctorAndPolyClinksResponse.data!!.image?.let { it8 ->
-                                                    getDoctorAndPolyClinksResponse.data!!.specialistName?.let { it9 ->
-                                                        DotorDetails(
-                                                            it1,
-                                                            it2,
-                                                            it3,
-                                                            it4,
-                                                            it5,
-                                                            it6,
-                                                            it7, it8, it9
-                                                        )
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    DotorDetails(
+                        getDoctorAndPolyClinksResponse.data?.firstName ?: "",
+                        getDoctorAndPolyClinksResponse.data?.firstNameAr ?: "",
+                        getDoctorAndPolyClinksResponse.data?.middelName ?: "",
+                        getDoctorAndPolyClinksResponse.data?.middelNameAr ?: "",
+                        getDoctorAndPolyClinksResponse.data?.lastName ?: "",
+                        getDoctorAndPolyClinksResponse.data?.lastNameAr ?: "",
+                        getDoctorAndPolyClinksResponse.data?.id ?: 0,
+                        getDoctorAndPolyClinksResponse.data?.image ?: "",
+                        getDoctorAndPolyClinksResponse.data?.specialistName ?: ""
+                    )
                 )
                 findNavController().navigate(action)
-            } else {
-                return@setOnClickListener
             }
-
         }
+        binding.tvRate.setOnClickListener(openRate)
+        binding.ivRate.setOnClickListener(openRate)
+
+        val openSupport = View.OnClickListener { v ->
+            val action = DialogSchduleFragmentDirections.actionDialogSchduleFragmentToDialogBottomSheetFragment("help")
+            findNavController().navigate(action)
+            v.isEnabled = false
+            Handler().postDelayed({ v.isEnabled = true }, 1000)
+        }
+        binding.tvSupportAction.setOnClickListener(openSupport)
+        binding.ivSupportAction.setOnClickListener(openSupport)
 
 
     }

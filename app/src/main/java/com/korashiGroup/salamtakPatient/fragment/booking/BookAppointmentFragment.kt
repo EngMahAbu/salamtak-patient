@@ -377,7 +377,7 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
                                 doctorWorkingDayTimeId,
                                 fees,
                                 medicalExaminationTypeName,
-                                "${it.data?.data?.doctorDto?.specialistName} - ${it.data?.data?.doctorDto?.seniorityLevelName}",
+                                "${it.data?.data?.doctorDto?.seniorityLevelName} - ${it.data?.data?.doctorDto?.specialistName}",
                                 args.doctorclinks?.data?.image,
                                 medicalExaminationId,
                                 args.doctorclinks?.data?.currentClinicDtos?.cityName,
@@ -434,7 +434,7 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
                                 doctorWorkingDayTimeId,
                                 fees,
                                 medicalExaminationTypeName,
-                                it.data?.data?.doctorDto?.specialistName,
+                                "${it.data?.data?.doctorDto?.seniorityLevelName} - ${it.data?.data?.doctorDto?.specialistName}",
                                 args.doctorclinks?.data?.image,
                                 medicalExaminationId,
                                 args.doctorclinks?.data?.currentClinicDtos?.cityName,
@@ -752,7 +752,7 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
         val seniority = args.doctorclinks?.data?.seniorityLevelName?.trim().orEmpty()
         val specialist = args.doctorclinks?.data?.specialistName?.trim().orEmpty()
         binding.tvSpecialization.text = if (seniority.isNotEmpty() && specialist.isNotEmpty()) {
-            "$seniority $specialist"
+            "$seniority - $specialist"
         } else {
             seniority.ifEmpty { specialist }
         }
@@ -779,30 +779,65 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
         }
         binding.AboutDoctor.text=str
     }
-    private fun bindViews(){
+//    private fun bindViews(){
+//        medicalExaminationId = HomeFragment.instance?.let {
+//            it.medicalExaminatioId
+//        } ?: 1
+//        dayId=SearchFragment.instance?.let {
+//            it.dayId
+//        }?:0
+//        formattedDate=SearchFragment.instance?.let {
+//            it.formattedDate
+//        }?:""
+//        if (formattedDate.isNullOrEmpty()){
+//            val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH).apply {
+//                this.timeZone = TimeZone.getTimeZone("CST")
+//            }
+//            formattedDate = formatter.format(now.time)
+//            getDayId()
+//        }
+//        isPolyClinic = medicalExaminationId==6
+//        sharedDataViewmodel.rating.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+//            binding.ratingBar.rating= it.rate?.toFloat()?: 1.0f
+//            binding.Reviewss.text="${it.rate?.roundToInt()?.toDouble()}"
+//            binding.Ratecount.text="${it.rateCount}"
+//        })
+//    }
+
+
+    private fun bindViews() {
         medicalExaminationId = HomeFragment.instance?.let {
             it.medicalExaminatioId
         } ?: 1
-        dayId=SearchFragment.instance?.let {
+
+        dayId = SearchFragment.instance?.let {
             it.dayId
-        }?:0
-        formattedDate=SearchFragment.instance?.let {
+        } ?: 0
+
+        formattedDate = SearchFragment.instance?.let {
             it.formattedDate
-        }?:""
-        if (formattedDate.isNullOrEmpty()){
-            val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH).apply {
+        } ?: ""
+
+        if (formattedDate.isNullOrEmpty()) {
+            val formatter = SimpleDateFormat(
+                "yyyy-MM-dd'T'HH:mm:ss'Z'",
+                Locale.ENGLISH
+            ).apply {
                 this.timeZone = TimeZone.getTimeZone("CST")
             }
+
             formattedDate = formatter.format(now.time)
             getDayId()
         }
-        isPolyClinic = medicalExaminationId==6
-        sharedDataViewmodel.rating.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-            binding.ratingBar.rating= it.rate?.toFloat()?: 1.0f
-            binding.Reviewss.text="${it.rate?.roundToInt()?.toDouble()}"
-            binding.Ratecount.text="${it.rateCount}"
-        })
+
+        isPolyClinic = medicalExaminationId == 6
+
+        // Hide Reviews / Rating
+        binding.ratingBar.visibility = View.GONE
+        binding.Reviewss.visibility = View.GONE
+        binding.Ratecount.visibility = View.GONE
     }
+
 
     private fun callCheckUser() {
 

@@ -157,7 +157,7 @@ class DialogClinkBookingFragment : BottomSheetDialogFragment(),
                     }
                     val appointmentDetailBooking= args.appointmentrequest.DoctorId?.let { it1 ->
                         AppointmentDetailBooking(name,
-                            it1,formattedDate,intervalTime,doctorWorkingDayTimeId,fees,medicalExaminationTypeName,it.data?.data?.doctorDto?.specialistName,args.appointmentrequest.image,null)
+                            it1,formattedDate,intervalTime,doctorWorkingDayTimeId,fees,medicalExaminationTypeName,"${it.data?.data?.doctorDto?.seniorityLevelName} - ${it.data?.data?.doctorDto?.specialistName}",args.appointmentrequest.image,null)
                     }
                    val action=DialogClinkBookingFragmentDirections.actionDialogClinkBookingFragmentToAppointmentDetailsFragment(appointmentDetailBooking
                   ,true )

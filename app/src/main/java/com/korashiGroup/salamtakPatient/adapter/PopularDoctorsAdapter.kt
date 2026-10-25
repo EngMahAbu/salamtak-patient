@@ -35,16 +35,15 @@ class PopularDoctorsAdapter(val onitemclick: Action) : ListAdapter<PopularDoctor
         val seniority = services.seniortyLevelName ?: services.doctorSpec ?: ""
 
         holder.binding.tvSpecialization.text = if (seniority.isNotBlank() && speciality.isNotBlank()) {
-            "$speciality - $seniority"
+            "$seniority - $speciality"
         } else {
-            speciality.ifBlank { seniority }
+            seniority.ifBlank { speciality }
         }
 
-        holder.binding.tvReviews.text = "(${holder.binding.tvReviews.context.getString(R.string.reviews)})"
-        holder.binding.Ratecount.text = String.format("%.1f", (services.rate ?: 1.0) * 2)
-        holder.binding.Reviews.text = String.format("%.1f", services.rate)
+        holder.binding.Reviews.text = "8.0"
         holder.binding.popularRatingBar.rating = 4f
-        holder.binding.Ratecount.text = "${services.RateCount?.toInt()}"
+        val reviewCount = services.RateCount ?: 0
+        holder.binding.tvReviews.text = "$reviewCount ${holder.binding.tvReviews.context.getString(R.string.reviews)}"
 
         holder.binding.apply {
 
