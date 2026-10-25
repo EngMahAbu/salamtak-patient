@@ -83,6 +83,7 @@
     <string name="please_select_specialization">Please Select Speciality</string>
     <string name="please_select_city">Please Select City</string>
     <string name="please_select_area">Please Select Area</string>
+    <string name="please_select_city_area_or_doctor_name">Please select City &amp; Area or enter Doctor Name</string>
     <string name="please_enter_doctor_or_polyclinic_name">Please enter doctor name or polyclinic name</string>
 
 

@@ -207,6 +207,13 @@ class SpecialistDoctorsFragment : Fragment(),SpecialictyAdapter.SelectSpecialist
 
             override fun afterTextChanged(s: Editable?) {}
         })
+        binding.etSearch.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (!s.isNullOrBlank()) clearLocationErrors()
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
 
     }
     private fun clinksRecylerview() {
@@ -283,6 +290,7 @@ class SpecialistDoctorsFragment : Fragment(),SpecialictyAdapter.SelectSpecialist
             if (spec != null) {
                 isSpecalistSelected = true
                 binding.etSpecialization.setText(spec.name ?: "")
+                if (!spec.name.isNullOrBlank()) clearSpecializationError()
             } else {
                 isSpecalistSelected = false
                 binding.etSpecialization.setText("")
@@ -315,6 +323,7 @@ class SpecialistDoctorsFragment : Fragment(),SpecialictyAdapter.SelectSpecialist
             if (area != null) {
                 isAreaSelected = true
                 binding.etChooseArea.setText(area.name ?: "")
+                if (!area.name.isNullOrBlank()) clearLocationErrors()
             } else {
                 isAreaSelected = false
                 binding.etChooseArea.setText("")
@@ -348,30 +357,43 @@ class SpecialistDoctorsFragment : Fragment(),SpecialictyAdapter.SelectSpecialist
             binding.tvCityError.visibility = View.GONE
             binding.tvAreaError.visibility = View.GONE
         } else {
-            // Standard mode: City OR Doctor Name OR PolyClinic Name validation
-            if (cityName.isEmpty() && doctorNameInput.isEmpty() && polyclinicNameInput.isEmpty()) {
-                binding.tvCityError.text = getString(R.string.please_select_city)
+            // Standard mode (e.g. In Clinic): (City AND Area) OR Doctor Name is required
+            val hasDoctorName = doctorNameInput.isNotEmpty() || polyclinicNameInput.isNotEmpty()
+            val hasCityAndArea = cityName.isNotEmpty() && areaName.isNotEmpty()
+
+            if (hasDoctorName || hasCityAndArea) {
+                clearLocationErrors()
+            } else if (cityName.isEmpty()) {
+                binding.tvCityError.text = getString(R.string.please_select_city_area_or_doctor_name)
                 binding.tvCityError.visibility = View.VISIBLE
                 binding.layoutChooseCity.setBackgroundResource(R.drawable.bg_edittext_error)
+                binding.tvAreaError.visibility = View.GONE
+                binding.layoutChooseArea.setBackgroundResource(R.drawable.bg_edittext)
                 isValid = false
             } else {
+                // City selected without area
                 binding.tvCityError.visibility = View.GONE
                 binding.layoutChooseCity.setBackgroundResource(R.drawable.bg_edittext)
-            }
-
-            // Area validation (Required if City is selected)
-            if (cityName.isNotEmpty() && areaName.isEmpty()) {
                 binding.tvAreaError.text = getString(R.string.please_select_area)
                 binding.tvAreaError.visibility = View.VISIBLE
                 binding.layoutChooseArea.setBackgroundResource(R.drawable.bg_edittext_error)
                 isValid = false
-            } else {
-                binding.tvAreaError.visibility = View.GONE
-                binding.layoutChooseArea.setBackgroundResource(R.drawable.bg_edittext)
             }
         }
 
         return isValid
+    }
+
+    private fun clearLocationErrors() {
+        binding.tvCityError.visibility = View.GONE
+        binding.layoutChooseCity.setBackgroundResource(R.drawable.bg_edittext)
+        binding.tvAreaError.visibility = View.GONE
+        binding.layoutChooseArea.setBackgroundResource(R.drawable.bg_edittext)
+    }
+
+    private fun clearSpecializationError() {
+        binding.tvSpecializationError.visibility = View.GONE
+        binding.layoutChooseSpecialization.setBackgroundResource(R.drawable.bg_edittext)
     }
 
     private fun initPolyClinicMutualDimming() {

@@ -332,6 +332,7 @@
     <string name="please_select_specialization">الرجاء اختيار التخصص</string>
     <string name="please_select_city">الرجاء اختيار المدينة</string>
     <string name="please_select_area">الرجاء اختيار المنطقة</string>
+    <string name="please_select_city_area_or_doctor_name">الرجاء اختيار المدينة والمنطقة أو إدخال اسم الطبيب</string>
     <string name="please_enter_doctor_or_polyclinic_name">الرجاء إدخال اسم الطبيب أو اسم المركز الطبي</string>
     <string name="avilableappointemnts">"Available "</string>
     <string name="avilableapapointemnts">المواعيد المتاحة</string>
