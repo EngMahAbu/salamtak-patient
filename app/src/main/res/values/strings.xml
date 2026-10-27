@@ -602,4 +602,5 @@ Welcome to Salamtak mobile clinics service. You can now get a premium service in
     <string name="electronic_medical_record_emr">Electronic Medical Record (EMR)</string>
     <string name="doctors_reviews_rate">Doctors reviews (Rate)</string>
     <string name="support_17143">Support 17143</string>
+    <string name="choose_date">Choose Date</string>
 </resources>

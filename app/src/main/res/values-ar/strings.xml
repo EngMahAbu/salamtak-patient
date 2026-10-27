@@ -581,4 +581,5 @@
     <string name="electronic_medical_record_emr">السجل الطبي الإلكتروني (EMR)</string>
     <string name="doctors_reviews_rate">تقييمات الأطباء (تقييم)</string>
     <string name="support_17143">الدعم 17143</string>
+    <string name="choose_date">اختار دكتور</string>
 </resources>

@@ -146,6 +146,7 @@ class BookAppointmentFragment : Fragment(), AppointmentsAvailableAdapter.Action,
         )
 
 
+        binding.calendar.minDate = cal.timeInMillis
         binding.calendar.firstDayOfWeek = java.util.Calendar.SATURDAY
         binding.calendar.setOnDateChangeListener { _, year, month, dayOfMonth ->
             val formattedMonth = String.format("%02d", month + 1) // إضافة 1 وجعلها بصيغة رقمين
