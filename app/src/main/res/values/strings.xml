@@ -462,7 +462,7 @@
     <string name="category_name">Category Name</string>
     <string name="search_by_specility">Search by speciality</string>
     <string name="upcoming_bookings">Upcoming Bookings</string>
-    <string name="PatientInfo">Patient Info</string>
+    <string name="PatientInfo">Delegatee Patient Info</string>
     <string name="full_name">Full Name</string>
     <string name="InsuranceCompanies">Insurance Companies</string>
     <string name="BookingDetails">Booking Details</string>
@@ -603,4 +603,6 @@ Welcome to Salamtak mobile clinics service. You can now get a premium service in
     <string name="doctors_reviews_rate">Doctors reviews (Rate)</string>
     <string name="support_17143">Support 17143</string>
     <string name="choose_date">Choose Date</string>
+    <string name="thank_you">Thank you</string>
+    <string name="booking_successful">Your booking has been confirmed successfully</string>
 </resources>
