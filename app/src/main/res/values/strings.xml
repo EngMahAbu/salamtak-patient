@@ -655,4 +655,6 @@ Welcome to Salamtak mobile clinics service. You can now get a premium service in
     <string name="queue_tracking">Queue Tracking</string>
     <string name="please_fill_information">Please fill in the following information</string>
     <string name="more_details">More Details</string>
+    <string name="no_queue_ticket">No Queue Ticket</string>
+    <string name="no_queue_ticket_message">We couldn\'t find a queue ticket for this appointment.</string>
 </resources>

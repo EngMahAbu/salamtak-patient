@@ -277,7 +277,7 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
                             DateUtils.setToken("")
                             findNavController().navigate(R.id.homeFragment)
                         }else {
-                        val appointmentId = it.data?.data?.appointmentId ?: 0
+                        val appointmentId = it.data?.data?.appointmentId ?: it.data?.rootAppointmentId ?: 0
                         val doctorId = it.data?.data?.doctorDto?.id ?: args.confirmappointments?.doctorId ?: 0
                         val action =
                             AppointmentDetailsFragmentDirections.actionAppointmentDetailsFragmentToConfirmedFragment(

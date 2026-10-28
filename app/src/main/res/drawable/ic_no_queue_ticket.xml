@@ -1,0 +1,74 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="140dp"
+    android:height="140dp"
+    android:viewportWidth="140"
+    android:viewportHeight="140">
+
+    <!-- Calendar Shadow / Base Back Layer -->
+    <path
+        android:fillColor="#E2E8F0"
+        android:pathData="M38,28 L104,28 C108,28 111,31 110,35 L101,98 C100.5,101.5 97.5,104 94,104 L28,104 C24,104 21,101 21.5,97 L29,34 C29.5,30.5 32.5,28 36,28 Z" />
+
+    <!-- Calendar Main Page (Light Gray/White) -->
+    <path
+        android:fillColor="#F1F5F9"
+        android:pathData="M37,26 L103,26 C107,26 110,29 109.5,33 L101,96 C100.5,99.5 97.5,102 94,102 L28,102 C24,102 21,99 21.5,95 L29,32 C29.5,28.5 32.5,26 36,26 Z" />
+
+    <!-- Calendar Dark Navy Top Header -->
+    <path
+        android:fillColor="#232B5C"
+        android:pathData="M37,26 L103,26 C106.5,26 109.5,28.5 109,32 L106.5,48 L26.5,48 L29,32 C29.5,28.5 32.5,26 36,26 Z" />
+
+    <!-- Binder Ring Left -->
+    <path
+        android:fillColor="#232B5C"
+        android:pathData="M43,18 C41,18 39,20 39,22 L39,30 C39,32 41,34 43,34 C45,34 47,32 47,30 L47,22 C47,20 45,18 43,18 Z" />
+
+    <!-- Binder Ring Right -->
+    <path
+        android:fillColor="#232B5C"
+        android:pathData="M95,18 C93,18 91,20 91,22 L91,30 C91,32 93,34 95,34 C97,34 99,32 99,30 L99,22 C99,20 97,18 95,18 Z" />
+
+    <!-- Calendar Dots Row 1 -->
+    <!-- Dot 1 -->
+    <path
+        android:fillColor="#232B5C"
+        android:pathData="M46,62 A 5,5 0 1,1 36,62 A 5,5 0 1,1 46,62" />
+
+    <!-- Dot 2 -->
+    <path
+        android:fillColor="#232B5C"
+        android:pathData="M69,62 A 5,5 0 1,1 59,62 A 5,5 0 1,1 69,62" />
+
+    <!-- Dot 3 -->
+    <path
+        android:fillColor="#232B5C"
+        android:pathData="M92,62 A 5,5 0 1,1 82,62 A 5,5 0 1,1 92,62" />
+
+    <!-- Calendar Dots Row 2 -->
+    <!-- Dot 4 -->
+    <path
+        android:fillColor="#232B5C"
+        android:pathData="M47,82 A 5,5 0 1,1 37,82 A 5,5 0 1,1 47,82" />
+
+    <!-- Dot 5 -->
+    <path
+        android:fillColor="#232B5C"
+        android:pathData="M70,82 A 5,5 0 1,1 60,82 A 5,5 0 1,1 70,82" />
+
+    <!-- Dot 6 -->
+    <path
+        android:fillColor="#232B5C"
+        android:pathData="M93,82 A 5,5 0 1,1 83,82 A 5,5 0 1,1 93,82" />
+
+    <!-- Teal Circular Badge -->
+    <path
+        android:fillColor="#00D2CB"
+        android:pathData="M118,92 A 18,18 0 1,1 82,92 A 18,18 0 1,1 118,92" />
+
+    <!-- Plus Sign in Badge -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M98,82 L102,82 L102,90 L110,90 L110,94 L102,94 L102,102 L98,102 L98,94 L90,94 L90,90 L98,90 Z" />
+
+</vector>

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.gson.Gson
 import com.korashiGroup.salamtakPatient.model.queue.PatientQueueStatusResponse
 import com.korashiGroup.salamtakPatient.repository.QueueRepository
 import com.korashiGroup.salamtakPatient.utils.Resource
@@ -39,6 +40,18 @@ class QueueViewModel @Inject constructor(
                 return Resource.sucess(body)
             }
         }
-        return Resource.Error(response.message() ?: "Error fetching queue status")
+        val errorMsg = try {
+            val errorBody = response.errorBody()?.string()
+            if (!errorBody.isNullOrBlank()) {
+                val parsed = Gson().fromJson(errorBody, PatientQueueStatusResponse::class.java)
+                parsed?.message ?: ""
+            } else {
+                ""
+            }
+        } catch (e: Exception) {
+            ""
+        }
+        val finalMsg = if (errorMsg.isNotBlank()) errorMsg else (response.message() ?: "")
+        return Resource.Error(if (finalMsg.isNotBlank()) finalMsg else "No queue ticket found")
     }
 }
