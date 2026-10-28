@@ -98,16 +98,12 @@ class ImageServicesViewModel @Inject constructor(
 
                 val itemInClinic = inClinicItem?.copy(
                     image_onboarding = R.drawable.m_book,
-                    textService = "In Clinic Booking",
-                    textServiceArabic = "حجز عيادة",
-                    image = null
+                    textService = "In Clinic Booking"
                 ) ?: ImageServices(R.drawable.m_book, "In Clinic Booking", "حجز عيادة", Id = 1)
 
                 val itemHomeVisit = homeVisitItem?.copy(
                     image_onboarding = R.drawable.m_home,
-                    textService = "Home Visit",
-                    textServiceArabic = "زيارة منزلية",
-                    image = null
+                    textService = "Home Visit"
                 ) ?: ImageServices(R.drawable.m_home, "Home Visit", "زيارة منزلية", Id = 2)
 
                 val itemPolyClinic = ImageServices(
@@ -120,15 +116,12 @@ class ImageServicesViewModel @Inject constructor(
                 val itemVideoCall = videoCallItem?.copy(
                     image_onboarding = R.drawable.m_video,
                     textService = "Video Call",
-                    textServiceArabic = "مكالمة فيديو",
-                    image = null
+                    textServiceArabic = "مكالمة فيديو"
                 ) ?: ImageServices(R.drawable.m_video, "Video Call", "مكالمة فيديو", Id = 8)
 
                 val itemCall = callItem?.copy(
                     image_onboarding = R.drawable.m_call,
-                    textService = "Call",
-                    textServiceArabic = "استشارة هاتفية",
-                    image = null
+                    textService = "Call"
                 ) ?: ImageServices(R.drawable.m_call, "Call", "استشارة هاتفية", Id = 9)
 
                 val itemOffers = ImageServices(
