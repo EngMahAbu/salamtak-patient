@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="14dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="14dp"
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="2dp"
+    app:cardUseCompatPadding="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <!-- Hospital Logo / Avatar -->
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_hospital_logo"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:src="@drawable/ic_hospital_default_logo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.MaterialComponents.LargeComponent" />
+
+        <!-- Hospital Name -->
+        <TextView
+            android:id="@+id/tv_hospital_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:fontFamily="@font/sf_pro_display_semibold"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_hospital_logo"
+            app:layout_constraintTop_toTopOf="@+id/iv_hospital_logo"
+            tools:text="Nile Hospital" />
+
+        <!-- Location Pin + Text -->
+        <TextView
+            android:id="@+id/tv_hospital_location"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="4dp"
+            android:drawableStart="@drawable/svg_location"
+            android:drawablePadding="6dp"
+            android:fontFamily="@font/inter_regular"
+            android:textColor="#8E8E93"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_hospital_logo"
+            app:layout_constraintTop_toBottomOf="@+id/tv_hospital_name"
+            tools:text="Cairo - Ain Shams" />
+
+        <!-- Outpatient Operating Hours Title -->
+        <TextView
+            android:id="@+id/tv_operating_hours_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:fontFamily="@font/sf_pro_display_semibold"
+            android:text="@string/outpatient_clinics_operating_hours"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_hospital_logo" />
+
+        <!-- Saturday - Thursday row -->
+        <TextView
+            android:id="@+id/tv_sat_thu_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/inter_regular"
+            android:text="@string/saturday_thursday_hours"
+            android:textColor="#8E8E93"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/tv_sat_thu_time"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_operating_hours_title" />
+
+        <TextView
+            android:id="@+id/tv_sat_thu_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/sf_pro_display_semibold"
+            android:text="@string/default_hours_sat_thu"
+            android:textColor="@color/color_primary"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_sat_thu_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_sat_thu_label" />
+
+        <!-- Friday row -->
+        <TextView
+            android:id="@+id/tv_friday_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:fontFamily="@font/inter_regular"
+            android:text="@string/friday_hours"
+            android:textColor="#8E8E93"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/tv_friday_time"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_sat_thu_label" />
+
+        <TextView
+            android:id="@+id/tv_friday_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/sf_pro_display_semibold"
+            android:text="@string/default_hours_fri"
+            android:textColor="@color/color_primary"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_friday_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_friday_label" />
+
+        <!-- Other Branches Title -->
+        <TextView
+            android:id="@+id/tv_other_branches_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/sf_pro_display_semibold"
+            android:text="@string/other_branches_label"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_friday_label" />
+
+        <!-- Other Branches Value (with building icon) -->
+        <TextView
+            android:id="@+id/tv_other_branches_val"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:drawableStart="@drawable/ic_hospital_building"
+            android:drawablePadding="8dp"
+            android:fontFamily="@font/inter_regular"
+            android:text="@string/not_available_na"
+            android:textColor="#8E8E93"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_other_branches_title" />
+
+        <!-- Buttons Container -->
+        <LinearLayout
+            android:id="@+id/layout_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/tv_other_branches_val">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_book_now"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_chooselang_button"
+                android:fontFamily="@font/sf_pro_display_semibold"
+                android:text="@string/book_now"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_about_hospital"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_hospital_card_outline_btn"
+                android:fontFamily="@font/sf_pro_display_semibold"
+                android:text="@string/about_hospital_btn"
+                android:textAllCaps="false"
+                android:textColor="@color/color_primary"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

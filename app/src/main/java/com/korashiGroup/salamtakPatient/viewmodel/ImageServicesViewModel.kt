@@ -5,10 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
+import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.model.ImageServices
 import com.korashiGroup.salamtakPatient.model.MedicalExaminationResponse
 import com.korashiGroup.salamtakPatient.repository.ImageServicesRepository
 import com.korashiGroup.salamtakPatient.repository.RegisterRepositry
+import com.korashiGroup.salamtakPatient.utils.DateUtils.context
 import com.korashiGroup.salamtakPatient.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -26,6 +28,7 @@ class ImageServicesViewModel @Inject constructor(
     private val repository2: RegisterRepositry
 ) : ViewModel() {
 
+    // Changed to Resource<List<ImageServices>> so both API items and static items fit together
     val imageServicesList = MutableLiveData<Resource<List<ImageServices>>>()
 
     private val _imageMedicalServicesList = MutableStateFlow<List<ImageServices>>(emptyList())
@@ -52,24 +55,59 @@ class ImageServicesViewModel @Inject constructor(
     private fun handleImageServicesResponse(it: Response<MedicalExaminationResponse>): Resource<List<ImageServices>> {
         if (it.isSuccessful) {
             it.body()?.let { responseBody ->
-                val sortedList = responseBody.data
-                    ?.filterNotNull()
-                    ?.filter { examination -> examination.inactive != true }
-                    ?.distinctBy { examination -> examination.id }
-                    ?.map { examination ->
-                        ImageServices(
-                            image_onboarding = 0,
-                            textService = examination.name ?: "",
-                            textServiceArabic = examination.name ?: "",
-                            color = 0,
-                            Id = examination.id,
-                            image = examination.image
-                        )
-                    }
-                    ?.sortedBy { getServiceCategory(it) }
-                    ?: emptyList()
 
-                return Resource.sucess(sortedList)
+                // 1. Map API MedicalExamination items into ImageServices objects
+                val apiMappedList = responseBody.data?.filterNotNull()?.map { examination ->
+                    ImageServices(
+                        image_onboarding = 0, // Set to 0 since we are using a remote URL string
+                        textService = examination.name ?: "",
+                        textServiceArabic = examination.name ?: "", // Fallback or use Arabic field if added later
+                        color = 0,
+                        Id = examination.id,
+                        image = examination.image // Pass the image URL string here from the API
+                    )
+                } ?: emptyList()
+
+                // 2. Find specific API items to arrange in 2x3 grid order:
+                // Row 1: In Clinic Booking | Home Visit | Poly Clinic
+                // Row 2: Video Call | Call | Offers
+                val inClinicItem = apiMappedList.find { it.Id == 1 }
+                    ?: apiMappedList.find { it.textService.contains("Clinic", ignoreCase = true) || it.textServiceArabic?.contains("عيادة") == true }
+                val homeVisitItem = apiMappedList.find { it.Id == 2 || it.Id == 10 }
+                    ?: apiMappedList.find { it.textService.contains("Home", ignoreCase = true) || it.textServiceArabic?.contains("منزل") == true }
+                val videoCallItem = apiMappedList.find { it.Id == 8 || it.Id == 3 || it.Id == 4 }
+                    ?: apiMappedList.find { it.textService.contains("Video", ignoreCase = true) || it.textServiceArabic?.contains("فيديو") == true }
+                val callItem = apiMappedList.find { it.Id == 9 || it.Id == 5 }
+                    ?: apiMappedList.find { it.textService.contains("Call", ignoreCase = true) || it.textServiceArabic?.contains("مكالمة") == true || it.textServiceArabic?.contains("هاتف") == true }
+
+                val itemInClinic = inClinicItem?.copy(image_onboarding = R.drawable.m_book, textService = "In Clinic Booking")
+                    ?: ImageServices(R.drawable.m_book, "In Clinic Booking", "حجز عيادة", Id = 1)
+
+                val itemHomeVisit = homeVisitItem?.copy(image_onboarding = R.drawable.m_home, textService = "Home Visit")
+                    ?: ImageServices(R.drawable.m_home, "Home Visit", "زيارة منزلية", Id = 2)
+
+                val itemPolyClinic = ImageServices(R.drawable.polyclinic_image_new, "PolyClinic", "مراكز طبية", Id = 6)
+
+                val itemVideoCall = videoCallItem?.copy(image_onboarding = R.drawable.m_video, textService = "Video Call", textServiceArabic = "مكالمة فيديو")
+                    ?: ImageServices(R.drawable.m_video, "Video Call", "مكالمة فيديو", Id = 8)
+
+                val itemCall = callItem?.copy(image_onboarding = R.drawable.m_call, textService = "Call")
+                    ?: ImageServices(R.drawable.m_call, "Call", "استشارة هاتفية", Id = 9)
+
+                val itemOffers = ImageServices(R.drawable.offers_image_new, context.getString(R.string.offers), "العروض", Id = 7)
+                val itemHospitals = ImageServices(R.drawable.ic_hospital_service, context.getString(R.string.hospitals), "مستشفيات", Id = 11)
+
+                val combinedList = listOf(
+                    itemInClinic,
+                    itemHomeVisit,
+                    itemPolyClinic,
+                    itemVideoCall,
+                    itemCall,
+                    itemOffers,
+                    itemHospitals
+                )
+
+                return Resource.sucess(combinedList)
             }
         }
 
@@ -86,35 +124,6 @@ class ImageServicesViewModel @Inject constructor(
         }
 
         return Resource.Error(errorMessage ?: "Unknown Error")
-    }
-
-    private fun getServiceCategory(service: ImageServices): Int {
-        val id = service.Id
-        val nameEn = service.textService.lowercase()
-        val nameAr = service.textServiceArabic?.lowercase() ?: ""
-
-        return when {
-            // 1. In Clinic Booking
-            (nameEn.contains("clinic") && !nameEn.contains("poly")) || (nameAr.contains("عياد") && !nameAr.contains("مراكز") && !nameAr.contains("مركز")) || id == 1 -> 1
-
-            // 2. Home Visit
-            nameEn.contains("home") || nameAr.contains("منزل") || id == 2 || id == 10 -> 2
-
-            // 3. PolyClinic
-            nameEn.contains("poly") || nameAr.contains("مراكز") || nameAr.contains("مركز") || nameAr.contains("بولي") || id == 6 -> 3
-
-            // 4. Video Call
-            nameEn.contains("video") || nameAr.contains("فيديو") || id == 8 -> 4
-
-            // 5. Call (voice call only)
-            ((nameEn.contains("call") || nameAr.contains("صوت") || nameAr.contains("مكالمة") || nameAr.contains("هاتف"))
-                    && !nameEn.contains("video") && !nameAr.contains("فيديو")) || id == 9 || id == 5 -> 5
-
-            // 6. Offers
-            nameEn.contains("offer") || nameAr.contains("عروض") || nameAr.contains("عرض") || id == 7 -> 6
-
-            else -> 100 + (id ?: 0)
-        }
     }
 
     private fun fetchMedicalServices() {

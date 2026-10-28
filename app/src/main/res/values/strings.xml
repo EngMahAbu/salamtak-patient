@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Salamtak|سلامتك</string>
     <!-- TODO: Remove or change this placeholder text -->
@@ -605,4 +605,34 @@ Welcome to Salamtak mobile clinics service. You can now get a premium service in
     <string name="choose_date">Choose Date</string>
     <string name="thank_you">Thank you</string>
     <string name="booking_successful">Your booking has been confirmed successfully</string>
+    <!-- Hospital Service Strings -->
+    <string name="choose_city_title">Choose City</string>
+    <string name="choose_area_title">Choose Area</string>
+    <string name="choose_speciality_title">Choose Speciality</string>
+    <string name="choose_sub_speciality_title">Choose Sub Speciality</string>
+    <string name="search_by_hospital_name">Search By Hospital Name</string>
+    <string name="search_by_hospital_doctor_name">Search by Hospital Doctor Name</string>
+    <string name="please_select_a_speciality">Please Select a Speciality.</string>
+    <string name="please_select_city_first">Please Select a City.</string>
+    <string name="please_select_area_first">Please Select an Area.</string>
+    <string name="outpatient_clinics_operating_hours">Outpatient Clinics Operating Hours :</string>
+    <string name="saturday_thursday_hours">Saturday - Thursday</string>
+    <string name="friday_hours">Friday</string>
+    <string name="default_hours_sat_thu">9:00 AM - 10:00 PM</string>
+    <string name="default_hours_fri">2:00 PM - 10:00 PM</string>
+    <string name="other_branches_label">Other Branches :</string>
+    <string name="not_available_na">Not Available (N/A)</string>
+    <string name="about_hospital_btn">About Hospital</string>
+    <string name="background_section">Background</string>
+    <string name="specialties_sub_specialties_section">Specialties / Sub Specialties</string>
+    <string name="hospital_features_section">Hospital Features</string>
+    <string name="medical_services_section">Medical Services</string>
+    <string name="other_hospital_branches_section">Other Hospital Branches</string>
+    <string name="other_specialties_section">Other Specialties</string>
+    <string name="no_doctors_found_in_clinic">No doctors found in this clinic</string>
+    <string name="hospitals_count_format">%1$d Hospitals</string>
+    <string name="doctors_count_format">%1$d Doctors</string>
+    <string name="more_dots">More...</string>
+    <string name="less_dots">Less...</string>
+    <string name="or_divider">OR</string>
 </resources>

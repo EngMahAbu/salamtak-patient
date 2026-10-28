@@ -1,5 +1,7 @@
 package com.korashiGroup.salamtakPatient.api
 
+import com.korashiGroup.salamtakPatient.model.hospital.HospitalDoctorResponse
+import com.korashiGroup.salamtakPatient.model.hospital.HospitalResponse
 import com.korashiGroup.salamtakPatient.fragment.polyclinic.model.PolyClinicResponse
 import com.korashiGroup.salamtakPatient.fragment.polyclinic.model.PolyClinicsDoctorsResponse
 import com.korashiGroup.salamtakPatient.model.*
@@ -586,4 +588,20 @@ interface ApiService {
         @Path("culture") culture: String
     ): Response<TipOfDayResponse>
 
+    @GET("{culture}/PatientHospital/GetAllHospitals")
+    suspend fun getAllHospitals(
+        @Path("culture") culture: String,
+        @Query("cityId") cityId: Int?,
+        @Query("areaId") areaId: Int?,
+        @Query("specialistId") specialistId: Int?,
+        @Query("searchByName") searchByName: String? = null
+    ): Response<HospitalResponse>
+
+    @GET("{culture}/PatientHospital/GetHospitalDoctors")
+    suspend fun getHospitalDoctors(
+        @Path("culture") culture: String,
+        @Query("hospitalId") hospitalId: Int?,
+        @Query("specialistId") specialistId: Int?,
+        @Query("searchByDoctorName") searchByDoctorName: String? = null
+    ): Response<HospitalDoctorResponse>
 }

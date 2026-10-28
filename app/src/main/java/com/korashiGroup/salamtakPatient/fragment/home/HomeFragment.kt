@@ -612,6 +612,9 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
             10 -> {
                 findNavController().navigate(R.id.homeCareFragment)
             }
+            11 -> {
+                findNavController().navigate(R.id.hospitalSearchFilterFragment)
+            }
 
             else -> {
                 val bundle = Bundle().apply {

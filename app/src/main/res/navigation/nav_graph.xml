@@ -206,6 +206,9 @@
                 android:id="@+id/action_homeFragment_to_doctorNotificationFragment"
                 app:destination="@id/doctorNotificationFragment" />
         <action
+                android:id="@+id/action_homeFragment_to_hospitalSearchFilterFragment"
+                app:destination="@id/hospitalSearchFilterFragment" />
+        <action
                 android:id="@+id/action_homeFragment_to_specialistDoctorsFragment"
                 app:destination="@id/specialistDoctorsFragment" />
         <action
@@ -817,5 +820,95 @@
     </fragment>
 
 
+
+    <fragment
+        android:id="@+id/hospitalSearchFilterFragment"
+        android:name="com.korashiGroup.salamtakPatient.fragment.hospital.HospitalSearchFilterFragment"
+        android:label="HospitalSearchFilterFragment"
+        tools:layout="@layout/fragment_hospital_search_filter">
+        <action
+            android:id="@+id/action_hospitalSearchFilterFragment_to_dialogBottomSheetFragment"
+            app:destination="@id/dialogBottomSheetFragment" />
+        <action
+            android:id="@+id/action_hospitalSearchFilterFragment_to_hospitalResultsFragment"
+            app:destination="@id/hospitalResultsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/hospitalResultsFragment"
+        android:name="com.korashiGroup.salamtakPatient.fragment.hospital.HospitalResultsFragment"
+        android:label="HospitalResultsFragment"
+        tools:layout="@layout/fragment_hospital_results">
+        <argument
+            android:name="cityId"
+            app:argType="integer" />
+        <argument
+            android:name="cityName"
+            app:argType="string" />
+        <argument
+            android:name="areaId"
+            app:argType="integer" />
+        <argument
+            android:name="areaName"
+            app:argType="string" />
+        <argument
+            android:name="specialistId"
+            app:argType="integer" />
+        <argument
+            android:name="specialistName"
+            app:argType="string" />
+        <argument
+            android:name="subSpecialistId"
+            android:defaultValue="0"
+            app:argType="integer" />
+        <argument
+            android:name="hospitalName"
+            android:defaultValue=""
+            app:argType="string" />
+        <argument
+            android:name="doctorName"
+            android:defaultValue=""
+            app:argType="string" />
+        <action
+            android:id="@+id/action_hospitalResultsFragment_to_dialogBottomSheetFragment"
+            app:destination="@id/dialogBottomSheetFragment" />
+        <action
+            android:id="@+id/action_hospitalResultsFragment_to_hospitalDoctorsFragment"
+            app:destination="@id/hospitalDoctorsFragment" />
+        <action
+            android:id="@+id/action_hospitalResultsFragment_to_aboutHospitalFragment"
+            app:destination="@id/aboutHospitalFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/aboutHospitalFragment"
+        android:name="com.korashiGroup.salamtakPatient.fragment.hospital.AboutHospitalFragment"
+        android:label="AboutHospitalFragment"
+        tools:layout="@layout/fragment_about_hospital">
+        <argument
+            android:name="hospital"
+            app:argType="com.korashiGroup.salamtakPatient.model.hospital.HospitalItem" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/hospitalDoctorsFragment"
+        android:name="com.korashiGroup.salamtakPatient.fragment.hospital.HospitalDoctorsFragment"
+        android:label="HospitalDoctorsFragment"
+        tools:layout="@layout/fragment_hospital_doctors">
+        <argument
+            android:name="hospitalId"
+            app:argType="integer" />
+        <argument
+            android:name="hospitalName"
+            app:argType="string" />
+        <argument
+            android:name="specialistId"
+            app:argType="integer" />
+        <argument
+            android:name="doctorName"
+            android:defaultValue=""
+            app:argType="string" />
+        <action android:id="@+id/action_hospitalDoctorsFragment_to_bookingAppointmentFragment" app:destination="@id/bookingAppointmentFragment" />
+    </fragment>
 
 </navigation>
