@@ -97,7 +97,8 @@ class TrackQueueFragment : Fragment() {
                     val msg = resource.message?.trim()
                     if (!msg.isNullOrEmpty() &&
                         !msg.equals("No queue ticket found", ignoreCase = true) &&
-                        !msg.equals("Not Found", ignoreCase = true)
+                        !msg.equals("Not Found", ignoreCase = true) &&
+                        !msg.equals("No data to display", ignoreCase = true)
                     ) {
                         Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
                     }

@@ -25,7 +25,27 @@ class QueueViewModel @Inject constructor(
         _queueStatus.value = Resource.Loading()
         viewModelScope.launch {
             try {
-                val response = repository.getMyQueueStatus(culture, appointmentId)
+                var response = repository.getMyQueueStatus(culture, appointmentId)
+                val body = response.body()
+                val needsTicketCreation = !response.isSuccessful || body?.data == null || (body.data.ticketPosition == null && body.data.statusName.isNullOrBlank())
+
+                if (needsTicketCreation) {
+                    try {
+                        val createTicketResponse = repository.createTicketFromAppointment(culture, appointmentId)
+                        if (createTicketResponse.isSuccessful && createTicketResponse.body()?.data != null) {
+                            val refreshed = repository.getMyQueueStatus(culture, appointmentId)
+                            if (refreshed.isSuccessful && refreshed.body()?.data != null) {
+                                response = refreshed
+                            } else if (createTicketResponse.body() != null) {
+                                _queueStatus.value = Resource.sucess(createTicketResponse.body()!!)
+                                return@launch
+                            }
+                        }
+                    } catch (_: Exception) {
+                        // Ignore create ticket error and proceed with original getMyQueueStatus handling
+                    }
+                }
+
                 _queueStatus.value = handleResponse(response)
             } catch (e: Exception) {
                 _queueStatus.value = Resource.Error(e.localizedMessage ?: "An unexpected error occurred")
