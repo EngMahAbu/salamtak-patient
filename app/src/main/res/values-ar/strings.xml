@@ -633,4 +633,7 @@
     <string name="queue_status_completed">مكتمل</string>
     <string name="queue_status_cancelled">ملغي</string>
     <string name="ticket_number_format">#%1$d</string>
+    <string name="queue_tracking">تتبع الدور</string>
+    <string name="please_fill_information">يرجى ملء البيانات التالية</string>
+    <string name="more_details">تفاصيل إضافية</string>
 </resources>
