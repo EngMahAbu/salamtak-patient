@@ -453,4 +453,11 @@ class MyScheduleFragment : Fragment(), MyScheduleAdapter.ActionSchedule,
             Toast.makeText(requireContext(), "Invalid clinic or doctor ID", Toast.LENGTH_SHORT).show()
         }
     }
+
+    override fun onTrackQueueClicked(appointmentId: Int, doctorName: String) {
+        val action = MyScheduleFragmentDirections.actionMyScheduleFragmentToTrackQueueFragment(
+            appointmentId
+        ).setDoctorName(doctorName)
+        findNavController().navigate(action)
+    }
 }

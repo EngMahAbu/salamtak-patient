@@ -268,6 +268,9 @@
         <action
                 android:id="@+id/action_myScheduleFragment_to_bookAppointmentFragment"
                 app:destination="@id/bookAppointmentFragment" />
+            <action
+            android:id="@+id/action_myScheduleFragment_to_trackQueueFragment"
+            app:destination="@id/trackQueueFragment" />
     </fragment>
     <fragment
             android:id="@+id/moreFragment"
@@ -911,4 +914,17 @@
         <action android:id="@+id/action_hospitalDoctorsFragment_to_bookingAppointmentFragment" app:destination="@id/bookingAppointmentFragment" />
     </fragment>
 
+    <fragment
+        android:id="@+id/trackQueueFragment"
+        android:name="com.korashiGroup.salamtakPatient.fragment.queue.TrackQueueFragment"
+        android:label="TrackQueueFragment"
+        tools:layout="@layout/fragment_track_queue">
+        <argument
+            android:name="appointmentId"
+            app:argType="integer" />
+        <argument
+            android:name="doctorName"
+            android:defaultValue=""
+            app:argType="string" />
+    </fragment>
 </navigation>

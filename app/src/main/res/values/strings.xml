@@ -638,4 +638,18 @@ Welcome to Salamtak mobile clinics service. You can now get a premium service in
     <string name="more_dots">More...</string>
     <string name="less_dots">Less...</string>
     <string name="or_divider">OR</string>
+    <!-- Queue Strings -->
+    <string name="track_queue">Track Queue</string>
+    <string name="my_queue">My Queue</string>
+    <string name="refresh">Refresh</string>
+    <string name="your_ticket_number">Your Ticket Number</string>
+    <string name="currently_serving">Currently Serving</string>
+    <string name="patients_ahead_of_you">Patients Ahead of You</string>
+    <string name="estimated_waiting_time">Estimated Waiting Time</string>
+    <string name="minutes_format">%1$d mins</string>
+    <string name="queue_status_waiting">Waiting</string>
+    <string name="queue_status_serving">Serving</string>
+    <string name="queue_status_completed">Completed</string>
+    <string name="queue_status_cancelled">Cancelled</string>
+    <string name="ticket_number_format">#%1$d</string>
 </resources>

@@ -118,6 +118,20 @@ class MyScheduleAdapter(private val schedule: ActionSchedule) :
                 }
             }
         }
+        // Track Queue button
+        val isClinicBooking = services.medicalExaminationTypeId == 1
+        val isUpcoming = services.IsCompleted != true && services.isCancel != true
+        if (isUpcoming && isClinicBooking) {
+            holder.binding.btnTrackQueue.visibility = View.VISIBLE
+            holder.binding.btnTrackQueue.setOnClickListener {
+                services.appointmentId?.let { id ->
+                    schedule.onTrackQueueClicked(id, services.doctorName ?: "")
+                }
+            }
+        } else {
+            holder.binding.btnTrackQueue.visibility = View.GONE
+        }
+
         val isCompletedOrCanceled = services.IsCompleted == true || services.isCancel == true
         if (isCompletedOrCanceled) {
             holder.binding.layoutLocation.visibility = View.GONE
@@ -205,6 +219,7 @@ class MyScheduleAdapter(private val schedule: ActionSchedule) :
         fun onLocationClicked(lat:String,long:String)
         fun onSupportClicked()
         fun onBookAgainClicked(clinicId: Int, doctorId: Int)
+        fun onTrackQueueClicked(appointmentId: Int, doctorName: String)
     }
 
     private fun DateParsing(dateParsing:String):String{

@@ -619,4 +619,18 @@
     <string name="more_dots">المزيد...</string>
     <string name="less_dots">أقل...</string>
     <string name="or_divider">أو</string>
+    <!-- Queue Strings Arabic -->
+    <string name="track_queue">تتبع الدور</string>
+    <string name="my_queue">دوري</string>
+    <string name="refresh">تحديث</string>
+    <string name="your_ticket_number">رقم التذكرة الخاص بك</string>
+    <string name="currently_serving">يتم خدمته حالياً</string>
+    <string name="patients_ahead_of_you">المرضى أمامك</string>
+    <string name="estimated_waiting_time">الوقت المتوقع للانتظار</string>
+    <string name="minutes_format">%1$d دقيقة</string>
+    <string name="queue_status_waiting">في الانتظار</string>
+    <string name="queue_status_serving">قيد الكشف</string>
+    <string name="queue_status_completed">مكتمل</string>
+    <string name="queue_status_cancelled">ملغي</string>
+    <string name="ticket_number_format">#%1$d</string>
 </resources>

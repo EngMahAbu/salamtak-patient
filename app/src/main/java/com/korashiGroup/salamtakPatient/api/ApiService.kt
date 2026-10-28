@@ -1,5 +1,6 @@
 package com.korashiGroup.salamtakPatient.api
 
+import com.korashiGroup.salamtakPatient.model.queue.PatientQueueStatusResponse
 import com.korashiGroup.salamtakPatient.model.hospital.HospitalDoctorResponse
 import com.korashiGroup.salamtakPatient.model.hospital.HospitalResponse
 import com.korashiGroup.salamtakPatient.fragment.polyclinic.model.PolyClinicResponse
@@ -604,4 +605,9 @@ interface ApiService {
         @Query("specialistId") specialistId: Int?,
         @Query("searchByDoctorName") searchByDoctorName: String? = null
     ): Response<HospitalDoctorResponse>
+    @GET("{culture}/Queue/GetMyQueueStatus")
+    suspend fun getMyQueueStatus(
+        @Path("culture") culture: String,
+        @Query("patientAppointmentId") patientAppointmentId: Int
+    ): Response<PatientQueueStatusResponse>
 }

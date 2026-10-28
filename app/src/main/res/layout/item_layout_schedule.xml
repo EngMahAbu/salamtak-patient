@@ -330,23 +330,63 @@
                         app:layout_constraintBottom_toBottomOf="@+id/layout_address" />
 
                     <!-- VALUE -->
+                    <!-- VALUE -->
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tvv_address"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
+                        android:layout_marginEnd="8dp"
                         android:fontFamily="@font/sf_pro_display_semibold"
-                        android:gravity="start"
+                        android:gravity="start|center_vertical"
                         android:padding="3dp"
                         android:text="Clinic Address"
                         android:textColor="@color/blue"
                         android:textSize="14sp"
-                        app:layout_constrainedWidth="true"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toEndOf="@+id/layout_address"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/btn_track_queue"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent" />
+
+                    <!-- TRACK QUEUE BUTTON -->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/btn_track_queue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="32dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/bg_track_queue_pill"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="12dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:id="@+id/iv_track_queue"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:src="@drawable/ic_watingtime"
+                            app:tint="@color/blue"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_track_queue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="6dp"
+                            android:fontFamily="@font/sf_pro_display_semibold"
+                            android:text="@string/track_queue"
+                            android:textColor="@color/blue"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/iv_track_queue"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
