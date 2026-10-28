@@ -231,6 +231,9 @@
     <string name="add_to_favorite">Add to favorite</string>
     <string name="remove_from_favorite">Remove from favorite</string>
     <string name="about_doctor">About Doctor</string>
+    <string name="doctor_biography">Doctor Biography</string>
+    <string name="not_available">Not Available (N/A)</string>
+    <string name="clinic_gallery">Clinic Gallery</string>
     <string name="sub_spec_doctor">Sub Specialty</string>
     <string name="doctor_s_clinics">Doctor’s Clinics</string>
     <string name="book_appointment">Book Appointment</string>
@@ -239,7 +242,7 @@
     <string name="examination_type"> Type Of Booking  </string>
     <string name="date_time">Date / Time</string>
     <string name="more_actions">Actions</string>
-    <string name="edit_appointment">Edit Bookings</string>
+    <string name="edit_appointment">Reschedule Appointment</string>
     <string name="cancelappointment">Cancel Booking</string>
     <string name="are_you_sure_you_want_to_cancel_this_appointment"> Are your sure you want to cancel this appointments</string>
     <string name="are_you_sure_you_want_to_edit_this_appointment">To Edit your appointment we have to cancel this one</string>

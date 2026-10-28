@@ -285,11 +285,18 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking, Ima
                     it.data?.let { it1 -> bindAnthorMainPage(it1) }
                     getDoctorAndPolyClinksResponse = GetDoctorClinksResponse(it.data?.data,it.message)
                     sharedDataViewmodel.getDoctorClinksResponseResponse(getDoctorAndPolyClinksResponse)
-                    it.data?.data?.currentClinicDtos?.let { it1 -> bindFeatures(it1) }
+                    val currentClinicDtos = it.data?.data?.currentClinicDtos
+                    if (currentClinicDtos != null) {
+                        bindFeatures(currentClinicDtos)
+                    } else {
+                        populateTabs(binding.detailsclinicservices, null)
+                        populateTabs(binding.detailsFeatures, null)
+                        binding.detailsInsurance.text = orNotAvailable(null)
+                    }
                     if (DefaultLocaleHelper.getInstance(requireContext()).getCurrentLocale()=="en"){
-                        binding.DetailsAboutDoctor.text = it.data?.data?.doctorInfo
+                        binding.DetailsAboutDoctor.text = orNotAvailable(it.data?.data?.doctorInfo)
                     }else{
-                        binding.DetailsAboutDoctor.text = it.data?.data?.doctorInfoAr.toString()
+                        binding.DetailsAboutDoctor.text = orNotAvailable(it.data?.data?.doctorInfoAr?.toString())
                     }
 
                     val name = if (DateUtils.getLanguage() == "en") {
@@ -407,12 +414,10 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking, Ima
                     binding.Reviews.text = getString(R.string.reviews)
 
                     if (reviewsList.isNullOrEmpty()) {
-                        binding.Reviews.visibility = View.GONE
-                        binding.seeAll.visibility = View.GONE
-                        binding.rvReviews.visibility = View.GONE
+                        showReviewsNotAvailable()
                     } else {
+                        binding.tvNoReviews.visibility = View.GONE
                         binding.rvReviews.visibility = View.VISIBLE
-                        binding.Reviews.visibility = View.VISIBLE
                         binding.seeAll.visibility = View.VISIBLE
                         reveiwsAdapter.submitList(reviewsList)
                         reviewsData = response.data
@@ -420,9 +425,7 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking, Ima
                 }
                 is Resource.Error -> {
                     binding.tvReviews.text = "0 ${getString(R.string.reviews)}"
-                    binding.Reviews.visibility = View.GONE
-                    binding.seeAll.visibility = View.GONE
-                    binding.rvReviews.visibility = View.GONE
+                    showReviewsNotAvailable()
                 }
             }
         })
@@ -430,6 +433,12 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking, Ima
         sharedDataViewmodel.clinicIdAndDoctorId.observe(viewLifecycleOwner, Observer {
             patientViewModel.getDoctorReviews(it.doctorId)
         })
+    }
+
+    private fun showReviewsNotAvailable() {
+        binding.seeAll.visibility = View.GONE
+        binding.rvReviews.visibility = View.GONE
+        binding.tvNoReviews.visibility = View.VISIBLE
     }
 
     private fun showprogtessbar() {
@@ -524,6 +533,39 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking, Ima
                 binding.ivFeatures.setImageResource(R.drawable.svg_arrow_up)
             }
         }
+        binding.layoutClinicGallery.setOnClickListener {
+            if (binding.detailsClinicGallery.visibility == View.GONE) {
+                binding.detailsClinicGallery.visibility = View.VISIBLE
+                binding.ivClinicGallery.setImageResource(R.drawable.svg_arrow_down)
+                binding.detailsClinicGallery.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.expand))
+            } else {
+                binding.detailsClinicGallery.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.collapse))
+                binding.detailsClinicGallery.visibility = View.GONE
+                binding.ivClinicGallery.setImageResource(R.drawable.svg_arrow_up)
+            }
+        }
+        binding.layoutReviews.setOnClickListener {
+            if (binding.detailsReviews.visibility == View.GONE) {
+                binding.detailsReviews.visibility = View.VISIBLE
+                binding.ivReviews.setImageResource(R.drawable.svg_arrow_down)
+                binding.detailsReviews.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.expand))
+            } else {
+                binding.detailsReviews.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.collapse))
+                binding.detailsReviews.visibility = View.GONE
+                binding.ivReviews.setImageResource(R.drawable.svg_arrow_up)
+            }
+        }
+        binding.layoutOtherClinics.setOnClickListener {
+            if (binding.detailsOtherClinics.visibility == View.GONE) {
+                binding.detailsOtherClinics.visibility = View.VISIBLE
+                binding.ivOtherClinics.setImageResource(R.drawable.svg_arrow_down)
+                binding.detailsOtherClinics.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.expand))
+            } else {
+                binding.detailsOtherClinics.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.collapse))
+                binding.detailsOtherClinics.visibility = View.GONE
+                binding.ivOtherClinics.setImageResource(R.drawable.svg_arrow_up)
+            }
+        }
     }
     private fun bindFeatures(currentDtos: CurrentClinicDtos) {
 
@@ -549,25 +591,15 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking, Ima
             imageVideoAdapter.submitList(listBlogs)
         }
 
-        if (!currentDtos.services.isNullOrEmpty()) {
-            populateTabs(binding.detailsclinicservices, currentDtos.services?.toString())
-        }
-
-        if (!currentDtos.features.isNullOrEmpty()) {
-            populateTabs(binding.detailsFeatures, currentDtos.features?.toString())
-        }
-
-        if (!currentDtos.insurance.isNullOrEmpty()) {
-            binding.detailsInsurance.setText(currentDtos.insurance?.toString()?.removePrefix("[")?.removeSuffix("]"))
-        }
+        populateTabs(binding.detailsclinicservices, currentDtos.services?.toString())
+        populateTabs(binding.detailsFeatures, currentDtos.features?.toString())
+        binding.detailsInsurance.text = orNotAvailable(currentDtos.insurance?.toString()?.removePrefix("[")?.removeSuffix("]"))
 
         if (currentDtos.gallary.isNullOrEmpty()) {
-            binding.photo.visibility = View.GONE
-            binding.layoutPhoto.visibility = View.GONE
             binding.rvGallry.visibility = View.GONE
+            binding.tvNoGallery.visibility = View.VISIBLE
         } else {
-            binding.photo.visibility = View.VISIBLE
-            binding.layoutPhoto.visibility = View.VISIBLE
+            binding.tvNoGallery.visibility = View.GONE
             binding.rvGallry.visibility = View.VISIBLE
             val listBlogs = mutableListOf<Gates>()
             for (i in currentDtos.gallary.indices) {
@@ -684,15 +716,27 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking, Ima
 
     private fun populateTabs(linearLayout: android.widget.LinearLayout, itemsString: String?) {
         linearLayout.removeAllViews()
-        val str = itemsString?.removePrefix("[")?.removeSuffix("]") ?: return
-        if (str.isBlank()) return
-        str.split(",").forEach {
-            if (it.isNotBlank()) {
-                val tv = layoutInflater.inflate(R.layout.item_doctor_profile_tab, linearLayout, false) as android.widget.TextView
-                tv.text = it.trim()
-                linearLayout.addView(tv)
-            }
+        val items = itemsString?.removePrefix("[")?.removeSuffix("]")
+            ?.split(",")
+            ?.map { it.trim() }
+            ?.filter { it.isNotBlank() && !it.equals("null", ignoreCase = true) }
+            .orEmpty()
+        if (items.isEmpty()) {
+            val tv = layoutInflater.inflate(R.layout.item_doctor_profile_tab, linearLayout, false) as android.widget.TextView
+            tv.background = null
+            tv.text = getString(R.string.not_available)
+            linearLayout.addView(tv)
+            return
         }
+        items.forEach {
+            val tv = layoutInflater.inflate(R.layout.item_doctor_profile_tab, linearLayout, false) as android.widget.TextView
+            tv.text = it
+            linearLayout.addView(tv)
+        }
+    }
+
+    private fun orNotAvailable(value: String?): String {
+        return if (value.isNullOrBlank() || value.equals("null", ignoreCase = true)) getString(R.string.not_available) else value
     }
 
 }

@@ -409,7 +409,7 @@
                             android:layout_marginEnd="10dp"
                             android:fontFamily="@font/sf_pro_display_semibold"
                             android:gravity="start"
-                            android:text="@string/about_doctor"
+                            android:text="@string/doctor_biography"
                             android:textColor="@color/black"
                             android:textSize="15sp"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -724,47 +724,98 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/photo"
-                    android:layout_width="0dp"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_Clinic_Gallery"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/avenirltstd_black"
-                    android:gravity="start"
-                    android:padding="2dp"
-                    android:text="@string/photos"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
-                    android:visibility="gone"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/layout_Features" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/layout_photo"
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:layout_marginStart="2dp"
                     android:layout_marginTop="15dp"
-                    android:layout_marginEnd="2dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/more_cards_background"
+                    android:padding="5dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/photo">
+                    app:layout_constraintTop_toBottomOf="@+id/layout_Features">
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rv_gallry"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/ClinicGallery"
                         android:layout_width="match_parent"
-                        android:layout_height="150dp"
-                        android:layout_margin="10dp"
-                        android:orientation="horizontal"
-                        android:paddingBottom="10dp"
-                        android:visibility="gone"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_height="50dp"
+                        android:background="@drawable/more_background"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:listitem="@layout/item_layout_images" />
+                        app:layout_constraintTop_toTopOf="parent">
+
+
+                        <TextView
+                            android:id="@+id/tv_ClinicGallery"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:fontFamily="@font/sf_pro_display_semibold"
+                            android:gravity="start"
+                            android:text="@string/clinic_gallery"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/iv_ClinicGallery"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginEnd="10dp"
+                            android:adjustViewBounds="true"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/svg_arrow_up"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/detailsClinicGallery"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/ClinicGallery">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_gallry"
+                            android:layout_width="match_parent"
+                            android:layout_height="150dp"
+                            android:layout_marginTop="5dp"
+                            android:orientation="horizontal"
+                            android:paddingBottom="5dp"
+                            android:visibility="gone"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:listitem="@layout/item_layout_images" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_NoGallery"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="10dp"
+                            android:fontFamily="@font/sd_pro_display_regular"
+                            android:gravity="start"
+                            android:padding="3dp"
+                            android:text="@string/not_available"
+                            android:textColor="@color/text_doctor_card_color"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -782,7 +833,7 @@
                     android:textSize="15sp"
                     android:visibility="gone"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/layout_photo" />
+                    app:layout_constraintTop_toBottomOf="@+id/layout_Clinic_Gallery" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layout_showDoctorVideos"
@@ -862,112 +913,219 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/Reviews"
-                    android:layout_width="0dp"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_Reviews"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/avenirltstd_black"
-                    android:gravity="start"
-                    android:padding="2dp"
-                    android:text="@string/reviews"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
-                    android:visibility="gone"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/see_All"
-                    app:layout_constraintTop_toBottomOf="@+id/layout_showclinicVideos"
-                    app:layout_constraintBottom_toBottomOf="@+id/see_All" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/see_All"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="15dp"
                     android:layout_marginEnd="15dp"
-                    android:fontFamily="@font/avenirltstd_black"
-                    android:gravity="end"
-                    android:padding="2dp"
-                    android:text="@string/see_all"
-                    android:textColor="@color/green"
-                    android:textSize="15sp"
-                    android:visibility="gone"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/layout_showclinicVideos" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_Reviews"
-                    android:layout_width="match_parent"
-                    android:layout_height="180dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:orientation="horizontal"
-                    android:paddingBottom="10dp"
-                    android:visibility="gone"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:background="@drawable/more_cards_background"
+                    android:padding="5dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/Reviews"
-                    tools:listitem="@layout/item_layout_reviews" />
+                    app:layout_constraintTop_toBottomOf="@+id/layout_showclinicVideos">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_DoctorsClinics"
-                    android:layout_width="0dp"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/ReviewsHeader"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@drawable/more_background"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+
+                        <TextView
+                            android:id="@+id/Reviews"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:fontFamily="@font/sf_pro_display_semibold"
+                            android:gravity="start"
+                            android:text="@string/reviews"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/see_All"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:fontFamily="@font/avenirltstd_black"
+                            android:padding="4dp"
+                            android:text="@string/see_all"
+                            android:textColor="@color/green"
+                            android:textSize="14sp"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/iv_Reviews"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/iv_Reviews"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginEnd="10dp"
+                            android:adjustViewBounds="true"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/svg_arrow_up"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/detailsReviews"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/ReviewsHeader">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_Reviews"
+                            android:layout_width="match_parent"
+                            android:layout_height="180dp"
+                            android:layout_marginTop="5dp"
+                            android:orientation="horizontal"
+                            android:paddingBottom="5dp"
+                            android:visibility="gone"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:listitem="@layout/item_layout_reviews" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_NoReviews"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="10dp"
+                            android:fontFamily="@font/sd_pro_display_regular"
+                            android:gravity="start"
+                            android:padding="3dp"
+                            android:text="@string/not_available"
+                            android:textColor="@color/text_doctor_card_color"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_Other_Clinics"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
-                    android:layout_marginTop="5dp"
-                    android:fontFamily="@font/avenirltstd_black"
-                    android:gravity="start"
-                    android:padding="2dp"
-                    android:text="@string/otherclinics"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/rv_Reviews" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_clinkDoctors"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_15sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:layout_marginBottom="@dimen/_10sdp"
-                    android:paddingBottom="10dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:background="@drawable/more_cards_background"
+                    android:padding="5dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_DoctorsClinics"
-                    tools:listitem="@layout/item_layout_clinks" />
+                    app:layout_constraintTop_toBottomOf="@+id/layout_Reviews">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_NoOtherClinics"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_15sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_15sdp"
-                    android:layout_marginBottom="@dimen/_10sdp"
-                    android:gravity="start"
-                    android:text="@string/none_clinics"
-                    android:textColor="@color/gray"
-                    android:fontFamily="@font/avenirltstd_black"
-                    android:textSize="15sp"
-                    android:visibility="gone"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_DoctorsClinics" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/OtherClinics"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@drawable/more_background"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+
+                        <TextView
+                            android:id="@+id/tv_DoctorsClinics"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:fontFamily="@font/sf_pro_display_semibold"
+                            android:gravity="start"
+                            android:text="@string/otherclinics"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/iv_OtherClinics"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginEnd="10dp"
+                            android:adjustViewBounds="true"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/svg_arrow_up"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/detailsOtherClinics"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/OtherClinics">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_clinkDoctors"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:paddingBottom="5dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:listitem="@layout/item_layout_clinks" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_NoOtherClinics"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="10dp"
+                            android:fontFamily="@font/sd_pro_display_regular"
+                            android:gravity="start"
+                            android:padding="3dp"
+                            android:text="@string/not_available"
+                            android:textColor="@color/text_doctor_card_color"
+                            android:textSize="14sp"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <ProgressBar
                     android:id="@+id/progress_bar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="@+id/rv_clinkDoctors"
-                    app:layout_constraintEnd_toEndOf="@+id/rv_clinkDoctors"
-                    app:layout_constraintStart_toStartOf="@+id/rv_clinkDoctors"
-                    app:layout_constraintTop_toTopOf="@+id/rv_clinkDoctors" />
+                    app:layout_constraintBottom_toBottomOf="@+id/layout_Other_Clinics"
+                    app:layout_constraintEnd_toEndOf="@+id/layout_Other_Clinics"
+                    app:layout_constraintStart_toStartOf="@+id/layout_Other_Clinics"
+                    app:layout_constraintTop_toTopOf="@+id/layout_Other_Clinics" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
