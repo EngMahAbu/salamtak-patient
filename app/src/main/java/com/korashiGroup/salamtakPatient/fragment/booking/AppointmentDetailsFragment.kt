@@ -142,56 +142,29 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
         }
 
         binding.btnConfirm.setOnClickListener {
-            fullName=binding.etFullNameAR.text.toString()
-            phoneNumber=binding.etPhoneNumber.text.toString()
+            fullName = binding.etFullNameAR.text.toString()
+            phoneNumber = binding.etPhoneNumber.text.toString()
             val mediaclName = args.confirmappointments?.medicalExaminationId
             if (mediaclName == 3 || mediaclName == 4) {
                 startPayment()
-            } else if (mediaclName == 1 || mediaclName == 2|| mediaclName == 6) {
-
-                Patient_InsuranceID.let { it1 ->
-                    PatientAppointmentRequest(
-                        args.confirmappointments?.doctorId,
-                        args.confirmappointments?.DoctorWorkingDayTimeId,
-                        args.confirmappointments?.formattedDate,
-                        true,
-                        "",
-                        1,
-                        "",
-                        "",
-                        it1,offerid,
-                        IsBookingForAnotherPatient=isAnthorPatient,
-                        AnotherPatientFullName = fullName,
-                        AnotherPatientPhone = phoneNumber,relationId
-                    )
-                }?.let { it2 ->
-                    viewmodel.createPatientAppointment(
-                        it2
-                    )
-                }
-
             } else {
-                Patient_InsuranceID?.let { it1 ->
-                    PatientAppointmentRequest(
-                        args.confirmappointments?.doctorId,
-                        args.confirmappointments?.DoctorWorkingDayTimeId,
-                        args.confirmappointments?.formattedDate,
-                        true,
-                        "",
-                        1,
-                        "",
-                        "",
-                        it1,
-                        IsBookingForAnotherPatient=isAnthorPatient,
-                        AnotherPatientFullName = fullName,
-                        AnotherPatientPhone = phoneNumber,
-                        RelationshipTypeId=relationId
-                    )
-                }?.let { it2 ->
-                    viewmodel.createPatientAppointment(
-                        it2
-                    )
-                }
+                val patientRequest = PatientAppointmentRequest(
+                    args.confirmappointments?.doctorId,
+                    args.confirmappointments?.DoctorWorkingDayTimeId,
+                    args.confirmappointments?.formattedDate,
+                    true,
+                    "",
+                    1,
+                    "",
+                    "",
+                    Patient_InsuranceID,
+                    offerid,
+                    IsBookingForAnotherPatient = isAnthorPatient,
+                    AnotherPatientFullName = fullName,
+                    AnotherPatientPhone = phoneNumber,
+                    RelationshipTypeId = relationId
+                )
+                viewmodel.createPatientAppointment(patientRequest)
             }
         }
 
@@ -304,17 +277,13 @@ class AppointmentDetailsFragment : Fragment(), InsuranceCardAdapter.SelectInsura
                             DateUtils.setToken("")
                             findNavController().navigate(R.id.homeFragment)
                         }else {
-                            val action =
-                                it.data?.data?.appointmentId?.let { it1 ->
-                                    it.data.data.doctorDto?.id?.let { it2 ->
-                                        AppointmentDetailsFragmentDirections.actionAppointmentDetailsFragmentToConfirmedFragment(
-                                            binding.tvDate.text.toString(), it1, it2
-                                        )
-                                    }
-                                }
-                            if (action != null) {
-                                findNavController().navigate(action)
-                            }
+                        val appointmentId = it.data?.data?.appointmentId ?: it.data?.rootAppointmentId ?: 0
+                        val doctorId = it.data?.data?.doctorDto?.id ?: args.confirmappointments?.doctorId ?: 0
+                        val action =
+                            AppointmentDetailsFragmentDirections.actionAppointmentDetailsFragmentToConfirmedFragment(
+                                binding.tvDate.text.toString(), appointmentId, doctorId
+                            ).setConfirmappointments(args.confirmappointments)
+                        findNavController().navigate(action)
                         }
                     }
 

@@ -14,4 +14,11 @@ class QueueRepository @Inject constructor(
     ): Response<PatientQueueStatusResponse> {
         return apiService.getMyQueueStatus(culture, patientAppointmentId)
     }
+
+    suspend fun createTicketFromAppointment(
+        culture: String,
+        patientAppointmentId: Int
+    ): Response<PatientQueueStatusResponse> {
+        return apiService.createTicketFromAppointment(culture, patientAppointmentId)
+    }
 }

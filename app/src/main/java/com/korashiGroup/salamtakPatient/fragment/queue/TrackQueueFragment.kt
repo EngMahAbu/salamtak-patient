@@ -68,7 +68,7 @@ class TrackQueueFragment : Fragment() {
 
     private fun loadQueueStatus() {
         if (appointmentId <= 0) {
-            Toast.makeText(requireContext(), "Invalid appointment ID", Toast.LENGTH_SHORT).show()
+            showEmptyState()
             return
         }
         val culture = DefaultLocaleHelper.getInstance(requireContext()).getCurrentLocale()
@@ -84,20 +84,37 @@ class TrackQueueFragment : Fragment() {
                 is Resource.sucess -> {
                     binding.progressBar.visibility = View.GONE
                     val data = resource.data?.data
-                    if (data != null) {
+                    if (data != null && (data.ticketPosition != null && data.ticketPosition > 0 || !data.statusName.isNullOrBlank())) {
+                        showQueueCard()
                         bindQueueData(data)
+                    } else {
+                        showEmptyState()
                     }
                 }
                 is Resource.Error -> {
                     binding.progressBar.visibility = View.GONE
-                    Toast.makeText(
-                        requireContext(),
-                        resource.message ?: "Failed to load queue status",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    showEmptyState()
+                    val msg = resource.message?.trim()
+                    if (!msg.isNullOrEmpty() &&
+                        !msg.equals("No queue ticket found", ignoreCase = true) &&
+                        !msg.equals("Not Found", ignoreCase = true) &&
+                        !msg.equals("No data to display", ignoreCase = true)
+                    ) {
+                        Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }
+    }
+
+    private fun showQueueCard() {
+        binding.cardQueue.visibility = View.VISIBLE
+        binding.layoutEmptyQueue.visibility = View.GONE
+    }
+
+    private fun showEmptyState() {
+        binding.cardQueue.visibility = View.GONE
+        binding.layoutEmptyQueue.visibility = View.VISIBLE
     }
 
     private fun bindQueueData(data: PatientQueueStatusData) {

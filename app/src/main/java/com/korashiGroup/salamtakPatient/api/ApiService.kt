@@ -610,4 +610,10 @@ interface ApiService {
         @Path("culture") culture: String,
         @Query("patientAppointmentId") patientAppointmentId: Int
     ): Response<PatientQueueStatusResponse>
+
+    @POST("{culture}/Queue/CreateTicketFromAppointment")
+    suspend fun createTicketFromAppointment(
+        @Path("culture") culture: String,
+        @Query("patientAppointmentId") patientAppointmentId: Int
+    ): Response<PatientQueueStatusResponse>
 }

@@ -12,7 +12,7 @@ data class PatientQueueStatusResponse(
 )
 
 data class PatientQueueStatusData(
-    @SerializedName("TicketId", alternate = ["ticketId"])
+    @SerializedName("TicketId", alternate = ["ticketId", "Id", "id"])
     val ticketId: Int?,
     @SerializedName("TicketPosition", alternate = ["ticketPosition"])
     val ticketPosition: Int?,
