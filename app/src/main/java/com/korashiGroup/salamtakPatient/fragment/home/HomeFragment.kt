@@ -300,11 +300,12 @@ class HomeFragment : Fragment(), ServicesAdapter.Action,
     }
 
     private fun servicesRecylerview() {
-        imageServicesAdapter = ServicesAdapter(this)
+        imageServicesAdapter = ServicesAdapter(this, centerLastRow = true)
         binding.rvSalamtakServices.apply {
             layoutManager = GridLayoutManager(requireContext(), 3)
             adapter = imageServicesAdapter
-            setHasFixedSize(true)
+            isNestedScrollingEnabled = false
+            setHasFixedSize(false)
         }
 
     }
