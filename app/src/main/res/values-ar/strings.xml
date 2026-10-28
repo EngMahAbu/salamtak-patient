@@ -210,6 +210,9 @@
     <string name="add_to_favorite">أضف إلى المفضلة</string>
     <string name="remove_from_favorite">حذف من المضلة</string>
     <string name="about_doctor">معلومات عن الطبيب</string>
+    <string name="doctor_biography">السيرة الذاتية للطبيب</string>
+    <string name="not_available">غير متوفر (N/A)</string>
+    <string name="clinic_gallery">معرض صور العيادة</string>
     <string name="sub_spec_doctor">التخصص الفرعي</string>
     <string name="doctor_s_clinics">عيادات الطبيب</string>
     <string name="book_appointment">حجز موعد</string>
@@ -218,6 +221,7 @@
     <string name="examination_type">نوع الحجز</string>
     <string name="date_time">التاريخ / الوقت</string>
     <string name="more_actions">المزيد من الإجراءات</string>
+    <!-- TODO: this text was not translated like in english -->
     <string name="edit_appointment">تعديل الحجز</string>
     <string name="cancelappointment">إلغاء الحجز</string>
     <string name="are_you_sure_you_want_to_cancel_this_appointment">هل أنت متأكد أنك تريد إلغاء هذا الحجز؟</string>
