@@ -259,6 +259,7 @@
     <string name="book_with_insurance">احجز الى مريض اخر</string>
     <string name="release_date">تاريخ الافراج عنه</string>
     <string name="update">تحديث</string>
+    <string name="confirm_edit">تأكيد التعديل</string>
     <string name="salamtak_gates">بوابة سلامتك</string>
     <string name="skip_login_explore_our_features"> يمكنك تخطي تسجيل الدخول للإطلاع على خدمات سلامتك.</string>
     <string name="you_must_sign_up_to_book_your_doctor">لاستكمال خطوات الحجز</string>
@@ -438,7 +439,7 @@
     <string name="clinics_location">موقع العيادات</string>
     <string name="support">الدعم</string>
     <string name="choose_rays">اختر الأشعة</string>
-    <string name="choose_category">اختر الفئة</string>
+    <string name="choose_category">فئات العروض</string>
     <string name="search_by_name_of_category">البحث حسب اسم الفئة</string>
     <string name="category_name">اسم الفئة</string>
     <string name="search_by_specility">البحث حسب التخصص</string>

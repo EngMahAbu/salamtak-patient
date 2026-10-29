@@ -118,6 +118,18 @@ class MyScheduleAdapter(private val schedule: ActionSchedule) :
                 }
             }
         }
+        // Cancelled bookings: replace "More actions" with a direct Support button
+        if (services.isCancel == true) {
+            holder.binding.tvActions.setText(R.string.support)
+            holder.binding.ivActions.setImageResource(R.drawable.svg_support)
+            holder.binding.layoutActions.setOnClickListener {
+                schedule.onSupportClicked()
+            }
+        } else {
+            holder.binding.tvActions.setText(R.string.more_actions)
+            holder.binding.ivActions.setImageResource(R.drawable.new_category)
+        }
+
         // Track Queue button
         val isClinicBooking = services.medicalExaminationTypeId == 1
         val isUpcoming = services.IsCompleted != true && services.isCancel != true

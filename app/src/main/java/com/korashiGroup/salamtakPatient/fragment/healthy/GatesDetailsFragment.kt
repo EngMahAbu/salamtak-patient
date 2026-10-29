@@ -29,9 +29,17 @@ class GatesDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Glide.with(binding.ivDoctorProfile.context)
-            .load("https://salamtechapi.azurewebsites.net/${args.gatesdetails?.image}")
-            .into(binding.ivDoctorProfile)
+        // API returns absolute blob URLs; only prefix the host for legacy relative paths
+        val image = args.gatesdetails?.image
+        val imageUrl = if (image.isNullOrBlank() || image.startsWith("http")) image
+        else "https://salamtakapi.salamtakgroup.com/${image.removePrefix("/")}"
+        if (imageUrl.isNullOrBlank()) {
+            binding.ivDoctorProfile.visibility = View.GONE
+        } else {
+            Glide.with(binding.ivDoctorProfile.context)
+                .load(imageUrl)
+                .into(binding.ivDoctorProfile)
+        }
 
         val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
         val date = sdf.parse(args.gatesdetails?.date)

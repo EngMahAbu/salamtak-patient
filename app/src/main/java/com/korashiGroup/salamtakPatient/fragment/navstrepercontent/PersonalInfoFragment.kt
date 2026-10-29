@@ -706,7 +706,7 @@ class PersonalInfoFragment : Fragment() {
             status = it
             if (it) {
                 viewmodel.getPatientInfo()
-                binding.btnNext.text = getString(R.string.update)
+                binding.btnNext.text = getString(R.string.confirm_edit)
             }
         })
 

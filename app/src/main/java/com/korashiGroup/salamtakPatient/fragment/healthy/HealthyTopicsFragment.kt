@@ -85,11 +85,11 @@ class HealthyTopicsFragment : Fragment(), BlogsGatesAdapter.Action, MedicalHealt
 
     private fun medicalServicesRecylerview() {
         val defaultImageResId = when (args.gatesId) {
-            1 -> R.drawable.icon_hospital_guide
-            2 -> R.drawable.icon_pharmacy_guide
-            3 -> R.drawable.icon_labs_guide
-            4 -> R.drawable.icon_radiology_guide
-            else -> R.drawable.icon_hospital_guide
+            1 -> R.drawable.svg_inclinic
+            2 -> R.drawable.svg_pharmacy
+            3 -> R.drawable.svg_labs
+            4 -> R.drawable.svg_radiology
+            else -> R.drawable.svg_inclinic
         }
         binding.ivHealthIcon.setImageResource(defaultImageResId)
         healthAdapter = MedicalHealthAdapter(this, defaultImageResId)

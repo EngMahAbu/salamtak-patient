@@ -174,6 +174,12 @@ class MoreFragment : Fragment() {
         binding.layoutMyQuestions.setOnClickListener {
             findNavController().navigate(R.id.myQuestionsFragment)
         }
+        binding.layoutMyBookings.setOnClickListener {
+            findNavController().navigate(R.id.myScheduleFragment)
+        }
+        binding.layoutSalamtakCommunity.setOnClickListener {
+            findNavController().navigate(R.id.salamtakCommunityFragment)
+        }
 
 
 

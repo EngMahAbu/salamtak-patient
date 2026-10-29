@@ -15,10 +15,14 @@ import coil.load
 import coil.transform.CircleCropTransformation
 import com.bumptech.glide.Glide
 import com.korashiGroup.salamtakPatient.R
+import com.korashiGroup.salamtakPatient.adapter.HospitalFeaturesAdapter
 import com.korashiGroup.salamtakPatient.adapter.ImageVideoAdapter
 import com.korashiGroup.salamtakPatient.adapter.ImagesAdapter
+import com.korashiGroup.salamtakPatient.adapter.PolyClinicSpecialtiesAdapter
+import com.korashiGroup.salamtakPatient.adapter.PolyClinicSpecialty
 import com.korashiGroup.salamtakPatient.adapter.PolyClinicsDoctorsAdapter
 import com.korashiGroup.salamtakPatient.databinding.PolyClinicInfofragmentBinding
+import com.korashiGroup.salamtakPatient.fragment.polyclinic.model.PolyClinicsDoctorsList
 import com.korashiGroup.salamtakPatient.model.HomeAdsData
 import com.korashiGroup.salamtakPatient.model.ImageServices
 import com.korashiGroup.salamtakPatient.model.salamtakgate.Gates
@@ -46,6 +50,13 @@ class PolyClinicInfoFragment : Fragment(), ImagesAdapter.IPhotoViewr, PolyClinic
     private lateinit var imageVideoAdapter: ImageVideoAdapter
     private lateinit var imagesAdapter: ImagesAdapter
     private lateinit var otherDoctorsAdapter: PolyClinicsDoctorsAdapter
+    private lateinit var specialtiesAdapter: PolyClinicSpecialtiesAdapter
+    private lateinit var featuresAdapter: HospitalFeaturesAdapter
+    private lateinit var servicesAdapter: HospitalFeaturesAdapter
+    private lateinit var insuranceAdapter: HospitalFeaturesAdapter
+
+    private var isFeaturesExpanded = false
+    private var allFeatures: List<String> = emptyList()
 
     private val sharedDataViewmodel: SharedDataViewmodel by activityViewModels()
     private val viewmodel: DialogBottomSheetViewmodel by viewModels()
@@ -64,6 +75,8 @@ class PolyClinicInfoFragment : Fragment(), ImagesAdapter.IPhotoViewr, PolyClinic
         capsVideoRecylerview()
         gallaryRecylerview()
         otherDoctorsRecyclerview()
+        setupSectionAdapters()
+        setupAccordionHeaders()
         bindFeatures()
         initButton()
         callBackDoctorProfile()
@@ -104,104 +117,175 @@ class PolyClinicInfoFragment : Fragment(), ImagesAdapter.IPhotoViewr, PolyClinic
         }
     }
 
+    private fun setupSectionAdapters() {
+        specialtiesAdapter = PolyClinicSpecialtiesAdapter()
+        featuresAdapter = HospitalFeaturesAdapter()
+        servicesAdapter = HospitalFeaturesAdapter()
+        insuranceAdapter = HospitalFeaturesAdapter()
+        binding.rvSpecialties.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvSpecialties.adapter = specialtiesAdapter
+        listOf(
+            binding.rvFeatures to featuresAdapter,
+            binding.rvServices to servicesAdapter,
+            binding.rvInsurance to insuranceAdapter
+        ).forEach { (recyclerView, sectionAdapter) ->
+            recyclerView.layoutManager = LinearLayoutManager(requireContext())
+            recyclerView.adapter = sectionAdapter
+        }
+    }
+
+    private fun setupAccordionHeaders() {
+        binding.headerBackground.setOnClickListener {
+            toggleSection(binding.tvBackgroundContent, binding.ivChevronBackground)
+        }
+        binding.headerSpecialties.setOnClickListener {
+            toggleSection(binding.layoutSpecialtiesContent, binding.ivChevronSpecialties)
+        }
+        binding.headerFeatures.setOnClickListener {
+            toggleSection(binding.layoutFeaturesContent, binding.ivChevronFeatures)
+        }
+        binding.headerGallery.setOnClickListener {
+            toggleSection(binding.layoutGalleryContent, binding.ivChevronGallery)
+        }
+        binding.headerServices.setOnClickListener {
+            toggleSection(binding.layoutServicesContent, binding.ivChevronServices)
+        }
+        binding.headerInsurance.setOnClickListener {
+            toggleSection(binding.layoutInsuranceContent, binding.ivChevronInsurance)
+        }
+        binding.headerVideos.setOnClickListener {
+            toggleSection(binding.viewPager, binding.ivChevronVideos)
+        }
+        binding.headerOtherDoctors.setOnClickListener {
+            toggleSection(binding.rvOtherDoctors, binding.ivChevronOtherDoctors)
+        }
+    }
+
+    private fun toggleSection(contentView: View, chevronView: View) {
+        val isCurrentlyVisible = contentView.visibility == View.VISIBLE
+        contentView.visibility = if (isCurrentlyVisible) View.GONE else View.VISIBLE
+        chevronView.rotation = if (isCurrentlyVisible) 0f else 180f
+    }
+
     private fun isFieldEmpty(value: Any?): Boolean {
         if (value == null) return true
         val str = value.toString().trim()
         return str.isEmpty() || str == "null" || str == "[]"
     }
 
+    // API sends list fields either as a JSON array or as a comma separated string
+    private fun toItemList(value: Any?): List<String> {
+        if (isFieldEmpty(value)) return emptyList()
+        val raw = if (value is List<*>) value.mapNotNull { it?.toString() }
+        else value.toString().removePrefix("[").removeSuffix("]").split(",")
+        return raw.map { it.trim() }.filter { it.isNotEmpty() && it != "null" }
+    }
+
+    private fun bindListSection(
+        items: List<String>,
+        sectionAdapter: HospitalFeaturesAdapter,
+        recyclerView: View,
+        emptyView: View
+    ) {
+        sectionAdapter.submitList(items)
+        recyclerView.visibility = if (items.isEmpty()) View.GONE else View.VISIBLE
+        emptyView.visibility = if (items.isEmpty()) View.VISIBLE else View.GONE
+    }
+
     private fun bindFeatures() {
-        binding.tvName.text = args.polyclinicitems.name
-        if (!args.polyclinicitems.logo.isNullOrEmpty()) {
-            binding.ivDoctorProfile.load(args.polyclinicitems.logo) {
+        val polyclinic = args.polyclinicitems
+
+        // Header card
+        binding.tvClinicName.text = polyclinic.name
+        val city = polyclinic.cityName?.takeIf { it != "null" }.orEmpty()
+        val area = polyclinic.areaName?.takeIf { it != "null" }.orEmpty()
+        binding.tvLocation.text = if (city.isNotEmpty() && area.isNotEmpty()) "$city - $area" else city.ifEmpty { area }
+        if (!polyclinic.logo.isNullOrEmpty()) {
+            binding.ivLogo.load(polyclinic.logo) {
                 crossfade(true)
-                crossfade(1000)
+                placeholder(R.drawable.ic_hospital_default_logo)
+                error(R.drawable.ic_hospital_default_logo)
                 transformations(CircleCropTransformation())
             }
         }
-        
-        // About PolyClinic (Bio)
-        val bio = args.polyclinicitems.ClinicBio
-        if (!isFieldEmpty(bio)) {
-            binding.tvAboutDoctor.visibility = View.VISIBLE
-            binding.AboutDoctor.visibility = View.VISIBLE
-            binding.AboutDoctor.text = bio.toString().removePrefix("[").removeSuffix("]")
+
+        // 1. Background
+        val bio = polyclinic.ClinicBio
+        binding.tvBackgroundContent.text = if (!isFieldEmpty(bio)) {
+            bio.toString().removePrefix("[").removeSuffix("]")
         } else {
-            binding.tvAboutDoctor.visibility = View.GONE
-            binding.AboutDoctor.visibility = View.GONE
+            getString(R.string.not_available_na)
         }
 
-        // Features
-        val features = args.polyclinicitems.features
-        if (!isFieldEmpty(features)) {
-            binding.tvFeatures.visibility = View.VISIBLE
-            binding.features.visibility = View.VISIBLE
-            binding.features.text = features.toString().removePrefix("[").removeSuffix("]")
+        // 2. Specialties are filled from the doctors response in getOtherDoctors()
+        bindSpecialties(emptyList())
+
+        // 3. Features
+        allFeatures = toItemList(polyclinic.features)
+        isFeaturesExpanded = false
+        bindListSection(allFeatures.take(3), featuresAdapter, binding.rvFeatures, binding.tvFeaturesEmpty)
+        if (allFeatures.size > 3) {
+            binding.tvMoreFeatures.visibility = View.VISIBLE
+            binding.tvMoreFeatures.text = getString(R.string.more_dots)
+            binding.tvMoreFeatures.setOnClickListener {
+                isFeaturesExpanded = !isFeaturesExpanded
+                featuresAdapter.submitList(if (isFeaturesExpanded) allFeatures else allFeatures.take(3))
+                binding.tvMoreFeatures.text =
+                    getString(if (isFeaturesExpanded) R.string.less_dots else R.string.more_dots)
+            }
         } else {
-            binding.tvFeatures.visibility = View.GONE
-            binding.features.visibility = View.GONE
+            binding.tvMoreFeatures.visibility = View.GONE
         }
 
-        // Insurance
-        val insurance = args.polyclinicitems.insurance
-        if (!isFieldEmpty(insurance)) {
-            binding.tvInsurance.visibility = View.VISIBLE
-            binding.insurance.visibility = View.VISIBLE
-            binding.insurance.text = insurance.toString().removePrefix("[").removeSuffix("]")
-        } else {
-            binding.tvInsurance.visibility = View.GONE
-            binding.insurance.visibility = View.GONE
-        }
-
-        // Services
-        val services = args.polyclinicitems.services
-        if (!isFieldEmpty(services)) {
-            binding.tvClinicservices.visibility = View.VISIBLE
-            binding.clinicservices.visibility = View.VISIBLE
-            binding.clinicservices.text = services.toString().removePrefix("[").removeSuffix("]")
-        } else {
-            binding.tvClinicservices.visibility = View.GONE
-            binding.clinicservices.visibility = View.GONE
-        }
-
-        // Gallery / Photos
-        val gallery = args.polyclinicitems.gallary
+        // 4. Gallery
+        val gallery = polyclinic.gallary?.filter { !isFieldEmpty(it) }
         if (!gallery.isNullOrEmpty()) {
-            binding.photo.visibility = View.VISIBLE
-            binding.layoutPhoto.visibility = View.VISIBLE
-            val listBlogs = mutableListOf<Gates>()
-            for (i in gallery.indices) {
-                val gates = Gates(0, gallery[i].toString())
-                listBlogs.add(gates)
-            }
-            imagesAdapter.submitList(listBlogs)
+            binding.rvGallry.visibility = View.VISIBLE
+            binding.tvGalleryEmpty.visibility = View.GONE
+            imagesAdapter.submitList(gallery.map { Gates(0, it) })
         } else {
-            binding.photo.visibility = View.GONE
-            binding.layoutPhoto.visibility = View.GONE
+            binding.rvGallry.visibility = View.GONE
+            binding.tvGalleryEmpty.visibility = View.VISIBLE
         }
 
-        // Videos
-        val videos = args.polyclinicitems.videos
+        // 5. Services
+        bindListSection(toItemList(polyclinic.services), servicesAdapter, binding.rvServices, binding.tvServicesEmpty)
+
+        // 6. Insurance
+        bindListSection(toItemList(polyclinic.insurance), insuranceAdapter, binding.rvInsurance, binding.tvInsuranceEmpty)
+
+        // 7. Videos
+        val videos = polyclinic.videos
         if (!videos.isNullOrEmpty()) {
-            binding.videos.visibility = View.VISIBLE
-            binding.layoutShowDoctorVideos.visibility = View.VISIBLE
-            val listBlogs = mutableListOf<HomeAdsData>()
-            for (i in videos.indices) {
-                val homeAdsData = videos[i]?.let { it1 ->
-                    HomeAdsData(true, it1)
-                }
-                if (homeAdsData != null) {
-                    listBlogs.add(homeAdsData)
-                }
-            }
-            imageVideoAdapter.submitList(listBlogs)
+            binding.cardVideos.visibility = View.VISIBLE
+            imageVideoAdapter.submitList(videos.mapNotNull { video -> video?.let { HomeAdsData(true, it) } })
         } else {
-            binding.videos.visibility = View.GONE
-            binding.layoutShowDoctorVideos.visibility = View.GONE
+            binding.cardVideos.visibility = View.GONE
         }
+    }
 
-        binding.tvDoctorName.text = args.polyclinicitems.name
-        binding.tvSpecialization.text = "${args.polyclinicitems.cityName} - ${args.polyclinicitems.areaName}"
+    private fun bindSpecialties(doctors: List<PolyClinicsDoctorsList>) {
+        val specialties = doctors
+            .filter { !it.specialistName.isNullOrBlank() }
+            .groupBy { it.specialistName!!.trim() }
+            .map { (specialty, specialtyDoctors) ->
+                val subSpecialties = specialtyDoctors
+                    .flatMap { it.subSpecialistName.orEmpty() }
+                    .mapNotNull { it?.trim()?.takeIf { sub -> sub.isNotEmpty() && sub != "null" } }
+                    .distinct()
+                PolyClinicSpecialty(specialty, subSpecialties)
+            }
+        specialtiesAdapter.submitList(specialties)
+        binding.rvSpecialties.visibility = if (specialties.isEmpty()) View.GONE else View.VISIBLE
+        binding.tvSpecialtiesEmpty.visibility = if (specialties.isEmpty()) View.VISIBLE else View.GONE
+    }
+
+    private fun showOtherDoctors(doctors: List<PolyClinicsDoctorsList>) {
+        val hasDoctors = doctors.isNotEmpty()
+        binding.headerOtherDoctors.visibility = if (hasDoctors) View.VISIBLE else View.GONE
+        binding.rvOtherDoctors.visibility = if (hasDoctors) View.VISIBLE else View.GONE
+        binding.ivChevronOtherDoctors.rotation = 180f
+        otherDoctorsAdapter.submitList(doctors)
     }
 
     private fun getOtherDoctors() {
@@ -220,27 +304,19 @@ class PolyClinicInfoFragment : Fragment(), ImagesAdapter.IPhotoViewr, PolyClinic
                     // Loading state
                 }
                 is Resource.sucess -> {
-                    val rawList = resource.data?.data ?: emptyList()
+                    val rawList = resource.data?.data?.filterNotNull() ?: emptyList()
+                    bindSpecialties(rawList)
                     val filtered = if (chosenSpecialistName.isNotEmpty()) {
                         rawList.filter { doc ->
-                            doc != null && !doc.specialistName.equals(chosenSpecialistName, ignoreCase = true)
+                            !doc.specialistName.equals(chosenSpecialistName, ignoreCase = true)
                         }
                     } else {
                         rawList
                     }
-
-                    if (filtered.isNotEmpty()) {
-                        binding.tvOtherDoctors.visibility = View.VISIBLE
-                        binding.layoutOtherDoctors.visibility = View.VISIBLE
-                        otherDoctorsAdapter.submitList(filtered.filterNotNull())
-                    } else {
-                        binding.tvOtherDoctors.visibility = View.GONE
-                        binding.layoutOtherDoctors.visibility = View.GONE
-                    }
+                    showOtherDoctors(filtered)
                 }
                 is Resource.Error -> {
-                    binding.tvOtherDoctors.visibility = View.GONE
-                    binding.layoutOtherDoctors.visibility = View.GONE
+                    showOtherDoctors(emptyList())
                 }
             }
         }

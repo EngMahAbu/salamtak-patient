@@ -181,7 +181,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             if (doctorNameFilter.isNotEmpty()) {
                 // Doctor search mode within PolyClinic
                 isSearchingPolyclinicDoctors = true
-                binding.etSearch.visibility = View.VISIBLE
+                binding.etSearch.visibility = View.GONE
                 binding.layoutFilter.visibility = View.GONE
                 binding.tvOrPolyclinic.visibility = View.GONE
                 binding.etSearchPolyclinic.visibility = View.GONE
@@ -229,7 +229,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
             } else {
                 // PolyClinic search mode
                 isSearchingPolyclinicDoctors = false
-                binding.etSearch.visibility = View.VISIBLE
+                binding.etSearch.visibility = View.GONE
                 binding.layoutFilter.visibility = View.GONE
                 binding.tvOrPolyclinic.visibility = View.GONE
                 binding.etSearchPolyclinic.visibility = View.GONE
@@ -1353,7 +1353,7 @@ class SearchFragment : Fragment(), CalenderAdapter.Action, SearchDoctorsAdapter.
     override fun onPolyClinicsItemClick(
         clinicId: Int
     ) {
-        binding.etSearch.setHint(getString(R.string.search_by_doctor_name))
+        binding.etSearch.visibility = View.GONE
         binding.etSearch.setText("")
         isSearchingPolyclinicDoctors = true
         binding.rvPolyclinic.visibility = View.GONE

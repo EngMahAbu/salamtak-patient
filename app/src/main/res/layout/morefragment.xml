@@ -328,6 +328,69 @@
                         app:layout_constraintTop_toBottomOf="@+id/layout_BillsDoctor"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_MyBookings"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/more_background"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/layout_BillsDoctor">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/iv_MyBookings"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:adjustViewBounds="true"
+                            android:layout_marginStart="10dp"
+                            android:src="@drawable/new_calendar"
+                            app:tint="@color/black"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" />
+
+                    <TextView
+                            android:id="@+id/tv_MyBookings"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:fontFamily="@font/sf_pro_display_semibold"
+                            android:gravity="start"
+                            android:text="@string/schedule"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            app:layout_constraintStart_toEndOf="@+id/iv_MyBookings"
+                            app:layout_constraintTop_toTopOf="@+id/iv_MyBookings"
+                            app:layout_constraintBottom_toBottomOf="@+id/iv_MyBookings" />
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/iv_ArrowMyBookings"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginEnd="10dp"
+                            android:adjustViewBounds="true"
+                            android:src="@drawable/svg_arrow_right"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <ImageView
+                        android:id="@+id/layout_MyBookingsLine"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginEnd="12dp"
+                        android:src="@drawable/ic_new_line"
+                        app:layout_constraintTop_toBottomOf="@+id/layout_MyBookings"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/layout_ChangePassword"
                         android:layout_width="match_parent"
@@ -338,7 +401,7 @@
                         android:background="@drawable/more_background"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/layout_BillsDoctor">
+                        app:layout_constraintTop_toBottomOf="@+id/layout_MyBookings">
 
                     <com.google.android.material.imageview.ShapeableImageView
                             android:id="@+id/iv_changePassword"
@@ -472,7 +535,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
             <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/layout_CallUs"
+                    android:id="@+id/layout_SalamtakCommunity"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginStart="10dp"
@@ -482,6 +545,67 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/layout_my_Questions">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/iv_SalamtakCommunity"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:adjustViewBounds="true"
+                        android:layout_marginStart="10dp"
+                        android:src="@drawable/svg_people"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+
+                <TextView
+                        android:id="@+id/tv_SalamtakCommunity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:fontFamily="@font/sf_pro_display_semibold"
+                        android:gravity="start"
+                        android:text="@string/salamtak_community"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        app:layout_constraintStart_toEndOf="@+id/iv_SalamtakCommunity"
+                        app:layout_constraintTop_toTopOf="@+id/iv_SalamtakCommunity"
+                        app:layout_constraintBottom_toBottomOf="@+id/iv_SalamtakCommunity" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/iv_ArrowSalamtakCommunity"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginEnd="10dp"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/svg_arrow_right"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                    android:id="@+id/layout_SalamtakCommunityLine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginTop="2dp"
+                    android:src="@drawable/ic_new_line"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_SalamtakCommunity"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_CallUs"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/more_background"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_SalamtakCommunity">
 
                 <com.google.android.material.imageview.ShapeableImageView
                         android:id="@+id/iv_CallUs"

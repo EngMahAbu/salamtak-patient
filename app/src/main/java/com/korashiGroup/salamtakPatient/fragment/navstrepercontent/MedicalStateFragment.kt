@@ -301,7 +301,7 @@ class MedicalStateFragment : Fragment() {
             if (!status){
                 binding.btnNext.text=getString(com.korashiGroup.salamtakPatient.R.string.finish)
             }else{
-                binding.btnNext.text=getString(com.korashiGroup.salamtakPatient.R.string.update)
+                binding.btnNext.text=getString(com.korashiGroup.salamtakPatient.R.string.confirm_edit)
                 binding.btnSkip.visibility=View.GONE
                 viewmodel.getPatientMedicalInfo()
             }
