@@ -53,7 +53,7 @@ class PolyClinicInfoFragment : Fragment(), ImagesAdapter.IPhotoViewr, PolyClinic
     private lateinit var specialtiesAdapter: PolyClinicSpecialtiesAdapter
     private lateinit var featuresAdapter: HospitalFeaturesAdapter
     private lateinit var servicesAdapter: HospitalFeaturesAdapter
-    private lateinit var insuranceAdapter: HospitalFeaturesAdapter
+    // private lateinit var insuranceAdapter: HospitalFeaturesAdapter
 
     private var isFeaturesExpanded = false
     private var allFeatures: List<String> = emptyList()
@@ -121,13 +121,13 @@ class PolyClinicInfoFragment : Fragment(), ImagesAdapter.IPhotoViewr, PolyClinic
         specialtiesAdapter = PolyClinicSpecialtiesAdapter()
         featuresAdapter = HospitalFeaturesAdapter()
         servicesAdapter = HospitalFeaturesAdapter()
-        insuranceAdapter = HospitalFeaturesAdapter()
+        // insuranceAdapter = HospitalFeaturesAdapter()
         binding.rvSpecialties.layoutManager = LinearLayoutManager(requireContext())
         binding.rvSpecialties.adapter = specialtiesAdapter
         listOf(
             binding.rvFeatures to featuresAdapter,
             binding.rvServices to servicesAdapter,
-            binding.rvInsurance to insuranceAdapter
+            // binding.rvInsurance to insuranceAdapter
         ).forEach { (recyclerView, sectionAdapter) ->
             recyclerView.layoutManager = LinearLayoutManager(requireContext())
             recyclerView.adapter = sectionAdapter
@@ -150,9 +150,10 @@ class PolyClinicInfoFragment : Fragment(), ImagesAdapter.IPhotoViewr, PolyClinic
         binding.headerServices.setOnClickListener {
             toggleSection(binding.layoutServicesContent, binding.ivChevronServices)
         }
-        binding.headerInsurance.setOnClickListener {
-            toggleSection(binding.layoutInsuranceContent, binding.ivChevronInsurance)
-        }
+        // binding.headerInsurance.setOnClickListener {
+        //     toggleSection(binding.layoutInsuranceContent, binding.ivChevronInsurance)
+        // }
+
         binding.headerVideos.setOnClickListener {
             toggleSection(binding.viewPager, binding.ivChevronVideos)
         }
@@ -251,8 +252,8 @@ class PolyClinicInfoFragment : Fragment(), ImagesAdapter.IPhotoViewr, PolyClinic
         // 5. Services
         bindListSection(toItemList(polyclinic.services), servicesAdapter, binding.rvServices, binding.tvServicesEmpty)
 
-        // 6. Insurance
-        bindListSection(toItemList(polyclinic.insurance), insuranceAdapter, binding.rvInsurance, binding.tvInsuranceEmpty)
+        // 6. Insurance (Commented out)
+        // bindListSection(toItemList(polyclinic.insurance), insuranceAdapter, binding.rvInsurance, binding.tvInsuranceEmpty)
 
         // 7. Videos
         val videos = polyclinic.videos
