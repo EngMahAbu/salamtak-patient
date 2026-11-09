@@ -1,214 +1,244 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="15dp"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        tools:context=".fragment.dialog.DialogRatingDoctorFragment">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="24dp"
+    android:paddingBottom="20dp"
+    tools:context=".fragment.dialog.DialogRatingDoctorFragment">
 
-
+    <!-- Title -->
     <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_ratingDoctor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/avenirltstd_black"
-            android:gravity="center"
-            android:padding="2dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="15dp"
-            android:text="@string/rate_doctor"
-            android:textColor="@color/black"
-            android:textSize="15sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-    />
-
+        android:id="@+id/tv_ratingDoctor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:fontFamily="@font/avenirltstd_black"
+        android:gravity="center"
+        android:text="@string/review_doctor_title"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
 
     <androidx.core.widget.NestedScrollView
-            android:id="@+id/layout"
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        android:overScrollMode="never">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/tv_ratingDoctor"
+            android:orientation="vertical"
+            android:paddingHorizontal="13dp">
 
-    >
-        <androidx.constraintlayout.widget.ConstraintLayout
+            <!-- Doctor card -->
+            <LinearLayout
+                android:id="@+id/layout_doctorsDetail"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-        >
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/bg_review_card"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="12dp">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/layout_doctorsDetail"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:padding="8dp"
-                    android:background="@drawable/bg_edittext"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent">
+                <FrameLayout
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_review_avatar"
+                    android:padding="1dp">
 
-                <com.google.android.material.imageview.ShapeableImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/iv_doctorProfile"
-                        android:layout_width="47dp"
-                        android:layout_height="47dp"
-                        android:src="@drawable/ic_docspecialization"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_docspecialization" />
+                </FrameLayout>
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_doctorName"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="15dp"
-                        android:fontFamily="@font/avenirltstd_roman"
-                        android:gravity="start"
-                        android:padding="3dp"
-                        android:text="Dr. Mohamed Farag Abdullatif"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/avenirltstd_black"
+                        android:maxLines="2"
+                        android:textAlignment="viewStart"
                         android:textColor="@color/black"
                         android:textSize="15sp"
-                        app:layout_constraintStart_toEndOf="@+id/iv_doctorProfile"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/iv_doctorProfile"/>
+                        tools:text="Dr. aya yasser test" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_Specialization"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/avenirltstd_black"
+                        android:maxLines="2"
+                        android:textAlignment="viewStart"
+                        android:textColor="#8E8E93"
+                        android:textSize="13sp"
+                        tools:text="Professor - Internal Medicine" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Rate & earn cashback card -->
+            <LinearLayout
+                android:id="@+id/layout_cashback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginTop="28dp"
+                android:background="@drawable/bg_review_card"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:paddingHorizontal="14dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="12dp">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_Specialization"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="15dp"
-                        android:layout_marginTop="5dp"
-                        android:fontFamily="@font/avenirltstd_roman"
-                        android:gravity="start"
-                        android:padding="2dp"
-                        android:text="Genecology and Infertility"
-                        android:textColor="@color/gray"
-                        android:textSize="15sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/iv_doctorProfile"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_doctorName"/>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.appcompat.widget.AppCompatRatingBar
-                    android:id="@+id/ratingBar"
+                    android:id="@+id/tv_cashbackTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@+id/layout_doctorsDetail"
-                    android:layout_marginTop="10dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:rating="0"
-                    android:stepSize="0.5"
-                    android:theme="@style/ratingBar"
-
-            />
-            <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/textinput_comment"
-                    android:padding="8dp"
-                    android:minLines="5"
-                    android:singleLine="false"
-                    android:lines="6"
-                    android:scrollbars="vertical"
-                    android:background="@drawable/bg_rating"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="15dp"
-                    android:autofillHints=""
-                    android:elevation="1dp"
-                    android:importantForAutofill="no"
-                    android:imeOptions="actionDone"
-                    android:hint="@string/write_a_comment"
-                    android:gravity="start|center"
-                    android:inputType="textMultiLine"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/ratingBar"
-            />
-            <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="15dp"
                     android:fontFamily="@font/avenirltstd_black"
-                    android:text="@string/reviewspolyclinics"
+                    android:gravity="center"
+                    android:text="@string/review_cashback_title"
                     android:textColor="@color/black"
-                    android:textSize="16sp"
-                  app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textinput_comment" />
-            <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/textinput_comment_polyclinics"
-                    android:padding="8dp"
-                    android:minLines="5"
-                    android:singleLine="false"
-                    android:lines="6"
-                    android:scrollbars="vertical"
-                    android:background="@drawable/bg_rating"
-                    android:layout_width="0dp"
+                    android:textSize="13sp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_cashbackDesc"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:autofillHints=""
-                    android:elevation="1dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/avenirltstd_roman"
+                    android:gravity="center"
+                    android:lineSpacingExtra="3dp"
+                    android:text="@string/review_cashback_desc"
+                    android:textColor="#8E8E93"
+                    android:textSize="13sp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_termsApply"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/avenirltstd_roman"
+                    android:gravity="center"
+                    android:text="@string/review_terms_apply"
+                    android:textColor="#B0B0B5"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+            <!-- Stars -->
+            <LinearLayout
+                android:id="@+id/layout_stars"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="22dp"
+                android:layoutDirection="ltr"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_star1"
+                    style="@style/ReviewStar"
+                    android:contentDescription="1" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_star2"
+                    style="@style/ReviewStar"
+                    android:contentDescription="2" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_star3"
+                    style="@style/ReviewStar"
+                    android:contentDescription="3" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_star4"
+                    style="@style/ReviewStar"
+                    android:contentDescription="4" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_star5"
+                    style="@style/ReviewStar"
+                    android:contentDescription="5" />
+            </LinearLayout>
+
+            <!-- Comment box -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="2dp"
+                android:layout_marginTop="22dp"
+                android:layout_marginBottom="8dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="6dp"
+                app:cardUseCompatPadding="false">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/textinput_comment"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/avenirltstd_roman"
+                    android:gravity="top|start"
+                    android:hint="@string/more_details"
                     android:importantForAutofill="no"
-                    android:imeOptions="actionDone"
-                    android:hint="@string/write_a_comment"
-                    android:gravity="start|center"
-                    android:inputType="textMultiLine"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_name"
-                    />
+                    android:inputType="textMultiLine|textCapSentences"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="14dp"
+                    android:scrollbars="vertical"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/black"
+                    android:textColorHint="#B0B0B5"
+                    android:textSize="16sp" />
+            </androidx.cardview.widget.CardView>
 
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
+        </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layout_btn_save"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layout"
-            app:layout_constraintWidth_percent=".90"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:padding="8dp"
-            android:layout_marginTop="20dp"
-    >
+    <!-- Save -->
+    <FrameLayout
+        android:id="@+id/layout_btn_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="23dp"
+        android:layout_marginTop="20dp">
+
         <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_save"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_chooselang_button"
-                android:fontFamily="@font/avenirltstd_black"
-                android:padding="5dp"
-                android:text="@string/save"
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/btn_save"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:background="@drawable/bg_review_save_button"
+            android:fontFamily="@font/avenirltstd_black"
+            android:stateListAnimator="@null"
+            android:text="@string/save"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
 
-        />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-    <ProgressBar
+        <ProgressBar
             android:id="@+id/progress_barInfo"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:visibility="gone"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:elevation="4dp"
             android:indeterminateTint="@color/white"
-            app:layout_constraintBottom_toBottomOf="@+id/layout_btn_save"
-            app:layout_constraintEnd_toEndOf="@+id/layout_btn_save"
-            app:layout_constraintStart_toStartOf="@+id/layout_btn_save"
-            app:layout_constraintTop_toTopOf="@+id/layout_btn_save"/>
+            android:visibility="gone" />
+    </FrameLayout>
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

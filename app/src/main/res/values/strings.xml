@@ -658,4 +658,9 @@ Welcome to Salamtak mobile clinics service. You can now get a premium service in
     <string name="more_details">More Details</string>
     <string name="no_queue_ticket">No Queue Ticket</string>
     <string name="no_queue_ticket_message">We couldn\'t find a queue ticket for this appointment.</string>
+    <string name="review_doctor_title">Doctor Reviews (Rate)</string>
+    <string name="review_cashback_title">Rate &amp; Earn Cashback!</string>
+    <string name="review_cashback_desc">Share Your Experience and Earn Cashback to Redeem for Free Medical Consultations and Exclusive Rewards</string>
+    <string name="review_terms_apply">Terms and conditions apply</string>
+    <string name="review_select_rating">Please select a rating first</string>
 </resources>

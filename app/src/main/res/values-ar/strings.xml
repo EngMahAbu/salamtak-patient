@@ -639,4 +639,9 @@
     <string name="more_details">تفاصيل إضافية</string>
     <string name="no_queue_ticket">لا توجد تذكرة انتظار</string>
     <string name="no_queue_ticket_message">لم نتمكن من العثور على تذكرة انتظار لهذا الحجز.</string>
+    <string name="review_doctor_title">تقييمات الطبيب (قيّم)</string>
+    <string name="review_cashback_title">قيّم واحصل على كاش باك!</string>
+    <string name="review_cashback_desc">شارك تجربتك واحصل على كاش باك يمكنك استخدامه في استشارات طبية مجانية ومكافآت حصرية</string>
+    <string name="review_terms_apply">تطبق الشروط والأحكام</string>
+    <string name="review_select_rating">يرجى اختيار التقييم أولاً</string>
 </resources>
