@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.adapter.HospitalDoctorsAdapter
 import com.korashiGroup.salamtakPatient.databinding.FragmentHospitalDoctorsBinding
+import com.korashiGroup.salamtakPatient.fragment.booking.BookingAppointmentFragment
 import com.korashiGroup.salamtakPatient.model.hospital.HospitalDoctor
 import com.korashiGroup.salamtakPatient.utils.Resource
 import com.korashiGroup.salamtakPatient.viewmodel.HospitalViewModel
@@ -108,7 +110,10 @@ class HospitalDoctorsFragment : Fragment(), HospitalDoctorsAdapter.HospitalDocto
             doctor.fees?.let { fees ->
                 sharedDataViewModel.getFees(fees.toInt())
             }
-            findNavController().navigate(R.id.bookingAppointmentFragment)
+            findNavController().navigate(
+                R.id.bookingAppointmentFragment,
+                bundleOf(BookingAppointmentFragment.ARG_HIDE_OTHER_CLINICS to true)
+            )
         }
     }
 
@@ -118,7 +123,10 @@ class HospitalDoctorsFragment : Fragment(), HospitalDoctorsAdapter.HospitalDocto
             doctor.fees?.let { fees ->
                 sharedDataViewModel.getFees(fees.toInt())
             }
-            findNavController().navigate(R.id.bookingAppointmentFragment)
+            findNavController().navigate(
+                R.id.bookingAppointmentFragment,
+                bundleOf(BookingAppointmentFragment.ARG_HIDE_OTHER_CLINICS to true)
+            )
         }
     }
 

@@ -2,6 +2,8 @@ package com.korashiGroup.salamtakPatient.fragment.polyclinic
 
 import android.os.Bundle
 import android.util.Log
+import androidx.core.os.bundleOf
+import com.korashiGroup.salamtakPatient.fragment.booking.BookingAppointmentFragment
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -404,7 +406,10 @@ class PolyClinicInfoFragment : Fragment(), ImagesAdapter.IPhotoViewr, PolyClinic
         sharedDataViewmodel.getRating(RatingDoctors(rate, rateCount))
         sharedDataViewmodel.getClinicSchedualByClinicDayId(clinicSchedualByClinicDayId)
         sharedDataViewmodel.getClinicIdAndDoctorId(ClinicData(ClinicID, doctorId, false))
-        findNavController().navigate(R.id.action_polyClinicInfoFragment_to_bookingAppointmentFragment)
+        findNavController().navigate(
+            R.id.action_polyClinicInfoFragment_to_bookingAppointmentFragment,
+            bundleOf(BookingAppointmentFragment.ARG_HIDE_OTHER_CLINICS to true)
+        )
     }
 
     override fun clickOnPhoto(image: String) {
