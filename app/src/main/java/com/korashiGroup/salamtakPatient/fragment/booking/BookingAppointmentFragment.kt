@@ -115,6 +115,15 @@ class BookingAppointmentFragment : Fragment(), ClinksDoctorsAdapter.Booking, Ima
         callBack()
         callDoctorVideos()
 
+        // Hide "Other Clinics" when opened from the Hospitals / Polyclinics service cards
+        if (arguments?.getBoolean(ARG_HIDE_OTHER_CLINICS, false) == true) {
+            binding.layoutOtherClinics.visibility = View.GONE
+        }
+
+    }
+
+    companion object {
+        const val ARG_HIDE_OTHER_CLINICS = "hideOtherClinics"
     }
 
 
