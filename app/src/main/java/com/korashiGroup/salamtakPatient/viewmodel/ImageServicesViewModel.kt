@@ -63,7 +63,7 @@ class ImageServicesViewModel @Inject constructor(
             ImageServices(R.drawable.m_video, "Video Call", "مكالمة فيديو", Id = 8),
             ImageServices(R.drawable.m_call, "Call", "استشارة هاتفية", Id = 9),
             ImageServices(R.drawable.offers_image_new, context.getString(R.string.offers), "العروض", Id = 7),
-            ImageServices(R.drawable.ic_hospital_service, context.getString(R.string.hospitals), "مستشفيات", Id = 11)
+            ImageServices(R.drawable.hospitals_image_new, context.getString(R.string.hospitals), "مستشفيات", Id = 11)
         )
     }
 
@@ -131,7 +131,7 @@ class ImageServicesViewModel @Inject constructor(
                     Id = 7
                 )
                 val itemHospitals = ImageServices(
-                    R.drawable.ic_hospital_service,
+                    R.drawable.hospitals_image_new,
                     context.getString(R.string.hospitals),
                     "مستشفيات",
                     Id = 11

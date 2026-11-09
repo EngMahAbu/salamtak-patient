@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.korashiGroup.salamtakPatient.R
 import com.korashiGroup.salamtakPatient.databinding.ItemLayoutRvservicesBinding
 import com.korashiGroup.salamtakPatient.model.ImageServices
 import com.korashiGroup.salamtakPatient.utils.DataBinding
@@ -20,6 +21,13 @@ class ServicesAdapter(
     companion object {
         private const val VIEW_TYPE_ITEM = 0
         private const val VIEW_TYPE_SPACER = 1
+
+        // Full-width logo banners bundled with the app; shown like the API service images
+        private val LOCAL_BANNER_IMAGES = setOf(
+            R.drawable.polyclinic_image_new,
+            R.drawable.offers_image_new,
+            R.drawable.hospitals_image_new
+        )
     }
 
     private var nam = ""
@@ -65,12 +73,20 @@ class ServicesAdapter(
             holder.binding.root.visibility = View.VISIBLE
             holder.binding.cardview.isClickable = true
 
-            if (services.image == null) {
+            if (services.image == null && services.image_onboarding !in LOCAL_BANNER_IMAGES) {
                 holder.binding.ivServices.visibility = View.VISIBLE
                 holder.binding.ivHomecare.visibility = View.GONE
                 Glide.with(holder.binding.ivServices)
                     .load(services.image_onboarding)
                     .into(holder.binding.ivServices)
+            } else if (services.image == null) {
+                // Local banner images (PolyClinics, Offers, Hospitals) fill the same full-size
+                // slot as the API images so all service cards are scaled consistently.
+                holder.binding.ivServices.visibility = View.GONE
+                holder.binding.ivHomecare.visibility = View.VISIBLE
+                Glide.with(holder.binding.ivHomecare)
+                    .load(services.image_onboarding)
+                    .into(holder.binding.ivHomecare)
             } else {
                 holder.binding.ivServices.visibility = View.GONE
                 holder.binding.ivHomecare.visibility = View.VISIBLE
